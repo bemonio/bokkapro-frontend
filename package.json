@@ -1,5 +1,5 @@
 {
-  "name": "metronic-angular-demo1",
+  "name": "frontend",
   "version": "7.1.3",
   "scripts": {
     "ng": "ng",
@@ -24,6 +24,7 @@
     "@angular/platform-browser": "~10.1.6",
     "@angular/platform-browser-dynamic": "~10.1.6",
     "@angular/router": "~10.1.6",
+    "@angular/service-worker": "~10.1.6",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@ngx-translate/core": "^13.0.0",

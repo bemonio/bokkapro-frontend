@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "frontend",
   "projects": {
-    "demo1-app": {
+    "frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -32,7 +32,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
@@ -69,25 +70,27 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "demo1-app:build"
+            "browserTarget": "frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "demo1-app:build:production"
+              "browserTarget": "frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "demo1-app:build"
+            "browserTarget": "frontend:build"
           }
         },
         "test": {
@@ -99,7 +102,8 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
@@ -124,18 +128,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "demo1-app:serve"
+            "devServerTarget": "frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "demo1-app:serve:production"
+              "devServerTarget": "frontend:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "demo1-app",
+  "defaultProject": "frontend",
   "cli": {
     "analytics": false
   }
