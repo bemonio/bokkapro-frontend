@@ -41,7 +41,7 @@
           <div class="col-lg-9 col-xl-6">
             <div class="image-input image-input-outline"
               id="kt_profile_avatar"
-              [class.image-input-empty]="!user.pic"
+              [class.image-input-empty]="!user.userprofile.avatar"
               [style.backgroundImage]="'url(./assets/media/users/blank.png)'"
             >
               <div class="image-input-wrapper" [style.backgroundImage]="getPic()"></div>
@@ -53,13 +53,13 @@
               >
                 <i class="fa fa-pen icon-sm text-muted"></i>
                 <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg"  />
-                <input type="hidden" name="profile_avatar_remove" formControlName="pic" />
+                <input type="hidden" name="profile_avatar_remove" formControlName="avatar" />
               </label>
               <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                 data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
                 <i class="ki ki-bold-close icon-xs text-muted"></i>
               </span>
-              <span *ngIf="user.pic"
+              <span *ngIf="user.userprofile.avatar"
                 class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                 (click)="deletePic()"
                 data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">

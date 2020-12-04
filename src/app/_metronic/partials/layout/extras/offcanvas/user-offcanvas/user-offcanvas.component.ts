@@ -26,4 +26,12 @@ export class UserOffcanvasComponent implements OnInit {
     this.auth.logout();
     document.location.reload();
   }
+
+  getPic(user) {
+    if (!user.userprofile.avatar) {
+      return 'none';
+    }
+    return `url('${user.userprofile.avatar}')`;
+  }
+
 }

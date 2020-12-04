@@ -8,17 +8,23 @@ export class UserModel extends AuthModel {
   password: string;
   fullname: string;
   email: string;
-  pic: string;
-  roles: number[];
-  occupation: string;
+  userprofile: {
+    id: number;
+    bio: string;
+    avatar: string;
+    phone: string;
+    address?: AddressModel;
+    location: string;
+    birth_date: string;
+    occupation: string;
+    socialNetworks?: SocialNetworksModel;
+    website: string;
+  }
+  groups: number[];
   companyName: string;
-  phone: string;
-  address?: AddressModel;
-  socialNetworks?: SocialNetworksModel;
   // personal information
-  firstname: string;
-  lastname: string;
-  website: string;
+  first_name: string;
+  last_name: string;
   // account information
   language: string;
   timeZone: string;
@@ -52,14 +58,14 @@ export class UserModel extends AuthModel {
     this.id = user.id;
     this.username = user.username || '';
     this.password = user.password || '';
-    this.fullname = user.fullname || '';
+    this.fullname = user.firstname || '';
     this.email = user.email || '';
-    this.pic = user.pic || './assets/media/users/default.jpg';
-    this.roles = user.roles || [];
-    this.occupation = user.occupation || '';
+    this.userprofile.avatar = user.pic || './assets/media/users/default.jpg';
+    this.groups = user.roles || [];
+    this.userprofile.occupation = user.occupation || '';
     this.companyName = user.companyName || '';
-    this.phone = user.phone || '';
-    this.address = user.address;
-    this.socialNetworks = user.socialNetworks;
+    this.userprofile.phone = user.phone || '';
+    this.userprofile.address = user.address;
+    this.userprofile.socialNetworks = user.socialNetworks;
   }
 }
