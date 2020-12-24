@@ -1,0 +1,93 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="loading">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="model">
+          {{ id ? "Edit" : "New" }}
+          <span *ngIf="model && model.id">'{{ model.id }} - {{ model.username }} </span>
+        </ng-container>
+        {{ model?.email }}
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="/users">
+        <i class="fa fa-arrow-left"></i>Back
+      </a>
+      <button class="btn btn-secondary ml-2" (click)="reset()">
+        <i class="fa fa-redo"></i>Reset
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+        <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+          [class.active]="activeTabId === tabs.BASIC_TAB">
+          Basic info
+        </a>
+      </li>
+      <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PROFILE"
+          [class.active]="activeTabId === tabs.PROFILE">Profile</a>
+      </li>
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+      <div class="mt-5" *ngIf="model">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Enter Username</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="Username" name="username" [class.is-invalid]="isControlInvalid('username')"
+                [class.is-valid]="isControlValid('username')" formControlName="username" />
+              <div class="feedback" *ngIf="!isControlTouched('username')">Please enter <b>Username</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('username')">Username was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'username')">Username is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'username')">Username should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'username')">Username should have maximum 100
+                symbols</div>
+            </div>
+            <div class="col-lg-4">
+              <label>Enter Email</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="Email" name="email" [class.is-invalid]="isControlInvalid('email')"
+                [class.is-valid]="isControlValid('email')" formControlName="email" />
+              <div class="feedback" *ngIf="!isControlTouched('email')">Please enter <b>Email</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('email')">Email was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'email')">Email is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'email')">Email should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">Email should have maximum 100
+                symbols</div>
+            </div>
+            <div class="col-lg-4">
+              <label>Is Active</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_active" onLabel="true" offLabel="false"></p-toggleButton>
+            </div>
+          </div>
+          <div class="float-right">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="/users">Cancel</a>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">Save</button>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(true)">Save Exit</button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeTabId === tabs.PROFILE && model && model.id">
+      Profile
+    </ng-container>
+
+  </div>
+</div>

@@ -1,0 +1,170 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">List</h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-primary" routerLink="/users/add">New</a>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+        <div class="col-lg-6">
+          Filter
+        </div>
+        <div class="col-lg-6" [formGroup]="searchGroup">
+          <input type="text" class="form-control" name="searchText" placeholder="Search" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>Search</b> in all fields</small>
+        </div>
+      </div>
+    </div>
+    <!-- end: Filtration form -->
+
+    <!-- begin:Table -->
+    <p-table #dt [value]="models" [(selection)]="selectedModels" dataKey="id" styleClass="p-datatable-striped p-datatable-sm" [rowHover]="true"
+    [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="1000" [globalFilterFields]="['id','username']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
+    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="name">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              ID
+              <!-- <p-sortIcon field="name"></p-sortIcon>
+              <p-columnFilter type="text" field="name" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+          <th pSortableColumn="username">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Username 
+              <!-- <p-sortIcon field="username"></p-sortIcon>
+              <p-columnFilter field="username" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" class="p-ml-auto">
+                  <ng-template pTemplate="header">
+                      <div class="p-px-3 p-pt-3 p-pb-0">
+                          <span class="p-text-bold">User Picker</span>
+                      </div>
+                  </ng-template>
+              </p-columnFilter> -->
+            </div>
+          </th>
+          <th pSortableColumn="email">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Email 
+              <!-- <p-sortIcon field="email"></p-sortIcon>
+              <p-columnFilter field="email" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" class="p-ml-auto">
+                  <ng-template pTemplate="header">
+                      <div class="p-px-3 p-pt-3 p-pb-0">
+                          <span class="p-text-bold">User Picker</span>
+                      </div>
+                  </ng-template>
+              </p-columnFilter> -->
+            </div>
+          </th>
+          <th pSortableColumn="date">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Date Joined
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+          <!-- <th pSortableColumn="balance">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Balance
+              <p-sortIcon field="balance"></p-sortIcon>
+              <p-columnFilter type="numeric" field="balance" display="menu" currency="USD" class="p-ml-auto"></p-columnFilter>
+            </div>
+          </th> -->
+          <th pSortableColumn="status">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Is Active
+              <!-- <p-sortIcon field="status"></p-sortIcon>
+              <p-columnFilter field="status" matchMode="equals" display="menu" class="p-ml-auto">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                  <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
+                    <ng-template let-option pTemplate="item">
+                      <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                    </ng-template>
+                  </p-dropdown>
+                </ng-template>
+              </p-columnFilter> -->
+            </div>
+          </th>
+          <!-- <th pSortableColumn="activity">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Activity
+              <p-sortIcon field="activity"></p-sortIcon>
+              <p-columnFilter field="activity" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" class="p-ml-auto">
+                <ng-template pTemplate="filter" let-filter="filterCallback">
+                  <p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)" styleClass="p-m-3"></p-slider>
+                  <div class="p-d-flex p-ai-center p-jc-between p-px-2">
+                    <span>{{activityValues[0]}}</span>
+                    <span>{{activityValues[1]}}</span>
+                  </div>
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th> -->
+          <th style="width: 8rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-value>
+        <tr class="p-selectable-row">
+          <td>
+            <p-tableCheckbox [value]="value"></p-tableCheckbox>
+          </td>
+          <td>
+            {{value.id}}
+          </td>
+          <td>
+            <img [alt]="'avatar'" src="{{value.userprofile ? value.userprofile.avatar : './assets/media/svg/avatars/001-boy.svg'}}" width="32" style="vertical-align: middle" />
+            <span class="image-text">{{value.username}}</span>
+          </td>
+          <td>
+            <span class="image-text">{{value.email}}</span>
+          </td>
+          <td>
+              {{value.date_joined | date: 'MM/dd/yyyy'}}
+          </td>
+          <!-- <td>
+              {{value.balance | currency:'USD':'symbol'}}
+          </td> -->
+          <td>
+              <span [class]="'value-badge status-' + value.is_active">{{value.is_active}}</span>
+          </td>
+          <!-- <td>
+            <span class="p-column-title">Activity</span>
+            <p-progressBar [value]="value.activity" [showValue]="false"></p-progressBar>
+          </td> -->
+          <td style="text-align: center">
+            <a title="Edit" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              [routerLink]="'/users/edit/' + value.id">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-primary">
+              </span>
+            </a>
+            <a title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+              (click)="confirm(value.id, 'right')">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-danger">
+              </span>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">No items found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <!-- end: Table -->
+  </div>
+</div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
