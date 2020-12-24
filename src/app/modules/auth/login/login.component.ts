@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const loginSubscr = this.authService
       .login(this.f.username.value, this.f.password.value)
       .pipe(first())
-      .subscribe((user: UserModel) => {
+      .subscribe((user: any) => {
         if (user) {
           this.router.navigate([this.  returnUrl]);
         } else {

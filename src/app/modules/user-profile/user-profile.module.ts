@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
 import {InlineSVGModule} from 'ng-inline-svg';
 import {NgbDropdownModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import {CRUDTableModule} from '../../_metronic/shared/crud-table';
@@ -34,7 +33,6 @@ import {ProfileCardComponent} from './_components/profile-card/profile-card.comp
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     CRUDTableModule,
     FormsModule,
     ReactiveFormsModule,

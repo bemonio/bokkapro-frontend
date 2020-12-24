@@ -41,6 +41,8 @@
     "ngx-perfect-scrollbar": "^9.0.0",
     "object-path": "^0.11.4",
     "perfect-scrollbar": "^1.5.0",
+    "primeicons": "^4.1.0",
+    "primeng": "^11.0.0",
     "rxjs": "~6.5.5",
     "socicon": "^3.0.5",
     "tslib": "^2.0.0",
