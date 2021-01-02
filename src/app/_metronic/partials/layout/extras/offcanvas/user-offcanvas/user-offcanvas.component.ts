@@ -28,10 +28,14 @@ export class UserOffcanvasComponent implements OnInit {
   }
 
   getPic(user) {
-    if (!user.userprofile.avatar) {
-      return 'none';
+    if (user) {
+      if (user.userprofile) {
+        if (user.userprofile.avatar) {
+          return `url('${user.userprofile.avatar}')`;
+        }
+      }
     }
-    return `url('${user.userprofile.avatar}')`;
+    return 'none';
   }
 
 }

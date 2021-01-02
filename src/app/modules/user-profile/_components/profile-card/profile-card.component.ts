@@ -12,4 +12,15 @@ export class ProfileCardComponent {
   constructor(public userService: AuthService) {
     this.user$ = this.userService.currentUserSubject.asObservable();
   }
+
+  getPic(user) {
+    if (user) {
+      if (user.userprofile) {
+        if (user.userprofile.avatar) {
+          return `url('${user.userprofile.avatar}')`;
+        }
+      }
+    }
+    return 'none';
+  }
 }
