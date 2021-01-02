@@ -32,6 +32,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'typescompanies',
+        loadChildren: () =>
+          import('../pages/type-company/type-company.module').then(
+            (m) => m.TypeCompanyModule
+          ),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',

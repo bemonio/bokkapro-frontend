@@ -1,0 +1,1 @@
+export { TypeCompanyService } from './type-company.service';
