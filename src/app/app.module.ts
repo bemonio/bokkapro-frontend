@@ -9,6 +9,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PagesModule } from './pages/pages.module';
 import { AuthService } from './modules/auth/_services/auth.service';
 import { environment } from 'src/environments/environment';
 // Highlight JS
@@ -23,6 +24,9 @@ import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/sp
 import { FakeAPIService } from './_fake/fake-api.service';
 // #fake-end#
 import { authInterceptorProviders } from './modules/auth/_helpers/auth.interceptor';
+import { TypeCompanyService } from './pages/type-company/_services';
+import { ConfirmationService } from 'primeng/api';
+import { CompanyService } from './pages/company/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -66,6 +70,7 @@ export function getHighlightLanguages() {
     AppRoutingModule,
     InlineSVGModule.forRoot(),
     NgbModule,
+    PagesModule
   ],
   providers: [
     authInterceptorProviders,
@@ -81,6 +86,10 @@ export function getHighlightLanguages() {
         languages: getHighlightLanguages,
       },
     },
+    TypeCompanyService,
+    ConfirmationService,
+    CompanyService,
+    ConfirmationService,
   ],
   bootstrap: [AppComponent],
 })

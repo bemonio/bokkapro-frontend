@@ -6,26 +6,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule }  from 'primeng/table';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { TypesCompaniesComponent } from './types-companies/types-companies.component';
-import { TypeCompanyComponent } from './type-company.component';
-// import { TypeCompanyRoutingModule} from './type-company-routing.module';
-import { TypeCompanyEditComponent } from './types-companies/type-company-edit/type-company-edit.component';
-import { TypeCompanyAutocompleteComponent } from './types-companies/autocomplete/autocomplete-type-company.component';
-import { TypeCompanyService } from './_services/';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ConfirmationService } from 'primeng/api';
+import { CompaniesComponent } from './companies/companies.component';
+import { CompanyComponent } from './company.component';
+// import { CompanyRoutingModule} from './company-routing.module';
+import { CompanyEditComponent } from './companies/company-edit/company-edit.component';
+import { CompanyAutocompleteComponent } from './companies/autocomplete/autocomplete-company.component';
+import { CompanyService } from './_services/';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    TypesCompaniesComponent,
-    TypeCompanyComponent,
-    TypeCompanyEditComponent,
-    TypeCompanyAutocompleteComponent,
+    CompaniesComponent,
+    CompanyComponent,
+    CompanyEditComponent,
+    CompanyAutocompleteComponent,
   ],
   imports: [
     CommonModule,
-    // TypeCompanyRoutingModule,
+    // CompanyRoutingModule,
     InlineSVGModule,
     NgbModalModule,
     NgbDatepickerModule,
@@ -35,13 +36,14 @@ import { RouterModule } from '@angular/router';
     ToggleButtonModule,
     ConfirmDialogModule,
     AutoCompleteModule,
-    RouterModule
+    FileUploadModule,
+    RouterModule,
   ],
   entryComponents: [
   ],
   providers: [
-    TypeCompanyService,
+    CompanyService,
     ConfirmationService
   ]
 })
-export class TypeCompanyModule {}
+export class CompanyModule {}

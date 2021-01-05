@@ -34,8 +34,15 @@ const routes: Routes = [
       {
         path: 'typescompanies',
         loadChildren: () =>
-          import('../pages/type-company/type-company.module').then(
-            (m) => m.TypeCompanyModule
+          import('../pages/type-company/type-company-routing.module').then(
+            (m) => m.TypeCompanyRoutingModule
+          ),
+      },
+      {
+        path: 'companies',
+        loadChildren: () =>
+          import('../pages/company/company-routing.module').then(
+            (m) => m.CompanyRoutingModule
           ),
       },
       {

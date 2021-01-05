@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TypeCompanyComponent } from './type-company.component';
-import { TypesCompaniesComponent } from './types-companies/types-companies.component';
-import { TypeCompanyEditComponent } from './types-companies/type-company-edit/type-company-edit.component';
+import { CompanyComponent } from './company.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { CompanyEditComponent } from './companies/company-edit/company-edit.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TypeCompanyComponent,
+    component: CompanyComponent,
     children: [
       {
         path: 'list',
-        component: TypesCompaniesComponent,
+        component: CompaniesComponent,
       },
       {
         path: 'add',
-        component: TypeCompanyEditComponent
+        component: CompanyEditComponent
       },
       {
         path: 'edit/:id',
-        component: TypeCompanyEditComponent
+        component: CompanyEditComponent
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
@@ -32,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TypeCompanyRoutingModule {}
+export class CompanyRoutingModule {}
