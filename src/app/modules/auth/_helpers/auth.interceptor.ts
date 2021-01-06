@@ -13,20 +13,15 @@ export class AuthInterceptor implements HttpInterceptor {
     let authReq = req;
     const token = this.token.getToken();
     if (token != null) {
-      authReq = req.clone(
-        {
-          setHeaders: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
+      if (!req.headers.has('Content-Type')) {
+        authReq = req.clone({setHeaders: {'Authorization': `Bearer ${token}`,'Content-Type': 'application/json'}});
+      } else {
+        authReq = req.clone({setHeaders: {'Authorization': `Bearer ${token}`}});
+      }
     } else {
-      authReq = req.clone(
-        {
-          setHeaders: {
-            'Content-Type': 'application/json'
-          }
-        });
+      if (!req.headers.has('Content-Type')) {
+        authReq = req.clone({setHeaders: {'Content-Type': 'application/json'}});
+      }
     }
     return next.handle(authReq);
   }
