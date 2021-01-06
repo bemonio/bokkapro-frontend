@@ -39,12 +39,16 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   public is_carrier: AbstractControl;
   public is_financial_institution: AbstractControl;
   public is_active: AbstractControl;
+  public segment_company: AbstractControl;
   public type_company: AbstractControl;
 
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
 
   public saveAndExit;
+
+  public imagePath: string;
+  public imgURL: any;
 
   constructor(
     private fb: FormBuilder,
@@ -73,6 +77,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       is_carrier: [''],
       is_financial_institution: [''],
       is_active: [''],
+      segment_company: ['', Validators.compose([Validators.required])],
       type_company: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];
@@ -90,6 +95,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.is_carrier = this.formGroup.controls['is_carrier'];
     this.is_financial_institution = this.formGroup.controls['is_financial_institution'];
     this.is_active = this.formGroup.controls['is_active'];
+    this.segment_company = this.formGroup.controls['segment_company'];
     this.type_company = this.formGroup.controls['type_company'];
   }
 
@@ -97,6 +103,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
+    this.imgURL = undefined;
     this.get();
   }
 
@@ -144,6 +151,9 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       this.is_financial_institution.setValue(this.model.is_financial_institution);
       this.is_active.setValue(this.model.is_active);
       this.is_active.setValue(this.model.is_active);
+      if (this.model.segment_company) {
+        this.segment_company.setValue(this.model.segment_company);
+      }
       if (this.model.type_company) {
         this.type_company.setValue(this.model.type_company);
       }
@@ -174,6 +184,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   edit() {
     this.loading = true;
     let model = this.model;
+    model.segment_company = this.model.segment_company.id;
     model.type_company = this.model.type_company.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(

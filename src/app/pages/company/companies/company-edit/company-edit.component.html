@@ -43,6 +43,10 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
             <div class="col-lg-4">
+              Logo
+              <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+            </div>
+            <div class="col-lg-4">
               <label>Enter name</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="name" name="name" [class.is-invalid]="isControlInvalid('name')"
@@ -147,19 +151,6 @@
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Type Company</label>
-              <app-autocomplete-type-company
-              placeholder="Type Company" name="type_company" [valid]="isControlValid('type_company')" [touched]="isControlTouched('type_company')" [class.is-invalid]="isControlInvalid('type_company')"
-              [class.is-valid]="isControlValid('type_company')" formControlName="type_company" id="type_company" [model]="model.type_company"></app-autocomplete-type-company>
-              <div class="feedback" *ngIf="!isControlTouched('type_company')">Please enter <b>Type Company</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('type_company')">Type Company was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_company')">Type Company is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_company')">Type Company should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_company')">Type Company should have maximum 30
-                symbols</div>
-            </div>
-            <div class="col-lg-4">
               <label>Enter Alias</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Alias" name="alias" [class.is-invalid]="isControlInvalid('alias')"
@@ -209,6 +200,32 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name_invoce_to')">Name Invoce To should have at least 3
                 symbols</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name_invoce_to')">Name Invoce To should have maximum 30
+                symbols</div>
+            </div>
+            <div class="col-lg-4">
+              <label>Enter Segment Company</label>
+              <app-segment-company-autocomplete
+              placeholder="Segment Company" name="segment_company" [valid]="isControlValid('segment_company')" [touched]="isControlTouched('segment_company')" [class.is-invalid]="isControlInvalid('segment_company')"
+              [class.is-valid]="isControlValid('segment_company')" formControlName="segment_company" id="segment_company" [model]="model.segment_company"></app-segment-company-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('segment_company')">Please enter <b>Segment Company</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('segment_company')">Segment Company was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'segment_company')">Segment Company is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'segment_company')">Segment Company should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'segment_company')">Segment Company should have maximum 30
+                symbols</div>
+            </div>
+            <div class="col-lg-4">
+              <label>Enter Type Company</label>
+              <app-autocomplete-type-company
+              placeholder="Type Company" name="type_company" [valid]="isControlValid('type_company')" [touched]="isControlTouched('type_company')" [class.is-invalid]="isControlInvalid('type_company')"
+              [class.is-valid]="isControlValid('type_company')" formControlName="type_company" id="type_company" [model]="model.type_company"></app-autocomplete-type-company>
+              <div class="feedback" *ngIf="!isControlTouched('type_company')">Please enter <b>Type Company</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('type_company')">Type Company was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_company')">Type Company is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_company')">Type Company should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_company')">Type Company should have maximum 30
                 symbols</div>
             </div>
           </div>

@@ -24,6 +24,8 @@ import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/sp
 import { FakeAPIService } from './_fake/fake-api.service';
 // #fake-end#
 import { authInterceptorProviders } from './modules/auth/_helpers/auth.interceptor';
+
+import { SegmentCompanyService } from './pages/segment-company/_services';
 import { TypeCompanyService } from './pages/type-company/_services';
 import { ConfirmationService } from 'primeng/api';
 import { CompanyService } from './pages/company/_services';
@@ -86,6 +88,7 @@ export function getHighlightLanguages() {
         languages: getHighlightLanguages,
       },
     },
+    SegmentCompanyService,
     TypeCompanyService,
     ConfirmationService,
     CompanyService,

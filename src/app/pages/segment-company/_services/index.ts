@@ -1,0 +1,1 @@
+export { SegmentCompanyService } from './segment-company.service';

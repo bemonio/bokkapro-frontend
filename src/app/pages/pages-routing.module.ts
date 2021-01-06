@@ -32,6 +32,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'segmentscompanies',
+        loadChildren: () =>
+          import('../pages/segment-company/segment-company-routing.module').then(
+            (m) => m.SegmentCompanyRoutingModule
+          ),
+      },
+      {
         path: 'typescompanies',
         loadChildren: () =>
           import('../pages/type-company/type-company-routing.module').then(

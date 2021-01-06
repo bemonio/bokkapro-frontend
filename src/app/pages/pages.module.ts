@@ -13,10 +13,20 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 
 // import { CompanyModule } from './company/company.module';
 // import { TypeCompanyModule } from './type-company/type-company.module';
+
+// TypeCompanies
 import { TypesCompaniesComponent } from './type-company/types-companies/types-companies.component';
 import { TypeCompanyComponent } from './type-company/type-company.component';
 import { TypeCompanyEditComponent } from './type-company/types-companies/type-company-edit/type-company-edit.component';
 import { TypeCompanyAutocompleteComponent } from './type-company/types-companies/autocomplete/autocomplete-type-company.component';
+
+// SegmentCompanies
+import { SegmentsCompaniesComponent } from './segment-company/segments-companies/segments-companies.component';
+import { SegmentCompanyComponent } from './segment-company/segment-company.component';
+import { SegmentCompanyEditComponent } from './segment-company/segments-companies/segment-company-edit/segment-company-edit.component';
+import { SegmentCompanyAutocompleteComponent } from './segment-company/segments-companies/segment-company-autocomplete/segment-company-autocomplete.component';
+
+// Companies
 import { CompaniesComponent } from './company/companies/companies.component';
 import { CompanyComponent } from './company/company.component';
 import { CompanyEditComponent } from './company/companies/company-edit/company-edit.component';
@@ -42,6 +52,10 @@ import { CompanyAutocompleteComponent } from './company/companies/autocomplete/a
     TypeCompanyComponent,
     TypeCompanyEditComponent,
     TypeCompanyAutocompleteComponent,
+    SegmentsCompaniesComponent,
+    SegmentCompanyComponent,
+    SegmentCompanyEditComponent,
+    SegmentCompanyAutocompleteComponent,
     CompaniesComponent,
     CompanyComponent,
     CompanyEditComponent,
