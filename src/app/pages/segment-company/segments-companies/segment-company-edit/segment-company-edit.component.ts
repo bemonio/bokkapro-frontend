@@ -66,11 +66,11 @@ export class SegmentCompanyEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'segment_companies':new Model()});
+        return of({'segment_company':new Model()});
       }),
       catchError((error) => {
         this.toastService.growl('error', error);
-        return of({'segment_companies':new Model()});
+        return of({'segment_company':new Model()});
       }),
     ).subscribe((response: any) => {
       this.loading = false;
@@ -88,6 +88,7 @@ export class SegmentCompanyEditComponent implements OnInit, OnDestroy {
       this.name.setValue(this.model.name);
       this.description.setValue(this.model.description);
     }
+    this.formGroup.markAllAsTouched();
   }
 
   reset() {

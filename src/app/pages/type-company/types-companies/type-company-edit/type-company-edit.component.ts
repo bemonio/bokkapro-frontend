@@ -66,11 +66,11 @@ export class TypeCompanyEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'type_companies':new Model()});
+        return of({'type_company':new Model()});
       }),
       catchError((error) => {
         this.toastService.growl('error', error);
-        return of({'type_companies':new Model()});
+        return of({'type_company':new Model()});
       }),
     ).subscribe((response: any) => {
       this.loading = false;
@@ -88,6 +88,7 @@ export class TypeCompanyEditComponent implements OnInit, OnDestroy {
       this.name.setValue(this.model.name);
       this.description.setValue(this.model.description);
     }
+    this.formGroup.markAllAsTouched();
   }
 
   reset() {
