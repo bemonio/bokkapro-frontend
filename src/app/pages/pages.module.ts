@@ -8,8 +8,11 @@ import { TableModule }  from 'primeng/table';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DialogModule } from 'primeng/dialog';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 // import { CompanyModule } from './company/company.module';
 // import { TypeCompanyModule } from './type-company/type-company.module';
@@ -37,9 +40,11 @@ import { CompanyAutocompleteComponent } from './company/companies/autocomplete/a
     CommonModule,
     TableModule,
     FileUploadModule,
+    DialogModule,
     ConfirmDialogModule,
     AutoCompleteModule,
     ToggleButtonModule,
+    ImageCropperModule,
     // CompanyModule,
     // TypeCompanyModule,
     FormsModule,
