@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
@@ -47,8 +48,18 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
 
   public saveAndExit;
 
-  public imagePath: string;
-  public imgURL: any;
+  public imageChangedEvent: any = '';
+  public croppedImage: any = '';
+
+  public displayModal: boolean;
+  public newLogo: boolean;
+
+  canvasRotation = 0;
+  rotation = 0;
+  scale = 1;
+  showCropper = false;
+  containWithinAspectRatio = false;
+  transform: ImageTransform = {};
 
   constructor(
     private fb: FormBuilder,
@@ -103,7 +114,10 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
-    this.imgURL = undefined;
+
+    this.newLogo = false;
+    this.displayModal = false;
+
     this.get();
   }
 
@@ -119,7 +133,9 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         return of({'company':new Model()});
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
+        Object.entries(error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of({'company':new Model()});
       }),
     ).subscribe((response: any) => {
@@ -157,6 +173,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       if (this.model.type_company) {
         this.type_company.setValue(this.model.type_company);
       }
+      this.formGroup.markAllAsTouched();
     }
   }
 
@@ -186,6 +203,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.segment_company = this.model.segment_company.id;
     model.type_company = this.model.type_company.id;
+    // model.logo = this.croppedImage;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -195,9 +213,10 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
-        console.error('UPDATE ERROR', error);
-        return of(this.model);
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
+       return of(this.model);
       })
     ).subscribe(response => {
       this.loading = false;
@@ -219,7 +238,9 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         console.error('CREATE ERROR', error);
         return of(this.model);
       })
@@ -257,5 +278,106 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   isControlTouched(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
     return control.dirty || control.touched;
+  }
+
+  fileChangeEvent(event: any): void {
+    this.loading = true;
+    this.imageChangedEvent = event;
+    this.showModalDialog();
+    this.newLogo = true;
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+      this.croppedImage = event.base64;
+      console.log(event, base64ToFile(event.base64));
+  }
+
+  imageLoaded() {
+      this.showCropper = true;
+      console.log('Image loaded');
+  }
+
+  cropperReady(sourceImageDimensions: Dimensions) {
+      console.log('Cropper ready', sourceImageDimensions);
+  }
+
+  loadImageFailed() {
+      console.log('Load failed');
+  }
+
+  deleteLogo () {
+    this.newLogo = false;
+  }
+
+  cancelLogo () {
+    this.newLogo = false;  
+    this.logo.setValue('');
+  }
+
+  showModalDialog() {
+    this.displayModal = true;
+    this.loading = false;
+  }
+
+  rotateLeft() {
+    this.canvasRotation--;
+    this.flipAfterRotate();
+  }
+
+  rotateRight() {
+      this.canvasRotation++;
+      this.flipAfterRotate();
+  }
+
+  private flipAfterRotate() {
+      const flippedH = this.transform.flipH;
+      const flippedV = this.transform.flipV;
+      this.transform = {
+          ...this.transform,
+          flipH: flippedV,
+          flipV: flippedH
+      };
+  }
+
+
+  flipHorizontal() {
+      this.transform = {
+          ...this.transform,
+          flipH: !this.transform.flipH
+      };
+  }
+
+  flipVertical() {
+      this.transform = {
+          ...this.transform,
+          flipV: !this.transform.flipV
+      };
+  }
+
+  resetImage() {
+      this.scale = 1;
+      this.rotation = 0;
+      this.canvasRotation = 0;
+      this.transform = {};
+  }
+
+  zoomOut() {
+      this.scale -= .1;
+      this.transform = {
+          ...this.transform,
+          scale: this.scale
+      };
+  }
+
+  zoomIn() {
+      this.scale += .1;
+      this.transform = {
+          ...this.transform,
+          scale: this.scale
+      };
+  }
+
+  toggleContainWithinAspectRatio() {
+      this.containWithinAspectRatio = !this.containWithinAspectRatio;
   }
 }

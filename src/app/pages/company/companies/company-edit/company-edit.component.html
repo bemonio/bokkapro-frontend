@@ -42,10 +42,31 @@
       <div class="mt-5" *ngIf="model">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
-            <div class="col-lg-4">
-              Logo
-              <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
-            </div>
+            <!-- <div class="col-lg-4">
+              <div class="image-input image-input-outline"
+                id="kt_profile_logo" [class.image-input-empty]="!model.logo && !newLogo">
+                <div class="image-input-wrapper" [style.backgroundImage]="model.logo" *ngIf="!newLogo"></div>
+                <div class="image-input-wrapper" [style.backgroundImage]="'url(' + croppedImage + ')'" *ngIf="newLogo"></div>
+                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                  data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
+                  <i class="fa fa-pen icon-sm text-muted"></i>
+                  <input type="file" name="logo" accept=".png, .jpg, .jpeg" (change)="fileChangeEvent($event)" formControlName="logo"/>
+                </label>
+                <span *ngIf="newLogo"
+                  class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                  (click)="cancelLogo()"
+                  data-action="remove" data-toggle="tooltip" title="" data-original-title="Cancel logo">
+                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+                <span *ngIf="!newLogo && model.logo"
+                  class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                  (click)="deleteLogo()"
+                  data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove logo">
+                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+              </div>
+              <span class="form-text text-muted">Allowed file types: png, jpg, jpeg. {{newLogo}}</span>
+            </div> -->
             <div class="col-lg-4">
               <label>Enter name</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -241,3 +262,38 @@
     </ng-container>
   </div>
 </div>
+
+<p-dialog header="Logo" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+  [draggable]="false" [resizable]="false">
+
+  <button (click)="rotateLeft()">Rotate left</button>
+  <button (click)="rotateRight()">Rotate right</button>
+  <button (click)="flipHorizontal()">Flip horizontal</button>
+  <button (click)="flipVertical()">Flip vertical</button>
+  <button (click)="toggleContainWithinAspectRatio()">{{containWithinAspectRatio?'Fill Aspect Ratio':'Contain Within Aspect Ratio'}}</button>
+  <button (click)="resetImage()">Reset image</button>
+
+  <image-cropper 
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [containWithinAspectRatio]="containWithinAspectRatio"
+    [aspectRatio]="4 / 3"
+    [resizeToWidth]="256"
+    [cropperMinWidth]="128"
+    [onlyScaleDown]="true"
+    [roundCropper]="false"
+    [canvasRotation]="canvasRotation"
+    [transform]="transform"
+    [alignImage]="'left'"
+    [style.display]="showCropper ? null : 'none'"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady($event)"
+    (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+  
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
