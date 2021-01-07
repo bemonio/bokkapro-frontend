@@ -80,7 +80,7 @@ export class DepartmentEditComponent implements OnInit, OnDestroy {
       if (response) {
         this.model = response.department;
         this.model.office = response.offices[0];
-        this.previous = Object.assign({}, response.department);
+        this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
     });

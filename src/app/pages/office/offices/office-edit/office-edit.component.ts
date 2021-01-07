@@ -80,7 +80,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
       if (response) {
         this.model = response.office;
         this.model.company = response.companies[0];
-        this.previous = Object.assign({}, response.office);
+        this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
     });

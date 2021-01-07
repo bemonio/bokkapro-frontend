@@ -80,7 +80,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.user;
-        this.previous = Object.assign({}, response.user);
+        this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
     });

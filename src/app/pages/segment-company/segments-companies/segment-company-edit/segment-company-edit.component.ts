@@ -76,7 +76,7 @@ export class SegmentCompanyEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.segment_company;
-        this.previous = Object.assign({}, response.segment_company);
+        this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
     });

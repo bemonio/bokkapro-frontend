@@ -76,7 +76,7 @@ export class TypeCompanyEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.type_company;
-        this.previous = Object.assign({}, response.type_company);
+        this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
     });

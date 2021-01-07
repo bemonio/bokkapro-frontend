@@ -80,7 +80,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
       if (response) {
         this.model = response.position;
         this.model.office = response.offices[0];
-        this.previous = Object.assign({}, response.position);
+        this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
     });
