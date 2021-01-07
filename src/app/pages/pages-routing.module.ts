@@ -60,6 +60,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'departments',
+        loadChildren: () =>
+          import('../pages/department/department-routing.module').then(
+            (m) => m.DepartmentRoutingModule
+          ),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',

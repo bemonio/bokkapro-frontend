@@ -30,6 +30,7 @@ import { TypeCompanyService } from './pages/type-company/_services';
 import { ConfirmationService } from 'primeng/api';
 import { CompanyService } from './pages/company/_services';
 import { OfficeService } from './pages/office/_services';
+import { DepartmentService } from './pages/department/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -94,6 +95,7 @@ export function getHighlightLanguages() {
     ConfirmationService,
     CompanyService,
     OfficeService,
+    DepartmentService,
     ConfirmationService,
   ],
   bootstrap: [AppComponent],

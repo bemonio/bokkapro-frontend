@@ -41,6 +41,12 @@ import { OfficeComponent } from './office/office.component';
 import { OfficeEditComponent } from './office/offices/office-edit/office-edit.component';
 import { OfficeAutocompleteComponent } from './office/offices/office-autocomplete/office-autocomplete.component';
 
+// Departments
+import { DepartmentsComponent } from './department/departments/departments.component';
+import { DepartmentComponent } from './department/department.component';
+import { DepartmentEditComponent } from './department/departments/department-edit/department-edit.component';
+import { DepartmentAutocompleteComponent } from './department/departments/department-autocomplete/department-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -75,6 +81,10 @@ import { OfficeAutocompleteComponent } from './office/offices/office-autocomplet
     OfficeComponent,
     OfficeEditComponent,
     OfficeAutocompleteComponent,
+    DepartmentsComponent,
+    DepartmentComponent,
+    DepartmentEditComponent,
+    DepartmentAutocompleteComponent,
   ]
 })
 export class PagesModule { }

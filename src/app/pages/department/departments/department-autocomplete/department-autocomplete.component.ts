@@ -1,22 +1,22 @@
 import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { OfficeService as ModelsService } from '../../_services/office.service';
+import { DepartmentService as ModelsService } from '../../_services/department.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => OfficeAutocompleteComponent),
+  useExisting: forwardRef(() => DepartmentAutocompleteComponent),
   multi: true,
 };
 
 @Component({
-  selector: 'app-office-autocomplete',
-  templateUrl: './office-autocomplete.component.html',
-  styleUrls: ['./office-autocomplete.component.scss'],
+  selector: 'app-department-autocomplete',
+  templateUrl: './department-autocomplete.component.html',
+  styleUrls: ['./department-autocomplete.component.scss'],
   providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
-export class OfficeAutocompleteComponent implements ControlValueAccessor, OnInit {
+export class DepartmentAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
@@ -50,7 +50,7 @@ export class OfficeAutocompleteComponent implements ControlValueAccessor, OnInit
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Segment Office';
+            this.placeholder = 'Segment Department';
         }
     }
 
@@ -106,7 +106,7 @@ export class OfficeAutocompleteComponent implements ControlValueAccessor, OnInit
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
             response => {
-                this.models = response.offices;
+                this.models = response.segment_companies;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {
