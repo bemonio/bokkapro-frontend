@@ -35,17 +35,23 @@ import { CompanyComponent } from './company/company.component';
 import { CompanyEditComponent } from './company/companies/company-edit/company-edit.component';
 import { CompanyAutocompleteComponent } from './company/companies/company-autocomplete/company-autocomplete.component';
 
+// Departments
+import { DepartmentsComponent } from './department/departments/departments.component';
+import { DepartmentComponent } from './department/department.component';
+import { DepartmentEditComponent } from './department/departments/department-edit/department-edit.component';
+import { DepartmentAutocompleteComponent } from './department/departments/department-autocomplete/department-autocomplete.component';
+
 // Offices
 import { OfficesComponent } from './office/offices/offices.component';
 import { OfficeComponent } from './office/office.component';
 import { OfficeEditComponent } from './office/offices/office-edit/office-edit.component';
 import { OfficeAutocompleteComponent } from './office/offices/office-autocomplete/office-autocomplete.component';
 
-// Departments
-import { DepartmentsComponent } from './department/departments/departments.component';
-import { DepartmentComponent } from './department/department.component';
-import { DepartmentEditComponent } from './department/departments/department-edit/department-edit.component';
-import { DepartmentAutocompleteComponent } from './department/departments/department-autocomplete/department-autocomplete.component';
+// Positions
+import { PositionsComponent } from './position/positions/positions.component';
+import { PositionComponent } from './position/position.component';
+import { PositionEditComponent } from './position/positions/position-edit/position-edit.component';
+import { PositionAutocompleteComponent } from './position/positions/position-autocomplete/position-autocomplete.component';
 
 @NgModule({
   imports: [
@@ -85,6 +91,10 @@ import { DepartmentAutocompleteComponent } from './department/departments/depart
     DepartmentComponent,
     DepartmentEditComponent,
     DepartmentAutocompleteComponent,
+    PositionsComponent,
+    PositionComponent,
+    PositionEditComponent,
+    PositionAutocompleteComponent,
   ]
 })
 export class PagesModule { }

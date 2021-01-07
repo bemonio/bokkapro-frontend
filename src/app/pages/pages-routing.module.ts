@@ -8,6 +8,11 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
         path: 'dashboard',
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
@@ -53,13 +58,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'offices',
-        loadChildren: () =>
-          import('../pages/office/office-routing.module').then(
-            (m) => m.OfficeRoutingModule
-          ),
-      },
-      {
         path: 'departments',
         loadChildren: () =>
           import('../pages/department/department-routing.module').then(
@@ -67,9 +65,18 @@ const routes: Routes = [
           ),
       },
       {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
+        path: 'offices',
+        loadChildren: () =>
+          import('../pages/office/office-routing.module').then(
+            (m) => m.OfficeRoutingModule
+          ),
+      },
+      {
+        path: 'positions',
+        loadChildren: () =>
+          import('../pages/position/position-routing.module').then(
+            (m) => m.PositionRoutingModule
+          ),
       },
       {
         path: '**',
