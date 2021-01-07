@@ -2,6 +2,7 @@ import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, Eve
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CompanyService as ModelsService } from '../../_services/company.service';
 import { LazyLoadEvent } from 'primeng/api';
+import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -10,13 +11,15 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  selector: 'app-autocomplete-company',
-  templateUrl: './autocomplete-company.component.html',
-  styleUrls: ['./autocomplete-company.component.scss'],
+  selector: 'app-company-autocomplete',
+  templateUrl: './company-autocomplete.component.html',
+  styleUrls: ['./company-autocomplete.component.scss'],
   providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
 export class CompanyAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
+    @Input() valid: boolean;
+    @Input() touched: boolean;
     @Input() required: boolean;
     @Input() disabled: boolean;
     @Input() placeholder: string;
@@ -37,7 +40,8 @@ export class CompanyAutocompleteComponent implements ControlValueAccessor, OnIni
     public value: any;
 
     constructor(
-        public modelsService: ModelsService
+        public modelsService: ModelsService,
+        public toastService: ToastService
     ) {
         this.page = 1;
         this.per_page = 1;
@@ -46,7 +50,7 @@ export class CompanyAutocompleteComponent implements ControlValueAccessor, OnIni
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Type Company';
+            this.placeholder = 'Segment Company';
         }
     }
 
@@ -104,17 +108,31 @@ export class CompanyAutocompleteComponent implements ControlValueAccessor, OnIni
             response => {
                 this.models = response.companies;
                 this.totalRecords = response.meta.total_results;
-                if (this.model.id) {
-                    if (this.model.id) {
-                        this.model.id = undefined;
-                        this.value = this.models[0];
-                        this.filters = [];
-                    }
-                }
+                // if (this.model) {
+                //     if (this.model.id) {
+                //         this.model.id = undefined;
+                //         this.value = this.models[0];
+                //         this.filters = [];
+                //     }
+                // }
             },
             error => {
-                // this.toastService.growl('error', error);
+                Object.entries(error.error).forEach(
+                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                );
             }
         );
+    }
+
+    public isValid() {
+        let stringClass = 'form-control form-control-lg form-control-solid';
+        if (this.touched) {
+            if (this.valid) {
+                stringClass += ' is-valid';
+            } else {
+                stringClass += ' is-invalid';
+            }
+        }
+        return stringClass;
     }
 }
