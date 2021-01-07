@@ -16,7 +16,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-light" routerLink="/departments">
+      <a type="button" class="btn btn-light" routerLink="/employees">
         <i class="fa fa-arrow-left"></i>Back
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
@@ -69,21 +69,21 @@
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Office</label>
-              <app-office-autocomplete
-              placeholder="Office" name="office" [valid]="isControlValid('office')" [touched]="isControlTouched('office')" [class.is-invalid]="isControlInvalid('office')"
-              [class.is-valid]="isControlValid('office')" formControlName="office" id="office" [model]="model.office"></app-office-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('office')">Please enter <b>Office</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('office')">Office was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'office')">Office is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'office')">Office should have at least 3
+              <label>Enter Position</label>
+              <app-position-autocomplete
+              placeholder="Position" name="position" [valid]="isControlValid('position')" [touched]="isControlTouched('position')" [class.is-invalid]="isControlInvalid('position')"
+              [class.is-valid]="isControlValid('position')" formControlName="position" id="position" [model]="model.position"></app-position-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('position')">Please enter <b>Position</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('position')">Position was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'position')">Position is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'position')">Position should have at least 3
                 symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'office')">Office should have maximum 30
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'position')">Position should have maximum 30
                 symbols</div>
             </div>
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="/departments">Cancel</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="/employees">Cancel</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)">Save</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

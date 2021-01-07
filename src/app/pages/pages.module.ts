@@ -53,6 +53,12 @@ import { PositionComponent } from './position/position.component';
 import { PositionEditComponent } from './position/positions/position-edit/position-edit.component';
 import { PositionAutocompleteComponent } from './position/positions/position-autocomplete/position-autocomplete.component';
 
+// Employees
+import { EmployeesComponent } from './employee/employees/employees.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeEditComponent } from './employee/employees/employee-edit/employee-edit.component';
+import { EmployeeAutocompleteComponent } from './employee/employees/employee-autocomplete/employee-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -95,6 +101,10 @@ import { PositionAutocompleteComponent } from './position/positions/position-aut
     PositionComponent,
     PositionEditComponent,
     PositionAutocompleteComponent,
+    EmployeesComponent,
+    EmployeeComponent,
+    EmployeeEditComponent,
+    EmployeeAutocompleteComponent,
   ]
 })
 export class PagesModule { }

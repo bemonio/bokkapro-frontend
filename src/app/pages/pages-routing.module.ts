@@ -13,6 +13,11 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
+        path: '**',
+        redirectTo: 'errors/404',
+        pathMatch: 'full',
+      },
+      {
         path: 'dashboard',
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
@@ -79,9 +84,11 @@ const routes: Routes = [
           ),
       },
       {
-        path: '**',
-        redirectTo: 'errors/404',
-        pathMatch: 'full',
+        path: 'employees',
+        loadChildren: () =>
+          import('../pages/employee/employee-routing.module').then(
+            (m) => m.EmployeeRoutingModule
+          ),
       },
     ],
   },

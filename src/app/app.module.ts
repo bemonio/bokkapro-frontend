@@ -32,6 +32,7 @@ import { CompanyService } from './pages/company/_services';
 import { DepartmentService } from './pages/department/_services';
 import { OfficeService } from './pages/office/_services';
 import { PositionService } from './pages/position/_services';
+import { EmployeeService } from './pages/employee/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -98,6 +99,7 @@ export function getHighlightLanguages() {
     DepartmentService,
     OfficeService,
     PositionService,
+    EmployeeService,
   ],
   bootstrap: [AppComponent],
 })
