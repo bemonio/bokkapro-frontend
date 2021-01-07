@@ -23,6 +23,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
+    OFFICE_TAB: 1,
   };
 
   public code: AbstractControl;
@@ -133,7 +134,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         return of({'company':new Model()});
       }),
       catchError((error) => {
-        Object.entries(error).forEach(
+        Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of({'company':new Model()});
@@ -142,7 +143,9 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.company;
-        this.previous = Object.assign({}, response.company);
+        this.model.type_company = response.type_companies[0];
+        this.model.segment_company = response.segment_companies[0];
+        this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
     });
@@ -173,8 +176,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       if (this.model.type_company) {
         this.type_company.setValue(this.model.type_company);
       }
-      this.formGroup.markAllAsTouched();
     }
+    this.formGroup.markAllAsTouched();
   }
 
   reset() {
@@ -228,6 +231,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   create() {
     this.loading = true;
     let model = this.model;
+    model.segment_company = this.model.segment_company.id;
     model.type_company = this.model.type_company.id;
 
     const sbCreate = this.modelsService.post(model).pipe(

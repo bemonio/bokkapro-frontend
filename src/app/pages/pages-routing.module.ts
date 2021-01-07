@@ -53,6 +53,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'offices',
+        loadChildren: () =>
+          import('../pages/office/office-routing.module').then(
+            (m) => m.OfficeRoutingModule
+          ),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',

@@ -1,3 +1,4 @@
+import { SegmentCompanyModel } from "../../segment-company/_models/segment-company.model";
 import { TypeCompanyModel } from "../../type-company/_models/type-company.model";
 
 export class CompanyModel {

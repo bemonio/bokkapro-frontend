@@ -33,7 +33,13 @@ import { SegmentCompanyAutocompleteComponent } from './segment-company/segments-
 import { CompaniesComponent } from './company/companies/companies.component';
 import { CompanyComponent } from './company/company.component';
 import { CompanyEditComponent } from './company/companies/company-edit/company-edit.component';
-import { CompanyAutocompleteComponent } from './company/companies/autocomplete/autocomplete-company.component';
+import { CompanyAutocompleteComponent } from './company/companies/company-autocomplete/company-autocomplete.component';
+
+// Offices
+import { OfficesComponent } from './office/offices/offices.component';
+import { OfficeComponent } from './office/office.component';
+import { OfficeEditComponent } from './office/offices/office-edit/office-edit.component';
+import { OfficeAutocompleteComponent } from './office/offices/office-autocomplete/office-autocomplete.component';
 
 @NgModule({
   imports: [
@@ -65,6 +71,10 @@ import { CompanyAutocompleteComponent } from './company/companies/autocomplete/a
     CompanyComponent,
     CompanyEditComponent,
     CompanyAutocompleteComponent,
+    OfficesComponent,
+    OfficeComponent,
+    OfficeEditComponent,
+    OfficeAutocompleteComponent,
   ]
 })
 export class PagesModule { }
