@@ -109,7 +109,9 @@ export class TypesCompaniesComponent implements OnInit {
             },
             error => {
                 this.loading = false;
-                this.toastService.growl('error', error);
+                Object.entries(error.error).forEach(
+                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                );
             }
         );
     }
@@ -142,7 +144,9 @@ export class TypesCompaniesComponent implements OnInit {
                 this.getModels();
             },
             error => {
-                this.toastService.growl('success', error);
+                Object.entries(error.error).forEach(
+                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                );
             }
         );
     }
@@ -158,7 +162,9 @@ export class TypesCompaniesComponent implements OnInit {
                     this.toastService.growl('success', 'Patch');
                 },
                 error => {
-                    this.toastService.growl('success', error);
+                    Object.entries(error.error).forEach(
+                        ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                    );
                 }
             );
         }

@@ -113,8 +113,9 @@ export class CompaniesComponent implements OnInit {
             },
             error => {
                 this.loading = false;
-                console.log('Loading (response):' + this.loading)
-                this.toastService.growl('error', error);
+                Object.entries(error.error).forEach(
+                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                );
             }
         );
     }
@@ -147,7 +148,9 @@ export class CompaniesComponent implements OnInit {
                 this.getModels();
             },
             error => {
-                this.toastService.growl('success', error);
+                Object.entries(error.error).forEach(
+                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                );
             }
         );
     }
@@ -163,7 +166,9 @@ export class CompaniesComponent implements OnInit {
                     this.toastService.growl('success', 'Patch');
                 },
                 error => {
-                    this.toastService.growl('success', error);
+                    Object.entries(error.error).forEach(
+                        ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                    );
                 }
             );
         }

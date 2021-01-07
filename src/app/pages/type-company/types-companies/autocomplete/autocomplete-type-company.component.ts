@@ -2,6 +2,7 @@ import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, Eve
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TypeCompanyService as ModelsService } from '../../_services/type-company.service';
 import { LazyLoadEvent } from 'primeng/api';
+import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -39,7 +40,8 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
     public value: any;
 
     constructor(
-        public modelsService: ModelsService
+        public modelsService: ModelsService,
+        public toastService: ToastService
     ) {
         this.page = 1;
         this.per_page = 1;
@@ -115,7 +117,9 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
                 // }
             },
             error => {
-                // this.toastService.growl('error', error);
+                Object.entries(error.error).forEach(
+                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                );
             }
         );
     }
