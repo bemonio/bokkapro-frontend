@@ -50,7 +50,7 @@ export class ZoneAutocompleteComponent implements ControlValueAccessor, OnInit {
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Type Zone';
+            this.placeholder = 'Zone';
         }
     }
 
@@ -106,7 +106,7 @@ export class ZoneAutocompleteComponent implements ControlValueAccessor, OnInit {
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
             response => {
-                this.models = response.type_companies;
+                this.models = response.zones;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {
