@@ -50,7 +50,7 @@ export class TypeLocationAutocompleteComponent implements ControlValueAccessor, 
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Type TypeLocation';
+            this.placeholder = 'Type Location';
         }
     }
 
@@ -106,7 +106,7 @@ export class TypeLocationAutocompleteComponent implements ControlValueAccessor, 
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
             response => {
-                this.models = response.type_companies;
+                this.models = response.type_locations;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {
