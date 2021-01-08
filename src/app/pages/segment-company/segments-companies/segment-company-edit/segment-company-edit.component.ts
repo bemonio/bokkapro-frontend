@@ -69,7 +69,10 @@ export class SegmentCompanyEditComponent implements OnInit, OnDestroy {
         return of({'segment_company':new Model()});
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
+        this.loading = false;
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of({'segment_company':new Model()});
       }),
     ).subscribe((response: any) => {
@@ -122,8 +125,10 @@ export class SegmentCompanyEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
-        console.error('UPDATE ERROR', error);
+        this.loading = false;
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of(this.model);
       })
     ).subscribe(response => {
@@ -143,8 +148,10 @@ export class SegmentCompanyEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
-        console.error('CREATE ERROR', error);
+        this.loading = false;
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of(this.model);
       })
     ).subscribe(response => {

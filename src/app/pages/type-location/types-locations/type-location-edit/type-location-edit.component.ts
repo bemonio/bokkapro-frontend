@@ -69,7 +69,10 @@ export class TypeLocationEditComponent implements OnInit, OnDestroy {
         return of({'type_location':new Model()});
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
+        this.loading = false;
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of({'type_location':new Model()});
       }),
     ).subscribe((response: any) => {
@@ -122,8 +125,10 @@ export class TypeLocationEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
-        console.error('UPDATE ERROR', error);
+        this.loading = false;
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of(this.model);
       })
     ).subscribe(response => {
@@ -143,8 +148,10 @@ export class TypeLocationEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
-        console.error('CREATE ERROR', error);
+        this.loading = false;
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of(this.model);
       })
     ).subscribe(response => {

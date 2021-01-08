@@ -73,7 +73,10 @@ export class UserEditComponent implements OnInit, OnDestroy {
         return of({'user':new Model()});
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
+        this.loading = false;
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of({'user':new Model()});
       }),
     ).subscribe((response: any) => {
@@ -126,8 +129,10 @@ export class UserEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
-        console.error('UPDATE ERROR', error);
+        this.loading = false;
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of(this.model);
       })
     ).subscribe(response => {
@@ -147,8 +152,10 @@ export class UserEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.toastService.growl('error', error);
-        console.error('CREATE ERROR', error);
+        this.loading = false;
+        Object.entries(error.error).forEach(
+          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        );
         return of(this.model);
       })
     ).subscribe(response => {
