@@ -104,6 +104,13 @@ const routes: Routes = [
             (m) => m.LocationRoutingModule
           ),
       },
+      {
+        path: 'zones',
+        loadChildren: () =>
+          import('../pages/zone/zone-routing.module').then(
+            (m) => m.ZoneRoutingModule
+          ),
+      },
     ],
   },
 ];

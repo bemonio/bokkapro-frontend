@@ -77,6 +77,12 @@ import { LocationComponent } from './location/location.component';
 import { LocationEditComponent } from './location/locations/location-edit/location-edit.component';
 import { LocationAutocompleteComponent } from './location/locations/location-autocomplete/location-autocomplete.component';
 
+// Zones
+import { ZonesComponent } from './zone/zones/zones.component';
+import { ZoneComponent } from './zone/zone.component';
+import { ZoneEditComponent } from './zone/zones/zone-edit/zone-edit.component';
+import { ZoneAutocompleteComponent } from './zone/zones/zone-autocomplete/zone-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -135,6 +141,10 @@ import { LocationAutocompleteComponent } from './location/locations/location-aut
     LocationComponent,
     LocationEditComponent,
     LocationAutocompleteComponent,
+    ZonesComponent,
+    ZoneComponent,
+    ZoneEditComponent,
+    ZoneAutocompleteComponent,
   ]
 })
 export class PagesModule { }
