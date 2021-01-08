@@ -238,9 +238,9 @@
             </div>
             <div class="col-lg-4">
               <label>Enter Type Company</label>
-              <app-autocomplete-type-company
+              <app-type-company-autocomplete
               placeholder="Type Company" name="type_company" [valid]="isControlValid('type_company')" [touched]="isControlTouched('type_company')" [class.is-invalid]="isControlInvalid('type_company')"
-              [class.is-valid]="isControlValid('type_company')" formControlName="type_company" id="type_company" [model]="model.type_company"></app-autocomplete-type-company>
+              [class.is-valid]="isControlValid('type_company')" formControlName="type_company" id="type_company" [model]="model.type_company"></app-type-company-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('type_company')">Please enter <b>Type Company</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('type_company')">Type Company was entered correct</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_company')">Type Company is required</div>

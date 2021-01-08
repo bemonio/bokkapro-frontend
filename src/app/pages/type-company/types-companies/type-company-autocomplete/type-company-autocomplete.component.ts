@@ -11,9 +11,9 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  selector: 'app-autocomplete-type-company',
-  templateUrl: './autocomplete-type-company.component.html',
-  styleUrls: ['./autocomplete-type-company.component.scss'],
+  selector: 'app-type-company-autocomplete',
+  templateUrl: './type-company-autocomplete.component.html',
+  styleUrls: ['./type-company-autocomplete.component.scss'],
   providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
 export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, OnInit {

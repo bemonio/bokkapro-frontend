@@ -27,7 +27,7 @@ import { UserAutocompleteComponent } from './user/users/user-autocomplete/user-a
 import { TypesCompaniesComponent } from './type-company/types-companies/types-companies.component';
 import { TypeCompanyComponent } from './type-company/type-company.component';
 import { TypeCompanyEditComponent } from './type-company/types-companies/type-company-edit/type-company-edit.component';
-import { TypeCompanyAutocompleteComponent } from './type-company/types-companies/autocomplete/autocomplete-type-company.component';
+import { TypeCompanyAutocompleteComponent } from './type-company/types-companies/type-company-autocomplete/type-company-autocomplete.component';
 
 // SegmentCompanies
 import { SegmentsCompaniesComponent } from './segment-company/segments-companies/segments-companies.component';

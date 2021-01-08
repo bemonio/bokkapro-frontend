@@ -12,7 +12,7 @@ import { TypesCompaniesComponent } from './types-companies/types-companies.compo
 import { TypeCompanyComponent } from './type-company.component';
 // import { TypeCompanyRoutingModule} from './type-company-routing.module';
 import { TypeCompanyEditComponent } from './types-companies/type-company-edit/type-company-edit.component';
-import { TypeCompanyAutocompleteComponent } from './types-companies/autocomplete/autocomplete-type-company.component';
+import { TypeCompanyAutocompleteComponent } from './types-companies/type-company-autocomplete/type-company-autocomplete.component';
 import { TypeCompanyService } from './_services/';
 import { RouterModule } from '@angular/router';
 
