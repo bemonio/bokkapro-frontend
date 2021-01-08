@@ -1,0 +1,1 @@
+export { TypeLocationService } from './type-location.service';

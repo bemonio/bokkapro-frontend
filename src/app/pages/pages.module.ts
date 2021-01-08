@@ -65,6 +65,12 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeEditComponent } from './employee/employees/employee-edit/employee-edit.component';
 import { EmployeeAutocompleteComponent } from './employee/employees/employee-autocomplete/employee-autocomplete.component';
 
+// TypesLocations
+import { TypesLocationsComponent } from './type-location/types-locations/types-locations.component';
+import { TypeLocationComponent } from './type-location/type-location.component';
+import { TypeLocationEditComponent } from './type-location/types-locations/type-location-edit/type-location-edit.component';
+import { TypeLocationAutocompleteComponent } from './type-location/types-locations/type-location-autocomplete/type-location-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -115,6 +121,10 @@ import { EmployeeAutocompleteComponent } from './employee/employees/employee-aut
     EmployeeComponent,
     EmployeeEditComponent,
     EmployeeAutocompleteComponent,
+    TypesLocationsComponent,
+    TypeLocationComponent,
+    TypeLocationEditComponent,
+    TypeLocationAutocompleteComponent,
   ]
 })
 export class PagesModule { }

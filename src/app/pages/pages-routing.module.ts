@@ -90,6 +90,13 @@ const routes: Routes = [
             (m) => m.EmployeeRoutingModule
           ),
       },
+      {
+        path: 'typeslocations',
+        loadChildren: () =>
+          import('../pages/type-location/type-location-routing.module').then(
+            (m) => m.TypeLocationRoutingModule
+          ),
+      },
     ],
   },
 ];
