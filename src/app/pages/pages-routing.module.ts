@@ -97,6 +97,13 @@ const routes: Routes = [
             (m) => m.TypeLocationRoutingModule
           ),
       },
+      {
+        path: 'locations',
+        loadChildren: () =>
+          import('../pages/location/location-routing.module').then(
+            (m) => m.LocationRoutingModule
+          ),
+      },
     ],
   },
 ];
