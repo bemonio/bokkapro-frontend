@@ -60,6 +60,6 @@ export class LocationService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=type_location.*&include[]=company.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=type_location.*&include[]=company.*&include[]=zone.*`);
     }
 }

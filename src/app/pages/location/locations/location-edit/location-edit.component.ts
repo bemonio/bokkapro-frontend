@@ -29,6 +29,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
   public description: AbstractControl;
   public type_location: AbstractControl;
   public company: AbstractControl;
+  public zone: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -53,6 +54,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       description: ['', Validators.compose([Validators.maxLength(30)])],
       type_location: ['', Validators.compose([Validators.required])],
       company: ['', Validators.compose([Validators.required])],
+      zone: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];
     this.code_brinks = this.formGroup.controls['code_brinks'];
@@ -60,6 +62,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     this.description = this.formGroup.controls['description'];
     this.type_location = this.formGroup.controls['type_location'];
     this.company = this.formGroup.controls['company'];
+    this.zone = this.formGroup.controls['zone'];
   }
 
   ngOnInit(): void {
@@ -97,6 +100,9 @@ export class LocationEditComponent implements OnInit, OnDestroy {
         if (response.companies) {
           this.model.company = response.companies[0];
         }
+        if (response.zones) {
+          this.model.zone = response.zones[0];
+        }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -115,6 +121,9 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       }
       if (this.model.company) {
         this.company.setValue(this.model.company);
+      }
+      if (this.model.zone) {
+        this.zone.setValue(this.model.zone);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -147,6 +156,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.type_location = this.model.type_location.id;
     model.company = this.model.company.id;
+    model.zone = this.model.zone.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -175,6 +185,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.type_location = this.model.type_location.id;
     model.company = this.model.company.id;
+    model.zone = this.model.zone.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

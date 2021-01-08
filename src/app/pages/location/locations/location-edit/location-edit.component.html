@@ -120,6 +120,19 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company')">Company should have maximum 30
                 symbols</div>
             </div>
+            <div class="col-lg-4">
+              <label>Enter Zone</label>
+              <app-zone-autocomplete
+              placeholder="Zone" name="zone" [valid]="isControlValid('zone')" [touched]="isControlTouched('zone')" [class.is-invalid]="isControlInvalid('zone')"
+              [class.is-valid]="isControlValid('zone')" formControlName="zone" id="zone" [model]="model.zone"></app-zone-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('zone')">Please enter <b>Zone</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('zone')">Zone was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'zone')">Zone is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'zone')">Zone should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'zone')">Zone should have maximum 30
+                symbols</div>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/locations">Cancel</a>
