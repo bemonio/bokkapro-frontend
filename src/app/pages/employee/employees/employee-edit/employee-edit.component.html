@@ -81,6 +81,19 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'position')">Position should have maximum 30
                 symbols</div>
             </div>
+            <div class="col-lg-4">
+              <label>Enter User</label>
+              <app-user-autocomplete
+              placeholder="User" name="user" [valid]="isControlValid('user')" [touched]="isControlTouched('user')" [class.is-invalid]="isControlInvalid('user')"
+              [class.is-valid]="isControlValid('user')" formControlName="user" id="user" [model]="model.user"></app-user-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('user')">Please enter <b>User</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('user')">User was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'user')">User is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'user')">User should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'user')">User should have maximum 30
+                symbols</div>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/employees">Cancel</a>

@@ -26,6 +26,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   public name: AbstractControl;
   public description: AbstractControl;  
   public position: AbstractControl;  
+  public user: AbstractControl;  
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -47,10 +48,12 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       description: ['', Validators.compose([Validators.maxLength(30)])],
       position: ['', Validators.compose([Validators.required])],
+      user: [''],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];
     this.position = this.formGroup.controls['position'];
+    this.user = this.formGroup.controls['user'];
   }
 
   ngOnInit(): void {
@@ -80,7 +83,10 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       if (response) {
         this.model = response.employee;
         this.model.position = response.positions[0];
-        this.previous = Object.assign({}, response.employee);
+        if (response.users) {
+          this.model.user = response.users[0];
+        }
+        this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
     });
@@ -93,6 +99,9 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       this.description.setValue(this.model.description);
       if (this.model.position) {
         this.position.setValue(this.model.position);
+      }
+      if (this.model.user) {
+        this.user.setValue(this.model.user);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -123,6 +132,9 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
     this.loading = true;
     let model = this.model;
     model.position = this.model.position.id;
+    if (this.model.user) {
+      model.user = this.model.user.id;
+    }
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -148,6 +160,9 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
 
     let model = this.model;
     model.position = this.model.position.id;
+    if (this.model.user) {
+      model.user = this.model.user.id;
+    }
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

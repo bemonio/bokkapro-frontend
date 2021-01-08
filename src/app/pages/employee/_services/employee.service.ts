@@ -60,6 +60,6 @@ export class EmployeeService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=position.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=position.*&include[]=user.*`);
     }
 }
