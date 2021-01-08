@@ -44,7 +44,7 @@ export class UserService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=userprofile.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -60,6 +60,6 @@ export class UserService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*`);
     }
 }

@@ -17,6 +17,12 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 // import { CompanyModule } from './company/company.module';
 // import { TypeCompanyModule } from './type-company/type-company.module';
 
+// Users
+import { UsersComponent } from './user/users/users.component';
+import { UserComponent } from './user/user.component';
+import { UserEditComponent } from './user/users/user-edit/user-edit.component';
+import { UserAutocompleteComponent } from './user/users/user-autocomplete/user-autocomplete.component';
+
 // TypeCompanies
 import { TypesCompaniesComponent } from './type-company/types-companies/types-companies.component';
 import { TypeCompanyComponent } from './type-company/type-company.component';
@@ -77,6 +83,10 @@ import { EmployeeAutocompleteComponent } from './employee/employees/employee-aut
     InlineSVGModule,
   ],
   declarations: [
+    UsersComponent,
+    UserComponent,
+    UserEditComponent,
+    UserAutocompleteComponent,
     TypesCompaniesComponent,
     TypeCompanyComponent,
     TypeCompanyEditComponent,

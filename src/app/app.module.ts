@@ -25,6 +25,7 @@ import { FakeAPIService } from './_fake/fake-api.service';
 // #fake-end#
 import { authInterceptorProviders } from './modules/auth/_helpers/auth.interceptor';
 
+import { UserService } from './pages/user/_services';
 import { SegmentCompanyService } from './pages/segment-company/_services';
 import { TypeCompanyService } from './pages/type-company/_services';
 import { ConfirmationService } from 'primeng/api';
@@ -92,6 +93,7 @@ export function getHighlightLanguages() {
         languages: getHighlightLanguages,
       },
     },
+    UserService,
     SegmentCompanyService,
     TypeCompanyService,
     ConfirmationService,

@@ -37,8 +37,8 @@ const routes: Routes = [
       {
         path: 'users',
         loadChildren: () =>
-          import('../pages/user/user.module').then(
-            (m) => m.UserModule
+          import('../pages/user/user-routing.module').then(
+            (m) => m.UserRoutingModule
           ),
       },
       {
