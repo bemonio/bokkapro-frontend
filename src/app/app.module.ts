@@ -37,6 +37,7 @@ import { EmployeeService } from './pages/employee/_services';
 import { TypeLocationService } from './pages/type-location/_services';
 import { LocationService } from './pages/location/_services';
 import { ZoneService } from './pages/zone/_services';
+import { TypeGuideService } from './pages/type-guide/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -107,7 +108,8 @@ export function getHighlightLanguages() {
     EmployeeService,
     TypeLocationService,
     LocationService,
-    ZoneService
+    ZoneService,
+    TypeGuideService
   ],
   bootstrap: [AppComponent],
 })

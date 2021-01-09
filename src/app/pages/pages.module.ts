@@ -83,6 +83,12 @@ import { ZoneComponent } from './zone/zone.component';
 import { ZoneEditComponent } from './zone/zones/zone-edit/zone-edit.component';
 import { ZoneAutocompleteComponent } from './zone/zones/zone-autocomplete/zone-autocomplete.component';
 
+// TypesGuides
+import { TypesGuidesComponent } from './type-guide/types-guides/types-guides.component';
+import { TypeGuideComponent } from './type-guide/type-guide.component';
+import { TypeGuideEditComponent } from './type-guide/types-guides/type-guide-edit/type-guide-edit.component';
+import { TypeGuideAutocompleteComponent } from './type-guide/types-guides/type-guide-autocomplete/type-guide-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -145,6 +151,10 @@ import { ZoneAutocompleteComponent } from './zone/zones/zone-autocomplete/zone-a
     ZoneComponent,
     ZoneEditComponent,
     ZoneAutocompleteComponent,
+    TypesGuidesComponent,
+    TypeGuideComponent,
+    TypeGuideEditComponent,
+    TypeGuideAutocompleteComponent,
   ]
 })
 export class PagesModule { }

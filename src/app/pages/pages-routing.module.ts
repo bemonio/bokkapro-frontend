@@ -111,6 +111,13 @@ const routes: Routes = [
             (m) => m.ZoneRoutingModule
           ),
       },
+      {
+        path: 'typesguides',
+        loadChildren: () =>
+          import('../pages/type-guide/type-guide-routing.module').then(
+            (m) => m.TypeGuideRoutingModule
+          ),
+      },
     ],
   },
 ];
