@@ -9,8 +9,10 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationService } from 'primeng/api';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ConfirmationService } from 'primeng/api';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -89,6 +91,12 @@ import { TypeGuideComponent } from './type-guide/type-guide.component';
 import { TypeGuideEditComponent } from './type-guide/types-guides/type-guide-edit/type-guide-edit.component';
 import { TypeGuideAutocompleteComponent } from './type-guide/types-guides/type-guide-autocomplete/type-guide-autocomplete.component';
 
+// Guides
+import { GuidesComponent } from './guide/guides/guides.component';
+import { GuideComponent } from './guide/guide.component';
+import { GuideEditComponent } from './guide/guides/guide-edit/guide-edit.component';
+import { GuideAutocompleteComponent } from './guide/guides/guide-autocomplete/guide-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -98,6 +106,8 @@ import { TypeGuideAutocompleteComponent } from './type-guide/types-guides/type-g
     ConfirmDialogModule,
     AutoCompleteModule,
     ToggleButtonModule,
+    CalendarModule,
+    DropdownModule,
     ImageCropperModule,
     // CompanyModule,
     // TypeCompanyModule,
@@ -155,6 +165,10 @@ import { TypeGuideAutocompleteComponent } from './type-guide/types-guides/type-g
     TypeGuideComponent,
     TypeGuideEditComponent,
     TypeGuideAutocompleteComponent,
+    GuidesComponent,
+    GuideComponent,
+    GuideEditComponent,
+    GuideAutocompleteComponent,
   ]
 })
 export class PagesModule { }
