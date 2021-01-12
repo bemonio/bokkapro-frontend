@@ -97,6 +97,12 @@ import { GuideComponent } from './guide/guide.component';
 import { GuideEditComponent } from './guide/guides/guide-edit/guide-edit.component';
 import { GuideAutocompleteComponent } from './guide/guides/guide-autocomplete/guide-autocomplete.component';
 
+// Packages
+import { PackagesComponent } from './package/packages/packages.component';
+import { PackageComponent } from './package/package.component';
+import { PackageEditComponent } from './package/packages/package-edit/package-edit.component';
+import { PackageAutocompleteComponent } from './package/packages/package-autocomplete/package-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -169,6 +175,10 @@ import { GuideAutocompleteComponent } from './guide/guides/guide-autocomplete/gu
     GuideComponent,
     GuideEditComponent,
     GuideAutocompleteComponent,
+    PackagesComponent,
+    PackageComponent,
+    PackageEditComponent,
+    PackageAutocompleteComponent,
   ]
 })
 export class PagesModule { }

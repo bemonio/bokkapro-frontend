@@ -125,6 +125,13 @@ const routes: Routes = [
             (m) => m.GuideRoutingModule
           ),
       },
+      {
+        path: 'packages',
+        loadChildren: () =>
+          import('../pages/package/package-routing.module').then(
+            (m) => m.PackageRoutingModule
+          ),
+      },
     ],
   },
 ];
