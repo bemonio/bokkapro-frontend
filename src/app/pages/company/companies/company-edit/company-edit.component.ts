@@ -143,8 +143,10 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.company;
-        this.model.type_company = response.type_companies[0];
-        this.model.segment_company = response.segment_companies[0];
+        if (response.type_companies)
+          this.model.type_company = response.type_companies[0];
+        if (response.segment_companies)
+          this.model.segment_company = response.segment_companies[0];
         this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
