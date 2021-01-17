@@ -62,7 +62,7 @@ export class OfficesComponent implements OnInit {
 
         this.page = 1;
         this.total_page = 0;
-        this.per_page = 10;
+        this.per_page = 5;
         this.totalRecords = 0;
 
         this.loading = false;
