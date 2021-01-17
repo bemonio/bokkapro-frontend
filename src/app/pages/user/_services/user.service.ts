@@ -25,9 +25,9 @@ export class UserService {
         }
 
         if (per_page !== null && per_page !== undefined) {
-            params.append('_limit', String(per_page));
+            params.append('_per_page', String(per_page));
         } else {
-            params.append('_limit', '10');
+            params.append('_per_page', '10');
         }
 
         if (sort !== null && sort !== undefined) {
