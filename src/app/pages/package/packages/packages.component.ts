@@ -79,10 +79,14 @@ export class PackagesComponent implements OnInit {
     
     public loadLazy(event: LazyLoadEvent) {
         this.page = (event.first / this.per_page) + 1;
-        if (event.sortOrder === -1) {
-            this.sort =  '-' + event.sortField;
+        if (event.sortField) {
+            if (event.sortOrder === -1) {
+                this.sort =  '-' + event.sortField;
+            } else {
+                this.sort =  event.sortField;
+            }
         } else {
-            this.sort =  event.sortField;
+            this.sort = '-id';
         }
 
         if (event.globalFilter) {

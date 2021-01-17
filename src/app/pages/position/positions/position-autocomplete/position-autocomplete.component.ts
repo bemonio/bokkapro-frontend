@@ -80,10 +80,14 @@ export class PositionAutocompleteComponent implements ControlValueAccessor, OnIn
     }
 
     public loadLazy(event: LazyLoadEvent) {
-        if (event.sortOrder === -1) {
-            this.sort =  '-' + event.sortField;
+        if (event.sortField) {
+            if (event.sortOrder === -1) {
+                this.sort =  '-' + event.sortField;
+            } else {
+                this.sort =  event.sortField;
+            }
         } else {
-            this.sort =  event.sortField;
+            this.sort = '-id';
         }
 
         if (event.globalFilter) {
