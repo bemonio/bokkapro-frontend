@@ -132,6 +132,13 @@ const routes: Routes = [
             (m) => m.PackageRoutingModule
           ),
       },
+      {
+        path: 'moderations',
+        loadChildren: () =>
+          import('../pages/moderation/moderation-routing.module').then(
+            (m) => m.ModerationRoutingModule
+          ),
+      },
     ],
   },
 ];

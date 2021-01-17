@@ -40,6 +40,7 @@ import { ZoneService } from './pages/zone/_services';
 import { TypeGuideService } from './pages/type-guide/_services';
 import { GuideService } from './pages/guide/_services';
 import { PackageService } from './pages/package/_services';
+import { ModerationService } from './pages/moderation/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -114,6 +115,7 @@ export function getHighlightLanguages() {
     TypeGuideService,
     GuideService,
     PackageService,
+    ModerationService,
   ],
   bootstrap: [AppComponent],
 })

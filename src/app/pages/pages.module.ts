@@ -12,7 +12,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { ConfirmationService } from 'primeng/api';
+import { BadgeModule } from 'primeng/badge';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -103,6 +103,12 @@ import { PackageComponent } from './package/package.component';
 import { PackageEditComponent } from './package/packages/package-edit/package-edit.component';
 import { PackageAutocompleteComponent } from './package/packages/package-autocomplete/package-autocomplete.component';
 
+// Moderations
+import { ModerationsComponent } from './moderation/moderations/moderations.component';
+import { ModerationComponent } from './moderation/moderation.component';
+import { ModerationEditComponent } from './moderation/moderations/moderation-edit/moderation-edit.component';
+import { ModerationAutocompleteComponent } from './moderation/moderations/moderation-autocomplete/moderation-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -111,6 +117,7 @@ import { PackageAutocompleteComponent } from './package/packages/package-autocom
     DialogModule,
     ConfirmDialogModule,
     AutoCompleteModule,
+    BadgeModule,
     ToggleButtonModule,
     CalendarModule,
     DropdownModule,
@@ -179,6 +186,10 @@ import { PackageAutocompleteComponent } from './package/packages/package-autocom
     PackageComponent,
     PackageEditComponent,
     PackageAutocompleteComponent,
+    ModerationsComponent,
+    ModerationComponent,
+    ModerationEditComponent,
+    ModerationAutocompleteComponent,
   ]
 })
 export class PagesModule { }
