@@ -96,7 +96,7 @@ export class TypeLocationAutocompleteComponent implements ControlValueAccessor, 
             this.per_page = event.rows;
         }
 
-        this.sort = '-id';
+        
         if (!this.firstTime) {
             this.getModels();
         }

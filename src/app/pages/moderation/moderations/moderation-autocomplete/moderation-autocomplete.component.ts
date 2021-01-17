@@ -96,7 +96,7 @@ export class ModerationAutocompleteComponent implements ControlValueAccessor, On
             this.per_page = event.rows;
         }
 
-        this.sort = '-id';
+        
         if (!this.firstTime) {
             this.getModels();
         }

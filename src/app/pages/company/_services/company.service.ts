@@ -31,7 +31,7 @@ export class CompanyService {
         }
 
         if (sort !== null && sort !== undefined) {
-            params.append('_sort', String(sort));
+            params.append('sort[]', String(sort));
         }
 
         if (query !== null && query !== undefined && query !== '') {

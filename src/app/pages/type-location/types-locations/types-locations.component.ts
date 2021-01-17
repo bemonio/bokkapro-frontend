@@ -95,7 +95,7 @@ export class TypesLocationsComponent implements OnInit {
             this.per_page = event.rows;
         }
 
-        this.sort = '-id';
+        
         this.getModels();
     }
 

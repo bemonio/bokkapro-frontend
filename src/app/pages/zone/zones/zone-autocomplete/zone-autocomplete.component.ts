@@ -96,7 +96,7 @@ export class ZoneAutocompleteComponent implements ControlValueAccessor, OnInit {
             this.per_page = event.rows;
         }
 
-        this.sort = '-id';
+        
         if (!this.firstTime) {
             this.getModels();
         }

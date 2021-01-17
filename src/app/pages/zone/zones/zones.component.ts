@@ -95,7 +95,7 @@ export class ZonesComponent implements OnInit {
             this.per_page = event.rows;
         }
 
-        this.sort = '-id';
+        
         this.getModels();
     }
 

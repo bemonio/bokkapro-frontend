@@ -96,7 +96,7 @@ export class LocationAutocompleteComponent implements ControlValueAccessor, OnIn
             this.per_page = event.rows;
         }
 
-        this.sort = '-id';
+        
         if (!this.firstTime) {
             this.getModels();
         }
