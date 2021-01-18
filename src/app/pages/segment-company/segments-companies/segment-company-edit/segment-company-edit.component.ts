@@ -87,7 +87,7 @@ export class SegmentCompanyEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model) {
+    if (this.model.id) {
       this.name.setValue(this.model.name);
       this.description.setValue(this.model.description);
     }

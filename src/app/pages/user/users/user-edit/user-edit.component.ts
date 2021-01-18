@@ -91,7 +91,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model) {
+    if (this.model.id) {
       this.username.setValue(this.model.username);
       this.email.setValue(this.model.email);
       this.is_active.setValue(this.model.is_active);

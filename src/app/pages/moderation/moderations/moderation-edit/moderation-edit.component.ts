@@ -86,7 +86,7 @@ export class ModerationEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model) {
+    if (this.model.id) {
       this.status.setValue(this.model.status);
     }
     this.formGroup.markAllAsTouched();

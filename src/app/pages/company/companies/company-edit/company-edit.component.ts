@@ -155,7 +155,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model) {
+    if (this.model.id) {
       this.code.setValue(this.model.code);
       this.code_brinks.setValue(this.model.code_brinks);
       this.identification_number.setValue(this.model.identification_number);

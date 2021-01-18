@@ -89,7 +89,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model) {
+    if (this.model.id) {
       this.code.setValue(this.model.code);
       this.verificated.setValue(this.model.verificated);
     }

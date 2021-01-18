@@ -111,7 +111,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model) {
+    if (this.model.id) {
       this.code.setValue(this.model.code);
       this.code_brinks.setValue(this.model.code_brinks);
       this.name.setValue(this.model.name);
