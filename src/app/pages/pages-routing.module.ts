@@ -133,6 +133,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'vouchers',
+        loadChildren: () =>
+          import('../pages/voucher/voucher-routing.module').then(
+            (m) => m.VoucherRoutingModule
+          ),
+      },
+      {
         path: 'moderations',
         loadChildren: () =>
           import('../pages/moderation/moderation-routing.module').then(

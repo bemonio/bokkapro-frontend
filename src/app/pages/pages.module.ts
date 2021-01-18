@@ -13,6 +13,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BadgeModule } from 'primeng/badge';
+import { ChipsModule } from 'primeng/chips';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -103,6 +104,12 @@ import { PackageComponent } from './package/package.component';
 import { PackageEditComponent } from './package/packages/package-edit/package-edit.component';
 import { PackageAutocompleteComponent } from './package/packages/package-autocomplete/package-autocomplete.component';
 
+// Vouchers
+import { VouchersComponent } from './voucher/vouchers/vouchers.component';
+import { VoucherComponent } from './voucher/voucher.component';
+import { VoucherEditComponent } from './voucher/vouchers/voucher-edit/voucher-edit.component';
+import { VoucherAutocompleteComponent } from './voucher/vouchers/voucher-autocomplete/voucher-autocomplete.component';
+
 // Moderations
 import { ModerationsComponent } from './moderation/moderations/moderations.component';
 import { ModerationComponent } from './moderation/moderation.component';
@@ -118,6 +125,7 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     ConfirmDialogModule,
     AutoCompleteModule,
     BadgeModule,
+    ChipsModule,
     ToggleButtonModule,
     CalendarModule,
     DropdownModule,
@@ -186,6 +194,10 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     PackageComponent,
     PackageEditComponent,
     PackageAutocompleteComponent,
+    VouchersComponent,
+    VoucherComponent,
+    VoucherEditComponent,
+    VoucherAutocompleteComponent,
     ModerationsComponent,
     ModerationComponent,
     ModerationEditComponent,
