@@ -20,7 +20,16 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: GuideEditComponent
+        component: GuideEditComponent,
+        children: [
+          {
+            path: 'vouchers',
+            loadChildren: () =>
+              import('../../pages/voucher/voucher-routing.module').then(
+                (m) => m.VoucherRoutingModule
+              ),
+          },
+        ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

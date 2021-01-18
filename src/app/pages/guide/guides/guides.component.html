@@ -38,9 +38,14 @@
               ID
             </div>
           </th>
+          <th pSortableColumn="date">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Date
+            </div>
+          </th>
           <th pSortableColumn="description">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Description
+              Shift
             </div>
           </th>
           <th pSortableColumn="created_at">
@@ -68,7 +73,10 @@
             {{value.id}}
           </td>
           <td>
-            {{value.description}}
+            {{value.am_pm}}
+          </td>
+          <td>
+            {{value.date | date: 'MM/dd/yyyy'}}
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}

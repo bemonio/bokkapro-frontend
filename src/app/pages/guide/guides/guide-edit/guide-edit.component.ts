@@ -21,6 +21,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
+    VOUCHER_TAB: 1,
   };
 
   public description: AbstractControl;  
@@ -34,6 +35,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   public saveAndExit;
 
   public optionsAmPm: {key: string, value: string}[];
+
+  public newVoucher: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -60,6 +63,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.optionsAmPm = [];
     this.optionsAmPm.push({key: 'AM', value: 'AM'});
     this.optionsAmPm.push({key: 'PM', value: 'PM'});
+
+    this.newVoucher = false;
   }
 
   ngOnInit(): void {
@@ -75,6 +80,11 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       switchMap(params => {
         // get id from URL
         this.id = Number(params.get('id'));
+
+        if (this.route.firstChild) {
+          this.activeTabId = this.tabs.VOUCHER_TAB;
+        }
+
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
@@ -99,10 +109,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model) {
+    if (this.model.id) {
       this.description.setValue(this.model.description);
       this.status.setValue(this.model.status);
-      this.am_pm.setValue(this.model.am_pm);
+      this.am_pm.setValue({key: this.model.am_pm, value: this.model.am_pm});
       this.date.setValue(new Date(this.model.date));
     }
     this.formGroup.markAllAsTouched();
@@ -133,7 +143,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     let model = this.model;
-    model.am_pm = this.am_pm.value;
+    model.am_pm = this.am_pm.value.value;
     model.date = this.formatDate(this.date.value);
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
@@ -161,7 +171,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     let model = this.model;
-    model.am_pm = this.am_pm.value;
+    model.am_pm = this.am_pm.value.value;
     model.date = this.formatDate(this.date.value);
 
     const sbCreate = this.modelsService.post(model).pipe(
