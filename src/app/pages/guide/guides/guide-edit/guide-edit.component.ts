@@ -28,6 +28,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   public status: AbstractControl;  
   public am_pm: AbstractControl;  
   public date: AbstractControl;  
+  public department_origin: AbstractControl;  
+  public department_destination: AbstractControl;  
+  public employee_origin: AbstractControl;  
+  public employee_destination: AbstractControl;  
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -54,11 +58,19 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       status: ['', Validators.compose([Validators.maxLength(30)])],
       am_pm: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
       date: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
+      department_origin: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
+      department_destination: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
+      employee_origin: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
+      employee_destination: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
     });
     this.description = this.formGroup.controls['description'];
     this.status = this.formGroup.controls['status'];
     this.date = this.formGroup.controls['date'];
     this.am_pm = this.formGroup.controls['am_pm'];
+    this.department_origin = this.formGroup.controls['department_origin'];
+    this.department_destination = this.formGroup.controls['department_destination'];
+    this.employee_origin = this.formGroup.controls['employee_origin'];
+    this.employee_destination = this.formGroup.controls['employee_destination'];
 
     this.optionsAmPm = [];
     this.optionsAmPm.push({key: 'AM', value: 'AM'});
@@ -101,6 +113,15 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.guide;
+        if (response.department_origin)
+          this.model.department_origin = response.department_origin[0];
+        if (response.department_destination)
+          this.model.department_destination = response.department_destination[0];
+        if (response.employee_origin)
+          this.model.employee_origin = response.employee_origin[0];
+        if (response.employee_destination)
+          this.model.employee_destination = response.employee_destination[0];
+
         this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
@@ -114,6 +135,18 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.status.setValue(this.model.status);
       this.am_pm.setValue({key: this.model.am_pm, value: this.model.am_pm});
       this.date.setValue(new Date(this.model.date));
+      if (this.model.department_origin) {
+        this.department_origin.setValue(this.model.department_origin);
+      }
+      if (this.model.department_destination) {
+        this.department_destination.setValue(this.model.department_destination);
+      }
+      if (this.model.employee_origin) {
+        this.employee_origin.setValue(this.model.employee_origin);
+      }
+      if (this.model.employee_destination) {
+        this.employee_destination.setValue(this.model.employee_destination);
+      }
     }
     this.formGroup.markAllAsTouched();
   }
@@ -145,6 +178,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.am_pm = this.am_pm.value.value;
     model.date = this.formatDate(this.date.value);
+    model.department_origin = this.model.department_origin.id;
+    model.department_destination = this.model.department_destination.id;
+    model.employee_origin = this.model.employee_origin.id;
+    model.employee_destination = this.model.employee_destination.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -173,6 +210,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.am_pm = this.am_pm.value.value;
     model.date = this.formatDate(this.date.value);
+    model.department_origin = this.model.department_origin.id;
+    model.department_destination = this.model.department_destination.id;
+    model.employee_origin = this.model.employee_origin.id;
+    model.employee_destination = this.model.employee_destination.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

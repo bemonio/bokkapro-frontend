@@ -68,6 +68,58 @@
                 symbols</div>
             </div>
           </div>
+          <div class="col-lg-4">
+            <label>Enter Department Origin</label>
+            <app-department-autocomplete
+            placeholder="Department Origin" name="department_origin" [valid]="isControlValid('department_origin')" [touched]="isControlTouched('department_origin')" [class.is-invalid]="isControlInvalid('department_origin')"
+            [class.is-valid]="isControlValid('department_origin')" formControlName="department_origin" id="department_origin" [model]="model.department_origin"></app-department-autocomplete>
+            <div class="feedback" *ngIf="!isControlTouched('department_origin')">Please enter <b>Department Origin</b></div>
+            <div class="valid-feedback" *ngIf="isControlValid('department_origin')">Department Origin was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'department_origin')">Department Origin is required</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'department_origin')">Department Origin should have at least 3
+              symbols</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'department_origin')">Department Origin should have maximum 30
+              symbols</div>
+          </div>
+          <div class="col-lg-4">
+            <label>Enter Department Destination</label>
+            <app-department-autocomplete
+            placeholder="Department Destination" name="department_destination" [valid]="isControlValid('department_destination')" [touched]="isControlTouched('department_destination')" [class.is-invalid]="isControlInvalid('department_destination')"
+            [class.is-valid]="isControlValid('department_destination')" formControlName="department_destination" id="department_destination" [model]="model.department_destination"></app-department-autocomplete>
+            <div class="feedback" *ngIf="!isControlTouched('department_destination')">Please enter <b>Department Destination</b></div>
+            <div class="valid-feedback" *ngIf="isControlValid('department_destination')">Department Destination was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'department_destination')">Department Destination is required</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'department_destination')">Department Destination should have at least 3
+              symbols</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'department_destination')">Department Destination should have maximum 30
+              symbols</div>
+          </div>
+          <div class="col-lg-4">
+            <label>Enter Employee Origin</label>
+            <app-employee-autocomplete
+            placeholder="Employee Origin" name="employee_origin" [valid]="isControlValid('employee_origin')" [touched]="isControlTouched('employee_origin')" [class.is-invalid]="isControlInvalid('employee_origin')"
+            [class.is-valid]="isControlValid('employee_origin')" formControlName="employee_origin" id="employee_origin" [model]="model.employee_origin"></app-employee-autocomplete>
+            <div class="feedback" *ngIf="!isControlTouched('employee_origin')">Please enter <b>Employee Origin</b></div>
+            <div class="valid-feedback" *ngIf="isControlValid('employee_origin')">Employee Origin was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee_origin')">Employee Origin is required</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employee_origin')">Employee Origin should have at least 3
+              symbols</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employee_origin')">Employee Origin should have maximum 30
+              symbols</div>
+          </div>
+          <div class="col-lg-4">
+            <label>Enter Employee Destination</label>
+            <app-employee-autocomplete
+            placeholder="Employee Destination" name="employee_destination" [valid]="isControlValid('employee_destination')" [touched]="isControlTouched('employee_destination')" [class.is-invalid]="isControlInvalid('employee_destination')"
+            [class.is-valid]="isControlValid('employee_destination')" formControlName="employee_destination" id="employee_destination" [model]="model.employee_destination"></app-employee-autocomplete>
+            <div class="feedback" *ngIf="!isControlTouched('employee_destination')">Please enter <b>Employee Destination</b></div>
+            <div class="valid-feedback" *ngIf="isControlValid('employee_destination')">Employee Destination was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee_destination')">Employee Destination is required</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employee_destination')">Employee Destination should have at least 3
+              symbols</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employee_destination')">Employee Destination should have maximum 30
+              symbols</div>
+          </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/guides">Cancel</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
