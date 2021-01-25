@@ -44,7 +44,7 @@ export class CompanyAutocompleteComponent implements ControlValueAccessor, OnIni
         public toastService: ToastService
     ) {
         this.page = 1;
-        this.per_page = 1;
+        this.per_page = 100;
         this.firstTime = true;
     }
 

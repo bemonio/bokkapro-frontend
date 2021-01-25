@@ -44,7 +44,7 @@ export class PositionAutocompleteComponent implements ControlValueAccessor, OnIn
         public toastService: ToastService
     ) {
         this.page = 1;
-        this.per_page = 1;
+        this.per_page = 100;
         this.firstTime = true;
     }
 

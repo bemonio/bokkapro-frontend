@@ -44,13 +44,13 @@ export class DepartmentAutocompleteComponent implements ControlValueAccessor, On
         public toastService: ToastService
     ) {
         this.page = 1;
-        this.per_page = 1;
+        this.per_page = 100;
         this.firstTime = true;
     }
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Segment Department';
+            this.placeholder = 'Department';
         }
     }
 
@@ -110,7 +110,7 @@ export class DepartmentAutocompleteComponent implements ControlValueAccessor, On
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
             response => {
-                this.models = response.segment_companies;
+                this.models = response.departments;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {
