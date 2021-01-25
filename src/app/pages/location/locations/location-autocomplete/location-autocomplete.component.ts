@@ -110,7 +110,7 @@ export class LocationAutocompleteComponent implements ControlValueAccessor, OnIn
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
             response => {
-                this.models = response.type_companies;
+                this.models = response.locations;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {

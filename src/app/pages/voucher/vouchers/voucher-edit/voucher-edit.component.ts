@@ -26,8 +26,13 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   };
 
   public code: AbstractControl;
+  public amount: AbstractControl;
+  public count_packages: AbstractControl;
   public verificated: AbstractControl;
   public package: AbstractControl;
+  public company: AbstractControl;
+  public location_origin: AbstractControl;
+  public location_destination: AbstractControl;
 
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
@@ -50,12 +55,22 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      amount: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      count_packages: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       verificated: [''],
       package: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      location_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      location_destination: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
     this.code = this.formGroup.controls['code'];
+    this.amount = this.formGroup.controls['amount']
+    this.count_packages = this.formGroup.controls['count_packages']
     this.verificated = this.formGroup.controls['verificated'];
     this.package = this.formGroup.controls['package'];
+    this.company = this.formGroup.controls['company']
+    this.location_origin = this.formGroup.controls['location_origin']
+    this.location_destination = this.formGroup.controls['location_destination']
   }
 
   ngOnInit(): void {
@@ -92,6 +107,13 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.voucher;
+        if (response.companies) {
+          this.model.company = response.companies[0];
+        }
+        if (response.guides) {
+          this.model.guide = response.guides[0];
+        }
+
         this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
@@ -102,7 +124,18 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.code.setValue(this.model.code);
+      this.amount.setValue(this.model.amount);
+      this.count_packages.setValue(this.model.count_packages);
       this.verificated.setValue(this.model.verificated);
+      if (this.model.company) {
+        this.company.setValue(this.model.company);
+      }
+      if (this.model.location_origin) {
+        this.location_origin.setValue(this.model.location_origin);
+      }
+      if (this.model.location_destination) {
+        this.location_destination.setValue(this.model.location_destination);
+      }
     }
     this.formGroup.markAllAsTouched();
   }
@@ -131,6 +164,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   edit() {
     this.loading = true;
     let model = this.model;
+    model.guide = this.guideId;
+    model.company = this.model.company.id;
+    model.location_origin = this.model.location_origin.id;
+    model.location_destination = this.model.location_destination.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -156,6 +193,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.loading = true;
     let model = this.model;
     model.guide = this.guideId;
+    model.company = this.model.company.id;
+    model.location_origin = this.model.location_origin.id;
+    model.location_destination = this.model.location_destination.id;
     
     // let packages = [];
     // this.model.package.forEach(element => {

@@ -81,9 +81,70 @@
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Verificated</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="verificated" onLabel="true" offLabel="false"></p-toggleButton>
+              <label>Enter Amount</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="Amount" name="amount" [class.is-invalid]="isControlInvalid('amount')"
+                [class.is-valid]="isControlValid('amount')" formControlName="amount" />
+              <div class="feedback" *ngIf="!isControlTouched('amount')">Please enter <b>Amount</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('amount')">Amount was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">Amount is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'amount')">Amount should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">Amount should have maximum 30
+                symbols</div>
+            </div>            
+            <div class="col-lg-4">
+              <label>Enter Company</label>
+              <app-company-autocomplete
+              placeholder="Company" name="company" [valid]="isControlValid('company')" [touched]="isControlTouched('company')" [class.is-invalid]="isControlInvalid('company')"
+              [class.is-valid]="isControlValid('company')" formControlName="company" id="company" [model]="model.company"></app-company-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('company')">Please enter <b>Company</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('company')">Company was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'company')">Company is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'company')">Company should have at least 1
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company')">Company should have maximum 30
+                symbols</div>
             </div>
+            <div class="col-lg-4">
+              <label>Enter Location Origin</label>
+              <app-location-autocomplete
+              placeholder="Location Origin" name="location_origin" [valid]="isControlValid('location_origin')" [touched]="isControlTouched('location_origin')" [class.is-invalid]="isControlInvalid('location_origin')"
+              [class.is-valid]="isControlValid('location_origin')" formControlName="location_origin" id="location_origin" [model]="model.location_origin"></app-location-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('location_origin')">Please enter <b>Location Origin</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('location_origin')">Location Origin was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_origin')">Location Origin is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location_origin')">Location Origin should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_origin')">Location Origin should have maximum 30
+                symbols</div>
+            </div>
+            <div class="col-lg-4">
+              <label>Enter Location Destination</label>
+              <app-location-autocomplete
+              placeholder="Location Destination" name="location_destination" [valid]="isControlValid('location_destination')" [touched]="isControlTouched('location_destination')" [class.is-invalid]="isControlInvalid('location_destination')"
+              [class.is-valid]="isControlValid('location_destination')" formControlName="location_destination" id="location_destination" [model]="model.location_destination"></app-location-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('location_destination')">Please enter <b>Location Destination</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('location_destination')">Location Destination was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_destination')">Location Destination is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location_destination')">Location Destination should have at least 1
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_destination')">Location Destination should have maximum 30
+                symbols</div>
+            </div>
+            <div class="col-lg-4">
+              <label>Enter Count Packages</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="Count Packages" name="count_packages" [class.is-invalid]="isControlInvalid('count_packages')"
+                [class.is-valid]="isControlValid('count_packages')" formControlName="count_packages" />
+              <div class="feedback" *ngIf="!isControlTouched('count_packages')">Please enter <b>Count Packages</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('count_packages')">Count Packages was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'count_packages')">Count Packages is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count_packages')">Count Packages should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count_packages')">Count Packages should have maximum 30
+                symbols</div>
+            </div>            
             <div class="col-lg-4">
               <label>Packages</label>
               <p-chips [styleClass]="getValidClass(isControlValid('package'))" formControlName="package" [allowDuplicate]="false"></p-chips>
@@ -94,6 +155,10 @@
                 item</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'package')">Packages should have maximum 100
                 items</div>
+            </div>
+            <div class="col-lg-4">
+              <label>Verificated</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="verificated" onLabel="true" offLabel="false"></p-toggleButton>
             </div>
           </div>
           <div class="float-right">
