@@ -85,7 +85,9 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.employee;
-        this.model.position = response.positions[0];
+        if (response.positions) {
+          this.model.position = response.positions[0];
+        }
         if (response.users) {
           this.model.user = response.users[0];
         }

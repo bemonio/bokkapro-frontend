@@ -82,7 +82,9 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.office;
-        this.model.company = response.companies[0];
+        if (response.companies) {
+          this.model.company = response.companies[0];
+        }
         this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
