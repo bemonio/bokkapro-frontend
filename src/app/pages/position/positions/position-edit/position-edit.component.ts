@@ -25,7 +25,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
 
   public name: AbstractControl;
   public description: AbstractControl;  
-  public office: AbstractControl;  
+  public department: AbstractControl;  
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -46,11 +46,11 @@ export class PositionEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       description: ['', Validators.compose([Validators.maxLength(30)])],
-      office: ['', Validators.compose([Validators.required])],
+      department: ['', Validators.compose([Validators.required])],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];
-    this.office = this.formGroup.controls['office'];
+    this.department = this.formGroup.controls['department'];
   }
 
   ngOnInit(): void {
@@ -82,7 +82,9 @@ export class PositionEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.position;
-        this.model.office = response.offices[0];
+        if (response.departments) {
+          this.model.department = response.departments[0];
+        }
         this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
@@ -94,8 +96,8 @@ export class PositionEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.name.setValue(this.model.name);
       this.description.setValue(this.model.description);
-      if (this.model.office) {
-        this.office.setValue(this.model.office);
+      if (this.model.department) {
+        this.department.setValue(this.model.department);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -125,7 +127,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
   edit() {
     this.loading = true;
     let model = this.model;
-    model.office = this.model.office.id;
+    model.department = this.model.department.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -152,7 +154,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     let model = this.model;
-    model.office = this.model.office.id;
+    model.department = this.model.department.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

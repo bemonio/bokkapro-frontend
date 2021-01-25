@@ -1,8 +1,8 @@
-import { OfficeModel } from "../../office/_models/office.model";
+import { DepartmentModel } from "../../department/_models/department.model";
 
 export class PositionModel {
   id: number;
   name: string;
   description: string;
-  office: any;
+  department: any;
 }
