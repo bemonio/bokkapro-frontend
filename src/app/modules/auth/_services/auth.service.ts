@@ -131,4 +131,17 @@ export class AuthService implements OnDestroy {
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
+
+  public hasPermission (permission) {
+    let has = false;
+    const list = this.currentUserSubject.getValue();
+    list.groups.forEach(elementGroup => {
+      elementGroup.permissions.forEach(elementPermission => {
+        if (elementPermission.codename === permission) {
+          has = true;
+        }
+      });
+    });
+    return has;
+  }
 }

@@ -20,7 +20,7 @@ export class UserModel extends AuthModel {
     socialNetworks?: SocialNetworksModel;
     website: string;
   }
-  groups: number[];
+  groups: any[];
   companyName: string;
   // personal information
   first_name: string;
