@@ -8,7 +8,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
-
+import { AuthService } from 'src/app/modules/auth';
 @Component({
   selector: 'app-packages',
   templateUrl: './packages.component.html',
@@ -46,6 +46,7 @@ export class PackagesComponent implements OnInit {
       public translate: TranslateService,
       private confirmationService: ConfirmationService,
       private toastService: ToastService,
+      public authService: AuthService,
       fb: FormBuilder) {
         this.formGroup = fb.group({
             'employee_id_filter': [''],

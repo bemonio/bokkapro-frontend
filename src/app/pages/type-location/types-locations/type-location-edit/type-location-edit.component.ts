@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
+import { AuthService } from 'src/app/modules/auth';
 import { TypeLocationModel as Model } from '../../_models/type-location.model';
 import { TypeLocationService as ModelsService } from '../../_services/type-location.service';
 

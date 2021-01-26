@@ -77,17 +77,17 @@
           </td>
           <td style="text-align: center">
             <a title="Edit" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/moderations/edit/' + value.id">
+              [routerLink]="'/moderations/edit/' + value.id"  *ngIf="authService.hasPermission('add_moderatedobject')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
-            <!-- <a title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')">
+            <a title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_moderatedobject')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
-            </a> -->
+            </a>
           </td>
         </tr>
       </ng-template>

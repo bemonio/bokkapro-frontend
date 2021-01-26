@@ -89,7 +89,7 @@
               </span>
             </a>
             <a title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>

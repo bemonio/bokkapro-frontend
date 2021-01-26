@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
+import { AuthService } from 'src/app/modules/auth';
 import { GuideModel as Model } from '../../_models/guide.model';
 import { GuideService as ModelsService } from '../../_services/guide.service';
 
@@ -47,6 +48,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private toastService: ToastService
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile

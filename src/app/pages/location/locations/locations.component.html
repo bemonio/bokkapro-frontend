@@ -83,13 +83,13 @@
           </td>
           <td style="text-align: center">
             <a title="Edit" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/locations/edit/' + value.id">
+              [routerLink]="'/locations/edit/' + value.id"  *ngIf="authService.hasPermission('add_location')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_location')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>

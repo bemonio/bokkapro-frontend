@@ -5,6 +5,7 @@ import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
+import { AuthService } from 'src/app/modules/auth';
 import { TypeCompanyModel } from 'src/app/pages/type-company/_models/type-company.model';
 import { CompanyModel as Model } from '../../_models/company.model';
 import { CompanyService as ModelsService } from '../../_services/company.service';

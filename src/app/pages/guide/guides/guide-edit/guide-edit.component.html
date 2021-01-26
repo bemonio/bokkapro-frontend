@@ -32,7 +32,7 @@
           Basic info
         </a>
       </li>
-      <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.VOUCHER_TAB)">
+      <li *ngIf="model && model.id && authService.hasPermission('view_voucher')" class="nav-item cursor-pointer" (click)="changeTab(tabs.VOUCHER_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.VOUCHER_TAB"
           [class.active]="activeTabId === tabs.VOUCHER_TAB" routerLink="/guides/edit/{{model.id}}/vouchers">Voucher</a>
       </li>
