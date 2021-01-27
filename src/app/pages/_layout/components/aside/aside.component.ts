@@ -21,7 +21,7 @@ export class AsideComponent implements OnInit {
   asideMenuScroll = 1;
   asideSelfMinimizeToggle = false;
 
-  constructor(private layout: LayoutService, private loc: Location, private authService: AuthService) { }
+  constructor(private layout: LayoutService, private loc: Location, public authService: AuthService) { }
 
   ngOnInit(): void {
     // load view settings
