@@ -84,7 +84,8 @@
               <label>Enter Amount</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Amount" name="amount" [class.is-invalid]="isControlInvalid('amount')"
-                [class.is-valid]="isControlValid('amount')" formControlName="amount" />
+                [class.is-valid]="isControlValid('amount')" formControlName="amount" 
+                currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
               <div class="feedback" *ngIf="!isControlTouched('amount')">Please enter <b>Amount</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('amount')">Amount was entered correct</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">Amount is required</div>
