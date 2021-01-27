@@ -17,6 +17,8 @@ import { ChipsModule } from 'primeng/chips';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
+import { CurrencyMaskModule } from "ng2-currency-mask";
+
 // import { CompanyModule } from './company/company.module';
 // import { TypeCompanyModule } from './type-company/type-company.module';
 
@@ -126,6 +128,7 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     AutoCompleteModule,
     BadgeModule,
     ChipsModule,
+    CurrencyMaskModule,
     ToggleButtonModule,
     CalendarModule,
     DropdownModule,
