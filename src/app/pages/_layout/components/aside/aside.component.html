@@ -159,6 +159,24 @@
       </li>
       <!-- end::1 Level -->
 
+      <!-- begin::1 Level Guide -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guide')">
+        <a class="menu-link" routerLink="/guidesinput" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span class="menu-text">Guides Input</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+      
+      <!-- begin::1 Level Guide -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guide')">
+        <a class="menu-link" routerLink="/guidesoutput" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span class="menu-text">Guides Output</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+
       <!-- begin::1 Level Voucher -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_voucher')">
         <a class="menu-link" routerLink="/vouchers" routerLinkActive="active">

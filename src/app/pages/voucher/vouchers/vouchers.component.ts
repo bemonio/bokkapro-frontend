@@ -47,6 +47,8 @@ export class VouchersComponent implements OnInit {
     public guideId: number;
     public parent: string;
 
+    public displayModal: boolean;
+
     constructor(
       public modelsService: ModelService,
       private router: Router,
@@ -76,6 +78,8 @@ export class VouchersComponent implements OnInit {
         this.filters = [];
 
         this.loading = false;
+
+        this.displayModal = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -109,7 +113,7 @@ export class VouchersComponent implements OnInit {
             this.per_page = event.rows;
         }
 
-        if (this.route.parent.parent.parent) {
+        if (this.route.parent.parent.parent.snapshot.url.length > 0) {
             const sb = this.route.parent.parent.parent.paramMap.pipe(
                 switchMap(params => {
                     // get id from URL
@@ -126,12 +130,16 @@ export class VouchersComponent implements OnInit {
                 }),
             ).subscribe((response: any) => {
                 if (response) {
-                    this.guideId = response;
-                    this.parent = '/guides/edit/' + this.guideId;
-                    this.filters.push ({key: 'filter{guide}', value: this.guideId.toString()})
+                    if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                        this.guideId = response;
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+                        this.filters.push ({key: 'filter{guide}', value: this.guideId.toString()})
+                    }
                 }
                 this.getModels()
             });
+        } else {
+            this.getModels();
         }
     }
 
@@ -219,4 +227,8 @@ export class VouchersComponent implements OnInit {
             }
         });
     }
+
+    showModalDialog() {
+        this.displayModal = true;
+    }    
 }

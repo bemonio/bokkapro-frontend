@@ -80,8 +80,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.previous = undefined;
 
     this.route.parent.parent.parent.params.subscribe((params) => { 
-      this.guideId = params.id;
-      this.parent = '/guides/edit/' + this.guideId;
+      if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+        this.guideId = params.id;
+        this.parent = '/'+ this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+      }
       this.get();
     });
   }

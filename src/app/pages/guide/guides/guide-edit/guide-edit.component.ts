@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
@@ -14,6 +14,10 @@ import { GuideService as ModelsService } from '../../_services/guide.service';
   styleUrls: ['./guide-edit.component.scss']
 })
 export class GuideEditComponent implements OnInit, OnDestroy {
+  @Input() transfer: boolean;
+  @Input() listVouchers: any[];
+  @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
+  
   public id: number;
   public model: Model;
   public previous: Model;
@@ -43,6 +47,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public newVoucher: boolean;
 
+  public parent: string;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -55,14 +61,24 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.saveAndExit = false;
     this.loading = false;
 
+    this.parent = '/guides';
+
+    this.newVoucher = false;
+  }
+
+  ngOnInit(): void {
+    this.id = undefined;
+    this.model = undefined;
+    this.previous = undefined;
+
     this.formGroup = this.fb.group({
       description: ['', Validators.compose([Validators.maxLength(30)])],
       status: ['', Validators.compose([Validators.maxLength(30)])],
-      am_pm: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
-      date: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
-      department_origin: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
+      am_pm: ['', Validators.compose([Validators.maxLength(30)])],
+      date: ['', Validators.compose([Validators.maxLength(30)])],
+      department_origin: [{value: ''}, Validators.compose(this.transfer ? [Validators.maxLength(30)]: [Validators.required, Validators.maxLength(30)])],
       department_destination: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
-      employee_origin: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
+      employee_origin: [{value: ''}, Validators.compose(this.transfer ? [Validators.maxLength(30)]: [Validators.required, Validators.maxLength(30)])],
       employee_destination: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
     });
     this.description = this.formGroup.controls['description'];
@@ -78,13 +94,11 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.optionsAmPm.push({key: 'AM', value: 'AM'});
     this.optionsAmPm.push({key: 'PM', value: 'PM'});
 
-    this.newVoucher = false;
-  }
 
-  ngOnInit(): void {
-    this.id = undefined;
-    this.model = undefined;
-    this.previous = undefined;
+    if (this.route.parent.parent.snapshot.url[0].path)  {
+      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
+    }
+
     this.get();
   }
 
@@ -150,7 +164,13 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         this.employee_destination.setValue(this.model.employee_destination);
       }
     }
+
     this.formGroup.markAllAsTouched();
+
+    if (this.transfer) {
+      this.department_origin.setValue(this.authService.currentUserValue.employee.position.department);
+      this.employee_origin.setValue(this.authService.currentUserValue.employee);
+    }
   }
 
   reset() {
@@ -306,5 +326,9 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     }
 
     return [year, month, day].join('-');
+  }
+
+  public cancel() {
+    this.close.emit(true);
   }
 }

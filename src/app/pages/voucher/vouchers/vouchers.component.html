@@ -4,6 +4,7 @@
       <h3 class="card-label">List<span *ngIf="guideId"></span></h3>
     </div>
     <div class="card-toolbar">
+      <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">Transfer</a>
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/vouchers/add">New</a>
     </div>
   </div>
@@ -108,3 +109,8 @@
 </div>
 
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
+
+<p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <app-guide-edit (close)="displayModal=false" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
+</p-dialog>

@@ -9,6 +9,9 @@ import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, switchMap, tap } from 'rxjs/operators';
+
 @Component({
   selector: 'app-guides',
   templateUrl: './guides.component.html',
@@ -41,12 +44,16 @@ export class GuidesComponent implements OnInit {
   
     public confirmDialogPosition: string;
 
+    public parent: string;
+
     constructor(
       public modelsService: ModelService,
       public translate: TranslateService,
       private confirmationService: ConfirmationService,
       private toastService: ToastService,
       public authService: AuthService,
+      private router: Router,
+      private route: ActivatedRoute,
       fb: FormBuilder) {
         this.formGroup = fb.group({
             'employee_id_filter': [''],
@@ -65,6 +72,8 @@ export class GuidesComponent implements OnInit {
         this.total_page = 0;
         this.per_page = 5;
         this.totalRecords = 0;
+        this.filters = [];
+        this.parent = '/guides';
 
         this.loading = false;
 
@@ -100,8 +109,17 @@ export class GuidesComponent implements OnInit {
             this.per_page = event.rows;
         }
 
-        
-        this.getModels();
+        switch (this.route.parent.parent.snapshot.url[0].path) {
+            case 'guidesinput':
+                this.filters.push ({key: 'filter{department_origin}[]', value: '1'})
+                this.parent = '/guidesinput';
+                break;
+            case 'guidesoutput':
+                this.filters.push ({key: 'filter{department_destination}[]', value: '1'})
+                this.parent = '/guidesoutput';
+                break;
+        }
+        this.getModels()
     }
 
     public getModels() {

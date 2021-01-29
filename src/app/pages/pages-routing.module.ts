@@ -123,7 +123,21 @@ const routes: Routes = [
         loadChildren: () =>
           import('../pages/guide/guide-routing.module').then(
             (m) => m.GuideRoutingModule
-          ),
+          ),  
+      },
+      {
+        path: 'guidesinput',
+        loadChildren: () =>
+          import('../pages/guide/guide-routing.module').then(
+            (m) => m.GuideRoutingModule
+          ),  
+      },
+      {
+        path: 'guidesoutput',
+        loadChildren: () =>
+          import('../pages/guide/guide-routing.module').then(
+            (m) => m.GuideRoutingModule
+          ),  
       },
       {
         path: 'packages',
