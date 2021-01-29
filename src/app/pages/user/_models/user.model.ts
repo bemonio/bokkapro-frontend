@@ -16,6 +16,7 @@ export class UserModel {
     website: string;
   }
   groups: any[];
+  employee: any;
   companyName: string;
   // personal information
   first_name: string;

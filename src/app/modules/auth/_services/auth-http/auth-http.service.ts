@@ -30,7 +30,7 @@ export class AuthHTTPService {
     });
   }
 
-  getUserByToken(token): Observable<UserModel> {
+  getUserByToken(): Observable<UserModel> {
     return this.http.get<UserModel>(`${API_AUTH_URL}auth/user`);
   }
 }

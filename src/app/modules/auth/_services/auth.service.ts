@@ -6,6 +6,7 @@ import { AuthModel } from '../_models/auth.model';
 import { AuthHTTPService } from './auth-http';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../_services/auth-http/token-storage.service';
+import { UserService } from 'src/app/pages/user/_services';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,8 @@ export class AuthService implements OnDestroy {
   constructor(
     private authHttpService: AuthHTTPService,
     private router: Router,
-    private token: TokenStorageService
+    private token: TokenStorageService,
+    private userService: UserService
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
@@ -73,10 +75,35 @@ export class AuthService implements OnDestroy {
     }
 
     this.isLoadingSubject.next(true);
-    return this.authHttpService.getUserByToken(auth.accessToken).pipe(
+    return this.authHttpService.getUserByToken().pipe(
       map((user: UserModel) => {
         if (user) {
-          this.currentUserSubject = new BehaviorSubject<UserModel>(user);
+          this.userService.getById(user.id).toPromise().then(
+              response => {
+                let model = response;
+                if (response.employees) {
+                  model.user.employee = response.employees[0];
+                  if (response.positions) {
+                    model.user.employee.position = response.positions[0];
+                    if (response.departments) {
+                      model.user.employee.position.department = response.departments[0];
+                    }
+                  }
+                }
+
+                if (response.groups) {
+                  model.user.groups = response.groups;
+                  if (response.permissions) {
+                    model.user.groups[0].permissions = response.permissions;
+                  }
+                }
+
+                this.currentUserSubject = new BehaviorSubject<UserModel>(model.user);
+              },
+              error => {
+                console.log ('error getting user');
+              }
+          );
         } else {
           this.logout();
         }
@@ -134,8 +161,8 @@ export class AuthService implements OnDestroy {
 
   public hasPermission (permission) {
     let has = false;
-    const list = this.currentUserSubject.getValue();
-    list.groups.forEach(elementGroup => {
+    const user = this.currentUserSubject.getValue();
+    user.groups.forEach(elementGroup => {
       elementGroup.permissions.forEach(elementPermission => {
         if (elementPermission.codename === permission) {
           has = true;
