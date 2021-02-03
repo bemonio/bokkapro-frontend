@@ -46,4 +46,8 @@ export class Subheader1Component implements OnInit {
       this.cdr.detectChanges();
     });
   }
+
+  getNow() {
+    return new Date();
+  }
 }

@@ -73,7 +73,7 @@
             >Today</span
           >
           <span class="font-weight-bold" id="kt_dashboard_daterangepicker_date"
-            >Aug 16</span
+            >{{getNow() | date}}</span
           >
         </a>
         <!--end::Daterange-->
@@ -89,7 +89,7 @@
       </ng-container>
 
       <!--begin::Dropdown-->
-      <div
+      <!-- <div
         class="dropdown dropdown-inline"
         data-toggle="tooltip"
         title="Quick actions"
@@ -115,7 +115,7 @@
         >
           <app-dropdown-menu1></app-dropdown-menu1>
         </div>
-      </div>
+      </div> -->
       <!--end::Dropdown-->
     </div>
     <!--end::Toolbar-->
