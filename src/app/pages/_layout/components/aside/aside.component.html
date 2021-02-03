@@ -25,7 +25,7 @@
     <!-- begin::Menu Nav -->
     <ul class="menu-nav" [ngClass]="ulCSSClasses">
       <!-- begin::1 Level  Dashboard -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"  *ngIf="authService.hasPermission('view_dashboard')">
         <a class="menu-link" routerLink="/dashboard" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
           <span class="menu-text">Dashboard</span>
@@ -160,7 +160,7 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level Guide -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guide')">
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guideinput')">
         <a class="menu-link" routerLink="/guidesinput" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
           <span class="menu-text">Guides Input</span>
@@ -169,7 +169,7 @@
       <!-- end::1 Level -->
       
       <!-- begin::1 Level Guide -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guide')">
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guideoutput')">
         <a class="menu-link" routerLink="/guidesoutput" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
           <span class="menu-text">Guides Output</span>
