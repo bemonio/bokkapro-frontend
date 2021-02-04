@@ -35,7 +35,7 @@ export class TypeLocationService {
         }
 
         if (query !== null && query !== undefined && query !== '') {
-            params.append('_q', String(query));
+            params.append('filter{id}[]', String(query));
         }
 
         if (filters !== null && filters !== undefined && filters.length > 0) {

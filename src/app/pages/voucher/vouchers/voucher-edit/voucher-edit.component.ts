@@ -30,7 +30,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public amount: AbstractControl;
   public count_packages: AbstractControl;
   public verificated: AbstractControl;
-  public package: AbstractControl;
+  public packages: AbstractControl;
   public company: AbstractControl;
   public location_origin: AbstractControl;
   public location_destination: AbstractControl;
@@ -59,7 +59,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       amount: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       count_packages: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       verificated: [''],
-      package: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      packages: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_destination: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -68,7 +68,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.amount = this.formGroup.controls['amount']
     this.count_packages = this.formGroup.controls['count_packages']
     this.verificated = this.formGroup.controls['verificated'];
-    this.package = this.formGroup.controls['package'];
+    this.packages = this.formGroup.controls['packages'];
     this.company = this.formGroup.controls['company']
     this.location_origin = this.formGroup.controls['location_origin']
     this.location_destination = this.formGroup.controls['location_destination']
@@ -116,6 +116,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (response.guides) {
           this.model.guide = response.guides[0];
         }
+        if (response.packages) {
+          this.model.packages = response.packages;
+        }
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();  
@@ -138,6 +141,13 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       }
       if (this.model.location_destination) {
         this.location_destination.setValue(this.model.location_destination);
+      }
+      if (this.model.packages) {
+        let list_packages = [];
+        this.model.packages.forEach(element => {
+            list_packages.push(element.code);
+        });
+        this.packages.setValue(list_packages);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -172,6 +182,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.location_origin = this.model.location_origin.id;
     model.location_destination = this.model.location_destination.id;
 
+    let packages = [];
+    this.model.packages.forEach(element => {
+      packages.push({'code': element, 'verificated': 'true'});
+    });
+    model.packages = packages;
+
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
@@ -199,12 +215,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.company = this.model.company.id;
     model.location_origin = this.model.location_origin.id;
     model.location_destination = this.model.location_destination.id;
-    
-    // let packages = [];
-    // this.model.package.forEach(element => {
-    //   packages.push({'code': element, 'verificated': 'true'});
-    // });
-    // model.package = packages;
+        
+    let packages = [];
+    this.model.packages.forEach(element => {
+      packages.push({'code': element, 'verificated': 'true'});
+    });
+    model.packages = packages;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

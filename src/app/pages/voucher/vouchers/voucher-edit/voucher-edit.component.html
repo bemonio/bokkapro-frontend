@@ -148,13 +148,13 @@
             </div>            
             <div class="col-lg-4">
               <label>Packages</label>
-              <p-chips [styleClass]="getValidClass(isControlValid('package'))" formControlName="package" [allowDuplicate]="false"></p-chips>
-              <div class="feedback" *ngIf="!isControlTouched('package')">Please enter <b>Packages</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('package')">Packages was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'package')">Packages is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'package')">Packages should have at least 1
+              <p-chips [styleClass]="getValidClass(isControlValid('packages'))" formControlName="packages" [allowDuplicate]="false"></p-chips>
+              <div class="feedback" *ngIf="!isControlTouched('packages')">Please enter <b>Packages</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('packages')">Packages was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'packages')">Packages is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'packages')">Packages should have at least 1
                 item</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'package')">Packages should have maximum 100
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'packages')">Packages should have maximum 100
                 items</div>
             </div>
             <div class="col-lg-4">
