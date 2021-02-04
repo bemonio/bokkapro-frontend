@@ -84,7 +84,7 @@ export const DefaultLayoutConfig = {
 
     menu: {
       self: {
-        display: true,
+        display: false,
         layout: 'default', // tab/default,
         rootArrow: false,
         iconStyle: 'duotone', // duotone, line, bold, solid
@@ -167,7 +167,7 @@ export const DefaultLayoutConfig = {
 
   // Footer
   footer: {
-    display: true,
+    display: false,
     width: 'fluid',
     fixed: true,
   },
@@ -176,7 +176,7 @@ export const DefaultLayoutConfig = {
   extras: {
     // Search
     search: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       offcanvas: {
         direction: 'right',
@@ -185,7 +185,7 @@ export const DefaultLayoutConfig = {
 
     // Notifications
     notifications: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       dropdown: {
         style: 'dark', // light|dark
@@ -197,7 +197,7 @@ export const DefaultLayoutConfig = {
 
     // Quick Actionss
     quickActions: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       dropdown: {
         style: 'dark', // light|dark
@@ -210,7 +210,7 @@ export const DefaultLayoutConfig = {
     // User
     user: {
       display: true,
-      layout: 'offcanvas', // offcanvas, dropdown,
+      layout: 'dropdown', // offcanvas, dropdown,
       dropdown: {
         style: 'dark', // light|dark
       },
@@ -221,12 +221,12 @@ export const DefaultLayoutConfig = {
 
     // Languages
     languages: {
-      display: true,
+      display: false,
     },
 
     // Cart
     cart: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       offcanvas: {
         direction: 'right',
@@ -238,12 +238,12 @@ export const DefaultLayoutConfig = {
 
     // Chat
     chat: {
-      display: true,
+      display: false,
     },
 
     // Quick Panel
     quickPanel: {
-      display: true,
+      display: false,
       offcanvas: {
         direction: 'right',
       },
@@ -251,7 +251,7 @@ export const DefaultLayoutConfig = {
 
     // Page Toolbar
     toolbar: {
-      display: true,
+      display: false,
     },
 
     // Scrolltop

@@ -9,7 +9,7 @@ import { AuthService } from '../../../../../../modules/auth/_services/auth.servi
   styleUrls: ['./user-dropdown-inner.component.scss'],
 })
 export class UserDropdownInnerComponent implements OnInit {
-  extrasUserDropdownStyle: 'light' | 'dark' = 'light';
+  extrasUserDropdownStyle: 'light' | 'dark' = 'dark';
   user$: Observable<UserModel>;
 
   constructor(private layout: LayoutService, private auth: AuthService) {}
