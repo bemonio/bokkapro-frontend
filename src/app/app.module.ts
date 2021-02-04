@@ -30,6 +30,7 @@ import { SegmentCompanyService } from './pages/segment-company/_services';
 import { TypeCompanyService } from './pages/type-company/_services';
 import { ConfirmationService } from 'primeng/api';
 import { CompanyService } from './pages/company/_services';
+import { DivisionService } from './pages/division/_services';
 import { DepartmentService } from './pages/department/_services';
 import { OfficeService } from './pages/office/_services';
 import { PositionService } from './pages/position/_services';
@@ -106,6 +107,7 @@ export function getHighlightLanguages() {
     TypeCompanyService,
     ConfirmationService,
     CompanyService,
+    DivisionService,
     DepartmentService,
     OfficeService,
     PositionService,

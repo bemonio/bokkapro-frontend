@@ -70,6 +70,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'divisions',
+        loadChildren: () =>
+          import('../pages/division/division-routing.module').then(
+            (m) => m.DivisionRoutingModule
+          ),
+      },
+      {
         path: 'offices',
         loadChildren: () =>
           import('../pages/office/office-routing.module').then(

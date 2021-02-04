@@ -53,6 +53,12 @@ import { DepartmentComponent } from './department/department.component';
 import { DepartmentEditComponent } from './department/departments/department-edit/department-edit.component';
 import { DepartmentAutocompleteComponent } from './department/departments/department-autocomplete/department-autocomplete.component';
 
+// Divisions
+import { DivisionsComponent } from './division/divisions/divisions.component';
+import { DivisionComponent } from './division/division.component';
+import { DivisionEditComponent } from './division/divisions/division-edit/division-edit.component';
+import { DivisionAutocompleteComponent } from './division/divisions/division-autocomplete/division-autocomplete.component';
+
 // Offices
 import { OfficesComponent } from './office/offices/offices.component';
 import { OfficeComponent } from './office/office.component';
@@ -168,6 +174,10 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     DepartmentComponent,
     DepartmentEditComponent,
     DepartmentAutocompleteComponent,
+    DivisionsComponent,
+    DivisionComponent,
+    DivisionEditComponent,
+    DivisionAutocompleteComponent,
     PositionsComponent,
     PositionComponent,
     PositionEditComponent,
