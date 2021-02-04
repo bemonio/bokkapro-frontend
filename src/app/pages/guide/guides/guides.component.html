@@ -16,7 +16,7 @@
         </div>
         <div class="col-lg-6" [formGroup]="searchGroup">
           <input type="text" class="form-control" name="searchText" placeholder="Search" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
-            formControlName="searchTerm" /><small class="form-text text-muted"><b>Search</b> in all fields</small>
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>Search</b> in id</small>
         </div>
       </div>
     </div>
@@ -48,6 +48,11 @@
               Shift
             </div>
           </th>
+          <th pSortableColumn="type_guide">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Type
+            </div>
+          </th>
           <th pSortableColumn="created_at">
             <div class="p-d-flex p-jc-between p-ai-center">
               Created At
@@ -77,6 +82,11 @@
           </td>
           <td>
             {{value.date | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
+            <p-badge [value]="'Entrada'"  severity="danger"  severity="danger" *ngIf="value.type_guide == 1"></p-badge>
+            <p-badge [value]="'Salida'"  severity="success"  severity="success" *ngIf="value.type_guide == 2"></p-badge>
+            <p-badge [value]="'Transferencia'"  severity="warning"  severity="warning" *ngIf="value.type_guide == 3"></p-badge>
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}

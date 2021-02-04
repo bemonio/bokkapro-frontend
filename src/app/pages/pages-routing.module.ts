@@ -140,6 +140,13 @@ const routes: Routes = [
           ),  
       },
       {
+        path: 'guidescheck',
+        loadChildren: () =>
+          import('../pages/guide/guide-routing.module').then(
+            (m) => m.GuideRoutingModule
+          ),  
+      },
+      {
         path: 'packages',
         loadChildren: () =>
           import('../pages/package/package-routing.module').then(

@@ -49,6 +49,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public parent: string;
 
+  public typeGuide: number;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -97,6 +99,21 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
     if (this.route.parent.parent.snapshot.url[0].path)  {
       this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
+      if (this.transfer) {
+        this.typeGuide = 3;
+      } else {
+        switch (this.route.parent.parent.snapshot.url[0].path) {
+          case 'guidesinput':
+              this.typeGuide = 1;
+            break;
+          case 'guidesoutput':
+              this.typeGuide = 2;
+            break;
+          case 'guidescheck':
+              this.typeGuide = 3;
+            break;
+        }
+      }
     }
 
     this.get();
@@ -209,7 +226,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/typesguides']);
+          this.router.navigate([this.parent]);
         }
       }),
       catchError((error) => {
@@ -231,17 +248,24 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
     let model = this.model;
     model.am_pm = this.am_pm.value.value;
-    model.date = this.formatDate(this.date.value);
+    
+    model.date = undefined;
+    if (this.date.value) {
+      model.date = this.formatDate(this.date.value);
+    }
+
+    model.type_guide = this.typeGuide;
     model.department_origin = this.model.department_origin.id;
     model.department_destination = this.model.department_destination.id;
     model.employee_origin = this.model.employee_origin.id;
     model.employee_destination = this.model.employee_destination.id;
+    model.vouchers = [];
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/typesguides']);
+          this.router.navigate([this.parent]);
         }
       }),
       catchError((error) => {

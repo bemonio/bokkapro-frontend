@@ -109,16 +109,21 @@ export class GuidesComponent implements OnInit {
             this.per_page = event.rows;
         }
 
+        this.filters = [];
         switch (this.route.parent.parent.snapshot.url[0].path) {
             case 'guidesinput':
-                this.filters.push ({key: 'filter{department_origin}[]', value: '1'})
+                this.filters.push ({key: 'filter{department_destination}[]', value: this.authService.currentUserValue.employee.position.department.id})
                 this.parent = '/guidesinput';
                 break;
             case 'guidesoutput':
-                this.filters.push ({key: 'filter{department_destination}[]', value: '1'})
+                this.filters.push ({key: 'filter{department_origin}[]', value: this.authService.currentUserValue.employee.position.department.id})
                 this.parent = '/guidesoutput';
                 break;
-        }
+            case 'guidescheck':
+                this.filters.push ({key: 'filter{type_guide}[]', value: '3'})
+                this.parent = '/guidescheck';
+                break;
+            }
         this.getModels()
     }
 
