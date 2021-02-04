@@ -14,6 +14,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BadgeModule } from 'primeng/badge';
 import { ChipsModule } from 'primeng/chips';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -69,6 +70,7 @@ import { EmployeesComponent } from './employee/employees/employees.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeEditComponent } from './employee/employees/employee-edit/employee-edit.component';
 import { EmployeeAutocompleteComponent } from './employee/employees/employee-autocomplete/employee-autocomplete.component';
+import { EmployeeMultiselectComponent } from './employee/employees/employee-multiselect/employee-multiselect.component';
 
 // TypesLocations
 import { TypesLocationsComponent } from './type-location/types-locations/types-locations.component';
@@ -128,6 +130,7 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     AutoCompleteModule,
     BadgeModule,
     ChipsModule,
+    MultiSelectModule,
     CurrencyMaskModule,
     ToggleButtonModule,
     CalendarModule,
@@ -173,6 +176,7 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     EmployeeComponent,
     EmployeeEditComponent,
     EmployeeAutocompleteComponent,
+    EmployeeMultiselectComponent,
     TypesLocationsComponent,
     TypeLocationComponent,
     TypeLocationEditComponent,
