@@ -7,6 +7,7 @@ import { AuthHTTPService } from './auth-http';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../_services/auth-http/token-storage.service';
 import { UserService } from 'src/app/pages/user/_services';
+import { DivisionModel } from 'src/app/pages/division/_models/division.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,8 @@ export class AuthService implements OnDestroy {
   currentUserSubject: BehaviorSubject<UserModel>;
   isLoadingSubject: BehaviorSubject<boolean>;
 
+  currentDivision$: Observable<DivisionModel>;
+  currentDivisionSubject: BehaviorSubject<DivisionModel>;
 
   get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
@@ -28,6 +31,14 @@ export class AuthService implements OnDestroy {
 
   set currentUserValue(user: UserModel) {
     this.currentUserSubject.next(user);
+  }
+
+  get currentDivisionValue(): DivisionModel {
+    return this.currentDivisionSubject.value;
+  }
+
+  set currentDivisionValue(division: DivisionModel) {
+    this.currentDivisionSubject.next(division);
   }
 
   constructor(
@@ -42,6 +53,8 @@ export class AuthService implements OnDestroy {
     this.isLoading$ = this.isLoadingSubject.asObservable();
     const subscr = this.getUserByToken().subscribe();
     this.unsubscribe.push(subscr);
+    this.currentDivisionSubject = new BehaviorSubject<DivisionModel>(undefined);
+    this.currentDivision$ = this.currentDivisionSubject.asObservable();
   }
 
   // public methods
@@ -89,6 +102,10 @@ export class AuthService implements OnDestroy {
                       model.user.employee.position.department = response.departments[0];
                     }
                   }
+
+                  if (response.divisions) {
+                    model.user.employee.divisions = response.divisions;
+                  }
                 }
 
                 if (response.groups) {
@@ -99,6 +116,7 @@ export class AuthService implements OnDestroy {
                 }
 
                 this.currentUserSubject = new BehaviorSubject<UserModel>(model.user);
+                this.currentDivisionSubject = new BehaviorSubject<DivisionModel>(model.user.employee.divisions[0]);
               },
               error => {
                 console.log ('error getting user');

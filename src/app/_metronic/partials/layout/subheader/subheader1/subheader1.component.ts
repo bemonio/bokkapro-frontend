@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { LayoutService } from '../../../../core';
 import { SubheaderService } from '../_services/subheader.service';
 import { BreadcrumbItemModel } from '../_models/breadcrumb-item.model';
+import { AuthService } from 'src/app/modules/auth';
 
 @Component({
   selector: 'app-subheader1',
@@ -23,7 +24,8 @@ export class Subheader1Component implements OnInit {
   constructor(
     private layout: LayoutService,
     private subheader: SubheaderService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public authService: AuthService
   ) {
     this.title$ = this.subheader.titleSubject.asObservable();
   }
