@@ -1,0 +1,1 @@
+export { TypeDivisionService } from './type-division.service';

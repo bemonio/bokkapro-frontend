@@ -53,6 +53,12 @@ import { DepartmentComponent } from './department/department.component';
 import { DepartmentEditComponent } from './department/departments/department-edit/department-edit.component';
 import { DepartmentAutocompleteComponent } from './department/departments/department-autocomplete/department-autocomplete.component';
 
+// TypesDivisions
+import { TypesDivisionsComponent } from './type-division/types-divisions/types-divisions.component';
+import { TypeDivisionComponent } from './type-division/type-division.component';
+import { TypeDivisionEditComponent } from './type-division/types-divisions/type-division-edit/type-division-edit.component';
+import { TypeDivisionAutocompleteComponent } from './type-division/types-divisions/type-division-autocomplete/type-division-autocomplete.component';
+
 // Divisions
 import { DivisionsComponent } from './division/divisions/divisions.component';
 import { DivisionComponent } from './division/division.component';
@@ -174,6 +180,10 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     DepartmentComponent,
     DepartmentEditComponent,
     DepartmentAutocompleteComponent,
+    TypesDivisionsComponent,
+    TypeDivisionComponent,
+    TypeDivisionEditComponent,
+    TypeDivisionAutocompleteComponent,
     DivisionsComponent,
     DivisionComponent,
     DivisionEditComponent,
