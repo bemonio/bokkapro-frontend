@@ -42,42 +42,17 @@
       <div class="mt-5" *ngIf="model">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
-            <div class="col-lg-4" *ngIf="!transfer">
-              <label>Enter AM/PM</label>
-              <!-- <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="am_pm" name="am_pm" [class.is-invalid]="isControlInvalid('am_pm')"
-                [class.is-valid]="isControlValid('am_pm')" formControlName="am_pm" /> -->
-              <p-dropdown [styleClass]="getValidClass(isControlValid('am_pm'))" [options]="optionsAmPm" optionLabel="key" name="am_pm" formControlName="am_pm" placeholder="seleccione" dateFormat="dd.mm.yy"></p-dropdown>
-              <div class="feedback" *ngIf="!isControlTouched('am_pm')">Please enter <b>AM/PM</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('am_pm')">AM/PM was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'am_pm')">AM/PM is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'am_pm')">AM/PM should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'am_pm')">AM/PM should have maximum 100
-                symbols</div>
-            </div>
-            <div class="col-lg-4" *ngIf="!transfer">
-              <label>Enter Date</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
-              <div class="feedback" *ngIf="!isControlTouched('date')">Please enter <b>Date</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('date')">Date was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">Date is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">Date should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">Date should have maximum 100
-                symbols</div>
-            </div>
             <div class="col-lg-4">
-              <label>Enter Department Origin</label>
-              <app-department-autocomplete
-              placeholder="Department Origin" name="department_origin" [valid]="isControlValid('department_origin')" [touched]="isControlTouched('department_origin')" [class.is-invalid]="isControlInvalid('department_origin')"
-              [class.is-valid]="isControlValid('department_origin')" formControlName="department_origin" id="department_origin" [model]="model.department_origin"></app-department-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('department_origin')">Please enter <b>Department Origin</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('department_origin')">Department Origin was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'department_origin')">Department Origin is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'department_origin')">Department Origin should have at least 3
+              <label>Enter Division Origin</label>
+              <app-division-autocomplete
+              placeholder="Division Origin" name="division_origin" [valid]="isControlValid('division_origin')" [touched]="isControlTouched('division_origin')" [class.is-invalid]="isControlInvalid('division_origin')"
+              [class.is-valid]="isControlValid('division_origin')" formControlName="division_origin" id="division_origin" [model]="model.division_origin"></app-division-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('division_origin')">Please enter <b>Division Origin</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('division_origin')">Division Origin was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'division_origin')">Division Origin is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division_origin')">Division Origin should have at least 3
                 symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'department_origin')">Department Origin should have maximum 30
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division_origin')">Division Origin should have maximum 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
@@ -94,16 +69,16 @@
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Department Destination</label>
-              <app-department-autocomplete
-              placeholder="Department Destination" name="department_destination" [valid]="isControlValid('department_destination')" [touched]="isControlTouched('department_destination')" [class.is-invalid]="isControlInvalid('department_destination')"
-              [class.is-valid]="isControlValid('department_destination')" formControlName="department_destination" id="department_destination" [model]="model.department_destination"></app-department-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('department_destination')">Please enter <b>Department Destination</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('department_destination')">Department Destination was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'department_destination')">Department Destination is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'department_destination')">Department Destination should have at least 3
+              <label>Enter Division Destination</label>
+              <app-division-autocomplete
+              placeholder="Division Destination" name="division_destination" [valid]="isControlValid('division_destination')" [touched]="isControlTouched('division_destination')" [class.is-invalid]="isControlInvalid('division_destination')"
+              [class.is-valid]="isControlValid('division_destination')" formControlName="division_destination" id="division_destination" [model]="model.division_destination" (change)="changeDivision($event)"></app-division-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('division_destination')">Please enter <b>Division Destination</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('division_destination')">Division Destination was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'division_destination')">Division Destination is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division_destination')">Division Destination should have at least 3
                 symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'department_destination')">Department Destination should have maximum 30
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division_destination')">Division Destination should have maximum 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
@@ -118,11 +93,33 @@
                 symbols</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employee_destination')">Employee Destination should have maximum 30
                 symbols</div>
-            </div>           
+            </div>  
+            <div class="col-lg-4" *ngIf="typeGuide == 3">
+              <label>Enter AM/PM {{division_destination.value?.type_division}}</label>
+              <p-dropdown [styleClass]="getValidClass(isControlValid('am_pm'))" [options]="optionsAmPm" optionLabel="key" name="am_pm" formControlName="am_pm" placeholder="seleccione" dateFormat="dd.mm.yy"></p-dropdown>
+              <div class="feedback" *ngIf="!isControlTouched('am_pm')">Please enter <b>AM/PM</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('am_pm')">AM/PM was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'am_pm')">AM/PM is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'am_pm')">AM/PM should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'am_pm')">AM/PM should have maximum 100
+                symbols</div>
+            </div>
+            <div class="col-lg-4" *ngIf="typeGuide == 3">
+              <label>Enter Date</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('date')">Please enter <b>Date</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('date')">Date was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">Date is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">Date should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">Date should have maximum 100
+                symbols</div>
+            </div>                     
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}" *ngIf="!transfer">Cancel</a>
-            <a class="btn btn-default font-weight-bold mr-2" (click)="cancel()" *ngIf="transfer">Cancel</a>
+            <a class="btn btn-default font-weight-bold mr-2" (click)="closeEmit()" *ngIf="transfer">Cancel</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!transfer">Save</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

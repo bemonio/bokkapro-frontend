@@ -44,11 +44,11 @@
               Code
             </div>
           </th>
-          <th pSortableColumn="verificated">
+          <!-- <th pSortableColumn="verificated">
             <div class="p-d-flex p-jc-between p-ai-center">
               Verificated
             </div>
-          </th>
+          </th> -->
           <th pSortableColumn="created_at">
             <div class="p-d-flex p-jc-between p-ai-center">
               Created At
@@ -56,7 +56,7 @@
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
-          <th style="width: 8rem">
+          <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               Action
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
@@ -76,9 +76,9 @@
           <td>
             {{value.code}}
           </td>
-          <td>
+          <!-- <td>
             {{value.verificated}}
-          </td>
+          </td> -->
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
@@ -100,7 +100,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="6">No items found.</td>
+          <td colspan="5">No items found.</td>
         </tr>
       </ng-template>
     </p-table>
@@ -111,6 +111,6 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
 <p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
-  [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
   <app-guide-edit (close)="displayModal=false" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
 </p-dialog>

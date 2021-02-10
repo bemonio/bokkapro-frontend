@@ -3,7 +3,7 @@ import { GuideService as ModelService } from '../_services/guide.service';
 import { GuideModel as Model } from '../_models/guide.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, of, Subscription  } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -35,16 +35,24 @@ export class GuidesComponent implements OnInit {
 
     public formGroup: FormGroup;
     public employee_id_filter: AbstractControl;
-    public department_id_filter: AbstractControl;
+    public division_id_filter: AbstractControl;
     public venue_id_filter: AbstractControl;
 
-    searchGroup: FormGroup;
+    public searchGroup: FormGroup;
+
+    public verificationGroup: FormGroup;
+    public vouchers: AbstractControl;
 
     public loading: boolean;
   
     public confirmDialogPosition: string;
 
     public parent: string;
+    public permission: string;
+
+    public displayModal: boolean;
+    public verificationGuide: any;
+    public listVouchers: any[];
 
     constructor(
       public modelsService: ModelService,
@@ -57,25 +65,32 @@ export class GuidesComponent implements OnInit {
       fb: FormBuilder) {
         this.formGroup = fb.group({
             'employee_id_filter': [''],
-            'department_id_filter': [''], 
+            'division_id_filter': [''], 
             'venue_id_filter': [''],
         });
         this.employee_id_filter = this.formGroup.controls['employee_id_filter'];    
-        this.department_id_filter = this.formGroup.controls['department_id_filter'];
+        this.division_id_filter = this.formGroup.controls['division_id_filter'];
         this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
 
         this.searchGroup = fb.group({
             searchTerm: [''],
         });
 
+        this.verificationGroup = fb.group({
+            vouchers: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        });
+        this.vouchers = this.formGroup.controls['vouchers'];
+
         this.page = 1;
         this.total_page = 0;
         this.per_page = 5;
         this.totalRecords = 0;
         this.filters = [];
-        this.parent = '/guides';
+        this.parent = 'guides';
+        this.permission = 'guide';
 
         this.loading = false;
+        this.displayModal = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -112,18 +127,21 @@ export class GuidesComponent implements OnInit {
         this.filters = [];
         switch (this.route.parent.parent.snapshot.url[0].path) {
             case 'guidesinput':
-                this.filters.push ({key: 'filter{department_destination}[]', value: this.authService.currentUserValue.employee.position.department.id})
-                this.parent = '/guidesinput';
+                this.filters.push ({key: 'filter{division_destination}[]', value: this.authService.currentDivisionValue.id.toString()})
+                this.parent = 'guidesinput';
+                this.permission = 'guideinput';
                 break;
             case 'guidesoutput':
-                this.filters.push ({key: 'filter{department_origin}[]', value: this.authService.currentUserValue.employee.position.department.id})
-                this.parent = '/guidesoutput';
+                this.filters.push ({key: 'filter{division_origin}[]', value: this.authService.currentDivisionValue.id.toString()})
+                this.parent = 'guidesoutput';
+                this.permission = 'guideoutput';
                 break;
             case 'guidescheck':
                 this.filters.push ({key: 'filter{type_guide}[]', value: '3'})
-                this.parent = '/guidescheck';
+                this.parent = 'guidescheck';
+                this.permission = 'guidecheck';
                 break;
-            }
+        }
         this.getModels()
     }
 
@@ -207,4 +225,114 @@ export class GuidesComponent implements OnInit {
             }
         });
     }
+
+    get(id) {
+        const sb = this.route.paramMap.pipe(
+            switchMap(params => {
+                if (id || id > 0) {
+                    return this.modelsService.getById(id);
+                }
+                return of({'guide':new Model()});
+            }),
+            catchError((error) => {
+                Object.entries(error.error).forEach(
+                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                );
+                return of({'guide':new Model()});
+            }),
+        ).subscribe((response: any) => {
+            if (response) {
+                this.verificationGuide = response.guide;
+                this.verificationGuide.vouchers = response.vouchers;
+            }
+        });
+    }
+
+    public verification(guide) {
+        this.get(guide.id)
+        this.listVouchers = [];
+        this.displayModal = true;
+    }
+
+    public addListVouchers(event) {
+        let found = false;
+        this.verificationGuide.vouchers.forEach(element => {
+            if (element.code === event.value) {
+                element.verificated = true;
+                found = true;
+            }
+        });
+        if (!found) {
+            this.listVouchers.forEach(element => {
+                if (element == event.value) {
+                    this.listVouchers.pop();
+                }                
+            });
+        }
+    }
+
+    public removeListVouchers(event) {
+        this.verificationGuide.vouchers.forEach(element => {
+            if (element.code === event.value) {
+                element.verificated = false;
+            }
+        });
+    }
+
+  // helpers for View
+  isControlValid(controlName: string): boolean {
+    const control = this.verificationGroup.controls[controlName];
+    return control.valid && (control.dirty || control.touched);
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.verificationGroup.controls[controlName];
+    return control.invalid && (control.dirty || control.touched);
+  }
+
+  controlHasError(validation: string, controlName: string) {
+    const control = this.verificationGroup.controls[controlName];
+    return control.hasError(validation) && (control.dirty || control.touched);
+  }
+
+  isControlTouched(controlName: string): boolean {
+    const control = this.verificationGroup.controls[controlName];
+    return control.dirty || control.touched;
+  }
+
+  public getValidClass(valid) {
+    let stringClass = 'form-control form-control-lg form-control-solid';
+    if (valid) {
+        stringClass += ' is-valid';
+    } else {
+        stringClass += ' is-invalid';
+    }
+    return stringClass;
+  }
+
+  save() {
+    let params = {
+        "status":"1",
+        "vouchers":[79]
+    };
+    
+    const sbUpdate = this.modelsService.patch(54, params).pipe(
+      tap(() => {
+        this.toastService.growl('success', 'success');
+      }),
+      catchError((error) => {
+        if (error.error instanceof Array) {
+            Object.entries(error.error).forEach(
+              ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+            );
+          } else {
+            this.toastService.growl('error', 'error' + ': ' + error.error)
+          }
+         return of(this.verificationGuide);
+      })
+    ).subscribe(response => {
+        this.displayModal = false;
+        this.getModels();
+    });
+  }
 }

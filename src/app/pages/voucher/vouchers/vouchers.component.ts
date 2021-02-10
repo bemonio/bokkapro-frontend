@@ -75,7 +75,6 @@ export class VouchersComponent implements OnInit {
         this.total_page = 0;
         this.per_page = 5;
         this.totalRecords = 0;
-        this.filters = [];
 
         this.loading = false;
 
@@ -113,34 +112,50 @@ export class VouchersComponent implements OnInit {
             this.per_page = event.rows;
         }
 
+        this.filters = [];
         if (this.route.parent.parent.parent.snapshot.url.length > 0) {
-            const sb = this.route.parent.parent.parent.paramMap.pipe(
-                switchMap(params => {
-                    // get id from URL
-                    if (params.get('id')) {
-                        return params.get('id');
-                    }
-                    return undefined;
-                }),
-                catchError((error) => {
-                    Object.entries(error.error).forEach(
-                        ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
-                    );
-                    return undefined;
-                }),
-            ).subscribe((response: any) => {
-                if (response) {
-                    if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                        this.guideId = response;
-                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
-                        this.filters.push ({key: 'filter{guide}', value: this.guideId.toString()})
-                    }
+            this.route.parent.parent.parent.params.subscribe((params) => {
+                if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                this.guideId = params.id;
+                this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+                    this.filters.push ({key: 'filter{guides}', value: this.guideId.toString()})
                 }
-                this.getModels()
+                this.getModels();
             });
         } else {
+            this.filters.push ({key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString()})
+            this.filters.push ({key: 'filter{verificated}', value: '1'})
             this.getModels();
         }
+      
+        // if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+        //     const sb = this.route.parent.parent.parent.paramMap.pipe(
+        //         switchMap(params => {
+        //             // get id from URL
+        //             if (params.get('id')) {
+        //                 return params.get('id');
+        //             }
+        //             return undefined;
+        //         }),
+        //         catchError((error) => {
+        //             Object.entries(error.error).forEach(
+        //                 ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        //             );
+        //             return undefined;
+        //         }),
+        //     ).subscribe((response: any) => {
+        //         if (response) {
+        //             if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+        //                 this.guideId = response;
+        //                 this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+        //                 this.filters.push ({key: 'filter{guides}', value: this.guideId.toString()})
+        //             }
+        //         }
+        //         this.getModels()
+        //     });
+        // } else {
+        //     this.getModels();
+        // }
     }
 
     public getModels() {

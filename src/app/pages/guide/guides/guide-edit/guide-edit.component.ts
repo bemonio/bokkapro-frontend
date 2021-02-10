@@ -33,8 +33,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   public status: AbstractControl;  
   public am_pm: AbstractControl;  
   public date: AbstractControl;  
-  public department_origin: AbstractControl;  
-  public department_destination: AbstractControl;  
+  public division_origin: AbstractControl;  
+  public division_destination: AbstractControl;  
   public employee_origin: AbstractControl;  
   public employee_destination: AbstractControl;  
 
@@ -74,21 +74,22 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.previous = undefined;
 
     this.formGroup = this.fb.group({
-      description: ['', Validators.compose([Validators.maxLength(30)])],
-      status: ['', Validators.compose([Validators.maxLength(30)])],
-      am_pm: ['', Validators.compose([Validators.maxLength(30)])],
-      date: ['', Validators.compose([Validators.maxLength(30)])],
-      department_origin: [{value: ''}, Validators.compose(this.transfer ? [Validators.maxLength(30)]: [Validators.required, Validators.maxLength(30)])],
-      department_destination: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
-      employee_origin: [{value: ''}, Validators.compose(this.transfer ? [Validators.maxLength(30)]: [Validators.required, Validators.maxLength(30)])],
-      employee_destination: ['', Validators.compose([Validators.required, Validators.maxLength(30)])],
+      description: [''],
+      status: [''],
+      am_pm: [''],
+      date: [''],
+      division_origin: ['', Validators.compose([Validators.required,])],
+      division_destination: ['', Validators.compose([Validators.required,])],
+      employee_origin: ['', Validators.compose([Validators.required,])],
+      employee_destination: ['', Validators.compose([Validators.required,])],
     });
+
     this.description = this.formGroup.controls['description'];
     this.status = this.formGroup.controls['status'];
     this.date = this.formGroup.controls['date'];
     this.am_pm = this.formGroup.controls['am_pm'];
-    this.department_origin = this.formGroup.controls['department_origin'];
-    this.department_destination = this.formGroup.controls['department_destination'];
+    this.division_origin = this.formGroup.controls['division_origin'];
+    this.division_destination = this.formGroup.controls['division_destination'];
     this.employee_origin = this.formGroup.controls['employee_origin'];
     this.employee_destination = this.formGroup.controls['employee_destination'];
 
@@ -96,24 +97,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.optionsAmPm.push({key: 'AM', value: 'AM'});
     this.optionsAmPm.push({key: 'PM', value: 'PM'});
 
-
     if (this.route.parent.parent.snapshot.url[0].path)  {
       this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
-      if (this.transfer) {
-        this.typeGuide = 3;
-      } else {
-        switch (this.route.parent.parent.snapshot.url[0].path) {
-          case 'guidesinput':
-              this.typeGuide = 1;
-            break;
-          case 'guidesoutput':
-              this.typeGuide = 2;
-            break;
-          case 'guidescheck':
-              this.typeGuide = 3;
-            break;
-        }
-      }
     }
 
     this.get();
@@ -146,10 +131,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.loading = false;
       if (response) {
         this.model = response.guide;
-        if (response.department_origin)
-          this.model.department_origin = response.department_origin[0];
-        if (response.department_destination)
-          this.model.department_destination = response.department_destination[0];
+        if (response.division_origin)
+          this.model.division_origin = response.division_origin[0];
+        if (response.division_destination)
+          this.model.division_destination = response.division_destination[0];
         if (response.employee_origin)
           this.model.employee_origin = response.employee_origin[0];
         if (response.employee_destination)
@@ -168,11 +153,11 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.status.setValue(this.model.status);
       this.am_pm.setValue({key: this.model.am_pm, value: this.model.am_pm});
       this.date.setValue(new Date(this.model.date));
-      if (this.model.department_origin) {
-        this.department_origin.setValue(this.model.department_origin);
+      if (this.model.division_origin) {
+        this.division_origin.setValue(this.model.division_origin);
       }
-      if (this.model.department_destination) {
-        this.department_destination.setValue(this.model.department_destination);
+      if (this.model.division_destination) {
+        this.division_destination.setValue(this.model.division_destination);
       }
       if (this.model.employee_origin) {
         this.employee_origin.setValue(this.model.employee_origin);
@@ -182,12 +167,37 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.formGroup.markAllAsTouched();
-
     if (this.transfer) {
-      this.department_origin.setValue(this.authService.currentUserValue.employee.position.department);
+      this.division_origin.setValue(this.authService.currentDivisionValue);
       this.employee_origin.setValue(this.authService.currentUserValue.employee);
+    } else {
+      switch (this.route.parent.parent.snapshot.url[0].path) {
+        case 'guidesinput':
+            this.typeGuide = 1;
+            this.division_destination.setValue(this.authService.currentDivisionValue);
+            this.employee_destination.setValue(this.authService.currentUserValue.employee);
+          break;
+        case 'guidesoutput':
+            this.typeGuide = 2;
+            this.division_origin.setValue(this.authService.currentDivisionValue);
+            this.employee_origin.setValue(this.authService.currentUserValue.employee);
+            break;
+        case 'guidescheck':
+        break;
+      }
     }
+
+    this.am_pm.setValidators(Validators.compose([]))
+    this.date.setValidators(Validators.compose([]))
+    if (this.division_destination.value) {
+      if (this.division_destination.value.type_division == 2) {
+        this.typeGuide = 3;
+        this.am_pm.setValidators(Validators.compose([Validators.required]))
+        this.date.setValidators(Validators.compose([Validators.required]))
+      }
+    }
+
+    this.formGroup.markAllAsTouched();
   }
 
   reset() {
@@ -217,10 +227,11 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.am_pm = this.am_pm.value.value;
     model.date = this.formatDate(this.date.value);
-    model.department_origin = this.model.department_origin.id;
-    model.department_destination = this.model.department_destination.id;
+    model.division_origin = this.model.division_origin.id;
+    model.division_destination = this.model.division_destination.id;
     model.employee_origin = this.model.employee_origin.id;
     model.employee_destination = this.model.employee_destination.id;
+    model.status = '1';
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -255,24 +266,40 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     }
 
     model.type_guide = this.typeGuide;
-    model.department_origin = this.model.department_origin.id;
-    model.department_destination = this.model.department_destination.id;
+    model.division_origin = this.model.division_origin.id;
+    model.division_destination = this.model.division_destination.id;
     model.employee_origin = this.model.employee_origin.id;
     model.employee_destination = this.model.employee_destination.id;
+    model.status = '1';
     model.vouchers = [];
+
+    if (this.listVouchers) {
+      this.listVouchers.forEach(element => {
+        model.vouchers.push(element.id);
+      });
+      model.status = '0';
+    }
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate([this.parent]);
+          if (this.transfer) {
+            this.closeEmit();
+          } else {
+            this.router.navigate([this.parent]);
+          }
         }
       }),
       catchError((error) => {
         this.loading = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
-        );
+        if (error.error instanceof Array) {
+          Object.entries(error.error).forEach(
+            ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+          );
+        } else {
+          this.toastService.growl('error', 'error' + ': ' + error.error)
+        }
         return of(this.model);
       })
     ).subscribe(response => {
@@ -352,7 +379,11 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     return [year, month, day].join('-');
   }
 
-  public cancel() {
+  public closeEmit() {
     this.close.emit(true);
+  }
+
+  public changeDivision(event) {
+    this.loadForm();
   }
 }

@@ -48,6 +48,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private toastService: ToastService
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
@@ -114,7 +115,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
           this.model.company = response.companies[0];
         }
         if (response.guides) {
-          this.model.guide = response.guides[0];
+          this.model.guides = response.guides[0];
         }
         if (response.packages) {
           this.model.packages = response.packages;
@@ -177,16 +178,21 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   edit() {
     this.loading = true;
     let model = this.model;
-    model.guide = this.guideId;
     model.company = this.model.company.id;
     model.location_origin = this.model.location_origin.id;
     model.location_destination = this.model.location_destination.id;
+    model.division = this.authService.currentDivisionValue.id;
+    model.verificated = true;
 
     let packages = [];
     this.model.packages.forEach(element => {
       packages.push({'code': element, 'verificated': 'true'});
     });
     model.packages = packages;
+
+    let guides = [];
+    guides.push(this.guideId);
+    model.guides = guides;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -211,16 +217,21 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   create() {
     this.loading = true;
     let model = this.model;
-    model.guide = this.guideId;
     model.company = this.model.company.id;
     model.location_origin = this.model.location_origin.id;
     model.location_destination = this.model.location_destination.id;
-        
+    model.division = this.authService.currentDivisionValue.id;
+    model.verificated = true;
+
     let packages = [];
     this.model.packages.forEach(element => {
       packages.push({'code': element, 'verificated': 'true'});
     });
     model.packages = packages;
+
+    let guides = [];
+    guides.push(this.guideId);
+    model.guides = guides;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

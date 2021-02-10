@@ -60,6 +60,6 @@ export class GuideService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=vouchers.*`);
     }
 }

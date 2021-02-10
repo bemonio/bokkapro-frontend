@@ -29,6 +29,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
   public description: AbstractControl;  
   public office: AbstractControl;  
   public employees: AbstractControl;  
+  public type_division: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -51,11 +52,13 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       description: ['', Validators.compose([Validators.maxLength(30)])],
       office: ['', Validators.compose([Validators.required])],
+      type: [''],
       employees: ['', Validators.compose([Validators.required])],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];
     this.office = this.formGroup.controls['office'];
+    this.type_division = this.formGroup.controls['type_division'];
     this.employees = this.formGroup.controls['employees'];
   }
 
