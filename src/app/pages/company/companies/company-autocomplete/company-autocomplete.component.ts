@@ -79,7 +79,8 @@ export class CompanyAutocompleteComponent implements ControlValueAccessor, OnIni
         this.onTouched(this.value);
     }
 
-    public loadLazy(event: LazyLoadEvent) {
+    public loadLazy(event) {
+        this.filters = [];
         if (event.sortField) {
             if (event.sortOrder === -1) {
                 this.sort =  '-' + event.sortField;
@@ -90,8 +91,8 @@ export class CompanyAutocompleteComponent implements ControlValueAccessor, OnIni
             this.sort = '-id';
         }
 
-        if (event.globalFilter) {
-            this.query = event.globalFilter;
+        if (event.query) {
+            this.filters.push ({key: 'filter{name.icontains}', value: event.query})
         } else {
             this.query = undefined;
         }
