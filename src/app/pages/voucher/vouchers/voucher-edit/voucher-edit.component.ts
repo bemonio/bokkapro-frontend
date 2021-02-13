@@ -54,7 +54,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.loading = false;
-  
+
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       amount: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -190,15 +190,15 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     });
     model.packages = packages;
 
-    let guides = [];
-    guides.push(this.guideId);
-    model.guides = guides;
+    // let guides = [];
+    // guides.push(this.guideId);
+    // model.guides = guides;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/vouchers']);
+          this.router.navigate([this.parent + '/vouchers']);
         }
       }),
       catchError((error) => {
@@ -236,9 +236,6 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
-        if (this.saveAndExit) {
-          this.router.navigate(['/vouchers']);
-        }
       }),
       catchError((error) => {
         if (Array.isArray(error.error)) {
@@ -254,7 +251,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     ).subscribe(response => {
       this.loading = false;
       this.model = response.voucher as Model
-    });
+      if (this.saveAndExit) {
+        this.router.navigate([this.parent + '/vouchers']);
+      }
+  });
     // this.subscriptions.push(sbCreate);
   }
 

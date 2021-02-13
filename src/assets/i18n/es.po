@@ -1,0 +1,503 @@
+# Español
+msgid "es"
+msgstr "Español"
+
+msgid "hello"
+msgstr "HOLA"
+
+msgid "close"
+msgstr "Cerrar"
+
+msgid "cancel"
+msgstr "Cancelar"
+
+msgid "save"
+msgstr "Guardar"
+
+msgid "save and exit"
+msgstr "Guardar y Salir"
+
+msgid "new password"
+msgstr "Nueva clave"
+
+msgid "yes"
+msgstr "Si"
+
+msgid "no"
+msgstr "No"
+
+msgid "choose"
+msgstr "Seleccione"
+
+msgid "account no owner"
+msgstr "La cuenta no es de un propietario"
+
+msgid "Do you want to delete?"
+msgstr "¿Quiere eliminar?"
+
+#language
+msgid "language"
+msgstr "idioma"
+
+msgid "administration"
+msgstr "Administración"
+
+msgid "dashboard"
+msgstr "Dashboard"
+
+#Login
+
+msgid "id"
+msgstr "ID"
+
+msgid "user"
+msgstr "Usuario"
+
+msgid "password"
+msgstr "Clave"
+
+msgid "forgot"
+msgstr "¿Olvido su clave?"
+
+msgid "sign up"
+msgstr "Registrate"
+
+msgid "sign in"
+msgstr "Entrar"
+
+msgid "sign out"
+msgstr "Salir"
+
+msgid "Unauthorized"
+msgstr "Email o contraseña invalido"
+
+#register
+
+msgid "register"
+msgstr "Registrar"
+
+msgid "identification number"
+msgstr "Número Identificación"
+
+msgid "name"
+msgstr "Nombre"
+
+msgid "last name"
+msgstr "Apellido"
+
+msgid "email"
+msgstr "Email"
+
+msgid "password confirm"
+msgstr "Confirmar clave"
+
+msgid "have account"
+msgstr "¿Ya tiene una cuenta?"
+
+msgid "The given data failed to pass validation."
+msgstr "Los datos dados no pudieron pasar la validación."
+
+msgid "The email has already been taken."
+msgstr "El email ya ha sido registrado."
+
+msgid "invalid_credentials"
+msgstr "Credenciales invalidas"
+
+msgid "mincaracters"
+msgstr "mínimo 6 caracteres"
+
+msgid "password not match"
+msgstr "Claves no coinciden"
+
+msgid "format"
+msgstr "Formato"
+
+msgid "registered"
+msgstr "Registrado exitosamente"
+
+msgid "We will send you an email to confirm that your email address is valid."
+msgstr "Nosotros le enviaremos un correo electrónico para confirmar que su dirección de correo electrónico es válida."
+
+# recover password
+
+msgid "recover_success"
+msgstr "Se ha enviado un enlace de recuperación de contraseña a su dirección de correo electronico"
+
+#reset password
+
+msgid "reset"
+msgstr "Restablecer"
+
+msgid "new password"
+msgstr "Nueva clave"
+
+msgid "new password confirm"
+msgstr "Confirmar nueva clave"
+
+msgid "invalid reset code"
+msgstr "Código de recuperación invalido o expirado"
+
+msgid "password reset"
+msgstr "Clave cambiada exitosamente"
+
+#activation
+
+msgid "invalid activation code"
+msgstr "Código de activación invalido o expirado"
+
+msgid "activate"
+msgstr "Activación exitosa"
+
+#account
+
+msgid "account"
+msgstr "Cuenta"
+
+msgid "current_password"
+msgstr "Clave actual"
+
+msgid "current password invalid"
+msgstr "Clave actual invvalida"
+
+msgid "saved"
+msgstr "Guardado exitosamente"
+
+msgid "export"
+msgstr "Exportar"
+
+msgid "welcome"
+msgstr "Bienvenido"
+
+#user
+
+msgid "users"
+msgstr "Usuarios"
+
+msgid "description"
+msgstr "Descripción"
+
+msgid "timezone"
+msgstr "Zona horaria"
+
+msgid "currency"
+msgstr "Moneda"
+
+msgid "actions"
+msgstr "Acciones"
+
+msgid "address"
+msgstr "Dirección"
+
+msgid "location"
+msgstr "Ubicación"
+
+msgid "new"
+msgstr "Nuevo"
+
+msgid "view"
+msgstr "Ver"
+
+msgid "edit"
+msgstr "Editar"
+
+msgid "delete"
+msgstr "Eliminar"
+
+msgid "delete?"
+msgstr "¿Quiere Eliminar?"
+
+msgid "Delete Confirmation"
+msgstr "Confirmación de Eliminación"
+
+msgid "Drag to your location"
+msgstr "Arrastre el marcador para precisar su ubicación"
+
+msgid "active"
+msgstr "Activa"
+
+msgid "annotation"
+msgstr "Observación"
+
+msgid "quantity"
+msgstr "Cantidad"
+
+msgid "qty."
+msgstr "Cant."
+
+msgid "add"
+msgstr "Agregar"
+
+msgid "pending"
+msgstr "Pendiente"
+
+msgid "pending close"
+msgstr "Pendiente Cerrar"
+
+msgid "cancelled"
+msgstr "Eliminada"
+
+msgid "processed"
+msgstr "Procesada"
+
+msgid "active"
+msgstr "Activa"
+
+msgid "settings"
+msgstr "Configuración"
+
+msgid "home"
+msgstr "Inicio"
+
+msgid "status"
+msgstr "Estado"
+
+msgid "created with"
+msgstr "Creado con"
+
+msgid "disabled"
+msgstr "Inactivo"
+
+msgid "enabled"
+msgstr "Activo"
+
+msgid "save image"
+msgstr "Guardar Imagen"
+
+# role
+msgid "administrator"
+msgstr "Administrador"
+
+# company
+msgid "companies"
+msgstr "Compañías"
+
+msgid "company"
+msgstr "Compañía"
+
+# venue
+msgid "venues"
+msgstr "Sedes"
+
+msgid "venue"
+msgstr "Sede"
+
+# municipality
+msgid "municipalities"
+msgstr "Municipios"
+
+msgid "municipality"
+msgstr "Municipio"
+
+# department
+msgid "departments"
+msgstr "Departamentos"
+
+msgid "department"
+msgstr "Departmento"
+
+# employee position
+msgid "employee positions"
+msgstr "Cargos"
+
+msgid "employee position"
+msgstr "Cargo"
+
+# employee
+msgid "employees"
+msgstr "Empleados"
+
+msgid "employee"
+msgstr "Empleado"
+
+# role
+msgid "roles"
+msgstr "Roles"
+
+msgid "role"
+msgstr "Rol"
+
+# permission
+msgid "permissions"
+msgstr "Permisos"
+
+msgid "permission"
+msgstr "Permiso"
+
+# customer
+msgid "customers"
+msgstr "Clientes"
+
+msgid "customer"
+msgstr "Cliente"
+
+# guide
+msgid "guides"
+msgstr "Transacciones"
+
+msgid "guide"
+msgstr "Transacción"
+
+# voucher
+msgid "vouchers"
+msgstr "Comprobantes"
+
+msgid "voucher"
+msgstr "Comprobante"
+
+# package
+msgid "packages"
+msgstr "Envases"
+
+msgid "package"
+msgstr "Envases"
+
+# department origin
+msgid "departments origin"
+msgstr "Departamentos Origen"
+
+msgid "department origin"
+msgstr "Departamento Origen"
+
+# department destination
+msgid "departments destination"
+msgstr "Departamentos Destino"
+
+msgid "department destination"
+msgstr "Departamento Destino"
+
+# employee origin
+msgid "employees origin"
+msgstr "Empleados Origen"
+
+msgid "employee origin"
+msgstr "Empleado Origen"
+
+# employee destination
+msgid "employees destination"
+msgstr "Empleados Destino"
+
+msgid "employee destination"
+msgstr "Empleado Destino"
+
+# code
+msgid "code"
+msgstr "Código"
+
+# amount
+msgid "amount"
+msgstr "Monto"
+
+# count packages
+msgid "count packages"
+msgstr "Cantidad Envases"
+
+# whales
+msgid "whales"
+msgstr "Whales"
+
+# whale
+msgid "whale"
+msgstr "Whale"
+
+# customer addresses
+msgid "customer addresses"
+msgstr "Cliente Direcciones"
+
+# customer address
+msgid "customer address"
+msgstr "Cliente Dirección"
+
+# addresses
+msgid "addresses"
+msgstr "Direcciones"
+
+# driver
+msgid "driver"
+msgstr "Chofer"
+
+# drivers
+msgid "drivers"
+msgstr "Choferes"
+
+# type
+msgid "type"
+msgstr "Tipo"
+
+# guides input 
+msgid "guides input"
+msgstr "Transacciones Entrada"
+
+# guides output
+msgid "guides output"
+msgstr "Transacciones Salida"
+
+# guides check
+msgid "guides check"
+msgstr "Transacciones Chequeo"
+
+# vouchers input 
+msgid "vouchers input"
+msgstr "Comprobantes Entrada"
+
+# vouchers output
+msgid "vouchers output"
+msgstr "Ruta Salida"
+
+# input
+msgid "input"
+msgstr "Entrada"
+
+# output
+msgid "output"
+msgstr "Salida"
+
+# transaction
+msgid "transaction"
+msgstr "Transación"
+
+# unconfirmed
+msgid "unconfirmed"
+msgstr "No Confirmada"
+
+# confirmed
+msgid "confirmed"
+msgstr "Confirmada"
+
+# delivered
+msgid "delivered"
+msgstr "Entregada"
+
+# origin
+msgid "origin"
+msgstr "Origen"
+
+# destination
+msgid "destination"
+msgstr "Destino"
+
+# print
+msgid "print"
+msgstr "Imprimir"
+
+# customer-type
+msgid "customer type"
+msgstr "Rubro Cliente"
+
+# customer-types
+msgid "customer types"
+msgstr "Rubros Cliente"
+
+msgid "hour"
+msgstr "Hora"
+
+# tips
+msgid "tips"
+msgstr "Tips"
+
+# hour
+msgid "hour out"
+msgstr "Hora Salida"
+
+# date
+msgid "date"
+msgstr "Date"
