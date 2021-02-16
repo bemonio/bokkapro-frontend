@@ -15,9 +15,10 @@ export class FirstLetterPipe implements PipeTransform {
    * @param args: any
    */
   transform(value: any, args?: any): any {
-    return value
-      .split(' ')
-      .map((n) => n[0])
-      .join('');
+    if (value) {
+      return value.charAt(0).toLocaleUpperCase();
+    } else {
+      return '-';
+    }
   }
 }
