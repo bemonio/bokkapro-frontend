@@ -116,7 +116,11 @@ export class AuthService implements OnDestroy {
                 }
 
                 this.currentUserSubject = new BehaviorSubject<UserModel>(model.user);
-                this.currentDivisionSubject = new BehaviorSubject<DivisionModel>(model.user.employee.divisions[0]);
+                if (model.user.employee) {
+                  if (model.user.employee.divisions) {
+                    this.currentDivisionSubject = new BehaviorSubject<DivisionModel>(model.user.employee.divisions[0]);
+                  }
+                }
               },
               error => {
                 console.log ('error getting user');
