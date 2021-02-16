@@ -27,6 +27,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   public username: AbstractControl;
   public email: AbstractControl;  
+  public password: AbstractControl;  
   public is_active: AbstractControl;  
 
   public activeTabId: number;
@@ -48,10 +49,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
       email: [''],
+      password: [''],
       is_active: ['']
     });
     this.username = this.formGroup.controls['username'];
     this.email = this.formGroup.controls['email'];
+    this.password = this.formGroup.controls['password'];
     this.is_active = this.formGroup.controls['is_active'];
   }
 
@@ -95,6 +98,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.username.setValue(this.model.username);
       this.email.setValue(this.model.email);
+      this.password.setValue(this.model.password);
       this.is_active.setValue(this.model.is_active);
     }
   }

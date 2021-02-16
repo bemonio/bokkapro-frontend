@@ -70,6 +70,19 @@
                 symbols</div>
             </div>
             <div class="col-lg-4">
+              <label>Enter Password</label>
+              <input type="password" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="Password" name="password" [class.is-invalid]="isControlInvalid('password')"
+                [class.is-valid]="isControlValid('password')" formControlName="password" />
+              <div class="feedback" *ngIf="!isControlTouched('password')">Please enter <b>Password</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('password')">Password was entered correct</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'password')">Password is required</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'password')">Password should have at least 3
+                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'password')">Password should have maximum 100
+                symbols</div>
+            </div>
+            <div class="col-lg-2">
               <label>Is Active</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_active" onLabel="true" offLabel="false"></p-toggleButton>
             </div>
