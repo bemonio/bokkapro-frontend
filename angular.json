@@ -42,6 +42,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "src/ik.js",
               "node_modules/apexcharts/dist/apexcharts.min.js",
               "node_modules/clipboard/dist/clipboard.js"
             ]
@@ -114,7 +115,11 @@
               "node_modules/primeng/resources/primeng.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/ik.js",
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "node_modules/clipboard/dist/clipboard.js"
+            ]
           }
         },
         "lint": {
