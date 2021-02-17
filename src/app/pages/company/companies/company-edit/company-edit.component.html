@@ -10,17 +10,17 @@
     <div class="card-title">
       <h3 class="card-label">
         <ng-container *ngIf="model">
-          {{ id ? "Edit" : "New" }}
+          {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
           <span *ngIf="model && model.id">'{{ model.id }} - {{ model.name }} </span>
         </ng-container>
       </h3>
     </div>
     <div class="card-toolbar">
       <a type="button" class="btn btn-light" routerLink="/companies">
-        <i class="fa fa-arrow-left"></i>Back
+        <i class="fa fa-arrow-left"> {{ 'COMMON.BACK' | translate }}</i>
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
-        <i class="fa fa-redo"></i>Reset
+        <i class="fa fa-redo">  {{ 'COMMON.RESET' | translate }}</i>
       </button>
     </div>
   </div>
@@ -29,7 +29,7 @@
       <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
         <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
           [class.active]="activeTabId === tabs.BASIC_TAB">
-          Basic info
+          {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
       <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.OFFICE_TAB)">
@@ -68,185 +68,171 @@
               <span class="form-text text-muted">Allowed file types: png, jpg, jpeg. {{newLogo}}</span>
             </div> -->
             <div class="col-lg-4">
-              <label>Enter name</label>
+              <label>{{ 'COMMON.ENTER' | translate }} name</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="name" name="name" [class.is-invalid]="isControlInvalid('name')"
                 [class.is-valid]="isControlValid('name')" formControlName="name" />
-              <div class="feedback" *ngIf="!isControlTouched('name')">Please enter <b>name</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('name')">name was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">name is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">name should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">name should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('name')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>name</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('name')">name  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">name  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">name {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">name {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Code</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Code</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Code" name="code" [class.is-invalid]="isControlInvalid('code')"
                 [class.is-valid]="isControlValid('code')" formControlName="code" />
-              <div class="feedback" *ngIf="!isControlTouched('code')">Please enter <b>Code</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('code')">Code was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">Code is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">Code should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">Code should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('code')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Code</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('code')">Code  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">Code  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">Code {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">Code {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Code Brinks</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Code Brinks</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Code Brinks" name="code_brinks" [class.is-invalid]="isControlInvalid('code_brinks')"
                 [class.is-valid]="isControlValid('code_brinks')" formControlName="code_brinks" />
-              <div class="feedback" *ngIf="!isControlTouched('code_brinks')">Please enter <b>Code Brinks</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('code_brinks')">Code Brinks was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code_brinks')">Code Brinks is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_brinks')">Code Brinks should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_brinks')">Code Brinks should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('code_brinks')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Code Brinks</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('code_brinks')">Code Brinks  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code_brinks')">Code Brinks  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_brinks')">Code Brinks {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_brinks')">Code Brinks {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Identification Number</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Identification Number</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Identification Number" name="identification_number" [class.is-invalid]="isControlInvalid('identification_number')"
                 [class.is-valid]="isControlValid('identification_number')" formControlName="identification_number" />
-              <div class="feedback" *ngIf="!isControlTouched('identification_number')">Please enter <b>Identification Number</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('identification_number')">Identification Number was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'identification_number')">Identification Number is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'identification_number')">Identification Number should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'identification_number')">Identification Number should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('identification_number')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Identification Number</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('identification_number')">Identification Number  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'identification_number')">Identification Number  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'identification_number')">Identification Number {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'identification_number')">Identification Number {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Email</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Email</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Email" name="email" [class.is-invalid]="isControlInvalid('email')"
                 [class.is-valid]="isControlValid('email')" formControlName="email" />
-              <div class="feedback" *ngIf="!isControlTouched('email')">Please enter <b>Email</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('email')">Email was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'email')">Email is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'email')">Email should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">Email should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('email')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Email</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('email')">Email  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'email')">Email  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'email')">Email {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">Email {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Phone</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Phone</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Phone" name="phone" [class.is-invalid]="isControlInvalid('phone')"
                 [class.is-valid]="isControlValid('phone')" formControlName="phone" />
-              <div class="feedback" *ngIf="!isControlTouched('phone')">Please enter <b>Phone</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('phone')">Phone was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'phone')">Phone is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'phone')">Phone should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'phone')">Phone should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('phone')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Phone</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('phone')">Phone  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'phone')">Phone  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'phone')">Phone {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'phone')">Phone {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Web</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Web</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Web" name="web" [class.is-invalid]="isControlInvalid('web')"
                 [class.is-valid]="isControlValid('web')" formControlName="web" />
-              <div class="feedback" *ngIf="!isControlTouched('web')">Please enter <b>Web</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('web')">Web was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'web')">Web is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'web')">Web should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'web')">Web should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('web')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Web</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('web')">Web  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'web')">Web  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'web')">Web {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'web')">Web {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Phone</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Phone</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Phone" name="phone" [class.is-invalid]="isControlInvalid('phone')"
                 [class.is-valid]="isControlValid('phone')" formControlName="phone" />
-              <div class="feedback" *ngIf="!isControlTouched('phone')">Please enter <b>Phone</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('phone')">Phone was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'phone')">Phone is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'phone')">Phone should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'phone')">Phone should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('phone')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Phone</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('phone')">Phone  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'phone')">Phone  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'phone')">Phone {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'phone')">Phone {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Alias</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Alias</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Alias" name="alias" [class.is-invalid]="isControlInvalid('alias')"
                 [class.is-valid]="isControlValid('alias')" formControlName="alias" />
-              <div class="feedback" *ngIf="!isControlTouched('alias')">Please enter <b>Alias</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('alias')">Alias was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'alias')">Alias is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'alias')">Alias should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'alias')">Alias should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('alias')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Alias</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('alias')">Alias  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'alias')">Alias  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'alias')">Alias {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'alias')">Alias {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Abbreviation</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Abbreviation</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Abbreviation" name="abbreviation" [class.is-invalid]="isControlInvalid('abbreviation')"
                 [class.is-valid]="isControlValid('abbreviation')" formControlName="abbreviation" />
-              <div class="feedback" *ngIf="!isControlTouched('abbreviation')">Please enter <b>Abbreviation</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('abbreviation')">Abbreviation was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'abbreviation')">Abbreviation is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'abbreviation')">Abbreviation should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'abbreviation')">Abbreviation should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('abbreviation')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Abbreviation</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('abbreviation')">Abbreviation  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'abbreviation')">Abbreviation  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'abbreviation')">Abbreviation {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'abbreviation')">Abbreviation {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Address</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Address</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Address" name="address" [class.is-invalid]="isControlInvalid('address')"
                 [class.is-valid]="isControlValid('address')" formControlName="address" />
-              <div class="feedback" *ngIf="!isControlTouched('address')">Please enter <b>Address</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('address')">Address was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'address')">Address is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'address')">Address should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'address')">Address should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('address')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Address</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('address')">Address  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'address')">Address  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'address')">Address {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'address')">Address {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Name Invoce To</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Name Invoce To</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Name Invoce To" name="name_invoce_to" [class.is-invalid]="isControlInvalid('name_invoce_to')"
                 [class.is-valid]="isControlValid('name_invoce_to')" formControlName="name_invoce_to" />
-              <div class="feedback" *ngIf="!isControlTouched('name_invoce_to')">Please enter <b>Name Invoce To</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('name_invoce_to')">Name Invoce To was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name_invoce_to')">Name Invoce To is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name_invoce_to')">Name Invoce To should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name_invoce_to')">Name Invoce To should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('name_invoce_to')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Name Invoce To</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('name_invoce_to')">Name Invoce To  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name_invoce_to')">Name Invoce To  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name_invoce_to')">Name Invoce To {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name_invoce_to')">Name Invoce To {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Segment Company</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Segment Company</label>
               <app-segment-company-autocomplete
               placeholder="Segment Company" name="segment_company" [valid]="isControlValid('segment_company')" [touched]="isControlTouched('segment_company')" [class.is-invalid]="isControlInvalid('segment_company')"
               [class.is-valid]="isControlValid('segment_company')" formControlName="segment_company" id="segment_company" [model]="model.segment_company"></app-segment-company-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('segment_company')">Please enter <b>Segment Company</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('segment_company')">Segment Company was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'segment_company')">Segment Company is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'segment_company')">Segment Company should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'segment_company')">Segment Company should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('segment_company')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Segment Company</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('segment_company')">Segment Company  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'segment_company')">Segment Company  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'segment_company')">Segment Company {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'segment_company')">Segment Company {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Type Company</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Type Company</label>
               <app-type-company-autocomplete
               placeholder="Type Company" name="type_company" [valid]="isControlValid('type_company')" [touched]="isControlTouched('type_company')" [class.is-invalid]="isControlInvalid('type_company')"
               [class.is-valid]="isControlValid('type_company')" formControlName="type_company" id="type_company" [model]="model.type_company"></app-type-company-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('type_company')">Please enter <b>Type Company</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('type_company')">Type Company was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_company')">Type Company is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_company')">Type Company should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_company')">Type Company should have maximum 30
+              <div class="feedback" *ngIf="!isControlTouched('type_company')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Type Company</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('type_company')">Type Company  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_company')">Type Company  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_company')">Type Company {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_company')">Type Company {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
                 symbols</div>
             </div>
             <div class="col-lg-4">
@@ -267,11 +253,11 @@
             </div>
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="/companies">Cancel</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="/companies">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">Save</button>
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(true)">Save Exit</button>
+              [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
         </form>
       </div>

@@ -12,6 +12,7 @@ import { Subheader7Component } from './subheader7/subheader7.component';
 import { SubheaderWrapperComponent } from './subheader-wrapper/subheader-wrapper.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropdownMenusModule } from '../../content/dropdown-menus/dropdown-menus.module';
+import { TranslationModule } from '../../../../modules/i18n/translation.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { DropdownMenusModule } from '../../content/dropdown-menus/dropdown-menus
     InlineSVGModule,
     NgbDropdownModule,
     DropdownMenusModule,
+    TranslationModule,
   ],
   exports: [SubheaderWrapperComponent],
 })

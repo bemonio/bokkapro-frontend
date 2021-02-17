@@ -10,7 +10,7 @@
     <div class="card-title">
       <h3 class="card-label">
         <ng-container *ngIf="model">
-          {{ id ? "Edit" : "New" }}
+          {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
           <span *ngIf="model && model.id">'{{ model.id }} - {{ model.username }} </span>
         </ng-container>
         {{ model?.email }}
@@ -18,10 +18,10 @@
     </div>
     <div class="card-toolbar">
       <a type="button" class="btn btn-light" routerLink="/users">
-        <i class="fa fa-arrow-left"></i>Back
+        <i class="fa fa-arrow-left"> {{ 'COMMON.BACK' | translate }}</i>
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
-        <i class="fa fa-redo"></i>Reset
+        <i class="fa fa-redo"> {{ 'COMMON.RESET' | translate }}</i>
       </button>
     </div>
   </div>
@@ -30,7 +30,7 @@
       <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
         <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
           [class.active]="activeTabId === tabs.BASIC_TAB">
-          Basic info
+          {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
       <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
@@ -44,43 +44,37 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
             <div class="col-lg-4">
-              <label>Enter Username</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Username</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Username" name="username" [class.is-invalid]="isControlInvalid('username')"
                 [class.is-valid]="isControlValid('username')" formControlName="username" />
-              <div class="feedback" *ngIf="!isControlTouched('username')">Please enter <b>Username</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('username')">Username was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'username')">Username is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'username')">Username should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'username')">Username should have maximum 100
-                symbols</div>
+              <div class="feedback" *ngIf="!isControlTouched('username')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Username</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('username')">Username  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'username')">Username  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'username')">Username {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'username')">Username {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Email</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Email</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Email" name="email" [class.is-invalid]="isControlInvalid('email')"
                 [class.is-valid]="isControlValid('email')" formControlName="email" />
-              <div class="feedback" *ngIf="!isControlTouched('email')">Please enter <b>Email</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('email')">Email was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'email')">Email is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'email')">Email should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">Email should have maximum 100
-                symbols</div>
+              <div class="feedback" *ngIf="!isControlTouched('email')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Email</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('email')">Email  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'email')">Email  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'email')">Email {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">Email {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
-              <label>Enter Password</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Password</label>
               <input type="password" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Password" name="password" [class.is-invalid]="isControlInvalid('password')"
                 [class.is-valid]="isControlValid('password')" formControlName="password" />
-              <div class="feedback" *ngIf="!isControlTouched('password')">Please enter <b>Password</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('password')">Password was entered correct</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'password')">Password is required</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'password')">Password should have at least 3
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'password')">Password should have maximum 100
-                symbols</div>
+              <div class="feedback" *ngIf="!isControlTouched('password')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Password</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('password')">Password  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'password')">Password  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'password')">Password {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'password')">Password {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-2">
               <label>Is Active</label>
@@ -88,11 +82,11 @@
             </div>
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="/users">Cancel</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="/users">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">Save</button>
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(true)">Save Exit</button>
+              [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
         </form>
       </div>

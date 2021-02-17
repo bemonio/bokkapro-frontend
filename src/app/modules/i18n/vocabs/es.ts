@@ -5,15 +5,6 @@ export const locale = {
     TRANSLATOR: {
       SELECT: 'Elige tu idioma',
     },
-    MENU: {
-      NEW: 'nuevo',
-      ACTIONS: 'Comportamiento',
-      CREATE_POST: 'Crear nueva publicación',
-      PAGES: 'Pages',
-      FEATURES: 'Caracteristicas',
-      APPS: 'Aplicaciones',
-      DASHBOARD: 'Tablero'
-    },
     AUTH: {
       GENERAL: {
         OR: 'O',
@@ -21,9 +12,12 @@ export const locale = {
         NO_ACCOUNT: 'No tienes una cuenta?',
         SIGNUP_BUTTON: 'Regístrate',
         FORGOT_BUTTON: 'Se te olvidó tu contraseña',
+        SIGN_IN: 'Iniciar',
+        SIGN_OUT: 'Salir',
         BACK_BUTTON: 'Espalda',
         PRIVACY: 'Intimidad',
         LEGAL: 'Legal',
+        TERMS: 'Términos',
         CONTACT: 'Contacto',
       },
       LOGIN: {
@@ -60,46 +54,136 @@ export const locale = {
         INVALID_FIELD: 'Field is not valid',
       }
     },
-    ECOMMERCE: {
-      COMMON: {
-        SELECTED_RECORDS_COUNT: 'Selected records count: ',
-        ALL: 'All',
-        SUSPENDED: 'Suspended',
-        ACTIVE: 'Active',
-        FILTER: 'Filter',
-        BY_STATUS: 'by Status',
-        BY_TYPE: 'by Type',
-        BUSINESS: 'Business',
-        INDIVIDUAL: 'Individual',
-        SEARCH: 'Search',
-        IN_ALL_FIELDS: 'in all fields'
+    DASHBOARD: {
+      DASHBOARD: 'Tablero',
+    },
+    USER: {
+      USER: 'Usuario',
+      USERS: 'Usuarios',
+      FIELDS: {
+        USERNAME: 'Username',
+        EMAIL: 'Email',
+        DATE_JOINED: 'Fecha Registro',
+        IS_ACTIVE: 'Activo?' 
       },
-      ECOMMERCE: 'eCommerce',
-      CUSTOMERS: {
-        CUSTOMERS: 'Customers',
-        CUSTOMERS_LIST: 'Customers list',
-        NEW_CUSTOMER: 'New Customer',
-        DELETE_CUSTOMER_SIMPLE: {
-          TITLE: 'Customer Delete',
-          DESCRIPTION: 'Are you sure to permanently delete this customer?',
-          WAIT_DESCRIPTION: 'Customer is deleting...',
-          MESSAGE: 'Customer has been deleted'
-        },
-        DELETE_CUSTOMER_MULTY: {
-          TITLE: 'Customers Delete',
-          DESCRIPTION: 'Are you sure to permanently delete selected customers?',
-          WAIT_DESCRIPTION: 'Customers are deleting...',
-          MESSAGE: 'Selected customers have been deleted'
-        },
-        UPDATE_STATUS: {
-          TITLE: 'Status has been updated for selected customers',
-          MESSAGE: 'Selected customers status have successfully been updated'
-        },
-        EDIT: {
-          UPDATE_MESSAGE: 'Customer has been updated',
-          ADD_MESSAGE: 'Customer has been created'
-        }
-      }
-    }
+    },
+    SEGMENT_COMPANY: {
+      SEGMENT_COMPANY: 'Segmento Compañía',
+      SEGMENTS_COMPANIES: 'Segmentos Compañías',
+    },
+    TYPE_COMPANY: {
+      TYPE_COMPANY: 'Tipo Compañía',
+      TYPES_COMPANIES: 'Tipos Compañías',
+    },
+    COMPANY: {
+      COMPANY: 'Compañía',
+      COMPANIES: 'Compañías',
+    },
+    OFFICE: {
+      OFFICE: 'Oficina',
+      OFFICES: 'Oficinas',
+    },
+    TYPE_DIVISION: {
+      TYPE_DIVISION: 'Tipo División',
+      TYPES_DIVISIONS: 'Tipos Divisiones',
+    },
+    DIVISION: {
+      DIVISION: 'División',
+      DIVISIONS: 'Divisiones',
+    },
+    DEPARTMENT: {
+      DEPARTMENT: 'Departamento',
+      DEPARTMENTS: 'Departamentos',
+    },
+    POSITION: {
+      POSITION: 'Cargo',
+      POSITIONS: 'Cargos',
+    },
+    EMPLOYEE: {
+      EMPLOYEE: 'Empleado',
+      EMPLOYEES: 'Empleados',
+    },
+    ZONE: {
+      ZONE: 'Zona',
+      ZONES: 'Zonas',
+    },
+    TYPE_LOCATION: {
+      TYPE_LOCATION: 'Tipo Localización',
+      TYPES_LOCATIONS: 'Tipos Localizaciones',
+    },
+    LOCATION: {
+      LOCATION: 'Localización',
+      LOCATIONS: 'Localizaciones',
+    },
+    TYPE_GUIDE: {
+      TYPE_GUIDE: 'Tipo Transacción',
+      TYPES_GUIDES: 'Tipos Transacciones',
+    },
+    GUIDE: {
+      GUIDE: 'Transacción',
+      GUIDES: 'Transacciones',
+      GUIDE_INPUT: 'Transacción Entrada',
+      GUIDES_INPUTS: 'Transacciones Entradas',
+      GUIDE_OUTPUT: 'Transacción Salida',
+      GUIDES_OUTPUTS: 'Transacciones Salidas',
+      GUIDE_CHECK: 'Transacción Checkeo',
+      GUIDES_CHECKS: 'Transacciones Checkeos',
+    },
+    VOUCHER: {
+      VOUCHER: 'Comprobante',
+      VOUCHERS: 'Comprobantes',
+    },
+    PACKAGE: {
+      PACKAGE: 'Paquete',
+      PACKAGES: 'Paquetes',
+    },
+    MODERATION: {
+      MODERATION: 'Moderación',
+      MODERATIONS: 'Moderaciones',
+    },
+    COMMON: {
+      ID: 'ID',
+      SELECTED_RECORDS_COUNT: 'Selected records count: ',
+      ALL: 'Todo',
+      SUSPENDED: 'Suspendido',
+      ACTIVE: 'Activo',
+      FILTER: 'Filtro',
+      BY_STATUS: 'by Status',
+      BY_TYPE: 'by Type',
+      BUSINESS: 'Business',
+      INDIVIDUAL: 'Individual',
+      SEARCH: 'Buscar',
+      IN: 'en',
+      IN_ALL_FIELDS: 'in all fields',
+      NEW: 'Nuevo',
+      EDIT: 'Editar',
+      DELETE: 'Eliminar',
+      ACTION: 'Acción',
+      NO_ITEMS_FOUND: 'Registros no encontrados',
+      BACK: 'Volver',
+      RESET: 'Resetear',
+      BASIC_INFO: 'Información Básica',
+      LIST: 'Información Básica',
+      CANCEL: 'Cancelar',
+      SAVE: 'Guardar',
+      SAVE_AND_EXIT: 'Guardar/Salir',
+      CONFIRMATION: 'Confirmación',
+      MESSAGE_CONFIRM_DELETE: '¿Estás seguro que deseas eliminar?',
+      ENTER: 'Ingrese',
+      PLEASE_ENTER: 'Por favor ingrese',
+      IS_REQUIRED: 'es Requerido',
+      WAS_ENTERED_CORRECT: 'ingresado correctamente',
+      SHOULD_HAVE_LEAST: 'debería tener mínimo',
+      SHOULD_HAVE_MAXIMUM: 'debería tener máximo',
+      SHOWING: 'Mostrando',
+      FROM: 'de',
+      TO: 'a',
+      OF: 'de',
+      RECORDS: 'Registros',
+      TODAY: 'Hoy',
+      WELCOME_TO: 'Bienvenido a',
+      CHOOSE: 'Elige',
+      HI: 'Hola'
+    },
   }
 };

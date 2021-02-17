@@ -38,4 +38,8 @@ export class Subheader2Component implements OnInit {
       'subheader.displayDaterangepicker'
     );
   }
+
+  getNow() {
+    return new Date();
+  }
 }

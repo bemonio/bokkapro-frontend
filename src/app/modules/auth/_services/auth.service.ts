@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from '../_services/auth-http/token-storage.service';
 import { UserService } from 'src/app/pages/user/_services';
 import { DivisionModel } from 'src/app/pages/division/_models/division.model';
+import { TranslationService } from '../../../modules/i18n/translation.service';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,7 @@ export class AuthService implements OnDestroy {
 
   constructor(
     private authHttpService: AuthHTTPService,
+    private translationService: TranslationService,
     private router: Router,
     private token: TokenStorageService,
     private userService: UserService
@@ -120,6 +122,12 @@ export class AuthService implements OnDestroy {
                   if (model.user.employee.divisions) {
                     this.currentDivisionSubject = new BehaviorSubject<DivisionModel>(model.user.employee.divisions[0]);
                   }
+                }
+
+                if (model.user.language) {
+                  this.translationService.setLanguage(model.user.language);
+                } else {
+                  this.translationService.setLanguage('es');
                 }
               },
               error => {

@@ -40,6 +40,9 @@ export class EmployeesComponent implements OnInit {
     public loading: boolean;
   
     public confirmDialogPosition: string;
+    public message_confirm_delete: string;
+
+    public showTableCheckbox: boolean;
 
     constructor(
       public modelsService: ModelService,
@@ -61,9 +64,15 @@ export class EmployeesComponent implements OnInit {
             searchTerm: [''],
         });
 
+        this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
+            this.message_confirm_delete = res;
+        });
+
+        this.showTableCheckbox = false;
+
         this.page = 1;
         this.total_page = 0;
-        this.per_page = 5;
+        this.per_page = 100
         this.totalRecords = 0;
 
         this.loading = false;

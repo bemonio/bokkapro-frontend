@@ -19,10 +19,10 @@ import { TranslationModule } from '../i18n/translation.module';
   ],
   imports: [
     CommonModule,
-    TranslationModule,
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslationModule,
   ]
 })
 export class AuthModule {}

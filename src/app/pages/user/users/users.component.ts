@@ -41,6 +41,9 @@ export class UsersComponent implements OnInit {
     public loading: boolean;
   
     public confirmDialogPosition: string;
+    public message_confirm_delete: string;
+
+    public showTableCheckbox: boolean;
 
     constructor(
       public modelsService: ModelService,
@@ -62,9 +65,15 @@ export class UsersComponent implements OnInit {
             searchTerm: [''],
         });
 
+        this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
+            this.message_confirm_delete = res;
+        });
+
+        this.showTableCheckbox = false;
+
         this.page = 1;
         this.total_page = 0;
-        this.per_page = 5;
+        this.per_page = 100
         this.totalRecords = 0;
 
         this.loading = false;
@@ -179,7 +188,7 @@ export class UsersComponent implements OnInit {
     confirm(id, position: string) {
         this.confirmDialogPosition = position;
         this.confirmationService.confirm({
-            message: 'Are you sure that you want to delete?',
+            message: this.message_confirm_delete,
             accept: () => {
                 this.delete(id);
             }

@@ -132,6 +132,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
         if (this.saveAndExit) {
           this.router.navigate(['/users']);
         }
+        this.formGroup.reset()
       }),
       catchError((error) => {
         this.loading = false;

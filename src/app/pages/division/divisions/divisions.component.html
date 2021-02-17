@@ -1,10 +1,10 @@
 <div class="card card-custom gutter-b">
   <div class="card-header">
     <div class="card-title">
-      <h3 class="card-label">List</h3>
+      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" routerLink="/divisions/add">New</a>
+      <a type="button" class="btn btn-primary" routerLink="/divisions/add">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -12,11 +12,11 @@
     <div class="form form-label-right">
       <div class="form-group row">
         <div class="col-lg-6">
-          Filter
+          {{ 'COMMON.FILTER' | translate }}
         </div>
         <div class="col-lg-6" [formGroup]="searchGroup">
-          <input type="text" class="form-control" name="searchText" placeholder="Search" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
-            formControlName="searchTerm" /><small class="form-text text-muted"><b>Search</b> in id</small>
+          <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> {{ 'COMMON.IN' | translate }} id</small>
         </div>
       </div>
     </div>
@@ -24,13 +24,13 @@
 
     <!-- begin:Table -->
     <p-table #dt [value]="models" [(selection)]="selectedModels" dataKey="id" styleClass="p-datatable-striped p-datatable-sm" [rowHover]="true"
-    [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50]" [loading]="loading"
-    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]" [loading]="loading"
+    [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
     [filterDelay]="1000" [globalFilterFields]="['id','username']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
     [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true">
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 3rem">
+          <th style="width: 3rem" *ngIf="showTableCheckbox">
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
           <th pSortableColumn="id">
@@ -57,7 +57,7 @@
           </th>
           <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Action
+              {{ 'COMMON.ACTION' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
@@ -66,7 +66,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-value>
         <tr class="p-selectable-row">
-          <td>
+          <td *ngIf="showTableCheckbox">
             <p-tableCheckbox [value]="value"></p-tableCheckbox>
           </td>
           <td>
@@ -82,13 +82,13 @@
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: center">
-            <a title="Edit" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+            <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               [routerLink]="'/divisions/edit/' + value.id" *ngIf="authService.hasPermission('add_division')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
-            <a title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+            <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
               (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_division')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
@@ -99,7 +99,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="6">No items found.</td>
+          <td colspan="6">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -107,4 +107,4 @@
   </div>
 </div>
 
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
+<p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>

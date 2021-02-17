@@ -4,6 +4,7 @@ import { DropdownMenu1Component } from './dropdown-menu1/dropdown-menu1.componen
 import { DropdownMenu2Component } from './dropdown-menu2/dropdown-menu2.component';
 import { DropdownMenu3Component } from './dropdown-menu3/dropdown-menu3.component';
 import { DropdownMenu4Component } from './dropdown-menu4/dropdown-menu4.component';
+import { TranslationModule } from '../../../../modules/i18n/translation.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,10 @@ import { DropdownMenu4Component } from './dropdown-menu4/dropdown-menu4.componen
     DropdownMenu3Component,
     DropdownMenu4Component,
   ],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    TranslationModule,
+  ],
   exports: [
     DropdownMenu1Component,
     DropdownMenu2Component,

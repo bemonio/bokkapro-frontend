@@ -23,7 +23,7 @@ export class TranslationService {
     this.translate.addLangs(['en']);
 
     // this language will be used as a fallback when a translation isn't found in the current language
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('es');
   }
 
   loadTranslations(...args: Locale[]): void {

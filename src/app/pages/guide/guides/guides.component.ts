@@ -46,6 +46,9 @@ export class GuidesComponent implements OnInit {
     public loading: boolean;
   
     public confirmDialogPosition: string;
+    public message_confirm_delete: string;
+
+    public showTableCheckbox: boolean;
 
     public parent: string;
     public permission: string;
@@ -81,9 +84,15 @@ export class GuidesComponent implements OnInit {
         });
         this.vouchers = this.formGroup.controls['vouchers'];
 
+        this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
+            this.message_confirm_delete = res;
+        });
+
+        this.showTableCheckbox = false;
+
         this.page = 1;
         this.total_page = 0;
-        this.per_page = 5;
+        this.per_page = 100
         this.totalRecords = 0;
         this.filters = [];
         this.parent = 'guides';
@@ -219,7 +228,7 @@ export class GuidesComponent implements OnInit {
     confirm(id, position: string) {
         this.confirmDialogPosition = position;
         this.confirmationService.confirm({
-            message: 'Are you sure that you want to delete?',
+            message: this.message_confirm_delete,
             accept: () => {
                 this.delete(id);
             }

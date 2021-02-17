@@ -20,6 +20,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";
 
+import { TranslateModule } from '@ngx-translate/core';
+
 // import { CompanyModule } from './company/company.module';
 // import { TypeCompanyModule } from './type-company/type-company.module';
 
@@ -154,6 +156,7 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     ReactiveFormsModule,
     RouterModule,
     InlineSVGModule,
+    TranslateModule.forRoot(),
   ],
   declarations: [
     UsersComponent,
