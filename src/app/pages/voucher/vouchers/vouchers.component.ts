@@ -232,6 +232,7 @@ export class VouchersComponent implements OnInit {
             this.promiseForm = promise.toPromise().then(
                 response => {
                     this.toastService.growl('success', 'Patch');
+                    this.getModels();
                 },
                 error => {
                     Object.entries(error.error).forEach(
@@ -254,5 +255,10 @@ export class VouchersComponent implements OnInit {
 
     showModalDialog() {
         this.displayModal = true;
-    }    
+    }
+
+    hideModalDialog() {
+        this.displayModal = false;
+        this.getModels();
+    }
 }
