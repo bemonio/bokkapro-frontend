@@ -252,15 +252,15 @@ export class GuidesComponent implements OnInit {
         ).subscribe((response: any) => {
             if (response) {
                 this.verificationGuide = response.guide;
-                this.verificationGuide.vouchers = response.vouchers;
+                this.verificationGuide.vouchers = response.guide.vouchers;
             }
+            this.displayModal = true;
         });
     }
 
     public verification(guide) {
         this.get(guide.id)
         this.listVouchers = [];
-        this.displayModal = true;
     }
 
     public addListVouchers(event) {
@@ -322,10 +322,13 @@ export class GuidesComponent implements OnInit {
   save() {
     let params = {
         "status":"1",
-        "vouchers":[79]
+        "vouchers":[]
     };
+    this.verificationGuide.vouchers.forEach(element => {
+        params.vouchers.push(element.id);
+    });
     
-    const sbUpdate = this.modelsService.patch(54, params).pipe(
+    const sbUpdate = this.modelsService.patch(this.verificationGuide.id, params).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
       }),
@@ -343,5 +346,17 @@ export class GuidesComponent implements OnInit {
         this.displayModal = false;
         this.getModels();
     });
+  }
+
+  countPackages(guide) {
+    let count = 0;
+    if (guide.vouchers) {
+        guide.vouchers.forEach(element => {
+            if (element.packages) {
+                count =+ element.count_packages;
+            }
+        });
+    }
+    return count;
   }
 }

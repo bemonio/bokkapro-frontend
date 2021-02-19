@@ -53,6 +53,26 @@
               Type
             </div>
           </th>
+          <th pSortableColumn="description">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Vouchers
+            </div>
+          </th>
+          <th pSortableColumn="description">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Packages
+            </div>
+          </th>
+          <th pSortableColumn="origin">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Origin
+            </div>
+          </th>
+          <th pSortableColumn="destination">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Destination
+            </div>
+          </th>
           <th pSortableColumn="status">
             <div class="p-d-flex p-jc-between p-ai-center">
               Status
@@ -86,7 +106,8 @@
             {{value.am_pm}}
           </td>
           <td>
-            {{value.date | date: 'MM/dd/yyyy'}}
+            {{value.date | date: 'MM/dd/yyyy'}}<br>
+            {{value.date | date: 'hh:mm:ss'}}
           </td>
           <td>
             <p-badge [value]="'Entrada'"  severity="success"  severity="success" *ngIf="value.type_guide == 1"></p-badge>
@@ -94,15 +115,27 @@
             <p-badge [value]="'Salida'"  severity="success"  severity="success" *ngIf="value.type_guide == 3"></p-badge>
           </td>
           <td>
+            {{value.vouchers.length}}
+          </td>
+          <td>
+            {{countPackages(value)}}
+          </td>
+          <td>
+            {{value.division_origin.name}}
+          </td>
+          <td>
+            {{value.division_destination.name}}
+          </td>
+          <td>
             <p-badge [value]="'Confirmada'"  severity="success"  severity="success" *ngIf="value.status == 1"></p-badge>
-            <p-badge [value]="'No confirmada'"  severity="warning"  severity="warning" *ngIf="value.status == 0"></p-badge>
+            <p-badge [value]="'NoConfirmada'"  severity="warning"  severity="warning" *ngIf="value.status == 0"></p-badge>
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: center">
             <a title="Verification" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;" 
-              (click)="verification(value)" *ngIf="authService.hasPermission('change_' + permission)">
+              (click)="verification(value)" *ngIf="authService.hasPermission('change_' + permission) && parent == 'guidesinput' && !(value.status == 1)">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
@@ -146,7 +179,7 @@
 
         <li class="list-group-item">
           <b>{{ 'vouchers' }}:</b><br>
-          <span *ngFor="let item of verificationGuide.vouchers">{{item.code}}<i class="fa fa-check-circle-o" aria-hidden="true" style="color: green;" *ngIf="item.verificated"></i><i class="fa fa-question-circle" aria-hidden="true" style="color: red;" *ngIf="!item.verificated"></i><br></span>
+          <span *ngFor="let item of verificationGuide.vouchers"> - {{item.code}}<i class="fa fa-check-circle-o" aria-hidden="true" style="color: green;" *ngIf="item.verificated"></i><i class="fa fa-question-circle" aria-hidden="true" style="color: red;" *ngIf="!item.verificated"></i><br></span>
         </li>
 
         <li class="list-group-item">
