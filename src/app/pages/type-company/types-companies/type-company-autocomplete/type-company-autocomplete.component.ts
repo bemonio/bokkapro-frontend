@@ -23,6 +23,7 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
     @Input() required: boolean;
     @Input() disabled: boolean;
     @Input() placeholder: string;
+    @Input() addFilters: {key: string, value: string}[];
 
     public models: any[];
     
@@ -89,6 +90,12 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
             }
         } else {
             this.sort = '-id';
+        }
+
+        if (this.addFilters) {
+            this.addFilters.forEach(element => {
+                this.filters.push ({key: 'filter{' + element.key + '}', value: element.value})
+            });
         }
 
         if (event.query) {
