@@ -44,6 +44,11 @@
               Code
             </div>
           </th>
+          <th pSortableColumn="code">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Packages
+            </div>
+          </th>
           <!-- <th pSortableColumn="verificated">
             <div class="p-d-flex p-jc-between p-ai-center">
               Verificated
@@ -75,6 +80,9 @@
           </td>
           <td>
             {{value.code}}
+          </td>
+          <td>
+            {{value.packages.length}}
           </td>
           <!-- <td>
             {{value.verificated}}
@@ -112,5 +120,5 @@
 
 <p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
   [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
-  <app-guide-edit (close)="displayModal=false" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
+  <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
 </p-dialog>
