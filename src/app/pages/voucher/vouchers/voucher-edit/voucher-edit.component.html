@@ -109,7 +109,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} Location Origin</label>
               <app-location-autocomplete
               placeholder="Location Origin" name="location_origin" [valid]="isControlValid('location_origin')" [touched]="isControlTouched('location_origin')" [class.is-invalid]="isControlInvalid('location_origin')"
-              [class.is-valid]="isControlValid('location_origin')" formControlName="location_origin" id="location_origin" [model]="model.location_origin"></app-location-autocomplete>
+              [class.is-valid]="isControlValid('location_origin')" formControlName="location_origin" id="location_origin" [model]="model.location_origin" [disabled]="!company.valid" [addFilters]="[{key:'company', value: company.value.id}]"></app-location-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('location_origin')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Location Origin</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('location_origin')">Location Origin  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_origin')">Location Origin  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -121,7 +121,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} Location Destination</label>
               <app-location-autocomplete
               placeholder="Location Destination" name="location_destination" [valid]="isControlValid('location_destination')" [touched]="isControlTouched('location_destination')" [class.is-invalid]="isControlInvalid('location_destination')"
-              [class.is-valid]="isControlValid('location_destination')" formControlName="location_destination" id="location_destination" [model]="model.location_destination"></app-location-autocomplete>
+              [class.is-valid]="isControlValid('location_destination')" formControlName="location_destination" id="location_destination" [model]="model.location_destination" [disabled]="!company.valid" [addFilters]="[{key:'company', value: company.value.id}]"></app-location-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('location_destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Location Destination</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('location_destination')">Location Destination  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_destination')">Location Destination  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
