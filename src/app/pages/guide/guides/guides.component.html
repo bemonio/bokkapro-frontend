@@ -135,7 +135,7 @@
           </td>
           <td style="text-align: center">
             <a title="Verification" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;" 
-              (click)="verification(value)" *ngIf="authService.hasPermission('change_' + permission) && parent == 'guidesinput' && !(value.status == 1)">
+              (click)="verification(value)" *ngIf="(authService.hasPermission('change_' + permission)) && ((parent == 'guidesinput' && !(value.status == 1)) || (parent == 'guidescheck'  && !(value.status == 1)))">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
@@ -179,18 +179,23 @@
 
         <li class="list-group-item">
           <b>{{ 'vouchers' }}:</b><br>
-          <span *ngFor="let item of verificationGuide.vouchers"> - {{item.code}}<i class="fa fa-check-circle-o" aria-hidden="true" style="color: green;" *ngIf="item.verificated"></i><i class="fa fa-question-circle" aria-hidden="true" style="color: red;" *ngIf="!item.verificated"></i><br></span>
+          <span *ngFor="let voucher of verificationGuide.vouchers">
+            + {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br>
+            <span *ngFor="let package of voucher.packages"> 
+              - {{package.code}} <i [ngClass]="package.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': package.verificated ? 'green' : 'red' }"></i><br>
+            </span>
+          </span>
         </li>
 
         <li class="list-group-item">
           <b>{{ 'verification' }}:</b>
           <p-chips [styleClass]="getValidClass(isControlValid('vouchers'))" formControlName="vouchers" [allowDuplicate]="false" (onAdd)="addListVouchers($event)" (onRemove)="removeListVouchers($event)" [(ngModel)]="listVouchers"></p-chips>
-          <div class="feedback" *ngIf="!isControlTouched('vouchers')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Vouchers</b></div>
-          <div class="valid-feedback" *ngIf="isControlValid('vouchers')">Vouchers  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'vouchers')">Vouchers  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-          <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'vouchers')">Vouchers {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1
+          <div class="feedback" *ngIf="!isControlTouched('vouchers')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>List Vouchers/Packages</b></div>
+          <div class="valid-feedback" *ngIf="isControlValid('vouchers')">List Vouchers/Packages  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'vouchers')">List Vouchers/Packages  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'vouchers')">List Vouchers/Packages {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1
             item</div>
-          <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'vouchers')">Vouchers {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100
+          <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'vouchers')">List Vouchers/Packages {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100
             items</div>
         </li>
 

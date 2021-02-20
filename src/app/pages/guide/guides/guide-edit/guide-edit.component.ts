@@ -231,7 +231,15 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     model.division_destination = this.model.division_destination.id;
     model.employee_origin = this.model.employee_origin.id;
     model.employee_destination = this.model.employee_destination.id;
-    model.status = '1';
+
+    let listVouchers = model.vouchers;
+    model.vouchers = [];
+
+    if (listVouchers) {
+      listVouchers.forEach(element => {
+        model.vouchers.push(element.id);
+      });
+    }
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {

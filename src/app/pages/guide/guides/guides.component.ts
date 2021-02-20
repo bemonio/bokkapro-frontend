@@ -82,7 +82,7 @@ export class GuidesComponent implements OnInit {
         this.verificationGroup = fb.group({
             vouchers: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         });
-        this.vouchers = this.formGroup.controls['vouchers'];
+        this.vouchers = this.verificationGroup.controls['vouchers'];
 
         this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
             this.message_confirm_delete = res;
@@ -253,14 +253,16 @@ export class GuidesComponent implements OnInit {
             if (response) {
                 this.verificationGuide = response.guide;
                 this.verificationGuide.vouchers = response.guide.vouchers;
+                let count = this.verificationGuide.vouchers.length + this.countPackages(this.verificationGuide);
+                this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
             }
-            this.displayModal = true;
         });
     }
 
     public verification(guide) {
+        this.displayModal = true;
+        this.listVouchers = undefined;
         this.get(guide.id)
-        this.listVouchers = [];
     }
 
     public addListVouchers(event) {
@@ -270,6 +272,12 @@ export class GuidesComponent implements OnInit {
                 element.verificated = true;
                 found = true;
             }
+            element.packages.forEach(element2 => {
+                if (element2.code === event.value) {
+                    element2.verificated = true;
+                    found = true;
+                }
+            });
         });
         if (!found) {
             this.listVouchers.forEach(element => {
@@ -285,6 +293,11 @@ export class GuidesComponent implements OnInit {
             if (element.code === event.value) {
                 element.verificated = false;
             }
+            element.packages.forEach(element2 => {
+                if (element2.code === event.value) {
+                    element2.verificated = false;
+                }
+            });
         });
     }
 
