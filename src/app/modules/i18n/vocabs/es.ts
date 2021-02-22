@@ -156,6 +156,7 @@ export const locale = {
       IN: 'en',
       IN_ALL_FIELDS: 'in all fields',
       NEW: 'Nuevo',
+      TRANSFER: 'Transferir',
       EDIT: 'Editar',
       DELETE: 'Eliminar',
       ACTION: 'Acción',
