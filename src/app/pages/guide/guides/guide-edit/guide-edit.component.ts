@@ -197,6 +197,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       }
     }
 
+    if (!this.typeGuide) {
+      this.typeGuide = 2;
+    }
+
     this.formGroup.markAllAsTouched();
   }
 
@@ -271,6 +275,18 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     model.date = undefined;
     if (this.date.value) {
       model.date = this.formatDate(this.date.value);
+    }
+
+    if (this.division_destination.value) {
+      if (this.division_destination.value.type_division == 2) {
+        this.typeGuide = 3;
+        this.am_pm.setValidators(Validators.compose([Validators.required]))
+        this.date.setValidators(Validators.compose([Validators.required]))
+      }
+    }
+
+    if (!this.typeGuide) {
+      this.typeGuide = 2;
     }
 
     model.type_guide = this.typeGuide;
