@@ -17,10 +17,10 @@
     </div>
     <div class="card-toolbar">
       <a type="button" class="btn btn-light" routerLink="{{parent}}/vouchers">
-        <i class="fa fa-arrow-left"> {{ 'COMMON.BACK' | translate }}</i>
+        <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
-        <i class="fa fa-redo"> {{ 'COMMON.RESET' | translate }}</i>
+        <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
       </button>
     </div>
   </div>
@@ -134,7 +134,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} Count Packages</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Count Packages" name="count_packages" [class.is-invalid]="isControlInvalid('count_packages')"
-                [class.is-valid]="isControlValid('count_packages')" formControlName="count_packages" />
+                [class.is-valid]="isControlValid('count_packages')" formControlName="count_packages" (change)="changeCountPackages()"/>
               <div class="feedback" *ngIf="!isControlTouched('count_packages')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Count Packages</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('count_packages')">Count Packages  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'count_packages')">Count Packages  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -145,12 +145,12 @@
             <div class="col-lg-12">
               <label>Packages</label>
               <p-chips [styleClass]="getValidClass(isControlValid('packages'))" formControlName="packages" [allowDuplicate]="false"></p-chips>
-              <div class="feedback" *ngIf="!isControlTouched('packages')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Packages</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('packages')">Packages  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'packages')">Packages  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'packages')">Packages {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1
+              <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('packages')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Packages</b></div>
+              <div class="valid-feedback"  style="display: block;" *ngIf="packages.value.length == count_packages.value">Packages  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'packages')">Packages  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
+              <div class="invalid-feedback"  style="display: block;" *ngIf="packages.value.length < count_packages.value">Packages {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{count_packages.value}}
                 item</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'packages')">Packages {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100
+              <div class="invalid-feedback"  style="display: block;" *ngIf="packages.value.length > count_packages.value">Packages {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{count_packages.value}}
                 items</div>
             </div>
             <!-- <div class="col-lg-4">
@@ -160,8 +160,8 @@
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers">{{ 'COMMON.CANCEL' | translate }}</a>
-            <!-- <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button> -->
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>

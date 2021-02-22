@@ -11,6 +11,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { catchError, switchMap, tap } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-vouchers',
@@ -79,6 +80,7 @@ export class VouchersComponent implements OnInit {
         });
 
         this.showTableCheckbox = true;
+        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;

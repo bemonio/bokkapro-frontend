@@ -296,4 +296,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     }
     return stringClass;
   }
+
+  public changeCountPackages() {
+    this.packages.setValidators(Validators.compose([Validators.required, Validators.minLength(this.count_packages.value), Validators.maxLength(this.count_packages.value)]));
+    this.formGroup.markAllAsTouched();
+  }
 }

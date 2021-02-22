@@ -4,7 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" routerLink="/{{parent}}/add" *ngIf="authService.hasPermission('add_' + permission)">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="/{{parent}}/add" *ngIf="authService.hasPermission('add_' + permission) && parent == 'guidesinput'">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -188,14 +188,14 @@
         </li>
 
         <li class="list-group-item">
-          <b>{{ 'verification' }}:</b>
+          <b>{{ 'verification' }}: {{verificationGuide.vouchers.length + countPackages(this.verificationGuide)}}</b>
           <p-chips [styleClass]="getValidClass(isControlValid('vouchers'))" formControlName="vouchers" [allowDuplicate]="false" (onAdd)="addListVouchers($event)" (onRemove)="removeListVouchers($event)" [(ngModel)]="listVouchers"></p-chips>
-          <div class="feedback" *ngIf="!isControlTouched('vouchers')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>List Vouchers/Packages</b></div>
-          <div class="valid-feedback" *ngIf="isControlValid('vouchers')">List Vouchers/Packages  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'vouchers')">List Vouchers/Packages  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-          <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'vouchers')">List Vouchers/Packages {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1
+          <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Vouchers</b></div>
+          <div class="valid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackages(this.verificationGuide) == listVouchers.length">Vouchers  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+          <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'vouchers')">Vouchers  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
+          <div class="invalid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackages(this.verificationGuide) > listVouchers.length">Vouchers {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{verificationGuide.vouchers.length + countPackages(this.verificationGuide)}}
             item</div>
-          <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'vouchers')">List Vouchers/Packages {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100
+          <div class="invalid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackages(this.verificationGuide) < listVouchers.length">Vouchers {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{verificationGuide.vouchers.length + countPackages(this.verificationGuide)}}
             items</div>
         </li>
 

@@ -291,13 +291,6 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
-        if (this.saveAndExit) {
-          if (this.transfer) {
-            this.closeEmit();
-          } else {
-            this.router.navigate([this.parent]);
-          }
-        }
       }),
       catchError((error) => {
         this.loading = false;
@@ -312,8 +305,23 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.loading = false;
-      this.model = response.guide as Model
-    });
+      this.model = response.guide as Model;
+      if (response) {
+        if (this.saveAndExit) {
+          if (this.transfer) {
+            this.closeEmit();
+          } else {
+            this.router.navigate([this.parent]);
+          }
+        } else {
+          if (this.transfer) {
+            this.closeEmit();
+          } else {
+            this.router.navigate([this.parent + '/edit/' + response.guide.id + '/vouchers']);
+          }
+        }
+      }
+  });
     this.subscriptions.push(sbCreate);
   }
 

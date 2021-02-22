@@ -89,6 +89,7 @@ export class GuidesComponent implements OnInit {
         });
 
         this.showTableCheckbox = false;
+        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
@@ -261,7 +262,7 @@ export class GuidesComponent implements OnInit {
 
     public verification(guide) {
         this.displayModal = true;
-        this.listVouchers = undefined;
+        this.listVouchers = [];
         this.get(guide.id)
     }
 
@@ -371,5 +372,10 @@ export class GuidesComponent implements OnInit {
         });
     }
     return count;
+  }
+
+  public changeCountPackages() {
+    this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(this.listVouchers.length), Validators.maxLength(this.listVouchers.length)]));
+    this.formGroup.markAllAsTouched();
   }
 }

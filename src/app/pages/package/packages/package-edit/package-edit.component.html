@@ -17,10 +17,10 @@
     </div>
     <div class="card-toolbar">
       <a type="button" class="btn btn-light" routerLink="/packages">
-        <i class="fa fa-arrow-left"> {{ 'COMMON.BACK' | translate }}</i>
+        <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
-        <i class="fa fa-redo"> {{ 'COMMON.RESET' | translate }}</i>
+        <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
       </button>
     </div>
   </div>
@@ -86,8 +86,8 @@
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/packages">{{ 'COMMON.CANCEL' | translate }}</a>
-            <!-- <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button> -->
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
