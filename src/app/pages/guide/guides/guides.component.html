@@ -134,7 +134,7 @@
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: center">
-            <a title="Verification" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;" 
+            <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;" 
               (click)="verification(value)" *ngIf="(authService.hasPermission('change_' + permission)) && ((parent == 'guidesinput' && !(value.status == 1)) || (parent == 'guidescheck'  && !(value.status == 1)))">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
@@ -167,7 +167,7 @@
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
-<p-dialog header="Verification" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+<p-dialog header="{{ 'COMMON.VERIFICATION' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
   [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
   <form action="#" class="form form-label-right" [formGroup]="verificationGroup">
     <div class="form-group row" *ngIf="verificationGuide" style="margin-top: 20px;">
@@ -178,17 +178,19 @@
         </li>
 
         <li class="list-group-item">
-          <b>{{ 'vouchers' }}:</b><br>
-          <span *ngFor="let voucher of verificationGuide.vouchers">
-            + {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br>
-            <span *ngFor="let package of voucher.packages"> 
-              - {{package.code}} <i [ngClass]="package.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': package.verificated ? 'green' : 'red' }"></i><br>
+          <b>{{ 'VOUCHER.VOUCHERS' | translate }}:</b><br>
+          <div style="overflow: scroll; max-height: 400px;">
+            <span *ngFor="let voucher of verificationGuide.vouchers">
+              <i class="fas fa-clipboard-list"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br>
+              <span *ngFor="let package of voucher.packages"> 
+                <i class="fas fa-archive"></i> {{package.code}} <i [ngClass]="package.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': package.verificated ? 'green' : 'red' }"></i><br>
+              </span>
             </span>
-          </span>
+          </div>
         </li>
 
         <li class="list-group-item">
-          <b>{{ 'verification' }}: {{verificationGuide.vouchers.length + countPackages(this.verificationGuide)}}</b>
+          <b>{{ 'COMMON.VERIFICATION' | translate }}:</b>
           <p-chips [styleClass]="getValidClass(isControlValid('vouchers'))" formControlName="vouchers" [allowDuplicate]="false" (onAdd)="addListVouchers($event)" (onRemove)="removeListVouchers($event)" [(ngModel)]="listVouchers"></p-chips>
           <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Vouchers</b></div>
           <div class="valid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackages(this.verificationGuide) == listVouchers.length">Vouchers  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
