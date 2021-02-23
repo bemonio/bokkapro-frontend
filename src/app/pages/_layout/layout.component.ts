@@ -37,6 +37,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   extrasUserOffcanvasDisplay = false;
   extrasQuickPanelDisplay = false;
   extrasScrollTopDisplay = false;
+  extrasToolbarDisplay = false;
   @ViewChild('ktAside', { static: true }) ktAside: ElementRef;
   @ViewChild('ktHeaderMobile', { static: true }) ktHeaderMobile: ElementRef;
   @ViewChild('ktHeader', { static: true }) ktHeader: ElementRef;
@@ -100,6 +101,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
     this.extrasScrollTopDisplay = this.layout.getProp(
       'extras.scrolltop.display'
+    );
+
+    this.extrasToolbarDisplay = this.layout.getProp(
+      'extras.toolbar.display'
     );
   }
 
