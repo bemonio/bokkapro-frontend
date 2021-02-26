@@ -59,9 +59,7 @@ export class EmployeeMultiselectComponent implements ControlValueAccessor, OnIni
     writeValue(value: any ) {
         // const div = this.textarea.nativeElement;
         // this.renderer.setProperty(div, 'textContent', value);
-        if (value) {
-            this.value = value;
-        }
+        this.value = value;
     }
 
     registerOnChange(fn: any ) {
