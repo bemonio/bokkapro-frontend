@@ -8,6 +8,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { VoucherModel as Model } from '../../_models/voucher.model';
 import { VoucherService as ModelsService } from '../../_services/voucher.service';
+import { CompanyService } from 'src/app/pages/company/_services';
 
 @Component({
   selector: 'app-voucher-edit',
@@ -49,7 +50,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     public authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private companyService: CompanyService
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
@@ -63,7 +65,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       packages: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      location_destination: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      location_destination: ['', Validators.compose([Validators.minLength(1)])],
     });
     this.code = this.formGroup.controls['code'];
     this.amount = this.formGroup.controls['amount']
@@ -300,5 +302,29 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public changeCountPackages() {
     this.packages.setValidators(Validators.compose([Validators.required, Validators.minLength(this.count_packages.value), Validators.maxLength(this.count_packages.value)]));
     this.formGroup.markAllAsTouched();
+  }
+
+  public changeCompany() {
+    this.location_origin.reset();
+    this.formGroup.markAllAsTouched();
+  }
+
+  public changeLocation() {
+    this.company.reset();
+    this.formGroup.markAllAsTouched();
+    if (this.location_origin.value) {
+      this.getCompanyById(this.location_origin.value.company);
+    }
+  }
+
+  getCompanyById(id) {
+    this.companyService.getById(id).toPromise().then(
+      response => {
+        this.company.setValue(response.company)
+      },
+      error => {
+        console.log ('error getting company');
+      }
+    );
   }
 }
