@@ -73,8 +73,7 @@
               <div class="valid-feedback" *ngIf="isControlValid('department')">Department  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'department')">Department  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'department')">Department {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'department')">Department {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
-                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'department')">Department {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
           </div>
           <div class="float-right">

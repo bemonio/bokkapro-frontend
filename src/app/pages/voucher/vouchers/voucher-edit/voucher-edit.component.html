@@ -76,9 +76,20 @@
               <div class="valid-feedback" *ngIf="isControlValid('code')">Code  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">Code  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">Code {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">Code {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
-                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">Code {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Currency</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="Currency" name="currency" [class.is-invalid]="isControlInvalid('currency')"
+                [class.is-valid]="isControlValid('currency')" formControlName="currency" 
+                currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Currency</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('currency')">Currency  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">Currency  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">Currency {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">Currency {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>            
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Amount</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -89,8 +100,7 @@
               <div class="valid-feedback" *ngIf="isControlValid('amount')">Amount  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">Amount  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'amount')">Amount {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">Amount {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
-                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">Amount {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>            
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Location Origin</label>
@@ -101,8 +111,7 @@
               <div class="valid-feedback" *ngIf="isControlValid('location_origin')">Location Origin  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_origin')">Location Origin  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location_origin')">Location Origin {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_origin')">Location Origin {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
-                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_origin')">Location Origin {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Location Destination</label>
@@ -112,10 +121,8 @@
               <div class="feedback" *ngIf="!isControlTouched('location_destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Location Destination</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('location_destination')">Location Destination  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_destination')">Location Destination  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location_destination')">Location Destination {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_destination')">Location Destination {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
-                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location_destination')">Location Destination {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_destination')">Location Destination {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Company</label>
@@ -125,10 +132,8 @@
               <div class="feedback" *ngIf="!isControlTouched('company')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Company</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('company')">Company  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'company')">Company  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'company')">Company {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1
-                symbols</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company')">Company {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
-                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'company')">Company {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company')">Company {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Count Packages</label>
@@ -139,8 +144,7 @@
               <div class="valid-feedback" *ngIf="isControlValid('count_packages')">Count Packages  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'count_packages')">Count Packages  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count_packages')">Count Packages {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count_packages')">Count Packages {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
-                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count_packages')">Count Packages {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>            
             <div class="col-lg-12">
               <label>Packages</label>

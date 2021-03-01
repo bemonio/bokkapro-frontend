@@ -73,8 +73,7 @@
               <div class="valid-feedback" *ngIf="isControlValid('office')">Office  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'office')">Office  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'office')">Office {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'office')">Office {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30
-                symbols</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'office')">Office {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
           </div>
           <div class="float-right">
