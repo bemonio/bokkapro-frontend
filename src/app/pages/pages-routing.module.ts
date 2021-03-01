@@ -175,6 +175,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'currencies',
+        loadChildren: () =>
+          import('../pages/currency/currency-routing.module').then(
+            (m) => m.CurrencyRoutingModule
+          ),
+      },
+      {
         path: 'moderations',
         loadChildren: () =>
           import('../pages/moderation/moderation-routing.module').then(

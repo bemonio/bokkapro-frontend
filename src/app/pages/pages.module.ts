@@ -128,6 +128,12 @@ import { VoucherComponent } from './voucher/voucher.component';
 import { VoucherEditComponent } from './voucher/vouchers/voucher-edit/voucher-edit.component';
 import { VoucherAutocompleteComponent } from './voucher/vouchers/voucher-autocomplete/voucher-autocomplete.component';
 
+// Currencies
+import { CurrenciesComponent } from './currency/currencies/currencies.component';
+import { CurrencyComponent } from './currency/currency.component';
+import { CurrencyEditComponent } from './currency/currencies/currency-edit/currency-edit.component';
+import { CurrencyAutocompleteComponent } from './currency/currencies/currency-autocomplete/currency-autocomplete.component';
+
 // Moderations
 import { ModerationsComponent } from './moderation/moderations/moderations.component';
 import { ModerationComponent } from './moderation/moderation.component';
@@ -228,6 +234,10 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     VoucherComponent,
     VoucherEditComponent,
     VoucherAutocompleteComponent,
+    CurrenciesComponent,
+    CurrencyComponent,
+    CurrencyEditComponent,
+    CurrencyAutocompleteComponent,
     ModerationsComponent,
     ModerationComponent,
     ModerationEditComponent,

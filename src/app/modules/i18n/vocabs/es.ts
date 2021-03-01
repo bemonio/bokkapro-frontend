@@ -137,6 +137,10 @@ export const locale = {
       PACKAGE: 'Paquete',
       PACKAGES: 'Paquetes',
     },
+    CURRENCY: {
+      CURRENCY: 'Divisa',
+      CURRENCIES: 'Divisas',
+    },
     MODERATION: {
       MODERATION: 'Moderación',
       MODERATIONS: 'Moderaciones',

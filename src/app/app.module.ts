@@ -43,6 +43,7 @@ import { TypeGuideService } from './pages/type-guide/_services';
 import { GuideService } from './pages/guide/_services';
 import { PackageService } from './pages/package/_services';
 import { VoucherService } from './pages/voucher/_services';
+import { CurrencyService } from './pages/currency/_services';
 import { ModerationService } from './pages/moderation/_services';
 
 function appInitializer(authService: AuthService) {
@@ -122,6 +123,7 @@ export function getHighlightLanguages() {
     PackageService,
     ModerationService,
     VoucherService,
+    CurrencyService,
   ],
   bootstrap: [AppComponent],
 })
