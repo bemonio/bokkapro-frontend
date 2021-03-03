@@ -18,7 +18,7 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
   public model: Model;
   public previous: Model;
   public formGroup: FormGroup;
-  public loading: boolean;
+  public requesting: boolean;
 
   public tabs = {
     BASIC_TAB: 0,
@@ -45,7 +45,7 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
-    this.loading = false;
+    this.requesting = false;
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -71,7 +71,7 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
   }
 
   get() {
-    this.loading = true;
+    this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
         // get id from URL
@@ -82,14 +82,14 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
         return of({'currency':new Model()});
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of({'currency':new Model()});
       }),
     ).subscribe((response: any) => {
-      this.loading = false;
+      this.requesting = false;
       if (response) {
         this.model = response.currency;
         if (response.offices) {
@@ -138,7 +138,7 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    this.loading = true;
+    this.requesting = true;
     let model = this.model;
     model.office = this.model.office.id;
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
@@ -149,21 +149,21 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.currency
     });
     this.subscriptions.push(sbUpdate);
   }
 
   create() {
-    this.loading = true;
+    this.requesting = true;
     let model = this.model;
     model.office = this.model.office.id;
     const sbCreate = this.modelsService.post(model).pipe(
@@ -174,14 +174,14 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.currency as Model
     });
     this.subscriptions.push(sbCreate);

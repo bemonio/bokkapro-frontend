@@ -19,7 +19,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   public model: Model;
   public previous: Model;
   public formGroup: FormGroup;
-  public loading: boolean;
+  public requesting: boolean;
 
   public tabs = {
     BASIC_TAB: 0,
@@ -43,7 +43,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
-    this.loading = false;
+    this.requesting = false;
   
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -62,7 +62,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   }
 
   get() {
-    this.loading = true;
+    this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
         // get id from URL
@@ -79,7 +79,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
         return of({'package':new Model()});
       }),
     ).subscribe((response: any) => {
-      this.loading = false;
+      this.requesting = false;
       if (response) {
         this.model = response.package;
         this.previous = Object.assign({}, this.model);
@@ -119,7 +119,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    this.loading = true;
+    this.requesting = true;
     let model = this.model;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
@@ -136,14 +136,14 @@ export class PackageEditComponent implements OnInit, OnDestroy {
        return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.package
     });
     // this.subscriptions.push(sbUpdate);
   }
 
   create() {
-    this.loading = true;
+    this.requesting = true;
     let model = this.model;
 
     const sbCreate = this.modelsService.post(model).pipe(
@@ -161,7 +161,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.package as Model
     });
     // this.subscriptions.push(sbCreate);

@@ -22,7 +22,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   public model: Model;
   public previous: Model;
   public formGroup: FormGroup;
-  public loading: boolean;
+  public requesting: boolean;
 
   public tabs = {
     BASIC_TAB: 0,
@@ -61,7 +61,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
-    this.loading = false;
+    this.requesting = false;
 
     this.parent = '/guides';
 
@@ -105,7 +105,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   get() {
-    this.loading = true;
+    this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
         // get id from URL
@@ -121,14 +121,14 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         return of({'guide':new Model()});
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of({'guide':new Model()});
       }),
     ).subscribe((response: any) => {
-      this.loading = false;
+      this.requesting = false;
       if (response) {
         this.model = response.guide;
         if (response.division_origin)
@@ -226,7 +226,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    this.loading = true;
+    this.requesting = true;
 
     let model = this.model;
     model.am_pm = this.am_pm.value.value;
@@ -253,21 +253,21 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.guide
     });
     this.subscriptions.push(sbUpdate);
   }
 
   create() {
-    this.loading = true;
+    this.requesting = true;
 
     let model = this.model;
     model.am_pm = this.am_pm.value.value;
@@ -309,7 +309,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         if (error.error instanceof Array) {
           Object.entries(error.error).forEach(
             ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
@@ -320,7 +320,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.guide as Model;
       if (response) {
         if (this.saveAndExit) {

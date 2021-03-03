@@ -41,7 +41,7 @@ export class VouchersComponent implements OnInit {
 
     searchGroup: FormGroup;
 
-    public loading: boolean;
+    public requesting: boolean;
   
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -87,7 +87,7 @@ export class VouchersComponent implements OnInit {
         this.per_page = 100
         this.totalRecords = 0;
 
-        this.loading = false;
+        this.requesting = false;
 
         this.displayModal = false;
 
@@ -170,10 +170,10 @@ export class VouchersComponent implements OnInit {
     }
 
     public getModels() {
-        this.loading = true;
+        this.requesting = true;
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
             response => {
-                this.loading = false;
+                this.requesting = false;
                 this.models = [];
                 response.vouchers.forEach(element => {
                     this.models.push(element);
@@ -181,7 +181,7 @@ export class VouchersComponent implements OnInit {
                 this.totalRecords = response.meta.total_results;
             },
             error => {
-                this.loading = false;
+                this.requesting = false;
                 Object.entries(error.error).forEach(
                     ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
                 );

@@ -21,7 +21,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public model: Model;
   public previous: Model;
   public formGroup: FormGroup;
-  public loading: boolean;
+  public requesting: boolean;
 
   public tabs = {
     BASIC_TAB: 0,
@@ -61,7 +61,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
-    this.loading = false;
+    this.requesting = false;
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -103,7 +103,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   }
 
   get() {
-    this.loading = true;
+    this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
         // get id from URL
@@ -121,7 +121,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         return of({'voucher':new Model()});
       }),
     ).subscribe((response: any) => {
-      this.loading = false;
+      this.requesting = false;
       if (response) {
         this.model = response.voucher;
         if (response.companies) {
@@ -195,7 +195,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    this.loading = true;
+    this.requesting = true;
     let model = this.model;
     model.company = this.model.company.id;
     model.location_origin = this.model.location_origin.id;
@@ -228,14 +228,14 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
        return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.voucher
     });
     // this.subscriptions.push(sbUpdate);
   }
 
   create() {
-    this.loading = true;
+    this.requesting = true;
     let model = this.model;
     model.company = this.model.company.id;
     model.location_origin = this.model.location_origin.id;
@@ -270,7 +270,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.voucher as Model
       if (this.saveAndExit) {
         this.router.navigate([this.parent + '/vouchers']);

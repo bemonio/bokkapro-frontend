@@ -43,7 +43,7 @@ export class GuidesComponent implements OnInit {
     public verificationGroup: FormGroup;
     public vouchers: AbstractControl;
 
-    public loading: boolean;
+    public requesting: boolean;
   
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -99,7 +99,7 @@ export class GuidesComponent implements OnInit {
         this.parent = 'guides';
         this.permission = 'guide';
 
-        this.loading = false;
+        this.requesting = false;
         this.displayModal = false;
 
         this.confirmDialogPosition = 'right';
@@ -156,15 +156,15 @@ export class GuidesComponent implements OnInit {
     }
 
     public getModels() {
-        this.loading = true;
+        this.requesting = true;
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
             response => {
-                this.loading = false;
+                this.requesting = false;
                 this.models = response.guides;
                 this.totalRecords = response.meta.total_results;
             },
             error => {
-                this.loading = false;
+                this.requesting = false;
                 Object.entries(error.error).forEach(
                     ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
                 );

@@ -18,7 +18,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   public model: Model;
   public previous: Model;
   public formGroup: FormGroup;
-  public loading: boolean;
+  public requesting: boolean;
 
   public tabs = {
     BASIC_TAB: 0,
@@ -44,7 +44,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
-    this.loading = false;
+    this.requesting = false;
 
     this.formGroup = this.fb.group({
       username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
@@ -66,7 +66,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   get() {
-    this.loading = true;
+    this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
         // get id from URL
@@ -77,14 +77,14 @@ export class UserEditComponent implements OnInit, OnDestroy {
         return of({'user':new Model()});
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of({'user':new Model()});
       }),
     ).subscribe((response: any) => {
-      this.loading = false;
+      this.requesting = false;
       if (response) {
         this.model = response.user;
         this.previous = Object.assign({}, this.model);
@@ -125,7 +125,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    this.loading = true;
+    this.requesting = true;
     const sbUpdate = this.modelsService.patch(this.id, this.model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
@@ -135,21 +135,21 @@ export class UserEditComponent implements OnInit, OnDestroy {
         this.formGroup.reset()
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.user
     });
     this.subscriptions.push(sbUpdate);
   }
 
   create() {
-    this.loading = true;
+    this.requesting = true;
     const sbCreate = this.modelsService.post(this.model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
@@ -158,14 +158,14 @@ export class UserEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.user as Model
     });
     this.subscriptions.push(sbCreate);

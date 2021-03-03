@@ -20,7 +20,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   public model: Model;
   public previous: Model;
   public formGroup: FormGroup;
-  public loading: boolean;
+  public requesting: boolean;
 
   public tabs = {
     BASIC_TAB: 0,
@@ -72,7 +72,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
-    this.loading = false;
+    this.requesting = false;
   
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -124,7 +124,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   }
 
   get() {
-    this.loading = true;
+    this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
         // get id from URL
@@ -141,7 +141,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         return of({'company':new Model()});
       }),
     ).subscribe((response: any) => {
-      this.loading = false;
+      this.requesting = false;
       if (response) {
         this.model = response.company;
         if (response.type_companies)
@@ -205,7 +205,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    this.loading = true;
+    this.requesting = true;
     let model = this.model;
     model.segment_company = this.model.segment_company.id;
     model.type_company = this.model.type_company.id;
@@ -225,14 +225,14 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
        return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.company
     });
     // this.subscriptions.push(sbUpdate);
   }
 
   create() {
-    this.loading = true;
+    this.requesting = true;
     let model = this.model;
     model.segment_company = this.model.segment_company.id;
     model.type_company = this.model.type_company.id;
@@ -252,7 +252,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.company as Model
     });
     // this.subscriptions.push(sbCreate);
@@ -288,7 +288,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   }
 
   fileChangeEvent(event: any): void {
-    this.loading = true;
+    this.requesting = true;
     this.imageChangedEvent = event;
     this.showModalDialog();
     this.newLogo = true;
@@ -323,7 +323,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
 
   showModalDialog() {
     this.displayModal = true;
-    this.loading = false;
+    this.requesting = false;
   }
 
   rotateLeft() {

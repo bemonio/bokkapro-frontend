@@ -18,7 +18,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
   public model: Model;
   public previous: Model;
   public formGroup: FormGroup;
-  public loading: boolean;
+  public requesting: boolean;
 
   public tabs = {
     BASIC_TAB: 0,
@@ -43,7 +43,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
-    this.loading = false;
+    this.requesting = false;
 
     this.formGroup = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -65,7 +65,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
   }
 
   get() {
-    this.loading = true;
+    this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
         // get id from URL
@@ -76,14 +76,14 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
         return of({'office':new Model()});
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of({'office':new Model()});
       }),
     ).subscribe((response: any) => {
-      this.loading = false;
+      this.requesting = false;
       if (response) {
         this.model = response.office;
         if (response.companies) {
@@ -135,7 +135,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
   }
 
   edit() {
-    this.loading = true;
+    this.requesting = true;
     let model = this.model;
     model.company = this.model.company.id;
     model.currency = this.model.currency.id;
@@ -148,21 +148,21 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.office
     });
     this.subscriptions.push(sbUpdate);
   }
 
   create() {
-    this.loading = true;
+    this.requesting = true;
 
     let model = this.model;
     model.company = this.model.company.id;
@@ -176,14 +176,14 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        this.loading = false;
+        this.requesting = false;
         Object.entries(error.error).forEach(
           ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
     ).subscribe(response => {
-      this.loading = false;
+      this.requesting = false;
       this.model = response.office as Model
     });
     this.subscriptions.push(sbCreate);
