@@ -80,10 +80,10 @@
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Currency</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="Currency" name="currency" [class.is-invalid]="isControlInvalid('currency')"
-                [class.is-valid]="isControlValid('currency')" formControlName="currency" 
-                currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <label style="float:right; color: red;">{{currency.value?.exchange_rate}}</label>
+              <app-currency-select
+              placeholder="Currency" name="currency" [valid]="isControlValid('currency')" [touched]="isControlTouched('currency')" [class.is-invalid]="isControlInvalid('currency')"
+              [class.is-valid]="isControlValid('currency')" formControlName="currency" id="currency" [model]="model.currency" (change)="changeCompany()"></app-currency-select>              
               <div class="feedback" *ngIf="!isControlTouched('currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Currency</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('currency')">Currency  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">Currency  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -92,10 +92,11 @@
             </div>            
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Amount</label>
+              <label style="float:right; color: red;">{{ amount.value * currency.value?.exchange_rate | currency }} {{office.currency.symbol}}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Amount" name="amount" [class.is-invalid]="isControlInvalid('amount')"
                 [class.is-valid]="isControlValid('amount')" formControlName="amount" 
-                currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
               <div class="feedback" *ngIf="!isControlTouched('amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Amount</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('amount')">Amount  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">Amount  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

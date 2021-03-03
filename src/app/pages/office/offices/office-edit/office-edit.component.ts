@@ -27,6 +27,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
   public name: AbstractControl;
   public description: AbstractControl;  
   public company: AbstractControl;  
+  public currency: AbstractControl;  
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -48,10 +49,12 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       description: ['', Validators.compose([Validators.maxLength(30)])],
       company: ['', Validators.compose([Validators.required])],
+      currency: [''],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];
     this.company = this.formGroup.controls['company'];
+    this.currency = this.formGroup.controls['currency'];
   }
 
   ngOnInit(): void {
@@ -86,6 +89,9 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
         if (response.companies) {
           this.model.company = response.companies[0];
         }
+        if (response.currencies) {
+          this.model.currency = response.currencies[0];
+        }
         this.previous = Object.assign({}, this.model);
         this.loadForm();  
       }
@@ -99,6 +105,9 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
       this.description.setValue(this.model.description);
       if (this.model.company) {
         this.company.setValue(this.model.company);
+      }
+      if (this.model.currency) {
+        this.currency.setValue(this.model.currency);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -129,6 +138,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
     this.loading = true;
     let model = this.model;
     model.company = this.model.company.id;
+    model.currency = this.model.currency.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -156,6 +166,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
 
     let model = this.model;
     model.company = this.model.company.id;
+    model.currency = this.model.currency.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

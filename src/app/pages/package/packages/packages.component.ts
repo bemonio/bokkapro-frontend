@@ -122,7 +122,6 @@ export class PackagesComponent implements OnInit {
                     this.models.push(element);
                 });
                 this.totalRecords = response.meta.total_results;
-                console.log('Loading (response):' + this.loading)
             },
             error => {
                 this.loading = false;

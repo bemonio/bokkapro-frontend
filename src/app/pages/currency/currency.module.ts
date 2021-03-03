@@ -12,7 +12,7 @@ import { CurrenciesComponent } from './currencies/currencies.component';
 import { CurrencyComponent } from './currency.component';
 // import { CurrencyRoutingModule} from './currency-routing.module';
 import { CurrencyEditComponent } from './currencies/currency-edit/currency-edit.component';
-import { CurrencyAutocompleteComponent } from './currencies/currency-autocomplete/currency-autocomplete.component';
+import { CurrencySelectComponent } from './currencies/currency-select/currency-select.component';
 import { CurrencyService } from './_services/';
 import { RouterModule } from '@angular/router';
 
@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
     CurrenciesComponent,
     CurrencyComponent,
     CurrencyEditComponent,
-    CurrencyAutocompleteComponent,
+    CurrencySelectComponent,
   ],
   imports: [
     CommonModule,

@@ -132,7 +132,7 @@ import { VoucherAutocompleteComponent } from './voucher/vouchers/voucher-autocom
 import { CurrenciesComponent } from './currency/currencies/currencies.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { CurrencyEditComponent } from './currency/currencies/currency-edit/currency-edit.component';
-import { CurrencyAutocompleteComponent } from './currency/currencies/currency-autocomplete/currency-autocomplete.component';
+import { CurrencySelectComponent } from './currency/currencies/currency-select/currency-select.component';
 
 // Moderations
 import { ModerationsComponent } from './moderation/moderations/moderations.component';
@@ -237,7 +237,7 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     CurrenciesComponent,
     CurrencyComponent,
     CurrencyEditComponent,
-    CurrencyAutocompleteComponent,
+    CurrencySelectComponent,
     ModerationsComponent,
     ModerationComponent,
     ModerationEditComponent,

@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { VoucherModel as Model } from '../../_models/voucher.model';
 import { VoucherService as ModelsService } from '../../_services/voucher.service';
 import { CompanyService } from 'src/app/pages/company/_services';
+import { OfficeService } from 'src/app/pages/office/_services';
 
 @Component({
   selector: 'app-voucher-edit',
@@ -35,6 +36,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public company: AbstractControl;
   public location_origin: AbstractControl;
   public location_destination: AbstractControl;
+  public currency: AbstractControl;
 
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
@@ -44,6 +46,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public guideId: number;
   public parent: string;
 
+  public division: any;
+  public office: any;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -51,7 +56,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public authService: AuthService,
     private toastService: ToastService,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    private officeService: OfficeService
   ) {  
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
@@ -66,6 +72,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_destination: ['', Validators.compose([Validators.minLength(1)])],
+      currency: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
     this.code = this.formGroup.controls['code'];
     this.amount = this.formGroup.controls['amount']
@@ -75,12 +82,16 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.company = this.formGroup.controls['company']
     this.location_origin = this.formGroup.controls['location_origin']
     this.location_destination = this.formGroup.controls['location_destination']
+    this.currency = this.formGroup.controls['currency']
   }
 
   ngOnInit(): void {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
+
+    this.division = this.authService.currentDivisionValue;
+    this.getOfficeById(this.division.office);
 
     this.route.parent.parent.parent.params.subscribe((params) => { 
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
@@ -122,6 +133,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (response.packages) {
           this.model.packages = response.packages;
         }
+        if (response.currencies) {
+          this.model.currency = response.currencies[0];
+        }
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();  
@@ -144,6 +158,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       }
       if (this.model.location_destination) {
         this.location_destination.setValue(this.model.location_destination);
+      }
+      if (this.model.currency) {
+        this.currency.setValue(this.model.currency);
       }
       if (this.model.packages) {
         let list_packages = [];
@@ -183,12 +200,13 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.company = this.model.company.id;
     model.location_origin = this.model.location_origin.id;
     model.location_destination = this.model.location_destination.id;
-    model.division = this.authService.currentDivisionValue.id;
+    model.currency = this.model.currency.id;
+    model.division = this.division.id;
     model.verificated = true;
 
     let packages = [];
     this.model.packages.forEach(element => {
-      packages.push({'code': element, 'verificated': 'true'});
+      packages.push(element);
     });
     model.packages = packages;
 
@@ -222,7 +240,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.company = this.model.company.id;
     model.location_origin = this.model.location_origin.id;
     model.location_destination = this.model.location_destination.id;
-    model.division = this.authService.currentDivisionValue.id;
+    model.currency = this.model.currency.id;
+    model.division = this.division.id;
     model.verificated = true;
 
     let packages = [];
@@ -324,6 +343,28 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       },
       error => {
         console.log ('error getting company');
+      }
+    );
+  }
+
+  getOfficeById(id) {
+    this.officeService.getById(id).toPromise().then(
+      response => {
+        this.office = response.office;
+        if (response.currencies) {
+          this.office.currency = response.currencies[0];
+        }
+        if (response.companies) {
+          this.office.company = response.companies[0];
+        }
+        if (!this.model) {
+          if (!this.model.id) {
+            this.currency.setValue(this.office.currency);
+          }
+        }
+      },
+      error => {
+        console.log ('error getting office');
       }
     );
   }

@@ -60,6 +60,6 @@ export class OfficeService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=company.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=company.*&include[]=currency.*`);
     }
 }
