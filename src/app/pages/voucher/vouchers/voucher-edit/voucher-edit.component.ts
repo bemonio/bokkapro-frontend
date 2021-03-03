@@ -357,10 +357,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (response.companies) {
           this.office.company = response.companies[0];
         }
-        if (!this.model) {
+        if (this.model) {
           if (!this.model.id) {
             this.currency.setValue(this.office.currency);
           }
+        } else {
+          this.currency.setValue(this.office.currency);
         }
       },
       error => {
