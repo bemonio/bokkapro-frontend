@@ -92,7 +92,7 @@
             </div>            
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Amount</label>
-              <label style="float:right; color: red;">{{ amount.value * currency.value?.exchange_rate | currency }} {{office.currency.symbol}}</label>
+              <label style="float:right; color: red;">{{ amount.value * currency.value?.exchange_rate | currency }} {{office?.currency?.symbol}}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Amount" name="amount" [class.is-invalid]="isControlInvalid('amount')"
                 [class.is-valid]="isControlValid('amount')" formControlName="amount" 
