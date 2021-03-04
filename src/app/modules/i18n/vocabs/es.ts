@@ -145,6 +145,10 @@ export const locale = {
       EXCHANGE: 'Cambio Divisa',
       EXCHANGES: 'Cambios Divisas',
     },
+    BANKACCOUNT: {
+      BANKACCOUNT: 'Cuenta Bancaria',
+      BANKSACCOUNTS: 'Cuentas Bancarias',
+    },
     MODERATION: {
       MODERATION: 'Moderación',
       MODERATIONS: 'Moderaciones',

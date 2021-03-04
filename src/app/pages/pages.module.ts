@@ -139,6 +139,12 @@ import { ExchangesComponent } from './exchange/exchanges/exchanges.component';
 import { ExchangeComponent } from './exchange/exchange.component';
 import { ExchangeEditComponent } from './exchange/exchanges/exchange-edit/exchange-edit.component';
 
+// BanksAccounts
+import { BanksAccountsComponent } from './bank-account/banks-accounts/banks-accounts.component';
+import { BankAccountComponent } from './bank-account/bank-account.component';
+import { BankAccountEditComponent } from './bank-account/banks-accounts/bank-account-edit/bank-account-edit.component';
+import { BankAccountAutocompleteComponent } from './bank-account/banks-accounts/bank-account-autocomplete/bank-account-autocomplete.component';
+
 // Moderations
 import { ModerationsComponent } from './moderation/moderations/moderations.component';
 import { ModerationComponent } from './moderation/moderation.component';
@@ -246,6 +252,10 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     ExchangesComponent,
     ExchangeComponent,
     ExchangeEditComponent,
+    BanksAccountsComponent,
+    BankAccountComponent,
+    BankAccountEditComponent,
+    BankAccountAutocompleteComponent,
     ModerationsComponent,
     ModerationComponent,
     ModerationEditComponent,

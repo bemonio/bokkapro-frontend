@@ -189,6 +189,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'banksaccounts',
+        loadChildren: () =>
+          import('../pages/bank-account/bank-account-routing.module').then(
+            (m) => m.BankAccountRoutingModule
+          ),
+      },
+      {
         path: 'moderations',
         loadChildren: () =>
           import('../pages/moderation/moderation-routing.module').then(

@@ -45,6 +45,7 @@ import { PackageService } from './pages/package/_services';
 import { VoucherService } from './pages/voucher/_services';
 import { CurrencyService } from './pages/currency/_services';
 import { ExchangeService } from './pages/exchange/_services';
+import { BankAccountService } from './pages/bank-account/_services';
 import { ModerationService } from './pages/moderation/_services';
 
 function appInitializer(authService: AuthService) {
@@ -126,6 +127,7 @@ export function getHighlightLanguages() {
     VoucherService,
     CurrencyService,
     ExchangeService,
+    BankAccountService,
   ],
   bootstrap: [AppComponent],
 })
