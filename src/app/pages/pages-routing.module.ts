@@ -182,6 +182,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'exchanges',
+        loadChildren: () =>
+          import('../pages/exchange/exchange-routing.module').then(
+            (m) => m.ExchangeRoutingModule
+          ),
+      },
+      {
         path: 'moderations',
         loadChildren: () =>
           import('../pages/moderation/moderation-routing.module').then(
