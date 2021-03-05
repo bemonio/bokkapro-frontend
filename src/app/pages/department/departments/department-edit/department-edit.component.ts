@@ -162,6 +162,8 @@ export class DepartmentEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/departments']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

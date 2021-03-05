@@ -146,6 +146,8 @@ export class TypeLocationEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/typescompanies']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

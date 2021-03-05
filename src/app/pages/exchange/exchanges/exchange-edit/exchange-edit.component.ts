@@ -159,6 +159,8 @@ export class ExchangeEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/exchanges']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

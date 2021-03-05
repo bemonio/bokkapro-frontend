@@ -146,6 +146,8 @@ export class TypeDivisionEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/typesdivisions']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

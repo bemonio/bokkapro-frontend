@@ -177,6 +177,8 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/employees']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

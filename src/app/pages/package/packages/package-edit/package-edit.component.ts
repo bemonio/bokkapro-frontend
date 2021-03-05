@@ -151,6 +151,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/packages']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

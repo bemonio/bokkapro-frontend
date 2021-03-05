@@ -187,6 +187,8 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/divisions']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

@@ -242,6 +242,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/companies']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

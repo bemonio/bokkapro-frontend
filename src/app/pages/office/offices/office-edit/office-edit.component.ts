@@ -173,6 +173,8 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/offices']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

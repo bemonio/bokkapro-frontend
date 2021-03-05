@@ -162,6 +162,8 @@ export class PositionEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/positions']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

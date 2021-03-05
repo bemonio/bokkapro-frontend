@@ -146,6 +146,8 @@ export class ZoneEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/zones']);
+        } else {
+          this.formGroup.reset()
         }
       }),
       catchError((error) => {

@@ -274,8 +274,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.model = response.voucher as Model
       if (this.saveAndExit) {
         this.router.navigate([this.parent + '/vouchers']);
+      } else {
+        this.formGroup.reset()
       }
-  });
+    });
     // this.subscriptions.push(sbCreate);
   }
 
