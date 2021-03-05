@@ -85,9 +85,10 @@ export class OfficesComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.requesting = false;
     }
     
-    public loadLazy(event: LazyLoadEvent) {
+    public loadLazy(event: LazyLoadEvent) {        
         this.page = (event.first / this.per_page) + 1;
         if (event.sortField) {
             if (event.sortOrder === -1) {

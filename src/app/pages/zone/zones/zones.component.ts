@@ -85,6 +85,7 @@ export class ZonesComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.requesting = false;
     }
     
     public loadLazy(event: LazyLoadEvent) {
