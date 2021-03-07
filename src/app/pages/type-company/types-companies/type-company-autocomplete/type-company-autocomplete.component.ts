@@ -5,16 +5,16 @@ import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => TypeCompanyAutocompleteComponent),
-  multi: true,
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => TypeCompanyAutocompleteComponent),
+    multi: true,
 };
 
 @Component({
-  selector: 'app-type-company-autocomplete',
-  templateUrl: './type-company-autocomplete.component.html',
-  styleUrls: ['./type-company-autocomplete.component.scss'],
-  providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
+    selector: 'app-type-company-autocomplete',
+    templateUrl: './type-company-autocomplete.component.html',
+    styleUrls: ['./type-company-autocomplete.component.scss'],
+    providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
 export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
@@ -23,10 +23,10 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
     @Input() required: boolean;
     @Input() disabled: boolean;
     @Input() placeholder: string;
-    @Input() addFilters: {key: string, value: string}[];
+    @Input() addFilters: { key: string, value: string }[];
 
     public models: any[];
-    
+
     public onChange;
     public onTouched;
 
@@ -36,7 +36,7 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
     public per_page: number;
     public sort: string;
     public query: string;
-    public filters: {key: string, value: string}[];
+    public filters: { key: string, value: string }[];
 
     public value: any;
 
@@ -55,21 +55,21 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
         }
     }
 
-    writeValue(value: any ) {
+    writeValue(value: any) {
         // const div = this.textarea.nativeElement;
         // this.renderer.setProperty(div, 'textContent', value);
         this.value = value;
     }
 
-    registerOnChange(fn: any ) {
+    registerOnChange(fn: any) {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn: any ) {
+    registerOnTouched(fn: any) {
         this.onTouched = fn;
     }
 
-    setDisabledState(isDisabled: boolean ) {
+    setDisabledState(isDisabled: boolean) {
         this.disabled = isDisabled;
     }
 
@@ -82,9 +82,9 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
         this.filters = [];
         if (event.sortField) {
             if (event.sortOrder === -1) {
-                this.sort =  '-' + event.sortField;
+                this.sort = '-' + event.sortField;
             } else {
-                this.sort =  event.sortField;
+                this.sort = event.sortField;
             }
         } else {
             this.sort = '-id';
@@ -92,12 +92,12 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
 
         if (this.addFilters) {
             this.addFilters.forEach(element => {
-                this.filters.push ({key: 'filter{' + element.key + '}', value: element.value})
+                this.filters.push({ key: 'filter{' + element.key + '}', value: element.value })
             });
         }
 
         if (event.query) {
-            this.filters.push ({key: 'filter{name.icontains}', value: event.query})
+            this.filters.push({ key: 'filter{name.icontains}', value: event.query })
         } else {
             this.query = undefined;
         }
@@ -106,7 +106,7 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
             this.per_page = event.rows;
         }
 
-        
+
         if (!this.firstTime) {
             this.getModels();
         }
@@ -127,8 +127,14 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
                 // }
             },
             error => {
-                Object.entries(error.error).forEach(
-                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                 );
             }
         );

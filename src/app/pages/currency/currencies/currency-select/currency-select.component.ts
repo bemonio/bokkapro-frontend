@@ -5,16 +5,16 @@ import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => CurrencySelectComponent),
-  multi: true,
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => CurrencySelectComponent),
+    multi: true,
 };
 
 @Component({
-  selector: 'app-currency-select',
-  templateUrl: './currency-select.component.html',
-  styleUrls: ['./currency-select.component.scss'],
-  providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
+    selector: 'app-currency-select',
+    templateUrl: './currency-select.component.html',
+    styleUrls: ['./currency-select.component.scss'],
+    providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
 export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
@@ -23,10 +23,10 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
     @Input() required: boolean;
     @Input() disabled: boolean;
     @Input() placeholder: string;
-    @Input() addFilters: {key: string, value: string}[];
+    @Input() addFilters: { key: string, value: string }[];
 
     public models: any[];
-    
+
     public onChange;
     public onTouched;
 
@@ -35,7 +35,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
     public per_page: number;
     public sort: string;
     public query: string;
-    public filters: {key: string, value: string}[];
+    public filters: { key: string, value: string }[];
 
     public value: any;
 
@@ -54,21 +54,21 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
         this.load();
     }
 
-    writeValue(value: any ) {
+    writeValue(value: any) {
         // const div = this.textarea.nativeElement;
         // this.renderer.setProperty(div, 'textContent', value);
         this.value = value;
     }
 
-    registerOnChange(fn: any ) {
+    registerOnChange(fn: any) {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn: any ) {
+    registerOnTouched(fn: any) {
         this.onTouched = fn;
     }
 
-    setDisabledState(isDisabled: boolean ) {
+    setDisabledState(isDisabled: boolean) {
         this.disabled = isDisabled;
     }
 
@@ -81,7 +81,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
         this.filters = [];
         if (this.addFilters) {
             this.addFilters.forEach(element => {
-                this.filters.push ({key: 'filter{' + element.key + '}', value: element.value})
+                this.filters.push({ key: 'filter{' + element.key + '}', value: element.value })
             });
         }
         this.getModels();
@@ -101,8 +101,14 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
                 // }
             },
             error => {
-                Object.entries(error.error).forEach(
-                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                 );
             }
         );

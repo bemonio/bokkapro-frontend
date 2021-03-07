@@ -25,8 +25,8 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
   };
 
   public bank: AbstractControl;
-  public account: AbstractControl;  
-  public company: AbstractControl;  
+  public account: AbstractControl;
+  public company: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -39,7 +39,7 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
@@ -70,14 +70,20 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'bank_account':new Model()});
+        return of({ 'bank_account': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'bank_account':new Model()});
+        return of({ 'bank_account': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -88,7 +94,7 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
           this.model.bank = response.companies[1];
         }
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     this.subscriptions.push(sb);
@@ -104,7 +110,7 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
       if (this.model.bank) {
         this.bank.setValue(this.model.bank);
       }
-  }
+    }
     this.formGroup.markAllAsTouched();
   }
 
@@ -144,8 +150,14 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -174,8 +186,14 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })

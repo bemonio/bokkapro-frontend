@@ -25,9 +25,9 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   };
 
   public name: AbstractControl;
-  public description: AbstractControl;  
-  public position: AbstractControl;  
-  public user: AbstractControl;  
+  public description: AbstractControl;
+  public position: AbstractControl;
+  public user: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -40,7 +40,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
@@ -73,14 +73,20 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'employee':new Model()});
+        return of({ 'employee': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'employee':new Model()});
+        return of({ 'employee': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -93,7 +99,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
           this.model.user = response.users[0];
         }
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     this.subscriptions.push(sb);
@@ -151,8 +157,14 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -183,8 +195,14 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })

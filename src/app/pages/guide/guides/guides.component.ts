@@ -3,7 +3,7 @@ import { GuideService as ModelService } from '../_services/guide.service';
 import { GuideModel as Model } from '../_models/guide.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, of, Subscription  } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -13,9 +13,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-guides',
-  templateUrl: './guides.component.html',
-  styleUrls: ['./guides.component.scss']
+    selector: 'app-guides',
+    templateUrl: './guides.component.html',
+    styleUrls: ['./guides.component.scss']
 })
 export class GuidesComponent implements OnInit {
 
@@ -31,7 +31,7 @@ export class GuidesComponent implements OnInit {
 
     public sort: string;
     public query: string;
-    public filters: {key: string, value: string}[];
+    public filters: { key: string, value: string }[];
 
     public formGroup: FormGroup;
     public employee_id_filter: AbstractControl;
@@ -44,7 +44,7 @@ export class GuidesComponent implements OnInit {
     public vouchers: AbstractControl;
 
     public requesting: boolean;
-  
+
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
 
@@ -58,20 +58,20 @@ export class GuidesComponent implements OnInit {
     public listVouchers: any[];
 
     constructor(
-      public modelsService: ModelService,
-      public translate: TranslateService,
-      private confirmationService: ConfirmationService,
-      private toastService: ToastService,
-      public authService: AuthService,
-      private router: Router,
-      private route: ActivatedRoute,
-      fb: FormBuilder) {
+        public modelsService: ModelService,
+        public translate: TranslateService,
+        private confirmationService: ConfirmationService,
+        private toastService: ToastService,
+        public authService: AuthService,
+        private router: Router,
+        private route: ActivatedRoute,
+        fb: FormBuilder) {
         this.formGroup = fb.group({
             'employee_id_filter': [''],
-            'division_id_filter': [''], 
+            'division_id_filter': [''],
             'venue_id_filter': [''],
         });
-        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];    
+        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
         this.division_id_filter = this.formGroup.controls['division_id_filter'];
         this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
 
@@ -112,14 +112,14 @@ export class GuidesComponent implements OnInit {
     ngOnInit() {
         this.requesting = false;
     }
-    
-    public loadLazy(event: LazyLoadEvent) {        
+
+    public loadLazy(event: LazyLoadEvent) {
         this.page = (event.first / this.per_page) + 1;
         if (event.sortField) {
             if (event.sortOrder === -1) {
-                this.sort =  '-' + event.sortField;
+                this.sort = '-' + event.sortField;
             } else {
-                this.sort =  event.sortField;
+                this.sort = event.sortField;
             }
         } else {
             this.sort = '-id';
@@ -138,17 +138,17 @@ export class GuidesComponent implements OnInit {
         this.filters = [];
         switch (this.route.parent.parent.snapshot.url[0].path) {
             case 'guidesinput':
-                this.filters.push ({key: 'filter{division_destination}[]', value: this.authService.currentDivisionValue.id.toString()})
+                this.filters.push({ key: 'filter{division_destination}[]', value: this.authService.currentDivisionValue.id.toString() })
                 this.parent = 'guidesinput';
                 this.permission = 'guideinput';
                 break;
             case 'guidesoutput':
-                this.filters.push ({key: 'filter{division_origin}[]', value: this.authService.currentDivisionValue.id.toString()})
+                this.filters.push({ key: 'filter{division_origin}[]', value: this.authService.currentDivisionValue.id.toString() })
                 this.parent = 'guidesoutput';
                 this.permission = 'guideoutput';
                 break;
             case 'guidescheck':
-                this.filters.push ({key: 'filter{type_guide}[]', value: '3'})
+                this.filters.push({ key: 'filter{type_guide}[]', value: '3' })
                 this.parent = 'guidescheck';
                 this.permission = 'guidecheck';
                 break;
@@ -166,8 +166,14 @@ export class GuidesComponent implements OnInit {
             },
             error => {
                 this.requesting = false;
-                Object.entries(error.error).forEach(
-                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                 );
             }
         );
@@ -201,8 +207,14 @@ export class GuidesComponent implements OnInit {
                 this.getModels();
             },
             error => {
-                Object.entries(error.error).forEach(
-                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                 );
             }
         );
@@ -219,8 +231,14 @@ export class GuidesComponent implements OnInit {
                     this.toastService.growl('success', 'Patch');
                 },
                 error => {
-                    Object.entries(error.error).forEach(
-                        ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                    let messageError = [];
+                    if (!Array.isArray(error.error)) {
+                        messageError.push(error.error);
+                    } else {
+                        messageError = error.error;
+                    }
+                    Object.entries(messageError).forEach(
+                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                     );
                 }
             );
@@ -243,13 +261,19 @@ export class GuidesComponent implements OnInit {
                 if (id || id > 0) {
                     return this.modelsService.getById(id);
                 }
-                return of({'guide':new Model()});
+                return of({ 'guide': new Model() });
             }),
             catchError((error) => {
-                Object.entries(error.error).forEach(
-                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                 );
-                return of({'guide':new Model()});
+                return of({ 'guide': new Model() });
             }),
         ).subscribe((response: any) => {
             if (response) {
@@ -285,7 +309,7 @@ export class GuidesComponent implements OnInit {
             this.listVouchers.forEach(element => {
                 if (element == event.value) {
                     this.listVouchers.pop();
-                }                
+                }
             });
         }
     }
@@ -303,80 +327,86 @@ export class GuidesComponent implements OnInit {
         });
     }
 
-  // helpers for View
-  isControlValid(controlName: string): boolean {
-    const control = this.verificationGroup.controls[controlName];
-    return control.valid && (control.dirty || control.touched);
-  }
-
-  isControlInvalid(controlName: string): boolean {
-    const control = this.verificationGroup.controls[controlName];
-    return control.invalid && (control.dirty || control.touched);
-  }
-
-  controlHasError(validation: string, controlName: string) {
-    const control = this.verificationGroup.controls[controlName];
-    return control.hasError(validation) && (control.dirty || control.touched);
-  }
-
-  isControlTouched(controlName: string): boolean {
-    const control = this.verificationGroup.controls[controlName];
-    return control.dirty || control.touched;
-  }
-
-  public getValidClass(valid) {
-    let stringClass = 'form-control form-control-lg form-control-solid';
-    if (valid) {
-        stringClass += ' is-valid';
-    } else {
-        stringClass += ' is-invalid';
+    // helpers for View
+    isControlValid(controlName: string): boolean {
+        const control = this.verificationGroup.controls[controlName];
+        return control.valid && (control.dirty || control.touched);
     }
-    return stringClass;
-  }
 
-  save() {
-    let params = {
-        "status":"1",
-        "vouchers":[]
-    };
-    this.verificationGuide.vouchers.forEach(element => {
-        params.vouchers.push(element.id);
-    });
-    
-    const sbUpdate = this.modelsService.patch(this.verificationGuide.id, params).pipe(
-      tap(() => {
-        this.toastService.growl('success', 'success');
-      }),
-      catchError((error) => {
-        if (error.error instanceof Array) {
-            Object.entries(error.error).forEach(
-              ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
-            );
-          } else {
-            this.toastService.growl('error', 'error' + ': ' + error.error)
-          }
-         return of(this.verificationGuide);
-      })
-    ).subscribe(response => {
-        this.displayModal = false;
-        this.getModels();
-    });
-  }
+    isControlInvalid(controlName: string): boolean {
+        const control = this.verificationGroup.controls[controlName];
+        return control.invalid && (control.dirty || control.touched);
+    }
 
-  countPackages(guide) {
-    let count = 0;
-    if (guide.vouchers) {
-        guide.vouchers.forEach(element => {
-            if (element.packages) {
-                count =+ element.count_packages;
-            }
+    controlHasError(validation: string, controlName: string) {
+        const control = this.verificationGroup.controls[controlName];
+        return control.hasError(validation) && (control.dirty || control.touched);
+    }
+
+    isControlTouched(controlName: string): boolean {
+        const control = this.verificationGroup.controls[controlName];
+        return control.dirty || control.touched;
+    }
+
+    public getValidClass(valid) {
+        let stringClass = 'form-control form-control-lg form-control-solid';
+        if (valid) {
+            stringClass += ' is-valid';
+        } else {
+            stringClass += ' is-invalid';
+        }
+        return stringClass;
+    }
+
+    save() {
+        let params = {
+            "status": "1",
+            "vouchers": []
+        };
+        this.verificationGuide.vouchers.forEach(element => {
+            params.vouchers.push(element.id);
+        });
+
+        const sbUpdate = this.modelsService.patch(this.verificationGuide.id, params).pipe(
+            tap(() => {
+                this.toastService.growl('success', 'success');
+            }),
+            catchError((error) => {
+                if (error.error instanceof Array) {
+                    let messageError = [];
+                    if (!Array.isArray(error.error)) {
+                        messageError.push(error.error);
+                    } else {
+                        messageError = error.error;
+                    }
+                    Object.entries(messageError).forEach(
+                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    );
+                } else {
+                    this.toastService.growl('error', 'error' + ': ' + error.error)
+                }
+                return of(this.verificationGuide);
+            })
+        ).subscribe(response => {
+            this.displayModal = false;
+            this.getModels();
         });
     }
-    return count;
-  }
 
-  public changeCountPackages() {
-    this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(this.listVouchers.length), Validators.maxLength(this.listVouchers.length)]));
-    this.formGroup.markAllAsTouched();
-  }
+    countPackages(guide) {
+        let count = 0;
+        if (guide.vouchers) {
+            guide.vouchers.forEach(element => {
+                if (element.packages) {
+                    count = + element.count_packages;
+                }
+            });
+        }
+        return count;
+    }
+
+    public changeCountPackages() {
+        this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(this.listVouchers.length), Validators.maxLength(this.listVouchers.length)]));
+        this.formGroup.markAllAsTouched();
+    }
 }

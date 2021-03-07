@@ -25,8 +25,8 @@ export class PositionEditComponent implements OnInit, OnDestroy {
   };
 
   public name: AbstractControl;
-  public description: AbstractControl;  
-  public department: AbstractControl;  
+  public description: AbstractControl;
+  public department: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -39,7 +39,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
@@ -70,14 +70,20 @@ export class PositionEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'position':new Model()});
+        return of({ 'position': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'position':new Model()});
+        return of({ 'position': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -87,7 +93,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
           this.model.department = response.departments[0];
         }
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     this.subscriptions.push(sb);
@@ -139,8 +145,14 @@ export class PositionEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -168,8 +180,14 @@ export class PositionEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })

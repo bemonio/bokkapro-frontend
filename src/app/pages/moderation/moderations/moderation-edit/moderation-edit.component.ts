@@ -39,11 +39,11 @@ export class ModerationEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
-  
+
     this.formGroup = this.fb.group({
       status: [''],
     });
@@ -67,20 +67,26 @@ export class ModerationEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'moderation':new Model()});
+        return of({ 'moderation': new Model() });
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'moderation':new Model()});
+        return of({ 'moderation': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
         this.model = response.moderated_object;
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     // this.subscriptions.push(sb);
@@ -143,10 +149,16 @@ export class ModerationEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-       return of(this.model);
+        return of(this.model);
       })
     ).subscribe(response => {
       this.requesting = false;
@@ -154,31 +166,6 @@ export class ModerationEditComponent implements OnInit, OnDestroy {
     });
     // this.subscriptions.push(sbUpdate);
   }
-
-  // create() {
-  //   this.requesting = true;
-  //   let model = this.model;
-
-  //   const sbCreate = this.modelsService.post(model).pipe(
-  //     tap(() => {
-  //       this.toastService.growl('success', 'success');
-  //       if (this.saveAndExit) {
-  //         this.router.navigate(['/moderations']);
-  //       }
-  //     }),
-  //     catchError((error) => {
-  //       Object.entries(error.error).forEach(
-  //         ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
-  //       );
-  //       console.error('CREATE ERROR', error);
-  //       return of(this.model);
-  //     })
-  //   ).subscribe(response => {
-  //     this.requesting = false;
-  //     this.model = response.moderated_object as Model
-  //   });
-  //   // this.subscriptions.push(sbCreate);
-  // }
 
   changeTab(tabId: number) {
     this.activeTabId = tabId;

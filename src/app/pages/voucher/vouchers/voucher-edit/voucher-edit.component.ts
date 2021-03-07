@@ -58,7 +58,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     private toastService: ToastService,
     private companyService: CompanyService,
     private officeService: OfficeService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
@@ -93,10 +93,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.division = this.authService.currentDivisionValue;
     this.getOfficeById(this.division.office);
 
-    this.route.parent.parent.parent.params.subscribe((params) => { 
+    this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
         this.guideId = params.id;
-        this.parent = '/'+ this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
       }
       this.get();
     });
@@ -112,13 +112,19 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'voucher':new Model()});
+        return of({ 'voucher': new Model() });
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'voucher':new Model()});
+        return of({ 'voucher': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -138,7 +144,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         }
 
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     // this.subscriptions.push(sb);
@@ -165,7 +171,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       if (this.model.packages) {
         let list_packages = [];
         this.model.packages.forEach(element => {
-            list_packages.push(element.code);
+          list_packages.push(element.code);
         });
         this.packages.setValue(list_packages);
       }
@@ -222,10 +228,16 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-       return of(this.model);
+        return of(this.model);
       })
     ).subscribe(response => {
       this.requesting = false;
@@ -246,7 +258,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
     let packages = [];
     this.model.packages.forEach(element => {
-      packages.push({'code': element, 'verificated': 'true'});
+      packages.push({ 'code': element, 'verificated': 'true' });
     });
     model.packages = packages;
 
@@ -260,8 +272,14 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         if (Array.isArray(error.error)) {
-          Object.entries(error.error).forEach(
-            ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+          let messageError = [];
+          if (!Array.isArray(error.error)) {
+            messageError.push(error.error);
+          } else {
+            messageError = error.error;
+          }
+          Object.entries(messageError).forEach(
+            ([key, value]) => this.toastService.growl('error', key + ': ' + value)
           );
         } else {
           this.toastService.growl('error', error.error)
@@ -313,9 +331,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public getValidClass(valid) {
     let stringClass = 'form-control form-control-lg form-control-solid';
     if (valid) {
-        stringClass += ' is-valid';
+      stringClass += ' is-valid';
     } else {
-        stringClass += ' is-invalid';
+      stringClass += ' is-invalid';
     }
     return stringClass;
   }
@@ -344,7 +362,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.company.setValue(response.company)
       },
       error => {
-        console.log ('error getting company');
+        console.log('error getting company');
       }
     );
   }
@@ -368,7 +386,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         }
       },
       error => {
-        console.log ('error getting office');
+        console.log('error getting office');
       }
     );
   }

@@ -69,11 +69,11 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
-  
+
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       code_brinks: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -132,13 +132,19 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'company':new Model()});
+        return of({ 'company': new Model() });
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'company':new Model()});
+        return of({ 'company': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -149,7 +155,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         if (response.segment_companies)
           this.model.segment_company = response.segment_companies[0];
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     // this.subscriptions.push(sb);
@@ -219,10 +225,16 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-       return of(this.model);
+        return of(this.model);
       })
     ).subscribe(response => {
       this.requesting = false;
@@ -247,8 +259,14 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         console.error('CREATE ERROR', error);
         return of(this.model);
@@ -297,29 +315,29 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-      this.croppedImage = event.base64;
-      console.log(event, base64ToFile(event.base64));
+    this.croppedImage = event.base64;
+    console.log(event, base64ToFile(event.base64));
   }
 
   imageLoaded() {
-      this.showCropper = true;
-      console.log('Image loaded');
+    this.showCropper = true;
+    console.log('Image loaded');
   }
 
   cropperReady(sourceImageDimensions: Dimensions) {
-      console.log('Cropper ready', sourceImageDimensions);
+    console.log('Cropper ready', sourceImageDimensions);
   }
 
   loadImageFailed() {
-      console.log('Load failed');
+    console.log('Load failed');
   }
 
-  deleteLogo () {
+  deleteLogo() {
     this.newLogo = false;
   }
 
-  cancelLogo () {
-    this.newLogo = false;  
+  cancelLogo() {
+    this.newLogo = false;
     this.logo.setValue('');
   }
 
@@ -334,59 +352,59 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   }
 
   rotateRight() {
-      this.canvasRotation++;
-      this.flipAfterRotate();
+    this.canvasRotation++;
+    this.flipAfterRotate();
   }
 
   private flipAfterRotate() {
-      const flippedH = this.transform.flipH;
-      const flippedV = this.transform.flipV;
-      this.transform = {
-          ...this.transform,
-          flipH: flippedV,
-          flipV: flippedH
-      };
+    const flippedH = this.transform.flipH;
+    const flippedV = this.transform.flipV;
+    this.transform = {
+      ...this.transform,
+      flipH: flippedV,
+      flipV: flippedH
+    };
   }
 
 
   flipHorizontal() {
-      this.transform = {
-          ...this.transform,
-          flipH: !this.transform.flipH
-      };
+    this.transform = {
+      ...this.transform,
+      flipH: !this.transform.flipH
+    };
   }
 
   flipVertical() {
-      this.transform = {
-          ...this.transform,
-          flipV: !this.transform.flipV
-      };
+    this.transform = {
+      ...this.transform,
+      flipV: !this.transform.flipV
+    };
   }
 
   resetImage() {
-      this.scale = 1;
-      this.rotation = 0;
-      this.canvasRotation = 0;
-      this.transform = {};
+    this.scale = 1;
+    this.rotation = 0;
+    this.canvasRotation = 0;
+    this.transform = {};
   }
 
   zoomOut() {
-      this.scale -= .1;
-      this.transform = {
-          ...this.transform,
-          scale: this.scale
-      };
+    this.scale -= .1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
   }
 
   zoomIn() {
-      this.scale += .1;
-      this.transform = {
-          ...this.transform,
-          scale: this.scale
-      };
+    this.scale += .1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
   }
 
   toggleContainWithinAspectRatio() {
-      this.containWithinAspectRatio = !this.containWithinAspectRatio;
+    this.containWithinAspectRatio = !this.containWithinAspectRatio;
   }
 }

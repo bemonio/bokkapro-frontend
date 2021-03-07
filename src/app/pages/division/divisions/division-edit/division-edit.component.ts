@@ -26,9 +26,9 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
   };
 
   public name: AbstractControl;
-  public description: AbstractControl;  
-  public office: AbstractControl;  
-  public employees: AbstractControl;  
+  public description: AbstractControl;
+  public office: AbstractControl;
+  public employees: AbstractControl;
   public type_division: AbstractControl;
 
   public activeTabId: number;
@@ -43,7 +43,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public authService: AuthService,
     private toastService: ToastService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
@@ -66,7 +66,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
-    
+
     this.get();
   }
 
@@ -79,14 +79,20 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'division':new Model()});
+        return of({ 'division': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'division':new Model()});
+        return of({ 'division': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -99,7 +105,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
           this.model.employees = response.employees;
         }
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     this.subscriptions.push(sb);
@@ -159,8 +165,14 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -193,8 +205,14 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })

@@ -40,11 +40,11 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
-  
+
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       verificated: [''],
@@ -70,20 +70,26 @@ export class PackageEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'package':new Model()});
+        return of({ 'package': new Model() });
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'package':new Model()});
+        return of({ 'package': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
         this.model = response.package;
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     // this.subscriptions.push(sb);
@@ -130,10 +136,16 @@ export class PackageEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-       return of(this.model);
+        return of(this.model);
       })
     ).subscribe(response => {
       this.requesting = false;
@@ -156,8 +168,14 @@ export class PackageEditComponent implements OnInit, OnDestroy {
         }
       }),
       catchError((error) => {
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         console.error('CREATE ERROR', error);
         return of(this.model);

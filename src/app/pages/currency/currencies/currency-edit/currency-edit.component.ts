@@ -27,9 +27,9 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
   public code: AbstractControl;
   public symbol: AbstractControl;
   public name: AbstractControl;
-  public format: AbstractControl;  
-  public exchange_rate: AbstractControl;  
-  public office: AbstractControl;  
+  public format: AbstractControl;
+  public exchange_rate: AbstractControl;
+  public office: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -42,7 +42,7 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
@@ -61,7 +61,7 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
     this.format = this.formGroup.controls['format'];
     this.exchange_rate = this.formGroup.controls['exchange_rate'];
     this.office = this.formGroup.controls['office'];
-}
+  }
 
   ngOnInit(): void {
     this.id = undefined;
@@ -79,14 +79,20 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'currency':new Model()});
+        return of({ 'currency': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'currency':new Model()});
+        return of({ 'currency': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -96,7 +102,7 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
           this.model.office = response.offices[0];
         }
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     this.subscriptions.push(sb);
@@ -112,7 +118,7 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
       if (this.model.office) {
         this.office.setValue(this.model.office);
       }
-  }
+    }
     this.formGroup.markAllAsTouched();
   }
 
@@ -150,8 +156,14 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -177,8 +189,14 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })

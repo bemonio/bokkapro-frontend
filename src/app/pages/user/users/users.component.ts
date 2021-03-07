@@ -11,9 +11,9 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+    selector: 'app-users',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
 
@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
 
     public sort: string;
     public query: string;
-    public filters: {key: string, value: string}[];
+    public filters: { key: string, value: string }[];
 
     public formGroup: FormGroup;
     public employee_id_filter: AbstractControl;
@@ -39,25 +39,25 @@ export class UsersComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean;
-  
+
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
 
     public showTableCheckbox: boolean;
 
     constructor(
-      public modelsService: ModelService,
-      public translate: TranslateService,
-      private confirmationService: ConfirmationService,
-      private toastService: ToastService,
-      public authService: AuthService,
-      fb: FormBuilder) {
+        public modelsService: ModelService,
+        public translate: TranslateService,
+        private confirmationService: ConfirmationService,
+        private toastService: ToastService,
+        public authService: AuthService,
+        fb: FormBuilder) {
         this.formGroup = fb.group({
             'employee_id_filter': [''],
-            'department_id_filter': [''], 
+            'department_id_filter': [''],
             'venue_id_filter': [''],
         });
-        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];    
+        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
         this.department_id_filter = this.formGroup.controls['department_id_filter'];
         this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
 
@@ -88,15 +88,15 @@ export class UsersComponent implements OnInit {
     ngOnInit() {
         this.requesting = false;
     }
-    
+
     public loadLazy(event: LazyLoadEvent) {
         this.requesting = true;
         this.page = (event.first / this.per_page) + 1;
         if (event.sortField) {
             if (event.sortOrder === -1) {
-                this.sort =  '-' + event.sortField;
+                this.sort = '-' + event.sortField;
             } else {
-                this.sort =  event.sortField;
+                this.sort = event.sortField;
             }
         } else {
             this.sort = '-id';
@@ -112,7 +112,7 @@ export class UsersComponent implements OnInit {
             this.per_page = event.rows;
         }
 
-        
+
         this.getModels();
     }
 
@@ -125,8 +125,14 @@ export class UsersComponent implements OnInit {
             },
             error => {
                 this.requesting = false;
-                Object.entries(error.error).forEach(
-                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                 );
             }
         );
@@ -160,8 +166,14 @@ export class UsersComponent implements OnInit {
                 this.getModels();
             },
             error => {
-                Object.entries(error.error).forEach(
-                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                 );
             }
         );
@@ -178,8 +190,14 @@ export class UsersComponent implements OnInit {
                     this.toastService.growl('success', 'Patch');
                 },
                 error => {
-                    Object.entries(error.error).forEach(
-                        ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                    let messageError = [];
+                    if (!Array.isArray(error.error)) {
+                        messageError.push(error.error);
+                    } else {
+                        messageError = error.error;
+                    }
+                    Object.entries(messageError).forEach(
+                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                     );
                 }
             );

@@ -14,9 +14,9 @@ import { catchError, switchMap, tap } from 'rxjs/operators';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
-  selector: 'app-vouchers',
-  templateUrl: './vouchers.component.html',
-  styleUrls: ['./vouchers.component.scss']
+    selector: 'app-vouchers',
+    templateUrl: './vouchers.component.html',
+    styleUrls: ['./vouchers.component.scss']
 })
 export class VouchersComponent implements OnInit {
 
@@ -32,7 +32,7 @@ export class VouchersComponent implements OnInit {
 
     public sort: string;
     public query: string;
-    public filters: {key: string, value: string}[];
+    public filters: { key: string, value: string }[];
 
     public formGroup: FormGroup;
     public employee_id_filter: AbstractControl;
@@ -42,7 +42,7 @@ export class VouchersComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean;
-  
+
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
 
@@ -54,20 +54,20 @@ export class VouchersComponent implements OnInit {
     public displayModal: boolean;
 
     constructor(
-      public modelsService: ModelService,
-      private router: Router,
-      private route: ActivatedRoute,
-      public translate: TranslateService,
-      private confirmationService: ConfirmationService,
-      private toastService: ToastService,
-      public authService: AuthService,
-      fb: FormBuilder) {
+        public modelsService: ModelService,
+        private router: Router,
+        private route: ActivatedRoute,
+        public translate: TranslateService,
+        private confirmationService: ConfirmationService,
+        private toastService: ToastService,
+        public authService: AuthService,
+        fb: FormBuilder) {
         this.formGroup = fb.group({
             'employee_id_filter': [''],
-            'department_id_filter': [''], 
+            'department_id_filter': [''],
             'venue_id_filter': [''],
         });
-        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];    
+        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
         this.department_id_filter = this.formGroup.controls['department_id_filter'];
         this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
 
@@ -101,14 +101,14 @@ export class VouchersComponent implements OnInit {
     ngOnInit() {
         this.requesting = false;
     }
-    
-    public loadLazy(event: LazyLoadEvent) {        
+
+    public loadLazy(event: LazyLoadEvent) {
         this.page = (event.first / this.per_page) + 1;
         if (event.sortField) {
             if (event.sortOrder === -1) {
-                this.sort =  '-' + event.sortField;
+                this.sort = '-' + event.sortField;
             } else {
-                this.sort =  event.sortField;
+                this.sort = event.sortField;
             }
         } else {
             this.sort = '-id';
@@ -128,46 +128,17 @@ export class VouchersComponent implements OnInit {
         if (this.route.parent.parent.parent.snapshot.url.length > 0) {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                this.guideId = params.id;
-                this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
-                    this.filters.push ({key: 'filter{guides}', value: this.guideId.toString()})
+                    this.guideId = params.id;
+                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+                    this.filters.push({ key: 'filter{guides}', value: this.guideId.toString() })
                 }
                 this.getModels();
             });
         } else {
-            this.filters.push ({key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString()})
-            this.filters.push ({key: 'filter{verificated}', value: '1'})
+            this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
+            this.filters.push({ key: 'filter{verificated}', value: '1' })
             this.getModels();
         }
-      
-        // if (this.route.parent.parent.parent.snapshot.url.length > 0) {
-        //     const sb = this.route.parent.parent.parent.paramMap.pipe(
-        //         switchMap(params => {
-        //             // get id from URL
-        //             if (params.get('id')) {
-        //                 return params.get('id');
-        //             }
-        //             return undefined;
-        //         }),
-        //         catchError((error) => {
-        //             Object.entries(error.error).forEach(
-        //                 ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
-        //             );
-        //             return undefined;
-        //         }),
-        //     ).subscribe((response: any) => {
-        //         if (response) {
-        //             if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-        //                 this.guideId = response;
-        //                 this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
-        //                 this.filters.push ({key: 'filter{guides}', value: this.guideId.toString()})
-        //             }
-        //         }
-        //         this.getModels()
-        //     });
-        // } else {
-        //     this.getModels();
-        // }
     }
 
     public getModels() {
@@ -183,8 +154,14 @@ export class VouchersComponent implements OnInit {
             },
             error => {
                 this.requesting = false;
-                Object.entries(error.error).forEach(
-                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                 );
             }
         );
@@ -218,8 +195,14 @@ export class VouchersComponent implements OnInit {
                 this.getModels();
             },
             error => {
-                Object.entries(error.error).forEach(
-                    ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                 );
             }
         );
@@ -237,8 +220,14 @@ export class VouchersComponent implements OnInit {
                     this.getModels();
                 },
                 error => {
-                    Object.entries(error.error).forEach(
-                        ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+                    let messageError = [];
+                    if (!Array.isArray(error.error)) {
+                        messageError.push(error.error);
+                    } else {
+                        messageError = error.error;
+                    }
+                    Object.entries(messageError).forEach(
+                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
                     );
                 }
             );

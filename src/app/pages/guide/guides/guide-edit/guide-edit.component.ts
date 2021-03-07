@@ -17,7 +17,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   @Input() transfer: boolean;
   @Input() listVouchers: any[];
   @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
-  
+
   public id: number;
   public model: Model;
   public previous: Model;
@@ -29,21 +29,21 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     VOUCHER_TAB: 1,
   };
 
-  public description: AbstractControl;  
-  public status: AbstractControl;  
-  public am_pm: AbstractControl;  
-  public date: AbstractControl;  
-  public division_origin: AbstractControl;  
-  public division_destination: AbstractControl;  
-  public employee_origin: AbstractControl;  
-  public employee_destination: AbstractControl;  
+  public description: AbstractControl;
+  public status: AbstractControl;
+  public am_pm: AbstractControl;
+  public date: AbstractControl;
+  public division_origin: AbstractControl;
+  public division_destination: AbstractControl;
+  public employee_origin: AbstractControl;
+  public employee_destination: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
 
-  public optionsAmPm: {key: string, value: string}[];
+  public optionsAmPm: { key: string, value: string }[];
 
   public newVoucher: boolean;
 
@@ -58,7 +58,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public authService: AuthService,
     private toastService: ToastService
-  ) {  
+  ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
@@ -94,10 +94,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.employee_destination = this.formGroup.controls['employee_destination'];
 
     this.optionsAmPm = [];
-    this.optionsAmPm.push({key: 'AM', value: 'AM'});
-    this.optionsAmPm.push({key: 'PM', value: 'PM'});
+    this.optionsAmPm.push({ key: 'AM', value: 'AM' });
+    this.optionsAmPm.push({ key: 'PM', value: 'PM' });
 
-    if (this.route.parent.parent.snapshot.url[0].path)  {
+    if (this.route.parent.parent.snapshot.url[0].path) {
       this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
     }
 
@@ -118,14 +118,20 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({'guide':new Model()});
+        return of({ 'guide': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({'guide':new Model()});
+        return of({ 'guide': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -141,7 +147,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
           this.model.employee_destination = response.employee_destination[0];
 
         this.previous = Object.assign({}, this.model);
-        this.loadForm();  
+        this.loadForm();
       }
     });
     this.subscriptions.push(sb);
@@ -151,7 +157,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.description.setValue(this.model.description);
       this.status.setValue(this.model.status);
-      this.am_pm.setValue({key: this.model.am_pm, value: this.model.am_pm});
+      this.am_pm.setValue({ key: this.model.am_pm, value: this.model.am_pm });
       this.date.setValue(new Date(this.model.date));
       if (this.model.division_origin) {
         this.division_origin.setValue(this.model.division_origin);
@@ -173,17 +179,17 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     } else {
       switch (this.route.parent.parent.snapshot.url[0].path) {
         case 'guidesinput':
-            this.typeGuide = 1;
-            this.division_destination.setValue(this.authService.currentDivisionValue);
-            this.employee_destination.setValue(this.authService.currentUserValue.employee);
+          this.typeGuide = 1;
+          this.division_destination.setValue(this.authService.currentDivisionValue);
+          this.employee_destination.setValue(this.authService.currentUserValue.employee);
           break;
         case 'guidesoutput':
-            this.typeGuide = 2;
-            this.division_origin.setValue(this.authService.currentDivisionValue);
-            this.employee_origin.setValue(this.authService.currentUserValue.employee);
-            break;
+          this.typeGuide = 2;
+          this.division_origin.setValue(this.authService.currentDivisionValue);
+          this.employee_origin.setValue(this.authService.currentUserValue.employee);
+          break;
         case 'guidescheck':
-        break;
+          break;
       }
     }
 
@@ -254,8 +260,14 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       }),
       catchError((error) => {
         this.requesting = false;
-        Object.entries(error.error).forEach(
-          ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -271,7 +283,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
     let model = this.model;
     model.am_pm = this.am_pm.value.value;
-    
+
     model.date = undefined;
     if (this.date.value) {
       model.date = this.formatDate(this.date.value);
@@ -311,8 +323,14 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       catchError((error) => {
         this.requesting = false;
         if (error.error instanceof Array) {
-          Object.entries(error.error).forEach(
-            ([key, value]) =>  this.toastService.growl('error', key + ': ' + value)
+          let messageError = [];
+          if (!Array.isArray(error.error)) {
+            messageError.push(error.error);
+          } else {
+            messageError = error.error;
+          }
+          Object.entries(messageError).forEach(
+            ([key, value]) => this.toastService.growl('error', key + ': ' + value)
           );
         } else {
           this.toastService.growl('error', 'error' + ': ' + error.error)
@@ -337,7 +355,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
           }
         }
       }
-  });
+    });
     this.subscriptions.push(sbCreate);
   }
 
@@ -373,9 +391,9 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   public getValidClass(valid) {
     let stringClass = 'form-control form-control-lg form-control-solid';
     if (valid) {
-        stringClass += ' is-valid';
+      stringClass += ' is-valid';
     } else {
-        stringClass += ' is-invalid';
+      stringClass += ' is-invalid';
     }
     return stringClass;
   }
@@ -390,22 +408,22 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     let seconds = '' + d.getSeconds();
 
     if (month.length < 2) {
-        month = '0' + month;
+      month = '0' + month;
     }
     if (day.length < 2) {
-        day = '0' + day;
+      day = '0' + day;
     }
 
     if (hours.length < 2) {
-        hours = '0' + hours;
+      hours = '0' + hours;
     }
 
     if (minutes.length < 2) {
-        minutes = '0' + minutes;
+      minutes = '0' + minutes;
     }
 
     if (seconds.length < 2) {
-        seconds = '0' + seconds;
+      seconds = '0' + seconds;
     }
 
     return [year, month, day].join('-');
