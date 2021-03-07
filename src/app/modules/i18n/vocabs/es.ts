@@ -134,8 +134,8 @@ export const locale = {
       VOUCHERS: 'Comprobantes',
     },
     PACKAGE: {
-      PACKAGE: 'Paquete',
-      PACKAGES: 'Paquetes',
+      PACKAGE: 'Envase',
+      PACKAGES: 'Envases',
     },
     CURRENCY: {
       CURRENCY: 'Divisa',
