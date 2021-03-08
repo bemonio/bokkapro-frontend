@@ -180,13 +180,25 @@
           <span>{{verificationGuide.id}}</span>
         </li>
 
+        <li class="list-group-item" *ngIf="verificationGuide.certified_cart">
+          <i class="fas fa-unlock" style="color: Dodgerblue; font-size: 16px;"></i> {{verificationGuide.certified_cart_code}}
+          <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+            placeholder="Certified Cart Code" name="certified_cart_code" [class.is-invalid]="isControlInvalid('certified_cart_code',verificationGroup)"
+            [class.is-valid]="isControlValid('certified_cart_code',verificationGroup)" formControlName="certified_cart_code" />
+          <div class="feedback" *ngIf="!isControlTouched('certified_cart_code',verificationGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Certified Cart Code</b></div>
+          <div class="valid-feedback" *ngIf="isControlValid('certified_cart_code',verificationGroup)">Certified Cart Code  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'certified_cart_code',verificationGroup)">Certified Cart Code  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'certified_cart_code',verificationGroup)">Certified Cart Code {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'certified_cart_code',verificationGroup)">Certified Cart Code {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+        </li>
+
         <li class="list-group-item">
           <b>{{ 'VOUCHER.VOUCHERS' | translate }}:</b><br>
           <div style="overflow: scroll; max-height: 400px;">
             <span *ngFor="let voucher of verificationGuide.vouchers">
-              <i class="fas fa-clipboard-list"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br>
+              <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br>
               <span *ngFor="let package of voucher.packages"> 
-                <i class="fas fa-archive"></i> {{package.code}} <i [ngClass]="package.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': package.verificated ? 'green' : 'red' }"></i><br>
+                - <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;"></i> {{package.code}} <i [ngClass]="package.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': package.verificated ? 'green' : 'red' }"></i><br>
               </span>
             </span>
           </div>

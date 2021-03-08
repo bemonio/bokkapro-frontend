@@ -45,6 +45,7 @@ export class GuidesComponent implements OnInit {
 
     public verificationGroup: FormGroup;
     public vouchers: AbstractControl;
+    public certified_cart_code: AbstractControl;
 
     public requesting: boolean;
 
@@ -91,8 +92,10 @@ export class GuidesComponent implements OnInit {
 
         this.verificationGroup = fb.group({
             vouchers: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+            certified_cart_code: [''],
         });
         this.vouchers = this.verificationGroup.controls['vouchers'];
+        this.certified_cart_code = this.verificationGroup.controls['certified_cart_code'];
 
         this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
             this.message_confirm_delete = res;
@@ -127,6 +130,10 @@ export class GuidesComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+    }
+
+    static matches(form: AbstractControl){
+        return form.get('email').value == form.get('emailConfirm').value ? null : {equals: true};
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -307,6 +314,9 @@ export class GuidesComponent implements OnInit {
                 this.verificationGuide.vouchers = response.guide.vouchers;
                 let count = this.verificationGuide.vouchers.length + this.countPackages(this.verificationGuide);
                 this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
+                if (response.guide.certified_cart) {
+                    this.certified_cart_code.setValidators(Validators.compose([Validators.required, Validators.pattern(response.guide.certified_cart_code)]));
+                }
             }
         });
     }
