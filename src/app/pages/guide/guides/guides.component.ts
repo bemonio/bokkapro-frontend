@@ -11,6 +11,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, switchMap, tap } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-guides',
@@ -33,12 +34,14 @@ export class GuidesComponent implements OnInit {
     public query: string;
     public filters: { key: string, value: string }[];
 
-    public formGroup: FormGroup;
-    public employee_id_filter: AbstractControl;
-    public division_id_filter: AbstractControl;
-    public venue_id_filter: AbstractControl;
-
     public searchGroup: FormGroup;
+    public search_filter: AbstractControl;
+    public date_filter: AbstractControl;
+    public am_pm_filter: AbstractControl;
+
+    public exportGroup: FormGroup;
+    public date_export: AbstractControl;
+    public am_pm_export: AbstractControl;
 
     public verificationGroup: FormGroup;
     public vouchers: AbstractControl;
@@ -54,8 +57,12 @@ export class GuidesComponent implements OnInit {
     public permission: string;
 
     public displayModal: boolean;
+    public displayModalExport: boolean;
+
     public verificationGuide: any;
     public listVouchers: any[];
+
+    public optionsAmPm: { key: string, value: string }[];
 
     constructor(
         public modelsService: ModelService,
@@ -66,18 +73,21 @@ export class GuidesComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         fb: FormBuilder) {
-        this.formGroup = fb.group({
-            'employee_id_filter': [''],
-            'division_id_filter': [''],
-            'venue_id_filter': [''],
-        });
-        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
-        this.division_id_filter = this.formGroup.controls['division_id_filter'];
-        this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
-
         this.searchGroup = fb.group({
-            searchTerm: [''],
+            'search_filter': [''],
+            'date_filter': [''],
+            'am_pm_filter': [''],
         });
+        this.search_filter = this.searchGroup.controls['search_filter'];
+        this.date_filter = this.searchGroup.controls['date_filter'];
+        this.am_pm_filter = this.searchGroup.controls['am_pm_filter'];
+
+        this.exportGroup = fb.group({
+            'date_export': [''],
+            'am_pm_export': [''],
+        });
+        this.date_export = this.exportGroup.controls['date_export'];
+        this.am_pm_export = this.exportGroup.controls['am_pm_export'];
 
         this.verificationGroup = fb.group({
             vouchers: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -100,12 +110,18 @@ export class GuidesComponent implements OnInit {
         this.permission = 'guide';
 
         this.requesting = false;
+
         this.displayModal = false;
+        this.displayModalExport = false;
 
         this.confirmDialogPosition = 'right';
 
         this.models = [];
         this.selectedModels = [];
+
+        this.optionsAmPm = [];
+        this.optionsAmPm.push({ key: 'AM', value: 'AM' });
+        this.optionsAmPm.push({ key: 'PM', value: 'PM' });    
         // this.getModels();
     }
 
@@ -113,29 +129,39 @@ export class GuidesComponent implements OnInit {
         this.requesting = false;
     }
 
-    public loadLazy(event: LazyLoadEvent) {
-        this.page = (event.first / this.per_page) + 1;
-        if (event.sortField) {
-            if (event.sortOrder === -1) {
-                this.sort = '-' + event.sortField;
+    public loadLazy(event?: LazyLoadEvent) {
+        if (event) {
+            this.page = (event.first / this.per_page) + 1;
+            if (event.sortField) {
+                if (event.sortOrder === -1) {
+                    this.sort = '-' + event.sortField;
+                } else {
+                    this.sort = event.sortField;
+                }
             } else {
-                this.sort = event.sortField;
+                this.sort = '-id';
             }
-        } else {
-            this.sort = '-id';
-        }
 
-        if (event.globalFilter) {
-            this.query = event.globalFilter;
-        } else {
-            this.query = undefined;
-        }
+            if (event.globalFilter) {
+                this.query = event.globalFilter;
+            } else {
+                this.query = undefined;
+            }
 
-        if (event.rows) {
-            this.per_page = event.rows;
+            if (event.rows) {
+                this.per_page = event.rows;
+            }    
         }
 
         this.filters = [];
+        if (this.date_filter.value) {
+            this.filters.push({ key: 'filter{date}[]', value: this.formatDate(this.date_filter.value) })
+        }
+
+        if (this.am_pm_filter.value) {
+            this.filters.push({ key: 'filter{am_pm}[]', value: this.am_pm_filter.value.value })
+        }
+
         switch (this.route.parent.parent.snapshot.url[0].path) {
             case 'guidesinput':
                 this.filters.push({ key: 'filter{division_destination}[]', value: this.authService.currentDivisionValue.id.toString() })
@@ -328,23 +354,23 @@ export class GuidesComponent implements OnInit {
     }
 
     // helpers for View
-    isControlValid(controlName: string): boolean {
-        const control = this.verificationGroup.controls[controlName];
+    isControlValid(controlName: string, formGroup: FormGroup): boolean {
+        const control = formGroup.controls[controlName];
         return control.valid && (control.dirty || control.touched);
     }
 
-    isControlInvalid(controlName: string): boolean {
-        const control = this.verificationGroup.controls[controlName];
+    isControlInvalid(controlName: string, formGroup: FormGroup): boolean {
+        const control = formGroup.controls[controlName];
         return control.invalid && (control.dirty || control.touched);
     }
 
-    controlHasError(validation: string, controlName: string) {
-        const control = this.verificationGroup.controls[controlName];
+    controlHasError(validation: string, controlName: string, formGroup: FormGroup) {
+        const control = formGroup.controls[controlName];
         return control.hasError(validation) && (control.dirty || control.touched);
     }
 
-    isControlTouched(controlName: string): boolean {
-        const control = this.verificationGroup.controls[controlName];
+    isControlTouched(controlName: string, formGroup: FormGroup): boolean {
+        const control = formGroup.controls[controlName];
         return control.dirty || control.touched;
     }
 
@@ -407,6 +433,60 @@ export class GuidesComponent implements OnInit {
 
     public changeCountPackages() {
         this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(this.listVouchers.length), Validators.maxLength(this.listVouchers.length)]));
-        this.formGroup.markAllAsTouched();
+        this.verificationGroup.markAllAsTouched();
+    }
+
+    public formatDate(date) {
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+        let hours = '' + d.getHours();
+        let minutes = '' + d.getMinutes();
+        let seconds = '' + d.getSeconds();
+    
+        if (month.length < 2) {
+          month = '0' + month;
+        }
+        if (day.length < 2) {
+          day = '0' + day;
+        }
+    
+        if (hours.length < 2) {
+          hours = '0' + hours;
+        }
+    
+        if (minutes.length < 2) {
+          minutes = '0' + minutes;
+        }
+    
+        if (seconds.length < 2) {
+          seconds = '0' + seconds;
+        }
+    
+        return [year, month, day].join('-');
+    }
+
+    public showExportDialog() {
+        this.displayModalExport = true;
+    }
+
+    public export() {
+        let url = environment.apiUrl + 'export/guides?';
+
+        if (this.date_export.value) {
+            let date = new Date(this.date_export.value);
+            date.setHours(0);
+            date.setMinutes(0);
+            date.setSeconds(0);
+            date.setMilliseconds(0);
+            url += 'filter{date}[]=' + this.formatDate(date) + '&';
+        }
+
+        if (this.am_pm_export.value) {
+            url += 'filter{am_pm}[]=' + this.am_pm_export.value.value  + '&';
+        }
+
+        window.open(url, '_blank');
     }
 }
