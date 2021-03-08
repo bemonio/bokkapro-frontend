@@ -16,7 +16,6 @@ export class TokenStorageService {
   }
 
   public saveToken(token: string): void {
-    localStorage.removeItem(TOKEN_KEY);
     localStorage.setItem(TOKEN_KEY, token);
   }
 
