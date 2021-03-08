@@ -8,6 +8,8 @@ export class GuideModel {
   status: string;
   am_pm: string;
   date: string;
+  certified_cart: boolean;
+  certified_cart_code: string;
   type_guide: number;
   division_origin: any;
   division_destination: any;

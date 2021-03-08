@@ -33,6 +33,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   public status: AbstractControl;
   public am_pm: AbstractControl;
   public date: AbstractControl;
+  public certified_cart: AbstractControl;
+  public certified_cart_code: AbstractControl;
   public division_origin: AbstractControl;
   public division_destination: AbstractControl;
   public employee_origin: AbstractControl;
@@ -78,6 +80,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       status: [''],
       am_pm: [''],
       date: [''],
+      certified_cart: [''],
+      certified_cart_code: [''],
       division_origin: ['', Validators.compose([Validators.required,])],
       division_destination: ['', Validators.compose([Validators.required,])],
       employee_origin: ['', Validators.compose([Validators.required,])],
@@ -88,6 +92,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.status = this.formGroup.controls['status'];
     this.date = this.formGroup.controls['date'];
     this.am_pm = this.formGroup.controls['am_pm'];
+    this.certified_cart = this.formGroup.controls['certified_cart'];
+    this.certified_cart_code = this.formGroup.controls['certified_cart_code'];
     this.division_origin = this.formGroup.controls['division_origin'];
     this.division_destination = this.formGroup.controls['division_destination'];
     this.employee_origin = this.formGroup.controls['employee_origin'];
@@ -159,7 +165,9 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.status.setValue(this.model.status);
       this.am_pm.setValue({ key: this.model.am_pm, value: this.model.am_pm });
       this.date.setValue(new Date(this.model.date));
-      if (this.model.division_origin) {
+      this.certified_cart.setValue(this.model.certified_cart);
+      this.certified_cart_code.setValue(this.model.certified_cart_code);
+        if (this.model.division_origin) {
         this.division_origin.setValue(this.model.division_origin);
       }
       if (this.model.division_destination) {
@@ -238,6 +246,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.am_pm = this.am_pm.value.value;
     model.date = this.formatDate(this.date.value);
+    model.certified_cart = this.model.certified_cart;
+    model.certified_cart_code = this.model.certified_cart_code;
     model.division_origin = this.model.division_origin.id;
     model.division_destination = this.model.division_destination.id;
     model.employee_origin = this.model.employee_origin.id;
@@ -284,6 +294,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
     let model = this.model;
     model.am_pm = this.am_pm.value.value;
+    model.certified_cart = this.certified_cart.value;
+    model.certified_cart_code = this.certified_cart_code.value;
 
     model.date = undefined;
     if (this.date.value) {
