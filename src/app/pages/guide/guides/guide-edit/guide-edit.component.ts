@@ -176,6 +176,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     if (this.transfer) {
       this.division_origin.setValue(this.authService.currentDivisionValue);
       this.employee_origin.setValue(this.authService.currentUserValue.employee);
+      this.date.setValue(new Date());
     } else {
       switch (this.route.parent.parent.snapshot.url[0].path) {
         case 'guidesinput':
@@ -431,6 +432,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public closeEmit() {
     this.close.emit(true);
+    this.formGroup.reset();
+    this.loadForm();
   }
 
   public changeDivision(event) {
