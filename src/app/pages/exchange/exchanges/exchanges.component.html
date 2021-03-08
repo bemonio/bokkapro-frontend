@@ -81,7 +81,7 @@
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
-          <td style="text-align: center">
+          <td style="text-align: right">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               [routerLink]="'/exchanges/edit/' + value.id"  *ngIf="authService.hasPermission('add_exchange')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"

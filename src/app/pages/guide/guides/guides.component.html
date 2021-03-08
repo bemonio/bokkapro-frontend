@@ -136,7 +136,7 @@
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
-          <td style="text-align: center">
+          <td style="text-align: right">
             <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;" 
               (click)="verification(value)" *ngIf="(authService.hasPermission('change_' + permission)) && ((parent == 'guidesinput' && !(value.status == 1)) || (parent == 'guidescheck'  && !(value.status == 1)))">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
