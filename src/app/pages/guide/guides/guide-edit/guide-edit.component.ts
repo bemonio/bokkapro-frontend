@@ -160,6 +160,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
+    this.certified_cart.setValue(false);
+
     if (this.model.id) {
       this.description.setValue(this.model.description);
       this.status.setValue(this.model.status);
@@ -263,12 +265,6 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     }
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
-      tap(() => {
-        this.toastService.growl('success', 'success');
-        if (this.saveAndExit) {
-          this.router.navigate([this.parent]);
-        }
-      }),
       catchError((error) => {
         this.requesting = false;
         let messageError = [];
@@ -283,8 +279,15 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         return of(this.model);
       })
     ).subscribe(response => {
-      this.requesting = false;
-      this.model = response.guide
+      if (response.guide.id) {
+        this.toastService.growl('success', 'success');
+        if (this.saveAndExit) {
+          this.router.navigate([this.parent]);
+        }
+  
+        this.requesting = false;
+        this.model = response.guide
+      }
     });
     this.subscriptions.push(sbUpdate);
   }
@@ -330,9 +333,6 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     }
 
     const sbCreate = this.modelsService.post(model).pipe(
-      tap(() => {
-        this.toastService.growl('success', 'success');
-      }),
       catchError((error) => {
         this.requesting = false;
         if (error.error instanceof Array) {
@@ -351,9 +351,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         return of(this.model);
       })
     ).subscribe(response => {
+      this.toastService.growl('success', 'success');
       this.requesting = false;
       this.model = response.guide as Model;
-      if (response) {
+      if (response.guide.id) {
         if (this.saveAndExit) {
           if (this.transfer) {
             this.closeEmit();
