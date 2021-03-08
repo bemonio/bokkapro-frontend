@@ -231,7 +231,7 @@
       <div class="float-right">
         <a class="btn btn-default font-weight-bold mr-2" (click)="displayModalExport = false">{{ 'COMMON.CANCEL' | translate }}</a>
         <button class="btn btn-primary font-weight-bold mr-2"
-          [disabled]="searchGroup.invalid" (click)="export()">{{ 'COMMON.EXPORT' | translate }}</button>
+          [disabled]="exportGroup.invalid" (click)="export()">{{ 'COMMON.EXPORT' | translate }}</button>
       </div>
     </div>
   </div>
