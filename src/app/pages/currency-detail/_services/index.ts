@@ -1,0 +1,1 @@
+export { CurrencyDetailService } from './currency-detail.service';
