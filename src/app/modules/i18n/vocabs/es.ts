@@ -112,7 +112,7 @@ export const locale = {
       TYPES_LOCATIONS: 'Tipos Localizaciones',
       ID: 'Id',
       NAME: 'Nombre',
-      DESCRIPTION: 'Description'
+      DESCRIPTION: 'Descripción'
     },
     LOCATION: {
       LOCATION: 'Localización',
