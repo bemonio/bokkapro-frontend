@@ -128,6 +128,21 @@ export const locale = {
       GUIDES_OUTPUTS: 'Transacciones Salidas',
       GUIDE_CHECK: 'Transacción Checkeo',
       GUIDES_CHECKS: 'Transacciones Checkeos',
+      ID: 'Id',
+      DATE: 'Fecha',
+      SHIFT: 'Horario',
+      TYPE: 'Tipo',
+      VOUCHERS: 'Comprobantes',
+      PACKAGES: 'Envases',
+      ORIGIN: 'Origen',
+      DESTINATION: 'Destino',
+      STATUS: 'Status',
+      CERTIFIED_CART: 'Carrito Certificado',
+      CERTIFIED_CART_CODE: 'Código Carrito Certificado',
+      DIVISION_ORIGIN: 'Division Origen',
+      DIVISION_DESTINATION: 'Division Destino',
+      EMPLOYEE_ORIGIN: 'Empleado Origen',
+      EMPLOYEE_DESTINATION: 'Empleado Destino',
     },
     VOUCHER: {
       VOUCHER: 'Comprobante',
@@ -202,7 +217,10 @@ export const locale = {
       TODAY: 'Hoy',
       WELCOME_TO: 'Bienvenido a',
       CHOOSE: 'Elige',
-      HI: 'Hola'
+      HI: 'Hola',
+      CREATED_AT: 'Creado en',
+      YES: 'Si',
+      NO: 'No'
     },
   }
 };
