@@ -121,6 +121,9 @@ export const locale = {
     TYPE_GUIDE: {
       TYPE_GUIDE: 'Tipo Transacción',
       TYPES_GUIDES: 'Tipos Transacciones',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción'
     },
     GUIDE: {
       GUIDE: 'Transacción',
