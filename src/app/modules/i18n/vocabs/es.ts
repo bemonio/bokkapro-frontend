@@ -147,6 +147,15 @@ export const locale = {
     VOUCHER: {
       VOUCHER: 'Comprobante',
       VOUCHERS: 'Comprobantes',
+      ID: 'Id',
+      CODE: 'Código',
+      PACKAGES: 'Envases',
+      CURRENCY: 'Divisa',
+      AMOUNT: 'Monto',
+      LOCATION_ORIGIN: 'Dirección Origen',
+      LOCATION_DESTINATION: 'Dirección Destino',
+      COMPANY: 'Cliente',
+      COUNT_PACKAGES: 'Cant. Envases'
     },
     PACKAGE: {
       PACKAGE: 'Envase',

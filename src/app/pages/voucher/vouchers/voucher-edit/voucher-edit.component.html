@@ -68,94 +68,94 @@
               <span class="form-text text-muted">Allowed file types: png, jpg, jpeg. {{newLogo}}</span>
             </div> -->
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Code</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CODE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="Code" name="code" [class.is-invalid]="isControlInvalid('code')"
+                name="code" [class.is-invalid]="isControlInvalid('code')"
                 [class.is-valid]="isControlValid('code')" formControlName="code" />
-              <div class="feedback" *ngIf="!isControlTouched('code')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Code</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('code')">Code  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">Code  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">Code {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">Code {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('code')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CODE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('code')">{{ 'VOUCHER.CODE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">{{ 'VOUCHER.CODE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">{{ 'VOUCHER.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">{{ 'VOUCHER.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Currency</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CURRENCY' | translate }}</label>
               <label style="float:right; color: red;">{{currency.value?.exchange_rate}}</label>
               <app-currency-select
-              placeholder="Currency" name="currency" [valid]="isControlValid('currency')" [touched]="isControlTouched('currency')" [class.is-invalid]="isControlInvalid('currency')"
+              name="currency" [valid]="isControlValid('currency')" [touched]="isControlTouched('currency')" [class.is-invalid]="isControlInvalid('currency')"
               [class.is-valid]="isControlValid('currency')" formControlName="currency" id="currency" [model]="model.currency" (change)="changeCompany()"></app-currency-select>              
-              <div class="feedback" *ngIf="!isControlTouched('currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Currency</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('currency')">Currency  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">Currency  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">Currency {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">Currency {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CURRENCY' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('currency')">{{ 'VOUCHER.CURRENCY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">{{ 'VOUCHER.CURRENCY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">{{ 'VOUCHER.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">{{ 'VOUCHER.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>            
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Amount</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.AMOUNT' | translate }}</label>
               <label style="float:right; color: red;">{{ amount.value * currency.value?.exchange_rate | currency }} {{office?.currency?.symbol}}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="Amount" name="amount" [class.is-invalid]="isControlInvalid('amount')"
+                name="amount" [class.is-invalid]="isControlInvalid('amount')"
                 [class.is-valid]="isControlValid('amount')" formControlName="amount" 
                 currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
-              <div class="feedback" *ngIf="!isControlTouched('amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Amount</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('amount')">Amount  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">Amount  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'amount')">Amount {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">Amount {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.AMOUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('amount')">{{ 'VOUCHER.AMOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">{{ 'VOUCHER.AMOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'amount')">{{ 'VOUCHER.AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">{{ 'VOUCHER.AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>            
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Location Origin</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.LOCATION_ORIGIN' | translate }}</label>
               <app-location-autocomplete
-              placeholder="Location Origin" name="location_origin" [valid]="isControlValid('location_origin')" [touched]="isControlTouched('location_origin')" [class.is-invalid]="isControlInvalid('location_origin')"
+              name="location_origin" [valid]="isControlValid('location_origin')" [touched]="isControlTouched('location_origin')" [class.is-invalid]="isControlInvalid('location_origin')"
               [class.is-valid]="isControlValid('location_origin')" formControlName="location_origin" id="location_origin" [model]="model.location_origin" (change)="changeLocation()"></app-location-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('location_origin')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Location Origin</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('location_origin')">Location Origin  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_origin')">Location Origin  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location_origin')">Location Origin {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_origin')">Location Origin {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('location_origin')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.LOCATION_ORIGIN' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('location_origin')">{{ 'VOUCHER.LOCATION_ORIGIN' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_origin')">{{ 'VOUCHER.LOCATION_ORIGIN' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location_origin')">{{ 'VOUCHER.LOCATION_ORIGIN' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_origin')">{{ 'VOUCHER.LOCATION_ORIGIN' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Location Destination</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.LOCATION_DESTINATION' | translate }}</label>
               <app-location-autocomplete
-              placeholder="Location Destination" name="location_destination" [valid]="isControlValid('location_destination')" [touched]="isControlTouched('location_destination')" [class.is-invalid]="isControlInvalid('location_destination')"
+              name="location_destination" [valid]="isControlValid('location_destination')" [touched]="isControlTouched('location_destination')" [class.is-invalid]="isControlInvalid('location_destination')"
               [class.is-valid]="isControlValid('location_destination')" formControlName="location_destination" id="location_destination" [model]="model.location_destination"></app-location-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('location_destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Location Destination</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('location_destination')">Location Destination  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_destination')">Location Destination  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location_destination')">Location Destination {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_destination')">Location Destination {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('location_destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.LOCATION_DESTINATION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('location_destination')">{{ 'VOUCHER.LOCATION_DESTINATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_destination')">{{ 'VOUCHER.LOCATION_DESTINATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location_destination')">{{ 'VOUCHER.LOCATION_DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location_destination')">{{ 'VOUCHER.LOCATION_DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Company</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.COMPANY' | translate }}</label>
               <app-company-autocomplete
-              placeholder="Company" name="company" [valid]="isControlValid('company')" [touched]="isControlTouched('company')" [class.is-invalid]="isControlInvalid('company')"
+              name="company" [valid]="isControlValid('company')" [touched]="isControlTouched('company')" [class.is-invalid]="isControlInvalid('company')"
               [class.is-valid]="isControlValid('company')" formControlName="company" id="company" [model]="model.company" (change)="changeCompany()"></app-company-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('company')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Company</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('company')">Company  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'company')">Company  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'company')">Company {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company')">Company {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('company')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.COMPANY' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('company')">{{ 'VOUCHER.COMPANY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'company')">{{ 'VOUCHER.COMPANY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'company')">{{ 'VOUCHER.COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company')">{{ 'VOUCHER.COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Count Packages</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.COUNT_PACKAGES' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="Count Packages" name="count_packages" [class.is-invalid]="isControlInvalid('count_packages')"
+                name="count_packages" [class.is-invalid]="isControlInvalid('count_packages')"
                 [class.is-valid]="isControlValid('count_packages')" formControlName="count_packages" (change)="changeCountPackages()"/>
-              <div class="feedback" *ngIf="!isControlTouched('count_packages')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Count Packages</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('count_packages')">Count Packages  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'count_packages')">Count Packages  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count_packages')">Count Packages {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count_packages')">Count Packages {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('count_packages')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.COUNT_PACKAGES' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('count_packages')">{{ 'VOUCHER.COUNT_PACKAGES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'count_packages')">{{ 'VOUCHER.COUNT_PACKAGES' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count_packages')">{{ 'VOUCHER.COUNT_PACKAGES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count_packages')">{{ 'VOUCHER.COUNT_PACKAGES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>            
             <div class="col-lg-12">
-              <label>Packages</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKAGES' | translate }}</label>
               <p-chips [styleClass]="getValidClass(isControlValid('packages'))" formControlName="packages" [allowDuplicate]="false"></p-chips>
-              <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('packages')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Packages</b></div>
-              <div class="valid-feedback"  style="display: block;" *ngIf="packages.value.length == count_packages.value">Packages  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'packages')">Packages  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
-              <div class="invalid-feedback"  style="display: block;" *ngIf="packages.value.length < count_packages.value">Packages {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{count_packages.value}}
+              <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('packages')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PACKAGES' | translate }}</b></div>
+              <div class="valid-feedback"  style="display: block;" *ngIf="packages.value.length == count_packages.value">{{ 'VOUCHER.PACKAGES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'packages')">{{ 'VOUCHER.PACKAGES' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
+              <div class="invalid-feedback"  style="display: block;" *ngIf="packages.value.length < count_packages.value">{{ 'VOUCHER.PACKAGES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{count_packages.value}}
                 item</div>
-              <div class="invalid-feedback"  style="display: block;" *ngIf="packages.value.length > count_packages.value">Packages {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{count_packages.value}}
+              <div class="invalid-feedback"  style="display: block;" *ngIf="packages.value.length > count_packages.value">{{ 'VOUCHER.PACKAGES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{count_packages.value}}
                 items</div>
             </div>
             <!-- <div class="col-lg-4">
