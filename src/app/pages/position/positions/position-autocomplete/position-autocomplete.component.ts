@@ -51,7 +51,7 @@ export class PositionAutocompleteComponent implements ControlValueAccessor, OnIn
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Segment Position';
+            this.placeholder = '';
         }
     }
 

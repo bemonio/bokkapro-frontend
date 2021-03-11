@@ -51,7 +51,7 @@ export class DepartmentAutocompleteComponent implements ControlValueAccessor, On
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Department';
+            this.placeholder = '';
         }
     }
 

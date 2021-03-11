@@ -51,7 +51,7 @@ export class DivisionAutocompleteComponent implements ControlValueAccessor, OnIn
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Division';
+            this.placeholder = '';
         }
     }
 

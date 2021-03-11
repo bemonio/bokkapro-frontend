@@ -51,7 +51,7 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Type TypeCompany';
+            this.placeholder = '';
         }
     }
 

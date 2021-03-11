@@ -51,7 +51,7 @@ export class UserAutocompleteComponent implements ControlValueAccessor, OnInit {
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Segment User';
+            this.placeholder = '';
         }
     }
 

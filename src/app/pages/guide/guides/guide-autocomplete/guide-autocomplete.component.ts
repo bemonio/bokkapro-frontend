@@ -51,7 +51,7 @@ export class GuideAutocompleteComponent implements ControlValueAccessor, OnInit 
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Guide';
+            this.placeholder = '';
         }
     }
 

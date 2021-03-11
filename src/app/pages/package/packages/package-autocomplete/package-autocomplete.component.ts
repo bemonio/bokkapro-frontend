@@ -51,7 +51,7 @@ export class PackageAutocompleteComponent implements ControlValueAccessor, OnIni
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Package';
+            this.placeholder = '';
         }
     }
 

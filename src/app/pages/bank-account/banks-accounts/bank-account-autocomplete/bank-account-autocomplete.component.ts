@@ -51,7 +51,7 @@ export class BankAccountAutocompleteComponent implements ControlValueAccessor, O
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Bank Account';
+            this.placeholder = '';
         }
     }
 

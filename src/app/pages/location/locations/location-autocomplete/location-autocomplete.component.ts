@@ -51,7 +51,7 @@ export class LocationAutocompleteComponent implements ControlValueAccessor, OnIn
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = ' Location';
+            this.placeholder = ' ';
         }
     }
 

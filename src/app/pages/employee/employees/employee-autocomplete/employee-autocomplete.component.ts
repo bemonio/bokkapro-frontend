@@ -51,7 +51,7 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Segment Employee';
+            this.placeholder = '';
         }
     }
 

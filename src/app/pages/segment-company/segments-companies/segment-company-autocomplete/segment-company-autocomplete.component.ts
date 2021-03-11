@@ -51,7 +51,7 @@ export class SegmentCompanyAutocompleteComponent implements ControlValueAccessor
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Segment SegmentCompany';
+            this.placeholder = '';
         }
     }
 

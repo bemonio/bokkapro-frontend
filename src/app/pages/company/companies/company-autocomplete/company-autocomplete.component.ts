@@ -51,7 +51,7 @@ export class CompanyAutocompleteComponent implements ControlValueAccessor, OnIni
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Segment Company';
+            this.placeholder = '';
         }
     }
 

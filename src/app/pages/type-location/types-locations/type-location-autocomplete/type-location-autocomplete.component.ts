@@ -51,7 +51,7 @@ export class TypeLocationAutocompleteComponent implements ControlValueAccessor, 
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Type Location';
+            this.placeholder = '';
         }
     }
 

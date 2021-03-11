@@ -51,7 +51,7 @@ export class TypeDivisionAutocompleteComponent implements ControlValueAccessor, 
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Type Division';
+            this.placeholder = '';
         }
     }
 

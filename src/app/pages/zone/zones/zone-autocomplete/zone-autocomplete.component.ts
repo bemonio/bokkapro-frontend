@@ -51,7 +51,7 @@ export class ZoneAutocompleteComponent implements ControlValueAccessor, OnInit {
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Zone';
+            this.placeholder = '';
         }
     }
 

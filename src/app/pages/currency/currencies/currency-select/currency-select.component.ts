@@ -49,7 +49,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Currency';
+            this.placeholder = '';
         }
         this.load();
     }

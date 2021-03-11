@@ -51,7 +51,7 @@ export class VoucherAutocompleteComponent implements ControlValueAccessor, OnIni
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Voucher';
+            this.placeholder = '';
         }
     }
 

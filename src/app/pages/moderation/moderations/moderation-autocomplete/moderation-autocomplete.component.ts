@@ -51,7 +51,7 @@ export class ModerationAutocompleteComponent implements ControlValueAccessor, On
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Moderation';
+            this.placeholder = '';
         }
     }
 

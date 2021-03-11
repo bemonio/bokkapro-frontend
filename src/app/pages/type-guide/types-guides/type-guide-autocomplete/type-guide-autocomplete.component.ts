@@ -51,7 +51,7 @@ export class TypeGuideAutocompleteComponent implements ControlValueAccessor, OnI
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Type Guide';
+            this.placeholder = '';
         }
     }
 

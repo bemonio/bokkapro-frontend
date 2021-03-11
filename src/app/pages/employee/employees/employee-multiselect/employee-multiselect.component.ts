@@ -51,7 +51,7 @@ export class EmployeeMultiselectComponent implements ControlValueAccessor, OnIni
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Employees';
+            this.placeholder = '';
         }
         this.getModels();
     }

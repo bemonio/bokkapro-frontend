@@ -51,7 +51,7 @@ export class OfficeAutocompleteComponent implements ControlValueAccessor, OnInit
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Segment Office';
+            this.placeholder = '';
         }
     }
 
