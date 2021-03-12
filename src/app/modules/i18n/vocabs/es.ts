@@ -236,10 +236,22 @@ export const locale = {
     CURRENCY: {
       CURRENCY: 'Divisa',
       CURRENCIES: 'Divisas',
+      ID: 'Id',
+      CODE: 'Código',
+      SYMBOL: 'Símbolo',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción',
+      FORMAT: 'Formato',
+      EXCHANGE_RATE: 'Tasa Cambio',
+      OFFICE: 'Oficina'
     },
     CURRENCYDETAIL: {
       CURRENCYDETAIL: 'Detalle Divisa',
       CURRENCIESDETAILS: 'Detalles Divisas',
+      ID: 'Id',
+      DENOMINATION: 'Denominación',
+      TYPE_CURRENCY: 'Tipo',
+      CURRENCY: 'Divisa',
     },
     EXCHANGE: {
       EXCHANGE: 'Cambio Divisa',
