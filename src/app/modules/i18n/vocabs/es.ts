@@ -70,6 +70,9 @@ export const locale = {
     SEGMENT_COMPANY: {
       SEGMENT_COMPANY: 'Segmento Compañía',
       SEGMENTS_COMPANIES: 'Segmentos Compañías',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción'
     },
     TYPE_COMPANY: {
       TYPE_COMPANY: 'Tipo Compañía',
