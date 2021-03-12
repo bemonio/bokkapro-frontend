@@ -227,6 +227,11 @@ export const locale = {
     PACKAGE: {
       PACKAGE: 'Envase',
       PACKAGES: 'Envases',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción',
+      CODE: 'Código',
+      VERIFICATED: 'Verificado',
     },
     CURRENCY: {
       CURRENCY: 'Divisa',

@@ -68,18 +68,18 @@
               <span class="form-text text-muted">Allowed file types: png, jpg, jpeg. {{newLogo}}</span>
             </div> -->
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Code</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PACKAGE.CODE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="Code" name="code" [class.is-invalid]="isControlInvalid('code')"
+                name="code" [class.is-invalid]="isControlInvalid('code')"
                 [class.is-valid]="isControlValid('code')" formControlName="code" />
-              <div class="feedback" *ngIf="!isControlTouched('code')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Code</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('code')">Code  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">Code  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">Code {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">Code {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('code')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PACKAGE.CODE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('code')">{{ 'PACKAGE.CODE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">{{ 'PACKAGE.CODE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">{{ 'PACKAGE.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">{{ 'PACKAGE.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>Verificated</label>
+              <label>{{ 'PACKAGE.VERIFICATED' | translate }}</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="verificated" onLabel="true" offLabel="false"></p-toggleButton>
             </div>
           </div>
