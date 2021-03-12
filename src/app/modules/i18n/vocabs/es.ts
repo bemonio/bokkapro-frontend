@@ -170,6 +170,14 @@ export const locale = {
     LOCATION: {
       LOCATION: 'Localización',
       LOCATIONS: 'Localizaciones',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción',
+      CODE: 'Código',
+      CODE_BRINKS: 'Código Brinks',
+      TYPE_LOCATION: 'Tipo Localización',
+      COMPANY: 'Companía',
+      ZONE: 'Zona',
     },
     TYPE_GUIDE: {
       TYPE_GUIDE: 'Tipo Transacción',
