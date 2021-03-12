@@ -74,6 +74,9 @@ export const locale = {
     TYPE_COMPANY: {
       TYPE_COMPANY: 'Tipo Compañía',
       TYPES_COMPANIES: 'Tipos Compañías',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción'
     },
     COMPANY: {
       COMPANY: 'Compañía',
@@ -86,6 +89,9 @@ export const locale = {
     TYPE_DIVISION: {
       TYPE_DIVISION: 'Tipo División',
       TYPES_DIVISIONS: 'Tipos Divisiones',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción'
     },
     DIVISION: {
       DIVISION: 'División',
