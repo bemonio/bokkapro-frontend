@@ -264,6 +264,8 @@ export const locale = {
     BANKACCOUNT: {
       BANKACCOUNT: 'Cuenta Bancaria',
       BANKSACCOUNTS: 'Cuentas Bancarias',
+      ID: 'Id',
+      ACCOUNT: 'Número de Cuenta',
     },
     MODERATION: {
       MODERATION: 'Moderación',
