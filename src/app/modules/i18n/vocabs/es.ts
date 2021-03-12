@@ -256,6 +256,10 @@ export const locale = {
     EXCHANGE: {
       EXCHANGE: 'Cambio Divisa',
       EXCHANGES: 'Cambios Divisas',
+      ID: 'Id',
+      RATE: 'Tasa Cambio',
+      DATE: 'Fecha',
+      CURRENCY: 'Divisa',
     },
     BANKACCOUNT: {
       BANKACCOUNT: 'Cuenta Bancaria',

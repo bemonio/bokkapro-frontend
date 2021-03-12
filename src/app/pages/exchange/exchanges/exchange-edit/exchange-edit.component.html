@@ -43,35 +43,35 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Rate</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'EXCHANGE.RATE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="Rate" name="rate" [class.is-invalid]="isControlInvalid('rate')"
+                name="rate" [class.is-invalid]="isControlInvalid('rate')"
                 [class.is-valid]="isControlValid('rate')" formControlName="rate" />
-              <div class="feedback" *ngIf="!isControlTouched('rate')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Rate</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('rate')">Rate  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'rate')">Rate  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'rate')">Rate {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'rate')">Rate {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('rate')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'EXCHANGE.RATE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('rate')">{{ 'EXCHANGE.RATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'rate')">{{ 'EXCHANGE.RATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'rate')">{{ 'EXCHANGE.RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'rate')">{{ 'EXCHANGE.RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Date</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'EXCHANGE.DATE' | translate }}</label>
               <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
-              <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Date</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('date')">Date  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">Date  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">Date {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">Date {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'EXCHANGE.DATE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('date')">{{ 'EXCHANGE.DATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">{{ 'EXCHANGE.DATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">{{ 'EXCHANGE.DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">{{ 'EXCHANGE.DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Currency</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'EXCHANGE.CURRENCY' | translate }}</label>
               <app-currency-select
-              placeholder="Currency" name="currency" [valid]="isControlValid('currency')" [touched]="isControlTouched('currency')" [class.is-invalid]="isControlInvalid('currency')"
+              name="currency" [valid]="isControlValid('currency')" [touched]="isControlTouched('currency')" [class.is-invalid]="isControlInvalid('currency')"
               [class.is-valid]="isControlValid('currency')" formControlName="currency" id="currency" [model]="model.currency"></app-currency-select>
-              <div class="feedback" *ngIf="!isControlTouched('currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Currency</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('currency')">Currency  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">Currency  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">Currency {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">Currency {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'EXCHANGE.CURRENCY' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('currency')">{{ 'EXCHANGE.CURRENCY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">{{ 'EXCHANGE.CURRENCY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">{{ 'EXCHANGE.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">{{ 'EXCHANGE.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
           </div>
           <div class="float-right">
