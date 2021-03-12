@@ -156,6 +156,9 @@ export const locale = {
     ZONE: {
       ZONE: 'Zona',
       ZONES: 'Zonas',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción',
     },
     TYPE_LOCATION: {
       TYPE_LOCATION: 'Tipo Localización',
