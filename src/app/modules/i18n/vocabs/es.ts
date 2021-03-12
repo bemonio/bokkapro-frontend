@@ -147,6 +147,11 @@ export const locale = {
     EMPLOYEE: {
       EMPLOYEE: 'Empleado',
       EMPLOYEES: 'Empleados',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción',
+      POSITION: 'Cargo',
+      USER: 'Usuario',
     },
     ZONE: {
       ZONE: 'Zona',
