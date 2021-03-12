@@ -103,6 +103,11 @@ export const locale = {
     OFFICE: {
       OFFICE: 'Oficina',
       OFFICES: 'Oficinas',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción',
+      COMPANY: 'Companía',
+      CURRENCY: 'Divisa'
     },
     TYPE_DIVISION: {
       TYPE_DIVISION: 'Tipo División',
