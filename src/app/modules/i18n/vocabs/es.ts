@@ -131,6 +131,10 @@ export const locale = {
     DEPARTMENT: {
       DEPARTMENT: 'Departamento',
       DEPARTMENTS: 'Departamentos',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción',
+      OFFICE: 'Oficina',
     },
     POSITION: {
       POSITION: 'Cargo',
