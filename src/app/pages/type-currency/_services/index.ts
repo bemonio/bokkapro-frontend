@@ -1,0 +1,1 @@
+export { TypeCurrencyService } from './type-currency.service';

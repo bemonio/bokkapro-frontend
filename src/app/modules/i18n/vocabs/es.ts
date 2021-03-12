@@ -145,6 +145,10 @@ export const locale = {
       CURRENCYDETAIL: 'Detalle Divisa',
       CURRENCIESDETAILS: 'Detalles Divisas',
     },
+    TYPECURRENCY: {
+      TYPECURRENCY: 'Tipo Divisa',
+      TYPESCURRENCIES: 'Tipos Divisas',
+    },
     EXCHANGE: {
       EXCHANGE: 'Cambio Divisa',
       EXCHANGES: 'Cambios Divisas',

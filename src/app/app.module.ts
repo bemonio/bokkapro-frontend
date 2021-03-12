@@ -45,6 +45,7 @@ import { PackageService } from './pages/package/_services';
 import { VoucherService } from './pages/voucher/_services';
 import { CurrencyService } from './pages/currency/_services';
 import { CurrencyDetailService } from './pages/currency-detail/_services';
+import { TypeCurrencyService } from './pages/type-currency/_services';
 import { ExchangeService } from './pages/exchange/_services';
 import { BankAccountService } from './pages/bank-account/_services';
 import { ModerationService } from './pages/moderation/_services';
@@ -128,6 +129,7 @@ export function getHighlightLanguages() {
     VoucherService,
     CurrencyService,
     CurrencyDetailService,
+    TypeCurrencyService,
     ExchangeService,
     BankAccountService,
   ],

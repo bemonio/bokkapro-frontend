@@ -182,6 +182,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'typescurrencies',
+        loadChildren: () =>
+          import('../pages/type-currency/type-currency-routing.module').then(
+            (m) => m.TypeCurrencyRoutingModule
+          ),
+      },
+      {
         path: 'currenciesdetails',
         loadChildren: () =>
           import('../pages/currency-detail/currency-detail-routing.module').then(
