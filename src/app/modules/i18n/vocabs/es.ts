@@ -69,22 +69,22 @@ export const locale = {
       PASSWORD: 'Contraseña' 
   },
     SEGMENT_COMPANY: {
-      SEGMENT_COMPANY: 'Segmento Compañía',
-      SEGMENTS_COMPANIES: 'Segmentos Compañías',
+      SEGMENT_COMPANY: 'Segmento Cliente',
+      SEGMENTS_COMPANIES: 'Segmentos Clientes',
       ID: 'Id',
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción'
     },
     TYPE_COMPANY: {
-      TYPE_COMPANY: 'Tipo Compañía',
-      TYPES_COMPANIES: 'Tipos Compañías',
+      TYPE_COMPANY: 'Tipo Cliente',
+      TYPES_COMPANIES: 'Tipos Clientes',
       ID: 'Id',
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción'
     },
     COMPANY: {
-      COMPANY: 'Compañía',
-      COMPANIES: 'Compañías',
+      COMPANY: 'Cliente',
+      COMPANIES: 'Clientes',
       ID: 'Id',
       CODE: 'Código',
       NAME: 'Nombre',
