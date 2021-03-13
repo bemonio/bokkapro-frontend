@@ -138,6 +138,8 @@ import { CurrencySelectComponent } from './currency/currencies/currency-select/c
 import { TypesCurrenciesComponent } from './type-currency/types-currencies/types-currencies.component';
 import { TypeCurrencyComponent } from './type-currency/type-currency.component';
 import { TypeCurrencyEditComponent } from './type-currency/types-currencies/type-currency-edit/type-currency-edit.component';
+import { TypeCurrencySelectComponent } from './type-currency/types-currencies/type-currency-select/type-currency-select.component';
+
 
 // CurrenciesDetails
 import { CurrenciesDetailsComponent } from './currency-detail/currencies-details/currencies-details.component';
@@ -265,6 +267,7 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     TypesCurrenciesComponent,
     TypeCurrencyComponent,
     TypeCurrencyEditComponent,
+    TypeCurrencySelectComponent,
     ExchangesComponent,
     ExchangeComponent,
     ExchangeEditComponent,

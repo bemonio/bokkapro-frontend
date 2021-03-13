@@ -89,6 +89,9 @@ export class CurrencyDetailEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.currency_detail;
+        if (response.type_currencies) {
+          this.model.type_currency = response.type_currencies[0];
+        }
         if (response.currencies) {
           this.model.currency = response.currencies[0];
         }
@@ -102,7 +105,9 @@ export class CurrencyDetailEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.denomination.setValue(this.model.denomination);
-      this.type_currency.setValue(this.model.type_currency);
+      if (this.model.type_currency) {
+        this.type_currency.setValue(this.model.type_currency);
+      }
       if (this.model.currency) {
         this.currency.setValue(this.model.currency);
       }
@@ -134,6 +139,7 @@ export class CurrencyDetailEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
+    model.type_currency = this.model.type_currency.id;
     model.currency = this.model.currency.id;
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -157,6 +163,7 @@ export class CurrencyDetailEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
+      this.model = response.type_currency
       this.model = response.currency
     });
     this.subscriptions.push(sbUpdate);
@@ -165,6 +172,7 @@ export class CurrencyDetailEditComponent implements OnInit, OnDestroy {
   create() {
     this.requesting = true;
     let model = this.model;
+    model.type_currency = this.model.type_currency.id;
     model.currency = this.model.currency.id;
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

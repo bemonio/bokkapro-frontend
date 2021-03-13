@@ -55,9 +55,9 @@
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Type Currency</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="Type Currency" name="type_currency" [class.is-invalid]="isControlInvalid('type_currency')"
-                [class.is-valid]="isControlValid('type_currency')" formControlName="type_currency" />
+              <app-type-currency-select
+              placeholder="Type Currency" name="type_currency" [valid]="isControlValid('type_currency')" [touched]="isControlTouched('type_currency')" [class.is-invalid]="isControlInvalid('type_currency')"
+              [class.is-valid]="isControlValid('type_currency')" formControlName="type_currency" id="type_currency" [model]="model.type_currency"></app-type-currency-select>
               <div class="feedback" *ngIf="!isControlTouched('type_currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Type Currency</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('type_currency')">Type Currency  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_currency')">Type Currency  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

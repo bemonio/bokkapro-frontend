@@ -60,6 +60,6 @@ export class CurrencyDetailService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=currency.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=currency.*&include[]=type_currency.*`);
     }
 }
