@@ -60,13 +60,14 @@ export const locale = {
     USER: {
       USER: 'Usuario',
       USERS: 'Usuarios',
-      FIELDS: {
-        USERNAME: 'Username',
-        EMAIL: 'Email',
-        DATE_JOINED: 'Fecha Registro',
-        IS_ACTIVE: 'Activo?' 
-      },
-    },
+      ID: 'id',
+      USERNAME: 'Username',
+      EMAIL: 'Email',
+      DATE_JOINED: 'Fecha Registro',
+      IS_ACTIVATE: 'Activo?' ,
+      STATUS: 'Status' ,
+      PASSWORD: 'Contraseña' 
+  },
     SEGMENT_COMPANY: {
       SEGMENT_COMPANY: 'Segmento Compañía',
       SEGMENTS_COMPANIES: 'Segmentos Compañías',
