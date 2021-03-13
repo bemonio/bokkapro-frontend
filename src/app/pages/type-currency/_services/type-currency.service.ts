@@ -5,8 +5,8 @@ import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
-export class CurrencyDetailService {
-    API_URL = `${environment.apiUrl}currenciesdetails`;
+export class TypeCurrencyService {
+    API_URL = `${environment.apiUrl}typescurrencies`;
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -60,6 +60,6 @@ export class CurrencyDetailService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=currency.*&include[]=type_currency.*`);
+        return this.http.get(`${this.API_URL}/${id}`);
     }
 }
