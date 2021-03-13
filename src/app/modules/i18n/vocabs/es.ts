@@ -60,7 +60,7 @@ export const locale = {
     USER: {
       USER: 'Usuario',
       USERS: 'Usuarios',
-      ID: 'id',
+      ID: 'Id',
       USERNAME: 'Username',
       EMAIL: 'Email',
       DATE_JOINED: 'Fecha Registro',
