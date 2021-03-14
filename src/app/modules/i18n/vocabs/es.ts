@@ -137,6 +137,10 @@ export const locale = {
       PACKAGE: 'Envase',
       PACKAGES: 'Envases',
     },
+    DEPOSITFORM: {
+      DEPOSITFORM: 'Planilla Depósito',
+      DEPOSITFORMS: 'Planillas Depósito',
+    },
     CURRENCY: {
       CURRENCY: 'Divisa',
       CURRENCIES: 'Divisas',

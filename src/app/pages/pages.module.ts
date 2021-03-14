@@ -122,6 +122,11 @@ import { PackageComponent } from './package/package.component';
 import { PackageEditComponent } from './package/packages/package-edit/package-edit.component';
 import { PackageAutocompleteComponent } from './package/packages/package-autocomplete/package-autocomplete.component';
 
+// DepositForms
+import { DepositFormsComponent } from './deposit-form/deposit-forms/deposit-forms.component';
+import { DepositFormComponent } from './deposit-form/deposit-form.component';
+import { DepositFormEditComponent } from './deposit-form/deposit-forms/deposit-form-edit/deposit-form-edit.component';
+
 // Vouchers
 import { VouchersComponent } from './voucher/vouchers/vouchers.component';
 import { VoucherComponent } from './voucher/voucher.component';
@@ -253,6 +258,9 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     PackageComponent,
     PackageEditComponent,
     PackageAutocompleteComponent,
+    DepositFormsComponent,
+    DepositFormComponent,
+    DepositFormEditComponent,
     VouchersComponent,
     VoucherComponent,
     VoucherEditComponent,

@@ -168,6 +168,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'depositforms',
+        loadChildren: () =>
+          import('../pages/deposit-form/deposit-form-routing.module').then(
+            (m) => m.DepositFormRoutingModule
+          ),
+      },
+      {
         path: 'vouchers',
         loadChildren: () =>
           import('../pages/voucher/voucher-routing.module').then(
