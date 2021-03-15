@@ -25,7 +25,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   };
 
   public amount: AbstractControl;
-  public difference_amount: AbstractControl;
+  public difference_reason: AbstractControl;
   public verified: AbstractControl;
   public verified_at: AbstractControl;
   public package: AbstractControl;
@@ -51,7 +51,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       amount: ['', Validators.compose([Validators.required])],
-      difference_amount: ['', Validators.compose([Validators.required])],
+      difference_reason: ['', Validators.compose([Validators.required])],
       verified: ['', Validators.compose([Validators.required])],
       verified_at: [''],
       package: ['', Validators.compose([Validators.required])],
@@ -60,7 +60,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       supervisor: ['', Validators.compose([Validators.required])],
     });
     this.amount = this.formGroup.controls['amount']
-    this.difference_amount = this.formGroup.controls['difference_amount']
+    this.difference_reason = this.formGroup.controls['difference_reason']
     this.verified = this.formGroup.controls['verified']
     this.verified_at = this.formGroup.controls['verified_at']
     this.package = this.formGroup.controls['package']
@@ -126,7 +126,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.amount.setValue(this.model.amount)
-      this.difference_amount.setValue(this.model.difference_amount)
+      this.difference_reason.setValue(this.model.difference_reason)
       this.verified.setValue(this.model.verified)
       this.verified_at.setValue(new Date(this.model.verified_at));
       if (this.model.package) {

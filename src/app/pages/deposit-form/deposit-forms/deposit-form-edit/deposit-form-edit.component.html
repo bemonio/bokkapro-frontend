@@ -54,15 +54,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">Amount {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Difference Amount</label>
+              <label>{{ 'COMMON.ENTER' | translate }} Difference Reason</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="Difference Amount" name="difference_amount" [class.is-invalid]="isControlInvalid('difference_amount')"
-                [class.is-valid]="isControlValid('difference_amount')" formControlName="difference_amount" />
-              <div class="feedback" *ngIf="!isControlTouched('difference_amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Difference Amount</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('difference_amount')">Difference Amount  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'difference_amount')">Difference Amount  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'difference_amount')">Difference Amount {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'difference_amount')">Difference Amount {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+                placeholder="Difference Reason" name="difference_reason" [class.is-invalid]="isControlInvalid('difference_reason')"
+                [class.is-valid]="isControlValid('difference_reason')" formControlName="difference_reason" />
+              <div class="feedback" *ngIf="!isControlTouched('difference_reason')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Difference Reason</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('difference_reason')">Difference Reason  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'difference_reason')">Difference Reason  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'difference_reason')">Difference Reason {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'difference_reason')">Difference Reason {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Verified</label>

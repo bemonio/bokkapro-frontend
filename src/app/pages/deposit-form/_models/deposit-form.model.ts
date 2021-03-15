@@ -5,7 +5,7 @@ import { EmployeeModel } from "../../employee/_models/employee.model";
 export class DepositFormModel {
   id: number;
   amount: string;
-  difference_amount: string;
+  difference_reason: string;
   verified: string;
   verified_at: string;
   package: any;
