@@ -175,6 +175,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'depositformsdetails',
+        loadChildren: () =>
+          import('../pages/deposit-formdetail/deposit-formdetail-routing.module').then(
+            (m) => m.DepositFormDetailRoutingModule
+          ),
+      },
+      {
         path: 'vouchers',
         loadChildren: () =>
           import('../pages/voucher/voucher-routing.module').then(

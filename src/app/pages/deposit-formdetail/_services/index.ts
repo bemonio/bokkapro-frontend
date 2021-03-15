@@ -1,0 +1,1 @@
+export { DepositFormDetailService } from './deposit-formdetail.service';

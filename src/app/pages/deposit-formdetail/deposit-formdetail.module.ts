@@ -8,22 +8,22 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { DepositFormsComponent } from './deposit-forms/deposit-forms.component';
-import { DepositFormComponent } from './deposit-form.component';
-// import { DepositFormRoutingModule} from './deposit-form-routing.module';
-import { DepositFormEditComponent } from './deposit-forms/deposit-form-edit/deposit-form-edit.component';
-import { DepositFormService } from './_services/';
+import { DepositFormsDetailsComponent } from './deposit-formsdetails/deposit-formsdetails.component';
+import { DepositFormDetailComponent } from './deposit-formdetail.component';
+// import { DepositFormDetailRoutingModule} from './deposit-form-routing.module';
+import { DepositFormDetailEditComponent } from './deposit-formsdetails/deposit-formdetail-edit/deposit-formdetail-edit.component';
+import { DepositFormDetailService } from './_services/';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    DepositFormsComponent,
-    DepositFormComponent,
-    DepositFormEditComponent,
+    DepositFormsDetailsComponent,
+    DepositFormDetailComponent,
+    DepositFormDetailEditComponent,
   ],
   imports: [
     CommonModule,
-    // DepositFormRoutingModule,
+    // DepositFormDetailRoutingModule,
     InlineSVGModule,
     NgbModalModule,
     NgbDatepickerModule,
@@ -38,8 +38,8 @@ import { RouterModule } from '@angular/router';
   entryComponents: [
   ],
   providers: [
-    DepositFormService,
+    DepositFormDetailService,
     ConfirmationService
   ]
 })
-export class DepositFormModule {}
+export class DepositFormDetailModule {}

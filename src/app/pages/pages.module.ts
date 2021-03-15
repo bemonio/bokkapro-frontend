@@ -126,6 +126,12 @@ import { PackageAutocompleteComponent } from './package/packages/package-autocom
 import { DepositFormsComponent } from './deposit-form/deposit-forms/deposit-forms.component';
 import { DepositFormComponent } from './deposit-form/deposit-form.component';
 import { DepositFormEditComponent } from './deposit-form/deposit-forms/deposit-form-edit/deposit-form-edit.component';
+import { DepositFormAutocompleteComponent } from './deposit-form/deposit-forms/deposit-form-autocomplete/deposit-form-autocomplete.component';
+
+// DepositFormsDetails
+import { DepositFormsDetailsComponent } from './deposit-formdetail/deposit-formsdetails/deposit-formsdetails.component';
+import { DepositFormDetailComponent } from './deposit-formdetail/deposit-formdetail.component';
+import { DepositFormDetailEditComponent } from './deposit-formdetail/deposit-formsdetails/deposit-formdetail-edit/deposit-formdetail-edit.component';
 
 // Vouchers
 import { VouchersComponent } from './voucher/vouchers/vouchers.component';
@@ -150,6 +156,7 @@ import { TypeCurrencySelectComponent } from './type-currency/types-currencies/ty
 import { CurrenciesDetailsComponent } from './currency-detail/currencies-details/currencies-details.component';
 import { CurrencyDetailComponent } from './currency-detail/currency-detail.component';
 import { CurrencyDetailEditComponent } from './currency-detail/currencies-details/currency-detail-edit/currency-detail-edit.component';
+import { CurrencyDetailAutocompleteComponent } from './currency-detail/currencies-details/currency-detail-autocomplete/currency-detail-autocomplete.component';
 
 // Exchanges
 import { ExchangesComponent } from './exchange/exchanges/exchanges.component';
@@ -261,6 +268,10 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     DepositFormsComponent,
     DepositFormComponent,
     DepositFormEditComponent,
+    DepositFormAutocompleteComponent,
+    DepositFormsDetailsComponent,
+    DepositFormDetailComponent,
+    DepositFormDetailEditComponent,
     VouchersComponent,
     VoucherComponent,
     VoucherEditComponent,
@@ -272,6 +283,7 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     CurrenciesDetailsComponent,
     CurrencyDetailComponent,
     CurrencyDetailEditComponent,
+    CurrencyDetailAutocompleteComponent,
     TypesCurrenciesComponent,
     TypeCurrencyComponent,
     TypeCurrencyEditComponent,
