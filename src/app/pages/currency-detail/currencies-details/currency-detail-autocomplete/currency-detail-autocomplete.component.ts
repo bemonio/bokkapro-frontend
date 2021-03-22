@@ -97,7 +97,7 @@ export class CurrencyDetailAutocompleteComponent implements ControlValueAccessor
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{name.icontains}', value: event.query })
+            this.filters.push({ key: 'filter{denomination.icontains}', value: event.query })
         } else {
             this.query = undefined;
         }
