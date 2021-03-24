@@ -1,22 +1,22 @@
 import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BankAccountService as ModelsService } from '../../_services/bank-account.service';
+import { CurrencyDetailService as ModelsService } from '../../_services/currency-detail.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => BankAccountAutocompleteComponent),
+    useExisting: forwardRef(() => CurrencyDetailAutocompleteComponent),
     multi: true,
 };
 
 @Component({
-    selector: 'app-bank-account-autocomplete',
-    templateUrl: './bank-account-autocomplete.component.html',
-    styleUrls: ['./bank-account-autocomplete.component.scss'],
+    selector: 'app-currency-detail-autocomplete',
+    templateUrl: './currency-detail-autocomplete.component.html',
+    styleUrls: ['./currency-detail-autocomplete.component.scss'],
     providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
-export class BankAccountAutocompleteComponent implements ControlValueAccessor, OnInit {
+export class CurrencyDetailAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
@@ -37,7 +37,6 @@ export class BankAccountAutocompleteComponent implements ControlValueAccessor, O
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
-    public _with: { key: string, value: string }[];
 
     public value: any;
 
@@ -52,7 +51,7 @@ export class BankAccountAutocompleteComponent implements ControlValueAccessor, O
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = '';
+            this.placeholder = 'Currency Detail';
         }
     }
 
@@ -98,7 +97,7 @@ export class BankAccountAutocompleteComponent implements ControlValueAccessor, O
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{account.icontains}', value: event.query })
+            this.filters.push({ key: 'filter{denomination.icontains}', value: event.query })
         } else {
             this.query = undefined;
         }
@@ -115,9 +114,9 @@ export class BankAccountAutocompleteComponent implements ControlValueAccessor, O
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
             response => {
-                this.models = response.banksaccounts;
+                this.models = response.currenciesdetails;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {

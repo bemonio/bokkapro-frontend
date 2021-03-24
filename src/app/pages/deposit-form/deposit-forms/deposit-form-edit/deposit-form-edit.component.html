@@ -1,0 +1,143 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="requesting">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="model">
+          {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
+          <span *ngIf="model && model.id">'{{ model.id }} </span>
+        </ng-container>
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="/depositforms">
+        <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
+      </a>
+      <button class="btn btn-secondary ml-2" (click)="reset()">
+        <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+        <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+          [class.active]="activeTabId === tabs.BASIC_TAB">
+          {{ 'COMMON.BASIC_INFO' | translate }}
+        </a>
+      </li>
+      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PROFILE"
+          [class.active]="activeTabId === tabs.PROFILE">Profile</a>
+      </li> -->
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+      <div class="mt-5" *ngIf="model">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Amount</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="Amount" name="amount" [class.is-invalid]="isControlInvalid('amount')"
+                [class.is-valid]="isControlValid('amount')" formControlName="amount" />
+              <div class="feedback" *ngIf="!isControlTouched('amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Amount</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('amount')">Amount  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">Amount  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'amount')">Amount {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">Amount {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Difference Reason</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="Difference Reason" name="difference_reason" [class.is-invalid]="isControlInvalid('difference_reason')"
+                [class.is-valid]="isControlValid('difference_reason')" formControlName="difference_reason" />
+              <div class="feedback" *ngIf="!isControlTouched('difference_reason')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Difference Reason</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('difference_reason')">Difference Reason  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'difference_reason')">Difference Reason  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'difference_reason')">Difference Reason {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'difference_reason')">Difference Reason {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Verified</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="Verified" name="verified" [class.is-invalid]="isControlInvalid('verified')"
+                [class.is-valid]="isControlValid('verified')" formControlName="verified" />
+              <div class="feedback" *ngIf="!isControlTouched('verified')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Verified</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('verified')">Verified  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'verified')">Verified  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'verified')">Verified {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'verified')">Verified {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Package</label>
+              <app-package-autocomplete
+              placeholder="Package" name="package" [valid]="isControlValid('package')" [touched]="isControlTouched('package')" [class.is-invalid]="isControlInvalid('package')"
+              [class.is-valid]="isControlValid('package')" formControlName="package" id="package" [model]="model.package"></app-package-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('package')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Package</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('package')">Package  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'package')">Package  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'package')">Package {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'package')">Package {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>  
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Bank Account</label>
+              <app-bank-account-autocomplete
+              placeholder="Bank Account" name="bank_account" [valid]="isControlValid('bank_account')" [touched]="isControlTouched('bank_account')" [class.is-invalid]="isControlInvalid('bank_account')"
+              [class.is-valid]="isControlValid('bank_account')" formControlName="bank_account" id="bank_account" [model]="model.bank_account"></app-bank-account-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('bank_account')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Bank Account</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('bank_account')">Bank Account  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'bank_account')">Bank Account  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'bank_account')">Bank Account {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'bank_account')">Bank Account {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>  
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Employee Who Counts</label>
+              <app-employee-autocomplete
+              placeholder="Employee Who Counts" name="employee_who_counts" [valid]="isControlValid('employee_who_counts')" [touched]="isControlTouched('employee_who_counts')" [class.is-invalid]="isControlInvalid('employee_who_counts')"
+              [class.is-valid]="isControlValid('employee_who_counts')" formControlName="employee_who_counts" id="employee_who_counts" [model]="model.employee_who_counts"></app-employee-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('employee_who_counts')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Employee Who Counts</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('employee_who_counts')">Employee Who Counts  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee_who_counts')">Employee Who Counts  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employee_who_counts')">Employee Who Counts {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employee_who_counts')">Employee Who Counts {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>  
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Supervisor</label>
+              <app-employee-autocomplete
+              placeholder="Supervisor" name="supervisor" [valid]="isControlValid('supervisor')" [touched]="isControlTouched('supervisor')" [class.is-invalid]="isControlInvalid('supervisor')"
+              [class.is-valid]="isControlValid('supervisor')" formControlName="supervisor" id="supervisor" [model]="model.supervisor"></app-employee-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('supervisor')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Supervisor</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('supervisor')">Supervisor  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'supervisor')">Supervisor  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'supervisor')">Supervisor {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'supervisor')">Supervisor {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>  
+            <!-- <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Verified At</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('verified_at'))" name="verified_at" formControlName="verified_at"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('verified_at')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Verified At</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('verified_at')">Verified At  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'verified_at')">Verified At  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'verified_at')">Verified At {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'verified_at')">Verified At {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>     -->
+          </div>
+          <div class="float-right">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="/depositforms">{{ 'COMMON.CANCEL' | translate }}</a>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+  </div>
+</div>

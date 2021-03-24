@@ -234,6 +234,14 @@ export const locale = {
       CODE: 'Código',
       VERIFICATED: 'Verificado',
     },
+    DEPOSITFORM: {
+      DEPOSITFORM: 'Planilla Depósito',
+      DEPOSITFORMS: 'Planillas Depósito',
+    },
+    DEPOSITFORMDETAIL: {
+      DEPOSITFORMDETAIL: 'Planilla Depósito Detalle',
+      DEPOSITFORMSDETAILS: 'Planillas Depósito Detalles',
+    },
     CURRENCY: {
       CURRENCY: 'Divisa',
       CURRENCIES: 'Divisas',
