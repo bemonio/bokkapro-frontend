@@ -15,11 +15,11 @@
       <div class="form-group row" [formGroup]="searchGroup">
         <div class="col-lg-3">
           <p-calendar styleClass="form-control form-control-lg form-control-solid" name="date_filter" formControlName="date_filter" showButtonBar="true" (onSelect)="loadLazy()" (onClickOutside)="loadLazy()" (onClearClick)="loadLazy()"></p-calendar>
-          <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} AM/PM</small>
+          <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} {{ 'GUIDE.DATE' | translate }}</small>
         </div>
         <div class="col-lg-3">
           <p-dropdown styleClass="form-control form-control-lg form-control-solid" [options]="optionsAmPm" optionLabel="key" name="am_pm_filter" formControlName="am_pm_filter" placeholder="seleccione" dateFormat="dd.mm.yy" (onChange)="loadLazy()"></p-dropdown>
-          <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} Date</small>
+          <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} {{ 'GUIDE.SHIFT' | translate }}</small>
         </div>
       </div>
     </div>
