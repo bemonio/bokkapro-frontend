@@ -211,6 +211,7 @@ export const locale = {
       DIVISION_DESTINATION: 'Division Destino',
       EMPLOYEE_ORIGIN: 'Empleado Origen',
       EMPLOYEE_DESTINATION: 'Empleado Destino',
+      CODES: 'Códigos',
     },
     VOUCHER: {
       VOUCHER: 'Comprobante',

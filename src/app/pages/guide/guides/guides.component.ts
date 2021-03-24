@@ -124,6 +124,7 @@ export class GuidesComponent implements OnInit {
         this.selectedModels = [];
 
         this.optionsAmPm = [];
+        this.optionsAmPm.push({ key: 'TODO', value: 'ALL' });
         this.optionsAmPm.push({ key: 'AM', value: 'AM' });
         this.optionsAmPm.push({ key: 'PM', value: 'PM' });    
         // this.getModels();
@@ -167,7 +168,9 @@ export class GuidesComponent implements OnInit {
         }
 
         if (this.am_pm_filter.value) {
-            this.filters.push({ key: 'filter{am_pm}[]', value: this.am_pm_filter.value.value })
+            if (this.am_pm_filter.value.value != 'ALL') {
+                this.filters.push({ key: 'filter{am_pm}[]', value: this.am_pm_filter.value.value })
+            }
         }
 
         switch (this.route.parent.parent.snapshot.url[0].path) {
@@ -335,12 +338,14 @@ export class GuidesComponent implements OnInit {
                 element.verificated = true;
                 found = true;
             }
-            element.packages.forEach(element2 => {
-                if (element2.code === event.value) {
-                    element2.verificated = true;
-                    found = true;
-                }
-            });
+            if (this.verificationGuide.division_destination.name == 'Operaciones Internas') {
+                element.packages.forEach(element2 => {
+                    if (element2.code === event.value) {
+                        element2.verificated = true;
+                        found = true;
+                    }
+                });
+            }
         });
         if (!found) {
             this.listVouchers.forEach(element => {
@@ -432,12 +437,14 @@ export class GuidesComponent implements OnInit {
 
     countPackages(guide) {
         let count = 0;
-        if (guide.vouchers) {
-            guide.vouchers.forEach(element => {
-                if (element.packages) {
-                    count = + element.count_packages;
-                }
-            });
+        if (guide.division_destination.name != 'Operaciones Internas') {
+            if (guide.vouchers) {
+                guide.vouchers.forEach(element => {
+                    if (element.packages) {
+                        count = + element.count_packages;
+                    }
+                });
+            }
         }
         return count;
     }
@@ -495,7 +502,9 @@ export class GuidesComponent implements OnInit {
         }
 
         if (this.am_pm_export.value) {
-            url += 'filter{am_pm}[]=' + this.am_pm_export.value.value  + '&';
+            if (this.am_pm_export.value.value != 'ALL') {
+                url += 'filter{am_pm}[]=' + this.am_pm_export.value.value  + '&';
+            }
         }
 
         window.open(url, '_blank');
