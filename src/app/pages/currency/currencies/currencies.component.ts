@@ -29,6 +29,7 @@ export class CurrenciesComponent implements OnInit {
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
+    public _with: { key: string, value: string }[];
 
     public formGroup: FormGroup;
     public employee_id_filter: AbstractControl;
@@ -86,6 +87,8 @@ export class CurrenciesComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this._with = [];
+        this._with.push ({key: 'include[]' , value: 'office.*'})
     }
 
     public loadLazy(event: LazyLoadEvent) {
@@ -116,10 +119,17 @@ export class CurrenciesComponent implements OnInit {
 
     public getModels() {
         this.requesting = true;
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.requesting = false;
                 this.models = response.currencies;
+                response.offices.array.forEach(office => {
+                    this.models.forEach(element => {
+                        if (element.office === office.id) {
+                            element.office = office;
+                        }
+                    });
+                });
                 this.totalRecords = response.meta.total_results;
             },
             error => {

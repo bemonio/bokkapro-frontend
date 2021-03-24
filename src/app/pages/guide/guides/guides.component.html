@@ -30,7 +30,7 @@
     [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
     [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
     [filterDelay]="1000" [globalFilterFields]="['id','username']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
-    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true">
+    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3rem" *ngIf="showTableCheckbox">

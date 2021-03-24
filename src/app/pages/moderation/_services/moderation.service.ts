@@ -16,7 +16,7 @@ export class ModerationService {
     //     return this._subscriptions;
     // }
     
-    public get (page?: number, per_page?: number, sort?: string, query?: string, filters?: any[]): Observable<any> {
+    public get (page?: number, per_page?: number, sort?: string, query?: string, filters?: any[], _with?: any[]): Observable<any> {
         let params: URLSearchParams = new URLSearchParams();
 
         if (page !== null && page !== undefined) {
@@ -41,6 +41,12 @@ export class ModerationService {
 
         if (filters !== null && filters !== undefined && filters.length > 0) {
             filters.forEach(element => {
+                params.append(element.key, String(element.value));
+            });
+        }
+
+        if (_with !== null && _with !== undefined && _with.length > 0) {
+            _with.forEach(element => {
                 params.append(element.key, String(element.value));
             });
         }

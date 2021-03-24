@@ -33,6 +33,7 @@ export class GuidesComponent implements OnInit {
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
+    public _with: { key: string, value: string }[];
 
     public searchGroup: FormGroup;
     public search_filter: AbstractControl;
@@ -191,7 +192,7 @@ export class GuidesComponent implements OnInit {
 
     public getModels() {
         this.requesting = true;
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.requesting = false;
                 this.models = response.guides;
