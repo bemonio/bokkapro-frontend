@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
@@ -8,6 +8,8 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 export class DivisionService {
     API_URL = `${environment.apiUrl}divisions`;
     private _subscriptions: Subscription[] = [];
+
+    public _change$ = new BehaviorSubject<boolean>(false);
 
     constructor(public http: HttpClient) { }
 

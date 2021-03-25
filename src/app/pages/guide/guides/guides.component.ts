@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
+import { DivisionService } from '../../division/_services';
 
 @Component({
     selector: 'app-guides',
@@ -66,12 +67,15 @@ export class GuidesComponent implements OnInit {
 
     public optionsAmPm: { key: string, value: string }[];
 
+    public divisionChangeSubscription: Subscription;
+
     constructor(
         public modelsService: ModelService,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
+        public divisionService: DivisionService,
         private router: Router,
         private route: ActivatedRoute,
         fb: FormBuilder) {
@@ -132,6 +136,7 @@ export class GuidesComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this.subscribeToDivisionChange();
     }
 
     static matches(form: AbstractControl){
@@ -508,5 +513,12 @@ export class GuidesComponent implements OnInit {
         }
 
         window.open(url, '_blank');
+    }
+
+    public subscribeToDivisionChange() {
+        this.divisionChangeSubscription = this.divisionService._change$
+        .subscribe(response => {
+            this.loadLazy();
+        });
     }
 }
