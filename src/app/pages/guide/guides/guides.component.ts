@@ -85,8 +85,8 @@ export class GuidesComponent implements OnInit {
         this.am_pm_filter = this.searchGroup.controls['am_pm_filter'];
 
         this.exportGroup = fb.group({
-            'date_export': ['', Validators.compose([Validators.required])],
-            'am_pm_export': ['', Validators.compose([Validators.required])],
+            'date_export': [''],
+            'am_pm_export': [''],
         });
         this.date_export = this.exportGroup.controls['date_export'];
         this.am_pm_export = this.exportGroup.controls['am_pm_export'];
