@@ -312,7 +312,7 @@ export const locale = {
       CANCEL: 'Cancelar',
       SAVE: 'Guardar',
       SAVE_AND_EXIT: 'Guardar/Salir',
-      EXPORT: 'Export',
+      EXPORT: 'Exportar',
       CONFIRMATION: 'Confirmación',
       VERIFICATION: 'Verificación',
       MESSAGE_CONFIRM_DELETE: '¿Estás seguro que deseas eliminar?',
