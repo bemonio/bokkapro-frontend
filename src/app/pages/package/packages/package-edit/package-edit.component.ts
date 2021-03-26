@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
@@ -15,6 +15,10 @@ import { PackageService as ModelsService } from '../../_services/package.service
   styleUrls: ['./package-edit.component.scss']
 })
 export class PackageEditComponent implements OnInit, OnDestroy {
+
+  @Input() listDepositForms: any[];
+
+
   public id: number;
   public model: Model;
   public previous: Model;
@@ -24,6 +28,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   public tabs = {
     BASIC_TAB: 0,
     OFFICE_TAB: 1,
+    DEPOSIT_FORM_TAB: 2,
   };
 
   public code: AbstractControl;
@@ -33,6 +38,9 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   // private subscriptions: Subscription[] = [];
 
   public saveAndExit;
+
+  public newDepositForm: boolean;
+  public parent: string;
 
   constructor(
     private fb: FormBuilder,
@@ -51,12 +59,19 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     });
     this.code = this.formGroup.controls['code'];
     this.verificated = this.formGroup.controls['verificated'];
+
+    this.parent = '/packages';
+    this.newDepositForm = false;
   }
 
   ngOnInit(): void {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
+
+    if (this.route.parent.parent.snapshot.url[0].path) {
+      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
+    }
 
     this.get();
   }
@@ -67,6 +82,11 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       switchMap(params => {
         // get id from URL
         this.id = Number(params.get('id'));
+
+        if (this.route.firstChild) {
+          this.activeTabId = this.tabs.DEPOSIT_FORM_TAB;
+        }
+
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
@@ -128,6 +148,15 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
 
+    let listDepositForms = model.depositforms;
+    model.depositforms = [];
+
+    if (listDepositForms) {
+      listDepositForms.forEach(element => {
+        model.depositforms.push(element.id);
+      });
+    }
+
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
@@ -148,8 +177,15 @@ export class PackageEditComponent implements OnInit, OnDestroy {
         return of(this.model);
       })
     ).subscribe(response => {
-      this.requesting = false;
-      this.model = response.package
+      if (response.package.id) {
+        this.toastService.growl('success', 'success');
+        if (this.saveAndExit) {
+          this.router.navigate([this.parent]);
+        }
+  
+        this.requesting = false;
+        this.model = response.package
+      }
     });
     // this.subscriptions.push(sbUpdate);
   }
@@ -157,6 +193,14 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   create() {
     this.requesting = true;
     let model = this.model;
+
+    model.depositforms = [];
+
+    if (this.listDepositForms) {
+      this.listDepositForms.forEach(element => {
+        model.depositforms.push(element.id);
+      });
+    }
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
@@ -183,6 +227,13 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     ).subscribe(response => {
       this.requesting = false;
       this.model = response.package as Model
+      if (response.package.id) {
+        if (this.saveAndExit) {
+          this.router.navigate([this.parent]);
+        } else {
+          this.router.navigate([this.parent + '/edit/' + response.package.id + '/depositforms']);
+        }
+      }
     });
     // this.subscriptions.push(sbCreate);
   }

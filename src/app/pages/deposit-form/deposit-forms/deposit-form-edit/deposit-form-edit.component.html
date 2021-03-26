@@ -16,7 +16,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-light" routerLink="/depositforms">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}/depositforms">
         <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
@@ -75,7 +75,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'verified')">Verified {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'verified')">Verified {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Package</label>
               <app-package-autocomplete
               placeholder="Package" name="package" [valid]="isControlValid('package')" [touched]="isControlTouched('package')" [class.is-invalid]="isControlInvalid('package')"
@@ -85,7 +85,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'package')">Package  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'package')">Package {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'package')">Package {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>  
+            </div>   -->
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Bank Account</label>
               <app-bank-account-autocomplete
@@ -130,7 +130,7 @@
             </div>     -->
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="/depositforms">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}//depositforms">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

@@ -28,7 +28,6 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   public difference_reason: AbstractControl;
   public verified: AbstractControl;
   public verified_at: AbstractControl;
-  public package: AbstractControl;
   public bank_account: AbstractControl;
   public employee_who_counts: AbstractControl;
   public supervisor: AbstractControl;
@@ -37,6 +36,9 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
+
+  public packageId: number;
+  public parent: string;
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +56,6 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       difference_reason: ['', Validators.compose([Validators.required])],
       verified: ['', Validators.compose([Validators.required])],
       verified_at: [''],
-      package: ['', Validators.compose([Validators.required])],
       bank_account: ['', Validators.compose([Validators.required])],
       employee_who_counts: ['', Validators.compose([Validators.required])],
       supervisor: ['', Validators.compose([Validators.required])],
@@ -63,7 +64,6 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.difference_reason = this.formGroup.controls['difference_reason']
     this.verified = this.formGroup.controls['verified']
     this.verified_at = this.formGroup.controls['verified_at']
-    this.package = this.formGroup.controls['package']
     this.bank_account = this.formGroup.controls['bank_account']
     this.employee_who_counts = this.formGroup.controls['employee_who_counts']
     this.supervisor = this.formGroup.controls['supervisor']
@@ -74,6 +74,14 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
     this.get();
+
+    this.route.parent.parent.parent.params.subscribe((params) => {
+      if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+        this.packageId = params.id;
+        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.packageId;
+      }
+      this.get();
+    });
   }
 
   get() {
@@ -104,8 +112,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.deposit_form;
-        if (response.package) {
-          this.model.package = response.package[0];
+        if (response.packages) {
+          this.model.packages = response.packages[0];
         }
         if (response.bank_account) {
           this.model.bank_account = response.bank_account[0];
@@ -129,9 +137,6 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       this.difference_reason.setValue(this.model.difference_reason)
       this.verified.setValue(this.model.verified)
       this.verified_at.setValue(new Date(this.model.verified_at));
-      if (this.model.package) {
-        this.package.setValue(this.model.package);
-      }
       if (this.model.bank_account) {
         this.bank_account.setValue(this.model.bank_account);
       }
@@ -169,7 +174,6 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
-    model.package = this.model.package.id
     model.bank_account = this.model.bank_account.id
     model.employee_who_counts = this.model.employee_who_counts.id
     model.supervisor = this.model.supervisor.id
@@ -177,7 +181,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/depositforms']);
+          this.router.navigate([this.parent + '/depositforms']);
         }
       }),
       catchError((error) => {
@@ -204,18 +208,17 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   create() {
     this.requesting = true;
     let model = this.model;
-    model.package = this.model.id
     model.bank_account = this.model.id
     model.employee_who_counts = this.model.id
     model.supervisor = this.model.id
+
+    let packages = [];
+    packages.push(this.packageId);
+    model.packages = packages;
+
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
-        if (this.saveAndExit) {
-          this.router.navigate(['/depositforms']);
-        } else {
-          this.formGroup.reset()
-        }
       }),
       catchError((error) => {
         this.requesting = false;
@@ -233,6 +236,11 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     ).subscribe(response => {
       this.requesting = false;
       this.model = response.deposit_form as Model
+      if (this.saveAndExit) {
+        this.router.navigate([this.parent + '/depositforms']);
+      } else {
+        this.formGroup.reset()
+      }
     });
     this.subscriptions.push(sbCreate);
   }
