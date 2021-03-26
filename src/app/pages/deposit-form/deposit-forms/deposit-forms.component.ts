@@ -110,18 +110,20 @@ export class DepositFormsComponent implements OnInit {
         }
 
         this.filters = [];
-        if (this.route.parent.parent.snapshot.url.length > 0) {
+        // if (this.route.parent.parent.snapshot.url.length > 0) {
             this.route.params.subscribe((params) => {
-                if (this.route.parent.parent.snapshot.url.length > 0) {
-                    this.packageId = params.id;
-                    this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.packageId;
-                    this.filters.push({ key: 'filter{package}', value: this.packageId.toString() })
-                }
+                // if (this.route.parent.parent.snapshot.url.length > 0) {
+                    if (params.id) {
+                        this.packageId = params.id;
+                        this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.packageId;
+                        this.filters.push({ key: 'filter{package}', value: this.packageId.toString() })
+                    }
+                // }
                 this.getModels();
             });
-        } else {
-            this.getModels();
-        }
+        // } else {
+        //     this.getModels();
+        // }
     }
 
     public getModels() {
