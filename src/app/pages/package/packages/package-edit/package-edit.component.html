@@ -36,6 +36,10 @@
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.OFFICE_TAB"
           [class.active]="activeTabId === tabs.OFFICE_TAB">Offices</a>
       </li> -->
+      <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.DEPOSIT_FORM_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.DEPOSIT_FORM_TAB"
+          [class.active]="activeTabId === tabs.DEPOSIT_FORM_TAB" routerLink="{{parent}}/edit/{{model.id}}/depositforms">{{ 'DEPOSITFORM.DEPOSITFORMS' | translate }}</a>
+      </li>
     </ul>
 
     <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
@@ -98,5 +102,11 @@
         <app-offices></app-offices>
       </div>
     </ng-container> -->
+
+    <ng-container *ngIf="activeTabId === tabs.DEPOSIT_FORM_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-deposit-forms></app-deposit-forms>
+      </div>
+    </ng-container>
   </div>
 </div>

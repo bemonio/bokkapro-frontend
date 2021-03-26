@@ -8,7 +8,7 @@ export class DepositFormModel {
   difference_reason: string;
   verified: string;
   verified_at: string;
-  package: any;
+  packages: any;
   bank_account: any;
   employee_who_counts: any;
   supervisor: any;

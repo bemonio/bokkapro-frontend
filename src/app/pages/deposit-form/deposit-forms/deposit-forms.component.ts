@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DepositFormService as ModelService } from '../_services/deposit-form.service';
 import { DepositFormModel as Model } from '../_models/deposit-form.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -39,10 +40,15 @@ export class DepositFormsComponent implements OnInit {
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
 
+    public packageId: number;
+    public parent: string;
+
     public showTableCheckbox: boolean;
 
     constructor(
         public modelsService: ModelService,
+        private router: Router,
+        private route: ActivatedRoute,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
@@ -61,6 +67,7 @@ export class DepositFormsComponent implements OnInit {
         });
 
         this.showTableCheckbox = false;
+        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
@@ -102,8 +109,19 @@ export class DepositFormsComponent implements OnInit {
             this.per_page = event.rows;
         }
 
-
-        this.getModels();
+        this.filters = [];
+        if (this.route.parent.parent.snapshot.url.length > 0) {
+            this.route.params.subscribe((params) => {
+                if (this.route.parent.parent.snapshot.url.length > 0) {
+                    this.packageId = params.id;
+                    this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.packageId;
+                    this.filters.push({ key: 'filter{package}', value: this.packageId.toString() })
+                }
+                this.getModels();
+            });
+        } else {
+            this.getModels();
+        }
     }
 
     public getModels() {

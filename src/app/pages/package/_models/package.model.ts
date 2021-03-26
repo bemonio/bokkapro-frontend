@@ -4,4 +4,5 @@ export class PackageModel {
   verificated: boolean;
   created_at: string;
   updated_at: string;
+  depositforms: any[];
 }
