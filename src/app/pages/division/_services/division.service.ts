@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
@@ -9,13 +9,15 @@ export class DivisionService {
     API_URL = `${environment.apiUrl}divisions`;
     private _subscriptions: Subscription[] = [];
 
+    public _change$ = new BehaviorSubject<boolean>(false);
+
     constructor(public http: HttpClient) { }
 
     get subscriptions() {
         return this._subscriptions;
     }
     
-    public get (page?: number, per_page?: number, sort?: string, query?: string, filters?: any[]): Observable<any> {
+    public get (page?: number, per_page?: number, sort?: string, query?: string, filters?: any[], _with?: any[]): Observable<any> {
         let params: URLSearchParams = new URLSearchParams();
 
         if (page !== null && page !== undefined) {
@@ -40,6 +42,12 @@ export class DivisionService {
 
         if (filters !== null && filters !== undefined && filters.length > 0) {
             filters.forEach(element => {
+                params.append(element.key, String(element.value));
+            });
+        }
+
+        if (_with !== null && _with !== undefined && _with.length > 0) {
+            _with.forEach(element => {
                 params.append(element.key, String(element.value));
             });
         }

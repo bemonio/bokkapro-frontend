@@ -27,7 +27,7 @@
     [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
     [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
     [filterDelay]="1000" [globalFilterFields]="['id','username']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
-    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true">
+    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3rem" *ngIf="showTableCheckbox">
@@ -35,37 +35,37 @@
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
-              ID
+              {{ 'COMPANY.ID' | translate }}
             </div>
           </th>
           <th pSortableColumn="code">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Code
+              {{ 'COMPANY.CODE' | translate }}
             </div>
           </th>
           <th pSortableColumn="name">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Name 
+              {{ 'COMPANY.NAME' | translate }}
             </div>
           </th>
           <th pSortableColumn="identification_number">
             <div class="p-d-flex p-jc-between p-ai-center">
-              NIT
+              {{ 'COMPANY.IDENTIFICATION_NUMBER' | translate }}
             </div>
           </th>
-          <th pSortableColumn="logo">
+          <!-- <th pSortableColumn="logo">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Logo
+              {{ 'COMPANY.LOGO' | translate }}
             </div>
-          </th>
+          </th> -->
           <th pSortableColumn="phone">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Phone
+              {{ 'COMPANY.PHONE' | translate }}
             </div>
           </th>
           <th pSortableColumn="created_at">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Created At
+              {{ 'COMMON.CREATED_AT' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
@@ -96,9 +96,9 @@
           <td>
             {{value.identification_number}}
           </td>
-          <td>
+          <!-- <td>
             {{value.logo}}
-          </td>
+          </td> -->
           <td>
             {{value.phone}}
           </td>
@@ -123,7 +123,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="9">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          <td colspan="8">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>

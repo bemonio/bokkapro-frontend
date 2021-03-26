@@ -27,7 +27,7 @@
     [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
     [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
     [filterDelay]="1000" [globalFilterFields]="['id','username']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
-    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true">
+    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3rem" *ngIf="showTableCheckbox">
@@ -35,14 +35,14 @@
           </th>
           <th pSortableColumn="name">
             <div class="p-d-flex p-jc-between p-ai-center">
-              ID
+              {{ 'USER.ID' | translate }}
               <!-- <p-sortIcon field="name"></p-sortIcon>
               <p-columnFilter type="text" field="name" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
           <th pSortableColumn="username">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Username 
+              {{ 'USER.USERNAME' | translate }} 
               <!-- <p-sortIcon field="username"></p-sortIcon>
               <p-columnFilter field="username" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" class="p-ml-auto">
                   <ng-template pTemplate="header">
@@ -55,7 +55,7 @@
           </th>
           <th pSortableColumn="email">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Email 
+              {{ 'USER.EMAIL' | translate }} 
               <!-- <p-sortIcon field="email"></p-sortIcon>
               <p-columnFilter field="email" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" class="p-ml-auto">
                   <ng-template pTemplate="header">
@@ -68,7 +68,7 @@
           </th>
           <th pSortableColumn="date">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Date Joined
+              {{ 'USER.DATE_JOINED' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
@@ -82,7 +82,7 @@
           </th> -->
           <th pSortableColumn="status">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Is Active
+              {{ 'USER.STATUS' | translate }}
               <!-- <p-sortIcon field="status"></p-sortIcon>
               <p-columnFilter field="status" matchMode="equals" display="menu" class="p-ml-auto">
                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">

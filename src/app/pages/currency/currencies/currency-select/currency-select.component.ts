@@ -36,6 +36,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
+    public _with: { key: string, value: string }[];
 
     public value: any;
 
@@ -49,7 +50,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Currency';
+            this.placeholder = '';
         }
         this.load();
     }
@@ -88,7 +89,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.models = response.currencies;
                 this.totalRecords = response.meta.total_results;

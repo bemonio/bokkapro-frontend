@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
+import { DivisionService } from '../../division/_services';
 
 @Component({
     selector: 'app-guides',
@@ -33,6 +34,7 @@ export class GuidesComponent implements OnInit {
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
+    public _with: { key: string, value: string }[];
 
     public searchGroup: FormGroup;
     public search_filter: AbstractControl;
@@ -65,12 +67,15 @@ export class GuidesComponent implements OnInit {
 
     public optionsAmPm: { key: string, value: string }[];
 
+    public divisionChangeSubscription: Subscription;
+
     constructor(
         public modelsService: ModelService,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
+        public divisionService: DivisionService,
         private router: Router,
         private route: ActivatedRoute,
         fb: FormBuilder) {
@@ -84,8 +89,8 @@ export class GuidesComponent implements OnInit {
         this.am_pm_filter = this.searchGroup.controls['am_pm_filter'];
 
         this.exportGroup = fb.group({
-            'date_export': ['', Validators.compose([Validators.required])],
-            'am_pm_export': ['', Validators.compose([Validators.required])],
+            'date_export': [''],
+            'am_pm_export': [''],
         });
         this.date_export = this.exportGroup.controls['date_export'];
         this.am_pm_export = this.exportGroup.controls['am_pm_export'];
@@ -123,6 +128,7 @@ export class GuidesComponent implements OnInit {
         this.selectedModels = [];
 
         this.optionsAmPm = [];
+        this.optionsAmPm.push({ key: 'TODO', value: 'ALL' });
         this.optionsAmPm.push({ key: 'AM', value: 'AM' });
         this.optionsAmPm.push({ key: 'PM', value: 'PM' });    
         // this.getModels();
@@ -130,6 +136,7 @@ export class GuidesComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this.subscribeToDivisionChange();
     }
 
     static matches(form: AbstractControl){
@@ -166,7 +173,9 @@ export class GuidesComponent implements OnInit {
         }
 
         if (this.am_pm_filter.value) {
-            this.filters.push({ key: 'filter{am_pm}[]', value: this.am_pm_filter.value.value })
+            if (this.am_pm_filter.value.value != 'ALL') {
+                this.filters.push({ key: 'filter{am_pm}[]', value: this.am_pm_filter.value.value })
+            }
         }
 
         switch (this.route.parent.parent.snapshot.url[0].path) {
@@ -191,7 +200,7 @@ export class GuidesComponent implements OnInit {
 
     public getModels() {
         this.requesting = true;
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.requesting = false;
                 this.models = response.guides;
@@ -334,12 +343,14 @@ export class GuidesComponent implements OnInit {
                 element.verificated = true;
                 found = true;
             }
-            element.packages.forEach(element2 => {
-                if (element2.code === event.value) {
-                    element2.verificated = true;
-                    found = true;
-                }
-            });
+            if (this.verificationGuide.division_destination.name == 'Operaciones Internas') {
+                element.packages.forEach(element2 => {
+                    if (element2.code === event.value) {
+                        element2.verificated = true;
+                        found = true;
+                    }
+                });
+            }
         });
         if (!found) {
             this.listVouchers.forEach(element => {
@@ -431,12 +442,14 @@ export class GuidesComponent implements OnInit {
 
     countPackages(guide) {
         let count = 0;
-        if (guide.vouchers) {
-            guide.vouchers.forEach(element => {
-                if (element.packages) {
-                    count = + element.count_packages;
-                }
-            });
+        if (guide.division_destination.name != 'Operaciones Internas') {
+            if (guide.vouchers) {
+                guide.vouchers.forEach(element => {
+                    if (element.packages) {
+                        count = + element.count_packages;
+                    }
+                });
+            }
         }
         return count;
     }
@@ -494,9 +507,18 @@ export class GuidesComponent implements OnInit {
         }
 
         if (this.am_pm_export.value) {
-            url += 'filter{am_pm}[]=' + this.am_pm_export.value.value  + '&';
+            if (this.am_pm_export.value.value != 'ALL') {
+                url += 'filter{am_pm}[]=' + this.am_pm_export.value.value  + '&';
+            }
         }
 
         window.open(url, '_blank');
+    }
+
+    public subscribeToDivisionChange() {
+        this.divisionChangeSubscription = this.divisionService._change$
+        .subscribe(response => {
+            this.loadLazy();
+        });
     }
 }

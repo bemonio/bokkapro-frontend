@@ -269,10 +269,10 @@ msgstr "Administrador"
 
 # company
 msgid "companies"
-msgstr "Compañías"
+msgstr "Clientes"
 
 msgid "company"
-msgstr "Compañía"
+msgstr "Cliente"
 
 # venue
 msgid "venues"

@@ -37,6 +37,7 @@ export class ModerationAutocompleteComponent implements ControlValueAccessor, On
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
+    public _with: { key: string, value: string }[];
 
     public value: any;
 
@@ -51,7 +52,7 @@ export class ModerationAutocompleteComponent implements ControlValueAccessor, On
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Moderation';
+            this.placeholder = '';
         }
     }
 
@@ -114,7 +115,7 @@ export class ModerationAutocompleteComponent implements ControlValueAccessor, On
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.models = response.moderated_objects;
                 this.totalRecords = response.meta.total_results;

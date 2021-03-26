@@ -43,37 +43,37 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} name</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPARTMENT.NAME' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="name" name="name" [class.is-invalid]="isControlInvalid('name')"
+                name="name" [class.is-invalid]="isControlInvalid('name')"
                 [class.is-valid]="isControlValid('name')" formControlName="name" />
-              <div class="feedback" *ngIf="!isControlTouched('name')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>name</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('name')">name  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">name  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">name {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">name {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              <div class="feedback" *ngIf="!isControlTouched('name')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPARTMENT.NAME' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('name')">{{ 'DEPARTMENT.NAME' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">{{ 'DEPARTMENT.NAME' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">{{ 'DEPARTMENT.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">{{ 'DEPARTMENT.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Description</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPARTMENT.DESCRIPTION' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="Description" name="description" [class.is-invalid]="isControlInvalid('description')"
+                name="description" [class.is-invalid]="isControlInvalid('description')"
                 [class.is-valid]="isControlValid('description')" formControlName="description" />
-              <div class="feedback" *ngIf="!isControlTouched('description')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Description</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('description')">Description  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'description')">Description  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'description')">Description {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'description')">Description {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              <div class="feedback" *ngIf="!isControlTouched('description')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPARTMENT.DESCRIPTION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('description')">{{ 'DEPARTMENT.DESCRIPTION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'description')">{{ 'DEPARTMENT.DESCRIPTION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'description')">{{ 'DEPARTMENT.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'description')">{{ 'DEPARTMENT.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Office</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPARTMENT.OFFICE' | translate }}</label>
               <app-office-autocomplete
-              placeholder="Office" name="office" [valid]="isControlValid('office')" [touched]="isControlTouched('office')" [class.is-invalid]="isControlInvalid('office')"
+              name="office" [valid]="isControlValid('office')" [touched]="isControlTouched('office')" [class.is-invalid]="isControlInvalid('office')"
               [class.is-valid]="isControlValid('office')" formControlName="office" id="office" [model]="model.office"></app-office-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('office')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Office</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('office')">Office  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'office')">Office  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'office')">Office {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'office')">Office {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="feedback" *ngIf="!isControlTouched('office')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPARTMENT.OFFICE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('office')">{{ 'DEPARTMENT.OFFICE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'office')">{{ 'DEPARTMENT.OFFICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'office')">{{ 'DEPARTMENT.OFFICE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'office')">{{ 'DEPARTMENT.OFFICE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
           </div>
           <div class="float-right">

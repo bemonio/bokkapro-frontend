@@ -37,6 +37,7 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
+    public _with: { key: string, value: string }[];
 
     public value: any;
 
@@ -51,7 +52,7 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Type TypeCompany';
+            this.placeholder = '';
         }
     }
 
@@ -114,7 +115,7 @@ export class TypeCompanyAutocompleteComponent implements ControlValueAccessor, O
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.models = response.type_companies;
                 this.totalRecords = response.meta.total_results;

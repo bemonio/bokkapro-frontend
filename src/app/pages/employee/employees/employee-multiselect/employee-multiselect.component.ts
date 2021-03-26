@@ -37,6 +37,7 @@ export class EmployeeMultiselectComponent implements ControlValueAccessor, OnIni
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
+    public _with: { key: string, value: string }[];
 
     public value: any;
 
@@ -51,7 +52,7 @@ export class EmployeeMultiselectComponent implements ControlValueAccessor, OnIni
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Employees';
+            this.placeholder = '';
         }
         this.getModels();
     }
@@ -115,7 +116,7 @@ export class EmployeeMultiselectComponent implements ControlValueAccessor, OnIni
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.models = response.employees;
                 this.totalRecords = response.meta.total_results;

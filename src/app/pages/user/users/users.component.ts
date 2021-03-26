@@ -30,6 +30,7 @@ export class UsersComponent implements OnInit {
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
+    public _with: { key: string, value: string }[];
 
     public formGroup: FormGroup;
     public employee_id_filter: AbstractControl;
@@ -90,7 +91,6 @@ export class UsersComponent implements OnInit {
     }
 
     public loadLazy(event: LazyLoadEvent) {
-        this.requesting = true;
         this.page = (event.first / this.per_page) + 1;
         if (event.sortField) {
             if (event.sortOrder === -1) {
@@ -117,7 +117,8 @@ export class UsersComponent implements OnInit {
     }
 
     public getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
+        this.requesting = true;
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.requesting = false;
                 this.models = response.users;
