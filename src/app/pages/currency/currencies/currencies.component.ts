@@ -123,7 +123,7 @@ export class CurrenciesComponent implements OnInit {
             response => {
                 this.requesting = false;
                 this.models = response.currencies;
-                response.offices.array.forEach(office => {
+                response.offices.forEach(office => {
                     this.models.forEach(element => {
                         if (element.office === office.id) {
                             element.office = office;
