@@ -4,7 +4,7 @@ import { VoucherService as ModelService } from '../_services/voucher.service';
 import { VoucherModel as Model } from '../_models/voucher.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { DivisionService } from '../../division/_services';
 
 @Component({
     selector: 'app-vouchers',
@@ -54,6 +55,8 @@ export class VouchersComponent implements OnInit {
 
     public displayModal: boolean;
 
+    public divisionChangeSubscription: Subscription;
+
     constructor(
         public modelsService: ModelService,
         private router: Router,
@@ -62,6 +65,7 @@ export class VouchersComponent implements OnInit {
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
+        public divisionService: DivisionService,
         fb: FormBuilder) {
         this.formGroup = fb.group({
             'employee_id_filter': [''],
@@ -101,28 +105,31 @@ export class VouchersComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this.subscribeToDivisionChange();
     }
 
-    public loadLazy(event: LazyLoadEvent) {
-        this.page = (event.first / this.per_page) + 1;
-        if (event.sortField) {
-            if (event.sortOrder === -1) {
-                this.sort = '-' + event.sortField;
+    public loadLazy(event?: LazyLoadEvent) {
+        if (event) {
+            this.page = (event.first / this.per_page) + 1;
+            if (event.sortField) {
+                if (event.sortOrder === -1) {
+                    this.sort = '-' + event.sortField;
+                } else {
+                    this.sort = event.sortField;
+                }
             } else {
-                this.sort = event.sortField;
+                this.sort = '-id';
             }
-        } else {
-            this.sort = '-id';
-        }
 
-        if (event.globalFilter) {
-            this.query = event.globalFilter;
-        } else {
-            this.query = undefined;
-        }
+            if (event.globalFilter) {
+                this.query = event.globalFilter;
+            } else {
+                this.query = undefined;
+            }
 
-        if (event.rows) {
-            this.per_page = event.rows;
+            if (event.rows) {
+                this.per_page = event.rows;
+            }    
         }
 
         this.filters = [];
@@ -252,5 +259,12 @@ export class VouchersComponent implements OnInit {
     hideModalDialog() {
         this.displayModal = false;
         this.getModels();
+    }
+
+    public subscribeToDivisionChange() {
+        this.divisionChangeSubscription = this.divisionService._change$
+        .subscribe(response => {
+            this.loadLazy();
+        });
     }
 }
