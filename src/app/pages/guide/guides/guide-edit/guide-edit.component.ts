@@ -85,7 +85,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       division_origin: ['', Validators.compose([Validators.required,])],
       division_destination: ['', Validators.compose([Validators.required,])],
       employee_origin: ['', Validators.compose([Validators.required,])],
-      employee_destination: ['', Validators.compose([Validators.required,])],
+      employee_destination: [''],
     });
 
     this.description = this.formGroup.controls['description'];
@@ -187,7 +187,9 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.division_origin.setValue(this.authService.currentDivisionValue);
       this.employee_origin.setValue(this.authService.currentUserValue.employee);
       this.date.setValue(new Date());
+      this.employee_destination.setValidators([])
     } else {
+      this.employee_destination.setValidators(Validators.compose([Validators.required,]))
       switch (this.route.parent.parent.snapshot.url[0].path) {
         case 'guidesinput':
           this.typeGuide = 1;

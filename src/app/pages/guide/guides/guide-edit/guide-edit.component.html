@@ -75,7 +75,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division_destination')">{{ 'GUIDE.DIVISION_DESTINATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division_destination')">{{ 'GUIDE.DIVISION_DESTINATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" *ngIf="!transfer">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.EMPLOYEE_DESTINATION' | translate}}</label>
               <app-employee-autocomplete
               name="employee_destination" [valid]="isControlValid('employee_destination')" [touched]="isControlTouched('employee_destination')" [class.is-invalid]="isControlInvalid('employee_destination')"
@@ -86,6 +86,24 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employee_destination')">{{ 'GUIDE.EMPLOYEE_DESTINATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employee_destination')">{{ 'GUIDE.EMPLOYEE_DESTINATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>  
+            <div class="col-lg-4" *ngIf="division_destination.value?.type_division == 2">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.SHIFT' | translate}}</label>
+              <p-dropdown [styleClass]="getValidClass(isControlValid('am_pm'))" [options]="optionsAmPm" optionLabel="key" name="am_pm" formControlName="am_pm" dateFormat="dd.mm.yy"></p-dropdown>
+              <div class="feedback" *ngIf="!isControlTouched('am_pm')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.SHIFT' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('am_pm')">{{ 'GUIDE.SHIFT' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'am_pm')">{{ 'GUIDE.SHIFT' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'am_pm')">{{ 'GUIDE.SHIFT' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'am_pm')">{{ 'GUIDE.SHIFT' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4" *ngIf="division_destination.value?.type_division == 2">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.DATE' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.DATE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('date')">{{ 'GUIDE.DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">{{ 'GUIDE.DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">{{ 'GUIDE.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">{{ 'GUIDE.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>                     
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.CERTIFIED_CART' | translate}}</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="certified_cart" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
@@ -106,24 +124,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'certified_cart_code')">{{ 'GUIDE.CERTIFIED_CART_CODE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'certified_cart_code')">{{ 'GUIDE.CERTIFIED_CART_CODE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4" *ngIf="division_destination.value?.type_division == 2">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.SHIFT' | translate}}</label>
-              <p-dropdown [styleClass]="getValidClass(isControlValid('am_pm'))" [options]="optionsAmPm" optionLabel="key" name="am_pm" formControlName="am_pm" dateFormat="dd.mm.yy"></p-dropdown>
-              <div class="feedback" *ngIf="!isControlTouched('am_pm')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.SHIFT' | translate}}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('am_pm')">{{ 'GUIDE.SHIFT' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'am_pm')">{{ 'GUIDE.SHIFT' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'am_pm')">{{ 'GUIDE.SHIFT' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'am_pm')">{{ 'GUIDE.SHIFT' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>
-            <div class="col-lg-4" *ngIf="division_destination.value?.type_division == 2">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.DATE' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
-              <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.DATE' | translate}}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('date')">{{ 'GUIDE.DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">{{ 'GUIDE.DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">{{ 'GUIDE.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">{{ 'GUIDE.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>                     
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}" *ngIf="!transfer">{{ 'COMMON.CANCEL' | translate }}</a>
