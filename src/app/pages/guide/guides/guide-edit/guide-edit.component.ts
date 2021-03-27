@@ -451,7 +451,13 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.loadForm();
   }
 
-  public changeDivision(event) {
+  public changeDivisionOrigin(event) {
+    this.employee_origin.setValue('');
+    this.loadForm();
+  }
+
+  public changeDivisionDestination(event) {
+    this.employee_destination.setValue('');
     this.loadForm();
   }
 }
