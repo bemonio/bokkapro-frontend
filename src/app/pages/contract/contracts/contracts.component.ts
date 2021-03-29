@@ -81,7 +81,7 @@ export class ContractsComponent implements OnInit {
             this.message_confirm_delete = res;
         });
 
-        this.showTableCheckbox = true;
+        this.showTableCheckbox = false;
         this.parent = '';
 
         this.page = 1;
