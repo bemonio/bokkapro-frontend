@@ -20,7 +20,17 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: CompanyEditComponent
+        component: CompanyEditComponent,
+        children: [
+          {
+            path: 'contracts',
+            loadChildren: () =>
+              import('../../pages/contract/contract-routing.module').then(
+                (m) => m.ContractRoutingModule
+              ),
+          },
+        ]
+
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

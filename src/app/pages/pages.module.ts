@@ -169,6 +169,12 @@ import { BankAccountComponent } from './bank-account/bank-account.component';
 import { BankAccountEditComponent } from './bank-account/banks-accounts/bank-account-edit/bank-account-edit.component';
 import { BankAccountAutocompleteComponent } from './bank-account/banks-accounts/bank-account-autocomplete/bank-account-autocomplete.component';
 
+// Contracts
+import { ContractsComponent } from './contract/contracts/contracts.component';
+import { ContractComponent } from './contract/contract.component';
+import { ContractEditComponent } from './contract/contracts/contract-edit/contract-edit.component';
+import { ContractAutocompleteComponent } from './contract/contracts/contract-autocomplete/contract-autocomplete.component';
+
 // Moderations
 import { ModerationsComponent } from './moderation/moderations/moderations.component';
 import { ModerationComponent } from './moderation/moderation.component';
@@ -295,6 +301,10 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     BankAccountComponent,
     BankAccountEditComponent,
     BankAccountAutocompleteComponent,
+    ContractsComponent,
+    ContractComponent,
+    ContractEditComponent,
+    ContractAutocompleteComponent,
     ModerationsComponent,
     ModerationComponent,
     ModerationEditComponent,

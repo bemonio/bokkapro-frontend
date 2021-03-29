@@ -102,7 +102,7 @@ export const locale = {
       TYPE_COMPANY: 'Tipo Cliente',
       IS_ACTIVE: "Activo?",
       IS_CARRIER: "Transportadora?",
-      IS_FINANCIAL_INSTITUTION: "Institución Financiera?"
+      IS_FINANCIAL_INSTITUTION: "Institución Financiera?",
     },
     OFFICE: {
       OFFICE: 'Oficina',
@@ -280,6 +280,13 @@ export const locale = {
       BANKSACCOUNTS: 'Cuentas Bancarias',
       ID: 'Id',
       ACCOUNT: 'Número de Cuenta',
+    },
+    CONTRACT: {
+      CONTRACT: 'Contrato',
+      CONTRACTS: 'Contratos',
+      ID: 'Id',
+      CODE: 'Código',
+      COMPANY: 'Compañía'
     },
     MODERATION: {
       MODERATION: 'Moderación',

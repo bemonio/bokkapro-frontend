@@ -224,6 +224,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'contracts',
+        loadChildren: () =>
+          import('../pages/contract/contract-routing.module').then(
+            (m) => m.ContractRoutingModule
+          ),
+      },
+      {
         path: 'moderations',
         loadChildren: () =>
           import('../pages/moderation/moderation-routing.module').then(

@@ -26,16 +26,16 @@
   </div>
   <div class="card-body">
     <ul class="nav nav-tabs nav-tabs-line" role="tablist">
-      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+      <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
         <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
-          [class.active]="activeTabId === tabs.BASIC_TAB">
+          [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/edit/{{model.id}}">
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
-      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.OFFICE_TAB)">
-        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.OFFICE_TAB"
-          [class.active]="activeTabId === tabs.OFFICE_TAB">Offices</a>
-      </li> -->
+      <li *ngIf="(model && model.id && authService.hasPermission('view_contract'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.CONTRACT_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.CONTRACT_TAB"
+          [class.active]="activeTabId === tabs.CONTRACT_TAB" routerLink="{{parent}}/edit/{{model.id}}/contracts">{{ 'CONTRACT.CONTRACTS' | translate }}</a>
+      </li>
     </ul>
 
     <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
@@ -233,11 +233,11 @@
         </form>
       </div>
     </ng-container>
-    <!-- <ng-container *ngIf="activeTabId === tabs.OFFICE_TAB">
-      <div class="mt-5" *ngIf="model">
-        <app-offices></app-offices>
+    <ng-container *ngIf="activeTabId === tabs.CONTRACT_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-contract></app-contract>
       </div>
-    </ng-container> -->
+    </ng-container>
   </div>
 </div>
 

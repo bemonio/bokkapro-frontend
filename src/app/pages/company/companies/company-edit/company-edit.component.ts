@@ -24,7 +24,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
-    OFFICE_TAB: 1,
+    CONTRACT_TAB: 1,
   };
 
   public code: AbstractControl;
@@ -63,11 +63,14 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   containWithinAspectRatio = false;
   transform: ImageTransform = {};
 
+  public parent: string;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private toastService: ToastService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
@@ -110,6 +113,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.is_active = this.formGroup.controls['is_active'];
     this.segment_company = this.formGroup.controls['segment_company'];
     this.type_company = this.formGroup.controls['type_company'];
+
+    this.parent = '/companies';
   }
 
   ngOnInit(): void {
@@ -119,6 +124,10 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
 
     this.newLogo = false;
     this.displayModal = false;
+
+    if (this.route.parent.parent.snapshot.url[0].path) {
+      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
+    }
 
     this.get();
   }
@@ -238,7 +247,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.company
+
+    this.model = response.company
     });
     // this.subscriptions.push(sbUpdate);
   }

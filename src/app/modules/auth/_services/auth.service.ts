@@ -191,7 +191,7 @@ export class AuthService implements OnDestroy {
   public hasPermission (permission) {
     let has = false;
     const user = this.currentUserSubject.getValue();
-    if (user.groups.length > 0) {
+    if (user && user.groups.length > 0) {
       user.groups.forEach(elementGroup => {
         elementGroup.permissions.forEach(elementPermission => {
           if (elementPermission.codename === permission) {

@@ -50,6 +50,7 @@ import { CurrencyDetailService } from './pages/currency-detail/_services';
 import { TypeCurrencyService } from './pages/type-currency/_services';
 import { ExchangeService } from './pages/exchange/_services';
 import { BankAccountService } from './pages/bank-account/_services';
+import { ContractService } from './pages/contract/_services';
 import { ModerationService } from './pages/moderation/_services';
 
 function appInitializer(authService: AuthService) {
@@ -136,6 +137,7 @@ export function getHighlightLanguages() {
     TypeCurrencyService,
     ExchangeService,
     BankAccountService,
+    ContractService,
   ],
   bootstrap: [AppComponent],
 })
