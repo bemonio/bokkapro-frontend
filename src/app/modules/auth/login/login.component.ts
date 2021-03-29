@@ -82,11 +82,16 @@ export class LoginComponent implements OnInit, OnDestroy {
       .login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe((user: any) => {
-        if (user) {
-          this.router.navigate(['/dashboard']);
-        } else {
-          this.hasError = true;
-        }
+        this.authService
+        .getUserByToken()
+        .pipe(first())
+        .subscribe((user: any) => {  
+          if (user) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.hasError = true;
+          }
+        }); 
       });
     this.unsubscribe.push(loginSubscr);
   }

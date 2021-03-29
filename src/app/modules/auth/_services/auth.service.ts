@@ -64,11 +64,10 @@ export class AuthService implements OnDestroy {
     this.isLoadingSubject.next(true);
     return this.authHttpService.login(username, password).pipe(
       map((auth: UserModel) => {
-        this.currentUserSubject = new BehaviorSubject<UserModel>(auth);
+        this.currentUserSubject.next(auth);                
         const result = this.setAuthFromLocalStorage(auth);
         return result;
       }),
-      switchMap(() => this.getUserByToken()),
       catchError((err) => {
         console.error('err', err);
         return of(undefined);
@@ -118,7 +117,6 @@ export class AuthService implements OnDestroy {
                   }
                 }
 
-                this.currentUserSubject = new BehaviorSubject<UserModel>(model.user);
                 if (model.user.employee) {
                   if (model.user.employee.divisions) {
                     this.currentDivisionSubject = new BehaviorSubject<DivisionModel>(model.user.employee.divisions[0]);
@@ -130,13 +128,13 @@ export class AuthService implements OnDestroy {
                 } else {
                   this.translationService.setLanguage('es');
                 }
+                // this.currentUserSubject = new BehaviorSubject<UserModel>(model.user);
+                this.currentUserSubject.next(model.user);                
               },
               error => {
                 console.log ('error getting user');
               }
           );
-        } else {
-          this.logout();
         }
         return user;
       }),
