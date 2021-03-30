@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     private token: TokenStorageService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.token.getUser()) {
+    if (this.token.getUser() && this.token.getToken()) {
       // logged in so return true
       return true;
     }
