@@ -27,6 +27,7 @@ export class AuthService implements OnDestroy {
   get currentUserValue(): UserModel {
     if (!this.currentUserSubject.value && this.token.getUser()) {
       this.currentUserSubject.next(this.token.getUser())
+      this.currentDivisionSubject.next(this.token.getUser().employee.divisions[0])
     }
     return this.currentUserSubject.value;
   }
