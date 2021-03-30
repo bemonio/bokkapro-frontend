@@ -5,6 +5,8 @@ import { first } from 'rxjs/operators';
 import { UserModel } from '../_models/user.model';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslationService } from '../../../modules/i18n/translation.service';
+import { UserService } from 'src/app/pages/user/_services';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +35,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private translationService: TranslationService,
+    private router: Router,
+    private userService: UserService
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -81,16 +85,51 @@ export class LoginComponent implements OnInit, OnDestroy {
     const loginSubscr = this.authService
       .login(this.f.username.value, this.f.password.value)
       .pipe(first())
-      .subscribe((user: any) => {
+      .subscribe((auth: any) => {
         this.authService
         .getUserByToken()
         .pipe(first())
-        .subscribe((user: any) => {  
-          if (user) {
+        .subscribe((userAuth: any) => {  
+          this.userService.getById(userAuth.id)
+          .pipe(first())
+          .subscribe((user: any) => {  
+            let model = user;
+            if (user.employees) {
+              model.user.employee = user.employees[0];
+              if (user.positions) {
+                model.user.employee.position = user.positions[0];
+                if (user.departments) {
+                  model.user.employee.position.department = user.departments[0];
+                }
+              }
+
+              if (user.divisions) {
+                model.user.employee.divisions = user.divisions;
+              }
+            }
+
+            if (user.groups) {
+              model.user.groups = user.groups;
+              if (user.permissions) {
+                model.user.groups[0].permissions = user.permissions;
+              }
+            }
+
+            if (model.user.employee) {
+              if (model.user.employee.divisions) {
+                this.authService.currentDivisionValue = model.user.employee.divisions[0];
+              }
+            }
+
+            if (model.user.language) {
+              this.translationService.setLanguage(model.user.language);
+            } else {
+              this.translationService.setLanguage('es');
+            }
+            this.authService.currentUserValue = model.user;
+
             this.router.navigate(['/dashboard']);
-          } else {
-            this.hasError = true;
-          }
+          });
         }); 
       });
     this.unsubscribe.push(loginSubscr);
