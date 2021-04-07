@@ -175,6 +175,12 @@ import { ContractComponent } from './contract/contract.component';
 import { ContractEditComponent } from './contract/contracts/contract-edit/contract-edit.component';
 import { ContractAutocompleteComponent } from './contract/contracts/contract-autocomplete/contract-autocomplete.component';
 
+// CompanyContacts
+import { CompanyContactsComponent } from './company-contact/company-contacts/company-contacts.component';
+import { CompanyContactComponent } from './company-contact/company-contact.component';
+import { CompanyContactEditComponent } from './company-contact/company-contacts/company-contact-edit/company-contact-edit.component';
+import { CompanyContactAutocompleteComponent } from './company-contact/company-contacts/company-contact-autocomplete/company-contact-autocomplete.component';
+
 // Moderations
 import { ModerationsComponent } from './moderation/moderations/moderations.component';
 import { ModerationComponent } from './moderation/moderation.component';
@@ -305,6 +311,10 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     ContractComponent,
     ContractEditComponent,
     ContractAutocompleteComponent,
+    CompanyContactsComponent,
+    CompanyContactComponent,
+    CompanyContactEditComponent,
+    CompanyContactAutocompleteComponent,
     ModerationsComponent,
     ModerationComponent,
     ModerationEditComponent,

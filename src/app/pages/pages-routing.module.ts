@@ -231,6 +231,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'companycontacts',
+        loadChildren: () =>
+          import('../pages/company-contact/company-contact-routing.module').then(
+            (m) => m.CompanyContactRoutingModule
+          ),
+      },
+      {
         path: 'moderations',
         loadChildren: () =>
           import('../pages/moderation/moderation-routing.module').then(

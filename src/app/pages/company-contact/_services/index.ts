@@ -1,0 +1,1 @@
+export { CompanyContactService } from './company-contact.service';

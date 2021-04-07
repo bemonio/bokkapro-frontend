@@ -29,6 +29,13 @@ const routes: Routes = [
                 (m) => m.ContractRoutingModule
               ),
           },
+          {
+            path: 'companycontacts',
+            loadChildren: () =>
+              import('../../pages/company-contact/company-contact-routing.module').then(
+                (m) => m.CompanyContactRoutingModule
+              ),
+          },
         ]
 
       },

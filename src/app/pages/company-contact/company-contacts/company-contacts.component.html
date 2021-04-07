@@ -1,0 +1,132 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/companycontacts/add">{{ 'COMMON.NEW' | translate }}</a>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+        <div class="col-lg-6">
+          {{ 'COMMON.FILTER' | translate }}
+        </div>
+        <div class="col-lg-6" [formGroup]="searchGroup">
+          <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> {{ 'COMMON.IN' | translate }} id</small>
+        </div>
+      </div>
+    </div>
+    <!-- end: Filtration form -->
+
+    <!-- begin:Table -->
+    <p-table #dt [value]="models" [(selection)]="selectedModels" dataKey="id" styleClass="p-datatable-striped p-datatable-sm" [rowHover]="true"
+    [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
+    [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
+    [filterDelay]="1000" [globalFilterFields]="['id','username']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
+    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem" *ngIf="showTableCheckbox">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="id">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMPANYCONTACT.ID' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="name">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMPANYCONTACT.NAME' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="phone">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMPANYCONTACT.PHONE' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="employee_position">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMPANYCONTACT.EMPLOYEEPOSITION' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="email">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMPANYCONTACT.EMAIL' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+          <th style="width: 10rem">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.ACTION' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-value>
+        <tr class="p-selectable-row">
+          <td *ngIf="showTableCheckbox">
+            <p-tableCheckbox [value]="value"></p-tableCheckbox>
+          </td>
+          <td>
+            {{value.id}}
+          </td>
+          <td>
+            {{value.name}}
+          </td>
+          <td>
+            {{value.phone}}
+          </td>
+          <td>
+            {{value.employee_position}}
+          </td>
+          <td>
+            {{value.email}}
+          </td>
+          <td>
+            {{value.created_at | date: 'MM/dd/yyyy'}}
+          </td>
+          <td style="text-align: right">
+            <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              routerLink="{{parent}}/companycontacts/edit/{{value.id}}">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-primary">
+              </span>
+            </a>
+            <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-danger">
+              </span>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <!-- end: Table -->
+  </div>
+</div>
+
+<p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
+
+<p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
+</p-dialog>

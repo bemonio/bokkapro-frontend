@@ -288,6 +288,18 @@ export const locale = {
       CODE: 'Código',
       COMPANY: 'Compañía'
     },
+    COMPANYCONTACT: {
+      COMPANYCONTACT: 'Contacto Empresa',
+      COMPANYCONTACTS: 'Contactos Empresa',
+      ID: 'Id',
+      NAME: 'Nombre',
+      PHONE: 'Teléfono',
+      MOBILE: 'Celular',
+      ADDRESS: 'Dirección',
+      EMPLOYEEPOSITION: 'Cargo',
+      EMAIL: 'Correo',
+      COMPANY: 'Compañía'
+    },
     MODERATION: {
       MODERATION: 'Moderación',
       MODERATIONS: 'Moderaciones',
