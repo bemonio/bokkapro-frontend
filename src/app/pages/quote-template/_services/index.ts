@@ -1,0 +1,1 @@
+export { QuoteTemplateService } from './quote-template.service';

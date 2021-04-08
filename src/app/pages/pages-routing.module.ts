@@ -244,6 +244,13 @@ const routes: Routes = [
             (m) => m.ModerationRoutingModule
           ),
       },
+      {
+        path: 'quotetemplates',
+        loadChildren: () =>
+          import('../pages/quote-template/quote-template-routing.module').then(
+            (m) => m.QuoteTemplateRoutingModule
+          ),
+      },
     ],
   },
 ];

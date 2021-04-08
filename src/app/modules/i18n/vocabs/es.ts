@@ -354,5 +354,14 @@ export const locale = {
       YES: 'Si',
       NO: 'No'
     },
+    QUOTETEMPLATE: { 
+      QUOTETEMPLATE: 'Plantilla Cotización',
+      QUOTETEMPLATES: 'Plantillas Cotización',
+      ID: 'Id',
+      NAME: 'Nombre',
+      content: 'Contenido',
+    },
   }
 };
+
+

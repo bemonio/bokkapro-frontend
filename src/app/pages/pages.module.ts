@@ -15,6 +15,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BadgeModule } from 'primeng/badge';
 import { ChipsModule } from 'primeng/chips';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { EditorModule } from 'primeng/editor';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -187,6 +188,12 @@ import { ModerationComponent } from './moderation/moderation.component';
 import { ModerationEditComponent } from './moderation/moderations/moderation-edit/moderation-edit.component';
 import { ModerationAutocompleteComponent } from './moderation/moderations/moderation-autocomplete/moderation-autocomplete.component';
 
+// QuoteTemplates
+import { QuoteTemplatesComponent } from './quote-template/quote-templates/quote-templates.component';
+import { QuoteTemplateComponent } from './quote-template/quote-template.component';
+import { QuoteTemplateEditComponent } from './quote-template/quote-templates/quote-template-edit/quote-template-edit.component';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -198,6 +205,7 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     BadgeModule,
     ChipsModule,
     MultiSelectModule,
+    EditorModule,
     CurrencyMaskModule,
     ToggleButtonModule,
     CalendarModule,
@@ -319,6 +327,9 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
     ModerationComponent,
     ModerationEditComponent,
     ModerationAutocompleteComponent,
+    QuoteTemplatesComponent,
+    QuoteTemplateComponent,
+    QuoteTemplateEditComponent
   ]
 })
 export class PagesModule { }
