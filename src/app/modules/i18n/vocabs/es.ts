@@ -361,6 +361,14 @@ export const locale = {
       NAME: 'Nombre',
       content: 'Contenido',
     },
+    QUOTATION: { 
+      QUOTATION: 'Cotización',
+      QUOTATIONS: 'Cotizaciones',
+      ID: 'Id',
+      COMPANY: 'Compañía',
+      TEMPLATE: 'Template',
+      CONTENT: 'Contenido',
+    },
   }
 };
 

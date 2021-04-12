@@ -26,6 +26,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     BASIC_TAB: 0,
     CONTRACT_TAB: 1,
     CONTACT_TAB: 2,
+    TEMPLATE_TAB: 3,
   };
 
   public code: AbstractControl;

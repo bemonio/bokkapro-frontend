@@ -192,6 +192,12 @@ import { ModerationAutocompleteComponent } from './moderation/moderations/modera
 import { QuoteTemplatesComponent } from './quote-template/quote-templates/quote-templates.component';
 import { QuoteTemplateComponent } from './quote-template/quote-template.component';
 import { QuoteTemplateEditComponent } from './quote-template/quote-templates/quote-template-edit/quote-template-edit.component';
+import { QuoteTemplateAutocompleteComponent } from './quote-template/quote-templates/quote-template-autocomplete/quote-template-autocomplete.component';
+
+// Quotations
+import { QuotationsComponent } from './quotation/quotations/quotations.component';
+import { QuotationComponent } from './quotation/quotation.component';
+import { QuotationEditComponent } from './quotation/quotations/quotation-edit/quotation-edit.component';
 
 
 @NgModule({
@@ -329,7 +335,11 @@ import { QuoteTemplateEditComponent } from './quote-template/quote-templates/quo
     ModerationAutocompleteComponent,
     QuoteTemplatesComponent,
     QuoteTemplateComponent,
-    QuoteTemplateEditComponent
+    QuoteTemplateEditComponent,
+    QuoteTemplateAutocompleteComponent,
+    QuotationsComponent,
+    QuotationComponent,
+    QuotationEditComponent
   ]
 })
 export class PagesModule { }

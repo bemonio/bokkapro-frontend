@@ -36,6 +36,13 @@ const routes: Routes = [
                 (m) => m.CompanyContactRoutingModule
               ),
           },
+          {
+            path: 'quotations',
+            loadChildren: () =>
+              import('../../pages/quotation/quotation-routing.module').then(
+                (m) => m.QuotationRoutingModule
+              ),
+          },
         ]
 
       },

@@ -40,6 +40,10 @@
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.CONTACT_TAB"
           [class.active]="activeTabId === tabs.CONTACT_TAB" routerLink="{{parent}}/edit/{{model.id}}/companycontacts">{{ 'COMPANYCONTACT.COMPANYCONTACTS' | translate }}</a>
       </li>
+      <li *ngIf="(model && model.id && authService.hasPermission('view_contract'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.TEMPLATE_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.TEMPLATE_TAB"
+          [class.active]="activeTabId === tabs.TEMPLATE_TAB" routerLink="{{parent}}/edit/{{model.id}}/quotations">{{ 'QUOTATION.QUOTATIONS' | translate }}</a>
+      </li>
     </ul>
 
     <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
@@ -245,6 +249,11 @@
     <ng-container *ngIf="activeTabId === tabs.CONTACT_TAB">
       <div class="mt-5" *ngIf="model && model.id">
         <app-company-contact></app-company-contact>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTabId === tabs.TEMPLATE_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-quotation></app-quotation>
       </div>
     </ng-container>
   </div>

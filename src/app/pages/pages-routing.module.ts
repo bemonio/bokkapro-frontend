@@ -251,6 +251,13 @@ const routes: Routes = [
             (m) => m.QuoteTemplateRoutingModule
           ),
       },
+      {
+        path: 'quotations',
+        loadChildren: () =>
+          import('../pages/quotation/quotation-routing.module').then(
+            (m) => m.QuotationRoutingModule
+          ),
+      },
     ],
   },
 ];

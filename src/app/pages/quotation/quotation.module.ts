@@ -6,26 +6,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule }  from 'primeng/table';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { QuoteTemplatesComponent } from './quote-templates/quote-templates.component';
-import { QuoteTemplateComponent } from './quote-template.component';
-// import { QuoteTemplateRoutingModule} from './quote-template-routing.module';
-import { QuoteTemplateEditComponent } from './quote-templates/quote-template-edit/quote-template-edit.component';
-import { QuoteTemplateAutocompleteComponent } from './quote-templates/quote-template-autocomplete/quote-template-autocomplete.component';
-import { QuoteTemplateService } from './_services/';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ConfirmationService } from 'primeng/api';
+import { QuotationsComponent } from './quotations/quotations.component';
+import { QuotationComponent } from './quotation.component';
+// import { quotationRoutingModule} from './quotation-routing.module';
+import { QuotationEditComponent } from './quotations/quotation-edit/quotation-edit.component';
+import { QuotationService } from './_services/';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    QuoteTemplatesComponent,
-    QuoteTemplateComponent,
-    QuoteTemplateEditComponent,
-    QuoteTemplateAutocompleteComponent
+    QuotationsComponent,
+    QuotationComponent,
+    QuotationEditComponent,
   ],
   imports: [
     CommonModule,
-    // QuoteTemplateRoutingModule,
+    // quotationRoutingModule,
     InlineSVGModule,
     NgbModalModule,
     NgbDatepickerModule,
@@ -35,13 +34,14 @@ import { RouterModule } from '@angular/router';
     ToggleButtonModule,
     ConfirmDialogModule,
     AutoCompleteModule,
-    RouterModule
+    FileUploadModule,
+    RouterModule,
   ],
   entryComponents: [
   ],
   providers: [
-    QuoteTemplateService,
+    QuotationService,
     ConfirmationService
   ]
 })
-export class QuoteTemplateModule {}
+export class quotationModule {}
