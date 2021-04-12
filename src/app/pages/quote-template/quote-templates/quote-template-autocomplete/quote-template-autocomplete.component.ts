@@ -116,7 +116,7 @@ export class QuoteTemplateAutocompleteComponent implements ControlValueAccessor,
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
             response => {
-                this.models = response.currenciesdetails;
+                this.models = response.quote_templates;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {
