@@ -13,7 +13,7 @@ import { CompaniesComponent } from './companies/companies.component';
 import { CompanyComponent } from './company.component';
 // import { CompanyRoutingModule} from './company-routing.module';
 import { CompanyEditComponent } from './companies/company-edit/company-edit.component';
-import { CompanyAutocompleteComponent } from './companies/autocomplete/autocomplete-company.component';
+import { CompanyAutocompleteComponent } from './companies/company-autocomplete/company-autocomplete.component';
 import { CompanyService } from './_services/';
 import { RouterModule } from '@angular/router';
 

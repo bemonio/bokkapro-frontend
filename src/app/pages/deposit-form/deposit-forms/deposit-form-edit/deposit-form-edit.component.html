@@ -11,7 +11,7 @@
       <h3 class="card-label">
         <ng-container *ngIf="model">
           {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
-          <span *ngIf="model && model.id">'{{ model.id }} </span>
+          <span *ngIf="model && model.id">'{{ model.id }}</span>
         </ng-container>
       </h3>
     </div>
@@ -32,9 +32,9 @@
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
-      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
-        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PROFILE"
-          [class.active]="activeTabId === tabs.PROFILE">Profile</a>
+      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.OFFICE_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.OFFICE_TAB"
+          [class.active]="activeTabId === tabs.OFFICE_TAB">Offices</a>
       </li> -->
     </ul>
 
@@ -42,6 +42,17 @@
       <div class="mt-5" *ngIf="model">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Package</label>
+              <app-package-autocomplete
+              placeholder="Package" name="package" [valid]="isControlValid('package')" [touched]="isControlTouched('package')" [class.is-invalid]="isControlInvalid('package')"
+              [class.is-valid]="isControlValid('package')" formControlName="package" id="package" [model]="model.package"></app-package-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('package')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Package</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('package')">Package  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'package')">Package  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'package')">Package {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'package')">Package {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>  
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Amount</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -75,17 +86,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'verified')">Verified {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'verified')">Verified {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <!-- <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Package</label>
-              <app-package-autocomplete
-              placeholder="Package" name="package" [valid]="isControlValid('package')" [touched]="isControlTouched('package')" [class.is-invalid]="isControlInvalid('package')"
-              [class.is-valid]="isControlValid('package')" formControlName="package" id="package" [model]="model.package"></app-package-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('package')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Package</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('package')">Package  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'package')">Package  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'package')">Package {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'package')">Package {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>   -->
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Bank Account</label>
               <app-bank-account-autocomplete
@@ -130,7 +130,7 @@
             </div>     -->
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}//depositforms">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/depositforms">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

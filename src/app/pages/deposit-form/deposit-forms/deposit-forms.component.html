@@ -4,6 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
+      <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a>
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/depositforms/add">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
@@ -27,7 +28,7 @@
     [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
     [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
     [filterDelay]="1000" [globalFilterFields]="['id','username']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
-    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true">
+    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3rem" *ngIf="showTableCheckbox">
@@ -35,22 +36,17 @@
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
-              ID
+              {{ 'DEPOSITFORM.ID' | translate }}
             </div>
           </th>
-          <th pSortableColumn="denomination">
+          <th pSortableColumn="name">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Bank Account 
-            </div>
-          </th>
-          <th pSortableColumn="type_currency">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              Employee Counts
+              {{ 'DEPOSITFORM.AMOUNT' | translate }}
             </div>
           </th>
           <th pSortableColumn="created_at">
             <div class="p-d-flex p-jc-between p-ai-center">
-              Created At
+              {{ 'COMMON.CREATED_AT' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
@@ -73,10 +69,7 @@
             {{value.id}}
           </td>
           <td>
-            {{value.bank_account}}
-          </td>
-          <td>
-            {{value.employee_who_counts}}
+            {{value.amount}}
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
@@ -89,7 +82,7 @@
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_currency')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
@@ -108,3 +101,8 @@
 </div>
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
+
+<!-- <p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
+</p-dialog> -->

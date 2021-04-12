@@ -238,6 +238,8 @@ export const locale = {
     DEPOSITFORM: {
       DEPOSITFORM: 'Planilla Depósito',
       DEPOSITFORMS: 'Planillas Depósito',
+      ID: 'Id',
+      AMOUNT: 'Monto',
     },
     DEPOSITFORMDETAIL: {
       DEPOSITFORMDETAIL: 'Planilla Depósito Detalle',
