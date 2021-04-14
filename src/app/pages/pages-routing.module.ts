@@ -161,10 +161,10 @@ const routes: Routes = [
           ),  
       },
       {
-        path: 'packages',
+        path: 'packings',
         loadChildren: () =>
-          import('../pages/package/package-routing.module').then(
-            (m) => m.PackageRoutingModule
+          import('../pages/packing/packing-routing.module').then(
+            (m) => m.PackingRoutingModule
           ),
       },
       {

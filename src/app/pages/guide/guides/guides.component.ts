@@ -321,7 +321,7 @@ export class GuidesComponent implements OnInit {
             if (response) {
                 this.verificationGuide = response.guide;
                 this.verificationGuide.vouchers = response.guide.vouchers;
-                let count = this.verificationGuide.vouchers.length + this.countPackages(this.verificationGuide);
+                let count = this.verificationGuide.vouchers.length + this.countPackings(this.verificationGuide);
                 this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
                 if (response.guide.certified_cart) {
                     this.certified_cart_code.setValidators(Validators.compose([Validators.required, Validators.pattern(response.guide.certified_cart_code)]));
@@ -344,7 +344,7 @@ export class GuidesComponent implements OnInit {
                 found = true;
             }
             if (this.verificationGuide.division_destination.name == 'Operaciones Internas') {
-                element.packages.forEach(element2 => {
+                element.packings.forEach(element2 => {
                     if (element2.code === event.value) {
                         element2.verificated = true;
                         found = true;
@@ -366,7 +366,7 @@ export class GuidesComponent implements OnInit {
             if (element.code === event.value) {
                 element.verificated = false;
             }
-            element.packages.forEach(element2 => {
+            element.packings.forEach(element2 => {
                 if (element2.code === event.value) {
                     element2.verificated = false;
                 }
@@ -440,13 +440,13 @@ export class GuidesComponent implements OnInit {
         });
     }
 
-    countPackages(guide) {
+    countPackings(guide) {
         let count = 0;
         if (guide.division_destination.name != 'Operaciones Internas') {
             if (guide.vouchers) {
                 guide.vouchers.forEach(element => {
-                    if (element.packages) {
-                        count = + element.count_packages;
+                    if (element.packings) {
+                        count = + element.count_packings;
                     }
                 });
             }
@@ -454,7 +454,7 @@ export class GuidesComponent implements OnInit {
         return count;
     }
 
-    public changeCountPackages() {
+    public changeCountPackings() {
         this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(this.listVouchers.length), Validators.maxLength(this.listVouchers.length)]));
         this.verificationGroup.markAllAsTouched();
     }

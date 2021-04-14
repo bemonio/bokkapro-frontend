@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PackageComponent } from './package.component';
-import { PackagesComponent } from './packages/packages.component';
-import { PackageEditComponent } from './packages/package-edit/package-edit.component';
+import { PackingComponent } from './packing.component';
+import { PackingsComponent } from './packings/packings.component';
+import { PackingEditComponent } from './packings/packing-edit/packing-edit.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PackageComponent,
+    component: PackingComponent,
     children: [
       {
         path: 'list',
-        component: PackagesComponent,
+        component: PackingsComponent,
       },
       {
         path: 'add',
-        component: PackageEditComponent
+        component: PackingEditComponent
       },
       {
         path: 'edit/:id',
-        component: PackageEditComponent,
+        component: PackingEditComponent,
         children: [
           {
             path: 'depositforms',
@@ -41,4 +41,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PackageRoutingModule {}
+export class PackingRoutingModule {}

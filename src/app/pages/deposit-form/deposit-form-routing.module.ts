@@ -20,7 +20,16 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: DepositFormEditComponent
+        component: DepositFormEditComponent,
+        children: [
+          {
+            path: 'depositformsdetails',
+            loadChildren: () =>
+              import('../../pages/deposit-formdetail/deposit-formdetail-routing.module').then(
+                (m) => m.DepositFormDetailRoutingModule
+              ),
+          },
+        ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

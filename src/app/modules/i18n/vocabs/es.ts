@@ -201,7 +201,7 @@ export const locale = {
       SHIFT: 'Horario',
       TYPE: 'Tipo',
       VOUCHERS: 'Comprobantes',
-      PACKAGES: 'Envases',
+      PACKINGS: 'Envases',
       ORIGIN: 'Origen',
       DESTINATION: 'Destino',
       STATUS: 'Status',
@@ -218,17 +218,17 @@ export const locale = {
       VOUCHERS: 'Comprobantes',
       ID: 'Id',
       CODE: 'Código/Comprobante',
-      PACKAGES: 'Envases',
+      PACKINGS: 'Envases',
       CURRENCY: 'Divisa',
       AMOUNT: 'Monto',
       LOCATION_ORIGIN: 'Dirección Origen',
       LOCATION_DESTINATION: 'Dirección Destino',
       COMPANY: 'Cliente',
-      COUNT_PACKAGES: 'Cant. Envases'
+      COUNT_PACKINGS: 'Cant. Envases'
     },
-    PACKAGE: {
-      PACKAGE: 'Envase',
-      PACKAGES: 'Envases',
+    PACKING: {
+      PACKING: 'Envase',
+      PACKINGS: 'Envases',
       ID: 'Id',
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción',
@@ -240,10 +240,20 @@ export const locale = {
       DEPOSITFORMS: 'Planillas Depósito',
       ID: 'Id',
       AMOUNT: 'Monto',
+      DIFFERENCEREASON: 'Motivo diferencia',
+      VERIFIED: 'Verificado',
+      VERIFIEDAT: 'Verificado El',
+      PACKING: 'Envase',
+      BANKACCOUNT: 'Cuenta Bancaria',
+      EMPLOYEEWHOCOUNTS: 'Empleado que cuenta',
+      SUPERVISOR: 'Supervisor',
     },
     DEPOSITFORMDETAIL: {
       DEPOSITFORMDETAIL: 'Planilla Depósito Detalle',
       DEPOSITFORMSDETAILS: 'Planillas Depósito Detalles',
+      ID: 'Id',
+      QUANTITY: 'Cantidad',
+      COUNTEDQUANTITY: 'Cantidad Contada'
     },
     CURRENCY: {
       CURRENCY: 'Divisa',

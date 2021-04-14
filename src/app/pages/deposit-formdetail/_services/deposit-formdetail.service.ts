@@ -7,15 +7,15 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 @Injectable()
 export class DepositFormDetailService {
     API_URL = `${environment.apiUrl}depositformsdetails`;
-    private _subscriptions: Subscription[] = [];
+    // private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
 
-    get subscriptions() {
-        return this._subscriptions;
-    }
+    // get subscriptions() {
+    //     return this._subscriptions;
+    // }
     
-    public get (page?: number, per_page?: number, sort?: string, query?: string, filters?: any[]): Observable<any> {
+    public get (page?: number, per_page?: number, sort?: string, query?: string, filters?: any[], _with?: any[]): Observable<any> {
         let params: URLSearchParams = new URLSearchParams();
 
         if (page !== null && page !== undefined) {
@@ -40,6 +40,12 @@ export class DepositFormDetailService {
 
         if (filters !== null && filters !== undefined && filters.length > 0) {
             filters.forEach(element => {
+                params.append(element.key, String(element.value));
+            });
+        }
+
+        if (_with !== null && _with !== undefined && _with.length > 0) {
+            _with.forEach(element => {
                 params.append(element.key, String(element.value));
             });
         }

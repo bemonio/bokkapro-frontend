@@ -35,7 +35,7 @@ export class DepositFormService {
         }
 
         if (query !== null && query !== undefined && query !== '') {
-            params.append('filter{id}[]', String(query));
+            params.append(`filter{id}[]`, String(query));
         }
 
         if (filters !== null && filters !== undefined && filters.length > 0) {
@@ -66,6 +66,6 @@ export class DepositFormService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=package.*&include[]=bank_account.*&include[]=employee_who_counts.*&include[]=supervisor.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=packing.*&include[]=bank_account.*&include[]=employee_who_counts.*&include[]=supervisor.*`);
     }
 }

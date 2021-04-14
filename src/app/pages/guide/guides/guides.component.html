@@ -63,7 +63,7 @@
           </th>
           <th pSortableColumn="description">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'GUIDE.PACKAGES' | translate }}
+              {{ 'GUIDE.PACKINGS' | translate }}
             </div>
           </th>
           <th pSortableColumn="division_origin">
@@ -121,7 +121,7 @@
             {{value.vouchers.length}}
           </td>
           <td>
-            {{countPackages(value)}}
+            {{countPackings(value)}}
           </td>
           <td>
             {{value.division_origin.name}}
@@ -189,11 +189,11 @@
         <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.CODES' | translate }}</label>
         <p-chips [styleClass]="getValidClass(isControlValid('vouchers',verificationGroup))" formControlName="vouchers" [allowDuplicate]="false" (onAdd)="addListVouchers($event)" (onRemove)="removeListVouchers($event)" [(ngModel)]="listVouchers"></p-chips>
         <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers',verificationGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CODES' | translate }}</b></div>
-        <div class="valid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackages(this.verificationGuide) == listVouchers.length">{{ 'GUIDE.CODES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+        <div class="valid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackings(this.verificationGuide) == listVouchers.length">{{ 'GUIDE.CODES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
         <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'vouchers')">Vouchers  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
-        <div class="invalid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackages(this.verificationGuide) > listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{verificationGuide.vouchers.length + countPackages(this.verificationGuide)}}
+        <div class="invalid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackings(this.verificationGuide) > listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{verificationGuide.vouchers.length + countPackings(this.verificationGuide)}}
           item</div>
-        <div class="invalid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackages(this.verificationGuide) < listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{verificationGuide.vouchers.length + countPackages(this.verificationGuide)}}
+        <div class="invalid-feedback"  style="display: block;" *ngIf="verificationGuide.vouchers.length + countPackings(this.verificationGuide) < listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{verificationGuide.vouchers.length + countPackings(this.verificationGuide)}}
           items</div>
       </div>
       <div class="col-lg-12" style="margin-top: 15px; margin-bottom: 5px;">
@@ -202,8 +202,8 @@
           <span *ngFor="let voucher of verificationGuide.vouchers">
             <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br>
             <div *ngIf="verificationGuide.division_destination.name !== 'Operaciones Internas'">
-              <span *ngFor="let package of voucher.packages"> 
-                - <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;"></i> {{package.code}} <i [ngClass]="package.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': package.verificated ? 'green' : 'red' }"></i><br>
+              <span *ngFor="let packing of voucher.packings"> 
+                - <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br>
               </span>
             </div>
           </span>

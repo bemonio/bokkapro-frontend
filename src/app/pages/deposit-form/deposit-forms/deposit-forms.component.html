@@ -39,9 +39,14 @@
               {{ 'DEPOSITFORM.ID' | translate }}
             </div>
           </th>
-          <th pSortableColumn="name">
+          <th pSortableColumn="amount">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'DEPOSITFORM.AMOUNT' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="difference_reason">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'DEPOSITFORM.DIFFERENCEREASON' | translate }}
             </div>
           </th>
           <th pSortableColumn="created_at">
@@ -70,6 +75,9 @@
           </td>
           <td>
             {{value.amount}}
+          </td>
+          <td>
+            {{value.difference_reason}}
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
@@ -102,7 +110,7 @@
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
-<!-- <p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+<p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
   [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
   <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
-</p-dialog> -->
+</p-dialog>

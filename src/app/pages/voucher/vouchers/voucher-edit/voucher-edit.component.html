@@ -137,25 +137,25 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company')">{{ 'VOUCHER.COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.COUNT_PACKAGES' | translate }}</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.COUNT_PACKINGS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="count_packages" [class.is-invalid]="isControlInvalid('count_packages')"
-                [class.is-valid]="isControlValid('count_packages')" formControlName="count_packages" (change)="changeCountPackages()"/>
-              <div class="feedback" *ngIf="!isControlTouched('count_packages')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.COUNT_PACKAGES' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('count_packages')">{{ 'VOUCHER.COUNT_PACKAGES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'count_packages')">{{ 'VOUCHER.COUNT_PACKAGES' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count_packages')">{{ 'VOUCHER.COUNT_PACKAGES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count_packages')">{{ 'VOUCHER.COUNT_PACKAGES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+                name="count_packings" [class.is-invalid]="isControlInvalid('count_packings')"
+                [class.is-valid]="isControlValid('count_packings')" formControlName="count_packings" (change)="changeCountPackings()"/>
+              <div class="feedback" *ngIf="!isControlTouched('count_packings')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.COUNT_PACKINGS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>            
             <div class="col-lg-12">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKAGES' | translate }}</label>
-              <p-chips [styleClass]="getValidClass(isControlValid('packages'))" formControlName="packages" [allowDuplicate]="false"></p-chips>
-              <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('packages')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PACKAGES' | translate }}</b></div>
-              <div class="valid-feedback"  style="display: block;" *ngIf="packages.value.length == count_packages.value">{{ 'VOUCHER.PACKAGES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'packages')">{{ 'VOUCHER.PACKAGES' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
-              <div class="invalid-feedback"  style="display: block;" *ngIf="packages.value.length < count_packages.value">{{ 'VOUCHER.PACKAGES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{count_packages.value}}
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKINGS' | translate }}</label>
+              <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false"></p-chips>
+              <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('packings')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PACKINGS' | translate }}</b></div>
+              <div class="valid-feedback"  style="display: block;" *ngIf="packings.value.length == count_packings.value">{{ 'VOUCHER.PACKINGS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'packings')">{{ 'VOUCHER.PACKINGS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
+              <div class="invalid-feedback"  style="display: block;" *ngIf="packings.value.length < count_packings.value">{{ 'VOUCHER.PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{count_packings.value}}
                 item</div>
-              <div class="invalid-feedback"  style="display: block;" *ngIf="packages.value.length > count_packages.value">{{ 'VOUCHER.PACKAGES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{count_packages.value}}
+              <div class="invalid-feedback"  style="display: block;" *ngIf="packings.value.length > count_packings.value">{{ 'VOUCHER.PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{count_packings.value}}
                 items</div>
             </div>
             <!-- <div class="col-lg-4">

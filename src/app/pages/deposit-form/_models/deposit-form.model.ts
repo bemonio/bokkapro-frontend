@@ -1,15 +1,17 @@
-import { PackageModel } from "../../package/_models/package.model";
-import { BankAccountModel } from "../../bank-account/_models/bank-account.model";
-import { EmployeeModel } from "../../employee/_models/employee.model";
+import { CompanyModel } from "../../company/_models/company.model";
 
 export class DepositFormModel {
   id: number;
-  amount: string;
-  difference_reason: string;
-  verified: string;
+  amount: number;
+  difference_reason: number;
+  verified: boolean;
   verified_at: string;
-  package: any;
+  packing: any;
   bank_account: any;
   employee_who_counts: any;
   supervisor: any;
+  created_at: string;
+  updated_at: string;
 }
+
+

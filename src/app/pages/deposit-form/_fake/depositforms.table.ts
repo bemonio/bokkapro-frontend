@@ -1,4 +1,4 @@
-export class DepositForms {
+export class DepositFormsTable {
   public static depositforms: any = [
     {
       id: 1,

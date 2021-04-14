@@ -8,8 +8,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { DepositFormModel as Model } from '../../_models/deposit-form.model';
 import { DepositFormService as ModelsService } from '../../_services/deposit-form.service';
-import { PackageService } from 'src/app/pages/package/_services';
-import { QuoteTemplateService } from 'src/app/pages/quote-template/_services';
+import { PackingService } from 'src/app/pages/packing/_services';
 import { OfficeService } from 'src/app/pages/office/_services';
 
 @Component({
@@ -26,25 +25,26 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
-    OFFICE_TAB: 1,
+    DEPOSITFORMDETAIL_TAB: 1,
   };
+
 
   public amount: AbstractControl;
   public difference_reason: AbstractControl;
   public verified: AbstractControl;
   public verified_at: AbstractControl;
 
-  public package: AbstractControl;
+  public packing: AbstractControl;
   public bank_account: AbstractControl;
   public employee_who_counts: AbstractControl;
   public supervisor: AbstractControl;
-  
+
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
 
   public saveAndExit;
 
-  public packageId: number;
+  public packingId: number;
   public parent: string;
 
   constructor(
@@ -54,8 +54,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public authService: AuthService,
     private toastService: ToastService,
-    private templateService: QuoteTemplateService,
-    private packageService: PackageService,
+    private packingService: PackingService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
@@ -64,10 +63,10 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       amount: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       difference_reason: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      verified: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      verified_at: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      package: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      bank_account: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      verified: [''],
+      verified_at: [''],
+      packing: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      bank_account: [''],
       employee_who_counts: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       supervisor: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
@@ -75,10 +74,12 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.difference_reason = this.formGroup.controls['difference_reason'];
     this.verified = this.formGroup.controls['verified'];
     this.verified_at = this.formGroup.controls['verified_at'];
-    this.package = this.formGroup.controls['package'];
+    this.packing = this.formGroup.controls['packing'];
     this.bank_account = this.formGroup.controls['bank_account'];
     this.employee_who_counts = this.formGroup.controls['employee_who_counts'];
     this.supervisor = this.formGroup.controls['supervisor'];
+
+    this.parent = '/depositforms';
   }
 
   ngOnInit(): void {
@@ -86,10 +87,14 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
 
+    if (this.route.parent.parent.snapshot.url[0].path) {
+      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
+    }
+
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-        this.packageId = params.id;
-        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.packageId;
+        this.packingId = params.id;
+        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.packingId;
       }
       this.get();
     });
@@ -123,17 +128,17 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.deposit_form;
-        if (response.packages) {
-          this.model.package = response.packages[0];
+        if (response.packings) {
+          this.model.packing = response.packings[0]; //ACAAAAAAAAA
         }
         if (response.banksaccounts) {
-          this.model.bank_account = response.bank_account[0];
+          this.model.bank_account = response.banksaccounts[0]; //ACAAAAAAAAA
         }
         if (response.employees) {
-          this.model.employee_who_counts = response.employee_who_counts[0];
+          this.model.employee_who_counts = response.employees[0]; //ACAAAAAAAAA
         }
         if (response.employees) {
-          this.model.supervisor = response.supervisor[0];
+          this.model.supervisor = response.employees[0]; //ACAAAAAAAAA
         }
 
         this.previous = Object.assign({}, this.model);
@@ -145,13 +150,12 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
   loadForm() {
     if (this.model.id) {
-      this.amount.setValue(this.model.amount);
-      this.difference_reason.setValue(this.model.difference_reason);
-      this.verified.setValue(this.model.verified);
-      this.verified_at.setValue(this.model.verified_at);
-
-      if (this.model.package) {
-        this.package.setValue(this.model.package);
+      this.amount.setValue(this.model.amount)
+      this.difference_reason.setValue(this.model.difference_reason)
+      this.verified.setValue(this.model.verified)
+      this.verified_at.setValue(new Date(this.model.verified_at));
+      if (this.model.packing) {
+        this.packing.setValue(this.model.packing);
       }
       if (this.model.bank_account) {
         this.bank_account.setValue(this.model.bank_account);
@@ -163,8 +167,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
         this.supervisor.setValue(this.model.supervisor);
       }
     } else {
-      if (this.packageId) {
-        this.getPackageById(this.packageId);
+      if (this.packingId) {
+        this.PetpackingById(this.packingId);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -194,7 +198,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
-    model.package = this.model.package.id;
+    model.verified_at = this.formatDate(this.verified_at.value);
+    model.packing = this.model.packing.id;
     model.bank_account = this.model.bank_account.id;
     model.employee_who_counts = this.model.employee_who_counts.id;
     model.supervisor = this.model.supervisor.id;
@@ -227,11 +232,16 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
   create() {
     this.requesting = true;
-    let model = this.model;
-    model.package = this.model.package.id;
+    let model = this.model;    
+    model.packing = this.model.packing.id;
     model.bank_account = this.model.bank_account.id;
     model.employee_who_counts = this.model.employee_who_counts.id;
     model.supervisor = this.model.supervisor.id;
+
+    model.verified_at = undefined;
+    if (this.verified_at.value) {
+      model.verified_at = this.formatDate(this.verified_at.value);
+    }
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
@@ -274,6 +284,37 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     // this.subscriptions.forEach(sb => sb.unsubscribe());
   }
 
+  public formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    let hours = '' + d.getHours();
+    let minutes = '' + d.getMinutes();
+    let seconds = '' + d.getSeconds();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+
+    if (hours.length < 2) {
+      hours = '0' + hours;
+    }
+
+    if (minutes.length < 2) {
+      minutes = '0' + minutes;
+    }
+
+    if (seconds.length < 2) {
+      seconds = '0' + seconds;
+    }
+
+    return [year, month, day].join('-');
+  }
+
   // helpers for View
   isControlValid(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
@@ -305,18 +346,13 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     return stringClass;
   }
 
-  public changeTemplate() {
-    // this.template.reset();
-    this.formGroup.markAllAsTouched();
-  }
-
-  getPackageById(id) {
-    this.packageService.getById(id).toPromise().then(
+  PetpackingById(id) {
+    this.packingService.getById(id).toPromise().then(
       response => {
-        this.package.setValue(response.package)
+        this.packing.setValue(response.packing)
       },
       error => {
-        console.log('error getting package');
+        console.log('error getting packing');
       }
     );
   }

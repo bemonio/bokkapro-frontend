@@ -41,7 +41,7 @@ import { LocationService } from './pages/location/_services';
 import { ZoneService } from './pages/zone/_services';
 import { TypeGuideService } from './pages/type-guide/_services';
 import { GuideService } from './pages/guide/_services';
-import { PackageService } from './pages/package/_services';
+import { PackingService } from './pages/packing/_services';
 import { DepositFormService } from './pages/deposit-form/_services';
 import { DepositFormDetailService } from './pages/deposit-formdetail/_services';
 import { VoucherService } from './pages/voucher/_services';
@@ -130,7 +130,7 @@ export function getHighlightLanguages() {
     ZoneService,
     TypeGuideService,
     GuideService,
-    PackageService,
+    PackingService,
     DepositFormService,
     DepositFormDetailService,
     ModerationService,

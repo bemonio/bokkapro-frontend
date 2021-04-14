@@ -1,22 +1,22 @@
 import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PackageService as ModelsService } from '../../_services/package.service';
+import { PackingService as ModelsService } from '../../_services/packing.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => PackageAutocompleteComponent),
+    useExisting: forwardRef(() => PackingAutocompleteComponent),
     multi: true,
 };
 
 @Component({
-    selector: 'app-package-autocomplete',
-    templateUrl: './package-autocomplete.component.html',
-    styleUrls: ['./package-autocomplete.component.scss'],
+    selector: 'app-packing-autocomplete',
+    templateUrl: './packing-autocomplete.component.html',
+    styleUrls: ['./packing-autocomplete.component.scss'],
     providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
-export class PackageAutocompleteComponent implements ControlValueAccessor, OnInit {
+export class PackingAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
@@ -117,7 +117,7 @@ export class PackageAutocompleteComponent implements ControlValueAccessor, OnIni
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
-                this.models = response.packages;
+                this.models = response.packings;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {

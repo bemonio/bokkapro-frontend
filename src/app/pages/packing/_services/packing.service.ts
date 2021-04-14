@@ -5,8 +5,8 @@ import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
-export class PackageService {
-    API_URL = `${environment.apiUrl}packages`;
+export class PackingService {
+    API_URL = `${environment.apiUrl}packings`;
     // private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -35,7 +35,7 @@ export class PackageService {
         }
 
         if (query !== null && query !== undefined && query !== '') {
-            params.append(`filter[]`, String(query));
+            params.append(`filter{username.icontains}`, String(query));
         }
 
         if (filters !== null && filters !== undefined && filters.length > 0) {
@@ -66,6 +66,6 @@ export class PackageService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=voucher.*`);
     }
 }

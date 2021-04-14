@@ -1,5 +1,5 @@
-export class PackagesTable {
-  public static packages: any = [
+export class PackingsTable {
+  public static packings: any = [
     {
       id: 1,
       firstName: 'Sonni',

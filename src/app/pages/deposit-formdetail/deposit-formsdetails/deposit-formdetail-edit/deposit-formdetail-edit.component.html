@@ -43,6 +43,28 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Deposit Form</label>
+              <app-deposit-form-autocomplete
+              placeholder="Deposit Form" name="deposit_form" [valid]="isControlValid('deposit_form')" [touched]="isControlTouched('deposit_form')" [class.is-invalid]="isControlInvalid('deposit_form')"
+              [class.is-valid]="isControlValid('deposit_form')" formControlName="deposit_form" id="deposit_form" [model]="model.deposit_form"></app-deposit-form-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('deposit_form')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Deposit Form</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('deposit_form')">Deposit Form  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'deposit_form')">Deposit Form  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'deposit_form')">Deposit Form {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'deposit_form')">Deposit Form {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} Currency Detail</label>
+              <app-currency-detail-autocomplete
+              placeholder="Currency Detail" name="currency_detail" [valid]="isControlValid('currency_detail')" [touched]="isControlTouched('currency_detail')" [class.is-invalid]="isControlInvalid('currency_detail')"
+              [class.is-valid]="isControlValid('currency_detail')" formControlName="currency_detail" id="currency_detail" [model]="model.currency_detail"></app-currency-detail-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('currency_detail')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Currency Detail</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('currency_detail')">Currency Detail  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency_detail')">Currency Detail  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency_detail')">Currency Detail {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency_detail')">Currency Detail {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>  
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Quantity</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="Quantity" name="quantity" [class.is-invalid]="isControlInvalid('quantity')"
@@ -64,28 +86,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'counted_quantity')">Counted Quantity {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'counted_quantity')">Counted Quantity {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Deposit Form</label>
-              <app-deposit-form-autocomplete
-              placeholder="Deposit Form" name="deposit_form" [valid]="isControlValid('deposit_form')" [touched]="isControlTouched('deposit_form')" [class.is-invalid]="isControlInvalid('deposit_form')"
-              [class.is-valid]="isControlValid('deposit_form')" formControlName="deposit_form" id="deposit_form" [model]="model.deposit_form"></app-deposit-form-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('deposit_form')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Deposit Form</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('deposit_form')">Deposit Form  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'deposit_form')">Deposit Form  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'deposit_form')">Deposit Form {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'deposit_form')">Deposit Form {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>  
-            <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} Currency Detail</label>
-              <app-currency-detail-autocomplete
-              placeholder="Currency Detail" name="currency_detail" [valid]="isControlValid('currency_detail')" [touched]="isControlTouched('currency_detail')" [class.is-invalid]="isControlInvalid('currency_detail')"
-              [class.is-valid]="isControlValid('currency_detail')" formControlName="currency_detail" id="currency_detail" [model]="model.currency_detail"></app-currency-detail-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('currency_detail')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Currency Detail</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('currency_detail')">Currency Detail  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency_detail')">Currency Detail  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency_detail')">Currency Detail {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency_detail')">Currency Detail {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>  
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/depositformsdetails">{{ 'COMMON.CANCEL' | translate }}</a>

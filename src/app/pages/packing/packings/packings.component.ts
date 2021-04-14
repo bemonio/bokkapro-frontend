@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { PackageService as ModelService } from '../_services/package.service';
-import { PackageModel as Model } from '../_models/package.model';
+import { PackingService as ModelService } from '../_services/packing.service';
+import { PackingModel as Model } from '../_models/packing.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-import { DivisionService } from '../../division/_services';
 @Component({
-    selector: 'app-packages',
-    templateUrl: './packages.component.html',
-    styleUrls: ['./packages.component.scss']
+    selector: 'app-packings',
+    templateUrl: './packings.component.html',
+    styleUrls: ['./packings.component.scss']
 })
-export class PackagesComponent implements OnInit {
+export class PackingsComponent implements OnInit {
 
     public promiseForm: Promise<any>;
 
@@ -46,15 +45,12 @@ export class PackagesComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
-    public divisionChangeSubscription: Subscription;
-
     constructor(
         public modelsService: ModelService,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
-        public divisionService: DivisionService,
         fb: FormBuilder) {
         this.formGroup = fb.group({
             'employee_id_filter': [''],
@@ -91,32 +87,31 @@ export class PackagesComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
-        this.subscribeToDivisionChange();
     }
 
-    public loadLazy(event?: LazyLoadEvent) {
-        if (event) {
-            this.page = (event.first / this.per_page) + 1;
-            if (event.sortField) {
-                if (event.sortOrder === -1) {
-                    this.sort = '-' + event.sortField;
-                } else {
-                    this.sort = event.sortField;
-                }
+    public loadLazy(event: LazyLoadEvent) {
+        this.page = (event.first / this.per_page) + 1;
+        if (event.sortField) {
+            if (event.sortOrder === -1) {
+                this.sort = '-' + event.sortField;
             } else {
-                this.sort = '-id';
+                this.sort = event.sortField;
             }
-
-            if (event.globalFilter) {
-                this.query = event.globalFilter;
-            } else {
-                this.query = undefined;
-            }
-
-            if (event.rows) {
-                this.per_page = event.rows;
-            }    
+        } else {
+            this.sort = '-id';
         }
+
+        if (event.globalFilter) {
+            this.query = event.globalFilter;
+        } else {
+            this.query = undefined;
+        }
+
+        if (event.rows) {
+            this.per_page = event.rows;
+        }
+
+
         this.getModels();
     }
 
@@ -126,7 +121,7 @@ export class PackagesComponent implements OnInit {
             response => {
                 this.requesting = false;
                 this.models = [];
-                response.packages.forEach(element => {
+                response.packings.forEach(element => {
                     this.models.push(element);
                 });
                 this.totalRecords = response.meta.total_results;
@@ -219,13 +214,6 @@ export class PackagesComponent implements OnInit {
             accept: () => {
                 this.delete(id);
             }
-        });
-    }
-
-    public subscribeToDivisionChange() {
-        this.divisionChangeSubscription = this.divisionService._change$
-        .subscribe(response => {
-            this.loadLazy();
         });
     }
 }

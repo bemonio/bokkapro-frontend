@@ -117,11 +117,11 @@ import { GuideComponent } from './guide/guide.component';
 import { GuideEditComponent } from './guide/guides/guide-edit/guide-edit.component';
 import { GuideAutocompleteComponent } from './guide/guides/guide-autocomplete/guide-autocomplete.component';
 
-// Packages
-import { PackagesComponent } from './package/packages/packages.component';
-import { PackageComponent } from './package/package.component';
-import { PackageEditComponent } from './package/packages/package-edit/package-edit.component';
-import { PackageAutocompleteComponent } from './package/packages/package-autocomplete/package-autocomplete.component';
+// Packings
+import { PackingsComponent } from './packing/packings/packings.component';
+import { PackingComponent } from './packing/packing.component';
+import { PackingEditComponent } from './packing/packings/packing-edit/packing-edit.component';
+import { PackingAutocompleteComponent } from './packing/packings/packing-autocomplete/packing-autocomplete.component';
 
 // DepositForms
 import { DepositFormsComponent } from './deposit-form/deposit-forms/deposit-forms.component';
@@ -287,10 +287,10 @@ import { QuotationEditComponent } from './quotation/quotations/quotation-edit/qu
     GuideComponent,
     GuideEditComponent,
     GuideAutocompleteComponent,
-    PackagesComponent,
-    PackageComponent,
-    PackageEditComponent,
-    PackageAutocompleteComponent,
+    PackingsComponent,
+    PackingComponent,
+    PackingEditComponent,
+    PackingAutocompleteComponent,
     DepositFormsComponent,
     DepositFormComponent,
     DepositFormEditComponent,

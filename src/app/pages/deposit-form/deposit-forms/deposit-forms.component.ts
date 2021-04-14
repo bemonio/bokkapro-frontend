@@ -50,7 +50,7 @@ export class DepositFormsComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
-    public packageId: number;
+    public packingId: number;
     public parent: string;
 
     public displayModal: boolean;
@@ -132,9 +132,9 @@ export class DepositFormsComponent implements OnInit {
         if (this.route.parent.parent.parent.snapshot.url.length > 0) {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                    this.packageId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.packageId;
-                    this.filters.push({ key: 'filter{package}', value: this.packageId.toString() })
+                    this.packingId = params.id;
+                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.packingId;
+                    this.filters.push({ key: 'filter{packing}', value: this.packingId.toString() })
                 }
                 this.getModels();
             });

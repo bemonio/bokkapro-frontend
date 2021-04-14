@@ -37,6 +37,7 @@ export class DepositFormAutocompleteComponent implements ControlValueAccessor, O
     public sort: string;
     public query: string;
     public filters: { key: string, value: string }[];
+    public _with: { key: string, value: string }[];
 
     public value: any;
 
@@ -51,7 +52,7 @@ export class DepositFormAutocompleteComponent implements ControlValueAccessor, O
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'Deposit Form';
+            this.placeholder = '';
         }
     }
 
@@ -114,9 +115,9 @@ export class DepositFormAutocompleteComponent implements ControlValueAccessor, O
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
-                this.models = response.depositforms;
+                this.models = response.deposit_forms;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {

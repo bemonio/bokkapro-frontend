@@ -4,7 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" routerLink="/packages/add">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="/packings/add">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -35,17 +35,17 @@
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'PACKAGE.ID' | translate }}
+              {{ 'PACKING.ID' | translate }}
             </div>
           </th>
           <th pSortableColumn="code">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'PACKAGE.CODE' | translate }}
+              {{ 'PACKING.CODE' | translate }}
             </div>
           </th>
           <th pSortableColumn="verificated">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'PACKAGE.VERIFICATED' | translate }}
+              {{ 'PACKING.VERIFICATED' | translate }}
             </div>
           </th>
           <th pSortableColumn="created_at">
@@ -83,13 +83,13 @@
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/packages/edit/' + value.id"  *ngIf="authService.hasPermission('add_package')">
+              [routerLink]="'/packings/edit/' + value.id" *ngIf="authService.hasPermission('add_company')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_package')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_company')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
@@ -99,7 +99,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="5">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          <td colspan="8">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>

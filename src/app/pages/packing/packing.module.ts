@@ -9,24 +9,24 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ConfirmationService } from 'primeng/api';
-import { PackagesComponent } from './packages/packages.component';
-import { PackageComponent } from './package.component';
-// import { PackageRoutingModule} from './package-routing.module';
-import { PackageEditComponent } from './packages/package-edit/package-edit.component';
-import { PackageAutocompleteComponent } from './packages/package-autocomplete/package-autocomplete.component';
-import { PackageService } from './_services/';
+import { PackingsComponent } from './packings/packings.component';
+import { PackingComponent } from './packing.component';
+// import { PackingRoutingModule} from './packing-routing.module';
+import { PackingEditComponent } from './packings/packing-edit/packing-edit.component';
+import { PackingAutocompleteComponent } from './packings/packing-autocomplete/packing-autocomplete.component';
+import { PackingService } from './_services/';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    PackagesComponent,
-    PackageComponent,
-    PackageEditComponent,
-    PackageAutocompleteComponent,
+    PackingsComponent,
+    PackingComponent,
+    PackingEditComponent,
+    PackingAutocompleteComponent,
   ],
   imports: [
     CommonModule,
-    // PackageRoutingModule,
+    // PackingRoutingModule,
     InlineSVGModule,
     NgbModalModule,
     NgbDatepickerModule,
@@ -42,8 +42,8 @@ import { RouterModule } from '@angular/router';
   entryComponents: [
   ],
   providers: [
-    PackageService,
+    PackingService,
     ConfirmationService
   ]
 })
-export class PackageModule {}
+export class PackingModule {}

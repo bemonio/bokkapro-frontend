@@ -30,9 +30,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   public code: AbstractControl;
   public amount: AbstractControl;
-  public count_packages: AbstractControl;
+  public count_packings: AbstractControl;
   public verificated: AbstractControl;
-  public packages: AbstractControl;
+  public packings: AbstractControl;
   public company: AbstractControl;
   public location_origin: AbstractControl;
   public location_destination: AbstractControl;
@@ -66,9 +66,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       amount: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      count_packages: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      count_packings: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       verificated: [''],
-      packages: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      packings: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_destination: ['', Validators.compose([Validators.minLength(1)])],
@@ -76,9 +76,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     });
     this.code = this.formGroup.controls['code'];
     this.amount = this.formGroup.controls['amount']
-    this.count_packages = this.formGroup.controls['count_packages']
+    this.count_packings = this.formGroup.controls['count_packings']
     this.verificated = this.formGroup.controls['verificated'];
-    this.packages = this.formGroup.controls['packages'];
+    this.packings = this.formGroup.controls['packings'];
     this.company = this.formGroup.controls['company']
     this.location_origin = this.formGroup.controls['location_origin']
     this.location_destination = this.formGroup.controls['location_destination']
@@ -136,8 +136,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (response.guides) {
           this.model.guides = response.guides[0];
         }
-        if (response.packages) {
-          this.model.packages = response.packages;
+        if (response.packings) {
+          this.model.packings = response.packings;
         }
         if (response.currencies) {
           this.model.currency = response.currencies[0];
@@ -154,7 +154,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.code.setValue(this.model.code);
       this.amount.setValue(this.model.amount);
-      this.count_packages.setValue(this.model.count_packages);
+      this.count_packings.setValue(this.model.count_packings);
       this.verificated.setValue(this.model.verificated);
       if (this.model.company) {
         this.company.setValue(this.model.company);
@@ -168,12 +168,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       if (this.model.currency) {
         this.currency.setValue(this.model.currency);
       }
-      if (this.model.packages) {
-        let list_packages = [];
-        this.model.packages.forEach(element => {
-          list_packages.push(element.code);
+      if (this.model.packings) {
+        let list_packings = [];
+        this.model.packings.forEach(element => {
+          list_packings.push(element.code);
         });
-        this.packages.setValue(list_packages);
+        this.packings.setValue(list_packings);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -210,11 +210,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.division = this.division.id;
     model.verificated = true;
 
-    let packages = [];
-    this.model.packages.forEach(element => {
-      packages.push(element);
+    let packings = [];
+    this.model.packings.forEach(element => {
+      packings.push(element);
     });
-    model.packages = packages;
+    model.packings = packings;
 
     // let guides = [];
     // guides.push(this.guideId);
@@ -256,11 +256,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.division = this.division.id;
     model.verificated = true;
 
-    let packages = [];
-    this.model.packages.forEach(element => {
-      packages.push({ 'code': element, 'verificated': 'true' });
+    let packings = [];
+    this.model.packings.forEach(element => {
+      packings.push({ 'code': element, 'verificated': 'true' });
     });
-    model.packages = packages;
+    model.packings = packings;
 
     let guides = [];
     guides.push(this.guideId);
@@ -338,8 +338,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     return stringClass;
   }
 
-  public changeCountPackages() {
-    this.packages.setValidators(Validators.compose([Validators.required, Validators.minLength(this.count_packages.value), Validators.maxLength(this.count_packages.value)]));
+  public changeCountPackings() {
+    this.packings.setValidators(Validators.compose([Validators.required, Validators.minLength(this.count_packings.value), Validators.maxLength(this.count_packings.value)]));
     this.formGroup.markAllAsTouched();
   }
 
