@@ -58,7 +58,7 @@ export class QuotationEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       content: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      template: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      template: [''],
     });
     this.content = this.formGroup.controls['content'];
     this.company = this.formGroup.controls['company'];
@@ -270,8 +270,7 @@ export class QuotationEditComponent implements OnInit, OnDestroy {
   }
 
   public changeTemplate() {
-    this.template.reset();
-    this.formGroup.markAllAsTouched();
+    this.content.setValue(this.template.value.content);
   }
 
   getCompanyById(id) {
