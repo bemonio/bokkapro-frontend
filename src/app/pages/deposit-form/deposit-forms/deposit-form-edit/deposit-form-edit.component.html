@@ -104,7 +104,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'verified_at')">{{ 'DEPOSITFORM.VERIFIEDAT' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'verified_at')">{{ 'DEPOSITFORM.VERIFIEDAT' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>                     
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.BANKACCOUNT' | translate }}</label>
               <app-bank-account-autocomplete
               name="bank_account" [valid]="isControlValid('bank_account')" [touched]="isControlTouched('bank_account')" [class.is-invalid]="isControlInvalid('bank_account')"
@@ -114,6 +114,28 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'bank_account')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'bank_account')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'bank_account')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> -->
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.BANKACCOUNT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="bank_account_number" [class.is-invalid]="isControlInvalid('bank_account_number')"
+                [class.is-valid]="isControlValid('bank_account_number')" formControlName="bank_account_number" />
+              <div class="feedback" *ngIf="!isControlTouched('bank_account_number')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.BANKACCOUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('bank_account_number')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'bank_account_number')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'bank_account_number')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'bank_account_number')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.CURRENCY' | translate }}</label>
+              <app-currency-select
+              name="currency" [valid]="isControlValid('currency')" [touched]="isControlTouched('currency')" [class.is-invalid]="isControlInvalid('currency')"
+              [class.is-valid]="isControlValid('currency')" formControlName="currency" id="currency" [model]="model.currency"></app-currency-select>
+              <div class="feedback" *ngIf="!isControlTouched('currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.CURRENCY' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('currency')">{{ 'DEPOSITFORM.CURRENCY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">{{ 'DEPOSITFORM.CURRENCY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">{{ 'DEPOSITFORM.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">{{ 'DEPOSITFORM.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.SUPERVISOR' | translate }}</label>

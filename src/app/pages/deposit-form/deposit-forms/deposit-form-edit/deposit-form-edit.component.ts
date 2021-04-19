@@ -31,11 +31,13 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
   public amount: AbstractControl;
   public difference_reason: AbstractControl;
+  public bank_account_number: AbstractControl;
   public verified: AbstractControl;
   public verified_at: AbstractControl;
 
   public packing: AbstractControl;
   public bank_account: AbstractControl;
+  public currency: AbstractControl;
   public employee_who_counts: AbstractControl;
   public supervisor: AbstractControl;
 
@@ -62,7 +64,9 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       amount: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      difference_reason: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      difference_reason: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
+      bank_account_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      currency: ['', Validators.compose([Validators.required])],
       verified: [''],
       verified_at: [''],
       packing: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -72,6 +76,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     });
     this.amount = this.formGroup.controls['amount'];
     this.difference_reason = this.formGroup.controls['difference_reason'];
+    this.bank_account_number = this.formGroup.controls['bank_account_number'];
+    this.currency = this.formGroup.controls['currency'];
     this.verified = this.formGroup.controls['verified'];
     this.verified_at = this.formGroup.controls['verified_at'];
     this.packing = this.formGroup.controls['packing'];
@@ -134,6 +140,9 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
         if (response.banksaccounts) {
           this.model.bank_account = response.banksaccounts[0]; //ACAAAAAAAAA
         }
+        if (response.currencies) {
+          this.model.currency = response.currencies[0];
+        }
         if (response.employees) {
           this.model.employee_who_counts = response.employees[0]; //ACAAAAAAAAA
         }
@@ -152,6 +161,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.amount.setValue(this.model.amount)
       this.difference_reason.setValue(this.model.difference_reason)
+      this.bank_account_number.setValue(this.model.bank_account_number)
       this.verified.setValue(this.model.verified)
       this.verified_at.setValue(new Date(this.model.verified_at));
       if (this.model.packing) {
@@ -159,6 +169,9 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       }
       if (this.model.bank_account) {
         this.bank_account.setValue(this.model.bank_account);
+      }
+      if (this.model.currency) {
+        this.currency.setValue(this.model.currency);
       }
       if (this.model.employee_who_counts) {
         this.employee_who_counts.setValue(this.model.employee_who_counts);
@@ -201,6 +214,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     model.verified_at = this.formatDate(this.verified_at.value);
     model.packing = this.model.packing.id;
     model.bank_account = this.model.bank_account.id;
+    model.currency = this.model.currency.id;
     model.employee_who_counts = this.model.employee_who_counts.id;
     model.supervisor = this.model.supervisor.id;
 
@@ -235,6 +249,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     let model = this.model;    
     model.packing = this.model.packing.id;
     model.bank_account = this.model.bank_account.id;
+    model.currency = this.model.currency.id;
     model.employee_who_counts = this.model.employee_who_counts.id;
     model.supervisor = this.model.supervisor.id;
 
