@@ -240,13 +240,16 @@ export const locale = {
       DEPOSITFORMS: 'Planillas Depósito',
       ID: 'Id',
       AMOUNT: 'Monto',
-      DIFFERENCEREASON: 'Motivo diferencia',
+      DIFFERENCEAMOUNT: 'Monto diferencia',
       VERIFIED: 'Verificado',
       VERIFIEDAT: 'Verificado El',
       PACKING: 'Envase',
       BANKACCOUNT: 'Cuenta Bancaria',
       EMPLOYEEWHOCOUNTS: 'Empleado que cuenta',
       SUPERVISOR: 'Supervisor',
+      SUPERVISOREXTRA: 'Supervisor Extra',
+      CURRENCY: 'Divisa',
+      REVIEW: 'Acta'
     },
     DEPOSITFORMDETAIL: {
       DEPOSITFORMDETAIL: 'Planilla Depósito Detalle',

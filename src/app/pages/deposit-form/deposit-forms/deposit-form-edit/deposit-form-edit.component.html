@@ -76,15 +76,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">{{ 'DEPOSITFORM.AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.DIFFERENCEREASON' | translate }}</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}</label>
               <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="difference_reason" [class.is-invalid]="isControlInvalid('difference_reason')"
-                [class.is-valid]="isControlValid('difference_reason')" formControlName="difference_reason" />
-              <div class="feedback" *ngIf="!isControlTouched('difference_reason')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.DIFFERENCEREASON' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('difference_reason')">{{ 'DEPOSITFORM.DIFFERENCEREASON' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'difference_reason')">{{ 'DEPOSITFORM.DIFFERENCEREASON' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'difference_reason')">{{ 'DEPOSITFORM.DIFFERENCEREASON' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'difference_reason')">{{ 'DEPOSITFORM.DIFFERENCEREASON' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+                name="difference_amount" [class.is-invalid]="isControlInvalid('difference_amount')"
+                [class.is-valid]="isControlValid('difference_amount')" formControlName="difference_amount" disabled/>
+              <div class="feedback" *ngIf="!isControlTouched('difference_amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('difference_amount')">{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'difference_amount')">{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'difference_amount')">{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'difference_amount')">{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.VERIFIED' | translate}}</label>
@@ -147,6 +147,21 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'supervisor')">{{ 'DEPOSITFORM.SUPERVISOR' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'supervisor')">{{ 'DEPOSITFORM.SUPERVISOR' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'supervisor')">{{ 'DEPOSITFORM.SUPERVISOR' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }}</label>
+              <app-employee-autocomplete
+              name="supervisor_extra" [valid]="isControlValid('supervisor_extra')" [touched]="isControlTouched('supervisor_extra')" [class.is-invalid]="isControlInvalid('supervisor_extra')"
+              [class.is-valid]="isControlValid('supervisor_extra')" formControlName="supervisor_extra" id="supervisor_extra" [model]="model.supervisor_extra"></app-employee-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('supervisor_extra')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-12">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.REVIEW' | translate }}</label>
+              <p-editor formControlName="review" [style]="{'height':'220px'}" placeholder="{{ 'DEPOSITFORM.REVIEW' | translate }}"></p-editor>
             </div>
           </div>
 

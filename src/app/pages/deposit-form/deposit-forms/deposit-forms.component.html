@@ -49,9 +49,9 @@
               {{ 'DEPOSITFORM.AMOUNT' | translate }}
             </div>
           </th>
-          <th pSortableColumn="difference_reason">
+          <th pSortableColumn="difference_amount">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'DEPOSITFORM.DIFFERENCEREASON' | translate }}
+              {{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}
             </div>
           </th>
           <th pSortableColumn="created_at">
@@ -85,7 +85,7 @@
             {{value.amount}}
           </td>
           <td>
-            {{value.difference_reason}}
+            {{value.difference_amount}}
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}

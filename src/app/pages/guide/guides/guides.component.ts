@@ -343,7 +343,7 @@ export class GuidesComponent implements OnInit {
                 element.verificated = true;
                 found = true;
             }
-            if (this.verificationGuide.division_destination.name == 'Operaciones Internas') {
+            if (this.verificationGuide.division_destination.name !== 'Operaciones Internas') {
                 element.packings.forEach(element2 => {
                     if (element2.code === event.value) {
                         element2.verificated = true;

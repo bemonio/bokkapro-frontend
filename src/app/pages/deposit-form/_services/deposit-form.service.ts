@@ -66,6 +66,6 @@ export class DepositFormService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=packing.*&include[]=bank_account.*&include[]=employee_who_counts.*&include[]=supervisor.*&include[]=currency.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=packing.*&include[]=bank_account.*&include[]=employee_who_counts.*&include[]=supervisor.*&include[]=currency.*&include[]=supervisor_extra.*`);
     }
 }
