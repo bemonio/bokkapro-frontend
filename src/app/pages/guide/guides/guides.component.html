@@ -46,11 +46,6 @@
               {{ 'GUIDE.DATE' | translate }}
             </div>
           </th>
-          <th pSortableColumn="shift">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'GUIDE.SHIFT' | translate }}
-            </div>
-          </th>
           <th pSortableColumn="type_guide">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'GUIDE.TYPE' | translate }}
@@ -74,6 +69,11 @@
           <th pSortableColumn="division_destination">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'GUIDE.DESTINATION' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="shift">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'GUIDE.SHIFT' | translate }}
             </div>
           </th>
           <th pSortableColumn="status">
@@ -107,10 +107,7 @@
           </td>
           <td>
             {{value.date | date: 'MM/dd/yyyy'}}<br>
-            {{value.date | date: 'hh:mm:ss'}}
-          </td>
-          <td>
-            {{value.am_pm}}
+            {{value.date | date: 'hh:mm:ss zzzz':'+0500'}}
           </td>
           <td>
             <p-badge [value]="'Entrada'"  severity="success"  severity="success" *ngIf="value.type_guide == 1"></p-badge>
@@ -128,6 +125,9 @@
           </td>
           <td>
             {{value.division_destination.name}}
+          </td>
+          <td>
+            {{value.am_pm}}
           </td>
           <td>
             <p-badge [value]="'Confirmada'"  severity="success"  severity="success" *ngIf="value.status == 1"></p-badge>

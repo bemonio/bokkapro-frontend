@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { GuideModel as Model } from '../../_models/guide.model';
 import { GuideService as ModelsService } from '../../_services/guide.service';
+import { DivisionService } from 'src/app/pages/division/_services';
 
 @Component({
   selector: 'app-guide-edit',
@@ -56,6 +57,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
+    private divisionService: DivisionService,
     private router: Router,
     private route: ActivatedRoute,
     public authService: AuthService,
@@ -159,6 +161,33 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.subscriptions.push(sb);
   }
 
+  getDivision(id) {
+    const sb = this.route.paramMap.pipe(
+        switchMap(params => {
+            if (id || id > 0) {
+                return this.divisionService.getById(id);
+            }
+            return of({ 'division': new Model() });
+        }),
+        catchError((error) => {
+            let messageError = [];
+            if (!Array.isArray(error.error)) {
+                messageError.push(error.error);
+            } else {
+                messageError = error.error;
+            }
+            Object.entries(messageError).forEach(
+                ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+            );
+            return of({ 'division': new Model() });
+        }),
+    ).subscribe((response: any) => {
+        if (response) {
+          this.division_destination.setValue(response.division);
+        }
+    });
+}
+
   loadForm() {
     this.certified_cart.setValue(false);
 
@@ -187,6 +216,13 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.division_origin.setValue(this.authService.currentDivisionValue);
       this.employee_origin.setValue(this.authService.currentUserValue.employee);
       this.date.setValue(new Date());
+      if(this.division_origin.value.name === "Apertura"){
+        this.getDivision(1);
+        // this.division_destination.disabled()
+      }
+      if(this.division_origin.value.name === "Check IN/OUT"){
+        this.getDivision(2);
+      }
       this.employee_destination.setValidators([])
     } else {
       this.employee_destination.setValidators(Validators.compose([Validators.required,]))
@@ -424,26 +460,26 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     let seconds = '' + d.getSeconds();
 
     if (month.length < 2) {
-      month = '0' + month;
+        month = '0' + month;
     }
     if (day.length < 2) {
-      day = '0' + day;
+        day = '0' + day;
     }
 
     if (hours.length < 2) {
-      hours = '0' + hours;
+        hours = '0' + hours;
     }
 
     if (minutes.length < 2) {
-      minutes = '0' + minutes;
+        minutes = '0' + minutes;
     }
 
     if (seconds.length < 2) {
-      seconds = '0' + seconds;
+        seconds = '0' + seconds;
     }
 
-    return [year, month, day].join('-');
-  }
+    return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
+}
 
   public closeEmit() {
     this.close.emit(true);
