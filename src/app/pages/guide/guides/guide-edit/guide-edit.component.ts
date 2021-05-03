@@ -101,9 +101,15 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.employee_origin = this.formGroup.controls['employee_origin'];
     this.employee_destination = this.formGroup.controls['employee_destination'];
 
-    this.optionsAmPm = [];
-    this.optionsAmPm.push({ key: 'AM', value: 'AM' });
-    this.optionsAmPm.push({ key: 'PM', value: 'PM' });
+    // this.optionsAmPm = [];
+    // this.optionsAmPm.push({ key: 'Select', value: '' });
+    // this.optionsAmPm.push({ key: 'AM', value: 'AM' });
+    // this.optionsAmPm.push({ key: 'PM', value: 'PM' });
+
+    this.optionsAmPm = [
+      {key: 'AM', value: 'AM'},
+      {key: 'PM', value: 'PM'},
+    ];
 
     if (this.route.parent.parent.snapshot.url[0].path) {
       this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;

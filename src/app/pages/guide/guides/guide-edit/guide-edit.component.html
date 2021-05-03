@@ -89,7 +89,7 @@
             </div>  
             <div class="col-lg-4" *ngIf="division_destination.value?.type_division == 2">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.SHIFT' | translate}}</label>
-              <p-dropdown [styleClass]="getValidClass(isControlValid('am_pm'))" [options]="optionsAmPm" optionLabel="key" name="am_pm" formControlName="am_pm"></p-dropdown>
+              <p-dropdown [styleClass]="getValidClass(isControlValid('am_pm'))" [options]="optionsAmPm" optionLabel="key" name="am_pm" formControlName="am_pm" placeholder="Selecciona Horario"></p-dropdown>
               <div class="feedback" *ngIf="!isControlTouched('am_pm')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.SHIFT' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('am_pm')">{{ 'GUIDE.SHIFT' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'am_pm')">{{ 'GUIDE.SHIFT' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
