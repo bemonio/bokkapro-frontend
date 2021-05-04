@@ -85,7 +85,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       certified_cart: [''],
       certified_cart_code: [''],
       division_origin: ['', Validators.compose([Validators.required,])],
-      division_destination: ['', Validators.compose([Validators.required,])],
+      division_destination: [''],
       employee_origin: ['', Validators.compose([Validators.required,])],
       employee_destination: [''],
     });

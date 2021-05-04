@@ -80,7 +80,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.EMPLOYEE_DESTINATION' | translate}}</label>
               <app-employee-autocomplete
               name="employee_destination" [valid]="isControlValid('employee_destination')" [touched]="isControlTouched('employee_destination')" [class.is-invalid]="isControlInvalid('employee_destination')"
-              [class.is-valid]="isControlValid('employee_destination')" formControlName="employee_destination" id="employee_destination" [model]="model.employee_destination" [addFilters]="[{key: 'divisions', value: division_destination.value ? division_destination.value.id : ''}]" [disabled]="division_destination.value ? false : true"></app-employee-autocomplete>
+              [class.is-valid]="isControlValid('employee_destination')" formControlName="employee_destination" id="employee_destination" [model]="model.employee_destination" [addFilters]="[{key: 'divisions', value: division_destination.value ? division_destination.value.id : ''}]" style="color: blue;" [disabled]="true"></app-employee-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('employee_destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.EMPLOYEE_DESTINATION' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('employee_destination')">{{ 'GUIDE.EMPLOYEE_DESTINATION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee_destination')">{{ 'GUIDE.EMPLOYEE_DESTINATION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
