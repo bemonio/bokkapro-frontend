@@ -137,18 +137,23 @@
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
-            <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;" 
-              (click)="verification(value)" *ngIf="(authService.hasPermission('change_' + permission)) && ((parent == 'guidesinput' && !(value.status == 1)) || (parent == 'guidescheck'  && !(value.status == 1)))">
+            <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning" style="margin-right: 5px;" 
+              (click)="verification(value)" *ngIf="showVerificationButton(value)">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
-                class="svg-icon svg-icon-md svg-icon-primary">
+                class="svg-icon svg-icon-md svg-icon-warning">
               </span>
             </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              routerLink="/{{parent}}/edit/{{value.id}}"  *ngIf="authService.hasPermission('change_' + permission)">
+              routerLink="/{{parent}}/edit/{{value.id}}"  *ngIf="authService.hasPermission('change_' + permission) && (this.authService.currentUserValue.employee.id !== value.employee_origin.id) ">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
+            <button class="btn btn-icon btn-transparent btn-hover-secondary btn-sm" style="margin-right: 5px;" *ngIf="this.authService.currentUserValue.employee.id == value.employee_origin.id" disabled>
+              <span [inlineSVG]="'./assets/media/svg/icons/General/User.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-secondary">
+              </span>
+            </button>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
               (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('delete_' + permission)">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"

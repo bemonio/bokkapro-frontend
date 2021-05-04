@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { DivisionService } from '../../division/_services';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
     selector: 'app-guides',
@@ -406,9 +407,11 @@ export class GuidesComponent implements OnInit {
     }
 
     save() {
+        let employee = this.authService.currentUserValue.employee.id;
         let params = {
             "status": "1",
-            "vouchers": []
+            "vouchers": [],
+            "employee_destination": employee
         };
         this.verificationGuide.vouchers.forEach(element => {
             params.vouchers.push(element.id);
@@ -520,5 +523,15 @@ export class GuidesComponent implements OnInit {
         .subscribe(response => {
             this.loadLazy();
         });
+    }
+
+    public showVerificationButton(value) {
+        let response = false;
+        if ((this.authService.hasPermission('change_' + this.permission)) && ((this.parent == 'guidesinput' && !(value.status == 1)) || (this.parent == 'guidescheck'  && !(value.status == 1)))) {
+            if (this.authService.currentUserValue.employee.id !== value.employee_origin.id) {
+                response = true;
+            }
+        }
+        return response;
     }
 }
