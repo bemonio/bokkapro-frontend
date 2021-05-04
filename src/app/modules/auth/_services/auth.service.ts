@@ -90,6 +90,7 @@ export class AuthService implements OnDestroy {
 
     return this.authHttpService.getUserByToken().pipe(
       map((user: UserModel) => {
+        this.isLoadingSubject.next(false)
         return user;
       }),
       finalize(() => this.isLoadingSubject.next(false))

@@ -7,6 +7,7 @@ import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from '../../../modules/i18n/translation.service';
 import { UserService } from 'src/app/pages/user/_services';
+import { ToastService } from '../../toast/_services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private translationService: TranslationService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastService: ToastService,
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -90,46 +92,51 @@ export class LoginComponent implements OnInit, OnDestroy {
         .getUserByToken()
         .pipe(first())
         .subscribe((userAuth: any) => {  
-          this.userService.getById(userAuth.id)
-          .pipe(first())
-          .subscribe((user: any) => {  
-            let model = user;
-            if (user.employees) {
-              model.user.employee = user.employees[0];
-              if (user.positions) {
-                model.user.employee.position = user.positions[0];
-                if (user.departments) {
-                  model.user.employee.position.department = user.departments[0];
+          if (userAuth){
+            this.userService.getById(userAuth.id)
+            .pipe(first())
+            .subscribe((user: any) => {  
+              let model = user;
+              if (user.employees) {
+                model.user.employee = user.employees[0];
+                if (user.positions) {
+                  model.user.employee.position = user.positions[0];
+                  if (user.departments) {
+                    model.user.employee.position.department = user.departments[0];
+                  }
+                }
+  
+                if (user.divisions) {
+                  model.user.employee.divisions = user.divisions;
                 }
               }
-
-              if (user.divisions) {
-                model.user.employee.divisions = user.divisions;
+  
+              if (user.groups) {
+                model.user.groups = user.groups;
+                if (user.permissions) {
+                  model.user.groups[0].permissions = user.permissions;
+                }
               }
-            }
-
-            if (user.groups) {
-              model.user.groups = user.groups;
-              if (user.permissions) {
-                model.user.groups[0].permissions = user.permissions;
+  
+              if (model.user.employee) {
+                if (model.user.employee.divisions) {
+                  this.authService.currentDivisionValue = model.user.employee.divisions[0];
+                }
               }
-            }
-
-            if (model.user.employee) {
-              if (model.user.employee.divisions) {
-                this.authService.currentDivisionValue = model.user.employee.divisions[0];
+  
+              if (model.user.language) {
+                this.translationService.setLanguage(model.user.language);
+              } else {
+                this.translationService.setLanguage('es');
               }
-            }
-
-            if (model.user.language) {
-              this.translationService.setLanguage(model.user.language);
-            } else {
-              this.translationService.setLanguage('es');
-            }
-            this.authService.currentUserValue = model.user;
-
-            this.router.navigate(['/dashboard']);
-          });
+              this.authService.currentUserValue = model.user;
+  
+              this.router.navigate(['/dashboard']);
+            });
+          } else {
+            this.toastService.growl('error', 'error');
+            this.hasError = true;
+          }
         }); 
       });
     this.unsubscribe.push(loginSubscr);
