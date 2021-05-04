@@ -54,6 +54,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public typeGuide: number;
 
+  public divisionChangeSubscription: Subscription;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -116,6 +118,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     }
 
     this.get();
+
+    this.subscribeToDivisionChange();
   }
 
   get() {
@@ -222,6 +226,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.division_origin.setValue(this.authService.currentDivisionValue);
       this.employee_origin.setValue(this.authService.currentUserValue.employee);
       this.date.setValue(new Date());
+      this.division_destination.reset();
       if(this.division_origin.value.name === "Apertura"){
         this.getDivision(1);
         // this.division_destination.disabled()
@@ -501,5 +506,12 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   public changeDivisionDestination(event) {
     this.employee_destination.setValue('');
     this.loadForm();
+  }
+
+  public subscribeToDivisionChange() {
+    this.divisionChangeSubscription = this.divisionService._change$
+    .subscribe(response => {
+      this.loadForm();
+    });
   }
 }
