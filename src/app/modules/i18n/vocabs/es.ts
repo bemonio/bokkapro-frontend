@@ -217,7 +217,7 @@ export const locale = {
       VOUCHER: 'Comprobante',
       VOUCHERS: 'Comprobantes',
       ID: 'Id',
-      CODE: 'Código/Comprobante',
+      CODE: 'Código / Comprobante',
       PACKINGS: 'Envases',
       CURRENCY: 'Divisa',
       AMOUNT: 'Monto',
