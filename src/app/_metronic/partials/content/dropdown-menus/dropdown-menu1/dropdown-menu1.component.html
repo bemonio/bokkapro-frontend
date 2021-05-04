@@ -11,7 +11,7 @@
   </li>
   <li class="navi-separator mb-3 opacity-70"></li>
   <li class="navi-item" *ngFor="let item of divisions">
-    <a class="navi-link cursor-pointer" (click)="changeDivision(item)">
+    <a class="navi-link cursor-pointer dropdown-item" (click)="changeDivision(item)">
       <span class="navi-text">
         <span class="label label-xl label-inline label-light-success">{{item.name}}</span>
       </span>
