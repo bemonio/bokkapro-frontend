@@ -81,7 +81,8 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-value>
-        <tr class="p-selectable-row">
+        <tr class="p-selectable-row" data-toggle="tooltip" data-placement="left" 
+        title="Divisa: {{value.currency.code}} - Monto: {{value.amount}} - Dir Destino: {{value.location_destination.name}}">
           <td *ngIf="showTableCheckbox">
             <p-tableCheckbox [value]="value"></p-tableCheckbox>
           </td>
@@ -98,7 +99,7 @@
             {{value.location_origin.name}}
           </td>
           <td>
-            {{value.company}}
+            {{value.company.name}}
           </td>
           <!-- <td>
             {{value.verificated}}
