@@ -7,7 +7,6 @@ import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from '../../../modules/i18n/translation.service';
 import { UserService } from 'src/app/pages/user/_services';
-import { ToastService } from '../../toast/_services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +38,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     private translationService: TranslationService,
     private router: Router,
     private userService: UserService,
-    private toastService: ToastService,
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -91,7 +89,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.authService
         .getUserByToken()
         .pipe(first())
-        .subscribe((userAuth: any) => {  
+        .subscribe((userAuth: any) => {
           if (userAuth){
             this.userService.getById(userAuth.id)
             .pipe(first())
@@ -134,7 +132,6 @@ export class LoginComponent implements OnInit, OnDestroy {
               this.router.navigate(['/dashboard']);
             });
           } else {
-            this.toastService.growl('error', 'error');
             this.hasError = true;
           }
         }); 
