@@ -264,6 +264,7 @@ export class VouchersComponent implements OnInit {
     public subscribeToDivisionChange() {
         this.divisionChangeSubscription = this.divisionService._change$
         .subscribe(response => {
+            this.selectedModels = [];
             this.loadLazy();
         });
     }
