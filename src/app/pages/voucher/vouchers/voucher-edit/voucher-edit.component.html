@@ -149,7 +149,7 @@
             </div>            
             <div class="col-lg-12">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKINGS' | translate }}</label>
-              <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false"></p-chips>
+              <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false" [disabled]="model && model.id"></p-chips>
               <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('packings')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PACKINGS' | translate }}</b></div>
               <div class="valid-feedback"  style="display: block;" *ngIf="packings.value.length == count_packings.value">{{ 'VOUCHER.PACKINGS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'packings')">{{ 'VOUCHER.PACKINGS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
@@ -165,8 +165,8 @@
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers">{{ 'COMMON.CANCEL' | translate }}</a>
-            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+            <!-- <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button> -->
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
