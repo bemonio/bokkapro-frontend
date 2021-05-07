@@ -211,7 +211,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.currency = this.model.currency.id;
     model.division = this.division.id;
     model.verificated = true;
-    model.guides = this.guideId;
+    model.guides = undefined;
     model.packings = undefined;
 
     // let packings = [];
