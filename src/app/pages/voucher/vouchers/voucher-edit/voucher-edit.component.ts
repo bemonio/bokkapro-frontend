@@ -10,6 +10,7 @@ import { VoucherModel as Model } from '../../_models/voucher.model';
 import { VoucherService as ModelsService } from '../../_services/voucher.service';
 import { CompanyService } from 'src/app/pages/company/_services';
 import { OfficeService } from 'src/app/pages/office/_services';
+import { LocationService } from 'src/app/pages/location/_services';
 
 @Component({
   selector: 'app-voucher-edit',
@@ -57,6 +58,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private toastService: ToastService,
     private companyService: CompanyService,
+    private locationService: LocationService,
     private officeService: OfficeService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
@@ -350,11 +352,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.formGroup.markAllAsTouched();
   }
 
-  public changeLocation() {
+  public changeLocationOrigin() {
     this.company.reset();
     this.formGroup.markAllAsTouched();
     if (this.location_origin.value) {
       this.getCompanyById(this.location_origin.value.company);
+      this.getLocationDestinationByCompanyId(this.location_origin.value.company)
     }
   }
 
@@ -365,6 +368,28 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       },
       error => {
         console.log('error getting company');
+      }
+    );
+  }
+
+  getLocationDestinationByCompanyId(id) {
+    let page = 1;
+    let per_page = 10; 
+    let sort = '-id';
+    let query = '';
+    let filters = [];
+    let _with = undefined;
+
+    filters.push({ key: 'filter{company}', value: id })
+
+    this.locationService.get(page, per_page, sort, query, filters, _with).toPromise().then(
+      response => {
+        if (response.locations.length == 1) {
+          this.location_destination.setValue(response.locations[0])
+        }
+      },
+      error => {
+        console.log('error getting location');
       }
     );
   }
