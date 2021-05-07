@@ -111,7 +111,7 @@
           </td>
           <td>
             {{value.date | date: 'MM/dd/yyyy'}}<br>
-            {{value.date | date: 'hh:mm:ss zzzz':'+0500'}}
+            {{value.date | date: 'hh:mm:ss'}}
           </td>
           <td>
             <p-badge [value]="'Entrada'"  severity="success"  severity="success" *ngIf="value.type_guide == 1"></p-badge>
