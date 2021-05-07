@@ -25,7 +25,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
-    OFFICE_TAB: 1,
+    PACKINGS_TAB: 1,
   };
 
   public code: AbstractControl;
