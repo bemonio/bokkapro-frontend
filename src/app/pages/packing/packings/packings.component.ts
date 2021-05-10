@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PackingService as ModelService } from '../_services/packing.service';
 import { PackingModel as Model } from '../_models/packing.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -45,12 +46,18 @@ export class PackingsComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
+    public guideId: number;
+    public voucherId: number;
+    public parent: string;
+
     constructor(
         public modelsService: ModelService,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
+        private router: Router,
+        private route: ActivatedRoute,
         fb: FormBuilder) {
         this.formGroup = fb.group({
             'employee_id_filter': [''],
@@ -70,6 +77,8 @@ export class PackingsComponent implements OnInit {
         });
 
         this.showTableCheckbox = false;
+
+        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
@@ -111,8 +120,31 @@ export class PackingsComponent implements OnInit {
             this.per_page = event.rows;
         }
 
+        this.filters = [];
+        if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+            this.route.parent.parent.parent.params.subscribe((params) => {
+                if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                    this.voucherId = params.id;
 
-        this.getModels();
+                    if (this.route.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                        this.route.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
+                            this.guideId = params.id;
+                            if (this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                                this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+                                this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.voucherId;
+                                this.filters.push({ key: 'filter{voucher}', value: this.voucherId.toString() })
+                            }
+                        })
+                    } else {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.voucherId;
+                        this.filters.push({ key: 'filter{voucher}', value: this.voucherId.toString() })
+                    }
+                }
+                this.getModels();
+            });
+        } else {
+            this.getModels();
+        }
     }
 
     public getModels() {

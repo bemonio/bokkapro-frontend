@@ -20,7 +20,16 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: VoucherEditComponent
+        component: VoucherEditComponent,
+        children: [
+          {
+            path: 'packings',
+            loadChildren: () =>
+              import('../../pages/packing/packing-routing.module').then(
+                (m) => m.PackingRoutingModule
+              ),
+          },
+        ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

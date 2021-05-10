@@ -201,7 +201,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   loadForm() {
     this.certified_cart.setValue(false);
 
-    if (this.model.id) {
+    if (this.model && this.model.id) {
       this.description.setValue(this.model.description);
       this.status.setValue(this.model.status);
       this.am_pm.setValue({ key: this.model.am_pm, value: this.model.am_pm });

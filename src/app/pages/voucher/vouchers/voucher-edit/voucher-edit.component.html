@@ -27,15 +27,17 @@
   <div class="card-body">
     <ul class="nav nav-tabs nav-tabs-line" role="tablist" *ngIf="!showCashier">
       <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
         <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
-          [class.active]="activeTabId === tabs.BASIC_TAB">
+          [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}">
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
-      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.OFFICE_TAB)">
-        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.OFFICE_TAB"
-          [class.active]="activeTabId === tabs.OFFICE_TAB">Offices</a>
-      </li> -->
+      <li *ngIf="(model && model.id && authService.hasPermission('view_contract'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.PACKINGS_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PACKINGS_TAB"
+          [class.active]="activeTabId === tabs.PACKINGS_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/packings">{{ 'VOUCHER.PACKINGS' | translate }}</a>
+      </li>
     </ul>
 
     <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
@@ -107,7 +109,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.LOCATION_ORIGIN' | translate }}</label>
               <app-location-autocomplete
               name="location_origin" [valid]="isControlValid('location_origin')" [touched]="isControlTouched('location_origin')" [class.is-invalid]="isControlInvalid('location_origin')"
-              [class.is-valid]="isControlValid('location_origin')" formControlName="location_origin" id="location_origin" [model]="model.location_origin" (change)="changeLocation()"></app-location-autocomplete>
+              [class.is-valid]="isControlValid('location_origin')" formControlName="location_origin" id="location_origin" [model]="model.location_origin" (change)="changeLocationOrigin()"></app-location-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('location_origin')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.LOCATION_ORIGIN' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('location_origin')">{{ 'VOUCHER.LOCATION_ORIGIN' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_origin')">{{ 'VOUCHER.LOCATION_ORIGIN' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -149,7 +151,7 @@
             </div>    
             <div class="col-lg-12">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKINGS' | translate }}</label>
-              <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false"></p-chips>
+              <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false" [disabled]="model && model.id"></p-chips>
               <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('packings')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PACKINGS' | translate }}</b></div>
               <div class="valid-feedback"  style="display: block;" *ngIf="packings.value.length == count_packings.value">{{ 'VOUCHER.PACKINGS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'packings')">{{ 'VOUCHER.PACKINGS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
@@ -177,14 +179,25 @@
             </div>
           </div>
           <div class="float-right">
+<<<<<<< HEAD
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
             <a class="btn btn-default font-weight-bold mr-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+=======
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers">{{ 'COMMON.CANCEL' | translate }}</a>
+            <!-- <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button> -->
+>>>>>>> 60251da8aec82adf98d97b0e7b0499d945fa3afc
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
         </form>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTabId === tabs.PACKINGS_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-packing></app-packing>
       </div>
     </ng-container>
   </div>

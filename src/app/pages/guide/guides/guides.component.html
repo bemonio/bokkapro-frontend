@@ -21,6 +21,10 @@
           <p-dropdown styleClass="form-control form-control-lg form-control-solid" [options]="optionsAmPm" optionLabel="key" name="am_pm_filter" formControlName="am_pm_filter" placeholder="seleccione" dateFormat="dd.mm.yy" (onChange)="loadLazy()"></p-dropdown>
           <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} {{ 'GUIDE.SHIFT' | translate }}</small>
         </div>
+        <div class="col-lg-6">
+          <input type="text" class="form-control" name="search_filter" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            formControlName="search_filter" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> {{ 'COMMON.IN' | translate }} id</small>
+        </div>
       </div>
     </div>
     <!-- end: Filtration form -->
@@ -107,7 +111,7 @@
           </td>
           <td>
             {{value.date | date: 'MM/dd/yyyy'}}<br>
-            {{value.date | date: 'hh:mm:ss zzzz':'+0500'}}
+            {{value.date | date: 'hh:mm:ss'}}
           </td>
           <td>
             <p-badge [value]="'Entrada'"  severity="success"  severity="success" *ngIf="value.type_guide == 1"></p-badge>

@@ -10,6 +10,7 @@ import { VoucherModel as Model } from '../../_models/voucher.model';
 import { VoucherService as ModelsService } from '../../_services/voucher.service';
 import { CompanyService } from 'src/app/pages/company/_services';
 import { OfficeService } from 'src/app/pages/office/_services';
+import { LocationService } from 'src/app/pages/location/_services';
 
 @Component({
   selector: 'app-voucher-edit',
@@ -29,7 +30,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
-    OFFICE_TAB: 1,
+    PACKINGS_TAB: 1,
   };
 
   public code: AbstractControl;
@@ -62,6 +63,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private toastService: ToastService,
     private companyService: CompanyService,
+    private locationService: LocationService,
     private officeService: OfficeService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
@@ -240,12 +242,14 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.currency = this.model.currency.id;
     model.division = this.division.id;
     model.verificated = true;
+    model.guides = undefined;
+    model.packings = undefined;
 
-    let packings = [];
-    this.model.packings.forEach(element => {
-      packings.push(element);
-    });
-    model.packings = packings;
+    // let packings = [];
+    // this.model.packings.forEach(element => {
+    //   packings.push(element);
+    // });
+    // model.packings = packings;
 
     // let guides = [];
     // guides.push(this.guideId);
@@ -380,11 +384,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.formGroup.markAllAsTouched();
   }
 
-  public changeLocation() {
+  public changeLocationOrigin() {
     this.company.reset();
     this.formGroup.markAllAsTouched();
     if (this.location_origin.value) {
       this.getCompanyById(this.location_origin.value.company);
+      this.getLocationDestinationByCompanyId(this.location_origin.value.company)
     }
   }
 
@@ -402,6 +407,28 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public closeEmit() {
     this.close.emit(true);
     this.loadForm();
+  }
+  
+  getLocationDestinationByCompanyId(id) {
+    let page = 1;
+    let per_page = 10; 
+    let sort = '-id';
+    let query = '';
+    let filters = [];
+    let _with = undefined;
+
+    filters.push({ key: 'filter{company}', value: id })
+
+    this.locationService.get(page, per_page, sort, query, filters, _with).toPromise().then(
+      response => {
+        if (response.locations.length == 1) {
+          this.location_destination.setValue(response.locations[0])
+        }
+      },
+      error => {
+        console.log('error getting location');
+      }
+    );
   }
 
   getOfficeById(id) {
