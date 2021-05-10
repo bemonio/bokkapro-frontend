@@ -4,6 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
+      <a type="button" class="btn btn-secondary" (click)="showModalDialogCashier()" *ngIf="selectedModels.length > 0">{{ 'VOUCHER.CASHIER' | translate }}</a>
       <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a>
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/vouchers/add" *ngIf="parent.startsWith('/guidesinput')">{{ 'COMMON.NEW' | translate }}</a>
     </div>
@@ -135,7 +136,12 @@
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
-<p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+<p-dialog header="{{ 'VOUCHER.CASHIER' | translate }}" [(visible)]="displayModalCashier" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-voucher-edit (close)="hideModalDialogCashier()" [listVouchers]="selectedModels" [showCashier]="true"></app-voucher-edit>
+</p-dialog>
+
+<p-dialog header="{{ 'COMMON.TRANSFER' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
   [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
   <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
 </p-dialog>

@@ -224,7 +224,8 @@ export const locale = {
       LOCATION_ORIGIN: 'Dirección Origen',
       LOCATION_DESTINATION: 'Dirección Destino',
       COMPANY: 'Cliente',
-      COUNT_PACKINGS: 'Cant. Envases'
+      COUNT_PACKINGS: 'Cant. Envases',
+      CASHIER: 'Cajera'
     },
     PACKING: {
       PACKING: 'Envase',

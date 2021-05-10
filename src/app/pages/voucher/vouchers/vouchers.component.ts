@@ -54,7 +54,8 @@ export class VouchersComponent implements OnInit {
     public parent: string;
 
     public displayModal: boolean;
-
+    public displayModalCashier: boolean;
+    
     public divisionChangeSubscription: Subscription;
 
     constructor(
@@ -95,6 +96,7 @@ export class VouchersComponent implements OnInit {
         this.requesting = false;
 
         this.displayModal = false;
+        this.displayModalCashier = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -280,6 +282,15 @@ export class VouchersComponent implements OnInit {
 
     hideModalDialog() {
         this.displayModal = false;
+        this.getModels();
+    }
+
+    showModalDialogCashier() {
+        this.displayModalCashier = true;
+    }
+
+    hideModalDialogCashier() {
+        this.displayModalCashier = false;
         this.getModels();
     }
 

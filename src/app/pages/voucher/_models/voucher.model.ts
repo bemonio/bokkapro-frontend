@@ -11,10 +11,12 @@ export class VoucherModel {
   division: any;
   guides: any;
   company: any;
+  cashier: any;
   location_origin: any;
   location_destination: any;
   packings: any[];
   currency: any;
+  vouchers: any[];
   created_at: string;
   updated_at: string;
 }

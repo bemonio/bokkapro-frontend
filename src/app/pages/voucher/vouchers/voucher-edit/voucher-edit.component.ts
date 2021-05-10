@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
@@ -17,6 +17,10 @@ import { OfficeService } from 'src/app/pages/office/_services';
   styleUrls: ['./voucher-edit.component.scss']
 })
 export class VoucherEditComponent implements OnInit, OnDestroy {
+  @Input() showCashier: boolean;
+  @Input() listVouchers: any[];
+  @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public id: number;
   public model: Model;
   public previous: Model;
@@ -34,6 +38,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public verificated: AbstractControl;
   public packings: AbstractControl;
   public company: AbstractControl;
+  public cashier: AbstractControl;
   public location_origin: AbstractControl;
   public location_destination: AbstractControl;
   public currency: AbstractControl;
@@ -70,6 +75,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       verificated: [''],
       packings: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      cashier: [''],
       location_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_destination: ['', Validators.compose([Validators.minLength(1)])],
       currency: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -80,6 +86,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.verificated = this.formGroup.controls['verificated'];
     this.packings = this.formGroup.controls['packings'];
     this.company = this.formGroup.controls['company']
+    this.cashier = this.formGroup.controls['cashier']
     this.location_origin = this.formGroup.controls['location_origin']
     this.location_destination = this.formGroup.controls['location_destination']
     this.currency = this.formGroup.controls['currency']
@@ -100,6 +107,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       }
       this.get();
     });
+
+    console.log(this.listVouchers)
   }
 
   get() {
@@ -133,6 +142,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (response.companies) {
           this.model.company = response.companies[0];
         }
+        if (response.cashier) {
+          this.model.cashier = response.cashier[0];
+        }
         if (response.guides) {
           this.model.guides = response.guides[0];
         }
@@ -159,6 +171,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }
+      if (this.model.cashier) {
+        this.cashier.setValue(this.model.cashier);
+      }
       if (this.model.location_origin) {
         this.location_origin.setValue(this.model.location_origin);
       }
@@ -176,6 +191,21 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.packings.setValue(list_packings);
       }
     }
+
+    if(this.showCashier){
+        this.cashier.setValue(Validators.compose([Validators.required, Validators.minLength(1)]))
+        this.code.setValidators([])
+        this.amount.setValidators([])
+        this.count_packings.setValidators([])
+        this.verificated.setValidators([])
+        this.packings.setValidators([])
+        this.company.setValidators([])
+        this.location_origin.setValidators([])
+        this.location_destination.setValidators([])
+        this.currency.setValidators([])
+        // console.log(this.listVouchers)
+    }
+
     this.formGroup.markAllAsTouched();
   }
 
@@ -192,7 +222,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     if (this.formGroup.valid) {
       const formValues = this.formGroup.value;
       this.model = Object.assign(this.model, formValues);
-      if (this.id) {
+      if (this.id || this.listVouchers) {
         this.edit();
       } else {
         this.create();
@@ -204,6 +234,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.company = this.model.company.id;
+    model.cashier = this.model.cashier.id;
     model.location_origin = this.model.location_origin.id;
     model.location_destination = this.model.location_destination.id;
     model.currency = this.model.currency.id;
@@ -250,6 +281,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.company = this.model.company.id;
+    model.cashier = this.model.cashier.id;
     model.location_origin = this.model.location_origin.id;
     model.location_destination = this.model.location_destination.id;
     model.currency = this.model.currency.id;
@@ -365,6 +397,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         console.log('error getting company');
       }
     );
+  }
+
+  public closeEmit() {
+    this.close.emit(true);
+    this.loadForm();
   }
 
   getOfficeById(id) {
