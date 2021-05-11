@@ -37,6 +37,9 @@ export class LocationEditComponent implements OnInit, OnDestroy {
 
   public saveAndExit;
 
+  public companyId: number;
+  public parent: string;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -70,7 +73,14 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
-    this.get();
+    
+    this.route.parent.parent.parent.params.subscribe((params) => {
+      if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+        this.companyId = params.id;
+        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
+      }
+      this.get();
+    });
   }
 
   get() {
@@ -169,7 +179,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/locations']);
+          this.router.navigate([this.parent + '/locations']);
         }
       }),
       catchError((error) => {
@@ -225,6 +235,11 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     ).subscribe(response => {
       this.requesting = false;
       this.model = response.location as Model
+      if (this.saveAndExit) {
+        this.router.navigate([this.parent + '/locations']);
+      } else {
+        this.formGroup.reset()
+      }
     });
     this.subscriptions.push(sbCreate);
   }

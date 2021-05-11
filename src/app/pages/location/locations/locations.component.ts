@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocationService as ModelService } from '../_services/location.service';
 import { LocationModel as Model } from '../_models/location.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -45,8 +46,12 @@ export class LocationsComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
+    public companyId: number;
+    public parent: string;
+
     constructor(
         public modelsService: ModelService,
+        private route: ActivatedRoute,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
@@ -70,6 +75,7 @@ export class LocationsComponent implements OnInit {
         });
 
         this.showTableCheckbox = false;
+        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
@@ -111,8 +117,19 @@ export class LocationsComponent implements OnInit {
             this.per_page = event.rows;
         }
 
-
-        this.getModels();
+        this.filters = [];
+        if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+            this.route.parent.parent.parent.params.subscribe((params) => {
+                if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                    this.companyId = params.id;
+                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
+                    this.filters.push({ key: 'filter{company}', value: this.companyId.toString() })
+                }
+                this.getModels();
+            });
+        } else {
+            this.getModels();
+        }
     }
 
     public getModels() {
@@ -121,6 +138,10 @@ export class LocationsComponent implements OnInit {
             response => {
                 this.requesting = false;
                 this.models = response.locations;
+                // this.models = [];
+                // response.locations.forEach(element => {
+                //     this.models.push(element);
+                // });
                 this.totalRecords = response.meta.total_results;
             },
             error => {

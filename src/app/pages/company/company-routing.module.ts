@@ -43,6 +43,13 @@ const routes: Routes = [
                 (m) => m.QuotationRoutingModule
               ),
           },
+          {
+            path: 'locations',
+            loadChildren: () =>
+              import('../../pages/location/location-routing.module').then(
+                (m) => m.LocationRoutingModule
+              ),
+          },
         ]
 
       },
