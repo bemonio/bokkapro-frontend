@@ -26,8 +26,6 @@
   </div>
   <div class="card-body">
     <ul class="nav nav-tabs nav-tabs-line" role="tablist" *ngIf="!showCashier">
-      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
-    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
       <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
         <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
           [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}">
@@ -179,16 +177,10 @@
             </div>
           </div>
           <div class="float-right">
-<<<<<<< HEAD
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
             <a class="btn btn-default font-weight-bold mr-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
-=======
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers">{{ 'COMMON.CANCEL' | translate }}</a>
-            <!-- <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button> -->
->>>>>>> 60251da8aec82adf98d97b0e7b0499d945fa3afc
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>

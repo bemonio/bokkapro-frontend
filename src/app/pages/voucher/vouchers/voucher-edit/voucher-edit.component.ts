@@ -109,8 +109,6 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       }
       this.get();
     });
-
-    console.log(this.listVouchers)
   }
 
   get() {
@@ -205,7 +203,6 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.location_origin.setValidators([])
         this.location_destination.setValidators([])
         this.currency.setValidators([])
-        // console.log(this.listVouchers)
     }
 
     this.formGroup.markAllAsTouched();
@@ -224,12 +221,40 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     if (this.formGroup.valid) {
       const formValues = this.formGroup.value;
       this.model = Object.assign(this.model, formValues);
-      if (this.id || this.listVouchers) {
+      if (this.id) {
         this.edit();
-      } else {
+      } else if (!this.listVouchers){
         this.create();
+      } else {
+        this.asignCashier();
       }
     }
+  }
+
+  asignCashier(){
+    const sbUpdate = this.modelsService.asignCashier(this.cashier.value.id, this.listVouchers).pipe(
+      tap(() => {
+        this.toastService.growl('success', 'success');
+        if (this.saveAndExit) {
+          this.router.navigate([this.parent + '/vouchers']);
+        }
+      }),
+      catchError((error) => {
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+        );
+        return of(this.model);
+      })
+    ).subscribe(response => {
+      this.requesting = false;
+      this.model = response.voucher
+    });
   }
 
   edit() {
@@ -254,6 +279,15 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     // let guides = [];
     // guides.push(this.guideId);
     // model.guides = guides;
+
+    let listVouchers = model.vouchers;
+    model.vouchers = [];
+
+    if (listVouchers) {
+      listVouchers.forEach(element => {
+        model.vouchers.push(element.id);
+      });
+    }
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {

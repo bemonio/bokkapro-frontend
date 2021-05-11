@@ -7,6 +7,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 @Injectable()
 export class VoucherService {
     API_URL = `${environment.apiUrl}vouchers`;
+    API_URL_ASIGN_CASHIER = `${environment.apiUrl}asigncashier`;
     // private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -67,5 +68,9 @@ export class VoucherService {
 
     public getById(id: number): Observable<any> {
         return this.http.get(`${this.API_URL}/${id}/?include[]=company.*&include[]=packings.*&include[]=division.*&include[]=currency.*`);
+    }
+
+    public asignCashier(id: number, body: Object): Observable<any> {
+        return this.http.patch(`${this.API_URL_ASIGN_CASHIER}/${id}`, JSON.stringify(body));
     }
 }
