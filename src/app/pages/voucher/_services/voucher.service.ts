@@ -70,7 +70,7 @@ export class VoucherService {
         return this.http.get(`${this.API_URL}/${id}/?include[]=company.*&include[]=packings.*&include[]=division.*&include[]=currency.*`);
     }
 
-    public asignCashier(id: number, body: Object): Observable<any> {
-        return this.http.patch(`${this.API_URL_ASIGN_CASHIER}/${id}`, JSON.stringify(body));
+    public asignCashier(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL_ASIGN_CASHIER}`, JSON.stringify(body));
     }
 }

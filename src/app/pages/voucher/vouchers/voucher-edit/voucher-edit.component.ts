@@ -232,12 +232,14 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   }
 
   asignCashier(){
-    const sbUpdate = this.modelsService.asignCashier(this.cashier.value.id, this.listVouchers).pipe(
+    let params = {
+      cashierId: this.cashier.value.id,
+      vouchers: this.listVouchers
+    }
+    const sbUpdate = this.modelsService.asignCashier(params).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
-        if (this.saveAndExit) {
-          this.router.navigate([this.parent + '/vouchers']);
-        }
+        this.cashier.reset();
       }),
       catchError((error) => {
         let messageError = [];
@@ -253,7 +255,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.voucher
+      this.closeEmit()
     });
   }
 
