@@ -112,6 +112,7 @@ export class VouchersComponent implements OnInit {
         this._with = [];
         this._with.push({key: 'include[]', value: 'company.*'})
         this._with.push({key: 'include[]', value: 'currency.*'})
+        this._with.push({key: 'include[]', value: 'cashier.*'})
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -178,6 +179,15 @@ export class VouchersComponent implements OnInit {
                         this.models.forEach(element => {
                             if (element.currency === currency.id) {
                                 element.currency = currency;
+                            }
+                        });
+                    });
+                }
+                if(response.cashiers){
+                    response.cashiers.forEach(cashier => {
+                        this.models.forEach(element => {
+                            if (element.cashier === cashier.id) {
+                                element.cashier = cashier;
                             }
                         });
                     });

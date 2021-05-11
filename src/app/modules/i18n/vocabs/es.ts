@@ -225,7 +225,8 @@ export const locale = {
       LOCATION_DESTINATION: 'Dirección Destino',
       COMPANY: 'Cliente',
       COUNT_PACKINGS: 'Cant. Envases',
-      CASHIER: 'Cajera'
+      CASHIER: 'Cajero/a',
+      DIVISION: 'División'
     },
     PACKING: {
       PACKING: 'Envase',
@@ -368,7 +369,8 @@ export const locale = {
       HI: 'Hola',
       CREATED_AT: 'Creado en',
       YES: 'Si',
-      NO: 'No'
+      NO: 'No',
+      ASIGN: 'Asignar',
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',
