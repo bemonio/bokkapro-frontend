@@ -306,6 +306,10 @@ export const locale = {
       CODE: 'Código',
       COMPANY: 'Compañía'
     },
+    TYPECONTRACT: {
+      TYPECONTRACT: 'Tipo Contrato',
+      TYPESCONTRACTS: 'Tipos Contratos',
+    },
     COMPANYCONTACT: {
       COMPANYCONTACT: 'Contacto Empresa',
       COMPANYCONTACTS: 'Contactos Empresa',

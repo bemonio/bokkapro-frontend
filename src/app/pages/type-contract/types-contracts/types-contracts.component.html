@@ -4,8 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a>
-      <a type="button" class="btn btn-primary" routerLink="{{parent}}/contracts/add">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="/typescontracts/add">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -36,27 +35,22 @@
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'CONTRACT.ID' | translate }}
+              ID
             </div>
           </th>
-          <th pSortableColumn="code">
+          <th pSortableColumn="name">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'CONTRACT.CODE' | translate }}
+              Name 
             </div>
           </th>
-          <th pSortableColumn="company">
+          <th pSortableColumn="description">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'CONTRACT.COMPANY' | translate }}
-            </div>
-          </th>
-          <th pSortableColumn="type_contract">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'TYPECONTRACT.TYPECONTRACT' | translate }}
+              Description
             </div>
           </th>
           <th pSortableColumn="created_at">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.CREATED_AT' | translate }}
+              Created At
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
@@ -79,26 +73,23 @@
             {{value.id}}
           </td>
           <td>
-            {{value.code}}
+            {{value.name}}
           </td>
           <td>
-            {{value.company?.name}}
-          </td>
-          <td>
-            {{value.type_contract?.name}}
+            {{value.description}}
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              routerLink="{{parent}}/contracts/edit/{{value.id}}">
+              [routerLink]="'/typescontracts/edit/' + value.id"  *ngIf="authService.hasPermission('add_contract')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_contract')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
@@ -108,7 +99,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="5">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          <td colspan="6">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -117,8 +108,3 @@
 </div>
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
-
-<p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
-  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
-  <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
-</p-dialog>

@@ -258,7 +258,11 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate([this.parent + '/depositforms']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/depositforms']);
+          } else {
+            this.router.navigate(['/depositforms']);
+          }
         }
       }),
       catchError((error) => {
@@ -320,7 +324,11 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       this.model = response.deposit_form as Model
       if (this.saveAndExit) {
-        this.router.navigate([this.parent + '/depositforms']);
+        if(this.parent){
+          this.router.navigate([this.parent + '/depositforms']);
+        } else {
+          this.router.navigate(['/depositforms']);
+        }
       } else {
         this.formGroup.reset()
       }

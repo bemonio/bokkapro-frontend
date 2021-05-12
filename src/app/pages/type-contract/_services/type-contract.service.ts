@@ -5,15 +5,15 @@ import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
-export class ContractService {
-    API_URL = `${environment.apiUrl}contracts`;
-    // private _subscriptions: Subscription[] = [];
+export class TypeContractService {
+    API_URL = `${environment.apiUrl}typescontracts`;
+    private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
 
-    // get subscriptions() {
-    //     return this._subscriptions;
-    // }
+    get subscriptions() {
+        return this._subscriptions;
+    }
     
     public get (page?: number, per_page?: number, sort?: string, query?: string, filters?: any[], _with?: any[]): Observable<any> {
         let params: URLSearchParams = new URLSearchParams();
@@ -35,7 +35,7 @@ export class ContractService {
         }
 
         if (query !== null && query !== undefined && query !== '') {
-            params.append(`filter{id}[]`, String(query));
+            params.append('filter{id}[]', String(query));
         }
 
         if (filters !== null && filters !== undefined && filters.length > 0) {
@@ -66,6 +66,6 @@ export class ContractService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=company.*&include[]=type_contract.*`);
+        return this.http.get(`${this.API_URL}/${id}`);
     }
 }

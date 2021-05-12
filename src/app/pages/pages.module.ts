@@ -176,6 +176,12 @@ import { ContractComponent } from './contract/contract.component';
 import { ContractEditComponent } from './contract/contracts/contract-edit/contract-edit.component';
 import { ContractAutocompleteComponent } from './contract/contracts/contract-autocomplete/contract-autocomplete.component';
 
+// TypesContracts
+import { TypesContractsComponent } from './type-contract/types-contracts/types-contracts.component';
+import { TypeContractComponent } from './type-contract/type-contract.component';
+import { TypeContractEditComponent } from './type-contract/types-contracts/type-contract-edit/type-contract-edit.component';
+import { TypeContractSelectComponent } from './type-contract/types-contracts/type-contract-select/type-contract-select.component';
+
 // CompanyContacts
 import { CompanyContactsComponent } from './company-contact/company-contacts/company-contacts.component';
 import { CompanyContactComponent } from './company-contact/company-contact.component';
@@ -325,6 +331,10 @@ import { QuotationEditComponent } from './quotation/quotations/quotation-edit/qu
     ContractComponent,
     ContractEditComponent,
     ContractAutocompleteComponent,
+    TypesContractsComponent,
+    TypeContractComponent,
+    TypeContractEditComponent,
+    TypeContractSelectComponent,
     CompanyContactsComponent,
     CompanyContactComponent,
     CompanyContactEditComponent,

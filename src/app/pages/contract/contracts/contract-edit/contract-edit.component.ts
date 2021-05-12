@@ -30,6 +30,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
 
   public code: AbstractControl;
   public company: AbstractControl;
+  public type_contract: AbstractControl;
 
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
@@ -55,9 +56,11 @@ export class ContractEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      type_contract: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];
-    this.company = this.formGroup.controls['company']
+    this.company = this.formGroup.controls['company'];
+    this.type_contract = this.formGroup.controls['type_contract'];
   }
 
   ngOnInit(): void {
@@ -105,7 +108,9 @@ export class ContractEditComponent implements OnInit, OnDestroy {
         if (response.companies) {
           this.model.company = response.companies[0];
         }
-
+        if (response.type_contracts) {
+          this.model.type_contract = response.type_contracts[0];
+        }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -118,6 +123,9 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       this.code.setValue(this.model.code);
       if (this.model.company) {
         this.company.setValue(this.model.company);
+      }
+      if (this.model.type_contract) {
+        this.type_contract.setValue(this.model.type_contract);
       }
     } else {
       if (this.companyId) {
@@ -152,12 +160,18 @@ export class ContractEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.company = this.model.company.id;
+    model.type_contract = this.model.type_contract.id;
+
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate([this.parent + '/contracts']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/contracts']);
+          } else {
+            this.router.navigate(['/contracts']);
+          }
         }
       }),
       catchError((error) => {
@@ -183,6 +197,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.company = this.model.company.id;
+    model.type_contract = this.model.type_contract.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
@@ -209,7 +224,11 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       this.model = response.contract as Model
       if (this.saveAndExit) {
-        this.router.navigate([this.parent + '/contracts']);
+        if(this.parent){
+          this.router.navigate([this.parent + '/contracts']);
+        } else {
+          this.router.navigate(['/contracts']);
+        }
       } else {
         this.formGroup.reset()
       }
