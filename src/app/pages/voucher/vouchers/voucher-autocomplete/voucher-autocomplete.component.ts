@@ -117,7 +117,7 @@ export class VoucherAutocompleteComponent implements ControlValueAccessor, OnIni
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
-                this.models = response.companies;
+                this.models = response.vouchers;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {
