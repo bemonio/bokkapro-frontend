@@ -231,6 +231,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'typescontracts',
+        loadChildren: () =>
+          import('../pages/type-contract/type-contract-routing.module').then(
+            (m) => m.TypeContractRoutingModule
+          ),
+      },
+      {
         path: 'companycontacts',
         loadChildren: () =>
           import('../pages/company-contact/company-contact-routing.module').then(

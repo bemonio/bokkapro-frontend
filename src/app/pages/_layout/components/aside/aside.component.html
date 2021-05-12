@@ -295,6 +295,15 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level Package -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typecontract')">
+        <a class="menu-link" routerLink="/typescontracts" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ 'TYPECONTRACT.TYPESCONTRACTS' | translate }}</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+
+      <!-- begin::1 Level Package -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_companycontact')">
         <a class="menu-link" routerLink="/companycontacts" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>

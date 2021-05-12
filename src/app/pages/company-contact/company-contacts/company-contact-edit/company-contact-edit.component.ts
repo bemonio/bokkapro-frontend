@@ -177,7 +177,11 @@ export class CompanyContactEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate([this.parent + '/companycontacts']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/companycontacts']);
+          } else {
+            this.router.navigate(['/companycontacts']);
+          }
         }
       }),
       catchError((error) => {
@@ -229,7 +233,11 @@ export class CompanyContactEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       this.model = response.company_contact as Model
       if (this.saveAndExit) {
-        this.router.navigate([this.parent + '/companycontacts']);
+        if(this.parent){
+          this.router.navigate([this.parent + '/companycontacts']);
+        } else {
+          this.router.navigate(['/companycontacts']);
+        }
       } else {
         this.formGroup.reset()
       }

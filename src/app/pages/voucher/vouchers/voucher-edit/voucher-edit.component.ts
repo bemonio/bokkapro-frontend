@@ -295,7 +295,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate([this.parent + '/vouchers']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/vouchers']);
+          } else {
+            this.router.navigate(['/vouchers']);
+          }
         }
       }),
       catchError((error) => {
@@ -363,7 +367,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       this.model = response.voucher as Model
       if (this.saveAndExit) {
-        this.router.navigate([this.parent + '/vouchers']);
+        if(this.parent){
+          this.router.navigate([this.parent + '/vouchers']);
+        } else {
+          this.router.navigate(['/vouchers']);
+        }
       } else {
         this.formGroup.reset()
       }

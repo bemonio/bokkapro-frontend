@@ -1,0 +1,1 @@
+export { TypeContractService } from './type-contract.service';

@@ -1,25 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ContractService as ModelService } from '../_services/contract.service';
-import { ContractModel as Model } from '../_models/contract.model';
+import { Component, OnInit } from '@angular/core';
+import { TypeContractService as ModelService } from '../_services/type-contract.service';
+import { TypeContractModel as Model } from '../_models/type-contract.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-import { catchError, switchMap, tap } from 'rxjs/operators';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { DivisionService } from '../../division/_services';
-
 @Component({
-    selector: 'app-contracts',
-    templateUrl: './contracts.component.html',
-    styleUrls: ['./contracts.component.scss']
+    selector: 'app-types-contracts',
+    templateUrl: './types-contracts.component.html',
+    styleUrls: ['./types-contracts.component.scss']
 })
-export class ContractsComponent implements OnInit {
+export class TypesContractsComponent implements OnInit {
 
     public promiseForm: Promise<any>;
 
@@ -37,9 +32,6 @@ export class ContractsComponent implements OnInit {
     public _with: { key: string, value: string }[];
 
     public formGroup: FormGroup;
-    public employee_id_filter: AbstractControl;
-    public department_id_filter: AbstractControl;
-    public venue_id_filter: AbstractControl;
 
     searchGroup: FormGroup;
 
@@ -50,28 +42,16 @@ export class ContractsComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
-    public companyId: number;
-    public parent: string;
-
-    public displayModal: boolean;
-
     constructor(
         public modelsService: ModelService,
-        private router: Router,
-        private route: ActivatedRoute,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
         fb: FormBuilder) {
         this.formGroup = fb.group({
-            'employee_id_filter': [''],
-            'department_id_filter': [''],
-            'venue_id_filter': [''],
+
         });
-        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
-        this.department_id_filter = this.formGroup.controls['department_id_filter'];
-        this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
 
         this.searchGroup = fb.group({
             searchTerm: [''],
@@ -82,7 +62,6 @@ export class ContractsComponent implements OnInit {
         });
 
         this.showTableCheckbox = false;
-        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
@@ -90,8 +69,6 @@ export class ContractsComponent implements OnInit {
         this.totalRecords = 0;
 
         this.requesting = false;
-
-        this.displayModal = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -102,49 +79,32 @@ export class ContractsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
-        
-        this._with = [];
-        this._with.push({key: 'include[]', value: 'type_contract.*'})
-        this._with.push({key: 'include[]', value: 'company.*'})
     }
 
-    public loadLazy(event?: LazyLoadEvent) {
-        if (event) {
-            this.page = (event.first / this.per_page) + 1;
-            if (event.sortField) {
-                if (event.sortOrder === -1) {
-                    this.sort = '-' + event.sortField;
-                } else {
-                    this.sort = event.sortField;
-                }
+    public loadLazy(event: LazyLoadEvent) {
+        this.page = (event.first / this.per_page) + 1;
+        if (event.sortField) {
+            if (event.sortOrder === -1) {
+                this.sort = '-' + event.sortField;
             } else {
-                this.sort = '-id';
+                this.sort = event.sortField;
             }
-
-            if (event.globalFilter) {
-                this.query = event.globalFilter;
-            } else {
-                this.query = undefined;
-            }
-
-            if (event.rows) {
-                this.per_page = event.rows;
-            }    
-        }
-
-        this.filters = [];
-        if (this.route.parent.parent.parent.snapshot.url.length > 0) {
-            this.route.parent.parent.parent.params.subscribe((params) => {
-                if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                    this.companyId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
-                    this.filters.push({ key: 'filter{company}', value: this.companyId.toString() })
-                }
-                this.getModels();
-            });
         } else {
-            this.getModels();
+            this.sort = '-id';
         }
+
+        if (event.globalFilter) {
+            this.query = event.globalFilter;
+        } else {
+            this.query = undefined;
+        }
+
+        if (event.rows) {
+            this.per_page = event.rows;
+        }
+
+
+        this.getModels();
     }
 
     public getModels() {
@@ -152,28 +112,7 @@ export class ContractsComponent implements OnInit {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.requesting = false;
-                this.models = [];
-                response.contracts.forEach(element => {
-                    this.models.push(element);
-                });
-                if(response.type_contracts){
-                    response.type_contracts.forEach(type_contract => {
-                        this.models.forEach(element => {
-                            if (element.type_contract === type_contract.id) {
-                                element.type_contract = type_contract;
-                            }
-                        });
-                    });
-                }
-                if(response.companies){
-                    response.companies.forEach(company => {
-                        this.models.forEach(element => {
-                            if (element.company === company.id) {
-                                element.company = company;
-                            }
-                        });
-                    });
-                }
+                this.models = response.type_contracts;
                 this.totalRecords = response.meta.total_results;
             },
             error => {
@@ -241,7 +180,6 @@ export class ContractsComponent implements OnInit {
             this.promiseForm = promise.toPromise().then(
                 response => {
                     this.toastService.growl('success', 'Patch');
-                    this.getModels();
                 },
                 error => {
                     let messageError = [];
@@ -266,14 +204,5 @@ export class ContractsComponent implements OnInit {
                 this.delete(id);
             }
         });
-    }
-
-    showModalDialog() {
-        this.displayModal = true;
-    }
-
-    hideModalDialog() {
-        this.displayModal = false;
-        this.getModels();
     }
 }

@@ -169,7 +169,11 @@ export class QuotationEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate([this.parent + '/quotations']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/quotations']);
+          } else {
+            this.router.navigate(['/quotations']);
+          }
         }
       }),
       catchError((error) => {
@@ -222,7 +226,11 @@ export class QuotationEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       this.model = response.quotation as Model
       if (this.saveAndExit) {
-        this.router.navigate([this.parent + '/quotations']);
+        if(this.parent){
+          this.router.navigate([this.parent + '/quotations']);
+        } else {
+          this.router.navigate(['/quotations']);
+        }
       } else {
         this.formGroup.reset()
       }

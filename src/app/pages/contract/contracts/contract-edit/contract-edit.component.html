@@ -89,6 +89,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'company')">{{ 'CONTRACT.COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company')">{{ 'CONTRACT.COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'TYPECONTRACT.TYPECONTRACT' | translate }}</label>
+              <app-type-contract-select
+              placeholder="{{ 'TYPECONTRACT.TYPECONTRACT' | translate }}" name="type_contract" [valid]="isControlValid('type_contract')" [touched]="isControlTouched('type_contract')" [class.is-invalid]="isControlInvalid('type_contract')"
+              [class.is-valid]="isControlValid('type_contract')" formControlName="type_contract" id="type_contract" [model]="model.type_contract"></app-type-contract-select>
+              <div class="feedback" *ngIf="!isControlTouched('type_contract')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'TYPECONTRACT.TYPECONTRACT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('type_contract')">{{ 'TYPECONTRACT.TYPECONTRACT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_contract')">{{ 'TYPECONTRACT.TYPECONTRACT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_contract')">{{ 'TYPECONTRACT.TYPECONTRACT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_contract')">{{ 'TYPECONTRACT.TYPECONTRACT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/contracts">{{ 'COMMON.CANCEL' | translate }}</a>

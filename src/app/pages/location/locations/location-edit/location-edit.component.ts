@@ -179,7 +179,11 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate([this.parent + '/locations']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/locations']);
+          } else {
+            this.router.navigate(['/locations']);
+          }
         }
       }),
       catchError((error) => {
@@ -236,7 +240,11 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       this.model = response.location as Model
       if (this.saveAndExit) {
-        this.router.navigate([this.parent + '/locations']);
+        if(this.parent){
+          this.router.navigate([this.parent + '/locations']);
+        } else {
+          this.router.navigate(['/locations']);
+        }
       } else {
         this.formGroup.reset()
       }
