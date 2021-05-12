@@ -236,6 +236,7 @@ export const locale = {
       DESCRIPTION: 'Descripción',
       CODE: 'Código/Envase',
       VERIFICATED: 'Verificado',
+      VOUCHER: 'Comprobante'
     },
     DEPOSITFORM: {
       DEPOSITFORM: 'Planilla Depósito',
