@@ -8,6 +8,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { PackingModel as Model } from '../../_models/packing.model';
 import { PackingService as ModelsService } from '../../_services/packing.service';
+import { VoucherService } from 'src/app/pages/voucher/_services';
 
 @Component({
   selector: 'app-packing-edit',
@@ -28,6 +29,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
 
   public code: AbstractControl;
   public verificated: AbstractControl;
+  public voucher: AbstractControl;
 
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
@@ -47,6 +49,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
   containWithinAspectRatio = false;
   transform: ImageTransform = {};
 
+  public voucherId: number;
   public parent: string;
 
   constructor(
@@ -55,6 +58,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     public authService: AuthService,
+    private voucherService: VoucherService,
     private toastService: ToastService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
@@ -64,12 +68,11 @@ export class PackingEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       verificated: [''],
+      voucher: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
     });
     this.code = this.formGroup.controls['code'];
     this.verificated = this.formGroup.controls['verificated'];
-
-
-    this.parent = '/packings';
+    this.voucher = this.formGroup.controls['voucher'];
   }
 
   ngOnInit(): void {
@@ -80,11 +83,41 @@ export class PackingEditComponent implements OnInit, OnDestroy {
     this.newLogo = false;
     this.displayModal = false;
 
-    if (this.route.parent.parent.snapshot.url[0].path) {
-      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
-    }
+    if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+      this.route.parent.parent.parent.params.subscribe((params) => {
+          if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+              let params1 = params.id;
+              this.voucherId = params1;
+              this.getVoucherById(params1);
 
-    this.get();
+              if (this.route.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                  this.route.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
+                      let params2 = params.id;
+
+                      if (this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                          this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
+                              let params3 = params.id;
+  
+                              if (this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                                  this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params3;
+                                  this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params2;
+                                  this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
+                              }
+                          })
+                      } else {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params2;
+                        this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
+                      }
+                  })
+              } else {
+                  this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
+              }
+          }
+          this.get();
+      });
+    } else {
+        this.get();
+    }
   }
 
   get() {
@@ -114,6 +147,10 @@ export class PackingEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.packing;
+        if (response.vouchers) {
+          this.model.voucher = response.vouchers[0]; //ACAAAAAAAAA
+        }
+
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -125,6 +162,14 @@ export class PackingEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.code.setValue(this.model.code);
       this.verificated.setValue(this.model.verificated);
+      if (this.model.voucher) {
+        this.voucher.setValue(this.model.voucher);
+      }
+    } else {
+      this.verificated.setValue(true);
+      if (this.voucherId) {
+        this.getVoucherById(this.voucherId);
+      }
     }
     this.formGroup.markAllAsTouched();
   }
@@ -160,7 +205,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/packings']);
+          this.router.navigate([this.parent + '/packings']);
         }
       }),
       catchError((error) => {
@@ -186,12 +231,13 @@ export class PackingEditComponent implements OnInit, OnDestroy {
   create() {
     this.requesting = true;
     let model = this.model;
+    model.voucher = this.voucherId;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/packings']);
+          this.router.navigate([this.parent + '/packings']);
         } else {
           this.formGroup.reset()
         }
@@ -243,5 +289,16 @@ export class PackingEditComponent implements OnInit, OnDestroy {
   isControlTouched(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
     return control.dirty || control.touched;
+  }
+
+  getVoucherById(id) {
+    this.voucherService.getById(id).toPromise().then(
+      response => {
+        this.voucher.setValue(response.voucher)
+      },
+      error => {
+        console.log('error getting voucher');
+      }
+    );
   }
 }
