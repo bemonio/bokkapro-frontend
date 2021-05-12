@@ -82,7 +82,6 @@ export class DepositFormsComponent implements OnInit {
         });
 
         this.showTableCheckbox = false;
-        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
@@ -132,9 +131,32 @@ export class DepositFormsComponent implements OnInit {
         if (this.route.parent.parent.parent.snapshot.url.length > 0) {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                    this.packingId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.packingId;
-                    this.filters.push({ key: 'filter{packing}', value: this.packingId.toString() })
+                    let params1 = params.id;
+      
+                    if (this.route.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                        this.route.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
+                            let params2 = params.id;
+
+                            if (this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                                this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
+                                    let params3 = params.id;
+        
+                                    if (this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params3;
+                                        this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params2;
+                                        this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
+                                        this.filters.push({ key: 'filter{packing}', value: params1.toString() })
+                                    }
+                                })
+                            } else {
+                                this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params2;
+                                this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
+                                this.filters.push({ key: 'filter{packing}', value: params1.toString() })
+                            }
+                        })
+                    } else {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
+                    }
                 }
                 this.getModels();
             });
