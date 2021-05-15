@@ -16,7 +16,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-light" routerLink="/packings">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}/packings">
         <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
@@ -28,13 +28,13 @@
     <ul class="nav nav-tabs nav-tabs-line" role="tablist">
       <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
         <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
-          [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/edit/{{model.id}}">
+          [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/packings/edit/{{model.id}}">
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
       <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.DEPOSITFORM_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.DEPOSITFORM_TAB"
-          [class.active]="activeTabId === tabs.DEPOSITFORM_TAB" routerLink="{{parent}}/edit/{{model.id}}/depositforms">{{ 'DEPOSITFORM.DEPOSITFORMS' | translate }}</a>
+          [class.active]="activeTabId === tabs.DEPOSITFORM_TAB" routerLink="{{parent}}/packings/edit/{{model.id}}/depositforms">{{ 'DEPOSITFORM.DEPOSITFORMS' | translate }}</a>
       </li>
     </ul>
 
@@ -42,7 +42,17 @@
       <div class="mt-5" *ngIf="model">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
-
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PACKING.VOUCHER' | translate }}</label>
+              <app-voucher-autocomplete
+              name="voucher" [valid]="isControlValid('voucher')" [touched]="isControlTouched('voucher')" [class.is-invalid]="isControlInvalid('voucher')"
+              [class.is-valid]="isControlValid('voucher')" formControlName="voucher" id="voucher" [model]="model.voucher"></app-voucher-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('voucher')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PACKING.VOUCHER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('voucher')">{{ 'PACKING.VOUCHER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'voucher')">{{ 'PACKING.VOUCHER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'voucher')">{{ 'PACKING.VOUCHER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'voucher')">{{ 'PACKING.VOUCHER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'PACKING.CODE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -60,7 +70,7 @@
             </div>
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="/packings">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/packings">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

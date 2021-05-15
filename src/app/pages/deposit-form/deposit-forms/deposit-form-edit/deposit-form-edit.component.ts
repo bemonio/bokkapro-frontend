@@ -90,8 +90,6 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.employee_who_counts = this.formGroup.controls['employee_who_counts'];
     this.supervisor = this.formGroup.controls['supervisor'];
     this.supervisor_extra = this.formGroup.controls['supervisor_extra'];
-
-    this.parent = '/depositforms';
   }
 
   ngOnInit(): void {
@@ -99,17 +97,41 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
 
-    if (this.route.parent.parent.snapshot.url[0].path) {
-      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
-    }
+    if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+      this.route.parent.parent.parent.params.subscribe((params) => {
+          if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+              let params1 = params.id;
+              this.packingId = params1;
+              this.getPackingById(params1);
 
-    this.route.parent.parent.parent.params.subscribe((params) => {
-      if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-        this.packingId = params.id;
-        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.packingId;
-      }
-      this.get();
-    });
+              if (this.route.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                  this.route.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
+                      let params2 = params.id;
+
+                      if (this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                          this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
+                              let params3 = params.id;
+  
+                              if (this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                                  this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params3;
+                                  this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params2;
+                                  this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
+                              }
+                          })
+                      } else {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params2;
+                        this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
+                      }
+                  })
+              } else {
+                  this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
+              }
+          }
+          this.get();
+      });
+    } else {
+        this.get();
+    }
   }
 
   get() {
@@ -194,7 +216,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       }
     } else {
       if (this.packingId) {
-        this.PetpackingById(this.packingId);
+        this.getPackingById(this.packingId);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -384,7 +406,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     return stringClass;
   }
 
-  PetpackingById(id) {
+  getPackingById(id) {
     this.packingService.getById(id).toPromise().then(
       response => {
         this.packing.setValue(response.packing)
