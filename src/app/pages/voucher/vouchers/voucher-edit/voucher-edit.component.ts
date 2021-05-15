@@ -48,6 +48,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   // private subscriptions: Subscription[] = [];
 
   public saveAndExit;
+  public editBool: boolean;
 
   public guideId: number;
   public parent: string;
@@ -69,6 +70,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
+    this.editBool = false;
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -164,6 +166,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   loadForm() {
     if (this.model.id) {
+      this.editBool = true;
       this.code.setValue(this.model.code);
       this.amount.setValue(this.model.amount);
       this.count_packings.setValue(this.model.count_packings);
@@ -262,6 +265,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
+    model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
     model.company = this.model.company.id;
     model.cashier = this.model.cashier.id;
     model.location_origin = this.model.location_origin.id;
@@ -324,6 +328,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   create() {
     this.requesting = true;
     let model = this.model;
+    model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
     model.company = this.model.company.id;
     model.cashier = this.model.cashier.id;
     model.location_origin = this.model.location_origin.id;
@@ -334,7 +339,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
     let packings = [];
     this.model.packings.forEach(element => {
-      packings.push({ 'code': element, 'verificated': 'true' });
+      packings.push({ 'code': element.replace(/[^a-zA-Z0-9]/g, ''), 'verificated': 'true' });
     });
     model.packings = packings;
 
