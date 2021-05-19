@@ -205,6 +205,10 @@ import { QuotationsComponent } from './quotation/quotations/quotations.component
 import { QuotationComponent } from './quotation/quotation.component';
 import { QuotationEditComponent } from './quotation/quotations/quotation-edit/quotation-edit.component';
 
+// ReportOperations
+import { ReportOperationsComponent } from './report-operation/report-operations/report-operations.component';
+import { ReportOperationComponent } from './report-operation/report-operation.component';
+import { ReportOperationEditComponent } from './report-operation/report-operations/report-operation-edit/report-operation-edit.component';
 
 @NgModule({
   imports: [
@@ -349,7 +353,10 @@ import { QuotationEditComponent } from './quotation/quotations/quotation-edit/qu
     QuoteTemplateAutocompleteComponent,
     QuotationsComponent,
     QuotationComponent,
-    QuotationEditComponent
+    QuotationEditComponent,
+    ReportOperationsComponent,
+    ReportOperationComponent,
+    ReportOperationEditComponent,
   ]
 })
 export class PagesModule { }

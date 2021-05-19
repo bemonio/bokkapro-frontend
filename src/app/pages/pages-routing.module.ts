@@ -265,6 +265,13 @@ const routes: Routes = [
             (m) => m.QuotationRoutingModule
           ),
       },
+      {
+        path: 'reports/operations',
+        loadChildren: () =>
+          import('../pages/report-operation/report-operation-routing.module').then(
+            (m) => m.ReportOperationRoutingModule
+          ),
+      },
     ],
   },
 ];

@@ -1,0 +1,97 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="requesting">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="model">
+          {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
+          <span *ngIf="model && model.id">'{{ model.id }} </span>
+        </ng-container>
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="/reports/operations">
+        <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
+      </a>
+      <button class="btn btn-secondary ml-2" (click)="reset()">
+        <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+        <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+          [class.active]="activeTabId === tabs.BASIC_TAB">
+          {{ 'COMMON.BASIC_INFO' | translate }}
+        </a>
+      </li>
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+      <div class="mt-5" *ngIf="model">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.CLOSED_AT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="{{ 'REPORT_OPERATION.CLOSED_AT' | translate }}" name="closed_at" [class.is-invalid]="isControlInvalid('closed_at')"
+                [class.is-valid]="isControlValid('closed_at')" formControlName="closed_at" />
+              <div class="feedback" *ngIf="!isControlTouched('closed_at')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.CLOSED_AT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('closed_at')">{{ 'REPORT_OPERATION.CLOSED_AT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'closed_at')">{{ 'REPORT_OPERATION.CLOSED_AT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'closed_at')">{{ 'REPORT_OPERATION.CLOSED_AT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'closed_at')">{{ 'REPORT_OPERATION.CLOSED_AT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.HOURS_CLOSE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="{{ 'REPORT_OPERATION.HOURS_CLOSE' | translate }}" name="hours_close" [class.is-invalid]="isControlInvalid('hours_close')"
+                [class.is-valid]="isControlValid('hours_close')" formControlName="hours_close" />
+              <div class="feedback" *ngIf="!isControlTouched('hours_close')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.HOURS_CLOSE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('hours_close')">{{ 'REPORT_OPERATION.HOURS_CLOSE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'hours_close')">{{ 'REPORT_OPERATION.HOURS_CLOSE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'hours_close')">{{ 'REPORT_OPERATION.HOURS_CLOSE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'hours_close')">{{ 'REPORT_OPERATION.HOURS_CLOSE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.EMPLOYEES_CLOSE' | translate }}</label>
+              <app-employee-multiselect
+              name="employees_close" [valid]="isControlValid('employees_close')" [touched]="isControlTouched('employees_close')" [class.is-invalid]="isControlInvalid('employees_close')"
+              [class.is-valid]="isControlValid('employees_close')" formControlName="employees_close" id="employees_close" [model]="model.employees_close"></app-employee-multiselect>
+              <div class="feedback" *ngIf="!isControlTouched('employees_close')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.EMPLOYEES_CLOSE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('employees_close')">{{ 'REPORT_OPERATION.EMPLOYEES_CLOSE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'employees_close')">{{ 'REPORT_OPERATION.EMPLOYEES_CLOSE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employees_close')">{{ 'REPORT_OPERATION.EMPLOYEES_CLOSE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employees_close')">{{ 'REPORT_OPERATION.EMPLOYEES_CLOSE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }}</label>
+              <app-employee-multiselect
+              name="employees_open" [valid]="isControlValid('employees_open')" [touched]="isControlTouched('employees_open')" [class.is-invalid]="isControlInvalid('employees_open')"
+              [class.is-valid]="isControlValid('employees_open')" formControlName="employees_open" id="employees_open" [model]="model.employees_open"></app-employee-multiselect>
+              <div class="feedback" *ngIf="!isControlTouched('employees_open')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('employees_open')">{{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'employees_open')">{{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employees_open')">{{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employees_open')">{{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+          </div>
+          <div class="float-right">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="/reports/operations">{{ 'COMMON.CANCEL' | translate }}</a>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+  </div>
+</div>

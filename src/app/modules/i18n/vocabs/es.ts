@@ -392,6 +392,21 @@ export const locale = {
       TEMPLATE: 'Template',
       CONTENT: 'Contenido',
     },
+    REPORT: { 
+      REPORT: 'Reporte',
+      REPORTS: 'Reportes',
+      OPERATIONS: 'Operaciones',
+    },
+    REPORT_OPERATION: { 
+      REPORT_OPERATION: 'Reporte',
+      REPORT_OPERATIONS: 'Reporte Operaciones',
+      OPERATIONS: 'Operaciones',
+      ID: 'Id',
+      CLOSED_AT: 'Cerrado',
+      HOURS_CLOSE: 'Horas de Cierre',
+      EMPLOYEES_OPEN: 'Empleados Aperturan',
+      EMPLOYEES_CLOSE: 'Empleados Cierre',
+    },
   }
 };
 

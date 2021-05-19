@@ -56,6 +56,7 @@ import { CompanyContactService } from './pages/company-contact/_services';
 import { ModerationService } from './pages/moderation/_services';
 import { QuoteTemplateService } from './pages/quote-template/_services';
 import { QuotationService } from './pages/quotation/_services';
+import { ReportOperationService } from './pages/report-operation/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -145,7 +146,8 @@ export function getHighlightLanguages() {
     TypeContractService,
     CompanyContactService,
     QuoteTemplateService,
-    QuotationService
+    QuotationService,
+    ReportOperationService
   ],
   bootstrap: [AppComponent],
 })

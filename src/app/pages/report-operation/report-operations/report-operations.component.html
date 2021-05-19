@@ -1,0 +1,184 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-primary" routerLink="/reports/operations/add">{{ 'COMMON.NEW' | translate }}</a>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+        <div class="col-lg-6">
+          {{ 'COMMON.FILTER' | translate }}
+        </div>
+        <div class="col-lg-6" [formGroup]="searchGroup">
+          <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> {{ 'COMMON.IN' | translate }} id</small>
+        </div>
+      </div>
+    </div>
+    <!-- end: Filtration form -->
+
+    <!-- begin:Table -->
+    <p-table #dt [value]="models" [(selection)]="selectedModels" dataKey="id" styleClass="p-datatable-striped p-datatable-sm" [rowHover]="true"
+    [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
+    [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
+    [filterDelay]="1000" [globalFilterFields]="['id','username']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
+    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem" *ngIf="showTableCheckbox">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="name">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'REPORT_OPERATION.ID' | translate }}
+              <!-- <p-sortIcon field="name"></p-sortIcon>
+              <p-columnFilter type="text" field="name" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+          <th pSortableColumn="username">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'REPORT_OPERATION.CLOSED_AT' | translate }} 
+              <!-- <p-sortIcon field="username"></p-sortIcon>
+              <p-columnFilter field="username" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" class="p-ml-auto">
+                  <ng-template pTemplate="header">
+                      <div class="p-px-3 p-pt-3 p-pb-0">
+                          <span class="p-text-bold">User Picker</span>
+                      </div>
+                  </ng-template>
+              </p-columnFilter> -->
+            </div>
+          </th>
+          <th pSortableColumn="email">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'REPORT_OPERATION.HOURS_CLOSE' | translate }} 
+              <!-- <p-sortIcon field="email"></p-sortIcon>
+              <p-columnFilter field="email" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" class="p-ml-auto">
+                  <ng-template pTemplate="header">
+                      <div class="p-px-3 p-pt-3 p-pb-0">
+                          <span class="p-text-bold">User Picker</span>
+                      </div>
+                  </ng-template>
+              </p-columnFilter> -->
+            </div>
+          </th>
+          <th pSortableColumn="date">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+          <!-- <th pSortableColumn="balance">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Balance
+              <p-sortIcon field="balance"></p-sortIcon>
+              <p-columnFilter type="numeric" field="balance" display="menu" currency="USD" class="p-ml-auto"></p-columnFilter>
+            </div>
+          </th> -->
+          <th pSortableColumn="status">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'REPORT_OPERATION.EMPLOYEES_CLOSE' | translate }}
+              <!-- <p-sortIcon field="status"></p-sortIcon>
+              <p-columnFilter field="status" matchMode="equals" display="menu" class="p-ml-auto">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                  <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
+                    <ng-template let-option pTemplate="item">
+                      <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                    </ng-template>
+                  </p-dropdown>
+                </ng-template>
+              </p-columnFilter> -->
+            </div>
+          </th>
+          <!-- <th pSortableColumn="activity">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Activity
+              <p-sortIcon field="activity"></p-sortIcon>
+              <p-columnFilter field="activity" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" class="p-ml-auto">
+                <ng-template pTemplate="filter" let-filter="filterCallback">
+                  <p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)" styleClass="p-m-3"></p-slider>
+                  <div class="p-d-flex p-ai-center p-jc-between p-px-2">
+                    <span>{{activityValues[0]}}</span>
+                    <span>{{activityValues[1]}}</span>
+                  </div>
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th> -->
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+          <th style="width: 10rem">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.ACTION' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-value>
+        <tr class="p-selectable-row">
+          <td *ngIf="showTableCheckbox">
+            <p-tableCheckbox [value]="value"></p-tableCheckbox>
+          </td>
+          <td>
+            {{value.id}}
+          </td>
+          <td>
+            {{value.closed_at}}
+          </td>
+          <td>
+            {{value.hours_close}}
+          </td>
+          <td>
+            {{value.employees_open}}
+          </td>
+          <td>
+            {{value.employees_close}}
+          </td>
+          <td>
+            {{value.created_at | date: 'MM/dd/yyyy'}}
+          </td>
+          <td style="text-align: right">
+            <!-- <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              [routerLink]="'/reports/operations/edit/' + value.id" *ngIf="authService.hasPermission('add_user')">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-primary">
+              </span>
+            </a>
+            <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_user')">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-danger">
+              </span>
+            </a> -->
+            <a title="{{ 'COMMON.PRINT' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+              (click)="print(value.id)">
+              <span [inlineSVG]="'./assets/media/svg/icons/Devices/Printer.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-primary">
+              </span>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <!-- end: Table -->
+  </div>
+</div>
+
+<p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
