@@ -205,6 +205,13 @@ import { QuotationsComponent } from './quotation/quotations/quotations.component
 import { QuotationComponent } from './quotation/quotation.component';
 import { QuotationEditComponent } from './quotation/quotations/quotation-edit/quotation-edit.component';
 
+// Clauses
+import { ClausesComponent } from './clause/clauses/clauses.component';
+import { ClauseComponent } from './clause/clause.component';
+import { ClauseEditComponent } from './clause/clauses/clause-edit/clause-edit.component';
+import { ClauseAutocompleteComponent } from './clause/clauses/clause-autocomplete/clause-autocomplete.component';
+
+
 
 @NgModule({
   imports: [
@@ -349,7 +356,11 @@ import { QuotationEditComponent } from './quotation/quotations/quotation-edit/qu
     QuoteTemplateAutocompleteComponent,
     QuotationsComponent,
     QuotationComponent,
-    QuotationEditComponent
+    QuotationEditComponent,
+    ClausesComponent,
+    ClauseComponent,
+    ClauseEditComponent,
+    ClauseAutocompleteComponent
   ]
 })
 export class PagesModule { }

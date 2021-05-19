@@ -265,6 +265,13 @@ const routes: Routes = [
             (m) => m.QuotationRoutingModule
           ),
       },
+      {
+        path: 'clauses',
+        loadChildren: () =>
+          import('../pages/clause/clause-routing.module').then(
+            (m) => m.ClauseRoutingModule
+          ),
+      },
     ],
   },
 ];

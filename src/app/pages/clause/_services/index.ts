@@ -1,0 +1,1 @@
+export { ClauseService } from './clause.service';

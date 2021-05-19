@@ -392,6 +392,11 @@ export const locale = {
       TEMPLATE: 'Template',
       CONTENT: 'Contenido',
     },
+    CLAUSE: {
+      CLAUSE: 'Clausula',
+      CLAUSES: 'Clausulas',
+      CODE: 'Código'
+    }
   }
 };
 
