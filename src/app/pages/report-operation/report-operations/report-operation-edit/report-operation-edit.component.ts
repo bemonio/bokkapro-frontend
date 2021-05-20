@@ -94,7 +94,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
       if (response) {
         this.model = response.report_operation;
         let employees = [];
-        if (response.report_operation.employees_close) {
+        if (response.report_operation && response.report_operation.employees_close) {
           response.report_operation.employees_close.forEach(employee_close => {
             response.employees.forEach(employee => {
               if (employee_close == employee.id) {
@@ -102,11 +102,11 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
               }
             });
           });
+          this.model.employees_close = employees;
         }
-        this.model.employees_close = employees;
 
         employees = [];
-        if (response.report_operation.employees_open) {
+        if (response.report_operation && response.report_operation.employees_open) {
           response.report_operation.employees_open.forEach(employee_open => {
             response.employees.forEach(employee => {
               if (employee_open == employee.id) {
@@ -114,8 +114,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
               }
             });
           });
+          this.model.employees_open = employees;
         }
-        this.model.employees_open = employees;
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
