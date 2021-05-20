@@ -26,6 +26,9 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
 
   public name: AbstractControl;
   public description: AbstractControl;
+  public address: AbstractControl;
+  public phone: AbstractControl;
+  public email: AbstractControl;
   public company: AbstractControl;
   public currency: AbstractControl;
 
@@ -48,11 +51,17 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       description: ['', Validators.compose([Validators.maxLength(30)])],
+      address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      phone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       company: ['', Validators.compose([Validators.required])],
       currency: [''],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];
+    this.address = this.formGroup.controls['address'];
+    this.phone = this.formGroup.controls['phone'];
+    this.email = this.formGroup.controls['email'];
     this.company = this.formGroup.controls['company'];
     this.currency = this.formGroup.controls['currency'];
   }
@@ -109,6 +118,10 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.name.setValue(this.model.name);
       this.description.setValue(this.model.description);
+      this.address.setValue(this.model.address);
+      this.phone.setValue(this.model.phone);
+      this.email.setValue(this.model.email);
+
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }

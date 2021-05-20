@@ -43,6 +43,21 @@
               {{ 'OFFICE.NAME' | translate }}
             </div>
           </th>
+          <th pSortableColumn="address">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'OFFICE.ADDRESS' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="phone">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'OFFICE.PHONE' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="email">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'OFFICE.EMAIL' | translate }}
+            </div>
+          </th>
           <th pSortableColumn="description">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'OFFICE.DESCRIPTION' | translate }}
@@ -74,6 +89,15 @@
           </td>
           <td>
             {{value.name}}
+          </td>
+          <td>
+            {{value.address}}
+          </td>
+          <td>
+            {{value.phone}}
+          </td>
+          <td>
+            {{value.email}}
           </td>
           <td>
             {{value.description}}

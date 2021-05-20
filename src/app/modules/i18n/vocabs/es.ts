@@ -109,6 +109,9 @@ export const locale = {
       OFFICES: 'Oficinas',
       ID: 'Id',
       NAME: 'Nombre',
+      ADDRESS: 'Dirección',
+      PHONE: 'Teléfono',
+      EMAIL: 'Correo',
       DESCRIPTION: 'Descripción',
       COMPANY: 'Companía',
       CURRENCY: 'Divisa'
