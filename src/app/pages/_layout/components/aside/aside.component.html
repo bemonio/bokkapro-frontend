@@ -392,6 +392,14 @@
       </li>
       <!-- end::1 Level -->
 
+      <!-- begin::1 Level Package -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_clause')">
+        <a class="menu-link" routerLink="/clauses" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ 'CLAUSE.CLAUSES' | translate }}</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
     </ul>
     <!-- end::Menu Nav -->
   </div>

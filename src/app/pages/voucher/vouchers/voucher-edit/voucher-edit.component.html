@@ -138,9 +138,9 @@
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.COUNT_PACKINGS' | translate }}</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+              <input type="text" [readonly]="editBool" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="count_packings" [class.is-invalid]="isControlInvalid('count_packings')"
-                [class.is-valid]="isControlValid('count_packings')" formControlName="count_packings" (change)="changeCountPackings()"/>
+                [class.is-valid]="isControlValid('count_packings')" formControlName="count_packings" (change)="changeCountPackings()"/> 
               <div class="feedback" *ngIf="!isControlTouched('count_packings')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.COUNT_PACKINGS' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

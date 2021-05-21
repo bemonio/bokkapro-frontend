@@ -340,13 +340,16 @@ export class GuidesComponent implements OnInit {
     public addListVouchers(event) {
         let found = false;
         this.verificationGuide.vouchers.forEach(element => {
-            if (element.code === event.value) {
+            
+            let evenValue = event.value.replace(/[^a-zA-Z0-9]/g, '');
+
+            if (element.code === evenValue) {
                 element.verificated = true;
                 found = true;
             }
             if (this.verificationGuide.division_destination.name !== 'Operaciones Internas') {
                 element.packings.forEach(element2 => {
-                    if (element2.code === event.value) {
+                    if (element2.code === evenValue) {
                         element2.verificated = true;
                         found = true;
                     }

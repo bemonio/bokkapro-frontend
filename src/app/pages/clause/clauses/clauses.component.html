@@ -4,7 +4,8 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" routerLink="/offices/add">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/clauses/add">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -35,32 +36,12 @@
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'OFFICE.ID' | translate }}
+              {{ 'CONTRACT.ID' | translate }}
             </div>
           </th>
-          <th pSortableColumn="name">
+          <th pSortableColumn="code">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'OFFICE.NAME' | translate }}
-            </div>
-          </th>
-          <th pSortableColumn="address">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'OFFICE.ADDRESS' | translate }}
-            </div>
-          </th>
-          <th pSortableColumn="phone">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'OFFICE.PHONE' | translate }}
-            </div>
-          </th>
-          <th pSortableColumn="email">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'OFFICE.EMAIL' | translate }}
-            </div>
-          </th>
-          <th pSortableColumn="description">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'OFFICE.DESCRIPTION' | translate }}
+              {{ 'CONTRACT.CODE' | translate }}
             </div>
           </th>
           <th pSortableColumn="created_at">
@@ -88,32 +69,20 @@
             {{value.id}}
           </td>
           <td>
-            {{value.name}}
-          </td>
-          <td>
-            {{value.address}}
-          </td>
-          <td>
-            {{value.phone}}
-          </td>
-          <td>
-            {{value.email}}
-          </td>
-          <td>
-            {{value.description}}
+            {{value.code}}
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/offices/edit/' + value.id"  *ngIf="authService.hasPermission('add_office')">
+              routerLink="{{parent}}/clauses/edit/{{value.id}}">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_office')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
@@ -123,7 +92,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="6">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          <td colspan="4">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -132,3 +101,8 @@
 </div>
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
+
+<p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
+</p-dialog>

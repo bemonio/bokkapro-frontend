@@ -109,6 +109,9 @@ export const locale = {
       OFFICES: 'Oficinas',
       ID: 'Id',
       NAME: 'Nombre',
+      ADDRESS: 'Dirección',
+      PHONE: 'Teléfono',
+      EMAIL: 'Correo',
       DESCRIPTION: 'Descripción',
       COMPANY: 'Companía',
       CURRENCY: 'Divisa'
@@ -407,6 +410,11 @@ export const locale = {
       EMPLOYEES_OPEN: 'Empleados Aperturan',
       EMPLOYEES_CLOSE: 'Empleados Cierre',
     },
+    CLAUSE: {
+      CLAUSE: 'Clausula',
+      CLAUSES: 'Clausulas',
+      CODE: 'Código'
+    }
   }
 };
 

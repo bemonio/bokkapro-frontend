@@ -272,6 +272,13 @@ const routes: Routes = [
             (m) => m.ReportOperationRoutingModule
           ),
       },
+      {
+        path: 'clauses',
+        loadChildren: () =>
+          import('../pages/clause/clause-routing.module').then(
+            (m) => m.ClauseRoutingModule
+          ),
+      },
     ],
   },
 ];

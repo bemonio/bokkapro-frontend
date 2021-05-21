@@ -210,6 +210,14 @@ import { ReportOperationsComponent } from './report-operation/report-operations/
 import { ReportOperationComponent } from './report-operation/report-operation.component';
 import { ReportOperationEditComponent } from './report-operation/report-operations/report-operation-edit/report-operation-edit.component';
 
+// Clauses
+import { ClausesComponent } from './clause/clauses/clauses.component';
+import { ClauseComponent } from './clause/clause.component';
+import { ClauseEditComponent } from './clause/clauses/clause-edit/clause-edit.component';
+import { ClauseAutocompleteComponent } from './clause/clauses/clause-autocomplete/clause-autocomplete.component';
+
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -357,6 +365,10 @@ import { ReportOperationEditComponent } from './report-operation/report-operatio
     ReportOperationsComponent,
     ReportOperationComponent,
     ReportOperationEditComponent,
+    ClausesComponent,
+    ClauseComponent,
+    ClauseEditComponent,
+    ClauseAutocompleteComponent
   ]
 })
 export class PagesModule { }

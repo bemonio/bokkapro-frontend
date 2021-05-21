@@ -198,7 +198,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
-
+    model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
     // model.logo = this.croppedImage;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
@@ -231,6 +231,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
   create() {
     this.requesting = true;
     let model = this.model;
+    model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
     model.voucher = this.voucherId;
 
     const sbCreate = this.modelsService.post(model).pipe(
