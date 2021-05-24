@@ -89,7 +89,7 @@ export class TypeContractSelectComponent implements ControlValueAccessor, OnInit
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.models = response.type_contracts;
                 this.totalRecords = response.meta.total_results;

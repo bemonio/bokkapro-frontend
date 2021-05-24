@@ -115,7 +115,7 @@ export class TypeGuideAutocompleteComponent implements ControlValueAccessor, OnI
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.models = response.type_guides;
                 this.totalRecords = response.meta.total_results;

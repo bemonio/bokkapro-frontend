@@ -168,7 +168,8 @@ export class DepositFormsComponent implements OnInit {
 
     public getModels() {
         this.requesting = true;
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
+        setTimeout(() => {
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.requesting = false;
                 this.models = [];
@@ -190,6 +191,7 @@ export class DepositFormsComponent implements OnInit {
                 );
             }
         );
+        }, 0)
     }
 
     // public showDeleteDialog(user: Model) {

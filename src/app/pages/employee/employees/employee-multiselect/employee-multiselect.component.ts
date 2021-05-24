@@ -116,7 +116,7 @@ export class EmployeeMultiselectComponent implements ControlValueAccessor, OnIni
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.models = response.employees;
                 this.totalRecords = response.meta.total_results;
