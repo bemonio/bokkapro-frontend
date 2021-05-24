@@ -43,7 +43,7 @@ export class VouchersComponent implements OnInit {
 
     searchGroup: FormGroup;
 
-    public requesting: boolean;
+    public requesting: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;

@@ -19,7 +19,7 @@ export class ModerationEditComponent implements OnInit, OnDestroy {
   public model: Model;
   public previous: Model;
   public formGroup: FormGroup;
-  public requesting: boolean;
+  public requesting: boolean = false;
 
   public tabs = {
     BASIC_TAB: 0,

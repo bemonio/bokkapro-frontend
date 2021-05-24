@@ -38,7 +38,7 @@ export class TypesDivisionsComponent implements OnInit {
 
     searchGroup: FormGroup;
 
-    public requesting: boolean;
+    public requesting: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -83,7 +83,7 @@ export class TypesDivisionsComponent implements OnInit {
 
         this.models = [];
         this.selectedModels = [];
-        // this.getModels();
+        this.getModels();
     }
 
     ngOnInit() {
@@ -138,7 +138,7 @@ export class TypesDivisionsComponent implements OnInit {
                 );
             }
         );
-        }, 0)
+        }, 5)
     }
 
     // public showDeleteDialog(user: Model) {

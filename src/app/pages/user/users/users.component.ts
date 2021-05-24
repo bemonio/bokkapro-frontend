@@ -39,7 +39,7 @@ export class UsersComponent implements OnInit {
 
     searchGroup: FormGroup;
 
-    public requesting: boolean;
+    public requesting: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -117,9 +117,9 @@ export class UsersComponent implements OnInit {
     }
 
     public getModels() {
-        this.requesting = true;
+        // this.requesting = true;
         setTimeout(() => {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.requesting = false;
                 this.models = response.users;
@@ -138,7 +138,7 @@ export class UsersComponent implements OnInit {
                 );
             }
         );
-        }, 0)
+        }, 5)
     }
 
     // public showDeleteDialog(user: Model) {

@@ -38,7 +38,7 @@ export class CompaniesComponent implements OnInit {
 
     searchGroup: FormGroup;
 
-    public requesting: boolean;
+    public requesting: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -83,7 +83,7 @@ export class CompaniesComponent implements OnInit {
 
         this.models = [];
         this.selectedModels = [];
-        // this.getModels();
+        this.getModels();
     }
 
     ngOnInit() {
@@ -141,7 +141,7 @@ export class CompaniesComponent implements OnInit {
                 );
             }
         );
-        }, 0)
+        }, 5)
     }
 
     // public showDeleteDialog(user: Model) {
