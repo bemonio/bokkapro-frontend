@@ -314,8 +314,8 @@ export const locale = {
       TYPESCONTRACTS: 'Tipos Contratos',
     },
     COMPANYCONTACT: {
-      COMPANYCONTACT: 'Contacto Empresa',
-      COMPANYCONTACTS: 'Contactos Empresa',
+      COMPANYCONTACT: 'Contacto Cliente',
+      COMPANYCONTACTS: 'Contactos Cliente',
       ID: 'Id',
       NAME: 'Nombre',
       PHONE: 'Teléfono',
@@ -379,6 +379,7 @@ export const locale = {
       YES: 'Si',
       NO: 'No',
       ASIGN: 'Asignar',
+      ADMINISTRATION: 'Administración'
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',
