@@ -182,6 +182,7 @@ export const locale = {
       TYPE_LOCATION: 'Tipo Dirección',
       COMPANY: 'Companía',
       ZONE: 'Zona',
+      TYPEADDRESS: 'Origen / Destino'
     },
     TYPE_GUIDE: {
       TYPE_GUIDE: 'Tipo Transacción',
@@ -210,8 +211,8 @@ export const locale = {
       STATUS: 'Status',
       CERTIFIED_CART: 'Carrito Certificado',
       CERTIFIED_CART_CODE: 'Código/Carrito Certificado',
-      DIVISION_ORIGIN: 'Division Origen',
-      DIVISION_DESTINATION: 'Division Destino',
+      DIVISION_ORIGIN: 'División / Ruta Origen',
+      DIVISION_DESTINATION: 'División / Ruta Destino',
       EMPLOYEE_ORIGIN: 'Empleado Origen',
       EMPLOYEE_DESTINATION: 'Empleado Destino',
       CODES: 'Códigos',
