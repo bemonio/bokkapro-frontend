@@ -14,7 +14,8 @@
     <div class="form form-label-right">
       <div class="form-group row">
         <div class="col-lg-6">
-          {{ 'COMMON.FILTER' | translate }}
+          <span class="mb-3 d-flex">{{ 'COMMON.FILTER' | translate }}</span>
+          <p-toggleButton styleClass="form-control" onLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.ALL' | translate }}" offLabel="{{ 'COMMON.ASSIGNED_TO_ME' | translate}}"  [style]="{'width': '11em'}" (onChange)="loadLazy()"></p-toggleButton>
         </div>
         <div class="col-lg-6" [formGroup]="searchGroup">
           <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"

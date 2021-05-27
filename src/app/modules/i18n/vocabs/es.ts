@@ -370,6 +370,8 @@ export const locale = {
       SHOULD_HAVE_LEAST: 'debería tener mínimo',
       SHOULD_HAVE_MAXIMUM: 'debería tener máximo',
       SHOWING: 'Mostrando',
+      SHOW: 'Mostar',
+      ASSIGNED_TO_ME: 'Asignados a mí',
       FROM: 'de',
       TO: 'a',
       OF: 'de',
