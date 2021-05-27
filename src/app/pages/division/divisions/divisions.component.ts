@@ -87,6 +87,9 @@ export class DivisionsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+
+        this._with = [];
+        this._with.push({key: 'include[]', value: 'type_division.*'})
     }
 
     public loadLazy(event: LazyLoadEvent) {
@@ -122,6 +125,15 @@ export class DivisionsComponent implements OnInit {
             response => {
                 this.requesting = false;
                 this.models = response.divisions;
+                if(response.type_divisions){
+                    response.type_divisions.forEach(type_division => {
+                        this.models.forEach(element => {
+                            if (element.type_division === type_division.id) {
+                                element.type_division = type_division;
+                            }
+                        });
+                    });
+                }
                 this.totalRecords = response.meta.total_results;
             },
             error => {

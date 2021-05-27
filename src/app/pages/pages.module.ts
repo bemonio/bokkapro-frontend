@@ -61,6 +61,8 @@ import { TypesDivisionsComponent } from './type-division/types-divisions/types-d
 import { TypeDivisionComponent } from './type-division/type-division.component';
 import { TypeDivisionEditComponent } from './type-division/types-divisions/type-division-edit/type-division-edit.component';
 import { TypeDivisionAutocompleteComponent } from './type-division/types-divisions/type-division-autocomplete/type-division-autocomplete.component';
+import { TypeDivisionSelectComponent } from './type-division/types-divisions/type-division-select/type-division-select.component';
+
 
 // Divisions
 import { DivisionsComponent } from './division/divisions/divisions.component';
@@ -272,6 +274,7 @@ import { ClauseAutocompleteComponent } from './clause/clauses/clause-autocomplet
     TypeDivisionComponent,
     TypeDivisionEditComponent,
     TypeDivisionAutocompleteComponent,
+    TypeDivisionSelectComponent,
     DivisionsComponent,
     DivisionComponent,
     DivisionEditComponent,

@@ -30,11 +30,14 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
   public office: AbstractControl;
   public employees: AbstractControl;
   public type_division: AbstractControl;
+  public schedule: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
+  public optionsSchedule: { key: string, value: string }[];
+
 
   constructor(
     private fb: FormBuilder,
@@ -54,18 +57,27 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       office: ['', Validators.compose([Validators.required])],
       type: [''],
       employees: ['', Validators.compose([Validators.required])],
+      type_division: ['', Validators.compose([Validators.required])],
+      schedule: [''],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];
     this.office = this.formGroup.controls['office'];
     this.type_division = this.formGroup.controls['type_division'];
     this.employees = this.formGroup.controls['employees'];
+    this.schedule = this.formGroup.controls['schedule'];
+
   }
 
   ngOnInit(): void {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
+
+    this.optionsSchedule = [
+      {key: 'AM', value: 'AM'},
+      {key: 'PM', value: 'PM'},
+    ];
 
     this.get();
   }
@@ -98,6 +110,9 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.division;
+        if (response.type_divisions) {
+          this.model.type_division = response.type_divisions[0];
+        }
         if (response.offices) {
           this.model.office = response.offices[0];
         }
@@ -115,11 +130,15 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.name.setValue(this.model.name);
       this.description.setValue(this.model.description);
+      this.schedule.setValue({ key: this.model.schedule, value: this.model.schedule });
       if (this.model.office) {
         this.office.setValue(this.model.office);
       }
       if (this.model.employees) {
         this.employees.setValue(this.model.employees);
+      }
+      if (this.model.type_division) {
+        this.type_division.setValue(this.model.type_division);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -150,6 +169,8 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.office = this.model.office.id;
+    model.type_division = this.model.type_division.id;
+    model.schedule = this.schedule.value.value;
     let employees = [];
     this.model.employees.forEach(element => {
       employees.push(element.id);
@@ -178,6 +199,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
+      this.model = response.type_division
       this.model = response.division
     });
     this.subscriptions.push(sbUpdate);
@@ -187,7 +209,10 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
+    model.type_division = this.model.type_division.id;
     model.office = this.model.office.id;
+    model.schedule = this.schedule.value.value;
+
     let employees = [];
     this.model.employees.forEach(element => {
       employees.push(element.id);
@@ -250,5 +275,15 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
   isControlTouched(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
     return control.dirty || control.touched;
+  }
+
+  public getValidClass(valid) {
+    let stringClass = 'form-control form-control-lg form-control-solid';
+    if (valid) {
+      stringClass += ' is-valid';
+    } else {
+      stringClass += ' is-invalid';
+    }
+    return stringClass;
   }
 }

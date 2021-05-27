@@ -68,6 +68,6 @@ export class DivisionService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=office.*&include[]=employees.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=office.*&include[]=employees.*&include[]=type_division.*`);
     }
 }

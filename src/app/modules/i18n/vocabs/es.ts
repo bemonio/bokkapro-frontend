@@ -130,7 +130,9 @@ export const locale = {
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción',
       OFFICE: 'Oficina',
-      EMPLOYEES: 'Empleados'
+      EMPLOYEES: 'Empleados',
+      TYPE_DIVISION: 'Tipo División',
+      SCHEDULE: 'Horario',
     },
     DEPARTMENT: {
       DEPARTMENT: 'Departamento',
