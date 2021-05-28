@@ -119,7 +119,7 @@ export class VouchersComponent implements OnInit {
         this._with.push({key: 'include[]', value: 'cashier.*'})
     }
 
-    public loadLazy(event?: LazyLoadEvent) {
+    public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
         if (event) {
             this.page = (event.first / this.per_page) + 1;
             if (event.sortField) {
@@ -157,9 +157,11 @@ export class VouchersComponent implements OnInit {
             this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
             this.filters.push({ key: 'filter{verificated}', value: '1' })
             
-            this.cashier_filter === false 
-            ? this.cashier_filter = true 
-            : this.cashier_filter = false
+            if(isCashierFilter === 'yesIsCashierFilter'){
+                this.cashier_filter === false 
+                ? this.cashier_filter = true 
+                : this.cashier_filter = false
+            }
 
             if (this.cashier_filter === true) {
                 this.filters.push({ key: 'filter{cashier}', value: this.authService.currentUserValue.employee.id })
