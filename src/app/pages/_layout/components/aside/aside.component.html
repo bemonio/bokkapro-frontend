@@ -43,7 +43,7 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_company')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Communication/Group.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -110,10 +110,10 @@
           </ul>
         </div>
       </li>
-      <!-- end::2 Level -->
+      <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_location')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Communication/Adress-book2.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -149,7 +149,7 @@
       <!-- end::2 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_guide')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Exchange.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -251,7 +251,7 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_depositform')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -288,7 +288,7 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_currency')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Dollar.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -352,7 +352,7 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_contract')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Files/Protected-file.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -400,7 +400,7 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_quotation')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Design/PenAndRuller.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -436,7 +436,7 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_reportoperation')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-line1.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -447,7 +447,7 @@
           <i class="menu-arrow"></i>
           <ul class="menu-subnav">
             <!-- begin::2 Level -->
-            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover" *ngIf="authService.hasPermission('view_reportoperation')">
               <a class="menu-link" routerLink="/reports/operations" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
                   <span></span>
@@ -462,7 +462,7 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_user')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/General/Settings-2.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
