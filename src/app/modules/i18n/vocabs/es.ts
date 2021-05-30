@@ -421,6 +421,7 @@ export const locale = {
       CREWS: 'Tripulaciones',
       ID: 'Id',
       CODE: 'Código',
+      DATE: 'Fecha',
       DIVISION: 'División',
       DRIVER: 'Chofer',
       ASSISTANT: 'Asistente',
