@@ -108,6 +108,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'zone')">{{ 'LOCATION.ZONE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'zone')">{{ 'LOCATION.ZONE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.TYPEADDRESS' | translate}}</label>
+              <p-dropdown [styleClass]="getValidClass(isControlValid('type_address'))" [options]="optionsTypeAddress" optionLabel="key" name="type_address" formControlName="type_address" placeholder="Selecciona Origen / Destino"></p-dropdown>
+              <div class="feedback" *ngIf="!isControlTouched('type_address')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'LOCATION.TYPEADDRESS' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('type_address')">{{ 'LOCATION.TYPEADDRESS' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_address')">{{ 'LOCATION.TYPEADDRESS' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_address')">{{ 'LOCATION.TYPEADDRESS' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_address')">{{ 'LOCATION.TYPEADDRESS' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/locations">{{ 'COMMON.CANCEL' | translate }}</a>

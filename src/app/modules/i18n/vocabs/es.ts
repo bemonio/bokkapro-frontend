@@ -130,7 +130,9 @@ export const locale = {
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción',
       OFFICE: 'Oficina',
-      EMPLOYEES: 'Empleados'
+      EMPLOYEES: 'Empleados',
+      TYPE_DIVISION: 'Tipo División',
+      SCHEDULE: 'Horario',
     },
     DEPARTMENT: {
       DEPARTMENT: 'Departamento',
@@ -182,6 +184,7 @@ export const locale = {
       TYPE_LOCATION: 'Tipo Dirección',
       COMPANY: 'Companía',
       ZONE: 'Zona',
+      TYPEADDRESS: 'Origen / Destino'
     },
     TYPE_GUIDE: {
       TYPE_GUIDE: 'Tipo Transacción',
@@ -210,8 +213,8 @@ export const locale = {
       STATUS: 'Status',
       CERTIFIED_CART: 'Carrito Certificado',
       CERTIFIED_CART_CODE: 'Código/Carrito Certificado',
-      DIVISION_ORIGIN: 'Division Origen',
-      DIVISION_DESTINATION: 'Division Destino',
+      DIVISION_ORIGIN: 'División / Ruta Origen',
+      DIVISION_DESTINATION: 'División / Ruta Destino',
       EMPLOYEE_ORIGIN: 'Empleado Origen',
       EMPLOYEE_DESTINATION: 'Empleado Destino',
       CODES: 'Códigos',
@@ -367,6 +370,8 @@ export const locale = {
       SHOULD_HAVE_LEAST: 'debería tener mínimo',
       SHOULD_HAVE_MAXIMUM: 'debería tener máximo',
       SHOWING: 'Mostrando',
+      SHOW: 'Mostar',
+      ASSIGNED_TO_ME: 'Asignados a mí',
       FROM: 'de',
       TO: 'a',
       OF: 'de',

@@ -31,11 +31,13 @@ export class LocationEditComponent implements OnInit, OnDestroy {
   public type_location: AbstractControl;
   public company: AbstractControl;
   public zone: AbstractControl;
+  public type_address: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
+  public optionsTypeAddress: { key: string, value: string }[];
 
   public companyId: number;
   public parent: string;
@@ -59,6 +61,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       type_location: ['', Validators.compose([Validators.required])],
       company: ['', Validators.compose([Validators.required])],
       zone: ['', Validators.compose([Validators.required])],
+      type_address: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];
     this.code_brinks = this.formGroup.controls['code_brinks'];
@@ -67,12 +70,18 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     this.type_location = this.formGroup.controls['type_location'];
     this.company = this.formGroup.controls['company'];
     this.zone = this.formGroup.controls['zone'];
+    this.type_address = this.formGroup.controls['type_address'];
   }
 
   ngOnInit(): void {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
+
+    this.optionsTypeAddress = [
+      {key: 'Origen', value: 'Origen'},
+      {key: 'Destino', value: 'Destino'},
+    ];
     
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
@@ -133,6 +142,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       this.code_brinks.setValue(this.model.code_brinks);
       this.name.setValue(this.model.name);
       this.description.setValue(this.model.description);
+      this.type_address.setValue({ key: this.model.type_address, value: this.model.type_address });
       if (this.model.type_location) {
         this.type_location.setValue(this.model.type_location);
       }
@@ -174,6 +184,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     model.type_location = this.model.type_location.id;
     model.company = this.model.company.id;
     model.zone = this.model.zone.id;
+    model.type_address = this.type_address.value.value;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -213,6 +224,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     model.type_location = this.model.type_location.id;
     model.company = this.model.company.id;
     model.zone = this.model.zone.id;
+    model.type_address = this.type_address.value.value;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
@@ -279,5 +291,15 @@ export class LocationEditComponent implements OnInit, OnDestroy {
   isControlTouched(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
     return control.dirty || control.touched;
+  }
+
+  public getValidClass(valid) {
+    let stringClass = 'form-control form-control-lg form-control-solid';
+    if (valid) {
+      stringClass += ' is-valid';
+    } else {
+      stringClass += ' is-invalid';
+    }
+    return stringClass;
   }
 }

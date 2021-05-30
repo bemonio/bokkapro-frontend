@@ -11,4 +11,5 @@ export class LocationModel {
   type_location: any;
   company: any;
   zone: any;
+  type_address: string
 }

@@ -8,5 +8,6 @@ export class DivisionModel {
   description: string;
   office: any;
   type_division: any;
+  schedule: string;
   employees: any[];
 }

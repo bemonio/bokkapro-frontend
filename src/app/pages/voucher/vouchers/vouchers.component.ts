@@ -42,6 +42,7 @@ export class VouchersComponent implements OnInit {
     // public venue_id_filter: AbstractControl;
 
     searchGroup: FormGroup;
+    public cashier_filter: boolean;
 
     public requesting: boolean = false;
 
@@ -87,12 +88,14 @@ export class VouchersComponent implements OnInit {
         });
 
         this.showTableCheckbox = true;
+        this.cashier_filter = false;
         this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
         this.per_page = 100
         this.totalRecords = 0;
+        this.filters = [];
 
         this.requesting = false;
 
@@ -116,7 +119,7 @@ export class VouchersComponent implements OnInit {
         this._with.push({key: 'include[]', value: 'cashier.*'})
     }
 
-    public loadLazy(event?: LazyLoadEvent) {
+    public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
         if (event) {
             this.page = (event.first / this.per_page) + 1;
             if (event.sortField) {
@@ -153,6 +156,16 @@ export class VouchersComponent implements OnInit {
         } else {
             this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
             this.filters.push({ key: 'filter{verificated}', value: '1' })
+            
+            if(isCashierFilter === 'yesIsCashierFilter'){
+                this.cashier_filter === false 
+                ? this.cashier_filter = true 
+                : this.cashier_filter = false
+            }
+
+            if (this.cashier_filter === true) {
+                this.filters.push({ key: 'filter{cashier}', value: this.authService.currentUserValue.employee.id })
+            }
             this.getModels();
         }
     }

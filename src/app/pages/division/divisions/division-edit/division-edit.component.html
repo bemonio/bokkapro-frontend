@@ -86,6 +86,26 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employees')">{{ 'DIVISION.EMPLOYEES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employees')">{{ 'DIVISION.EMPLOYEES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DIVISION.TYPE_DIVISION' | translate }}</label>
+              <app-type-division-select
+              placeholder="{{ 'DIVISION.TYPE_DIVISION' | translate }}" name="type_division" [valid]="isControlValid('type_division')" [touched]="isControlTouched('type_division')" [class.is-invalid]="isControlInvalid('type_division')"
+              [class.is-valid]="isControlValid('type_division')" formControlName="type_division" id="type_division" [model]="model.type_division"></app-type-division-select>
+              <div class="feedback" *ngIf="!isControlTouched('type_division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DIVISION.TYPE_DIVISION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('type_division')">{{ 'DIVISION.TYPE_DIVISION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_division')">{{ 'DIVISION.TYPE_DIVISION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_division')">{{ 'DIVISION.TYPE_DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_division')">{{ 'DIVISION.TYPE_DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4" *ngIf="type_division.value.id === 2">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DIVISION.SCHEDULE' | translate}}</label>
+              <p-dropdown [styleClass]="getValidClass(isControlValid('schedule'))" [options]="optionsSchedule" optionLabel="key" name="schedule" formControlName="schedule" placeholder="Selecciona Horario"></p-dropdown>
+              <div class="feedback" *ngIf="!isControlTouched('schedule')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DIVISION.SCHEDULE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('schedule')">{{ 'DIVISION.SCHEDULE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'schedule')">{{ 'DIVISION.SCHEDULE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'schedule')">{{ 'DIVISION.SCHEDULE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'schedule')">{{ 'DIVISION.SCHEDULE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/divisions">{{ 'COMMON.CANCEL' | translate }}</a>
