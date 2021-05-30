@@ -216,6 +216,11 @@ import { ClauseComponent } from './clause/clause.component';
 import { ClauseEditComponent } from './clause/clauses/clause-edit/clause-edit.component';
 import { ClauseAutocompleteComponent } from './clause/clauses/clause-autocomplete/clause-autocomplete.component';
 
+// Crews
+import { CrewsComponent } from './crew/crews/crews.component';
+import { CrewComponent } from './crew/crew.component';
+import { CrewEditComponent } from './crew/crews/crew-edit/crew-edit.component';
+import { CrewAutocompleteComponent } from './crew/crews/crew-autocomplete/crew-autocomplete.component';
 
 
 @NgModule({
@@ -368,7 +373,11 @@ import { ClauseAutocompleteComponent } from './clause/clauses/clause-autocomplet
     ClausesComponent,
     ClauseComponent,
     ClauseEditComponent,
-    ClauseAutocompleteComponent
+    ClauseAutocompleteComponent,
+    CrewsComponent,
+    CrewComponent,
+    CrewEditComponent,
+    CrewAutocompleteComponent
   ]
 })
 export class PagesModule { }
