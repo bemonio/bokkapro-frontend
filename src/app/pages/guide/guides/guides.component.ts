@@ -454,7 +454,7 @@ export class GuidesComponent implements OnInit {
             if (guide.vouchers) {
                 guide.vouchers.forEach(element => {
                     if (element.packings) {
-                        count = + element.count_packings;
+                        count = count + element.count_packings;
                     }
                 });
             }
