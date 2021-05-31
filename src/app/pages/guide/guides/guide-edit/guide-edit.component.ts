@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { GuideModel as Model } from '../../_models/guide.model';
 import { GuideService as ModelsService } from '../../_services/guide.service';
 import { DivisionService } from 'src/app/pages/division/_services';
+import { CrewService } from 'src/app/pages/crew/_services';
 
 @Component({
   selector: 'app-guide-edit',
@@ -60,6 +61,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private modelsService: ModelsService,
     private divisionService: DivisionService,
+    private crewService: CrewService,
     private router: Router,
     private route: ActivatedRoute,
     public authService: AuthService,
@@ -196,7 +198,49 @@ export class GuideEditComponent implements OnInit, OnDestroy {
           this.division_destination.setValue(response.division);
         }
     });
-}
+  }
+
+  getCrew(id) {
+    const sb = this.route.paramMap.pipe(
+        switchMap(params => {
+            if (id || id > 0) {
+                return this.crewService.getById(id);
+            }
+            return of({ 'crew': new Model() });
+        }),
+        catchError((error) => {
+            let messageError = [];
+            if (!Array.isArray(error.error)) {
+                messageError.push(error.error);
+            } else {
+                messageError = error.error;
+            }
+            Object.entries(messageError).forEach(
+                ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+            );
+            return of({ 'crew': new Model() });
+        }),
+    ).subscribe((response: any) => {
+        if (response) {
+          if(response.employees){
+            response.employees.forEach(employee => {
+              if (response.crew.driver === employee.id) {
+                  response.crew.driver = employee;
+                  this.employee_origin.setValue(employee);
+              }
+              if (response.crew.assistant === employee.id) {
+                  response.crew.assistant = employee;
+              }
+              if (response.crew.assistant2 === employee.id) {
+                  response.crew.assistant2 = employee;
+              }
+            });
+          } else {
+            this.employee_origin.setValue('');
+          }
+        }
+    });
+  }
 
   loadForm() {
     this.certified_cart.setValue(false);
@@ -499,7 +543,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   public changeDivisionOrigin(event) {
-    this.employee_origin.setValue('');
+    this.getCrew(this.division_origin.value.crew)
     this.loadForm();
   }
 

@@ -52,7 +52,7 @@ export class DivisionService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=office.*&include[]=employees.*&include[]=type_division.*&include[]=crew.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -68,6 +68,6 @@ export class DivisionService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=office.*&include[]=employees.*&include[]=type_division.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=office.*&include[]=employees.*&include[]=type_division.*&include[]=crew.*`);
     }
 }
