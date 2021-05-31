@@ -36,6 +36,9 @@ export class CrewEditComponent implements OnInit, OnDestroy {
 
   public saveAndExit;
 
+  public divisionId: number;
+  public parent: string;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -70,7 +73,13 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.assistant = this.formGroup.controls['assistant'];
     this.assistant2 = this.formGroup.controls['assistant2'];
 
-    this.get();
+    this.route.parent.parent.parent.params.subscribe((params) => {
+      if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+        this.divisionId = params.id;
+        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.divisionId;
+      }
+      this.get();
+    });
   }
 
   get() {

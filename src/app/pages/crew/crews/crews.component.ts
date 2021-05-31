@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CrewService as ModelService } from '../_services/crew.service';
 import { CrewModel as Model } from '../_models/crew.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -46,8 +47,13 @@ export class CrewsComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
+    public divisionId: number;
+    public parent: string;
+
     constructor(
         public modelsService: ModelService,
+        private router: Router,
+        private route: ActivatedRoute,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
@@ -71,6 +77,7 @@ export class CrewsComponent implements OnInit {
         });
 
         this.showTableCheckbox = false;
+        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
@@ -112,6 +119,19 @@ export class CrewsComponent implements OnInit {
             this.per_page = event.rows;
         }
 
+        this.filters = [];
+        if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+            this.route.parent.parent.parent.params.subscribe((params) => {
+                if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                    this.divisionId = params.id;
+                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.divisionId;
+                    this.filters.push({ key: 'filter{division}', value: this.divisionId.toString() })
+                }
+                this.getModels();
+            });
+        } else {
+            this.getModels();
+        }
 
         this.getModels();
     }

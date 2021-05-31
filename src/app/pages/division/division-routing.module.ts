@@ -29,6 +29,13 @@ const routes: Routes = [
                 (m) => m.EmployeeRoutingModule
               ),
           },
+          {
+            path: 'crews',
+            loadChildren: () =>
+              import('../../pages/crew/crew-routing.module').then(
+                (m) => m.CrewRoutingModule
+              ),
+          },  
         ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },

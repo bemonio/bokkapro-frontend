@@ -22,7 +22,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
-    EMPLOYEE_TAB: 1
+    CREW_TAB: 1
   };
 
   public name: AbstractControl;
@@ -38,6 +38,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
   public saveAndExit;
   public optionsSchedule: { key: string, value: string }[];
 
+  public parent: string;
 
   constructor(
     private fb: FormBuilder,
@@ -67,6 +68,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     this.employees = this.formGroup.controls['employees'];
     this.schedule = this.formGroup.controls['schedule'];
 
+    this.parent = '/companies';
   }
 
   ngOnInit(): void {
@@ -78,6 +80,10 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       {key: 'AM', value: 'AM'},
       {key: 'PM', value: 'PM'},
     ];
+
+    if (this.route.parent.parent.snapshot.url[0].path) {
+      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
+    }
 
     this.get();
   }
