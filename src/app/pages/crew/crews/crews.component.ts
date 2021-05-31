@@ -132,8 +132,6 @@ export class CrewsComponent implements OnInit {
         } else {
             this.getModels();
         }
-
-        this.getModels();
     }
 
     public getModels() {
