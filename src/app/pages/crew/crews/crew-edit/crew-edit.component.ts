@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { CrewModel as Model } from '../../_models/crew.model';
 import { CrewService as ModelsService } from '../../_services/crew.service';
+import { DivisionService } from 'src/app/pages/division/_services';
 
 @Component({
   selector: 'app-crew-edit',
@@ -44,7 +45,8 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private divisionService: DivisionService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
@@ -144,6 +146,10 @@ export class CrewEditComponent implements OnInit, OnDestroy {
       }
       if (this.model.assistant2) {
         this.assistant2.setValue(this.model.assistant2);
+      }
+    } else {
+      if (this.divisionId) {
+        this.getDivisionById(this.divisionId);
       }
     }
   }
@@ -283,6 +289,17 @@ export class CrewEditComponent implements OnInit, OnDestroy {
       stringClass += ' is-invalid';
     }
     return stringClass;
+  }
+
+  getDivisionById(id) {
+    this.divisionService.getById(id).toPromise().then(
+      response => {
+        this.division.setValue(response.division)
+      },
+      error => {
+        console.log('error getting division');
+      }
+    );
   }
 
   public formatDate(date) {
