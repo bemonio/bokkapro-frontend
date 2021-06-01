@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
-export class DivisionService {
-    API_URL = `${environment.apiUrl}divisions`;
+export class CrewService {
+    API_URL = `${environment.apiUrl}crews`;
     private _subscriptions: Subscription[] = [];
-
-    public _change$ = new BehaviorSubject<boolean>(false);
 
     constructor(public http: HttpClient) { }
 
@@ -52,7 +50,7 @@ export class DivisionService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=office.*&include[]=employees.*&include[]=type_division.*&include[]=crew.*`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=division.*&include[]=driver.*&include[]=assistant.*&include[]=assistant2.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -68,6 +66,6 @@ export class DivisionService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=office.*&include[]=employees.*&include[]=type_division.*&include[]=crew.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=division.*&include[]=driver.*&include[]=assistant.*&include[]=assistant2.*`);
     }
 }

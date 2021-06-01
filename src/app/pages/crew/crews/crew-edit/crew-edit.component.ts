@@ -5,15 +5,16 @@ import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-import { DivisionModel as Model } from '../../_models/division.model';
-import { DivisionService as ModelsService } from '../../_services/division.service';
+import { CrewModel as Model } from '../../_models/crew.model';
+import { CrewService as ModelsService } from '../../_services/crew.service';
+import { DivisionService } from 'src/app/pages/division/_services';
 
 @Component({
-  selector: 'app-division-edit',
-  templateUrl: './division-edit.component.html',
-  styleUrls: ['./division-edit.component.scss']
+  selector: 'app-crew-edit',
+  templateUrl: './crew-edit.component.html',
+  styleUrls: ['./crew-edit.component.scss']
 })
-export class DivisionEditComponent implements OnInit, OnDestroy {
+export class CrewEditComponent implements OnInit, OnDestroy {
   public id: number;
   public model: Model;
   public previous: Model;
@@ -22,22 +23,21 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
-    CREW_TAB: 1
+    PROFILE: 1,
   };
 
-  public name: AbstractControl;
-  public description: AbstractControl;
-  public office: AbstractControl;
-  public employees: AbstractControl;
-  public type_division: AbstractControl;
-  public schedule: AbstractControl;
+  public date: AbstractControl;
+  public division: AbstractControl;
+  public driver: AbstractControl;
+  public assistant: AbstractControl;
+  public assistant2: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
-  public optionsSchedule: { key: string, value: string }[];
 
+  public divisionId: number;
   public parent: string;
 
   constructor(
@@ -45,30 +45,15 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
-    public authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private divisionService: DivisionService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: ['', Validators.compose([Validators.maxLength(30)])],
-      office: ['', Validators.compose([Validators.required])],
-      type: [''],
-      employees: ['', Validators.compose([Validators.required])],
-      type_division: ['', Validators.compose([Validators.required])],
-      schedule: [''],
     });
-    this.name = this.formGroup.controls['name'];
-    this.description = this.formGroup.controls['description'];
-    this.office = this.formGroup.controls['office'];
-    this.type_division = this.formGroup.controls['type_division'];
-    this.employees = this.formGroup.controls['employees'];
-    this.schedule = this.formGroup.controls['schedule'];
-
-    this.parent = '/companies';
   }
 
   ngOnInit(): void {
@@ -76,16 +61,27 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
 
-    this.optionsSchedule = [
-      {key: 'AM', value: 'AM'},
-      {key: 'PM', value: 'PM'},
-    ];
+    this.formGroup = this.fb.group({
+      date: ['', Validators.compose([Validators.required,])],
+      division: ['', Validators.compose([Validators.required,])],
+      driver: ['', Validators.compose([Validators.required,])],
+      assistant: ['', Validators.compose([Validators.required,])],
+      assistant2: ['', Validators.compose([Validators.required,])],
+    });
 
-    if (this.route.parent.parent.snapshot.url[0].path) {
-      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
-    }
+    this.date = this.formGroup.controls['date'];
+    this.division = this.formGroup.controls['division'];
+    this.driver = this.formGroup.controls['driver'];
+    this.assistant = this.formGroup.controls['assistant'];
+    this.assistant2 = this.formGroup.controls['assistant2'];
 
-    this.get();
+    this.route.parent.parent.parent.params.subscribe((params) => {
+      if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+        this.divisionId = params.id;
+        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.divisionId;
+      }
+      this.get();
+    });
   }
 
   get() {
@@ -97,7 +93,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'division': new Model() });
+        return of({ 'crew': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -110,21 +106,25 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({ 'division': new Model() });
+        return of({ 'crew': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.model = response.division;
-        if (response.type_divisions) {
-          this.model.type_division = response.type_divisions[0];
-        }
-        if (response.offices) {
-          this.model.office = response.offices[0];
+        this.model = response.crew;
+        if (response.divisions) {
+          this.model.division = response.divisions[0];
         }
         if (response.employees) {
-          this.model.employees = response.employees;
+          this.model.driver = response.employees[0];
         }
+        if (response.employees) {
+          this.model.assistant = response.employees[1];
+        }
+        if (response.employees) {
+          this.model.assistant2 = response.employees[2];
+        }
+
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -133,21 +133,25 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model.id) {
-      this.name.setValue(this.model.name);
-      this.description.setValue(this.model.description);
-      this.schedule.setValue({ key: this.model.schedule, value: this.model.schedule });
-      if (this.model.office) {
-        this.office.setValue(this.model.office);
+    if (this.model && this.model.id) {
+      this.date.setValue(new Date(this.model.date));
+      if (this.model.division) {
+        this.division.setValue(this.model.division);
       }
-      if (this.model.employees) {
-        this.employees.setValue(this.model.employees);
+      if (this.model.driver) {
+        this.driver.setValue(this.model.driver);
       }
-      if (this.model.type_division) {
-        this.type_division.setValue(this.model.type_division);
+      if (this.model.assistant) {
+        this.assistant.setValue(this.model.assistant);
+      }
+      if (this.model.assistant2) {
+        this.assistant2.setValue(this.model.assistant2);
+      }
+    } else {
+      if (this.divisionId) {
+        this.getDivisionById(this.divisionId);
       }
     }
-    this.formGroup.markAllAsTouched();
   }
 
   reset() {
@@ -173,22 +177,21 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
 
   edit() {
     this.requesting = true;
+
     let model = this.model;
-    model.office = this.model.office.id;
-    model.type_division = this.model.type_division.id;
-    model.schedule = this.schedule.value.value;
-    let employees = [];
-    this.model.employees.forEach(element => {
-      employees.push(element.id);
-    });
-    model.employees = employees;
+    model.date = this.formatDate(this.date.value);
+    model.division = this.model.division.id;
+    model.driver = this.model.driver.id;
+    model.assistant = this.model.assistant.id;
+    model.assistant2 = this.model.assistant2.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/divisions']);
+          this.router.navigate(['/crews']);
         }
+        this.formGroup.reset()
       }),
       catchError((error) => {
         this.requesting = false;
@@ -205,8 +208,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.type_division
-      this.model = response.division
+      this.model = response.crew
     });
     this.subscriptions.push(sbUpdate);
   }
@@ -215,21 +217,17 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    model.type_division = this.model.type_division.id;
-    model.office = this.model.office.id;
-    model.schedule = this.schedule.value.value;
-
-    let employees = [];
-    this.model.employees.forEach(element => {
-      employees.push(element.id);
-    });
-    model.employees = employees;
+    model.date = this.formatDate(this.date.value);
+    model.division = this.model.division.id;
+    model.driver = this.model.driver.id;
+    model.assistant = this.model.assistant.id;
+    model.assistant2 = this.model.assistant2.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/divisions']);
+          this.router.navigate(['/crews']);
         } else {
           this.formGroup.reset()
         }
@@ -249,7 +247,7 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.division as Model
+      this.model = response.crew as Model
     });
     this.subscriptions.push(sbCreate);
   }
@@ -291,5 +289,47 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
       stringClass += ' is-invalid';
     }
     return stringClass;
+  }
+
+  getDivisionById(id) {
+    this.divisionService.getById(id).toPromise().then(
+      response => {
+        this.division.setValue(response.division)
+      },
+      error => {
+        console.log('error getting division');
+      }
+    );
+  }
+
+  public formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    let hours = '' + d.getHours();
+    let minutes = '' + d.getMinutes();
+    let seconds = '' + d.getSeconds();
+
+    if (month.length < 2) {
+        month = '0' + month;
+    }
+    if (day.length < 2) {
+        day = '0' + day;
+    }
+
+    if (hours.length < 2) {
+        hours = '0' + hours;
+    }
+
+    if (minutes.length < 2) {
+        minutes = '0' + minutes;
+    }
+
+    if (seconds.length < 2) {
+        seconds = '0' + seconds;
+    }
+
+    return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
   }
 }

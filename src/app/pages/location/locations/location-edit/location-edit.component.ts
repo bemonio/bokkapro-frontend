@@ -60,7 +60,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       description: ['', Validators.compose([Validators.maxLength(30)])],
       type_location: ['', Validators.compose([Validators.required])],
       company: ['', Validators.compose([Validators.required])],
-      zone: ['', Validators.compose([Validators.required])],
+      zone: [''],
       type_address: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];

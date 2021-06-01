@@ -420,6 +420,17 @@ export const locale = {
       CLAUSE: 'Clausula',
       CLAUSES: 'Clausulas',
       CODE: 'Código'
+    },
+    CREW: {
+      CREW: 'Tripulación',
+      CREWS: 'Tripulaciones',
+      ID: 'Id',
+      CODE: 'Código',
+      DATE: 'Fecha',
+      DIVISION: 'División',
+      DRIVER: 'Chofer',
+      ASSISTANT: 'Asistente',
+      ASSISTANT2: 'Cajero'
     }
   }
 };
