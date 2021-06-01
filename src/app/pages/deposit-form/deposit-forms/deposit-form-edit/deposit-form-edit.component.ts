@@ -218,6 +218,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       if (this.packingId) {
         this.getPackingById(this.packingId);
       }
+      this.employee_who_counts.setValue(this.authService.currentUserValue.employee);
     }
     this.formGroup.markAllAsTouched();
   }
