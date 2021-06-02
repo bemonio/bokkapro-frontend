@@ -165,7 +165,7 @@
               </span>
             </li> -->
             <!-- begin::2 Level Guide -->
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guide')">
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guide') || authService.hasPermission('view_guideinput')">
               <a class="menu-link" routerLink="/guides" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
                   <span></span>
