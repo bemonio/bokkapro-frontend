@@ -4,7 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a>
+      <!-- <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a> -->
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/depositforms/add">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
@@ -91,6 +91,12 @@
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
+            <!-- <a title="{{ 'COMMON.COUNT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+            (click)="showModalDialog()">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/Binocular.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-success">
+              </span>
+            </a> -->
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               routerLink="{{parent}}/depositforms/edit/{{value.id}}/depositformsdetails">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
@@ -118,7 +124,10 @@
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
-<p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
-  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
-  <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
-</p-dialog>
+<!-- <p-dialog header="{{ 'DEPOSITFORMDETAIL.DEPOSITFORMSDETAILS' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [dismissableMask]="true" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+
+  <div class="mt-5">
+    <app-deposit-formsdetails></app-deposit-formsdetails>
+  </div>
+</p-dialog> -->
