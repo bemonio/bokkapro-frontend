@@ -384,7 +384,8 @@ export const locale = {
       YES: 'Si',
       NO: 'No',
       ASIGN: 'Asignar',
-      ADMINISTRATION: 'Administración'
+      ADMINISTRATION: 'Administración',
+      TESTING: 'Prueba'
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',

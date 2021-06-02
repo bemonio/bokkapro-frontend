@@ -15,6 +15,8 @@ import { locale as frLang } from './modules/i18n/vocabs/fr';
 import { SplashScreenService } from './_metronic/partials/layout/splash-screen/splash-screen.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'body[root]',
@@ -24,6 +26,8 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
+
+  public production = `${environment.production}`;
 
   constructor(
     private translationService: TranslationService,
