@@ -324,7 +324,7 @@ export class GuidesComponent implements OnInit {
             if (response) {
                 this.verificationGuide = response.guide;
                 this.verificationGuide.vouchers = response.guide.vouchers;
-                let count = this.verificationGuide.vouchers.length + this.countPackings(this.verificationGuide);
+                let count = this.verificationGuide.vouchers.length + this.countPackings(this.verificationGuide, true);
                 this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
                 if (response.guide.certified_cart) {
                     this.certified_cart_code.setValidators(Validators.compose([Validators.required, Validators.pattern(response.guide.certified_cart_code)]));
@@ -448,9 +448,19 @@ export class GuidesComponent implements OnInit {
         });
     }
 
-    countPackings(guide) {
+    countPackings(guide, operations) {
         let count = 0;
-        if (guide.division_destination.name != 'Operaciones Internas') {
+        if (operations) {
+            if (guide.division_destination.name != 'Operaciones Internas') {
+                if (guide.vouchers) {
+                    guide.vouchers.forEach(element => {
+                        if (element.packings) {
+                            count = count + element.count_packings;
+                        }
+                    });
+                }
+            }
+        } else {
             if (guide.vouchers) {
                 guide.vouchers.forEach(element => {
                     if (element.packings) {

@@ -149,7 +149,7 @@
       <!-- end::2 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_guide')">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_guide') || authService.hasPermission('view_guideinput')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Exchange.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
