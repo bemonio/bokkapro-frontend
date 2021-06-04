@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepositFormDetailService as ModelService } from '../_services/deposit-formdetail.service';
 import { DepositFormDetailModel as Model } from '../_models/deposit-formdetail.model';
@@ -19,7 +19,10 @@ import { DivisionService } from '../../division/_services';
     templateUrl: './deposit-formsdetails.component.html',
     styleUrls: ['./deposit-formsdetails.component.scss']
 })
-export class DepositFormsDetailsComponent implements OnInit {
+export class DepositFormsDetailsComponent implements OnInit, OnChanges {
+    @Input() redirectURL: boolean;
+    @Input() showListFormDetails: boolean;
+    @Input() depositFormID: number;
 
     public promiseForm: Promise<any>;
 
@@ -54,6 +57,7 @@ export class DepositFormsDetailsComponent implements OnInit {
     public parent: string;
 
     public displayModal: boolean;
+    public createOrEdit: {create: boolean, id: number};
 
     constructor(
         public modelsService: ModelService,
@@ -72,7 +76,7 @@ export class DepositFormsDetailsComponent implements OnInit {
         // this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
         // this.department_id_filter = this.formGroup.controls['department_id_filter'];
         // this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
-
+        this.redirectURL = true;
 
         this.searchGroup = fb.group({
             searchTerm: [''],
@@ -98,11 +102,17 @@ export class DepositFormsDetailsComponent implements OnInit {
 
         this.models = [];
         this.selectedModels = [];
-        this.getModels();
+        // this.getModels();
     }
 
     ngOnInit() {
         this.requesting = false;
+        this.createOrEdit = {create: false, id: undefined};
+        this.loadLazy();
+    }
+
+    ngOnChanges() {
+        this.ngOnInit();
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -130,17 +140,22 @@ export class DepositFormsDetailsComponent implements OnInit {
         }
 
         this.filters = [];
-        if (this.route.parent.parent.parent.snapshot.url.length > 0) {
-            this.route.parent.parent.parent.params.subscribe((params) => {
-                if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                    this.depositFormId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.depositFormId;
-                    this.filters.push({ key: 'filter{deposit_form}', value: this.depositFormId.toString() })
-                }
-                this.getModels();
-            });
-        } else {
+        if(this.depositFormID){
+            this.filters.push({ key: 'filter{deposit_form}', value: this.depositFormID.toString() })
             this.getModels();
+        } else {
+            if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+                this.route.parent.parent.parent.params.subscribe((params) => {
+                    if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                        this.depositFormId = params.id;
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.depositFormId;
+                        this.filters.push({ key: 'filter{deposit_form}', value: this.depositFormId.toString() })
+                    }
+                    this.getModels();
+                });
+            } else {
+                this.getModels();
+            }
         }
     }
 
@@ -256,5 +271,9 @@ export class DepositFormsDetailsComponent implements OnInit {
     hideModalDialog() {
         this.displayModal = false;
         this.getModels();
+    }
+
+    showNew(id?) {
+        this.createOrEdit = {create: true, id: id ? id : undefined}
     }
 }

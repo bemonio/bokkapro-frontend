@@ -91,14 +91,14 @@
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
-            <!-- <a title="{{ 'COMMON.COUNT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-            (click)="showModalDialog()">
+            <a title="{{ 'COMMON.COUNT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+            (click)="showModalDialog(value.id)">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Binocular.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-success">
               </span>
-            </a> -->
+            </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              routerLink="{{parent}}/depositforms/edit/{{value.id}}/depositformsdetails">
+              routerLink="{{parent}}/depositforms/edit/{{value.id}}">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
@@ -124,10 +124,10 @@
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
-<!-- <p-dialog header="{{ 'DEPOSITFORMDETAIL.DEPOSITFORMSDETAILS' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
-  [baseZIndex]="10000" [draggable]="false" [dismissableMask]="true" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+<p-dialog header="{{ 'DEPOSITFORMDETAIL.DEPOSITFORMSDETAILS' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
 
   <div class="mt-5">
-    <app-deposit-formsdetails></app-deposit-formsdetails>
+    <app-deposit-formsdetails [depositFormID]="depositFormId" [showListFormDetails]="showListFormDetails" [redirectURL]="false"></app-deposit-formsdetails>
   </div>
-</p-dialog> -->
+</p-dialog>

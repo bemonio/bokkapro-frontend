@@ -75,7 +75,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       packing: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       bank_account: [''],
       employee_who_counts: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      supervisor: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      supervisor: [''],
       supervisor_extra: [''],
     });
     this.amount = this.formGroup.controls['amount'];
@@ -163,22 +163,22 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       if (response) {
         this.model = response.deposit_form;
         if (response.packings) {
-          this.model.packing = response.packings[0]; //ACAAAAAAAAA
+          this.model.packing = response.packings[0];
         }
         if (response.banksaccounts) {
-          this.model.bank_account = response.banksaccounts[0]; //ACAAAAAAAAA
+          this.model.bank_account = response.banksaccounts[0];
         }
         if (response.currencies) {
           this.model.currency = response.currencies[0];
         }
         if (response.employees) {
-          this.model.employee_who_counts = response.employees[0]; //ACAAAAAAAAA
+          this.model.employee_who_counts = response.employees[0];
         }
         if (response.employees) {
-          this.model.supervisor = response.employees[1]; //ACAAAAAAAAA
+          this.model.supervisor = response.employees[1];
         }
         if (response.employees) {
-          this.model.supervisor_extra = response.employees[2]; //ACAAAAAAAAA2
+          this.model.supervisor_extra = response.employees[2];2
         }
 
         this.previous = Object.assign({}, this.model);
@@ -189,6 +189,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
+    this.verified.setValue(false);
+
     if (this.model.id) {
       this.amount.setValue(this.model.amount)
       this.difference_amount.setValue(this.model.difference_amount)

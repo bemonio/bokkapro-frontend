@@ -53,7 +53,10 @@ export class DepositFormsComponent implements OnInit {
     public packingId: number;
     public parent: string;
 
+    public depositFormId: number;
+
     public displayModal: boolean;
+    public showListFormDetails: boolean;
 
     constructor(
         public modelsService: ModelService,
@@ -133,6 +136,7 @@ export class DepositFormsComponent implements OnInit {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
                     let params1 = params.id;
+                    this.filters.push({ key: 'filter{packing}', value: params1.toString() })
       
                     if (this.route.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
                         this.route.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
@@ -271,8 +275,12 @@ export class DepositFormsComponent implements OnInit {
         });
     }
 
-    showModalDialog() {
+    showModalDialog(id) {
         this.displayModal = true;
+        this.showListFormDetails 
+        ? this.showListFormDetails = false 
+        : this.showListFormDetails = true;
+        this.depositFormId = id;
     }
 
     hideModalDialog() {
