@@ -62,7 +62,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.previous = undefined;
 
     this.formGroup = this.fb.group({
-      date: ['', Validators.compose([Validators.required,])],
+      date: [''],
       division: ['', Validators.compose([Validators.required,])],
       driver: ['', Validators.compose([Validators.required,])],
       assistant: ['', Validators.compose([Validators.required,])],
