@@ -16,7 +16,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-light" routerLink="/depositformsdetails">
+      <a type="button" class="btn btn-light" routerLink="/depositformsdetails" *ngIf="redirectURL">
         <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
@@ -46,7 +46,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} Deposit Form</label>
               <app-deposit-form-autocomplete
               placeholder="Deposit Form" name="deposit_form" [valid]="isControlValid('deposit_form')" [touched]="isControlTouched('deposit_form')" [class.is-invalid]="isControlInvalid('deposit_form')"
-              [class.is-valid]="isControlValid('deposit_form')" formControlName="deposit_form" id="deposit_form" [model]="model.deposit_form"></app-deposit-form-autocomplete>
+              [class.is-valid]="isControlValid('deposit_form')" formControlName="deposit_form" id="deposit_form" [model]="model.deposit_form" [disabled]="deposit_form.value ? true : false"></app-deposit-form-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('deposit_form')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>Deposit Form</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('deposit_form')">Deposit Form  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'deposit_form')">Deposit Form  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -88,9 +88,11 @@
             </div>
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/depositformsdetails">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/depositformsdetails" *ngIf="redirectURL">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" (click)="hideModal()" *ngIf="!redirectURL">{{ 'COMMON.CANCEL' | translate }}</a>
+
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="redirectURL">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
