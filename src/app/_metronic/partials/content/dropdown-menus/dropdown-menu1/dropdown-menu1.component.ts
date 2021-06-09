@@ -28,5 +28,6 @@ export class DropdownMenu1Component implements OnInit {
   changeDivision(division) {
     this.authService.currentDivisionValue = division;
     this.divisionService._change$.next(true);
+    this.divisionService._change$.next(false);
   }
 }
