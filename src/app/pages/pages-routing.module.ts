@@ -286,6 +286,13 @@ const routes: Routes = [
             (m) => m.CrewRoutingModule
           ),
       },
+      {
+        path: 'certifiedcarts',
+        loadChildren: () =>
+          import('../pages/certified-cart/certified-cart-routing.module').then(
+            (m) => m.CertifiedCartRoutingModule
+          ),
+      },
     ],
   },
 ];

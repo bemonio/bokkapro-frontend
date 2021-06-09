@@ -573,6 +573,18 @@
               </a>
             </li>
             <!-- end::2 Level -->
+
+                        <!-- begin::2 Level Certified Cart -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_certifiedcart')">
+              <a class="menu-link" routerLink="/certifiedcarts" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'CERTIFIED_CART.CERTIFIED_CARTS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+
           </ul>
         </div>
       </li>

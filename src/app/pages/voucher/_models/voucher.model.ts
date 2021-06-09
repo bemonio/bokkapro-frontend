@@ -1,6 +1,7 @@
 import { CurrencyModel } from "../../currency/_models/currency.model";
 import { DivisionModel } from "../../division/_models/division.model";
 import { PackingModel } from "../../packing/_models/packing.model";
+import { CertifiedCartModel } from "../../certified-cart/_models/certified-cart.model";
 
 export class VoucherModel {
   id: number;
@@ -12,6 +13,7 @@ export class VoucherModel {
   guides: any;
   company: any;
   cashier: any;
+  certified_cart: any;
   location_origin: any;
   location_destination: any;
   packings: any[];

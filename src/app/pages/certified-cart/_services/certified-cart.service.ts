@@ -5,17 +5,15 @@ import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
-export class VoucherService {
-    API_URL = `${environment.apiUrl}vouchers`;
-    API_URL_ASIGN_CASHIER = `${environment.apiUrl}asigncashier`;
-    API_URL_ASIGN_CERTIFIED_CART = `${environment.apiUrl}asigncertifiedcart`;
-    // private _subscriptions: Subscription[] = [];
+export class CertifiedCartService {
+    API_URL = `${environment.apiUrl}certifiedcarts`;
+    private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
 
-    // get subscriptions() {
-    //     return this._subscriptions;
-    // }
+    get subscriptions() {
+        return this._subscriptions;
+    }
     
     public get (page?: number, per_page?: number, sort?: string, query?: string, filters?: any[], _with?: any[]): Observable<any> {
         let params: URLSearchParams = new URLSearchParams();
@@ -37,7 +35,7 @@ export class VoucherService {
         }
 
         if (query !== null && query !== undefined && query !== '') {
-            params.append(`filter{id}[]`, String(query));
+            params.append('filter{id}[]', String(query));
         }
 
         if (filters !== null && filters !== undefined && filters.length > 0) {
@@ -52,7 +50,7 @@ export class VoucherService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=vouchers.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -68,14 +66,6 @@ export class VoucherService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=company.*&include[]=packings.*&include[]=division.*&include[]=currency.*&include[]=cashier.*`);
-    }
-
-    public asignCashier(body: Object): Observable<any> {
-        return this.http.post(`${this.API_URL_ASIGN_CASHIER}`, JSON.stringify(body));
-    }
-
-    public asignCertifiedCart(body: Object): Observable<any> {
-        return this.http.post(`${this.API_URL_ASIGN_CERTIFIED_CART}`, JSON.stringify(body));
+        return this.http.get(`${this.API_URL}/${id}/?include[]=vouchers.*`);
     }
 }

@@ -51,11 +51,12 @@ export class VouchersComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
-    public guideId: number;
+    public paramId: number;
     public parent: string;
 
     public displayModal: boolean;
     public displayModalCashier: boolean;
+    public displayModalCertifiedCart: boolean;
     
     public divisionChangeSubscription: Subscription;
 
@@ -101,6 +102,7 @@ export class VouchersComponent implements OnInit {
 
         this.displayModal = false;
         this.displayModalCashier = false;
+        this.displayModalCertifiedCart = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -117,6 +119,7 @@ export class VouchersComponent implements OnInit {
         this._with.push({key: 'include[]', value: 'company.*'})
         this._with.push({key: 'include[]', value: 'currency.*'})
         this._with.push({key: 'include[]', value: 'cashier.*'})
+        this._with.push({key: 'include[]', value: 'certified_cart.*'})
     }
 
     public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
@@ -147,9 +150,14 @@ export class VouchersComponent implements OnInit {
         if (this.route.parent.parent.parent.snapshot.url.length > 0) {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                    this.guideId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
-                    this.filters.push({ key: 'filter{guides}', value: this.guideId.toString() })
+                    this.paramId = params.id;
+                    if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path.startsWith('guide')) {
+                        this.filters.push({ key: 'filter{guides}', value: this.paramId.toString() })
+                    } else if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path == 'certifiedcarts') {
+                        this.filters.push({ key: 'filter{certified_cart}', value: this.paramId.toString() })
+                    }
+                    this.paramId = params.id;
+                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.paramId;
                 }
                 this.getModels();
             });
@@ -317,6 +325,15 @@ export class VouchersComponent implements OnInit {
 
     hideModalDialogCashier() {
         this.displayModalCashier = false;
+        this.getModels();
+    }
+
+    showModalDialogCertifiedCart() {
+        this.displayModalCertifiedCart = true;
+    }
+
+    hideModalDialogCertifiedCart() {
+        this.displayModalCertifiedCart = false;
         this.getModels();
     }
 

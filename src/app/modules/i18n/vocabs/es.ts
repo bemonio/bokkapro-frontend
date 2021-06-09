@@ -232,7 +232,8 @@ export const locale = {
       COMPANY: 'Cliente',
       COUNT_PACKINGS: 'Cant. Envases',
       CASHIER: 'Cajero/a',
-      DIVISION: 'División'
+      DIVISION: 'División',
+      CERTIFIED_CART: 'Carrito Certificado'
     },
     PACKING: {
       PACKING: 'Envase',
@@ -432,6 +433,13 @@ export const locale = {
       DRIVER: 'Chofer',
       ASSISTANT: 'Asistente',
       ASSISTANT2: 'Cajero'
+    },
+    CERTIFIED_CART: {
+      CERTIFIED_CART: 'Carrito Certificado',
+      CERTIFIED_CARTS: 'Carritos certificados',
+      ID: 'Id',
+      CODE: 'Código',
+      VOUCHERS: 'Comprobantes',
     }
   }
 };

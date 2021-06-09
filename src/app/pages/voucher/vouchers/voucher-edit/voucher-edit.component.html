@@ -6,7 +6,7 @@
     </div>
   </ng-container>
 
-  <div class="card-header" *ngIf="!showCashier">
+  <div class="card-header" *ngIf="!showCashier && !showCertifiedCart">
     <div class="card-title">
       <h3 class="card-label">
         <ng-container *ngIf="model">
@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="card-body">
-    <ul class="nav nav-tabs nav-tabs-line" role="tablist" *ngIf="!showCashier">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist" *ngIf="!showCashier && !showCertifiedCart">
       <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
         <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
           [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}">
@@ -41,32 +41,7 @@
     <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
       <div class="mt-5" *ngIf="model">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
-          <div class="form-group row" *ngIf="!showCashier">
-            <!-- <div class="col-lg-4">
-              <div class="image-input image-input-outline"
-                id="kt_profile_logo" [class.image-input-empty]="!model.logo && !newLogo">
-                <div class="image-input-wrapper" [style.backgroundImage]="model.logo" *ngIf="!newLogo"></div>
-                <div class="image-input-wrapper" [style.backgroundImage]="'url(' + croppedImage + ')'" *ngIf="newLogo"></div>
-                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                  data-action="change" data-toggle="tooltip" title="" data-original-title="Change logo">
-                  <i class="fa fa-pen icon-sm text-muted"></i>
-                  <input type="file" name="logo" accept=".png, .jpg, .jpeg" (change)="fileChangeEvent($event)" formControlName="logo"/>
-                </label>
-                <span *ngIf="newLogo"
-                  class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                  (click)="cancelLogo()"
-                  data-action="remove" data-toggle="tooltip" title="" data-original-title="Cancel logo">
-                  <i class="ki ki-bold-close icon-xs text-muted"></i>
-                </span>
-                <span *ngIf="!newLogo && model.logo"
-                  class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                  (click)="deleteLogo()"
-                  data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove logo">
-                  <i class="ki ki-bold-close icon-xs text-muted"></i>
-                </span>
-              </div>
-              <span class="form-text text-muted">Allowed file types: png, jpg, jpeg. {{newLogo}}</span>
-            </div> -->
+          <div class="form-group row" *ngIf="!showCashier && !showCertifiedCart">
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CODE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -178,8 +153,21 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'cashier')">{{ 'VOUCHER.CASHIER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
           </div>
+          <div class="form-group row" *ngIf="showCertifiedCart">
+            <div class="col-lg-12">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CERTIFIED_CART' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="certified_cart" [class.is-invalid]="isControlInvalid('certified_cart')"
+                [class.is-valid]="isControlValid('certified_cart')" formControlName="certified_cart" />
+              <div class="feedback" *ngIf="!isControlTouched('certified_cart')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CERTIFIED_CART' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('certified_cart')">{{ 'VOUCHER.CERTIFIED_CART' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'certified_cart')">{{ 'VOUCHER.CERTIFIED_CART' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'certified_cart')">{{ 'VOUCHER.CERTIFIED_CART' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'certified_cart')">{{ 'VOUCHER.CERTIFIED_CART' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+          </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
             <a class="btn btn-default font-weight-bold mr-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>

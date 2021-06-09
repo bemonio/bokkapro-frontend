@@ -4,6 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
+      <a type="button" class="btn btn-secondary" (click)="showModalDialogCertifiedCart()" *ngIf="selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CERTIFIED_CART' | translate }}</a>
       <a type="button" class="btn btn-secondary" (click)="showModalDialogCashier()" *ngIf="selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CASHIER' | translate }}</a>
       <a type="button" class="btn btn-secondary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a>
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/vouchers/add" *ngIf="parent.startsWith('/guidesinput')">{{ 'COMMON.NEW' | translate }}</a>
@@ -66,6 +67,11 @@
               {{ 'VOUCHER.CASHIER' | translate }}
             </div>
           </th>
+          <th pSortableColumn="certified_cart">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.CERTIFIED_CART' | translate }}
+            </div>
+          </th>
           <!-- <th pSortableColumn="verificated">
             <div class="p-d-flex p-jc-between p-ai-center">
               Verificated
@@ -111,6 +117,9 @@
           <td>
             {{value.cashier?.name}}
           </td>
+          <td>
+            {{value.certified_cart?.code}}
+          </td>
           <!-- <td>
             {{value.verificated}}
           </td> -->
@@ -144,6 +153,11 @@
 </div>
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
+
+<p-dialog header="{{ 'VOUCHER.CERTIFIED_CART' | translate }}" [(visible)]="displayModalCertifiedCart" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-voucher-edit (close)="hideModalDialogCertifiedCart()" [listVouchers]="selectedModels" [showCertifiedCart]="true"></app-voucher-edit>
+</p-dialog>
 
 <p-dialog header="{{ 'VOUCHER.CASHIER' | translate }}" [(visible)]="displayModalCashier" [modal]="true" [style]="{width: '50vw'}" 
   [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
