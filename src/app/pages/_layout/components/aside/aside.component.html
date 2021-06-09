@@ -224,6 +224,15 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level Voucher -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_certifiedcart')">
+        <a class="menu-link" routerLink="/certifiedcarts" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/General/Lock.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ 'CERTIFIED_CART.CERTIFIED_CARTS' | translate }}</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+      
+      <!-- begin::1 Level Voucher -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_voucher')">
         <a class="menu-link" routerLink="/vouchers" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Files/File-done.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
@@ -354,7 +363,7 @@
       <!-- begin::1 Level -->
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_contract')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
-          <span [inlineSVG]="'./assets/media/svg/icons/Files/Protected-file.svg'" cacheSVG="true" class="svg-icon menu-icon">
+          <span [inlineSVG]="'./assets/media/svg/icons/Files/Folder-star.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
           <span class="menu-text">{{ 'CONTRACT.CONTRACTS' | translate }}</span>
           <i class="menu-arrow"></i>
@@ -435,6 +444,15 @@
       </li>
       <!-- end::1 Level -->
 
+      <!-- begin::1 Level Packing -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_crew')">
+        <a class="menu-link" routerLink="/crews" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Files/User-folder.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ 'CREW.CREWS' | translate }}</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+      
       <!-- begin::1 Level -->
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_reportoperation')">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
@@ -494,16 +512,6 @@
                   <span></span>
                 </i>
                 <span class="menu-text">{{ 'EMPLOYEE.EMPLOYEES' | translate }}</span>
-              </a>
-            </li>
-            <!-- end::2 Level -->
-            <!-- begin::2 Level Employee -->
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_crew')">
-              <a class="menu-link" routerLink="/crews" routerLinkActive="active">
-                <i class="menu-bullet menu-bullet-dot">
-                  <span></span>
-                </i>
-                <span class="menu-text">{{ 'CREW.CREWS' | translate }}</span>
               </a>
             </li>
             <!-- end::2 Level -->
@@ -573,18 +581,6 @@
               </a>
             </li>
             <!-- end::2 Level -->
-
-                        <!-- begin::2 Level Certified Cart -->
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_certifiedcart')">
-              <a class="menu-link" routerLink="/certifiedcarts" routerLinkActive="active">
-                <i class="menu-bullet menu-bullet-dot">
-                  <span></span>
-                </i>
-                <span class="menu-text">{{ 'CERTIFIED_CART.CERTIFIED_CARTS' | translate }}</span>
-              </a>
-            </li>
-            <!-- end::2 Level -->
-
           </ul>
         </div>
       </li>
