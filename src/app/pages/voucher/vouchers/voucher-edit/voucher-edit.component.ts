@@ -42,6 +42,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public cashier: AbstractControl;
   public location_origin: AbstractControl;
   public location_destination: AbstractControl;
+  public direct_operation: AbstractControl;
   public currency: AbstractControl;
 
   public activeTabId: number;
@@ -82,6 +83,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       cashier: [''],
       location_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_destination: ['', Validators.compose([Validators.minLength(1)])],
+      direct_operation: [''],
       currency: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
     this.code = this.formGroup.controls['code'];
@@ -93,6 +95,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.cashier = this.formGroup.controls['cashier']
     this.location_origin = this.formGroup.controls['location_origin']
     this.location_destination = this.formGroup.controls['location_destination']
+    this.direct_operation = this.formGroup.controls['direct_operation'];
     this.currency = this.formGroup.controls['currency']
   }
 
@@ -165,12 +168,15 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
+    this.direct_operation.setValue(false);
+
     if (this.model.id) {
       this.editBool = true;
       this.code.setValue(this.model.code);
       this.amount.setValue(this.model.amount);
       this.count_packings.setValue(this.model.count_packings);
       this.verificated.setValue(this.model.verificated);
+      this.direct_operation.setValue(this.model.direct_operation);
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }
@@ -205,6 +211,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.company.setValidators([])
         this.location_origin.setValidators([])
         this.location_destination.setValidators([])
+        this.direct_operation.setValidators([])
         this.currency.setValidators([])
     }
 
@@ -269,7 +276,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.company = this.model.company.id;
     model.cashier = this.model.cashier.id;
     model.location_origin = this.model.location_origin.id;
-    model.location_destination = this.model.location_destination.id;
+
+    this.model.location_destination 
+    ? model.location_destination = this.model.location_destination.id 
+    : model.location_destination = null;
+
     model.currency = this.model.currency.id;
     model.division = this.division.id;
     model.verificated = true;
@@ -332,7 +343,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.company = this.model.company.id;
     model.cashier = this.model.cashier.id;
     model.location_origin = this.model.location_origin.id;
-    model.location_destination = this.model.location_destination.id;
+
+    this.model.location_destination 
+    ? model.location_destination = this.model.location_destination.id 
+    : model.location_destination = null;
+
     model.currency = this.model.currency.id;
     model.division = this.division.id;
     model.verificated = true;
@@ -502,5 +517,25 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         console.log('error getting office');
       }
     );
+  }
+
+  changeRequiredLocation () {
+    if (this.direct_operation.value === true) {
+      this.location_destination.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+      if (this.location_destination.value) {
+        let model = this.model;
+        model.location_destination = this.location_destination.value;
+      } else {
+        this.location_destination.setValue(undefined);
+      }
+    } else {
+      this.location_destination.setValidators([]);
+      if (this.location_destination.value) {
+        let model = this.model;
+        model.location_destination = this.location_destination.value;
+      } else {
+        this.location_destination.setValue(undefined);
+      }
+    }
   }
 }

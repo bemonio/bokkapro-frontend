@@ -120,7 +120,7 @@
               <app-location-autocomplete
               name="location_destination" [valid]="isControlValid('location_destination')" [touched]="isControlTouched('location_destination')" [class.is-invalid]="isControlInvalid('location_destination')"
               [class.is-valid]="isControlValid('location_destination')" formControlName="location_destination" id="location_destination" [model]="model.location_destination"
-              [addFilters]="[{key: 'type_address', value: 'Destino'}]"></app-location-autocomplete>
+              [addFilters]="[{key: 'type_address', value: 'Destino'}]" (change)="changeRequiredLocation()"></app-location-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('location_destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.LOCATION_DESTINATION' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('location_destination')">{{ 'VOUCHER.LOCATION_DESTINATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_destination')">{{ 'VOUCHER.LOCATION_DESTINATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -148,7 +148,16 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>    
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.DIRECTOPERATION' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="direct_operation" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('direct_operation')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.DIRECTOPERATION' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>   
             <div class="col-lg-12">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKINGS' | translate }}</label>
               <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false" [disabled]="model && model.id"></p-chips>

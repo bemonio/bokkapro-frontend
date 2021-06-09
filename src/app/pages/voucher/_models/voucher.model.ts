@@ -17,6 +17,7 @@ export class VoucherModel {
   packings: any[];
   currency: any;
   vouchers: any[];
+  direct_operation: boolean;
   created_at: string;
   updated_at: string;
 }

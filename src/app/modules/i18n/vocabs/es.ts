@@ -232,7 +232,8 @@ export const locale = {
       COMPANY: 'Cliente',
       COUNT_PACKINGS: 'Cant. Envases',
       CASHIER: 'Cajero/a',
-      DIVISION: 'División'
+      DIVISION: 'División',
+      DIRECTOPERATION: 'Operación Directa?'
     },
     PACKING: {
       PACKING: 'Envase',
