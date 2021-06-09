@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GuideService as ModelService } from '../_services/guide.service';
 import { GuideModel as Model } from '../_models/guide.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -20,7 +20,7 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
     templateUrl: './guides.component.html',
     styleUrls: ['./guides.component.scss']
 })
-export class GuidesComponent implements OnInit {
+export class GuidesComponent implements OnInit, OnDestroy {
 
     public promiseForm: Promise<any>;
 
@@ -68,7 +68,7 @@ export class GuidesComponent implements OnInit {
 
     public optionsAmPm: { key: string, value: string }[];
 
-    public divisionChangeSubscription: Subscription;
+    private unsubscribe: Subscription[] = [];
 
     constructor(
         public modelsService: ModelService,
@@ -132,7 +132,7 @@ export class GuidesComponent implements OnInit {
         this.optionsAmPm.push({ key: 'TODO', value: 'ALL' });
         this.optionsAmPm.push({ key: 'AM', value: 'AM' });
         this.optionsAmPm.push({ key: 'PM', value: 'PM' });    
-        this.getModels();
+        // this.getModels();
     }
 
     ngOnInit() {
@@ -534,10 +534,18 @@ export class GuidesComponent implements OnInit {
     }
 
     public subscribeToDivisionChange() {
-        this.divisionChangeSubscription = this.divisionService._change$
+        const divisionChangeSubscription = this.divisionService._change$
         .subscribe(response => {
-            this.loadLazy();
+            if (response) {
+                this.selectedModels = [];
+                this.loadLazy();
+            }
         });
+        this.unsubscribe.push(divisionChangeSubscription);
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe.forEach((sb) => sb.unsubscribe());
     }
 
     public showVerificationButton(value) {

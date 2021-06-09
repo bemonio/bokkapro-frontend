@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VoucherService as ModelService } from '../_services/voucher.service';
 import { VoucherModel as Model } from '../_models/voucher.model';
@@ -19,7 +19,7 @@ import { DivisionService } from '../../division/_services';
     templateUrl: './vouchers.component.html',
     styleUrls: ['./vouchers.component.scss']
 })
-export class VouchersComponent implements OnInit {
+export class VouchersComponent implements OnInit, OnDestroy {
 
     public promiseForm: Promise<any>;
 
@@ -58,7 +58,7 @@ export class VouchersComponent implements OnInit {
     public displayModalCashier: boolean;
     public displayModalCertifiedCart: boolean;
     
-    public divisionChangeSubscription: Subscription;
+    private unsubscribe: Subscription[] = [];
 
     constructor(
         public modelsService: ModelService,
@@ -121,7 +121,7 @@ export class VouchersComponent implements OnInit {
         this._with.push({key: 'include[]', value: 'cashier.*'})
         this._with.push({key: 'include[]', value: 'certified_cart.*'})
     }
-
+    
     public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
         if (event) {
             this.page = (event.first / this.per_page) + 1;
@@ -338,10 +338,17 @@ export class VouchersComponent implements OnInit {
     }
 
     public subscribeToDivisionChange() {
-        this.divisionChangeSubscription = this.divisionService._change$
+        const divisionChangeSubscription = this.divisionService._change$
         .subscribe(response => {
-            this.selectedModels = [];
-            this.loadLazy();
+            if (response) {
+                this.selectedModels = [];
+                this.loadLazy();
+            }
         });
+        this.unsubscribe.push(divisionChangeSubscription);
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe.forEach((sb) => sb.unsubscribe());
     }
 }
