@@ -103,6 +103,8 @@ export const locale = {
       IS_ACTIVE: "Activo?",
       IS_CARRIER: "Transportadora?",
       IS_FINANCIAL_INSTITUTION: "Institución Financiera?",
+      GOVERNMENT_INSTITUTION: "Institución Gubernamental?",
+      COMMERCIAL_INSTITUTION: "Institución Comercial?"
     },
     OFFICE: {
       OFFICE: 'Oficina',

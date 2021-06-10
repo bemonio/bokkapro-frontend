@@ -36,7 +36,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   public name: AbstractControl;
   public alias: AbstractControl;
   public abbreviation: AbstractControl;
-  public logo: AbstractControl;
+  // public logo: AbstractControl;
   public email: AbstractControl;
   public phone: AbstractControl;
   public web: AbstractControl;
@@ -44,6 +44,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   public name_invoce_to: AbstractControl;
   public is_carrier: AbstractControl;
   public is_financial_institution: AbstractControl;
+  public is_government_institution: AbstractControl;
+  public is_commercial_institution: AbstractControl;
   public is_active: AbstractControl;
   public segment_company: AbstractControl;
   public type_company: AbstractControl;
@@ -87,7 +89,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       alias: [''],
       abbreviation: [''],
-      logo: [''],
+      // logo: [''],
       email: [''],
       phone: [''],
       web: [''],
@@ -95,6 +97,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       name_invoce_to: [''],
       is_carrier: [''],
       is_financial_institution: [''],
+      is_government_institution: [''],
+      is_commercial_institution: [''],
       is_active: [''],
       segment_company: ['', Validators.compose([Validators.required])],
       type_company: ['', Validators.compose([Validators.required])],
@@ -105,7 +109,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.name = this.formGroup.controls['name'];
     this.alias = this.formGroup.controls['alias'];
     this.abbreviation = this.formGroup.controls['abbreviation'];
-    this.logo = this.formGroup.controls['logo'];
+    // this.logo = this.formGroup.controls['logo'];
     this.email = this.formGroup.controls['email'];
     this.phone = this.formGroup.controls['phone'];
     this.web = this.formGroup.controls['web'];
@@ -113,6 +117,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.name_invoce_to = this.formGroup.controls['name_invoce_to'];
     this.is_carrier = this.formGroup.controls['is_carrier'];
     this.is_financial_institution = this.formGroup.controls['is_financial_institution'];
+    this.is_government_institution = this.formGroup.controls['is_government_institution'];
+    this.is_commercial_institution = this.formGroup.controls['is_commercial_institution'];
     this.is_active = this.formGroup.controls['is_active'];
     this.segment_company = this.formGroup.controls['segment_company'];
     this.type_company = this.formGroup.controls['type_company'];
@@ -174,6 +180,12 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
+    this.is_carrier.setValue(false);
+    this.is_active.setValue(false);
+    this.is_financial_institution.setValue(false);
+    this.is_government_institution.setValue(false);
+    this.is_commercial_institution.setValue(false);
+
     if (this.model.id) {
       this.code.setValue(this.model.code);
       this.code_brinks.setValue(this.model.code_brinks);
@@ -181,7 +193,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       this.name.setValue(this.model.name);
       this.alias.setValue(this.model.alias);
       this.abbreviation.setValue(this.model.abbreviation);
-      this.logo.setValue(this.model.logo);
+      // this.logo.setValue(this.model.logo);
       this.email.setValue(this.model.email);
       this.phone.setValue(this.model.phone);
       this.web.setValue(this.model.web);
@@ -189,7 +201,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       this.name_invoce_to.setValue(this.model.name_invoce_to);
       this.is_carrier.setValue(this.model.is_carrier);
       this.is_financial_institution.setValue(this.model.is_financial_institution);
-      this.is_active.setValue(this.model.is_active);
+      this.is_government_institution.setValue(this.model.is_government_institution);
+      this.is_commercial_institution.setValue(this.model.is_commercial_institution);
       this.is_active.setValue(this.model.is_active);
       if (this.model.segment_company) {
         this.segment_company.setValue(this.model.segment_company);
@@ -227,7 +240,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.segment_company = this.model.segment_company.id;
     model.type_company = this.model.type_company.id;
-    // model.logo = this.croppedImage;
+    // // model.logo = this.croppedImage;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -324,7 +337,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     this.imageChangedEvent = event;
     this.showModalDialog();
-    this.newLogo = true;
+    // this.newLogo = true;
   }
 
   imageCropped(event: ImageCroppedEvent) {
@@ -351,7 +364,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
 
   cancelLogo() {
     this.newLogo = false;
-    this.logo.setValue('');
+    // this.logo.setValue('');
   }
 
   showModalDialog() {
