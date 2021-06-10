@@ -423,7 +423,8 @@ export const locale = {
     CLAUSE: {
       CLAUSE: 'Clausula',
       CLAUSES: 'Clausulas',
-      CODE: 'Código'
+      CODE: 'Código',
+      DESCRIPTION: 'Descripción'
     },
     CREW: {
       CREW: 'Tripulación',
