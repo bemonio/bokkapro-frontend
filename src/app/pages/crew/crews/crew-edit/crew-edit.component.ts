@@ -26,7 +26,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     PROFILE: 1,
   };
 
-  public date: AbstractControl;
+  // public date: AbstractControl;
   public division: AbstractControl;
   public driver: AbstractControl;
   public assistant: AbstractControl;
@@ -62,14 +62,14 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.previous = undefined;
 
     this.formGroup = this.fb.group({
-      date: [''],
+      // date: [''],
       division: ['', Validators.compose([Validators.required,])],
       driver: ['', Validators.compose([Validators.required,])],
       assistant: ['', Validators.compose([Validators.required,])],
       assistant2: ['', Validators.compose([Validators.required,])],
     });
 
-    this.date = this.formGroup.controls['date'];
+    // this.date = this.formGroup.controls['date'];
     this.division = this.formGroup.controls['division'];
     this.driver = this.formGroup.controls['driver'];
     this.assistant = this.formGroup.controls['assistant'];
@@ -134,7 +134,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
 
   loadForm() {
     if (this.model && this.model.id) {
-      this.date.setValue(new Date(this.model.date));
+      // this.date.setValue(new Date(this.model.date));
       if (this.model.division) {
         this.division.setValue(this.model.division);
       }
