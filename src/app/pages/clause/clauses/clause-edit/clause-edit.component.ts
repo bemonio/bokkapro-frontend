@@ -29,6 +29,7 @@ export class ClauseEditComponent implements OnInit, OnDestroy {
   };
 
   public code: AbstractControl;
+  public description: AbstractControl;
 
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
@@ -53,8 +54,10 @@ export class ClauseEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      description: [''],
     });
     this.code = this.formGroup.controls['code'];
+    this.description = this.formGroup.controls['description'];
   }
 
   ngOnInit(): void {
@@ -109,6 +112,7 @@ export class ClauseEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.code.setValue(this.model.code);
+      this.description.setValue(this.model.description)
     }
     this.formGroup.markAllAsTouched();
   }

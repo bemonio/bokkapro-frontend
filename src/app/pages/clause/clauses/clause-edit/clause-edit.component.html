@@ -53,6 +53,10 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">{{ 'CLAUSE.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">{{ 'CLAUSE.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-12 mt-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CLAUSE.DESCRIPTION' | translate }}</label>
+              <p-editor formControlName="description" [style]="{'height':'220px'}" placeholder="{{ 'CLAUSE.DESCRIPTION' | translate }}"></p-editor>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/clauses">{{ 'COMMON.CANCEL' | translate }}</a>

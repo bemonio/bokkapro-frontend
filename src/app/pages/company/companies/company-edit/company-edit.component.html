@@ -234,6 +234,24 @@
               <label>{{ 'COMPANY.IS_FINANCIAL_INSTITUTION' | translate }}</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_financial_institution" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMPANY.GOVERNMENT_INSTITUTION' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_government_institution" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('is_government_institution')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.GOVERNMENT_INSTITUTION' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('is_government_institution')">{{ 'COMPANY.GOVERNMENT_INSTITUTION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_government_institution')">{{ 'COMPANY.GOVERNMENT_INSTITUTION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_government_institution')">{{ 'COMPANY.GOVERNMENT_INSTITUTION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_government_institution')">{{ 'COMPANY.GOVERNMENT_INSTITUTION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMPANY.COMMERCIAL_INSTITUTION' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_commercial_institution" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('is_commercial_institution')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.COMMERCIAL_INSTITUTION' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('is_commercial_institution')">{{ 'COMPANY.COMMERCIAL_INSTITUTION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_commercial_institution')">{{ 'COMPANY.COMMERCIAL_INSTITUTION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_commercial_institution')">{{ 'COMPANY.COMMERCIAL_INSTITUTION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_commercial_institution')">{{ 'COMPANY.COMMERCIAL_INSTITUTION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div> 
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/companies">{{ 'COMMON.CANCEL' | translate }}</a>
@@ -268,7 +286,7 @@
   </div>
 </div>
 
-<p-dialog header="Logo" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+<!-- <p-dialog header="Logo" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
   [draggable]="false" [resizable]="false">
 
   <button (click)="rotateLeft()">Rotate left</button>
@@ -301,4 +319,4 @@
   <ng-template pTemplate="footer">
     <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
   </ng-template>
-</p-dialog>
+</p-dialog> -->

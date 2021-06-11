@@ -103,6 +103,8 @@ export const locale = {
       IS_ACTIVE: "Activo?",
       IS_CARRIER: "Transportadora?",
       IS_FINANCIAL_INSTITUTION: "Institución Financiera?",
+      GOVERNMENT_INSTITUTION: "Institución Gubernamental?",
+      COMMERCIAL_INSTITUTION: "Institución Comercial?"
     },
     OFFICE: {
       OFFICE: 'Oficina',
@@ -233,7 +235,8 @@ export const locale = {
       COUNT_PACKINGS: 'Cant. Envases',
       CASHIER: 'Cajero/a',
       DIVISION: 'División',
-      CERTIFIED_CART: 'Carrito Certificado'
+      CERTIFIED_CART: 'Carrito Certificado',
+      DIRECTOPERATION: 'Operación Directa?'
     },
     PACKING: {
       PACKING: 'Envase',
@@ -421,7 +424,8 @@ export const locale = {
     CLAUSE: {
       CLAUSE: 'Clausula',
       CLAUSES: 'Clausulas',
-      CODE: 'Código'
+      CODE: 'Código',
+      DESCRIPTION: 'Descripción'
     },
     CREW: {
       CREW: 'Tripulación',

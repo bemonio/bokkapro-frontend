@@ -17,6 +17,8 @@ export class CompanyModel {
   name_invoce_to: string;
   is_carrier: boolean;
   is_financial_institution: boolean;
+  is_government_institution: boolean;
+  is_commercial_institution: boolean;
   is_active: boolean;
   segment_company: any;
   type_company: any;
