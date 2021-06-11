@@ -179,7 +179,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    model.date = this.formatDate(this.date.value);
+    // model.date = this.formatDate(this.date.value);
     model.division = this.model.division.id;
     model.driver = this.model.driver.id;
     model.assistant = this.model.assistant.id;
@@ -217,7 +217,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    model.date = this.formatDate(this.date.value);
+    // model.date = this.formatDate(this.date.value);
     model.division = this.model.division.id;
     model.driver = this.model.driver.id;
     model.assistant = this.model.assistant.id;
