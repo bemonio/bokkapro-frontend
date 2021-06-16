@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InlineSVGModule} from 'ng-inline-svg';
 import {NgbDropdownModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
-import {CRUDTableModule} from '../../_metronic/shared/crud-table';
 import {WidgetsModule} from '../../_metronic/partials/content/widgets/widgets.module';
 import {DropdownMenusModule} from '../../_metronic/partials/content/dropdown-menus/dropdown-menus.module';
 import {UserProfileComponent} from './user-profile.component';
@@ -34,7 +33,6 @@ import { TranslationModule } from '../i18n/translation.module';
   ],
   imports: [
     CommonModule,
-    CRUDTableModule,
     FormsModule,
     ReactiveFormsModule,
     InlineSVGModule,
