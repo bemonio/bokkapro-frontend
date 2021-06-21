@@ -224,6 +224,10 @@ import { CrewComponent } from './crew/crew.component';
 import { CrewEditComponent } from './crew/crews/crew-edit/crew-edit.component';
 import { CrewAutocompleteComponent } from './crew/crews/crew-autocomplete/crew-autocomplete.component';
 
+// CertifiedCarts
+import { CertifiedCartsComponent } from './certified-cart/certified-carts/certified-carts.component';
+import { CertifiedCartComponent } from './certified-cart/certified-cart.component';
+import { CertifiedCartEditComponent } from './certified-cart/certified-carts/certified-cart-edit/certified-cart-edit.component';
 
 @NgModule({
   imports: [
@@ -380,7 +384,10 @@ import { CrewAutocompleteComponent } from './crew/crews/crew-autocomplete/crew-a
     CrewsComponent,
     CrewComponent,
     CrewEditComponent,
-    CrewAutocompleteComponent
+    CrewAutocompleteComponent,
+    CertifiedCartsComponent,
+    CertifiedCartComponent,
+    CertifiedCartEditComponent,
   ]
 })
 export class PagesModule { }

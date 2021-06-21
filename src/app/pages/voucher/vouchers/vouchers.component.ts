@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VoucherService as ModelService } from '../_services/voucher.service';
 import { VoucherModel as Model } from '../_models/voucher.model';
@@ -19,7 +19,7 @@ import { DivisionService } from '../../division/_services';
     templateUrl: './vouchers.component.html',
     styleUrls: ['./vouchers.component.scss']
 })
-export class VouchersComponent implements OnInit {
+export class VouchersComponent implements OnInit, OnDestroy {
 
     public promiseForm: Promise<any>;
 
@@ -52,13 +52,14 @@ export class VouchersComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
-    public guideId: number;
+    public paramId: number;
     public parent: string;
 
     public displayModal: boolean;
     public displayModalCashier: boolean;
+    public displayModalCertifiedCart: boolean;
     
-    public divisionChangeSubscription: Subscription;
+    private unsubscribe: Subscription[] = [];
 
     constructor(
         public modelsService: ModelService,
@@ -106,6 +107,7 @@ export class VouchersComponent implements OnInit {
 
         this.displayModal = false;
         this.displayModalCashier = false;
+        this.displayModalCertifiedCart = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -122,8 +124,9 @@ export class VouchersComponent implements OnInit {
         this._with.push({key: 'include[]', value: 'company.*'})
         this._with.push({key: 'include[]', value: 'currency.*'})
         this._with.push({key: 'include[]', value: 'cashier.*'})
+        this._with.push({key: 'include[]', value: 'certified_cart.*'})
     }
-
+    
     public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
         if (event) {
             this.page = (event.first / this.per_page) + 1;
@@ -152,9 +155,14 @@ export class VouchersComponent implements OnInit {
         if (this.route.parent.parent.parent.snapshot.url.length > 0) {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                    this.guideId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
-                    this.filters.push({ key: 'filter{guides}', value: this.guideId.toString() })
+                    this.paramId = params.id;
+                    if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path.startsWith('guide')) {
+                        this.filters.push({ key: 'filter{guides}', value: this.paramId.toString() })
+                    } else if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path == 'certifiedcarts') {
+                        this.filters.push({ key: 'filter{certified_cart}', value: this.paramId.toString() })
+                    }
+                    this.paramId = params.id;
+                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.paramId;
                 }
             });
         } else {
@@ -324,12 +332,28 @@ export class VouchersComponent implements OnInit {
         this.getModels();
     }
 
+    showModalDialogCertifiedCart() {
+        this.displayModalCertifiedCart = true;
+    }
+
+    hideModalDialogCertifiedCart() {
+        this.displayModalCertifiedCart = false;
+        this.getModels();
+    }
+
     public subscribeToDivisionChange() {
-        this.divisionChangeSubscription = this.divisionService._change$
+        const divisionChangeSubscription = this.divisionService._change$
         .subscribe(response => {
-            this.selectedModels = [];
-            this.loadLazy();
+            if (response) {
+                this.selectedModels = [];
+                this.loadLazy();
+            }
         });
+        this.unsubscribe.push(divisionChangeSubscription);
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe.forEach((sb) => sb.unsubscribe());
     }
 
     public verification(voucher, position: string) {

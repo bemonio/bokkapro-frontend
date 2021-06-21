@@ -19,6 +19,7 @@ import { LocationService } from 'src/app/pages/location/_services';
 })
 export class VoucherEditComponent implements OnInit, OnDestroy {
   @Input() showCashier: boolean;
+  @Input() showCertifiedCart: boolean;
   @Input() listVouchers: any[];
   @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -45,7 +46,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public direct_operation: AbstractControl;
   public is_active: AbstractControl;
   public currency: AbstractControl;
-
+  public certified_cart: AbstractControl;
+  
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
 
@@ -87,11 +89,19 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       direct_operation: [''],
       is_active: [''],
       currency: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      certified_cart: [''] 
     });
     this.code = this.formGroup.controls['code'];
-    this.amount = this.formGroup.controls['amount']
-    this.count_packings = this.formGroup.controls['count_packings']
+    this.amount = this.formGroup.controls['amount'];
+    this.count_packings = this.formGroup.controls['count_packings'];
     this.verificated = this.formGroup.controls['verificated'];
+    this.packings = this.formGroup.controls['packings'];;
+    this.company = this.formGroup.controls['company'];
+    this.cashier = this.formGroup.controls['cashier'];
+    this.location_origin = this.formGroup.controls['location_origin'];
+    this.location_destination = this.formGroup.controls['location_destination'];
+    this.currency = this.formGroup.controls['currency'];
+    this.certified_cart = this.formGroup.controls['certified_cart'];
     this.packings = this.formGroup.controls['packings'];
     this.company = this.formGroup.controls['company']
     this.cashier = this.formGroup.controls['cashier']
@@ -162,6 +172,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (response.currencies) {
           this.model.currency = response.currencies[0];
         }
+        if (response.certified_cart) {
+          this.model.certified_cart = response.certified_cart[0];
+        }
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -198,6 +211,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       if (this.model.currency) {
         this.currency.setValue(this.model.currency);
       }
+      if (this.model.certified_cart) {
+        this.certified_cart.setValue(this.model.certified_cart);
+      }
       if (this.model.packings) {
         let list_packings = [];
         this.model.packings.forEach(element => {
@@ -208,6 +224,31 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     }
 
     if(this.showCashier){
+        this.cashier.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+        this.code.setValidators([]);
+        this.amount.setValidators([]);
+        this.count_packings.setValidators([]);
+        this.verificated.setValidators([]);
+        this.packings.setValidators([]);
+        this.company.setValidators([]);
+        this.location_origin.setValidators([]);
+        this.location_destination.setValidators([]);
+        this.currency.setValidators([]);
+        this.certified_cart.setValidators([]);
+    }
+
+    if(this.showCertifiedCart){
+      this.cashier.setValidators([]);
+      this.code.setValidators([]);
+      this.amount.setValidators([]);
+      this.count_packings.setValidators([]);
+      this.verificated.setValidators([]);
+      this.packings.setValidators([]);
+      this.company.setValidators([]);
+      this.location_origin.setValidators([]);
+      this.location_destination.setValidators([]);
+      this.currency.setValidators([]);
+      this.certified_cart.setValidators([]);
         this.cashier.setValue(Validators.compose([Validators.required, Validators.minLength(1)]))
         this.code.setValidators([])
         this.amount.setValidators([])
@@ -242,8 +283,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.edit();
       } else if (!this.listVouchers){
         this.create();
-      } else {
+      } else if (this.showCashier) {
         this.asignCashier();
+      } else if (this.showCertifiedCart) {
+        this.asignCertifiedCart();
       }
     }
   }
@@ -276,6 +319,34 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     });
   }
 
+  asignCertifiedCart(){
+    let params = {
+      certifiedCartId: this.certified_cart.value,
+      vouchers: this.listVouchers
+    }
+    const sbUpdate = this.modelsService.asignCertifiedCart(params).pipe(
+      tap(() => {
+        this.toastService.growl('success', 'success');
+        this.certified_cart.reset();
+      }),
+      catchError((error) => {
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+        );
+        return of(this.model);
+      })
+    ).subscribe(response => {
+      this.requesting = false;
+      this.closeEmit()
+    });
+  }
+
   edit() {
     this.requesting = true;
     let model = this.model;
@@ -289,6 +360,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     : model.location_destination = null;
 
     model.currency = this.model.currency.id;
+    model.certified_cart = this.model.certified_cart.id;
     model.division = this.division.id;
     // model.verificated = true;
     model.guides = undefined;
@@ -356,6 +428,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     : model.location_destination = null;
 
     model.currency = this.model.currency.id;
+    model.certified_cart = this.model.certified_cart.id;
     model.division = this.division.id;
     // model.verificated = true;
 
@@ -508,6 +581,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.office = response.office;
         if (response.currencies) {
           this.office.currency = response.currencies[0];
+        }
+        if (response.certified_carts) {
+          this.office.certified_cart = response.certified_carts[0];
         }
         if (response.companies) {
           this.office.company = response.companies[0];

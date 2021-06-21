@@ -11,7 +11,9 @@ export class DivisionService {
 
     public _change$ = new BehaviorSubject<boolean>(false);
 
-    constructor(public http: HttpClient) { }
+    constructor(public http: HttpClient) {
+        this._change$.next(false);
+     }
 
     get subscriptions() {
         return this._subscriptions;

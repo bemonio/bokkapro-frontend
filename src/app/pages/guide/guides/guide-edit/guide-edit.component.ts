@@ -55,7 +55,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public typeGuide: number;
 
-  public divisionChangeSubscription: Subscription;
+  private unsubscribe: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -470,10 +470,6 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.activeTabId = tabId;
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach(sb => sb.unsubscribe());
-  }
-
   // helpers for View
   isControlValid(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
@@ -553,9 +549,16 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   public subscribeToDivisionChange() {
-    this.divisionChangeSubscription = this.divisionService._change$
+    const divisionChangeSubscription = this.divisionService._change$
     .subscribe(response => {
-      this.loadForm();
+      if (response) {
+        this.loadForm();
+      }
     });
+    this.unsubscribe.push(divisionChangeSubscription);
+  }
+
+  ngOnDestroy() {
+      this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }

@@ -11,7 +11,7 @@
       <h3 class="card-label">
         <ng-container *ngIf="model">
           {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
-          <span *ngIf="model && model.id">'{{ model.id }} - {{ model.date }} </span>
+          <span *ngIf="model && model.id">'{{ model.id }} </span>
         </ng-container>
       </h3>
     </div>
@@ -86,7 +86,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'assistant2')">{{ 'CREW.ASSISTANT2' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'assistant2')">{{ 'CREW.ASSISTANT2' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.DATE' | translate}}</label>
               <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.DATE' | translate}}</b></div>
@@ -94,7 +94,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">{{ 'CREW.DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>                     
+            </div> -->
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/crews">{{ 'COMMON.CANCEL' | translate }}</a>

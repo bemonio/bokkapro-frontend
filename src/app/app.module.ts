@@ -59,6 +59,7 @@ import { QuotationService } from './pages/quotation/_services';
 import { ReportOperationService } from './pages/report-operation/_services';
 import { ClauseService } from './pages/clause/_services';
 import { CrewService } from './pages/crew/_services';
+import { CertifiedCartService } from './pages/certified-cart/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -152,6 +153,7 @@ export function getHighlightLanguages() {
     ReportOperationService,
     ClauseService,
     CrewService,
+    CertifiedCartService,
   ],
   bootstrap: [AppComponent],
 })

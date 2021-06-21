@@ -236,7 +236,8 @@ export const locale = {
       CASHIER: 'Cajero/a',
       DIVISION: 'División',
       DIRECTOPERATION: 'Operación Directa?',
-      IS_ACTIVE: 'Activo?'
+      IS_ACTIVE: 'Activo?',
+      CERTIFIED_CART: 'Carrito Certificado',
     },
     PACKING: {
       PACKING: 'Envase',
@@ -438,6 +439,13 @@ export const locale = {
       DRIVER: 'Chofer',
       ASSISTANT: 'Asistente',
       ASSISTANT2: 'Cajero'
+    },
+    CERTIFIED_CART: {
+      CERTIFIED_CART: 'Carrito Certificado',
+      CERTIFIED_CARTS: 'Carritos certificados',
+      ID: 'Id',
+      CODE: 'Código',
+      VOUCHERS: 'Comprobantes',
     }
   }
 };

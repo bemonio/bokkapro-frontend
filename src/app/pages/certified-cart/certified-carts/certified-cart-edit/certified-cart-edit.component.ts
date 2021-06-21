@@ -5,16 +5,16 @@ import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-import { CrewModel as Model } from '../../_models/crew.model';
-import { CrewService as ModelsService } from '../../_services/crew.service';
+import { CertifiedCartModel as Model } from '../../_models/certified-cart.model';
+import { CertifiedCartService as ModelsService } from '../../_services/certified-cart.service';
 import { DivisionService } from 'src/app/pages/division/_services';
 
 @Component({
-  selector: 'app-crew-edit',
-  templateUrl: './crew-edit.component.html',
-  styleUrls: ['./crew-edit.component.scss']
+  selector: 'app-certified-cart-edit',
+  templateUrl: './certified-cart-edit.component.html',
+  styleUrls: ['./certified-cart-edit.component.scss']
 })
-export class CrewEditComponent implements OnInit, OnDestroy {
+export class CertifiedCartEditComponent implements OnInit, OnDestroy {
   public id: number;
   public model: Model;
   public previous: Model;
@@ -23,28 +23,26 @@ export class CrewEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
-    PROFILE: 1,
+    VOUCHER_TAB: 1,
   };
 
-  // public date: AbstractControl;
-  public division: AbstractControl;
-  public driver: AbstractControl;
-  public assistant: AbstractControl;
-  public assistant2: AbstractControl;
+  public vouchers: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
 
-  public divisionId: number;
   public parent: string;
+
+  public code: AbstractControl;
 
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private toastService: ToastService,
     private divisionService: DivisionService,
   ) {
@@ -53,7 +51,13 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
+      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      vouchers: [''],
     });
+    this.code = this.formGroup.controls['code'];
+    this.vouchers = this.formGroup.controls['vouchers'];
+
+    this.parent = '/certifiedcarts';
   }
 
   ngOnInit(): void {
@@ -61,27 +65,11 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
 
-    this.formGroup = this.fb.group({
-      // date: [''],
-      division: ['', Validators.compose([Validators.required,])],
-      driver: ['', Validators.compose([Validators.required,])],
-      assistant: ['', Validators.compose([Validators.required,])],
-      assistant2: ['', Validators.compose([Validators.required,])],
-    });
+    if (this.route.parent.parent.snapshot.url[0].path) {
+      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
+    }
 
-    // this.date = this.formGroup.controls['date'];
-    this.division = this.formGroup.controls['division'];
-    this.driver = this.formGroup.controls['driver'];
-    this.assistant = this.formGroup.controls['assistant'];
-    this.assistant2 = this.formGroup.controls['assistant2'];
-
-    this.route.parent.parent.parent.params.subscribe((params) => {
-      if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-        this.divisionId = params.id;
-        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.divisionId;
-      }
-      this.get();
-    });
+    this.get();
   }
 
   get() {
@@ -93,7 +81,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'crew': new Model() });
+        return of({ 'certified_cart': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -106,23 +94,14 @@ export class CrewEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({ 'crew': new Model() });
+        return of({ 'certified_cart': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.model = response.crew;
-        if (response.divisions) {
-          this.model.division = response.divisions[0];
-        }
-        if (response.employees) {
-          this.model.driver = response.employees[0];
-        }
-        if (response.employees) {
-          this.model.assistant = response.employees[1];
-        }
-        if (response.employees) {
-          this.model.assistant2 = response.employees[2];
+        this.model = response.certified_cart;
+        if (response.vouchers) {
+          this.model.vouchers = response.vouchers;
         }
 
         this.previous = Object.assign({}, this.model);
@@ -134,22 +113,9 @@ export class CrewEditComponent implements OnInit, OnDestroy {
 
   loadForm() {
     if (this.model && this.model.id) {
-      // this.date.setValue(new Date(this.model.date));
-      if (this.model.division) {
-        this.division.setValue(this.model.division);
-      }
-      if (this.model.driver) {
-        this.driver.setValue(this.model.driver);
-      }
-      if (this.model.assistant) {
-        this.assistant.setValue(this.model.assistant);
-      }
-      if (this.model.assistant2) {
-        this.assistant2.setValue(this.model.assistant2);
-      }
-    } else {
-      if (this.divisionId) {
-        this.getDivisionById(this.divisionId);
+      this.code.setValue(this.model.code);
+      if (this.model.vouchers) {
+        this.vouchers.setValue(this.model.vouchers);
       }
     }
   }
@@ -179,17 +145,13 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    // model.date = this.formatDate(this.date.value);
-    model.division = this.model.division.id;
-    model.driver = this.model.driver.id;
-    model.assistant = this.model.assistant.id;
-    model.assistant2 = this.model.assistant2.id;
+    model.vouchers = [];
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/crews']);
+          this.router.navigate(['/certifiedcarts']);
         }
         this.formGroup.reset()
       }),
@@ -208,7 +170,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.crew
+      this.model = response.certified_carts
     });
     this.subscriptions.push(sbUpdate);
   }
@@ -217,17 +179,13 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    // model.date = this.formatDate(this.date.value);
-    model.division = this.model.division.id;
-    model.driver = this.model.driver.id;
-    model.assistant = this.model.assistant.id;
-    model.assistant2 = this.model.assistant2.id;
+    model.vouchers = [];
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/crews']);
+          this.router.navigate(['/certifiedcarts']);
         } else {
           this.formGroup.reset()
         }
@@ -247,7 +205,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.crew as Model
+      this.model = response.certified_carts as Model
     });
     this.subscriptions.push(sbCreate);
   }
@@ -289,17 +247,6 @@ export class CrewEditComponent implements OnInit, OnDestroy {
       stringClass += ' is-invalid';
     }
     return stringClass;
-  }
-
-  getDivisionById(id) {
-    this.divisionService.getById(id).toPromise().then(
-      response => {
-        this.division.setValue(response.division)
-      },
-      error => {
-        console.log('error getting division');
-      }
-    );
   }
 
   public formatDate(date) {
