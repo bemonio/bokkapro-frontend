@@ -4,7 +4,7 @@ import { VoucherService as ModelService } from '../_services/voucher.service';
 import { VoucherModel as Model } from '../_models/voucher.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -48,6 +48,7 @@ export class VouchersComponent implements OnInit {
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
+    public message_verification_voucher: string;
 
     public showTableCheckbox: boolean;
 
@@ -85,6 +86,10 @@ export class VouchersComponent implements OnInit {
 
         this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
             this.message_confirm_delete = res;
+        });
+        
+        this.translate.get('COMMON.MESSAGE_VERIFICATION_VOUCHER').subscribe((res: string) => {
+            this.message_verification_voucher = res;
         });
 
         this.showTableCheckbox = true;
@@ -151,23 +156,22 @@ export class VouchersComponent implements OnInit {
                     this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
                     this.filters.push({ key: 'filter{guides}', value: this.guideId.toString() })
                 }
-                this.getModels();
             });
         } else {
             this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
             this.filters.push({ key: 'filter{verificated}', value: '1' })
-            
-            if(isCashierFilter === 'yesIsCashierFilter'){
-                this.cashier_filter === false 
-                ? this.cashier_filter = true 
-                : this.cashier_filter = false
-            }
-
-            if (this.cashier_filter === true) {
-                this.filters.push({ key: 'filter{cashier}', value: this.authService.currentUserValue.employee.id })
-            }
-            this.getModels();
         }
+        
+        if(isCashierFilter === 'yesIsCashierFilter'){
+            this.cashier_filter === false 
+            ? this.cashier_filter = true 
+            : this.cashier_filter = false
+        }
+
+        if (this.cashier_filter === true) {
+            this.filters.push({ key: 'filter{cashier}', value: this.authService.currentUserValue.employee.id })
+        }
+        this.getModels();
     }
 
     public getModels() {
@@ -327,4 +331,40 @@ export class VouchersComponent implements OnInit {
             this.loadLazy();
         });
     }
+
+    public verification(voucher, position: string) {
+        this.confirmDialogPosition = position;
+        this.confirmationService.confirm({
+            message: this.message_verification_voucher,
+            accept: () => {
+                this.asiconfirmVerification(voucher);
+            }
+        });
+    }
+
+    asiconfirmVerification(voucher){
+        let params = {
+          is_active: false,
+        }
+        const sbUpdate = this.modelsService.patch(voucher.id, params).pipe(
+          tap(() => {
+            this.toastService.growl('success', 'success');
+          }),
+          catchError((error) => {
+            let messageError = [];
+            if (!Array.isArray(error.error)) {
+              messageError.push(error.error);
+            } else {
+              messageError = error.error;
+            }
+            Object.entries(messageError).forEach(
+              ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+            );
+            return of(this.models);
+          })
+        ).subscribe(response => {
+          this.requesting = false;
+          this.getModels();
+        });
+      }
 }

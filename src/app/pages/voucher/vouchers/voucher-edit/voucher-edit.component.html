@@ -158,6 +158,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>   
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.IS_ACTIVE' | translate}}</label>
+              <p-toggleButton disabled="true" class="form-control form-control-lg form-control-solid" formControlName="is_active" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('is_active')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.IS_ACTIVE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('is_active')">{{ 'VOUCHER.IS_ACTIVE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_active')">{{ 'VOUCHER.IS_ACTIVE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_active')">{{ 'VOUCHER.IS_ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_active')">{{ 'VOUCHER.IS_ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div> 
             <div class="col-lg-12">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKINGS' | translate }}</label>
               <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false" [disabled]="model && model.id"></p-chips>
