@@ -322,6 +322,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   asignCertifiedCart(){
     let params = {
       certifiedCartId: this.certified_cart.value,
+      division: this.division.id.toString(),
       vouchers: this.listVouchers
     }
     const sbUpdate = this.modelsService.asignCertifiedCart(params).pipe(
