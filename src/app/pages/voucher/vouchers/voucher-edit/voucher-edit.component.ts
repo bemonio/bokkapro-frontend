@@ -44,6 +44,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public location_origin: AbstractControl;
   public location_destination: AbstractControl;
   public direct_operation: AbstractControl;
+  public is_active: AbstractControl;
   public currency: AbstractControl;
   public certified_cart: AbstractControl;
   
@@ -86,6 +87,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       location_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       location_destination: ['', Validators.compose([Validators.minLength(1)])],
       direct_operation: [''],
+      is_active: [''],
       currency: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       certified_cart: [''] 
     });
@@ -106,6 +108,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.location_origin = this.formGroup.controls['location_origin']
     this.location_destination = this.formGroup.controls['location_destination']
     this.direct_operation = this.formGroup.controls['direct_operation'];
+    this.is_active = this.formGroup.controls['is_active'];
     this.currency = this.formGroup.controls['currency']
   }
 
@@ -181,7 +184,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
+    this.verificated.setValue(false);
     this.direct_operation.setValue(false);
+    this.is_active.setValue(true);
 
     if (this.model.id) {
       this.editBool = true;
@@ -190,6 +195,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.count_packings.setValue(this.model.count_packings);
       this.verificated.setValue(this.model.verificated);
       this.direct_operation.setValue(this.model.direct_operation);
+      this.is_active.setValue(this.model.is_active);
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }
@@ -253,6 +259,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.location_origin.setValidators([])
         this.location_destination.setValidators([])
         this.direct_operation.setValidators([])
+        this.is_active.setValidators([])
         this.currency.setValidators([])
     }
 
@@ -357,7 +364,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.model.certified_cart = null;
 
     model.division = this.division.id;
-    model.verificated = true;
+    // model.verificated = true;
     model.guides = undefined;
     model.packings = undefined;
 
@@ -427,11 +434,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.model.certified_cart = null;
 
     model.division = this.division.id;
-    model.verificated = true;
+    // model.verificated = true;
 
     let packings = [];
     this.model.packings.forEach(element => {
-      packings.push({ 'code': element.replace(/[^a-zA-Z0-9]/g, ''), 'verificated': 'true' });
+      packings.push({ 'code': element.replace(/[^a-zA-Z0-9]/g, '')});
     });
     model.packings = packings;
 

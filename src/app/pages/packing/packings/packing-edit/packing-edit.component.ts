@@ -166,7 +166,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
         this.voucher.setValue(this.model.voucher);
       }
     } else {
-      this.verificated.setValue(true);
+      this.verificated.setValue(false);
       if (this.voucherId) {
         this.getVoucherById(this.voucherId);
       }
@@ -198,14 +198,19 @@ export class PackingEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
-    model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
+    model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '');
+    model.voucher = this.model.voucher.id;
     // model.logo = this.croppedImage;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate([this.parent + '/packings']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/packings']);
+          } else {
+            this.router.navigate(['/packings']);
+          }
         }
       }),
       catchError((error) => {
@@ -231,14 +236,23 @@ export class PackingEditComponent implements OnInit, OnDestroy {
   create() {
     this.requesting = true;
     let model = this.model;
-    model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
-    model.voucher = this.voucherId;
+    model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '');
+
+    if (this.voucherId) {
+      model.voucher = this.voucherId;
+    } else {
+      model.voucher = this.model.voucher.id;
+    }
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate([this.parent + '/packings']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/packings']);
+          } else {
+            this.router.navigate(['/packings']);
+          }
         } else {
           this.formGroup.reset()
         }

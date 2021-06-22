@@ -235,8 +235,9 @@ export const locale = {
       COUNT_PACKINGS: 'Cant. Envases',
       CASHIER: 'Cajero/a',
       DIVISION: 'División',
+      DIRECTOPERATION: 'Operación Directa?',
+      IS_ACTIVE: 'Activo?',
       CERTIFIED_CART: 'Carrito Certificado',
-      DIRECTOPERATION: 'Operación Directa?'
     },
     PACKING: {
       PACKING: 'Envase',
@@ -367,6 +368,7 @@ export const locale = {
       CONFIRMATION: 'Confirmación',
       VERIFICATION: 'Verificación',
       MESSAGE_CONFIRM_DELETE: '¿Estás seguro que deseas eliminar?',
+      MESSAGE_VERIFICATION_VOUCHER: '¿Estás seguro de verificar este comprobante?',
       ENTER: 'Ingrese',
       PLEASE_ENTER: 'Por favor ingrese',
       IS_REQUIRED: 'es Requerido',

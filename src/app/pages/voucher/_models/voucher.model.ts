@@ -22,6 +22,7 @@ export class VoucherModel {
   crew: any;
   vouchers: any[];
   direct_operation: boolean;
+  is_active: boolean;
   created_at: string;
   updated_at: string;
 }

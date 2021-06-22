@@ -127,6 +127,12 @@
             {{value.created_at | date: 'MM/dd/yyyy HH:mm:ss'}}
           </td>
           <td style="text-align: right">
+            <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning" style="margin-right: 5px;" 
+              (click)="verification(value, 'center')" *ngIf="authService.currentDivisionValue.id === 2 && value.direct_operation && value.is_active === true">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-warning">
+              </span>
+            </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               routerLink="{{parent}}/vouchers/edit/{{value.id}}">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
