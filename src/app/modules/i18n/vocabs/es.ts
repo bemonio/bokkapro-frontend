@@ -444,6 +444,7 @@ export const locale = {
       ID: 'Id',
       CODE: 'Código',
       VOUCHERS: 'Comprobantes',
+      CODES: 'Códigos',
     }
   }
 };

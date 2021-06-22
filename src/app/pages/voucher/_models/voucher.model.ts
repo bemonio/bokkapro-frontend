@@ -2,6 +2,7 @@ import { CurrencyModel } from "../../currency/_models/currency.model";
 import { DivisionModel } from "../../division/_models/division.model";
 import { PackingModel } from "../../packing/_models/packing.model";
 import { CertifiedCartModel } from "../../certified-cart/_models/certified-cart.model";
+import { CrewModel } from "../../crew/_models/crew.model";
 
 export class VoucherModel {
   id: number;
@@ -18,6 +19,7 @@ export class VoucherModel {
   location_destination: any;
   packings: any[];
   currency: any;
+  crew: any;
   vouchers: any[];
   direct_operation: boolean;
   created_at: string;

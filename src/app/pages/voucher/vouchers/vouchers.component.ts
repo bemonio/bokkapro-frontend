@@ -120,6 +120,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this._with.push({key: 'include[]', value: 'currency.*'})
         this._with.push({key: 'include[]', value: 'cashier.*'})
         this._with.push({key: 'include[]', value: 'certified_cart.*'})
+        this._with.push({key: 'include[]', value: 'crew.*'})
+        this._with.push({key: 'include[]', value: 'crew_last.*'})
     }
     
     public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {

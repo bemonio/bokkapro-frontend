@@ -353,7 +353,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     : model.location_destination = null;
 
     model.currency = this.model.currency.id;
-    model.certified_cart = this.model.certified_cart.id;
+
+    this.model.certified_cart = null;
+
     model.division = this.division.id;
     model.verificated = true;
     model.guides = undefined;
@@ -421,7 +423,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     : model.location_destination = null;
 
     model.currency = this.model.currency.id;
-    model.certified_cart = this.model.certified_cart.id;
+
+    this.model.certified_cart = null;
+
     model.division = this.division.id;
     model.verificated = true;
 
