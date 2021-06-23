@@ -293,6 +293,13 @@ const routes: Routes = [
             (m) => m.CertifiedCartRoutingModule
           ),
       },
+      {
+        path: 'vehicles',
+        loadChildren: () =>
+          import('../pages/vehicle/vehicle-routing.module').then(
+            (m) => m.VehicleRoutingModule
+          ),
+      },
     ],
   },
 ];

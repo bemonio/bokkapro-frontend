@@ -229,6 +229,12 @@ import { CertifiedCartsComponent } from './certified-cart/certified-carts/certif
 import { CertifiedCartComponent } from './certified-cart/certified-cart.component';
 import { CertifiedCartEditComponent } from './certified-cart/certified-carts/certified-cart-edit/certified-cart-edit.component';
 
+// Vehicles
+import { VehiclesComponent } from './vehicle/vehicles/vehicles.component';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { VehicleEditComponent } from './vehicle/vehicles/vehicle-edit/vehicle-edit.component';
+import { VehicleAutocompleteComponent } from './vehicle/vehicles/vehicle-autocomplete/vehicle-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -388,6 +394,10 @@ import { CertifiedCartEditComponent } from './certified-cart/certified-carts/cer
     CertifiedCartsComponent,
     CertifiedCartComponent,
     CertifiedCartEditComponent,
+    VehiclesComponent,
+    VehicleComponent,
+    VehicleEditComponent,
+    VehicleAutocompleteComponent
   ]
 })
 export class PagesModule { }

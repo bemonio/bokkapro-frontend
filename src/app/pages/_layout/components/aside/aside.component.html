@@ -559,6 +559,17 @@
               </a>
             </li>
             <!-- end::2 Level -->
+
+            <!-- begin::2 Level Office -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_vehicle')">
+              <a class="menu-link" routerLink="/vehicles" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'VEHICLE.VEHICLES' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
             
             <!-- begin::2 Level Division -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_division')">

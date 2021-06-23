@@ -447,6 +447,16 @@ export const locale = {
       CODE: 'Código',
       VOUCHERS: 'Comprobantes',
       CODES: 'Códigos',
+    },
+    VEHICLE: {
+      VEHICLE: 'Vehículo',
+      VEHICLES: 'Vehículos',
+      ID: 'Id',
+      CODE: 'Código',
+      PLATE: 'Placa',
+      AMOUNT_INSURED: 'Monto Asegurado',
+      IS_ARMORED: 'es Blindado',
+      OFFICE: 'Oficina',
     }
   }
 };
