@@ -113,8 +113,8 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.vehicle;
-        if (response.office) {
-          this.model.office = response.office[0];
+        if (response.offices) {
+          this.model.office = response.offices[0];
         }
 
         this.previous = Object.assign({}, this.model);
@@ -127,6 +127,10 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
   loadForm() {
     this.is_armored.setValue(false);
     if (this.model && this.model.id) {
+      this.code.setValue(this.model.code);
+      this.plate.setValue(this.model.plate);
+      this.amount_insured.setValue(this.model.amount_insured);
+      this.is_armored.setValue(this.model.is_armored);
       if (this.model.office) {
         this.office.setValue(this.model.office);
       }
@@ -135,6 +139,7 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
         this.getOfficeById(this.officeId);
       }
     }
+    this.formGroup.markAllAsTouched();
   }
 
   reset() {
@@ -177,7 +182,6 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
         if (this.saveAndExit) {
           this.router.navigate(['/vehicles']);
         }
-        this.formGroup.reset()
       }),
       catchError((error) => {
         this.requesting = false;
@@ -283,7 +287,7 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
   getOfficeById(id) {
     this.officeService.getById(id).toPromise().then(
       response => {
-        this.office.setValue(response.office)
+        this.office.setValue(response.offices[0])
       },
       error => {
         console.log('error getting division');
