@@ -203,7 +203,6 @@ export class CrewEditComponent implements OnInit, OnDestroy {
         if (this.saveAndExit) {
           this.router.navigate(['/crews']);
         }
-        this.formGroup.reset()
       }),
       catchError((error) => {
         this.requesting = false;

@@ -161,7 +161,6 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
         if (this.saveAndExit) {
           this.router.navigate(['/reports/operations']);
         }
-        this.formGroup.reset()
       }),
       catchError((error) => {
         this.requesting = false;

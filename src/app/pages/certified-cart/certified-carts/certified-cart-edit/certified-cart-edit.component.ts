@@ -153,7 +153,6 @@ export class CertifiedCartEditComponent implements OnInit, OnDestroy {
         if (this.saveAndExit) {
           this.router.navigate(['/certifiedcarts']);
         }
-        this.formGroup.reset()
       }),
       catchError((error) => {
         this.requesting = false;
