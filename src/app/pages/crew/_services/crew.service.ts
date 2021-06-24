@@ -50,7 +50,7 @@ export class CrewService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=division.*&include[]=driver.*&include[]=assistant.*&include[]=assistant2.*`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=division.*&include[]=driver.*&include[]=assistant.*&include[]=assistant2.*&include[]=vehicle.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -66,6 +66,6 @@ export class CrewService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=division.*&include[]=driver.*&include[]=assistant.*&include[]=assistant2.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=division.*&include[]=driver.*&include[]=assistant.*&include[]=assistant2.*&include[]=vehicle.*`);
     }
 }

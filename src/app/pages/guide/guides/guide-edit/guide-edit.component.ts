@@ -9,6 +9,7 @@ import { GuideModel as Model } from '../../_models/guide.model';
 import { GuideService as ModelsService } from '../../_services/guide.service';
 import { DivisionService } from 'src/app/pages/division/_services';
 import { CrewService } from 'src/app/pages/crew/_services';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-guide-edit',
@@ -204,7 +205,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     const sb = this.route.paramMap.pipe(
         switchMap(params => {
             if (id || id > 0) {
-                return this.crewService.getById(id);
+              return this.crewService.get(1, 1, '-id', undefined, [{ key: 'filter{date}[]', value: formatDate(Date.now(),'yyyy-MM-dd','en-US')}], []);
             }
             return of({ 'crew': new Model() });
         }),
@@ -224,15 +225,15 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         if (response) {
           if(response.employees){
             response.employees.forEach(employee => {
-              if (response.crew.driver === employee.id) {
-                  response.crew.driver = employee;
+              if (response.crews[0].driver === employee.id) {
+                  response.crews[0].driver = employee;
                   this.employee_origin.setValue(employee);
               }
-              if (response.crew.assistant === employee.id) {
-                  response.crew.assistant = employee;
+              if (response.crews[0].assistant === employee.id) {
+                  response.crews[0].assistant = employee;
               }
-              if (response.crew.assistant2 === employee.id) {
-                  response.crew.assistant2 = employee;
+              if (response.crews[0].assistant2 === employee.id) {
+                  response.crews[0].assistant2 = employee;
               }
             });
           } else {

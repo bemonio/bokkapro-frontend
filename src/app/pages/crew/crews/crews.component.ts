@@ -165,6 +165,15 @@ export class CrewsComponent implements OnInit {
                         });
                     });
                 }
+                if(response.vehicles){
+                    response.vehicles.forEach(vehicle => {
+                        this.models.forEach(element => {
+                            if (element.vehicle === vehicle.id) {
+                                element.vehicle = vehicle;
+                            }
+                        });
+                    });
+                }
                 this.requesting = false;
             },
             error => {

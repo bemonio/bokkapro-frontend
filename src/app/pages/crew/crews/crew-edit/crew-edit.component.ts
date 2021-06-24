@@ -26,11 +26,12 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     PROFILE: 1,
   };
 
-  // public date: AbstractControl;
+  public date: AbstractControl;
   public division: AbstractControl;
   public driver: AbstractControl;
   public assistant: AbstractControl;
   public assistant2: AbstractControl;
+  public vehicle: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -62,18 +63,20 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.previous = undefined;
 
     this.formGroup = this.fb.group({
-      // date: [''],
+      date: ['', Validators.compose([Validators.required,])],
       division: ['', Validators.compose([Validators.required,])],
       driver: ['', Validators.compose([Validators.required,])],
       assistant: ['', Validators.compose([Validators.required,])],
       assistant2: ['', Validators.compose([Validators.required,])],
+      vehicle: ['', Validators.compose([Validators.required,])],
     });
 
-    // this.date = this.formGroup.controls['date'];
+    this.date = this.formGroup.controls['date'];
     this.division = this.formGroup.controls['division'];
     this.driver = this.formGroup.controls['driver'];
     this.assistant = this.formGroup.controls['assistant'];
     this.assistant2 = this.formGroup.controls['assistant2'];
+    this.vehicle = this.formGroup.controls['vehicle'];
 
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
@@ -124,6 +127,9 @@ export class CrewEditComponent implements OnInit, OnDestroy {
         if (response.employees) {
           this.model.assistant2 = response.employees[2];
         }
+        if (response.vehicles) {
+          this.model.vehicle = response.vehicles[0];
+        }
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -134,7 +140,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
 
   loadForm() {
     if (this.model && this.model.id) {
-      // this.date.setValue(new Date(this.model.date));
+      this.date.setValue(new Date(this.model.date));
       if (this.model.division) {
         this.division.setValue(this.model.division);
       }
@@ -147,11 +153,16 @@ export class CrewEditComponent implements OnInit, OnDestroy {
       if (this.model.assistant2) {
         this.assistant2.setValue(this.model.assistant2);
       }
+      if (this.model.vehicle) {
+        this.vehicle.setValue(this.model.vehicle);
+      }
     } else {
       if (this.divisionId) {
         this.getDivisionById(this.divisionId);
       }
     }
+    this.formGroup.markAllAsTouched();
+    this.assistant2.updateValueAndValidity();
   }
 
   reset() {
@@ -179,11 +190,12 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    // model.date = this.formatDate(this.date.value);
+    model.date = this.formatDate(this.date.value);
     model.division = this.model.division.id;
     model.driver = this.model.driver.id;
     model.assistant = this.model.assistant.id;
     model.assistant2 = this.model.assistant2.id;
+    model.vehicle = this.model.vehicle.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -217,11 +229,12 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    // model.date = this.formatDate(this.date.value);
+    model.date = this.formatDate(this.date.value);
     model.division = this.model.division.id;
     model.driver = this.model.driver.id;
     model.assistant = this.model.assistant.id;
     model.assistant2 = this.model.assistant2.id;
+    model.vehicle = this.model.vehicle.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
@@ -331,5 +344,15 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     }
 
     return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
+  }
+
+  public changeVehicle() {
+    if (this.vehicle.value && this.vehicle.value.is_armored) {
+      this.assistant2.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+    } else {
+      this.assistant2.setValidators(null);
+    }
+    this.assistant2.updateValueAndValidity();
+    this.formGroup.markAllAsTouched();
   }
 }

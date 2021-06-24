@@ -98,7 +98,7 @@ export class VehicleAutocompleteComponent implements ControlValueAccessor, OnIni
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{vehiclename.icontains}', value: event.query })
+            this.filters.push({ key: 'filter{code.icontains}', value: event.query })
         } else {
             this.query = undefined;
         }

@@ -65,6 +65,11 @@
               {{ 'CREW.ASSISTANT2' | translate }}
             </div>
           </th>
+          <th pSortableColumn="vehicle">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'CREW.VEHICLE' | translate }}
+            </div>
+          </th>
           <th pSortableColumn="created_at">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.CREATED_AT' | translate }}
@@ -90,19 +95,22 @@
             {{value.id}}
           </td>
           <td>
-            {{value.created_at | date: 'MM/dd/yyyy HH:mm'}}
+            {{value.date | date: 'MM/dd/yyyy'}}
           </td>
           <td>
-            {{value.division.name}}
+            {{value.division?.name}}
           </td>
           <td>
-            {{value.driver.name}}
+            {{value.driver?.name}}
           </td>
           <td>
-            {{value.assistant.name}}
+            {{value.assistant?.name}}
           </td>
           <td>
-            {{value.assistant2.name}}
+            {{value.assistant2?.name}}
+          </td>
+          <td>
+            {{value.vehicle?.code}}
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}

@@ -54,6 +54,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'CREW.DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.VEHICLE' | translate }}</label>
+              <app-vehicle-autocomplete
+              name="vehicle" [valid]="isControlValid('vehicle')" [touched]="isControlTouched('vehicle')" [class.is-invalid]="isControlInvalid('vehicle')"
+              [class.is-valid]="isControlValid('vehicle')" formControlName="vehicle" id="vehicle" [model]="model.vehicle" (change)="changeVehicle()"></app-vehicle-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('vehicle')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.VEHICLE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('vehicle')">{{ 'CREW.VEHICLE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'vehicle')">{{ 'CREW.VEHICLE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'vehicle')">{{ 'CREW.VEHICLE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'vehicle')">{{ 'CREW.VEHICLE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.DRIVER' | translate }}</label>
               <app-employee-autocomplete
               name="driver" [valid]="isControlValid('driver')" [touched]="isControlTouched('driver')" [class.is-invalid]="isControlInvalid('driver')"
@@ -86,7 +97,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'assistant2')">{{ 'CREW.ASSISTANT2' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'assistant2')">{{ 'CREW.ASSISTANT2' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <!-- <div class="col-lg-4">
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.DATE' | translate}}</label>
               <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.DATE' | translate}}</b></div>
@@ -94,7 +105,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">{{ 'CREW.DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div> -->
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/crews">{{ 'COMMON.CANCEL' | translate }}</a>
