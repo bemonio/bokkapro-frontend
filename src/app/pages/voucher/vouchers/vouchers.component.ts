@@ -43,6 +43,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     searchGroup: FormGroup;
     public cashier_filter: boolean;
+    public active_filter: boolean;
 
     public requesting: boolean = false;
 
@@ -95,6 +96,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
         this.showTableCheckbox = true;
         this.cashier_filter = false;
+        this.active_filter = false;
         this.parent = '';
 
         this.page = 1;
@@ -171,16 +173,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
             this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
             this.filters.push({ key: 'filter{verificated}', value: '1' })
         }
-        
-        if(isCashierFilter === 'yesIsCashierFilter'){
-            this.cashier_filter === false 
-            ? this.cashier_filter = true 
-            : this.cashier_filter = false
-        }
 
-        if (this.cashier_filter === true) {
-            this.filters.push({ key: 'filter{cashier}', value: this.authService.currentUserValue.employee.id })
-        }
+        this.filters.push({ key: 'filter{is_active}', value: '1'})
         this.getModels();
     }
 
@@ -358,39 +352,25 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.unsubscribe.forEach((sb) => sb.unsubscribe());
     }
 
-    public verification(voucher, position: string) {
-        this.confirmDialogPosition = position;
-        this.confirmationService.confirm({
-            message: this.message_verification_voucher,
-            accept: () => {
-                this.asiconfirmVerification(voucher);
-            }
-        });
-    }
-
-    asiconfirmVerification(voucher){
-        let params = {
-          is_active: false,
-        }
-        const sbUpdate = this.modelsService.patch(voucher.id, params).pipe(
-          tap(() => {
-            this.toastService.growl('success', 'success');
-          }),
-          catchError((error) => {
-            let messageError = [];
-            if (!Array.isArray(error.error)) {
-              messageError.push(error.error);
+    applyFilter(whatFilter) {
+        if (whatFilter === "cashier") {
+            this.cashier_filter === false ? this.cashier_filter = true : this.cashier_filter = false
+            if (this.cashier_filter === true) {
+                this.filters.push({ key: 'filter{cashier}', value: this.authService.currentUserValue.employee.id })
             } else {
-              messageError = error.error;
+                this.filters = this.filters.filter(filter => filter.key != 'filter{cashier}');
             }
-            Object.entries(messageError).forEach(
-              ([key, value]) => this.toastService.growl('error', key + ': ' + value)
-            );
-            return of(this.models);
-          })
-        ).subscribe(response => {
-          this.requesting = false;
-          this.getModels();
-        });
-      }
+        }
+        if (whatFilter === "active") {
+            this.active_filter === false ? this.active_filter = true : this.active_filter = false
+            if (this.active_filter === true) {
+                this.filters = this.filters.filter(filter => filter.key != 'filter{is_active}');
+                this.filters.push({ key: 'filter{is_active}', value: '0'})
+            } else {
+                this.filters = this.filters.filter(filter => filter.key != 'filter{is_active}');
+                this.filters.push({ key: 'filter{is_active}', value: '1'})
+            }
+        }
+        this.getModels();
+    }
 }

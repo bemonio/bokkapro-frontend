@@ -11,6 +11,8 @@ import { VoucherService as ModelsService } from '../../_services/voucher.service
 import { CompanyService } from 'src/app/pages/company/_services';
 import { OfficeService } from 'src/app/pages/office/_services';
 import { LocationService } from 'src/app/pages/location/_services';
+import { ConfirmationService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-voucher-edit',
@@ -45,6 +47,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public location_destination: AbstractControl;
   public direct_operation: AbstractControl;
   public is_active: AbstractControl;
+  public verified_oi: AbstractControl;
   public currency: AbstractControl;
   public certified_cart: AbstractControl;
   
@@ -60,6 +63,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public division: any;
   public office: any;
 
+  public confirmDialogPosition: string;
+  public message_facture_voucher_and_packings: string;
+  public message_verification_voucher: string;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -69,7 +76,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     private toastService: ToastService,
     private companyService: CompanyService,
     private locationService: LocationService,
-    private officeService: OfficeService
+    private officeService: OfficeService,
+    private confirmationService: ConfirmationService,
+    public translate: TranslateService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
@@ -88,6 +97,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       location_destination: ['', Validators.compose([Validators.minLength(1)])],
       direct_operation: [''],
       is_active: [''],
+      verified_oi: [''],
       currency: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       certified_cart: [''] 
     });
@@ -109,7 +119,18 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.location_destination = this.formGroup.controls['location_destination']
     this.direct_operation = this.formGroup.controls['direct_operation'];
     this.is_active = this.formGroup.controls['is_active'];
+    this.verified_oi = this.formGroup.controls['verified_oi'];
     this.currency = this.formGroup.controls['currency']
+
+    this.confirmDialogPosition = 'center';
+
+    this.translate.get('COMMON.MESSAGE_FACTURE_VOUCHER_AND_PACKINGS').subscribe((res: string) => {
+        this.message_facture_voucher_and_packings = res;
+    });
+
+    this.translate.get('COMMON.MESSAGE_VERIFICATION_VOUCHER').subscribe((res: string) => {
+        this.message_verification_voucher = res;
+    });
   }
 
   ngOnInit(): void {
@@ -187,6 +208,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.verificated.setValue(false);
     this.direct_operation.setValue(false);
     this.is_active.setValue(true);
+    this.verified_oi.setValue(false);
 
     if (this.model.id) {
       this.editBool = true;
@@ -196,6 +218,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.verificated.setValue(this.model.verificated);
       this.direct_operation.setValue(this.model.direct_operation);
       this.is_active.setValue(this.model.is_active);
+      this.verified_oi.setValue(this.model.verified_oi);
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }
@@ -260,6 +283,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.location_destination.setValidators([])
         this.direct_operation.setValidators([])
         this.is_active.setValidators([])
+        this.verified_oi.setValidators([])
         this.currency.setValidators([])
     }
 
@@ -625,4 +649,63 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       }
     }
   }
+  
+  public verification(position: string) {
+    this.confirmDialogPosition = position;
+    if(this.direct_operation.value === true){
+      this.confirmationService.confirm({
+          message: this.message_facture_voucher_and_packings,
+          accept: () => {
+              this.asiconfirmVerification();
+          }
+      });
+    } else {
+      this.confirmationService.confirm({
+          message: this.message_verification_voucher,
+          accept: () => {
+              this.asiconfirmVerification();
+          }
+      });
+    }
+  }
+
+  asiconfirmVerification(){
+    let params = []
+    if (this.direct_operation.value === true) {
+      params.push({
+        is_active: false,
+        verified_oi: true,
+      })
+    } else {
+      params.push({
+        verified_oi: true,
+      })
+    }
+    const sbUpdate = this.modelsService.patch(this.id, params[0]).pipe(
+      tap(() => {
+        this.toastService.growl('success', 'success');
+        if(this.parent){
+          this.router.navigate([this.parent + '/vouchers']);
+        } else {
+          this.router.navigate(['/vouchers']);
+        }
+      }),
+      catchError((error) => {
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+        );
+        return of(this.model);
+      })
+    ).subscribe(response => {
+      this.requesting = false;
+      this.closeEmit()
+    });
+  }
+
 }
