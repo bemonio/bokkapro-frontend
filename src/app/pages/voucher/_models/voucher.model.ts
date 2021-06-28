@@ -23,6 +23,7 @@ export class VoucherModel {
   vouchers: any[];
   direct_operation: boolean;
   is_active: boolean;
+  verified_oi: boolean;
   created_at: string;
   updated_at: string;
 }

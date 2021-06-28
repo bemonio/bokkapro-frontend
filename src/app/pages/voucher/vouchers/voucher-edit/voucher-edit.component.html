@@ -36,6 +36,18 @@
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PACKINGS_TAB"
           [class.active]="activeTabId === tabs.PACKINGS_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/packings">{{ 'VOUCHER.PACKINGS' | translate }}</a>
       </li>
+      <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning ml-auto" style="margin-right: 5px;" 
+        (click)="verification('center')" *ngIf="authService.currentDivisionValue.id === 2 && direct_operation.value === true && is_active.value === true && verified_oi.value === false">
+        <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
+          class="svg-icon svg-icon-md svg-icon-warning">
+        </span>
+      </a>
+      <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning ml-auto" style="margin-right: 5px;" 
+      (click)="verification('center')" *ngIf="authService.currentDivisionValue.id === 2 && direct_operation.value === false && is_active.value === true && verified_oi.value === false">
+      <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
+        class="svg-icon svg-icon-md svg-icon-warning">
+      </span>
+    </a>
     </ul>
 
     <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
@@ -133,7 +145,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>   
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.IS_ACTIVE' | translate}}</label>
               <p-toggleButton disabled="true" class="form-control form-control-lg form-control-solid" formControlName="is_active" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('is_active')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.IS_ACTIVE' | translate}}</b></div>
@@ -141,7 +153,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_active')">{{ 'VOUCHER.IS_ACTIVE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_active')">{{ 'VOUCHER.IS_ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_active')">{{ 'VOUCHER.IS_ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div> 
+            </div>  -->
             <div class="col-lg-12">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKINGS' | translate }}</label>
               <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false" [disabled]="model && model.id"></p-chips>
@@ -202,3 +214,5 @@
     </ng-container>
   </div>
 </div>
+
+<p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
