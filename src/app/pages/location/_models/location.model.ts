@@ -7,6 +7,12 @@ export class LocationModel {
   code: string;
   code_brinks: string;
   name: string;
+  contact: string;
+  point_name: string;
+  reference_point: string;
+  telephone: string;
+  email: string;
+  address: string;
   description: string;
   type_location: any;
   company: any;
