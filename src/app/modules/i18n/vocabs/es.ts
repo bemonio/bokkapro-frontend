@@ -180,7 +180,12 @@ export const locale = {
       LOCATIONS: 'Direcciones',
       ID: 'Id',
       NAME: 'Nombre',
+      CONTACT: 'Contacto',
       DESCRIPTION: 'Descripción',
+      POINT_NAME: 'Nombre del Punto',
+      REFERENCE_POINT: "Punto de referencia",
+      TELEPHONE: 'Teléfono',
+      EMAIL: 'Correo',
       CODE: 'Código/Location',
       CODE_BRINKS: 'Código Brinks',
       TYPE_LOCATION: 'Tipo Dirección',
@@ -315,7 +320,10 @@ export const locale = {
       CONTRACTS: 'Contratos',
       ID: 'Id',
       CODE: 'Código',
-      COMPANY: 'Compañía'
+      COMPANY: 'Compañía',
+      START_BILLING_DATE: 'Inicio Fecha de Facturación',
+      END_BILLING_DATE: 'Final Fecha de Facturación',
+      BILLING_START_END: 'Facturación. Inicio - Fin'
     },
     TYPECONTRACT: {
       TYPECONTRACT: 'Tipo Contrato',

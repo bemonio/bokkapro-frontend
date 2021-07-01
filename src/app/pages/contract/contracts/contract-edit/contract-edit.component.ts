@@ -31,9 +31,11 @@ export class ContractEditComponent implements OnInit, OnDestroy {
   public code: AbstractControl;
   public company: AbstractControl;
   public type_contract: AbstractControl;
+  public start_billing_date: AbstractControl;
+  public end_billing_date: AbstractControl;
 
   public activeTabId: number;
-  // private subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   public saveAndExit;
 
@@ -57,10 +59,14 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       type_contract: ['', Validators.compose([Validators.required])],
+      start_billing_date: ['', Validators.compose([Validators.required,])],
+      end_billing_date: ['', Validators.compose([Validators.required,])],
     });
     this.code = this.formGroup.controls['code'];
     this.company = this.formGroup.controls['company'];
     this.type_contract = this.formGroup.controls['type_contract'];
+    this.start_billing_date = this.formGroup.controls['start_billing_date'];
+    this.end_billing_date = this.formGroup.controls['end_billing_date'];
   }
 
   ngOnInit(): void {
@@ -121,6 +127,8 @@ export class ContractEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.code.setValue(this.model.code);
+      this.start_billing_date.setValue(new Date(this.model.start_billing_date));
+      this.end_billing_date.setValue(new Date(this.model.end_billing_date));
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }
@@ -158,10 +166,12 @@ export class ContractEditComponent implements OnInit, OnDestroy {
 
   edit() {
     this.requesting = true;
+
     let model = this.model;
     model.company = this.model.company.id;
     model.type_contract = this.model.type_contract.id;
-
+    model.start_billing_date = this.formatDate(this.start_billing_date.value);
+    model.end_billing_date = this.formatDate(this.end_billing_date.value);
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -195,45 +205,44 @@ export class ContractEditComponent implements OnInit, OnDestroy {
 
   create() {
     this.requesting = true;
+    
     let model = this.model;
     model.company = this.model.company.id;
     model.type_contract = this.model.type_contract.id;
+    model.start_billing_date = this.formatDate(this.start_billing_date.value);
+    model.end_billing_date = this.formatDate(this.end_billing_date.value);
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
+        if (this.saveAndExit) {
+          if(this.parent){
+            this.router.navigate([this.parent + '/contracts']);
+          } else {
+            this.router.navigate(['/contracts']);
+          }
+        } else {
+          this.formGroup.reset()
+        }
       }),
       catchError((error) => {
-        if (Array.isArray(error.error)) {
-          let messageError = [];
-          if (!Array.isArray(error.error)) {
-            messageError.push(error.error);
-          } else {
-            messageError = error.error;
-          }
-          Object.entries(messageError).forEach(
-            ([key, value]) => this.toastService.growl('error', key + ': ' + value)
-          );
+        this.requesting = false;
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
         } else {
-          this.toastService.growl('error', error.error)
+          messageError = error.error;
         }
-        console.error('CREATE ERROR', error);
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+        );
         return of(this.model);
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.contract as Model
-      if (this.saveAndExit) {
-        if(this.parent){
-          this.router.navigate([this.parent + '/contracts']);
-        } else {
-          this.router.navigate(['/contracts']);
-        }
-      } else {
-        this.formGroup.reset()
-      }
+      this.model = response.crew as Model
     });
-    // this.subscriptions.push(sbCreate);
+    this.subscriptions.push(sbCreate);
   }
 
   changeTab(tabId: number) {
@@ -284,5 +293,36 @@ export class ContractEditComponent implements OnInit, OnDestroy {
         console.log('error getting company');
       }
     );
+  }
+
+  public formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    let hours = '' + d.getHours();
+    let minutes = '' + d.getMinutes();
+    let seconds = '' + d.getSeconds();
+
+    if (month.length < 2) {
+        month = '0' + month;
+    }
+    if (day.length < 2) {
+        day = '0' + day;
+    }
+
+    if (hours.length < 2) {
+        hours = '0' + hours;
+    }
+
+    if (minutes.length < 2) {
+        minutes = '0' + minutes;
+    }
+
+    if (seconds.length < 2) {
+        seconds = '0' + seconds;
+    }
+
+    return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
   }
 }

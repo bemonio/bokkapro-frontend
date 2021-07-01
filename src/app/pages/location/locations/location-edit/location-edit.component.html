@@ -76,6 +76,61 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'description')">{{ 'LOCATION.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.CONTACT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="contact" [class.is-invalid]="isControlInvalid('contact')"
+                [class.is-valid]="isControlValid('contact')" formControlName="contact" />
+              <div class="feedback" *ngIf="!isControlTouched('contact')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'LOCATION.CONTACT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('contact')">{{ 'LOCATION.CONTACT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'contact')">{{ 'LOCATION.CONTACT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'contact')">{{ 'LOCATION.CONTACT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'contact')">{{ 'LOCATION.CONTACT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.POINT_NAME' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="point_name" [class.is-invalid]="isControlInvalid('point_name')"
+                [class.is-valid]="isControlValid('point_name')" formControlName="point_name" />
+              <div class="feedback" *ngIf="!isControlTouched('point_name')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'LOCATION.POINT_NAME' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('point_name')">{{ 'LOCATION.POINT_NAME' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'point_name')">{{ 'LOCATION.POINT_NAME' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'point_name')">{{ 'LOCATION.POINT_NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'point_name')">{{ 'LOCATION.POINT_NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.REFERENCE_POINT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="reference_point" [class.is-invalid]="isControlInvalid('reference_point')"
+                [class.is-valid]="isControlValid('reference_point')" formControlName="reference_point" />
+              <div class="feedback" *ngIf="!isControlTouched('reference_point')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'LOCATION.REFERENCE_POINT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('reference_point')">{{ 'LOCATION.REFERENCE_POINT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'reference_point')">{{ 'LOCATION.REFERENCE_POINT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'reference_point')">{{ 'LOCATION.REFERENCE_POINT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'reference_point')">{{ 'LOCATION.REFERENCE_POINT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.TELEPHONE' | translate }}</label>
+              <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="telephone" [class.is-invalid]="isControlInvalid('telephone')"
+                [class.is-valid]="isControlValid('telephone')" formControlName="telephone" />
+              <div class="feedback" *ngIf="!isControlTouched('telephone')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'LOCATION.TELEPHONE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('telephone')">{{ 'LOCATION.TELEPHONE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'telephone')">{{ 'LOCATION.TELEPHONE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'telephone')">{{ 'LOCATION.TELEPHONE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'telephone')">{{ 'LOCATION.TELEPHONE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.EMAIL' | translate }}</label>
+              <input type="email" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="email" [class.is-invalid]="isControlInvalid('email')"
+                [class.is-valid]="isControlValid('email')" formControlName="email" />
+              <div class="feedback" *ngIf="!isControlTouched('email')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'LOCATION.EMAIL' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('email')">{{ 'LOCATION.EMAIL' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'email')">{{ 'LOCATION.EMAIL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'email')">{{ 'LOCATION.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">{{ 'LOCATION.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.TYPE_LOCATION' | translate }}</label>
               <app-type-location-autocomplete
               name="type_location" [valid]="isControlValid('type_location')" [touched]="isControlTouched('type_location')" [class.is-invalid]="isControlInvalid('type_location')"
@@ -85,6 +140,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_location')">{{ 'LOCATION.TYPE_LOCATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_location')">{{ 'LOCATION.TYPE_LOCATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_location')">{{ 'LOCATION.TYPE_LOCATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.LOCATION' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="address" [class.is-invalid]="isControlInvalid('address')"
+                [class.is-valid]="isControlValid('address')" formControlName="address" />
+              <div class="feedback" *ngIf="!isControlTouched('address')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'LOCATION.LOCATION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('address')">{{ 'LOCATION.LOCATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'address')">{{ 'LOCATION.LOCATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'address')">{{ 'LOCATION.LOCATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'address')">{{ 'LOCATION.LOCATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.COMPANY' | translate }}</label>
