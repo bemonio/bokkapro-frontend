@@ -11,6 +11,10 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
 @Component({
     selector: 'app-crews',
     templateUrl: './crews.component.html',
@@ -49,6 +53,12 @@ export class CrewsComponent implements OnInit {
 
     public divisionId: number;
     public parent: string;
+
+    public events: any[];
+    public options: any;        
+
+    public viewcalendar: boolean;
+    public viewlist: boolean;
 
     constructor(
         public modelsService: ModelService,
@@ -90,11 +100,26 @@ export class CrewsComponent implements OnInit {
 
         this.models = [];
         this.selectedModels = [];
+
+        this.viewlist = true;
+        this.viewcalendar = false;
         // this.getModels();
     }
 
     ngOnInit() {
         this.requesting = false;
+        this.options = {
+            plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+            defaultDate: new Date(),
+            header: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            eventClick: (e) => {
+                this.router.navigate([this.parent + '/crews/edit/' + e.event.id]);
+            }
+        }
     }
 
     public loadLazy(event: LazyLoadEvent) {
@@ -174,6 +199,15 @@ export class CrewsComponent implements OnInit {
                         });
                     });
                 }
+
+                this.events = [];
+                this.models.forEach(element => {
+                    this.events.push({
+                        "id": element.id,
+                        "title": element.division.name,
+                        "start": element.date
+                    });
+                });            
                 this.requesting = false;
             },
             error => {
@@ -266,5 +300,15 @@ export class CrewsComponent implements OnInit {
                 this.delete(id);
             }
         });
+    }
+
+    public showList() {
+        this.viewlist = true;
+        this.viewcalendar = false;
+    }
+
+    public showCalendar() {
+        this.viewlist = false;
+        this.viewcalendar = true;
     }
 }

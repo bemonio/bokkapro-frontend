@@ -41,7 +41,10 @@
               "node_modules/primeng/resources/primeng.min.css",
               "src/styles.scss",
               "node_modules/quill/dist/quill.core.css", 
-              "node_modules/quill/dist/quill.snow.css"
+              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/@fullcalendar/core/main.min.css",
+              "node_modules/@fullcalendar/daygrid/main.min.css",
+              "node_modules/@fullcalendar/timegrid/main.min.css"
             ],
             "scripts": [
               "src/ik.js",
@@ -118,7 +121,10 @@
               "node_modules/primeng/resources/primeng.min.css",
               "src/styles.scss",
               "node_modules/quill/dist/quill.core.css", 
-              "node_modules/quill/dist/quill.snow.css"
+              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/@fullcalendar/core/main.min.css",
+              "node_modules/@fullcalendar/daygrid/main.min.css",
+              "node_modules/@fullcalendar/timegrid/main.min.css"
             ],
             "scripts": [
               "src/ik.js",

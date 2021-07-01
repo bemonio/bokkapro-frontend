@@ -2,6 +2,18 @@
   <div class="card-header">
     <div class="card-title">
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
+      <a title="{{ 'COMMON.LIST' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm"
+        (click)="showList()">
+        <span [inlineSVG]="'./assets/media/svg/misc/017-list.svg'" cacheSVG="true"
+          class="svg-icon svg-icon-md svg-icon-danger">
+        </span>
+      </a>
+      <a title="{{ 'COMMON.CALENDAR' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm"
+        (click)="showCalendar()" style="margin-left: 5px;">
+        <span [inlineSVG]="'./assets/media/svg/misc/016-monthly-calendar.svg'" cacheSVG="true"
+          class="svg-icon svg-icon-md svg-icon-danger">
+        </span>
+      </a>
     </div>
     <div class="card-toolbar">
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/crews/add">{{ 'COMMON.NEW' | translate }}</a>
@@ -27,7 +39,7 @@
     [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
     [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
     [filterDelay]="1000" [globalFilterFields]="['id']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
-    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
+    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting" *ngIf="viewlist">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3rem" *ngIf="showTableCheckbox">
@@ -138,6 +150,10 @@
       </ng-template>
     </p-table>
     <!-- end: Table -->
+
+    <!-- begin:Calendar -->
+    <p-fullCalendar [events]="events" [options]="options" *ngIf="viewcalendar"></p-fullCalendar>
+    <!-- end: Calendar -->
   </div>
 </div>
 

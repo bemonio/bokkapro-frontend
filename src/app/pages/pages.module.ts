@@ -16,6 +16,7 @@ import { BadgeModule } from 'primeng/badge';
 import { ChipsModule } from 'primeng/chips';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { EditorModule } from 'primeng/editor';
+import { FullCalendarModule } from 'primeng/fullcalendar';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -247,6 +248,7 @@ import { VehicleAutocompleteComponent } from './vehicle/vehicles/vehicle-autocom
     ChipsModule,
     MultiSelectModule,
     EditorModule,
+    FullCalendarModule,
     CurrencyMaskModule,
     ToggleButtonModule,
     CalendarModule,
