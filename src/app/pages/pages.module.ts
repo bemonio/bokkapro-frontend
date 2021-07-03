@@ -236,6 +236,18 @@ import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehicleEditComponent } from './vehicle/vehicles/vehicle-edit/vehicle-edit.component';
 import { VehicleAutocompleteComponent } from './vehicle/vehicles/vehicle-autocomplete/vehicle-autocomplete.component';
 
+// ProductAndServices
+import { ProductAndServicesComponent } from './product-and-service/product-and-services/product-and-services.component';
+import { ProductAndServiceComponent } from './product-and-service/product-and-service.component';
+import { ProductAndServiceEditComponent } from './product-and-service/product-and-services/product-and-service-edit/product-and-service-edit.component';
+import { ProductAndServiceSelectComponent } from './product-and-service/product-and-services/product-and-service-select/product-and-service-select.component';
+
+// Rates
+import { RatesComponent } from './rate/rates/rates.component';
+import { RateComponent } from './rate/rate.component';
+import { RateEditComponent } from './rate/rates/rate-edit/rate-edit.component';
+import { RateAutocompleteComponent } from './rate/rates/rate-autocomplete/rate-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -399,7 +411,15 @@ import { VehicleAutocompleteComponent } from './vehicle/vehicles/vehicle-autocom
     VehiclesComponent,
     VehicleComponent,
     VehicleEditComponent,
-    VehicleAutocompleteComponent
+    VehicleAutocompleteComponent,
+    ProductAndServicesComponent,
+    ProductAndServiceComponent,
+    ProductAndServiceEditComponent,
+    ProductAndServiceSelectComponent,
+    RatesComponent,
+    RateComponent,
+    RateEditComponent,
+    RateAutocompleteComponent,
   ]
 })
 export class PagesModule { }

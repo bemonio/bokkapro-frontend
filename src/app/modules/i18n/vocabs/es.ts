@@ -243,6 +243,7 @@ export const locale = {
       DIRECTOPERATION: 'Operación Directa?',
       IS_ACTIVE: 'Activo?',
       CERTIFIED_CART: 'Carrito Certificado',
+      GUIDES: 'Transacciones',
     },
     PACKING: {
       PACKING: 'Envase',
@@ -470,6 +471,32 @@ export const locale = {
       AMOUNT_INSURED: 'Monto Asegurado',
       IS_ARMORED: 'es Blindado',
       OFFICE: 'Oficina',
+    },
+    PRODUCTANDSERVICE: {
+      PRODUCTANDSERVICE: 'Producto y Servicio',
+      PRODUCTANDSERVICES: 'Productos y Servicios',
+      ID: 'Id',
+      CODE: 'Código',
+      NAME: 'Nombre',
+    },
+    RATE: {
+      RATE: 'Tarifa',
+      RATES: 'Tarifas',
+      ID: 'Id',
+      CODE: 'Código',
+      FREQUENCY: 'Frecuencia',
+      TRIPSPERMONTH: 'Viajes Por Mes',
+      FIXEDCHARGE: 'Cargo Fijo',
+      LIMITTRAVEL: 'Límite Por Viaje',
+      LIMITAPPRAISAL: 'Límite Por Avalúo ',
+      LIMITMANIPULATION: 'Límite Por Manipulación',
+      LIMITMATERIALS: 'Límite Por Materiales',
+      EXCESSTRAVEL: 'Exceso Por Viaje',
+      EXCESSAPPRAISAL: 'Exceso Por Avalúo',
+      EXCESSMANIPULATION: 'Exceso Por Manipulación',
+      EXCESSMATERIALS: 'Exceso Por Materiales',
+      OFFICE: 'Oficina',
+      PRODUCTANDSERVICE: 'Producto y Servicio',
     }
   }
 };

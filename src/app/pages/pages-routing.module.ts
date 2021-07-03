@@ -300,6 +300,20 @@ const routes: Routes = [
             (m) => m.VehicleRoutingModule
           ),
       },
+      {
+        path: 'productandservices',
+        loadChildren: () =>
+          import('../pages/product-and-service/product-and-service-routing.module').then(
+            (m) => m.ProductAndServiceRoutingModule
+          ),
+      },
+      {
+        path: 'rates',
+        loadChildren: () =>
+          import('../pages/rate/rate-routing.module').then(
+            (m) => m.RateRoutingModule
+          ),
+      },
     ],
   },
 ];
