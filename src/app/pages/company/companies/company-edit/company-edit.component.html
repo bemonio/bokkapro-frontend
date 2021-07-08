@@ -11,7 +11,7 @@
       <h3 class="card-label">
         <ng-container *ngIf="model">
           {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
-          <span *ngIf="model && model.id">'{{ model.id }} </span>
+          <span *ngIf="model && model.id">{{ model.id }} </span>
         </ng-container>
       </h3>
     </div>
@@ -47,6 +47,10 @@
       <li *ngIf="(model && model.id && authService.hasPermission('view_contract'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.LOCATIONS_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.LOCATIONS_TAB"
           [class.active]="activeTabId === tabs.LOCATIONS_TAB" routerLink="{{parent}}/edit/{{model.id}}/locations">{{ 'LOCATION.LOCATIONS' | translate }}</a>
+      </li>
+      <li *ngIf="(model && model.id && authService.hasPermission('view_serviceorder'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.SERVICE_ORDERS_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.SERVICE_ORDERS_TAB"
+          [class.active]="activeTabId === tabs.SERVICE_ORDERS_TAB" routerLink="{{parent}}/edit/{{model.id}}/serviceorders">{{ 'SERVICE_ORDER.SERVICE_ORDERS' | translate }}</a>
       </li>
     </ul>
 
@@ -281,6 +285,11 @@
     <ng-container *ngIf="activeTabId === tabs.LOCATIONS_TAB">
       <div class="mt-5" *ngIf="model && model.id">
         <app-location></app-location>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTabId === tabs.SERVICE_ORDERS_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-service-order></app-service-order>
       </div>
     </ng-container>
   </div>

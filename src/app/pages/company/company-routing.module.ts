@@ -50,6 +50,13 @@ const routes: Routes = [
                 (m) => m.LocationRoutingModule
               ),
           },
+          {
+            path: 'serviceorders',
+            loadChildren: () =>
+              import('../../pages/service-order/service-order-routing.module').then(
+                (m) => m.ServiceOrderRoutingModule
+              ),
+          },
         ]
 
       },

@@ -98,7 +98,7 @@ export class CompanyContactAutocompleteComponent implements ControlValueAccessor
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{code.icontains}', value: event.query })
+            this.filters.push({ key: 'filter{email.icontains}', value: event.query })
         } else {
             this.query = undefined;
         }
@@ -117,7 +117,7 @@ export class CompanyContactAutocompleteComponent implements ControlValueAccessor
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
-                this.models = response.companies;
+                this.models = response.company_contacts;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {

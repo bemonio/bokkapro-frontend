@@ -63,6 +63,7 @@ import { CertifiedCartService } from './pages/certified-cart/_services';
 import { VehicleService } from './pages/vehicle/_services';
 import { ProductAndServiceService } from './pages/product-and-service/_services';
 import { RateService } from './pages/rate/_services';
+import { ServiceOrderService } from './pages/service-order/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -160,6 +161,7 @@ export function getHighlightLanguages() {
     VehicleService,
     ProductAndServiceService,
     RateService,
+    ServiceOrderService,
   ],
   bootstrap: [AppComponent],
 })
