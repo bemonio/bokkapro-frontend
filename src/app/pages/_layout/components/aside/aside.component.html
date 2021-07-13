@@ -224,15 +224,6 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level Voucher -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_serviceorder')">
-        <a class="menu-link" routerLink="/serviceorders" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bag2.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'SERVICE_ORDER.SERVICE_ORDERS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Voucher -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_certifiedcart')">
         <a class="menu-link" routerLink="/certifiedcarts" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/General/Lock.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
@@ -418,7 +409,11 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_rate')">
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" 
+      *ngIf="authService.hasPermission('view_rate') 
+        || authService.hasPermission('view_origindestination') 
+        || authService.hasPermission('view_serviceorder') 
+        || authService.hasPermission('view_productandservice')">  
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/reports">
           <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Cart3.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -449,6 +444,29 @@
               </a>
             </li>
             <!-- end::1 Level -->
+
+            <!-- begin::1 Level Types Product and Services -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_serviceorder')">
+              <a class="menu-link" routerLink="/serviceorders" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'SERVICE_ORDER.SERVICE_ORDERS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::1 Level -->
+
+            <!-- begin::1 Level Types Product and Services -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_origindestination')">
+              <a class="menu-link" routerLink="/origindestinations" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'ORIGIN_DESTINATION.ORIGIN_DESTINATIONS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::1 Level -->
+
           </ul>
         </div>
       </li>

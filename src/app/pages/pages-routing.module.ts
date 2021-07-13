@@ -321,6 +321,13 @@ const routes: Routes = [
             (m) => m.ServiceOrderRoutingModule
           ),
       },
+      {
+        path: 'origindestinations',
+        loadChildren: () =>
+          import('../pages/origin-destination/origin-destination-routing.module').then(
+            (m) => m.OriginDestinationRoutingModule
+          ),
+      },
     ],
   },
 ];

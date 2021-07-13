@@ -253,6 +253,13 @@ import { ServiceOrdersComponent } from './service-order/service-orders/service-o
 import { ServiceOrderComponent } from './service-order/service-order.component';
 import { ServiceOrderEditComponent } from './service-order/service-orders/service-order-edit/service-order-edit.component';
 import { ServiceOrderSelectComponent } from './service-order/service-orders/service-order-select/service-order-select.component';
+import { ServiceOrderAutocompleteComponent } from './service-order/service-orders/service-order-autocomplete/service-order-autocomplete.component';
+
+// OriginDestinations
+import { OriginDestinationsComponent } from './origin-destination/origin-destinations/origin-destinations.component';
+import { OriginDestinationComponent } from './origin-destination/origin-destination.component';
+import { OriginDestinationEditComponent } from './origin-destination/origin-destinations/origin-destination-edit/origin-destination-edit.component';
+import { OriginDestinationSelectComponent } from './origin-destination/origin-destinations/origin-destination-select/origin-destination-select.component';
 
 @NgModule({
   imports: [
@@ -430,6 +437,11 @@ import { ServiceOrderSelectComponent } from './service-order/service-orders/serv
     ServiceOrderComponent,
     ServiceOrderEditComponent,
     ServiceOrderSelectComponent,
+    ServiceOrderAutocompleteComponent,
+    OriginDestinationsComponent,
+    OriginDestinationComponent,
+    OriginDestinationEditComponent,
+    OriginDestinationSelectComponent,
   ]
 })
 export class PagesModule { }
