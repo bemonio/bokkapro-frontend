@@ -88,6 +88,7 @@ export class ServiceOrdersComponent implements OnInit {
         this._with = [];
         this._with.push({key: 'include[]', value: 'company.*'})
         this._with.push({key: 'include[]', value: 'employee.*'})
+        this._with.push({key: 'include[]', value: 'contract.*'})
     }
 
     public loadLazy(event: LazyLoadEvent) {
@@ -149,6 +150,15 @@ export class ServiceOrdersComponent implements OnInit {
                         this.models.forEach(element => {
                             if (element.employee === employee.id) {
                                 element.employee = employee;
+                            }
+                        });
+                    });
+                }
+                if(response.contracts){
+                    response.contracts.forEach(contract => {
+                        this.models.forEach(element => {
+                            if (element.contract === contract.id) {
+                                element.contract = contract;
                             }
                         });
                     });
