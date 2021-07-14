@@ -48,6 +48,11 @@
               {{ 'SERVICE_ORDER.EMPLOYEE' | translate }}
             </div>
           </th>
+          <th pSortableColumn="contract">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'SERVICE_ORDER.CONTRACT' | translate }} 
+            </div>
+          </th>
           <th pSortableColumn="code">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }} 
@@ -87,6 +92,9 @@
           </td>
           <td>
             {{value.employee.name}}
+          </td>
+          <td>
+            {{value.contract.code}}
           </td>
           <td>
             {{value.total_amount}}

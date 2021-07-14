@@ -119,15 +119,17 @@
             </div> 
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }}</label>
+              <!-- <label style="float:right; color: red;">{{ total_amount.value * currency.value?.exchange_rate | currency }} {{office?.currency?.symbol}}</label> -->
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="{{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }}" name="total_amount" [class.is-invalid]="isControlInvalid('total_amount')"
-                [class.is-valid]="isControlValid('total_amount')" formControlName="total_amount" />
+                name="total_amount" [class.is-invalid]="isControlInvalid('total_amount')"
+                [class.is-valid]="isControlValid('total_amount')" formControlName="total_amount" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
               <div class="feedback" *ngIf="!isControlTouched('total_amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('total_amount')">{{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_amount')">{{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_amount')">{{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_amount')">{{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>   
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_amount')">{{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
             <div class="col-lg-12">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.NOTE' | translate }}</label>
               <p-editor formControlName="note" [style]="{'height':'200px'}" placeholder="{{ 'SERVICE_ORDER.NOTE' | translate }}"></p-editor>
