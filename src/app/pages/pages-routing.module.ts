@@ -314,6 +314,13 @@ const routes: Routes = [
             (m) => m.RateRoutingModule
           ),
       },
+      {
+        path: 'documentsservicesorders',
+        loadChildren: () =>
+          import('../pages/document-service-order/document-service-order-routing.module').then(
+            (m) => m.DocumentServiceOrderRoutingModule
+          ),
+      },
     ],
   },
 ];

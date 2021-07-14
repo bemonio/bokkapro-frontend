@@ -248,6 +248,11 @@ import { RateComponent } from './rate/rate.component';
 import { RateEditComponent } from './rate/rates/rate-edit/rate-edit.component';
 import { RateAutocompleteComponent } from './rate/rates/rate-autocomplete/rate-autocomplete.component';
 
+// DocumentsServicesOrders
+import { DocumentsServicesOrdersComponent } from './document-service-order/documents-services-orders/documents-services-orders.component';
+import { DocumentServiceOrderComponent } from './document-service-order/document-service-order.component';
+import { DocumentServiceOrderEditComponent } from './document-service-order/documents-services-orders/document-service-order-edit/document-service-order-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -420,6 +425,9 @@ import { RateAutocompleteComponent } from './rate/rates/rate-autocomplete/rate-a
     RateComponent,
     RateEditComponent,
     RateAutocompleteComponent,
+    DocumentsServicesOrdersComponent,
+    DocumentServiceOrderComponent,
+    DocumentServiceOrderEditComponent,
   ]
 })
 export class PagesModule { }

@@ -497,6 +497,13 @@ export const locale = {
       EXCESSMATERIALS: 'Exceso Por Materiales',
       OFFICE: 'Oficina',
       PRODUCTANDSERVICE: 'Producto y Servicio',
+    },
+    DOCUMENT_SERVICE_ORDER: {
+      DOCUMENT_SERVICE_ORDER: 'Doc Orden de Servicio',
+      DOCUMENTS_SERVICES_ORDERS: 'Docs Órdenes de Servicios',
+      ID: 'Id',
+      NAME: 'Nombre',
+      FILE_UPLOADED: 'Archivo',
     }
   }
 };
