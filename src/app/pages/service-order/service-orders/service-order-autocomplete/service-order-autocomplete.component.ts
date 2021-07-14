@@ -1,22 +1,22 @@
 import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ContractService as ModelsService } from '../../_services/contract.service';
+import { ServiceOrderService as ModelsService } from '../../_services/service-order.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ContractAutocompleteComponent),
+    useExisting: forwardRef(() => ServiceOrderAutocompleteComponent),
     multi: true,
 };
 
 @Component({
-    selector: 'app-contract-autocomplete',
-    templateUrl: './contract-autocomplete.component.html',
-    styleUrls: ['./contract-autocomplete.component.scss'],
+    selector: 'app-service-order-autocomplete',
+    templateUrl: './service-order-autocomplete.component.html',
+    styleUrls: ['./service-order-autocomplete.component.scss'],
     providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
-export class ContractAutocompleteComponent implements ControlValueAccessor, OnInit {
+export class ServiceOrderAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
@@ -52,7 +52,7 @@ export class ContractAutocompleteComponent implements ControlValueAccessor, OnIn
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = '';
+            this.placeholder = ' ';
         }
     }
 
@@ -98,7 +98,7 @@ export class ContractAutocompleteComponent implements ControlValueAccessor, OnIn
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{code.icontains}', value: event.query })
+            this.filters.push({ key: 'filter{total_amount.icontains}', value: event.query })
         } else {
             this.query = undefined;
         }
@@ -117,7 +117,7 @@ export class ContractAutocompleteComponent implements ControlValueAccessor, OnIn
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
-                this.models = response.contracts;
+                this.models = response.service_orders;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {

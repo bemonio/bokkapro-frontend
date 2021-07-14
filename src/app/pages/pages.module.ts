@@ -252,6 +252,18 @@ import { RateAutocompleteComponent } from './rate/rates/rate-autocomplete/rate-a
 import { DocumentsServicesOrdersComponent } from './document-service-order/documents-services-orders/documents-services-orders.component';
 import { DocumentServiceOrderComponent } from './document-service-order/document-service-order.component';
 import { DocumentServiceOrderEditComponent } from './document-service-order/documents-services-orders/document-service-order-edit/document-service-order-edit.component';
+// ServiceOrders
+import { ServiceOrdersComponent } from './service-order/service-orders/service-orders.component';
+import { ServiceOrderComponent } from './service-order/service-order.component';
+import { ServiceOrderEditComponent } from './service-order/service-orders/service-order-edit/service-order-edit.component';
+import { ServiceOrderSelectComponent } from './service-order/service-orders/service-order-select/service-order-select.component';
+import { ServiceOrderAutocompleteComponent } from './service-order/service-orders/service-order-autocomplete/service-order-autocomplete.component';
+
+// OriginDestinations
+import { OriginDestinationsComponent } from './origin-destination/origin-destinations/origin-destinations.component';
+import { OriginDestinationComponent } from './origin-destination/origin-destination.component';
+import { OriginDestinationEditComponent } from './origin-destination/origin-destinations/origin-destination-edit/origin-destination-edit.component';
+import { OriginDestinationSelectComponent } from './origin-destination/origin-destinations/origin-destination-select/origin-destination-select.component';
 
 @NgModule({
   imports: [
@@ -428,6 +440,15 @@ import { DocumentServiceOrderEditComponent } from './document-service-order/docu
     DocumentsServicesOrdersComponent,
     DocumentServiceOrderComponent,
     DocumentServiceOrderEditComponent,
+    ServiceOrdersComponent,
+    ServiceOrderComponent,
+    ServiceOrderEditComponent,
+    ServiceOrderSelectComponent,
+    ServiceOrderAutocompleteComponent,
+    OriginDestinationsComponent,
+    OriginDestinationComponent,
+    OriginDestinationEditComponent,
+    OriginDestinationSelectComponent,
   ]
 })
 export class PagesModule { }

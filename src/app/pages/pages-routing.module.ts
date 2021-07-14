@@ -321,6 +321,20 @@ const routes: Routes = [
             (m) => m.DocumentServiceOrderRoutingModule
           ),
       },
+      {
+        path: 'serviceorders',
+        loadChildren: () =>
+          import('../pages/service-order/service-order-routing.module').then(
+            (m) => m.ServiceOrderRoutingModule
+          ),
+      },
+      {
+        path: 'origindestinations',
+        loadChildren: () =>
+          import('../pages/origin-destination/origin-destination-routing.module').then(
+            (m) => m.OriginDestinationRoutingModule
+          ),
+      },
     ],
   },
 ];
