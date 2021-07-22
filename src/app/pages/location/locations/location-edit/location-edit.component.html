@@ -43,6 +43,17 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.NAME' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="name" [class.is-invalid]="isControlInvalid('name')"
+                [class.is-valid]="isControlValid('name')" formControlName="name" />
+              <div class="feedback" *ngIf="!isControlTouched('name')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'LOCATION.NAME' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('name')">{{ 'LOCATION.NAME' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">{{ 'LOCATION.NAME' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">{{ 'LOCATION.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">{{ 'LOCATION.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.CODE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="code" [class.is-invalid]="isControlInvalid('code')"
@@ -174,7 +185,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'zone')">{{ 'LOCATION.ZONE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'zone')">{{ 'LOCATION.ZONE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.TYPEADDRESS' | translate}}</label>
               <p-dropdown [styleClass]="getValidClass(isControlValid('type_address'))" [options]="optionsTypeAddress" optionLabel="key" name="type_address" formControlName="type_address" placeholder="Selecciona Origen / Destino"></p-dropdown>
               <div class="feedback" *ngIf="!isControlTouched('type_address')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'LOCATION.TYPEADDRESS' | translate}}</b></div>
@@ -182,7 +193,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_address')">{{ 'LOCATION.TYPEADDRESS' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_address')">{{ 'LOCATION.TYPEADDRESS' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_address')">{{ 'LOCATION.TYPEADDRESS' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>
+            </div> -->
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/locations">{{ 'COMMON.CANCEL' | translate }}</a>

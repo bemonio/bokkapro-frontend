@@ -107,6 +107,18 @@
               </a>
             </li>
             <!-- end::1 Level -->
+
+            <!-- begin::1 Level Package -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_clientbinnacle')">
+              <a class="menu-link" routerLink="/clientbinnacles" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'CLIENT_BINNACLE.CLIENT_BINNACLES' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::1 Level -->
+            
           </ul>
         </div>
       </li>

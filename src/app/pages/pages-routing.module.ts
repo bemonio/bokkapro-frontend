@@ -328,6 +328,13 @@ const routes: Routes = [
             (m) => m.OriginDestinationRoutingModule
           ),
       },
+      {
+        path: 'clientbinnacles',
+        loadChildren: () =>
+          import('../pages/client-binnacle/client-binnacle-routing.module').then(
+            (m) => m.ClientBinnacleRoutingModule
+          ),
+      },
     ],
   },
 ];

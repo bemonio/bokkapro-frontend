@@ -25,6 +25,7 @@ import { FakeAPIService } from './_fake/fake-api.service';
 // #fake-end#
 import { authInterceptorProviders } from './modules/auth/_helpers/auth.interceptor';
 
+// SERVICES
 import { UserService } from './pages/user/_services';
 import { SegmentCompanyService } from './pages/segment-company/_services';
 import { TypeCompanyService } from './pages/type-company/_services';
@@ -65,6 +66,10 @@ import { ProductAndServiceService } from './pages/product-and-service/_services'
 import { RateService } from './pages/rate/_services';
 import { ServiceOrderService } from './pages/service-order/_services';
 import { OriginDestinationService } from './pages/origin-destination/_services';
+import { ClientBinnacleService } from './pages/client-binnacle/_services';
+
+// OTHER MODULES
+import { CompaniesComponent } from 'src/app/pages/company/companies/companies.component';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -164,6 +169,8 @@ export function getHighlightLanguages() {
     RateService,
     ServiceOrderService,
     OriginDestinationService,
+    ClientBinnacleService,
+    CompaniesComponent
   ],
   bootstrap: [AppComponent],
 })

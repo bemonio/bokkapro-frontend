@@ -1,19 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-import { LocationModel as Model } from '../../_models/location.model';
-import { LocationService as ModelsService } from '../../_services/location.service';
+import { ClientBinnacleModel as Model } from '../../_models/client-binnacle.model';
+import { ClientBinnacleService as ModelsService } from '../../_services/client-binnacle.service';
+import { CompanyService } from 'src/app/pages/company/_services';
+import { CompaniesComponent } from 'src/app/pages/company/companies/companies.component';
 
 @Component({
-  selector: 'app-location-edit',
-  templateUrl: './location-edit.component.html',
-  styleUrls: ['./location-edit.component.scss']
+  selector: 'app-client-binnacle-edit',
+  templateUrl: './client-binnacle-edit.component.html',
+  styleUrls: ['./client-binnacle-edit.component.scss']
 })
-export class LocationEditComponent implements OnInit, OnDestroy {
+export class ClientBinnacleEditComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() companiesCompanyId: number;
+
   public id: number;
   public model: Model;
   public previous: Model;
@@ -22,28 +27,18 @@ export class LocationEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
+    OFFICE_TAB: 1,
   };
 
-  public code: AbstractControl;
-  public code_brinks: AbstractControl;
-  public name: AbstractControl;
-  public contact: AbstractControl;
-  public point_name: AbstractControl;
-  public reference_point: AbstractControl;
-  public telephone: AbstractControl;
-  public email: AbstractControl;
-  public description: AbstractControl;
-  public type_location: AbstractControl;
-  public address: AbstractControl;
   public company: AbstractControl;
-  public zone: AbstractControl;
-  public type_address: AbstractControl;
+  public employee: AbstractControl;
+  public note: AbstractControl;
+  public hour: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
-  public optionsTypeAddress: { key: string, value: string }[];
 
   public companyId: number;
   public parent: string;
@@ -53,42 +48,27 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastService: ToastService
+    public authService: AuthService,
+    private toastService: ToastService,
+    private companiesComponent: CompaniesComponent,
+    private companyService: CompanyService,
   ) {
-    this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
+    this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      code_brinks: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      name: ['', Validators.compose([Validators.required])],
-      contact: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      point_name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      reference_point: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      telephone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: ['', Validators.compose([Validators.maxLength(30)])],
-      type_location: ['', Validators.compose([Validators.required])],
-      address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      company: ['', Validators.compose([Validators.required])],
-      zone: [''],
-      type_address: [''],
+      company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      employee: ['', Validators.compose([Validators.required])],
+      note: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      hour: ['', Validators.compose([Validators.required,])],
+  
     });
-    this.code = this.formGroup.controls['code'];
-    this.code_brinks = this.formGroup.controls['code_brinks'];
-    this.name = this.formGroup.controls['name'];
-    this.contact = this.formGroup.controls['contact'];
-    this.point_name = this.formGroup.controls['point_name'];
-    this.reference_point = this.formGroup.controls['reference_point'];
-    this.telephone = this.formGroup.controls['telephone'];
-    this.email = this.formGroup.controls['email'];
-    this.description = this.formGroup.controls['description'];
-    this.type_location = this.formGroup.controls['type_location'];
-    this.address = this.formGroup.controls['address'];
     this.company = this.formGroup.controls['company'];
-    this.zone = this.formGroup.controls['zone'];
-    this.type_address = this.formGroup.controls['type_address'];
+    this.employee = this.formGroup.controls['employee'];
+    this.note = this.formGroup.controls['note'];
+    this.hour = this.formGroup.controls['hour'];
+
   }
 
   ngOnInit(): void {
@@ -96,11 +76,6 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
 
-    this.optionsTypeAddress = [
-      {key: 'Origen', value: 'Origen'},
-      {key: 'Destino', value: 'Destino'},
-    ];
-    
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
         this.companyId = params.id;
@@ -110,19 +85,23 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnChanges(): void {
+    this.ngOnInit();
+  }
+
   get() {
     this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
         // get id from URL
         this.id = Number(params.get('id'));
+
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'location': new Model() });
+        return of({ 'client_binnacle': new Model() });
       }),
       catchError((error) => {
-        this.requesting = false;
         let messageError = [];
         if (!Array.isArray(error.error)) {
           messageError.push(error.error);
@@ -132,51 +111,48 @@ export class LocationEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({ 'location': new Model() });
+        return of({ 'client_binnacle': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.model = response.location;
-        if (response.type_locations) {
-          this.model.type_location = response.type_locations[0];
-        }
+        this.model = response.client_binnacle;
         if (response.companies) {
           this.model.company = response.companies[0];
         }
-        if (response.zones) {
-          this.model.zone = response.zones[0];
+        if (response.employees) {
+          this.model.employee = response.employees[0];
         }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
     });
-    this.subscriptions.push(sb);
+    // this.subscriptions.push(sb);
   }
 
   loadForm() {
     if (this.model.id) {
-      this.code.setValue(this.model.code);
-      this.code_brinks.setValue(this.model.code_brinks);
-      this.name.setValue(this.model.name);
-      this.contact.setValue(this.model.contact);
-      this.point_name.setValue(this.model.point_name);
-      this.reference_point.setValue(this.model.reference_point);
-      this.telephone.setValue(this.model.telephone);
-      this.email.setValue(this.model.email);
-      this.description.setValue(this.model.description);
-      this.type_address.setValue({ key: this.model.type_address, value: this.model.type_address });
-      this.address.setValue(this.model.address);
-      if (this.model.type_location) {
-        this.type_location.setValue(this.model.type_location);
-      }
+      this.note.setValue(this.model.note);
+      this.hour.setValue(new Date(this.model.hour));
+  
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }
-      if (this.model.zone) {
-        this.zone.setValue(this.model.zone);
+      if (this.model.employee) {
+        this.employee.setValue(this.model.employee);
+      }
+    } else {
+      if (this.companyId) {
+        this.getCompanyById(this.companyId);
       }
     }
+
+    if (this.companiesCompanyId) {
+      this.company.setValue(this.companiesCompanyId);
+      this.employee.setValue(this.authService.currentUserValue.employee);
+      this.hour.setValue(new Date());
+    }
+
     this.formGroup.markAllAsTouched();
   }
 
@@ -205,24 +181,22 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    model.type_location = this.model.type_location.id;
     model.company = this.model.company.id;
-    model.zone = this.model.zone.id;
-    model.type_address = this.type_address.value.value;
+    model.employee = this.model.employee.id;
+    model.hour = this.formatDate(this.hour.value);
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
-            this.router.navigate([this.parent + '/locations']);
+            this.router.navigate([this.parent + '/clientbinnacles']);
           } else {
-            this.router.navigate(['/locations']);
+            this.router.navigate(['/clientbinnacles']);
           }
         }
       }),
       catchError((error) => {
-        this.requesting = false;
         let messageError = [];
         if (!Array.isArray(error.error)) {
           messageError.push(error.error);
@@ -236,28 +210,37 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.location
+      this.model = response.client_binnacle
     });
-    this.subscriptions.push(sbUpdate);
+    // this.subscriptions.push(sbUpdate);
   }
 
   create() {
     this.requesting = true;
-
+    
     let model = this.model;
-    model.type_location = this.model.type_location.id;
-    model.company = this.model.company.id;
-    model.zone = this.model.zone.id;
-    model.type_address = this.type_address.value.value;
+    if(this.companiesCompanyId){
+      model.company = this.model.company;
+    } else {
+      model.company = this.model.company.id;
+    }
+    model.employee = this.model.employee.id;
+    model.hour = this.formatDate(this.hour.value);
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
-            this.router.navigate([this.parent + '/locations']);
+            this.router.navigate([this.parent + '/clientbinnacles']);
           } else {
-            this.router.navigate(['/locations']);
+            if(this.companiesCompanyId){
+              this.companiesComponent.ngOnInit();
+              this.router.navigate(['/companies']);
+              this.formGroup.reset()
+            } else {
+              this.router.navigate(['/clientbinnacles']);
+            }
           }
         } else {
           this.formGroup.reset()
@@ -278,16 +261,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.location as Model
-      // if (this.saveAndExit) {
-      //   if(this.parent){
-      //     this.router.navigate([this.parent + '/locations']);
-      //   } else {
-      //     this.router.navigate(['/locations']);
-      //   }
-      // } else {
-      //   this.formGroup.reset()
-      // }
+      this.model = response.crew as Model
     });
     this.subscriptions.push(sbCreate);
   }
@@ -297,7 +271,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sb => sb.unsubscribe());
+    // this.subscriptions.forEach(sb => sb.unsubscribe());
   }
 
   // helpers for View
@@ -329,5 +303,47 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       stringClass += ' is-invalid';
     }
     return stringClass;
+  }
+
+  getCompanyById(id) {
+    this.companyService.getById(id).toPromise().then(
+      response => {
+        this.company.setValue(response.company)
+      },
+      error => {
+        console.log('error getting company');
+      }
+    );
+  }
+
+  public formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    let hours = '' + d.getHours();
+    let minutes = '' + d.getMinutes();
+    let seconds = '' + d.getSeconds();
+
+    if (month.length < 2) {
+        month = '0' + month;
+    }
+    if (day.length < 2) {
+        day = '0' + day;
+    }
+
+    if (hours.length < 2) {
+        hours = '0' + hours;
+    }
+
+    if (minutes.length < 2) {
+        minutes = '0' + minutes;
+    }
+
+    if (seconds.length < 2) {
+        seconds = '0' + seconds;
+    }
+
+    return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
   }
 }

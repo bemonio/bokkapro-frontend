@@ -1,10 +1,11 @@
-<div class="card card-custom gutter-b">
+<div class="card card-custom gutter-b" *ngIf="!companiesCompanyId">
   <div class="card-header">
     <div class="card-title">
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" routerLink="/companies/add">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/clientbinnacles/add">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -35,32 +36,27 @@
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMPANY.ID' | translate }}
+              {{ 'CLIENT_BINNACLE.ID' | translate }}
             </div>
           </th>
-          <th pSortableColumn="code">
+          <th pSortableColumn="company">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMPANY.CODE' | translate }}
+              {{ 'CLIENT_BINNACLE.COMPANY' | translate }}
             </div>
           </th>
-          <th pSortableColumn="name">
+          <th pSortableColumn="employee">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMPANY.NAME' | translate }}
+              {{ 'CLIENT_BINNACLE.EMPLOYEE' | translate }}
             </div>
           </th>
-          <th pSortableColumn="identification_number">
+          <th pSortableColumn="note">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMPANY.IDENTIFICATION_NUMBER' | translate }}
+              {{ 'CLIENT_BINNACLE.NOTE' | translate }}
             </div>
           </th>
-          <!-- <th pSortableColumn="logo">
+          <th pSortableColumn="hour">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMPANY.LOGO' | translate }}
-            </div>
-          </th> -->
-          <th pSortableColumn="phone">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMPANY.PHONE' | translate }}
+              {{ 'CLIENT_BINNACLE.HOUR' | translate }}
             </div>
           </th>
           <th pSortableColumn="created_at">
@@ -88,38 +84,29 @@
             {{value.id}}
           </td>
           <td>
-            {{value.code}}
+            {{value.company?.name}}
           </td>
           <td>
-            {{value.name}}
+            {{value.employee?.name}}
           </td>
           <td>
-            {{value.identification_number}}
+            {{value.note}}
           </td>
-          <!-- <td>
-            {{value.logo}}
-          </td> -->
           <td>
-            {{value.phone}}
+            {{value.hour | date: 'MM/dd/yyyy hh:mm'}}
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
-            <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-success btn-sm" style="margin-right: 5px;"
-              (click)="(visibleSidebar = true) && AsignID(value.id)" *ngIf="authService.hasPermission('add_company')">
-              <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-left.svg'" cacheSVG="true"
-                class="svg-icon svg-icon-md svg-icon-success">
-              </span>
-            </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/companies/edit/' + value.id" *ngIf="authService.hasPermission('add_company')">
+              routerLink="{{parent}}/clientbinnacles/edit/{{value.id}}">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_company')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
@@ -129,7 +116,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="8">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          <td colspan="5">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -139,7 +126,22 @@
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
-<p-sidebar [(visible)]="visibleSidebar" (onShow)="AsignID()" styleClass="p-sidebar-lg" position="right"  blockScroll="false" [baseZIndex]="10000">
-  <h3 class="mb-5 ml-2">{{ 'CLIENT_BINNACLE.CLIENT_BINNACLES' | translate}}</h3>
-  <app-client-binnacle-edit [companiesCompanyId]="companiesCompanyId"></app-client-binnacle-edit>
-</p-sidebar>
+<p-dialog header="Transfer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
+</p-dialog>
+
+<div  *ngIf="companiesCompanyId" class="card py-4 bg-secondary">
+  <p-timeline [value]="models" align="alternate" *ngIf="models.length > 0">
+      <ng-template pTemplate="content" let-event>
+          <em><strong>{{event.employee?.name}}</strong> - <span *ngIf="event.created_at!='0000-00-00 00:00:00'" >{{event.created_at | date : 'dd/MM/yyyy hh:mm a'}}</span></em>
+          <br>
+          <div style="padding-top: 8px">
+            <font size="3"><div [innerHTML]="event.note"></div></font>
+          </div>
+      </ng-template>
+  </p-timeline>
+  <div *ngIf="models.length === 0" class="my-5 text-center">
+      <h1>{{'COMMON.NO_ITEMS_FOUND' | translate}}</h1>
+  </div>
+</div>

@@ -43,16 +43,41 @@
               {{ 'LOCATION.NAME' | translate }}
             </div>
           </th>
+          <th pSortableColumn="company">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'LOCATION.COMPANY' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="code">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'LOCATION.CODE' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="code_brinks">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'LOCATION.CODE_BRINKS' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="address">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'LOCATION.LOCATION' | translate }}
+            </div>
+          </th>
+          <!-- <th pSortableColumn="zone">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'LOCATION.ZONE' | translate }}
+            </div>
+          </th> -->
           <th pSortableColumn="description">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'LOCATION.DESCRIPTION' | translate }}
             </div>
           </th>
-          <th pSortableColumn="type_location">
+          <!-- <th pSortableColumn="type_location">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'LOCATION.TYPEADDRESS' | translate }}
             </div>
-          </th>
+          </th> -->
           <th pSortableColumn="created_at">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.CREATED_AT' | translate }}
@@ -81,11 +106,26 @@
             {{value.name}}
           </td>
           <td>
-            {{value.description}}
+            {{value.company.name}}
           </td>
           <td>
-            {{value.type_address}}
+            {{value.code}}
           </td>
+          <td>
+            {{value.code_brinks}}
+          </td>
+          <td>
+            {{value.address}}
+          </td>
+          <!-- <td>
+            {{value.zone?.name}}
+          </td> -->
+          <td>
+            {{value.description}}
+          </td>
+          <!-- <td>
+            {{value.type_address}}
+          </td> -->
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
