@@ -1,22 +1,26 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { CompanyService as ModelService } from '../_services/company.service';
-import { CompanyModel as Model } from '../_models/company.model';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClientBinnacleService as ModelService } from '../_services/client-binnacle.service';
+import { ClientBinnacleModel as Model } from '../_models/client-binnacle.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-@Component({
-    selector: 'app-companies',
-    templateUrl: './companies.component.html',
-    styleUrls: ['./companies.component.scss']
-})
-export class CompaniesComponent implements OnInit, OnChanges {
+import { catchError, switchMap, tap } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { DivisionService } from '../../division/_services';
 
-    public visibleSidebar;
+@Component({
+    selector: 'app-client-binnacles',
+    templateUrl: './client-binnacles.component.html',
+    styleUrls: ['./client-binnacles.component.scss']
+})
+export class ClientBinnaclesComponent implements OnInit, OnChanges {
+    @Input() companiesCompanyId: number;
 
     public promiseForm: Promise<any>;
 
@@ -46,10 +50,16 @@ export class CompaniesComponent implements OnInit, OnChanges {
     public message_confirm_delete: string;
 
     public showTableCheckbox: boolean;
-    public companiesCompanyId: number;
+
+    public companyId: number;
+    public parent: string;
+
+    public displayModal: boolean;
 
     constructor(
         public modelsService: ModelService,
+        private router: Router,
+        private route: ActivatedRoute,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
@@ -74,7 +84,7 @@ export class CompaniesComponent implements OnInit, OnChanges {
         });
 
         this.showTableCheckbox = false;
-        this.companiesCompanyId = undefined;
+        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
@@ -82,6 +92,8 @@ export class CompaniesComponent implements OnInit, OnChanges {
         this.totalRecords = 0;
 
         this.requesting = false;
+
+        this.displayModal = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -92,38 +104,59 @@ export class CompaniesComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.requesting = false;
-        this.visibleSidebar = false;
-        this.companiesCompanyId = undefined;
+        
+        this._with = [];
+        this._with.push({key: 'include[]', value: 'company.*'})
+        this._with.push({key: 'include[]', value: 'employee.*'})
+        this.loadLazy();
     }
 
     ngOnChanges(): void {
         this.ngOnInit();
     }
 
-    public loadLazy(event: LazyLoadEvent) {
-        this.page = (event.first / this.per_page) + 1;
-        if (event.sortField) {
-            if (event.sortOrder === -1) {
-                this.sort = '-' + event.sortField;
+    public loadLazy(event?: LazyLoadEvent) {
+        if (event) {
+            this.page = (event.first / this.per_page) + 1;
+            if (event.sortField) {
+                if (event.sortOrder === -1) {
+                    this.sort = '-' + event.sortField;
+                } else {
+                    this.sort = event.sortField;
+                }
             } else {
-                this.sort = event.sortField;
+                this.sort = '-id';
             }
+
+            if (event.globalFilter) {
+                this.query = event.globalFilter;
+            } else {
+                this.query = undefined;
+            }
+
+            if (event.rows) {
+                this.per_page = event.rows;
+            }    
+        }
+
+        this.filters = [];
+        if (this.companiesCompanyId) {
+            this.filters.push({ key: 'filter{company}', value: this.companiesCompanyId.toString() })
+            this.getModels();
         } else {
-            this.sort = '-id';
+            if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+                this.route.parent.parent.parent.params.subscribe((params) => {
+                    if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                        this.companyId = params.id;
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
+                        this.filters.push({ key: 'filter{company}', value: this.companyId.toString() })
+                    }
+                    this.getModels();
+                });
+            } else {
+                this.getModels();
+            }
         }
-
-        if (event.globalFilter) {
-            this.query = event.globalFilter;
-        } else {
-            this.query = undefined;
-        }
-
-        if (event.rows) {
-            this.per_page = event.rows;
-        }
-
-
-        this.getModels();
     }
 
     public getModels() {
@@ -133,9 +166,27 @@ export class CompaniesComponent implements OnInit, OnChanges {
             response => {
                 this.requesting = false;
                 this.models = [];
-                response.companies.forEach(element => {
+                response.client_binnacles.forEach(element => {
                     this.models.push(element);
                 });
+                if(response.employees){
+                    response.employees.forEach(employee => {
+                        this.models.forEach(element => {
+                            if (element.employee === employee.id) {
+                                element.employee = employee;
+                            }
+                        });
+                    });
+                }
+                if(response.companies){
+                    response.companies.forEach(company => {
+                        this.models.forEach(element => {
+                            if (element.company === company.id) {
+                                element.company = company;
+                            }
+                        });
+                    });
+                }
                 this.totalRecords = response.meta.total_results;
             },
             error => {
@@ -204,6 +255,7 @@ export class CompaniesComponent implements OnInit, OnChanges {
             this.promiseForm = promise.toPromise().then(
                 response => {
                     this.toastService.growl('success', 'Patch');
+                    this.getModels();
                 },
                 error => {
                     let messageError = [];
@@ -230,11 +282,12 @@ export class CompaniesComponent implements OnInit, OnChanges {
         });
     }
 
-    AsignID(val?){
-        if(val){
-            this.companiesCompanyId = val;
-        } else {
-            this.companiesCompanyId = this.companiesCompanyId
-        }
+    showModalDialog() {
+        this.displayModal = true;
+    }
+
+    hideModalDialog() {
+        this.displayModal = false;
+        this.getModels();
     }
 }

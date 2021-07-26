@@ -17,6 +17,9 @@ import { ChipsModule } from 'primeng/chips';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { EditorModule } from 'primeng/editor';
 import { FullCalendarModule } from 'primeng/fullcalendar';
+import { SidebarModule } from 'primeng/sidebar';
+import { TimelineModule } from 'primeng/timeline';
+import { CardModule } from 'primeng/card';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -265,6 +268,11 @@ import { OriginDestinationComponent } from './origin-destination/origin-destinat
 import { OriginDestinationEditComponent } from './origin-destination/origin-destinations/origin-destination-edit/origin-destination-edit.component';
 import { OriginDestinationSelectComponent } from './origin-destination/origin-destinations/origin-destination-select/origin-destination-select.component';
 
+// ClientBinnacles
+import { ClientBinnaclesComponent } from './client-binnacle/client-binnacles/client-binnacles.component';
+import { ClientBinnacleComponent } from './client-binnacle/client-binnacle.component';
+import { ClientBinnacleEditComponent } from './client-binnacle/client-binnacles/client-binnacle-edit/client-binnacle-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -278,6 +286,9 @@ import { OriginDestinationSelectComponent } from './origin-destination/origin-de
     MultiSelectModule,
     EditorModule,
     FullCalendarModule,
+    SidebarModule,
+    TimelineModule,
+    CardModule,
     CurrencyMaskModule,
     ToggleButtonModule,
     CalendarModule,
@@ -449,6 +460,9 @@ import { OriginDestinationSelectComponent } from './origin-destination/origin-de
     OriginDestinationComponent,
     OriginDestinationEditComponent,
     OriginDestinationSelectComponent,
+    ClientBinnaclesComponent,
+    ClientBinnacleComponent,
+    ClientBinnacleEditComponent,
   ]
 })
 export class PagesModule { }

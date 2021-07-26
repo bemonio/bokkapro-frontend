@@ -1,0 +1,120 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="requesting">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!companiesCompanyId">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">
+          <ng-container *ngIf="model">
+            {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
+            <span *ngIf="model && model.id">'{{ model.id }}</span>
+          </ng-container>
+        </h3>
+      </div>
+      <div class="card-toolbar">
+        <a type="button" class="btn btn-light" routerLink="{{parent}}/clientbinnacles">
+          <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
+        </a>
+        <button class="btn btn-secondary ml-2" (click)="reset()">
+          <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+        <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+          <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+            [class.active]="activeTabId === tabs.BASIC_TAB">
+            {{ 'COMMON.BASIC_INFO' | translate }}
+          </a>
+        </li>
+        <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.OFFICE_TAB)">
+          <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.OFFICE_TAB"
+            [class.active]="activeTabId === tabs.OFFICE_TAB">Offices</a>
+        </li> -->
+      </ul>
+  
+      <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+        <div class="mt-5" *ngIf="model">
+          <form action="#" class="form form-label-right" [formGroup]="formGroup">
+            <div class="form-group row">
+              <div class="col-lg-4">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'CLIENT_BINNACLE.COMPANY' | translate }}</label>
+                <app-company-autocomplete
+                name="company" [valid]="isControlValid('company')" [touched]="isControlTouched('company')" [class.is-invalid]="isControlInvalid('company')"
+                [class.is-valid]="isControlValid('company')" formControlName="company" id="company" [model]="model.company"></app-company-autocomplete>
+                <div class="feedback" *ngIf="!isControlTouched('company')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CLIENT_BINNACLE.COMPANY' | translate }}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('company')">{{ 'CLIENT_BINNACLE.COMPANY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'company')">{{ 'CLIENT_BINNACLE.COMPANY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'company')">{{ 'CLIENT_BINNACLE.COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company')">{{ 'CLIENT_BINNACLE.COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              </div>
+              <div class="col-lg-4">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'CLIENT_BINNACLE.EMPLOYEE' | translate }}</label>
+                <app-employee-autocomplete
+                name="employee" [valid]="isControlValid('employee')" [touched]="isControlTouched('employee')" [class.is-invalid]="isControlInvalid('employee')"
+                [class.is-valid]="isControlValid('employee')" formControlName="employee" id="employee" [model]="model.employee"></app-employee-autocomplete>
+                <div class="feedback" *ngIf="!isControlTouched('employee')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CLIENT_BINNACLE.COMPANY' | translate }}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('employee')">{{ 'CLIENT_BINNACLE.COMPANY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee')">{{ 'CLIENT_BINNACLE.COMPANY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employee')">{{ 'CLIENT_BINNACLE.COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employee')">{{ 'CLIENT_BINNACLE.COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              </div>
+              <div class="col-lg-4">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'CLIENT_BINNACLE.HOUR' | translate}}</label>
+                <p-calendar [inputStyleClass]="getValidClass(isControlValid('hour'))" name="hour" formControlName="hour"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('hour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CLIENT_BINNACLE.HOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('hour')">{{ 'CLIENT_BINNACLE.HOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'hour')">{{ 'CLIENT_BINNACLE.HOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'hour')">{{ 'CLIENT_BINNACLE.HOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'hour')">{{ 'CLIENT_BINNACLE.HOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+              <div class="col-lg-12">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'CLIENT_BINNACLE.NOTE' | translate}}</label>
+                <p-editor formControlName="note" [style]="{'height':'320px'}" placeholder="{{ 'CLIENT_BINNACLE.NOTE' | translate}}"></p-editor>
+              </div>
+            </div>
+            <div class="float-right">
+              <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/clientbinnacles">{{ 'COMMON.CANCEL' | translate }}</a>
+              <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+                [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+              <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+                [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+            </div>
+          </form>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <div *ngIf="companiesCompanyId" style="height: 90vh; overflow-y: scroll;">
+      <div class="card-body py-3">
+        <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+          <div *ngIf="model">
+            <form action="#" class="form form-label-right" [formGroup]="formGroup">
+              <div class="form-group row">
+                <div class="col-lg-12">
+                  <p-editor formControlName="note" [style]="{'height':'100px'}" placeholder="{{ 'COMMON.ENTER' | translate }} {{ 'CLIENT_BINNACLE.NOTE' | translate}}"></p-editor>
+                </div>
+              </div>
+              <div class="text-right" style="height: 0;">
+                <button type="submit" class="btn btn-primary font-weight-bold" style="transform: translate(-10%, -175%);"
+                  [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE' | translate }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </ng-container>
+      </div>
+      <div class="card-body pt-0">
+        <ng-container>
+          <app-client-binnacles [companiesCompanyId]="companiesCompanyId"></app-client-binnacles>
+        </ng-container>
+      </div>
+  </div>
+</div>

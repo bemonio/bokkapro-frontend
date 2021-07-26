@@ -550,7 +550,16 @@ export const locale = {
       SUNDAY: 'Domingo',
       SUNDAY_START_TIME: 'Hora Inicio Domingo',
       SUNDAY_END_TIME: 'Hora Fin Domingo',
-    }
+    },
+    CLIENT_BINNACLE: {
+      CLIENT_BINNACLE: 'Bitácora Cliente',
+      CLIENT_BINNACLES: 'Bitácoras Clientes',
+      ID: 'Id',
+      NOTE: 'Nota',
+      HOUR: 'Fecha y Hora',
+      COMPANY: 'Compañía',
+      EMPLOYEE: 'Empleado',
+    },
   }
 };
 

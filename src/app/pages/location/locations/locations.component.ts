@@ -94,6 +94,10 @@ export class LocationsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+
+        this._with = [];
+        this._with.push({key: 'include[]', value: 'company.*'})
+        this._with.push({key: 'include[]', value: 'zone.*'})
     }
 
     public loadLazy(event: LazyLoadEvent) {
@@ -144,6 +148,24 @@ export class LocationsComponent implements OnInit {
                 // response.locations.forEach(element => {
                 //     this.models.push(element);
                 // });
+                if(response.companies){
+                    response.companies.forEach(company => {
+                        this.models.forEach(element => {
+                            if (element.company === company.id) {
+                                element.company = company;
+                            }
+                        });
+                    });
+                }
+                if(response.zones){
+                    response.zones.forEach(zone => {
+                        this.models.forEach(element => {
+                            if (element.zone === zone.id) {
+                                element.zone = zone;
+                            }
+                        });
+                    });
+                }
                 this.totalRecords = response.meta.total_results;
             },
             error => {
