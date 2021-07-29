@@ -3,6 +3,7 @@ export class OriginDestinationModel {
   type_service: string;
   distrib_charges: string;
   days_month: string;
+  precall: boolean;
   monday: boolean;
   tuesday: boolean;
   wednesday: boolean;

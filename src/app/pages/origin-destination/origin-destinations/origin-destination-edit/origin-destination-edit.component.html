@@ -16,7 +16,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-light" routerLink="{{parent}}/origindestinations">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}/origindestinations" *ngIf="!originDestinationID">
         <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
@@ -75,7 +75,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'service_order')">{{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'service_order')">{{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}</label>
               <p-dropdown [styleClass]="getValidClass(isControlValid('type_service'))" [options]="optionsTypeService" optionLabel="key" name="type_service" formControlName="type_service" placeholder="Selecciona"></p-dropdown>
               <div class="feedback" *ngIf="!isControlTouched('type_service')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}</b></div>
@@ -83,6 +83,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_service')">{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_service')">{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_service')">{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div> 
+            <div class="col-lg-2">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.PRECALL' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="precall" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('precall')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.PRECALL' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('precall')">{{ 'ORIGIN_DESTINATION.PRECALL' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'precall')">{{ 'ORIGIN_DESTINATION.PRECALL' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'precall')">{{ 'ORIGIN_DESTINATION.PRECALL' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'precall')">{{ 'ORIGIN_DESTINATION.PRECALL' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.DISTRIB_CHARGES' | translate }}</label>
@@ -327,9 +336,10 @@
             </div>
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/origindestinations">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/origindestinations" *ngIf="!originDestinationID">{{ 'COMMON.CANCEL' | translate }}</a>
+
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!originDestinationID">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>

@@ -31,6 +31,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
   public code: AbstractControl;
   public company: AbstractControl;
   public type_contract: AbstractControl;
+  public name_invoce_to: AbstractControl;
   public start_billing_date: AbstractControl;
   public end_billing_date: AbstractControl;
 
@@ -59,12 +60,14 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       type_contract: ['', Validators.compose([Validators.required])],
+      name_invoce_to: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       start_billing_date: ['', Validators.compose([Validators.required,])],
       end_billing_date: ['', Validators.compose([Validators.required,])],
     });
     this.code = this.formGroup.controls['code'];
     this.company = this.formGroup.controls['company'];
     this.type_contract = this.formGroup.controls['type_contract'];
+    this.name_invoce_to = this.formGroup.controls['name_invoce_to'];
     this.start_billing_date = this.formGroup.controls['start_billing_date'];
     this.end_billing_date = this.formGroup.controls['end_billing_date'];
   }
@@ -127,6 +130,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.code.setValue(this.model.code);
+      this.name_invoce_to.setValue(this.model.name_invoce_to);
       this.start_billing_date.setValue(new Date(this.model.start_billing_date));
       this.end_billing_date.setValue(new Date(this.model.end_billing_date));
       if (this.model.company) {

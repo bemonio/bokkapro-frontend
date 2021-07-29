@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OriginDestinationService as ModelService } from '../_services/origin-destination.service';
 import { OriginDestinationModel as Model } from '../_models/origin-destination.model';
@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/modules/auth';
     styleUrls: ['./origin-destinations.component.scss']
 })
 export class OriginDestinationsComponent implements OnInit {
+    @Input() serviceOrderId: any;
 
     public promiseForm: Promise<any>;
 
@@ -41,10 +42,12 @@ export class OriginDestinationsComponent implements OnInit {
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
 
+    public displayModal: boolean;
     public showTableCheckbox: boolean;
 
-    public companyId: number;
+    public serOrderId: number;
     public parent: string;
+    public originDestinationID: { id: number, isNew: boolean };
 
     constructor(
         public modelsService: ModelService,
@@ -75,6 +78,7 @@ export class OriginDestinationsComponent implements OnInit {
         this.totalRecords = 0;
 
         this.requesting = false;
+        this.displayModal = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -85,6 +89,7 @@ export class OriginDestinationsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this.originDestinationID = {id: undefined, isNew: false};
         this._with = [];
         this._with.push({key: 'include[]', value: 'origin.*'})
         this._with.push({key: 'include[]', value: 'destination.*'})
@@ -114,18 +119,24 @@ export class OriginDestinationsComponent implements OnInit {
         }
 
         this.filters = [];
-        if (this.route.parent.parent.parent.snapshot.url.length > 0) {
-            this.route.parent.parent.parent.params.subscribe((params) => {
-                if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                    this.companyId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
-                    this.filters.push({ key: 'filter{company}', value: this.companyId.toString() })
-                }
-                this.getModels();
-            });
-        } else {
+        if (this.serviceOrderId) {
+            this.filters.push({ key: 'filter{service_order}', value: this.serviceOrderId.toString() })
+            this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.serviceOrderId;
             this.getModels();
-        }   
+        } else {
+            if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+                this.route.parent.parent.parent.params.subscribe((params) => {
+                    if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                        this.serOrderId = params.id;
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.serOrderId;
+                        this.filters.push({ key: 'filter{service_order}', value: this.serOrderId.toString() })
+                    }
+                    this.getModels();
+                });
+            } else {
+                this.getModels();
+            }  
+        } 
     }
 
     public getModels() {
@@ -254,5 +265,15 @@ export class OriginDestinationsComponent implements OnInit {
                 this.delete(id);
             }
         });
+    }
+
+    showModalDialog(id, isNew) {
+        this.displayModal = true;
+        this.originDestinationID = {id: id, isNew: isNew}
+    }
+
+    hideModalDialog() {
+        this.displayModal = false;
+        this.getModels();
     }
 }

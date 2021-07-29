@@ -194,17 +194,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'address')">{{ 'COMPANY.ADDRESS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.NAME_INVOICE_TO' | translate }}</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="name_invoce_to" [class.is-invalid]="isControlInvalid('name_invoce_to')"
-                [class.is-valid]="isControlValid('name_invoce_to')" formControlName="name_invoce_to" />
-              <div class="feedback" *ngIf="!isControlTouched('name_invoce_to')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.NAME_INVOICE_TO' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('name_invoce_to')">{{ 'COMPANY.NAME_INVOICE_TO' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name_invoce_to')">{{ 'COMPANY.NAME_INVOICE_TO' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name_invoce_to')">{{ 'COMPANY.NAME_INVOICE_TO' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name_invoce_to')">{{ 'COMPANY.NAME_INVOICE_TO' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.SEGMENT_COMPANY' | translate }}</label>
               <app-segment-company-autocomplete
               name="segment_company" [valid]="isControlValid('segment_company')" [touched]="isControlTouched('segment_company')" [class.is-invalid]="isControlInvalid('segment_company')"

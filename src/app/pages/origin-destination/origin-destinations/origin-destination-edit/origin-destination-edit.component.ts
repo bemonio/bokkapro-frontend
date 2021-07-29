@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, Output, OnDestroy, OnChanges, OnInit, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
@@ -7,14 +7,17 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { OriginDestinationModel as Model } from '../../_models/origin-destination.model';
 import { OriginDestinationService as ModelsService } from '../../_services/origin-destination.service';
-import { CompanyService } from 'src/app/pages/company/_services';
+import { ServiceOrderService } from 'src/app/pages/service-order/_services';
 
 @Component({
   selector: 'app-origin-destination-edit',
   templateUrl: './origin-destination-edit.component.html',
   styleUrls: ['./origin-destination-edit.component.scss']
 })
-export class OriginDestinationEditComponent implements OnInit, OnDestroy {
+export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() originDestinationID: { id: number, isNew: boolean};
+  @Output() displayModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public id: number;
   public model: Model;
   public previous: Model;
@@ -28,6 +31,7 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
   public type_service: AbstractControl;
   public distrib_charges: AbstractControl;
   public days_month: AbstractControl;
+  public precall: AbstractControl;
   public monday: AbstractControl;
   public tuesday: AbstractControl;
   public wednesday: AbstractControl;
@@ -60,7 +64,7 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
   public saveAndExit;
   public optionsTypeService: { key: string, value: string }[];
 
-  public companyId: number;
+  public serviceOrderId: number;
   public parent: string;
 
   constructor(
@@ -69,7 +73,7 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService,
-    private companyService: CompanyService,
+    private serviceOrderService: ServiceOrderService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
@@ -79,6 +83,7 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
       type_service: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       distrib_charges: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       days_month: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      precall: [''],
       monday: [''],
       tuesday: [''],
       wednesday: [''],
@@ -107,6 +112,7 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
     this.type_service = this.formGroup.controls['type_service'];
     this.distrib_charges = this.formGroup.controls['distrib_charges'];
     this.days_month = this.formGroup.controls['days_month'];
+    this.precall = this.formGroup.controls['precall'];
     this.monday = this.formGroup.controls['monday'];
     this.tuesday = this.formGroup.controls['tuesday'];
     this.wednesday = this.formGroup.controls['wednesday'];
@@ -143,21 +149,34 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
       {key: 'Delivery', value: 'Delivery'},
     ];
 
-    this.route.parent.parent.parent.params.subscribe((params) => {
-      if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-        this.companyId = params.id;
-        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
+    if (this.originDestinationID){
+      if(this.originDestinationID.id){
+        this.id = this.originDestinationID.id; 
+        this.get();
+      } else {
+        this.id = undefined;
+        this.get();
+      }
+    } 
+    this.route.params.subscribe((params) => {
+      if (this.route.snapshot.url.length > 0) {
+        this.serviceOrderId = params.id;
       }
       this.get();
     });
+  }
+
+  ngOnChanges() {
+    this.ngOnInit();
   }
 
   get() {
     this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
-        // get id from URL
-        this.id = Number(params.get('id'));
+        if(!this.originDestinationID){
+          this.id = Number(params.get('id'));
+        }
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
@@ -197,39 +216,11 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    this.monday.setValue(false);
-    this.tuesday.setValue(false);
-    this.wednesday.setValue(false);
-    this.thursday.setValue(false);
-    this.friday.setValue(false);
-    this.saturday.setValue(false);
-    this.sunday.setValue(false);
-    this.monday_start_time.setValue(undefined)
-    this.monday_end_time.setValue(undefined)
-    this.tuesday_start_time.setValue(undefined)
-    this.tuesday_end_time.setValue(undefined)
-    this.wednesday_start_time.setValue(undefined)
-    this.wednesday_end_time.setValue(undefined)
-    this.thursday_start_time.setValue(undefined)
-    this.thursday_end_time.setValue(undefined)
-    this.friday_start_time.setValue(undefined)
-    this.friday_end_time.setValue(undefined)
-    this.saturday_start_time.setValue(undefined)
-    this.saturday_end_time.setValue(undefined)
-    this.sunday_start_time.setValue(undefined)
-    this.sunday_end_time.setValue(undefined)
-
     if (this.model.id) {
-
-      // let date = new Date();
-      // date.setHours(Number(this.model.monday_start_time.split(':')[0]))
-      // date.setMinutes(Number(this.model.monday_start_time.split(':')[1]))
-      // date.setSeconds(Number(this.model.monday_start_time.split(':')[2]))
-      // this.monday_start_time.setValue(date);
-
       this.type_service.setValue({ key: this.model.type_service, value: this.model.type_service });
       this.distrib_charges.setValue(this.model.distrib_charges);
       this.days_month.setValue(this.model.days_month);
+      this.precall.setValue(this.model.precall);
       this.monday.setValue(this.model.monday);
       this.tuesday.setValue(this.model.tuesday);
       this.wednesday.setValue(this.model.wednesday);
@@ -262,8 +253,36 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
         this.service_order.setValue(this.model.service_order);
       }
     } else {
-      if (this.companyId) {
-        this.getCompanyById(this.companyId);
+      this.type_service.setValue('');
+      this.distrib_charges.setValue('');
+      this.days_month.setValue('');
+      this.origin.setValue('');
+      this.destination.setValue('');
+      this.service_order.setValue('');
+      this.precall.setValue(false);
+      this.monday.setValue(false);
+      this.tuesday.setValue(false);
+      this.wednesday.setValue(false);
+      this.thursday.setValue(false);
+      this.friday.setValue(false);
+      this.saturday.setValue(false);
+      this.sunday.setValue(false);
+      this.monday_start_time.setValue(undefined)
+      this.monday_end_time.setValue(undefined)
+      this.tuesday_start_time.setValue(undefined)
+      this.tuesday_end_time.setValue(undefined)
+      this.wednesday_start_time.setValue(undefined)
+      this.wednesday_end_time.setValue(undefined)
+      this.thursday_start_time.setValue(undefined)
+      this.thursday_end_time.setValue(undefined)
+      this.friday_start_time.setValue(undefined)
+      this.friday_end_time.setValue(undefined)
+      this.saturday_start_time.setValue(undefined)
+      this.saturday_end_time.setValue(undefined)
+      this.sunday_start_time.setValue(undefined)
+      this.sunday_end_time.setValue(undefined)
+      if (this.serviceOrderId) {
+        this.getServiceOrderById(this.serviceOrderId);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -318,7 +337,9 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          if(this.parent){
+          if (this.originDestinationID) {
+            this.hideModal();
+          } else if(this.parent) {
             this.router.navigate([this.parent + '/origindestinations']);
           } else {
             this.router.navigate(['/origindestinations']);
@@ -373,7 +394,9 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          if(this.parent){
+          if (this.originDestinationID) {
+            this.hideModal();
+          } else if(this.parent) {
             this.router.navigate([this.parent + '/origindestinations']);
           } else {
             this.router.navigate(['/origindestinations']);
@@ -441,13 +464,13 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
     return stringClass;
   }
 
-  getCompanyById(id) {
-    this.companyService.getById(id).toPromise().then(
+  getServiceOrderById(id) {
+    this.serviceOrderService.getById(id).toPromise().then(
       response => {
-        this.origin.setValue(response.origin)
+        this.service_order.setValue(response.service_order)
       },
       error => {
-        console.log('error getting origin');
+        console.log('error getting service_order');
       }
     );
   }
@@ -512,5 +535,9 @@ export class OriginDestinationEditComponent implements OnInit, OnDestroy {
     }
 
     return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
+  }
+
+  hideModal(){
+    this.displayModal.emit()
   }
 }
