@@ -32,9 +32,13 @@
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
-      <li *ngIf="(model && model.id && authService.hasPermission('view_contract'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.PACKINGS_TAB)">
+      <li *ngIf="(model && model.id && authService.hasPermission('view_packing'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.PACKINGS_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PACKINGS_TAB"
           [class.active]="activeTabId === tabs.PACKINGS_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/packings">{{ 'VOUCHER.PACKINGS' | translate }}</a>
+      </li>
+      <li *ngIf="(model && model.id && authService.hasPermission('view_guide'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.GUIDES_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.GUIDES_TAB"
+          [class.active]="activeTabId === tabs.GUIDES_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/guides">{{ 'VOUCHER.GUIDES' | translate }}</a>
       </li>
       <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning ml-auto" style="margin-right: 5px;" 
         (click)="verification('center')" *ngIf="authService.currentDivisionValue.id === 2 && direct_operation.value === true && is_active.value === true && verified_oi.value === false">
@@ -210,6 +214,11 @@
     <ng-container *ngIf="activeTabId === tabs.PACKINGS_TAB">
       <div class="mt-5" *ngIf="model && model.id">
         <app-packing></app-packing>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTabId === tabs.GUIDES_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-guides></app-guides>
       </div>
     </ng-container>
   </div>
