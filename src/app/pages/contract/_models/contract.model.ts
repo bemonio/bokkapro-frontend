@@ -5,6 +5,7 @@ export class ContractModel {
   code: string;
   company: any;
   type_contract: any;
+  name_invoce_to: string;
   start_billing_date: string;
   end_billing_date: string;
   created_at: string;

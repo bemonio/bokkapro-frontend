@@ -57,6 +57,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
 
     public showTableCheckbox: boolean;
 
+    public voucherId: number;
     public parent: string;
     public permission: string;
 
@@ -169,6 +170,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
         }
 
         this.filters = [];
+        
         if (this.date_filter.value) {
             this.filters.push({ key: 'filter{date}[]', value: this.formatDate(this.date_filter.value) })
         }
@@ -196,7 +198,20 @@ export class GuidesComponent implements OnInit, OnDestroy {
                 this.permission = 'guidecheck';
                 break;
         }
-        this.getModels()
+
+        if (this.route.snapshot.url.length > 0) {
+            this.route.params.subscribe((params) => {
+                if (this.route.snapshot.url.length > 0) {
+                    this.voucherId = params.id;
+                    if(this.voucherId){
+                        this.filters.push({ key: 'filter{vouchers}', value: this.voucherId.toString() })
+                    }
+                }
+                this.getModels();
+            });
+        } else {
+            this.getModels();
+        }
     }
 
     public getModels() {

@@ -20,7 +20,16 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: ServiceOrderEditComponent
+        component: ServiceOrderEditComponent,
+        children: [
+          {
+            path: 'origindestinations',
+            loadChildren: () =>
+              import('../../pages/origin-destination/origin-destination-routing.module').then(
+                (m) => m.OriginDestinationRoutingModule
+            ),
+          },
+        ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

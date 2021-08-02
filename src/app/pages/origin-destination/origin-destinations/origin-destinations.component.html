@@ -4,7 +4,8 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" routerLink="{{parent}}/origindestinations/add">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" (click)="showModalDialog(undefined, true)" *ngIf="serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/origindestinations/add" *ngIf="!serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -115,8 +116,14 @@
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
+            <a title="{{ 'COMMON.COUNT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+            (click)="showModalDialog(value.id, false)" *ngIf="serviceOrderId">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-success">
+              </span>
+            </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              routerLink="{{parent}}/origindestinations/edit/{{value.id}}" *ngIf="authService.hasPermission('add_contract')">
+              routerLink="{{parent}}/origindestinations/edit/{{value.id}}" *ngIf="authService.hasPermission('add_contract') && !serviceOrderId">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
@@ -141,3 +148,11 @@
 </div>
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
+
+<p-dialog header="{{ 'ORIGIN_DESTINATION.ORIGIN_DESTINATIONS' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '60vw'}" 
+  [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
+
+  <div class="mt-5">
+    <app-origin-destination-edit [originDestinationID]="originDestinationID" (displayModal)="hideModalDialog()"></app-origin-destination-edit>
+  </div>
+</p-dialog>

@@ -29,6 +29,13 @@ const routes: Routes = [
                 (m) => m.PackingRoutingModule
               ),
           },
+          {
+            path: 'guides',
+            loadChildren: () =>
+              import('../../pages/guide/guide-routing.module').then(
+                (m) => m.GuideRoutingModule
+              ),
+          },
         ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },

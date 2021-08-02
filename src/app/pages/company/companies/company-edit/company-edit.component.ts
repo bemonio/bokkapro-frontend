@@ -42,7 +42,6 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   public phone: AbstractControl;
   public web: AbstractControl;
   public address: AbstractControl;
-  public name_invoce_to: AbstractControl;
   public is_carrier: AbstractControl;
   public is_financial_institution: AbstractControl;
   public is_government_institution: AbstractControl;
@@ -95,7 +94,6 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       phone: [''],
       web: [''],
       address: [''],
-      name_invoce_to: [''],
       is_carrier: [''],
       is_financial_institution: [''],
       is_government_institution: [''],
@@ -115,7 +113,6 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.phone = this.formGroup.controls['phone'];
     this.web = this.formGroup.controls['web'];
     this.address = this.formGroup.controls['address'];
-    this.name_invoce_to = this.formGroup.controls['name_invoce_to'];
     this.is_carrier = this.formGroup.controls['is_carrier'];
     this.is_financial_institution = this.formGroup.controls['is_financial_institution'];
     this.is_government_institution = this.formGroup.controls['is_government_institution'];
@@ -199,7 +196,6 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       this.phone.setValue(this.model.phone);
       this.web.setValue(this.model.web);
       this.address.setValue(this.model.address);
-      this.name_invoce_to.setValue(this.model.name_invoce_to);
       this.is_carrier.setValue(this.model.is_carrier);
       this.is_financial_institution.setValue(this.model.is_financial_institution);
       this.is_government_institution.setValue(this.model.is_government_institution);
