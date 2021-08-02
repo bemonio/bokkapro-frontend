@@ -237,4 +237,8 @@ export class DocumentsServicesOrdersComponent implements OnInit {
             }
         });
     }
+
+    public showFile(url) {
+        window.open(url, '_blank');
+    }    
 }

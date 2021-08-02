@@ -116,6 +116,10 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.name.setValue(this.model.name);
+      this.files = [];
+      if (this.model.file_uploaded) {
+        this.files.push({name:this.model.name, file_uploaded:this.model.file_uploaded})
+      }
     }
     this.formGroup.markAllAsTouched();
   }
@@ -264,5 +268,10 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
     for(let file of event.files) {
       this.files.push(file);
     }
-    }
+  }
+
+  public showFile(url) {
+    window.open(url, '_blank');
+  }    
+
 }

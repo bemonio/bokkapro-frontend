@@ -35,7 +35,7 @@ export class PackingService {
         }
 
         if (query !== null && query !== undefined && query !== '') {
-            params.append(`filter{username.icontains}`, String(query));
+            params.append(`filter`, String(query));
         }
 
         if (filters !== null && filters !== undefined && filters.length > 0) {

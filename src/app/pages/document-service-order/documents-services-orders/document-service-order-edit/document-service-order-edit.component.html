@@ -55,8 +55,19 @@
             </div>
             <div class="col-lg-12">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DOCUMENT_SERVICE_ORDER.FILE_UPLOADED' | translate }}</label>
-              <p-fileUpload name="file_uploaded" [showUploadButton]="false" multiple="true" (onSelect)="onSelect($event)"
-              chooseLabel="{{'COMMON.CHOOSE' | translate}}" uploadLabel="{{'COMMON.UPLOAD' | translate}}" cancelLabel="{{'COMMON.CANCEL' | translate}}"></p-fileUpload>
+              <p-fileUpload name="file_uploaded" (onSelect)="onSelect($event)" multiple="false" maxFileSize="1000000" [showUploadButton]="false"
+              chooseLabel="{{'COMMON.CHOOSE' | translate}}" uploadLabel="{{'COMMON.UPLOAD' | translate}}" cancelLabel="{{'COMMON.CANCEL' | translate}}">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="files.length > 0">
+                        <li *ngFor="let file of files">
+                          <span style="width: -webkit-fill-available; height: 35px;" class="label label-lg label-inline label-light-primary" (click)="showFile(file.file_uploaded)">
+                            <div style="text-align: left; width: 50%;">{{file.name}}</div>
+                            <div style="text-align: right; width: 50%;">/ size bytes</div>
+                          </span>
+                        </li>
+                    </ul>
+                </ng-template>
+              </p-fileUpload>
             </div>
           </div>
           <div class="float-right">

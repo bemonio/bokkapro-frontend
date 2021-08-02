@@ -78,13 +78,13 @@
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'CLIENT_BINNACLE.NOTE' | translate}}</label>
                 <p-editor formControlName="note" [style]="{'height':'320px'}" placeholder="{{ 'CLIENT_BINNACLE.NOTE' | translate}}"></p-editor>
               </div>
-            </div>
-            <div class="float-right">
-              <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/clientbinnacles">{{ 'COMMON.CANCEL' | translate }}</a>
-              <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-                [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
-              <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-                [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+              <div class="col-lg-12 float-right">
+                <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/clientbinnacles">{{ 'COMMON.CANCEL' | translate }}</a>
+                <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+                  [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+                <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+                  [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+              </div>
             </div>
           </form>
         </div>

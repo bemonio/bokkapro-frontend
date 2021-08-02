@@ -397,14 +397,15 @@ export const locale = {
       RECORDS: 'Registros',
       TODAY: 'Hoy',
       WELCOME_TO: 'Bienvenido a',
-      CHOOSE: 'Elige',
+      CHOOSE: 'Eligir',
       HI: 'Hola',
       CREATED_AT: 'Creado en',
       YES: 'Si',
       NO: 'No',
       ASIGN: 'Asignar',
       ADMINISTRATION: 'Administración',
-      TESTING: 'Prueba'
+      TESTING: 'Prueba',
+      UPLOAD: 'Subir'
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',

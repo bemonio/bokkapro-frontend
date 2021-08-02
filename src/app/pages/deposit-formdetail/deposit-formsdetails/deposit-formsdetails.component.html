@@ -18,7 +18,7 @@
         </div>
         <div class="col-lg-6" [formGroup]="searchGroup">
           <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
-            formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> {{ 'COMMON.IN' | translate }} id</small>
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> </small>
         </div>
       </div>
     </div>
