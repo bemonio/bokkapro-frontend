@@ -47,6 +47,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   public is_government_institution: AbstractControl;
   public is_commercial_institution: AbstractControl;
   public is_active: AbstractControl;
+  public dubious_reputation: AbstractControl;
   public segment_company: AbstractControl;
   public type_company: AbstractControl;
 
@@ -99,6 +100,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       is_government_institution: [''],
       is_commercial_institution: [''],
       is_active: [''],
+      dubious_reputation: [''],
       segment_company: ['', Validators.compose([Validators.required])],
       type_company: ['', Validators.compose([Validators.required])],
     });
@@ -118,6 +120,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.is_government_institution = this.formGroup.controls['is_government_institution'];
     this.is_commercial_institution = this.formGroup.controls['is_commercial_institution'];
     this.is_active = this.formGroup.controls['is_active'];
+    this.dubious_reputation = this.formGroup.controls['dubious_reputation'];
     this.segment_company = this.formGroup.controls['segment_company'];
     this.type_company = this.formGroup.controls['type_company'];
 
@@ -180,6 +183,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   loadForm() {
     this.is_carrier.setValue(false);
     this.is_active.setValue(false);
+    this.dubious_reputation.setValue(false);
     this.is_financial_institution.setValue(false);
     this.is_government_institution.setValue(false);
     this.is_commercial_institution.setValue(false);
@@ -201,6 +205,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       this.is_government_institution.setValue(this.model.is_government_institution);
       this.is_commercial_institution.setValue(this.model.is_commercial_institution);
       this.is_active.setValue(this.model.is_active);
+      this.dubious_reputation.setValue(this.model.dubious_reputation);
       if (this.model.segment_company) {
         this.segment_company.setValue(this.model.segment_company);
       }

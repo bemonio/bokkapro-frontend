@@ -68,6 +68,7 @@ import { DocumentServiceOrderService } from './pages/document-service-order/_ser
 import { ServiceOrderService } from './pages/service-order/_services';
 import { OriginDestinationService } from './pages/origin-destination/_services';
 import { ClientBinnacleService } from './pages/client-binnacle/_services';
+import { NotificationService } from './pages/notification/_services';
 
 // OTHER MODULES
 import { CompaniesComponent } from 'src/app/pages/company/companies/companies.component';
@@ -172,6 +173,9 @@ export function getHighlightLanguages() {
     ServiceOrderService,
     OriginDestinationService,
     ClientBinnacleService,
+    NotificationService,
+
+    //Others
     CompaniesComponent
   ],
   bootstrap: [AppComponent],

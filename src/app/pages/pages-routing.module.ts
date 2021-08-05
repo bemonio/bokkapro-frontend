@@ -342,6 +342,13 @@ const routes: Routes = [
             (m) => m.ClientBinnacleRoutingModule
           ),
       },
+      {
+        path: 'notifications',
+        loadChildren: () =>
+          import('../pages/notification/notification-routing.module').then(
+            (m) => m.NotificationRoutingModule
+          ),
+      },
     ],
   },
 ];

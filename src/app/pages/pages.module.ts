@@ -273,6 +273,11 @@ import { ClientBinnaclesComponent } from './client-binnacle/client-binnacles/cli
 import { ClientBinnacleComponent } from './client-binnacle/client-binnacle.component';
 import { ClientBinnacleEditComponent } from './client-binnacle/client-binnacles/client-binnacle-edit/client-binnacle-edit.component';
 
+// Notifications
+import { NotificationsComponent } from './notification/notifications/notifications.component';
+import { NotificationComponent } from './notification/notification.component';
+import { NotificationEditComponent } from './notification/notifications/notification-edit/notification-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -463,6 +468,9 @@ import { ClientBinnacleEditComponent } from './client-binnacle/client-binnacles/
     ClientBinnaclesComponent,
     ClientBinnacleComponent,
     ClientBinnacleEditComponent,
+    NotificationsComponent,
+    NotificationComponent,
+    NotificationEditComponent,
   ]
 })
 export class PagesModule { }

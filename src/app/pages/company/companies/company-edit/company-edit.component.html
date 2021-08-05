@@ -245,6 +245,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_commercial_institution')">{{ 'COMPANY.COMMERCIAL_INSTITUTION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_commercial_institution')">{{ 'COMPANY.COMMERCIAL_INSTITUTION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMPANY.DUBIOUS_REPUTATION' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="dubious_reputation" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('dubious_reputation')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.DUBIOUS_REPUTATION' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('dubious_reputation')">{{ 'COMPANY.DUBIOUS_REPUTATION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'dubious_reputation')">{{ 'COMPANY.DUBIOUS_REPUTATION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'dubious_reputation')">{{ 'COMPANY.DUBIOUS_REPUTATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'dubious_reputation')">{{ 'COMPANY.DUBIOUS_REPUTATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div> 
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/companies">{{ 'COMMON.CANCEL' | translate }}</a>

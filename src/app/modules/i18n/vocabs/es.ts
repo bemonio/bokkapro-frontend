@@ -103,7 +103,8 @@ export const locale = {
       IS_CARRIER: "Transportadora?",
       IS_FINANCIAL_INSTITUTION: "Institución Financiera?",
       GOVERNMENT_INSTITUTION: "Institución Gubernamental?",
-      COMMERCIAL_INSTITUTION: "Institución Comercial?"
+      COMMERCIAL_INSTITUTION: "Institución Comercial?",
+      DUBIOUS_REPUTATION: "Reputación Dudosa"
     },
     OFFICE: {
       OFFICE: 'Oficina',
@@ -561,6 +562,20 @@ export const locale = {
       HOUR: 'Fecha y Hora',
       COMPANY: 'Compañía',
       EMPLOYEE: 'Empleado',
+    },
+    NOTIFICATION: {
+      NOTIFICATION: 'Notificación',
+      NOTIFICATIONS: 'Notificaciones',
+      ID: 'Id',
+      ICON: 'Icono',
+      TITLE: 'Título',
+      DESCRIPTION: 'Descripción',
+      LINK: 'Enlace',
+      IS_READ: 'Leído?',
+      TYPE: 'Tipo',
+      MODULE: 'Módulo',
+      EMPLOYEE_ORIGIN: 'Empleado Origen',
+      EMPLOYEE_DESTINATION: 'Empleado Destino',
     },
   }
 };

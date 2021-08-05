@@ -20,6 +20,7 @@ export class CompanyModel {
   is_government_institution: boolean;
   is_commercial_institution: boolean;
   is_active: boolean;
+  dubious_reputation: boolean;
   segment_company: any;
   type_company: any;
   created_at: string;
