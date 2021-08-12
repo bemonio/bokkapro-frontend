@@ -365,6 +365,8 @@ export const locale = {
       IN: 'en',
       IN_ALL_FIELDS: 'in all fields',
       NEW: 'Nuevo',
+      NEWS: 'Nuevos',
+      TOTAL: 'Total',
       TRANSFER: 'Transferir',
       EDIT: 'Editar',
       DELETE: 'Eliminar',
@@ -576,6 +578,12 @@ export const locale = {
       MODULE: 'Módulo',
       EMPLOYEE_ORIGIN: 'Empleado Origen',
       EMPLOYEE_DESTINATION: 'Empleado Destino',
+      USER_NOTIFICATIONS: 'Notificaciones',
+      ALERTS: 'Alertas',
+      EVENTS: 'Eventos',
+      ALL_CAUGHT_UP: '!Estás al día!',
+      NO_NEW_NOTIFICATIONS: 'No hay notificaciones nuevas.',
+
     },
   }
 };

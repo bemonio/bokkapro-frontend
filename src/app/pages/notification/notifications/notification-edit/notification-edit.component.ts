@@ -89,8 +89,9 @@ export class NotificationEditComponent implements OnInit, OnDestroy {
     this.previous = undefined;
 
     this.optionsType = [
-      {key: 'Alerta', value: 'Alerta'},
       {key: 'Notificación', value: 'Notificación'},
+      {key: 'Alerta', value: 'Alerta'},
+      {key: 'Evento', value: 'Evento'},
     ];
 
     this.route.parent.parent.parent.params.subscribe((params) => {
