@@ -68,7 +68,7 @@ export class VoucherService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=company.*&include[]=packings.*&include[]=division.*&include[]=currency.*&include[]=cashier.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=company.*&include[]=packings.*&include[]=division.*&include[]=currency.*&include[]=cashier.*&include[]=contract.*&include[]=origin_destination.*`);
     }
 
     public asignCashier(body: Object): Observable<any> {

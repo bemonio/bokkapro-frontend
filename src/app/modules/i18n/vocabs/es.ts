@@ -244,6 +244,8 @@ export const locale = {
       IS_ACTIVE: 'Activo?',
       CERTIFIED_CART: 'Carrito Certificado',
       GUIDES: 'Transacciones',
+      CONTRACT: 'Contrato',
+      ORIGIN_DESTINATION: 'Origen Destino',
     },
     PACKING: {
       PACKING: 'Envase',

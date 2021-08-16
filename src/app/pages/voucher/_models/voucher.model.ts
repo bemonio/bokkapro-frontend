@@ -15,6 +15,8 @@ export class VoucherModel {
   company: any;
   cashier: any;
   certified_cart: any;
+  contract: any;
+  origin_destination: any;
   location_origin: any;
   location_destination: any;
   packings: any[];

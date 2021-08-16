@@ -54,7 +54,7 @@
               {{ 'VOUCHER.PACKINGS' | translate }}
             </div>
           </th>
-          <th pSortableColumn="location_origin">
+          <!-- <th pSortableColumn="location_origin">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'VOUCHER.LOCATION_ORIGIN' | translate }}
             </div>
@@ -63,7 +63,7 @@
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'VOUCHER.COMPANY' | translate }}
             </div>
-          </th>
+          </th> -->
           <th pSortableColumn="cashier">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'VOUCHER.CASHIER' | translate }}
@@ -111,12 +111,12 @@
           <td>
             {{value.packings.length}}
           </td>
-          <td>
+          <!-- <td>
             {{value.location_origin.name}}
           </td>
           <td>
             {{value.company.name}}
-          </td>
+          </td> -->
           <td>
             {{value.cashier?.name}}
           </td>

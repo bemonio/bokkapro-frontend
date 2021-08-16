@@ -4,6 +4,7 @@ import { OriginDestinationService as ModelsService } from '../../_services/origi
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
+import { ContractService } from 'src/app/pages/contract/_services';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => OriginDestinationSelectComponent),
@@ -42,7 +43,8 @@ export class OriginDestinationSelectComponent implements ControlValueAccessor, O
 
     constructor(
         public modelsService: ModelsService,
-        public toastService: ToastService
+        public toastService: ToastService,
+        public contractService: ContractService,
     ) {
         this.page = 1;
         this.per_page = 100;
@@ -85,13 +87,19 @@ export class OriginDestinationSelectComponent implements ControlValueAccessor, O
                 this.filters.push({ key: 'filter{' + element.key + '}', value: element.value })
             });
         }
-        this.getModels();
+
+        if(this.addFilters[0].key === 'contract'){
+            this.getModelsOriginDestinationById(this.addFilters[0].value);
+        } else {
+            this.getModels();
+        }
+
     }
 
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
-                this.models = response.product_and_services;
+                this.models = response.origin_destinations;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {
@@ -114,6 +122,18 @@ export class OriginDestinationSelectComponent implements ControlValueAccessor, O
             }
         );
     }
+
+    getModelsOriginDestinationById(id) {
+        this.contractService.getById(id).toPromise().then(
+          response => {
+            console.log(response);
+            this.models = response.origin_destinations;
+          },
+          error => {
+            console.log('error getting Origin Destination');
+          }
+        );
+      }
 
     public isValid() {
         let stringClass = 'form-control form-control-lg form-control-solid';

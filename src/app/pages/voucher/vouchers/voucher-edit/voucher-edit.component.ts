@@ -11,6 +11,7 @@ import { VoucherService as ModelsService } from '../../_services/voucher.service
 import { CompanyService } from 'src/app/pages/company/_services';
 import { OfficeService } from 'src/app/pages/office/_services';
 import { LocationService } from 'src/app/pages/location/_services';
+import { ContractService } from 'src/app/pages/contract/_services';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -44,6 +45,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public packings: AbstractControl;
   public company: AbstractControl;
   public cashier: AbstractControl;
+  public contract: AbstractControl;
+  public origin_destination: AbstractControl; 
   public location_origin: AbstractControl;
   public location_destination: AbstractControl;
   public direct_operation: AbstractControl;
@@ -77,6 +80,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     private toastService: ToastService,
     private companyService: CompanyService,
     private locationService: LocationService,
+    private contractService: ContractService,
     private officeService: OfficeService,
     private confirmationService: ConfirmationService,
     public translate: TranslateService
@@ -92,10 +96,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       count_packings: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       verificated: [''],
       packings: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      company: [''],
       cashier: [''],
-      location_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      location_destination: ['', Validators.compose([Validators.minLength(1)])],
+      contract: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      origin_destination: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      location_origin: [''],
+      location_destination: [''],
       direct_operation: [''],
       is_active: [''],
       verified_oi: [''],
@@ -109,15 +115,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.packings = this.formGroup.controls['packings'];;
     this.company = this.formGroup.controls['company'];
     this.cashier = this.formGroup.controls['cashier'];
+    this.contract = this.formGroup.controls['contract'];
+    this.origin_destination = this.formGroup.controls['origin_destination'];
     this.location_origin = this.formGroup.controls['location_origin'];
     this.location_destination = this.formGroup.controls['location_destination'];
     this.currency = this.formGroup.controls['currency'];
     this.certified_cart = this.formGroup.controls['certified_cart'];
-    this.packings = this.formGroup.controls['packings'];
-    this.company = this.formGroup.controls['company']
-    this.cashier = this.formGroup.controls['cashier']
-    this.location_origin = this.formGroup.controls['location_origin']
-    this.location_destination = this.formGroup.controls['location_destination']
     this.direct_operation = this.formGroup.controls['direct_operation'];
     this.is_active = this.formGroup.controls['is_active'];
     this.verified_oi = this.formGroup.controls['verified_oi'];
@@ -182,6 +185,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (response.companies) {
           this.model.company = response.companies[0];
         }
+        if (response.contracts) {
+          this.model.contract = response.contracts[0];
+        }
+        if (response.origin_destinations) {
+          this.model.origin_destination = response.origin_destinations[0];
+        }
         if (response.cashier) {
           this.model.cashier = response.cashier[0];
         }
@@ -226,6 +235,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       if (this.model.cashier) {
         this.cashier.setValue(this.model.cashier);
       }
+      if (this.model.contract) {
+        this.contract.setValue(this.model.contract);
+      }
+      if (this.model.origin_destination) {
+        this.origin_destination.setValue(this.model.origin_destination);
+      }
       if (this.model.location_origin) {
         this.location_origin.setValue(this.model.location_origin);
       }
@@ -255,6 +270,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.verificated.setValidators([]);
         this.packings.setValidators([]);
         this.company.setValidators([]);
+        this.contract.setValidators([]);
+        this.origin_destination.setValidators([]);
         this.location_origin.setValidators([]);
         this.location_destination.setValidators([]);
         this.currency.setValidators([]);
@@ -269,23 +286,15 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.verificated.setValidators([]);
       this.packings.setValidators([]);
       this.company.setValidators([]);
+      this.contract.setValidators([]);
+      this.contract.setValidators([]);
       this.location_origin.setValidators([]);
       this.location_destination.setValidators([]);
       this.currency.setValidators([]);
       this.certified_cart.setValidators([]);
-        this.cashier.setValue(Validators.compose([Validators.required, Validators.minLength(1)]))
-        this.code.setValidators([])
-        this.amount.setValidators([])
-        this.count_packings.setValidators([])
-        this.verificated.setValidators([])
-        this.packings.setValidators([])
-        this.company.setValidators([])
-        this.location_origin.setValidators([])
-        this.location_destination.setValidators([])
-        this.direct_operation.setValidators([])
-        this.is_active.setValidators([])
-        this.verified_oi.setValidators([])
-        this.currency.setValidators([])
+      this.direct_operation.setValidators([])
+      this.is_active.setValidators([])
+      this.verified_oi.setValidators([])
     }
 
     this.formGroup.markAllAsTouched();
@@ -379,6 +388,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
     model.company = this.model.company.id;
     model.cashier = this.model.cashier.id;
+    model.contract = this.model.contract.id;
+    model.origin_destination = this.model.origin_destination.id;
     model.location_origin = this.model.location_origin.id;
 
     this.model.location_destination 
@@ -449,6 +460,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
     model.company = this.model.company.id;
     model.cashier = this.model.cashier.id;
+    model.contract = this.model.contract.id;
+    model.origin_destination = this.model.origin_destination.id;
     model.location_origin = this.model.location_origin.id;
 
     this.model.location_destination 
@@ -566,6 +579,26 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.getLocationDestinationByCompanyId(this.location_origin.value.company)
     }
   }
+
+  public changeContract () {
+    this.origin_destination.reset();
+    this.formGroup.markAllAsTouched();
+    this.loadForm();
+    // if (this.contract.value) {
+    //   this.getOriginDestinationById(this.contract.value.id);
+    // }
+  }
+
+  // getOriginDestinationById(id) {
+  //   this.contractService.getById(id).toPromise().then(
+  //     response => {
+  //       // this.origin_destination.setValue(response.contracts.contractserviceorder)
+  //     },
+  //     error => {
+  //       console.log('error getting Origin Destination');
+  //     }
+  //   );
+  // }
 
   getCompanyById(id) {
     this.companyService.getById(id).toPromise().then(
