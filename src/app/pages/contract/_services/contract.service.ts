@@ -66,6 +66,6 @@ export class ContractService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=company.*&include[]=type_contract.*&include[]=contractserviceorder.od_service_order.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=company.*&include[]=type_contract.*&include[]=contractserviceorder.od_service_order.origin.*&include[]=contractserviceorder.od_service_order.destination.*`);
     }
 }

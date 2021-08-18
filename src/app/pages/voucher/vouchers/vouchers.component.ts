@@ -129,6 +129,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this._with.push({key: 'include[]', value: 'certified_cart.*'})
         this._with.push({key: 'include[]', value: 'crew.*'})
         this._with.push({key: 'include[]', value: 'crew_last.*'})
+        this._with.push({key: 'include[]', value: 'contract.*'})
+        this._with.push({key: 'include[]', value: 'origin_destination.origin.*'})
+        this._with.push({key: 'include[]', value: 'origin_destination.destination.*'})
     }
     
     public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
@@ -215,6 +218,26 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         });
                     });
                 }
+                if(response.contracts){
+                    response.contracts.forEach(contract => {
+                        this.models.forEach(element => {
+                            if (element.contract === contract.id) {
+                                element.contract = contract;
+                            }
+                        });
+                    });
+                }
+
+                // if(response.locations){
+                //     response.locations.forEach(location => {
+                //         this.models.forEach(element => {
+                //             if (element.origin_destination === location.id) {
+                //                 element.origin_destination.origin = location;
+                //             }
+                //         });
+                //     });
+                // }
+                
                 this.totalRecords = response.meta.total_results;
             },
             error => {

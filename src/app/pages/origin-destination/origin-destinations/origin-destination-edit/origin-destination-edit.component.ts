@@ -203,7 +203,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
           this.model.origin = response.locations[0];
         }
         if (response.locations) {
-          this.model.destination = response.locations[0];
+          this.model.destination = response.locations[1];
         }
         if (response.service_orders) {
           this.model.service_order = response.service_orders[0];

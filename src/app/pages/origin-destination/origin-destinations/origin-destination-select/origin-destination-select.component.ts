@@ -1,4 +1,4 @@
-import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OriginDestinationService as ModelsService } from '../../_services/origin-destination.service';
 import { LazyLoadEvent } from 'primeng/api';
@@ -17,7 +17,7 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     styleUrls: ['./origin-destination-select.component.scss'],
     providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
-export class OriginDestinationSelectComponent implements ControlValueAccessor, OnInit {
+export class OriginDestinationSelectComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input() model: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
@@ -52,9 +52,13 @@ export class OriginDestinationSelectComponent implements ControlValueAccessor, O
 
     public ngOnInit() {
         if (!this.placeholder) {
-            this.placeholder = 'OriginDestination';
+            this.placeholder = 'Origin Destination';
         }
         this.load();
+    }
+
+    ngOnChanges(): void {
+        this.ngOnInit();
     }
 
     writeValue(value: any) {
@@ -126,8 +130,23 @@ export class OriginDestinationSelectComponent implements ControlValueAccessor, O
     getModelsOriginDestinationById(id) {
         this.contractService.getById(id).toPromise().then(
           response => {
-            console.log(response);
             this.models = response.origin_destinations;
+
+            // response.locations.forEach(location => {
+            //     this.models.forEach(element => {
+            //         if (element.origin === location.id) {
+            //             element.origin = location;
+            //         }
+            //     });
+            // });
+
+            // response.locations.forEach(location => {
+            //     this.models.forEach(element => {
+            //         if (element.destination === location.id) {
+            //             element.destination = location;
+            //         }
+            //     });
+            // });
           },
           error => {
             console.log('error getting Origin Destination');

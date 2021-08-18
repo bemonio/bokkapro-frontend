@@ -583,22 +583,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public changeContract () {
     this.origin_destination.reset();
     this.formGroup.markAllAsTouched();
-    this.loadForm();
-    // if (this.contract.value) {
-    //   this.getOriginDestinationById(this.contract.value.id);
-    // }
   }
-
-  // getOriginDestinationById(id) {
-  //   this.contractService.getById(id).toPromise().then(
-  //     response => {
-  //       // this.origin_destination.setValue(response.contracts.contractserviceorder)
-  //     },
-  //     error => {
-  //       console.log('error getting Origin Destination');
-  //     }
-  //   );
-  // }
 
   getCompanyById(id) {
     this.companyService.getById(id).toPromise().then(
