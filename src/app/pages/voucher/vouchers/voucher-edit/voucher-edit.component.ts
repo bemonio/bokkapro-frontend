@@ -567,7 +567,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   }
 
   public changeCompany() {
-    this.location_origin.reset();
+    this.contract.reset();
+    this.origin_destination.reset();
     this.formGroup.markAllAsTouched();
   }
 

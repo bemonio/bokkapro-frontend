@@ -132,21 +132,21 @@ export class OriginDestinationSelectComponent implements ControlValueAccessor, O
           response => {
             this.models = response.origin_destinations;
 
-            // response.locations.forEach(location => {
-            //     this.models.forEach(element => {
-            //         if (element.origin === location.id) {
-            //             element.origin = location;
-            //         }
-            //     });
-            // });
+            response.locations.forEach(location => {
+                this.models.forEach(element => {
+                    if (element.origin === location.id) {
+                        element.origin = location;
+                    }
+                });
+            });
 
-            // response.locations.forEach(location => {
-            //     this.models.forEach(element => {
-            //         if (element.destination === location.id) {
-            //             element.destination = location;
-            //         }
-            //     });
-            // });
+            response.locations.forEach(location => {
+                this.models.forEach(element => {
+                    if (element.destination === location.id) {
+                        element.destination = location;
+                    }
+                });
+            });
           },
           error => {
             console.log('error getting Origin Destination');

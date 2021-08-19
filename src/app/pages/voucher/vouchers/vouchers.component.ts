@@ -227,16 +227,33 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         });
                     });
                 }
-
-                // if(response.locations){
-                //     response.locations.forEach(location => {
-                //         this.models.forEach(element => {
-                //             if (element.origin_destination === location.id) {
-                //                 element.origin_destination.origin = location;
-                //             }
-                //         });
-                //     });
-                // }
+                if(response.origin_destinations){
+                    response.origin_destinations.forEach(origin_destination => {
+                        this.models.forEach(element => {
+                            if (element.origin_destination === origin_destination.id) {
+                                element.origin_destination = origin_destination;
+                            }
+                        });
+                    });
+                }
+                if(response.locations){
+                    response.locations.forEach(location => {
+                        this.models.forEach(element => {
+                            if (element.origin_destination.origin === location.id) {
+                                element.origin_destination.origin = location;
+                            }
+                        });
+                    });
+                }
+                if(response.locations){
+                    response.locations.forEach(location => {
+                        this.models.forEach(element => {
+                            if (element.origin_destination.destination === location.id) {
+                                element.origin_destination.destination = location;
+                            }
+                        });
+                    });
+                }
                 
                 this.totalRecords = response.meta.total_results;
             },
