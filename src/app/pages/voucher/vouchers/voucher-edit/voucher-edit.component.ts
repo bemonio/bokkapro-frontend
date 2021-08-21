@@ -42,6 +42,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public amount: AbstractControl;
   public count_packings: AbstractControl;
   public verificated: AbstractControl;
+  public date_delivery: AbstractControl;
+  public pickup_date: AbstractControl;
+  public checkin_date: AbstractControl;
   public packings: AbstractControl;
   public company: AbstractControl;
   public cashier: AbstractControl;
@@ -95,6 +98,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       amount: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       count_packings: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       verificated: [''],
+      date_delivery: [''],
+      pickup_date: [''],
+      checkin_date: [''],
       packings: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       company: [''],
       cashier: [''],
@@ -112,6 +118,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.amount = this.formGroup.controls['amount'];
     this.count_packings = this.formGroup.controls['count_packings'];
     this.verificated = this.formGroup.controls['verificated'];
+    this.date_delivery = this.formGroup.controls['date_delivery'];
+    this.pickup_date = this.formGroup.controls['pickup_date'];
+    this.checkin_date = this.formGroup.controls['checkin_date'];
     this.packings = this.formGroup.controls['packings'];;
     this.company = this.formGroup.controls['company'];
     this.cashier = this.formGroup.controls['cashier'];
@@ -219,6 +228,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.direct_operation.setValue(false);
     this.is_active.setValue(true);
     this.verified_oi.setValue(false);
+    this.date_delivery.setValue(undefined)
+    this.pickup_date.setValue(undefined)
+    this.checkin_date.setValue(undefined)
 
     if (this.model.id) {
       this.editBool = true;
@@ -226,6 +238,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.amount.setValue(this.model.amount);
       this.count_packings.setValue(this.model.count_packings);
       this.verificated.setValue(this.model.verificated);
+      this.model.date_delivery != undefined ? this.date_delivery.setValue(new Date(this.formatDate(this.model.date_delivery))) : undefined;
+      this.model.pickup_date != undefined ? this.pickup_date.setValue(new Date(this.formatDate(this.model.pickup_date))) : undefined;
+      this.model.checkin_date != undefined ? this.checkin_date.setValue(new Date(this.formatDate(this.model.checkin_date))) : undefined;
       this.direct_operation.setValue(this.model.direct_operation);
       this.is_active.setValue(this.model.is_active);
       this.verified_oi.setValue(this.model.verified_oi);
@@ -391,6 +406,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.contract = this.model.contract.id;
     model.origin_destination = this.model.origin_destination.id;
     model.location_origin = this.model.location_origin.id;
+    this.date_delivery.value != null ? model.date_delivery = this.formatDate(this.date_delivery.value) : model.date_delivery = this.date_delivery.value;
+    this.pickup_date.value != null ? model.pickup_date = this.formatDate(this.pickup_date.value) : model.pickup_date = this.pickup_date.value;
+    this.checkin_date.value != null ? model.checkin_date = this.formatDate(this.checkin_date.value) : model.checkin_date = this.checkin_date.value;
 
     this.model.location_destination 
     ? model.location_destination = this.model.location_destination.id 
@@ -463,6 +481,19 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     model.contract = this.model.contract.id;
     model.origin_destination = this.model.origin_destination.id;
     model.location_origin = this.model.location_origin.id;
+
+    model.date_delivery = undefined;
+    if (this.date_delivery.value) {
+      model.date_delivery = this.formatDate(this.date_delivery.value);
+    }
+    model.pickup_date = undefined;
+    if (this.pickup_date.value) {
+      model.pickup_date = this.formatDate(this.pickup_date.value);
+    }
+    model.checkin_date = undefined;
+    if (this.checkin_date.value) {
+      model.checkin_date = this.formatDate(this.checkin_date.value);
+    }
 
     this.model.location_destination 
     ? model.location_destination = this.model.location_destination.id 
@@ -727,6 +758,37 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       this.closeEmit()
     });
+  }
+
+  public formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    let hours = '' + d.getHours();
+    let minutes = '' + d.getMinutes();
+    let seconds = '' + d.getSeconds();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+
+    if (hours.length < 2) {
+      hours = '0' + hours;
+    }
+
+    if (minutes.length < 2) {
+      minutes = '0' + minutes;
+    }
+
+    if (seconds.length < 2) {
+      seconds = '0' + seconds;
+    }
+
+    return [year, month, day].join('-') + ' ' + [hours, minutes].join(':');
   }
 
 }

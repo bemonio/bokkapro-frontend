@@ -10,6 +10,9 @@ export class VoucherModel {
   amount: number;
   count_packings: number;
   verificated: boolean;
+  date_delivery: string;
+  pickup_date: string;
+  checkin_date: string;
   division: any;
   guides: any;
   company: any;

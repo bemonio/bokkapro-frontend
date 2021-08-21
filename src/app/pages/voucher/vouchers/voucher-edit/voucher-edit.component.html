@@ -181,6 +181,33 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_active')">{{ 'VOUCHER.IS_ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_active')">{{ 'VOUCHER.IS_ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>  -->
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.DATE_DELIVERY' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date_delivery'))" name="date_delivery" formControlName="date_delivery" showTime="true" hourFormat="24"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('date_delivery')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.DATE_DELIVERY' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('date_delivery')">{{ 'VOUCHER.DATE_DELIVERY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date_delivery')">{{ 'VOUCHER.DATE_DELIVERY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date_delivery')">{{ 'VOUCHER.DATE_DELIVERY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date_delivery')">{{ 'VOUCHER.DATE_DELIVERY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>  
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PICKUP_DATE' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('pickup_date'))" name="pickup_date" formControlName="pickup_date" showTime="true" hourFormat="24"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('pickup_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PICKUP_DATE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>  
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CHECKIN_DATE' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('checkin_date'))" name="checkin_date" formControlName="checkin_date" showTime="true" hourFormat="24"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('checkin_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CHECKIN_DATE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('checkin_date')">{{ 'VOUCHER.CHECKIN_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'checkin_date')">{{ 'VOUCHER.CHECKIN_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'checkin_date')">{{ 'VOUCHER.CHECKIN_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'checkin_date')">{{ 'VOUCHER.CHECKIN_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>  
             <div class="col-lg-12">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKINGS' | translate }}</label>
               <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false" [disabled]="model && model.id"></p-chips>
