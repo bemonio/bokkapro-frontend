@@ -123,7 +123,6 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.subscribeToDivisionChange();
 
         this._with = [];
-        this._with.push({key: 'include[]', value: 'company.*'})
         this._with.push({key: 'include[]', value: 'currency.*'})
         this._with.push({key: 'include[]', value: 'cashier.*'})
         this._with.push({key: 'include[]', value: 'certified_cart.*'})
@@ -191,15 +190,6 @@ export class VouchersComponent implements OnInit, OnDestroy {
                 response.vouchers.forEach(element => {
                     this.models.push(element);
                 });
-                if(response.companies){
-                    response.companies.forEach(company => {
-                        this.models.forEach(element => {
-                            if (element.company === company.id) {
-                                element.company = company;
-                            }
-                        });
-                    });
-                }
                 if(response.currencies){
                     response.currencies.forEach(currency => {
                         this.models.forEach(element => {
