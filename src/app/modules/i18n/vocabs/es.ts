@@ -246,6 +246,9 @@ export const locale = {
       GUIDES: 'Transacciones',
       CONTRACT: 'Contrato',
       ORIGIN_DESTINATION: 'Origen Destino',
+      DATE_DELIVERY: 'Fecha Entrega',
+      PICKUP_DATE: 'Fecha Recogida',
+      CHECKIN_DATE: 'Fecha Checkin'
     },
     PACKING: {
       PACKING: 'Envase',
