@@ -1,4 +1,7 @@
 <div>
     <p-dropdown  optionLabel="origin.name" [styleClass]="isValid()" [options]="models" (onChange)="change($event)" [(ngModel)]="value" placeholder="{{placeholder}}" [disabled]="disabled" [required]="required">
+        <ng-template let-item pTemplate="item">
+            <div>{{item.origin.name}} - {{item.destination.name}}</div>
+        </ng-template>
     </p-dropdown>
 </div>
