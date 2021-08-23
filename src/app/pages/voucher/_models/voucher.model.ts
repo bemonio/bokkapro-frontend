@@ -15,7 +15,6 @@ export class VoucherModel {
   checkin_date: string;
   division: any;
   guides: any;
-  company: any;
   cashier: any;
   certified_cart: any;
   contract: any;
