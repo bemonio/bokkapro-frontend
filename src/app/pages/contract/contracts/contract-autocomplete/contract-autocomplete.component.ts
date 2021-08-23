@@ -98,7 +98,7 @@ export class ContractAutocompleteComponent implements ControlValueAccessor, OnIn
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{code.icontains}', value: event.query })
+            this.filters.push({ key: 'filter', value: event.query })
         } else {
             this.query = undefined;
         }
