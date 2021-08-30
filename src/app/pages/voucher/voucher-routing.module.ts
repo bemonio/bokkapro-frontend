@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { VoucherComponent } from './voucher.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { VoucherEditComponent } from './vouchers/voucher-edit/voucher-edit.component';
+import { VoucherAddListComponent } from './vouchers/voucher-add-list/voucher-add-list.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'add',
         component: VoucherEditComponent
+      },
+      {
+        path: 'addList',
+        component: VoucherAddListComponent
       },
       {
         path: 'edit/:id',

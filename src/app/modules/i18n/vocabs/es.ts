@@ -231,6 +231,8 @@ export const locale = {
       VOUCHERS: 'Comprobantes',
       ID: 'Id',
       CODE: 'Código / Comprobante',
+      CODE_START: 'Código Inicio / Comprobante',
+      CODE_END: 'Código Final / Comprobante',
       PACKINGS: 'Envases',
       CURRENCY: 'Divisa',
       AMOUNT: 'Monto',

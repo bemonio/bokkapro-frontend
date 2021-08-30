@@ -14,6 +14,7 @@ import { VoucherComponent } from './voucher.component';
 // import { VoucherRoutingModule} from './voucher-routing.module';
 import { VoucherEditComponent } from './vouchers/voucher-edit/voucher-edit.component';
 import { VoucherAutocompleteComponent } from './vouchers/voucher-autocomplete/voucher-autocomplete.component';
+import { VoucherAddListComponent } from './vouchers/voucher-add-list/voucher-add-list.component';
 import { VoucherService } from './_services/';
 import { RouterModule } from '@angular/router';
 
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
     VoucherComponent,
     VoucherEditComponent,
     VoucherAutocompleteComponent,
+    VoucherAddListComponent,
   ],
   imports: [
     CommonModule,

@@ -144,6 +144,7 @@ import { DepositFormDetailEditComponent } from './deposit-formdetail/deposit-for
 import { VouchersComponent } from './voucher/vouchers/vouchers.component';
 import { VoucherComponent } from './voucher/voucher.component';
 import { VoucherEditComponent } from './voucher/vouchers/voucher-edit/voucher-edit.component';
+import { VoucherAddListComponent } from './voucher/vouchers/voucher-add-list/voucher-add-list.component';
 import { VoucherAutocompleteComponent } from './voucher/vouchers/voucher-autocomplete/voucher-autocomplete.component';
 
 // Currencies
@@ -384,6 +385,7 @@ import { NotificationEditComponent } from './notification/notifications/notifica
     VouchersComponent,
     VoucherComponent,
     VoucherEditComponent,
+    VoucherAddListComponent,
     VoucherAutocompleteComponent,
     CurrenciesComponent,
     CurrencyComponent,
