@@ -8,6 +8,7 @@
       <a type="button" class="btn btn-secondary" (click)="showModalDialogCashier()" *ngIf="authService.currentDivisionValue.id === 3 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CASHIER' | translate }}</a>
       <a type="button" class="btn btn-secondary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a>
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/vouchers/add" *ngIf="parent.startsWith('/guidesinput')">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/vouchers/addList">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
