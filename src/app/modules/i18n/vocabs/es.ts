@@ -52,6 +52,8 @@ export const locale = {
         MIN_LENGTH_FIELD: 'Minimum field length:',
         MAX_LENGTH_FIELD: 'Maximum field length:',
         INVALID_FIELD: 'Field is not valid',
+        USERNAME: 'Correo electrónico',
+        PASSWORD: 'Contraseña'
       }
     },
     DASHBOARD: {
@@ -66,8 +68,36 @@ export const locale = {
       DATE_JOINED: 'Fecha Registro',
       IS_ACTIVATE: 'Activo?' ,
       STATUS: 'Status' ,
-      PASSWORD: 'Contraseña' 
-  },
+      PASSWORD: 'Contraseña',
+      FIRST_NAME: 'Nombre',
+      LAST_NAME: 'Apellido',
+      PERMISSIONS: 'Permisos',
+      GROUPS: 'Grupos',
+      IS_STAFF: 'Staff?',
+      IS_SUPERUSER: 'Super Usuario?',
+    },
+    PERMISSION: {
+      PERMISSION: 'Permiso',
+      PERMISSIONS: 'Permisos',
+      ID: 'Id',
+      NAME: 'Nombre',
+      CONTENT_TYPE: 'Tipo Contenido',
+      CODENAME: 'Nombre Clave',
+    },
+    CONTENT_TYPE: {
+      CONTENT_TYPE: 'Tipo Contenido Permiso',
+      CONTENT_TYPES: 'Tipos Contenido Permisos',
+      ID: 'Id',
+      APP_LABEL: 'Etiqueta de la Aplicación',
+      MODEL: 'Modelo',
+    },
+    GROUP: {
+      GROUP: 'Grupo',
+      GROUPS: 'Grupos',
+      ID: 'Id',
+      NAME: 'Nombre',
+      PERMISSIONS: 'Permisos'
+    },
     SEGMENT_COMPANY: {
       SEGMENT_COMPANY: 'Segmento Cliente',
       SEGMENTS_COMPANIES: 'Segmentos Clientes',
@@ -535,6 +565,7 @@ export const locale = {
       ORIGIN: 'Origen',
       DESTINATION: 'Destino',
       SERVICE_ORDER: 'Orden de Servicio',
+      CONTRACT: 'Contrato',
       TYPE_SERVICE: 'Tipo Servicio',
       DISTRIB_CHARGES: 'Cargos Distribución',
       DAYS_MONTH: 'Días Mes',

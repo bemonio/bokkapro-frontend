@@ -581,6 +581,7 @@
               </a>
             </li>
             <!-- end::2 Level -->
+
             <!-- begin::2 Level Employee -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_employee')">
               <a class="menu-link" routerLink="/employees" routerLinkActive="active">
@@ -588,6 +589,39 @@
                   <span></span>
                 </i>
                 <span class="menu-text">{{ 'EMPLOYEE.EMPLOYEES' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+
+            <!-- begin::2 Level Permission -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_permission')">
+              <a class="menu-link" routerLink="/permissions" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'PERMISSION.PERMISSIONS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+
+            <!-- begin::2 Level ContentType -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_permission')">
+              <a class="menu-link" routerLink="/contenttypes" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'CONTENT_TYPE.CONTENT_TYPES' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+
+            <!-- begin::2 Level Group -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_group')">
+              <a class="menu-link" routerLink="/groups" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'GROUP.GROUPS' | translate }}</span>
               </a>
             </li>
             <!-- end::2 Level -->

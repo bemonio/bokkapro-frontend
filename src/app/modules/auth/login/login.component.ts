@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         .pipe(first())
         .subscribe((userAuth: any) => {
           if (userAuth){
-            this.userService.getById(userAuth.id)
+            this.userService.getByIdPermissions(userAuth.id)
             .pipe(first())
             .subscribe((user: any) => {  
               let model = user;

@@ -1,0 +1,4 @@
+<div>
+    <p-autoComplete [inputStyleClass]="isValid()" [suggestions]="models" (completeMethod)="loadLazy($event)" (change)="change($event)" (paste)="change($event)" (onSelect)="change($event)" [forceSelection]="true" delay="0" [(ngModel)]="value" field="id" placeholder="{{placeholder}}" [disabled]="disabled" [required]="required">
+    </p-autoComplete>
+</div>

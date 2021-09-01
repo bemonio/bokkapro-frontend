@@ -349,6 +349,27 @@ const routes: Routes = [
             (m) => m.NotificationRoutingModule
           ),
       },
+      {
+        path: 'permissions',
+        loadChildren: () =>
+          import('../pages/permission/permission-routing.module').then(
+            (m) => m.PermissionRoutingModule
+          ),
+      },
+      {
+        path: 'groups',
+        loadChildren: () =>
+          import('../pages/group/group-routing.module').then(
+            (m) => m.GroupRoutingModule
+          ),
+      },
+      {
+        path: 'contenttypes',
+        loadChildren: () =>
+          import('../pages/content-type/content-type-routing.module').then(
+            (m) => m.ContentTypeRoutingModule
+          ),
+      },
     ],
   },
 ];

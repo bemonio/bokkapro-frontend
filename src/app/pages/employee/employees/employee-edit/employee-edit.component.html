@@ -42,7 +42,7 @@
       <div class="mt-5" *ngIf="model">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'EMPLOYEE.NAME' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="name" [class.is-invalid]="isControlInvalid('name')"
@@ -53,7 +53,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">{{ 'EMPLOYEE.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">{{ 'EMPLOYEE.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-6">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'EMPLOYEE.DESCRIPTION' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="description" [class.is-invalid]="isControlInvalid('description')"
@@ -64,7 +64,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'description')">{{ 'EMPLOYEE.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'description')">{{ 'EMPLOYEE.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-6">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'EMPLOYEE.POSITION' | translate }}</label>
               <app-position-autocomplete
               name="position" [valid]="isControlValid('position')" [touched]="isControlTouched('position')" [class.is-invalid]="isControlInvalid('position')"
@@ -75,7 +75,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'position')">{{ 'EMPLOYEE.POSITION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'position')">{{ 'EMPLOYEE.POSITION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-6">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'EMPLOYEE.USER' | translate }}</label>
               <app-user-autocomplete
               placeholder="{{ 'EMPLOYEE.USER' | translate }}" name="user" [valid]="isControlValid('user')" [touched]="isControlTouched('user')" [class.is-invalid]="isControlInvalid('user')"

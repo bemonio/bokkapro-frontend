@@ -1,0 +1,101 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="requesting">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="model">
+          {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
+          <span *ngIf="model && model.id">'{{ model.id }} </span>
+        </ng-container>
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="/permissions">
+        <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
+      </a>
+      <button class="btn btn-secondary ml-2" (click)="reset()">
+        <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+        <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+          [class.active]="activeTabId === tabs.BASIC_TAB">
+          {{ 'COMMON.BASIC_INFO' | translate }}
+        </a>
+      </li>
+      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PROFILE"
+          [class.active]="activeTabId === tabs.PROFILE">Profile</a>
+      </li> -->
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+      <div class="mt-5" *ngIf="model">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
+          <div class="form-group row">
+            <div class="col-lg-6">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PERMISSION.NAME' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="name" [class.is-invalid]="isControlInvalid('name')"
+                [class.is-valid]="isControlValid('name')" formControlName="name" />
+              <div class="feedback" *ngIf="!isControlTouched('name')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PERMISSION.NAME' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('name')">{{ 'PERMISSION.NAME' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">{{ 'PERMISSION.NAME' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">{{ 'PERMISSION.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">{{ 'PERMISSION.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-6">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PERMISSION.CONTENT_TYPE' | translate }}</label>
+              <app-content-type-select
+              name="content_type" [valid]="isControlValid('content_type')" [touched]="isControlTouched('content_type')" [class.is-invalid]="isControlInvalid('content_type')"
+              [class.is-valid]="isControlValid('content_type')" formControlName="content_type" id="content_type" [model]="model.content_type"></app-content-type-select>
+              <div class="feedback" *ngIf="!isControlTouched('content_type')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PERMISSION.CONTENT_TYPE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('content_type')">{{ 'PERMISSION.CONTENT_TYPE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'content_type')">{{ 'PERMISSION.CONTENT_TYPE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'content_type')">{{ 'PERMISSION.CONTENT_TYPE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'content_type')">{{ 'PERMISSION.CONTENT_TYPE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-6">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PERMISSION.CODENAME' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="codename" [class.is-invalid]="isControlInvalid('codename')"
+                [class.is-valid]="isControlValid('codename')" formControlName="codename" />
+              <div class="feedback" *ngIf="!isControlTouched('codename')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PERMISSION.CODENAME' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('codename')">{{ 'PERMISSION.CODENAME' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'codename')">{{ 'PERMISSION.CODENAME' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'codename')">{{ 'PERMISSION.CODENAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'codename')">{{ 'PERMISSION.CODENAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <!-- <div class="col-lg-6">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PERMISSION.POSITION' | translate }}</label>
+              <app-position-autocomplete
+              name="position" [valid]="isControlValid('position')" [touched]="isControlTouched('position')" [class.is-invalid]="isControlInvalid('position')"
+              [class.is-valid]="isControlValid('position')" formControlName="position" id="position" [model]="model.position"></app-position-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('position')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PERMISSION.POSITION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('position')">{{ 'PERMISSION.POSITION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'position')">{{ 'PERMISSION.POSITION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'position')">{{ 'PERMISSION.POSITION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'position')">{{ 'PERMISSION.POSITION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> -->
+          </div>
+          <div class="float-right">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="/permissions">{{ 'COMMON.CANCEL' | translate }}</a>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+  </div>
+</div>

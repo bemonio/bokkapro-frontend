@@ -1,0 +1,4 @@
+<div>
+    <p-multiSelect [styleClass]="isValid()" [options]="models" optionLabel="name" defaultLabel="Select Groups" (completeMethod)="loadLazy($event)" (onChange)="change($event)" (paste)="change($event)" (onSelect)="change($event)" [(ngModel)]="value" field="name" placeholder="{{placeholder}}" [disabled]="disabled" [required]="required">
+    </p-multiSelect>
+</div>
