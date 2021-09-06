@@ -463,6 +463,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
           }
         }
       }
+      this.listVouchers = [];
     });
     this.subscriptions.push(sbCreate);
   }

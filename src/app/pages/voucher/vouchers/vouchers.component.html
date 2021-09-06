@@ -176,5 +176,5 @@
 
 <p-dialog header="{{ 'COMMON.TRANSFER' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
   [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
-  <app-guide-edit (close)="hideModalDialog()" [listVouchers]="selectedModels" [transfer]="true"></app-guide-edit>
+  <app-guide-edit (close)="hideModalDialog()" [(listVouchers)]="selectedModels" [transfer]="true"></app-guide-edit>
 </p-dialog>
