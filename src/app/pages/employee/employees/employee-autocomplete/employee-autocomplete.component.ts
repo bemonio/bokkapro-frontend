@@ -1,9 +1,12 @@
 import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EmployeeService as ModelsService } from '../../_services/employee.service';
+import { CrewService } from 'src/app/pages/crew/_services/crew.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
+import { formatDate } from '@angular/common';
+
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => EmployeeAutocompleteComponent),
@@ -23,6 +26,7 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
     @Input() required: boolean;
     @Input() disabled: boolean;
     @Input() placeholder: string;
+    @Input() isCrewInput: boolean;
     @Input() addFilters: { key: string, value: string }[];
 
     public models: any[];
@@ -43,7 +47,8 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
 
     constructor(
         public modelsService: ModelsService,
-        public toastService: ToastService
+        public toastService: ToastService,
+        public crewService: CrewService,
     ) {
         this.page = 1;
         this.per_page = 100;
@@ -95,10 +100,17 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
             this.addFilters.forEach(element => {
                 this.filters.push({ key: 'filter{' + element.key + '}', value: element.value })
             });
+            if(this.isCrewInput){
+                this.filters.push({ key: 'filter{date}', value: formatDate(Date.now(),'yyyy-MM-dd','en-US') })
+            }
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{name.icontains}', value: event.query })
+            if(this.isCrewInput){
+                this.filters.push({ key: 'filter{assistant.name.icontains}', value: event.query })
+            } else {
+                this.filters.push({ key: 'filter{name.icontains}', value: event.query })
+            }          
         } else {
             this.query = undefined;
         }
@@ -115,30 +127,57 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
-            response => {
-                this.models = response.employees;
-                this.totalRecords = response.meta.total_results;
-                // if (this.model) {
-                //     if (this.model.id) {
-                //         this.model.id = undefined;
-                //         this.value = this.models[0];
-                //         this.filters = [];
-                //     }
-                // }
-            },
-            error => {
-                let messageError = [];
-                if (!Array.isArray(error.error)) {
-                    messageError.push(error.error);
-                } else {
-                    messageError = error.error;
+        if(this.isCrewInput){
+            this.crewService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
+                response => {
+                    this.models = response.employees;
+                    this.totalRecords = response.meta.total_results;
+                    // if (this.model) {
+                    //     if (this.model.id) {
+                    //         this.model.id = undefined;
+                    //         this.value = this.models[0];
+                    //         this.filters = [];
+                    //     }
+                    // }
+                },
+                error => {
+                    let messageError = [];
+                    if (!Array.isArray(error.error)) {
+                        messageError.push(error.error);
+                    } else {
+                        messageError = error.error;
+                    }
+                    Object.entries(messageError).forEach(
+                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    );
                 }
-                Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
-                );
-            }
-        );
+            );
+        } else {
+            this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
+                response => {
+                    this.models = response.employees;
+                    this.totalRecords = response.meta.total_results;
+                    // if (this.model) {
+                    //     if (this.model.id) {
+                    //         this.model.id = undefined;
+                    //         this.value = this.models[0];
+                    //         this.filters = [];
+                    //     }
+                    // }
+                },
+                error => {
+                    let messageError = [];
+                    if (!Array.isArray(error.error)) {
+                        messageError.push(error.error);
+                    } else {
+                        messageError = error.error;
+                    }
+                    Object.entries(messageError).forEach(
+                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    );
+                }
+            );
+        }
     }
 
     public isValid() {

@@ -43,28 +43,6 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}</label>
-              <app-location-autocomplete
-              name="origin" [valid]="isControlValid('origin')" [touched]="isControlTouched('origin')" [class.is-invalid]="isControlInvalid('origin')"
-              [class.is-valid]="isControlValid('origin')" formControlName="origin" id="origin" [model]="model.origin"></app-location-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('origin')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}</label>
-              <app-location-autocomplete
-              name="destination" [valid]="isControlValid('destination')" [touched]="isControlTouched('destination')" [class.is-invalid]="isControlInvalid('destination')"
-              [class.is-valid]="isControlValid('destination')" formControlName="destination" id="destination" [model]="model.destination"></app-location-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }}</label>
               <app-service-order-autocomplete
               name="service_order" [valid]="isControlValid('service_order')" [touched]="isControlTouched('service_order')" [class.is-invalid]="isControlInvalid('service_order')"
@@ -74,6 +52,28 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'service_order')">{{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'service_order')">{{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'service_order')">{{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}</label>
+              <app-location-autocomplete [addFilters]="filterServOrdCompany ? [{key: 'company', value: filterServOrdCompany.company}] : undefined " 
+              name="origin" [valid]="isControlValid('origin')" [touched]="isControlTouched('origin')" [class.is-invalid]="isControlInvalid('origin')"
+              [class.is-valid]="isControlValid('origin')" formControlName="origin" id="origin" [model]="model.origin" [disabled]="service_order.value ? false : true"></app-location-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('origin')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}</label>
+              <app-location-autocomplete [addFilters]="filterServOrdCompany ? [{key: 'company', value: filterServOrdCompany.company}] : undefined " 
+              name="destination" [valid]="isControlValid('destination')" [touched]="isControlTouched('destination')" [class.is-invalid]="isControlInvalid('destination')"
+              [class.is-valid]="isControlValid('destination')" formControlName="destination" id="destination" [model]="model.destination" [disabled]="service_order.value ? false : true"></app-location-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-2">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}</label>

@@ -66,6 +66,6 @@ export class OriginDestinationService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=origin.*&include[]=destination.*&include[]=service_order.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=origin.*&include[]=destination.*&include[]=service_order.*&include[]=service_order.company.*`);
     }
 }

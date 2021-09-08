@@ -9,7 +9,7 @@ import { GuideModel as Model } from '../../_models/guide.model';
 import { GuideService as ModelsService } from '../../_services/guide.service';
 import { DivisionService } from 'src/app/pages/division/_services';
 import { CrewService } from 'src/app/pages/crew/_services';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-guide-edit',

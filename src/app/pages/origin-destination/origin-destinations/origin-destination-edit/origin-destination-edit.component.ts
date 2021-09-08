@@ -58,6 +58,8 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
   public destination: AbstractControl;
   public service_order: AbstractControl;
 
+  public filterServOrdCompany: any;
+
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
 
@@ -78,6 +80,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
+    this.filterServOrdCompany = undefined;
 
     this.formGroup = this.fb.group({
       type_service: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -207,6 +210,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
         }
         if (response.service_orders) {
           this.model.service_order = response.service_orders[0];
+          this.filterServOrdCompany = response.service_orders[0];
         }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -467,7 +471,8 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
   getServiceOrderById(id) {
     this.serviceOrderService.getById(id).toPromise().then(
       response => {
-        this.service_order.setValue(response.service_order)
+        this.service_order.setValue(response.service_order);
+        this.filterServOrdCompany = response.service_order;
       },
       error => {
         console.log('error getting service_order');
