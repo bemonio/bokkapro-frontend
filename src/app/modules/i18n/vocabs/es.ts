@@ -474,6 +474,8 @@ export const locale = {
       ID: 'Id',
       CLOSED_AT: 'Cerrado',
       HOURS_CLOSE: 'Horas de Cierre',
+      ATM: 'ATM', 
+      CASH_OPENING: 'Apertura Efectivo',
       EMPLOYEES_OPEN: 'Empleados Aperturan',
       EMPLOYEES_CLOSE: 'Empleados Cierre',
     },

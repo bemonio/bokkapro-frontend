@@ -27,6 +27,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
 
   public closed_at: AbstractControl;
   public hours_close: AbstractControl;
+  public atm: AbstractControl;
+  public cash_opening: AbstractControl;
   public employees_close: AbstractControl;
   public employees_open: AbstractControl;
 
@@ -48,12 +50,16 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       closed_at: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
-      hours_close: [''],
-      employees_open: [''],
-      employees_close: ['']
+      hours_close: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      atm: [''],
+      cash_opening: [''],
+      employees_open: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      employees_close: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
     this.closed_at = this.formGroup.controls['closed_at'];
     this.hours_close = this.formGroup.controls['hours_close'];
+    this.atm = this.formGroup.controls['atm'];
+    this.cash_opening = this.formGroup.controls['cash_opening'];
     this.employees_open = this.formGroup.controls['employees_open'];
     this.employees_close = this.formGroup.controls['employees_close'];
   }
@@ -74,7 +80,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'report-operation': new Model() });
+        return of({ 'report_operation': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -87,7 +93,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({ 'report-operation': new Model() });
+        return of({ 'report_operation': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -127,9 +133,12 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     if (this.model && this.model.id) {
       this.closed_at.setValue(this.model.closed_at);
       this.hours_close.setValue(this.model.hours_close);
+      this.atm.setValue(this.model.atm);
+      this.cash_opening.setValue(this.model.cash_opening);
       this.employees_open.setValue(this.model.employees_open);
       this.employees_close.setValue(this.model.employees_close);
     }
+    this.formGroup.markAllAsTouched();
   }
 
   reset() {
