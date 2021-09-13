@@ -38,6 +38,13 @@
               {{ 'TYPE_DIVISION.ID' | translate }}
             </div>
           </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
           <th pSortableColumn="name">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'TYPE_DIVISION.NAME' | translate }} 
@@ -46,13 +53,6 @@
           <th pSortableColumn="description">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'TYPE_DIVISION.DESCRIPTION' | translate }}
-            </div>
-          </th>
-          <th pSortableColumn="created_at">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.CREATED_AT' | translate }}
-              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
           <th style="width: 10rem">
@@ -73,13 +73,13 @@
             {{value.id}}
           </td>
           <td>
+            {{value.created_at | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
             {{value.name}}
           </td>
           <td>
             {{value.description}}
-          </td>
-          <td>
-            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"

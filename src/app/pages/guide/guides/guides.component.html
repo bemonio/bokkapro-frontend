@@ -45,6 +45,13 @@
               {{ 'GUIDE.ID' | translate }}
             </div>
           </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
           <th pSortableColumn="date">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'GUIDE.DATE' | translate }}
@@ -85,13 +92,6 @@
               {{ 'GUIDE.STATUS' | translate }}
             </div>
           </th>
-          <th pSortableColumn="created_at">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.CREATED_AT' | translate }}
-              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
-            </div>
-          </th>
           <th style="width: 10rem" *ngIf="!voucherId">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -108,6 +108,9 @@
           </td>
           <td>
             {{value.id}}
+          </td>
+          <td>
+            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td>
             {{value.date | date: 'MM/dd/yyyy'}}<br>
@@ -136,9 +139,6 @@
           <td>
             <p-badge [value]="'Confirmada'"  severity="success"  severity="success" *ngIf="value.status == 1"></p-badge>
             <p-badge [value]="'NoConfirmada'"  severity="warning"  severity="warning" *ngIf="value.status == 0"></p-badge>
-          </td>
-          <td>
-            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right" *ngIf="!voucherId">
             <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning" style="margin-right: 5px;" 

@@ -38,6 +38,13 @@
               ID
             </div>
           </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Created At
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
           <th pSortableColumn="name">
             <div class="p-d-flex p-jc-between p-ai-center">
               Name 
@@ -46,13 +53,6 @@
           <th pSortableColumn="description">
             <div class="p-d-flex p-jc-between p-ai-center">
               Description
-            </div>
-          </th>
-          <th pSortableColumn="created_at">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              Created At
-              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
           <th style="width: 10rem">
@@ -73,13 +73,13 @@
             {{value.id}}
           </td>
           <td>
+            {{value.created_at | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
             {{value.name}}
           </td>
           <td>
             {{value.description}}
-          </td>
-          <td>
-            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
@@ -99,7 +99,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="6">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          <td colspan="5">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>

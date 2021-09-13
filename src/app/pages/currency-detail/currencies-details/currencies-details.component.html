@@ -38,6 +38,13 @@
               {{ 'CURRENCYDETAIL.ID' | translate }}
             </div>
           </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
           <th pSortableColumn="denomination">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'CURRENCYDETAIL.DENOMINATION' | translate }} 
@@ -46,13 +53,6 @@
           <th pSortableColumn="type_currency">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'CURRENCYDETAIL.TYPE_CURRENCY' | translate }}
-            </div>
-          </th>
-          <th pSortableColumn="created_at">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.CREATED_AT' | translate }}
-              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
           <th style="width: 10rem">
@@ -73,13 +73,13 @@
             {{value.id}}
           </td>
           <td>
+            {{value.created_at | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
             {{value.denomination}}
           </td>
           <td>
             {{value.type_currency}}
-          </td>
-          <td>
-            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
@@ -99,7 +99,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="6">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          <td colspan="5">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>
