@@ -22,7 +22,9 @@ export class CrewsComponent implements OnInit {
     public promiseForm: Promise<any>;
 
     public models: Model[];
+    public modelsCalendar: Model[];
     public selectedModels: Model[];
+    public selectedModelId: string;
 
     public page: number;
     public total_page: number;
@@ -52,10 +54,18 @@ export class CrewsComponent implements OnInit {
     public parent: string;
 
     public events: any[];
-    public calendarOptions: CalendarOptions;        
+    public calendarOptions: CalendarOptions;
+    public calendarStart: string;
+    public calendarEnd: string;
+    public filtersCalendar: {key: string, value: string}[];
+    public dateSchedule: Date;
 
     public viewcalendar: boolean;
     public viewlist: boolean;
+
+    public viewtypecalendar: string;
+
+    public showViewTourDetail: boolean;
 
     constructor(
         public modelsService: ModelService,
@@ -96,10 +106,14 @@ export class CrewsComponent implements OnInit {
         this.confirmDialogPosition = 'right';
 
         this.models = [];
+        this.modelsCalendar = [];
         this.selectedModels = [];
 
         this.viewlist = true;
         this.viewcalendar = false;
+
+        this.showViewTourDetail = false;
+
         // this.getModels();
     }
 
@@ -110,6 +124,7 @@ export class CrewsComponent implements OnInit {
             eventClick: (e) => {
                 this.showViewTourDetail = true;
                 this.selectedModelId = e.event.id;
+                this.router.navigate([this.parent + '/crews/edit/' + e.event.id]);
             },
             headerToolbar: {
                 left: 'prev,next,today',
@@ -125,6 +140,7 @@ export class CrewsComponent implements OnInit {
             },
             allDayText: 'Todo el día',
             dateClick: this.handleDateClick.bind(this),
+            datesSet: this.loadLazyCalendar.bind(this),
             editable: false,
             selectable:false,
             selectMirror: true,
@@ -136,6 +152,19 @@ export class CrewsComponent implements OnInit {
 
     handleDateClick(arg) {
         console.log('date click! ' + arg.dateStr)
+    }
+
+    public loadLazyCalendar(dateInfo) {
+        this.filtersCalendar = [];
+        this.calendarStart = dateInfo.startStr;
+        this.calendarEnd = dateInfo.endStr;
+        this.filtersCalendar.push({'key': 'start-min', 'value': this.calendarStart});
+        this.filtersCalendar.push({'key': 'end-max', 'value': this.calendarEnd});
+        this.viewtypecalendar = dateInfo.view.type;
+        if (this.viewtypecalendar==='timeGridDay') {
+            this.dateSchedule = new Date(dateInfo.startStr);
+        }
+        this.getModelsCalendar();
     }
 
     public loadLazy(event: LazyLoadEvent) {
@@ -242,6 +271,81 @@ export class CrewsComponent implements OnInit {
         }, 5)
     }
 
+    public getModelsCalendar() {
+        this.requesting = true;
+        setTimeout(() => {
+        let page = undefined; 
+        let per_page = 10000000; 
+        let sort = undefined; 
+        let query = undefined; 
+        let filters = this.filtersCalendar; 
+        let _with = [];
+
+        this.modelsService.get(page, per_page, sort, query, filters, _with).toPromise().then(
+            response => {
+                this.modelsCalendar = response.crews;
+                this.totalRecords = response.meta.total_results;
+                if(response.divisions){
+                    response.divisions.forEach(division => {
+                        this.modelsCalendar.forEach(element => {
+                            if (element.division === division.id) {
+                                element.division = division;
+                            }
+                        });
+                    });
+                }
+                if(response.employees){
+                    response.employees.forEach(employee => {
+                        this.modelsCalendar.forEach(element => {
+                            if (element.driver === employee.id) {
+                                element.driver = employee;
+                            }
+                            if (element.assistant === employee.id) {
+                                element.assistant = employee;
+                            }
+                            if (element.assistant2 === employee.id) {
+                                element.assistant2 = employee;
+                            }
+                        });
+                    });
+                }
+                if(response.vehicles){
+                    response.vehicles.forEach(vehicle => {
+                        this.modelsCalendar.forEach(element => {
+                            if (element.vehicle === vehicle.id) {
+                                element.vehicle = vehicle;
+                            }
+                        });
+                    });
+                }
+
+                this.events = [];
+                this.modelsCalendar.forEach(element => {
+                    this.events.push({
+                        "id": element.id,
+                        "title": element.division.name,
+                        "start": element.date
+                    });
+                });            
+                this.calendarOptions.events = this.events;
+                this.requesting = false;
+            },
+            error => {
+                this.requesting = false;
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                );
+            }
+        );
+        }, 5)
+    }
+
     // public showDeleteDialog(crew: Model) {
     //     let message;
     //     this.translate.get('Do you want to delete?').subscribe((res: string) => {
@@ -326,5 +430,10 @@ export class CrewsComponent implements OnInit {
     public showCalendar() {
         this.viewlist = false;
         this.viewcalendar = true;
+    }
+
+    hideModal() {
+        this.getModelsCalendar();
+        this.showViewTourDetail = false;
     }
 }
