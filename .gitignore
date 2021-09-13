@@ -53,3 +53,4 @@ Thumbs.db
 .vscode
 
 dist_prod/
+dist_old/
