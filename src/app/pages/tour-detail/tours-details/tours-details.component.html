@@ -160,15 +160,15 @@
   <form action="#" class="form form-label-right" [formGroup]="formGroup">
     <div class="form-group row">
       <div class="col-lg-8">
-        <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.DIVISION' | translate}}</label>
+        <label>{{ 'COMMON.ENTER' | translate }} {{ 'TOUR_DETAIL.DIVISION' | translate}}</label>
         <app-division-autocomplete
         name="division" [valid]="isControlValid('division')" [touched]="isControlTouched('division')" [class.is-invalid]="isControlInvalid('division')"
         [class.is-valid]="isControlValid('division')" formControlName="division" id="division"></app-division-autocomplete>
-        <div class="feedback" *ngIf="!isControlTouched('division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.DIVISION' | translate}}</b></div>
-        <div class="valid-feedback" *ngIf="isControlValid('division')">{{ 'GUIDE.DIVISION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'GUIDE.DIVISION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division')">{{ 'GUIDE.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'GUIDE.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+        <div class="feedback" *ngIf="!isControlTouched('division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'TOUR_DETAIL.DIVISION' | translate}}</b></div>
+        <div class="valid-feedback" *ngIf="isControlValid('division')">{{ 'TOUR_DETAIL.DIVISION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
       </div>
       <div class="col-lg-4">
         <button type="submit" class="btn btn-primary font-weight-bold mr-2" style="width: inherit;"
