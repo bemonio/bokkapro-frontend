@@ -18,7 +18,8 @@ import { formatDate } from '@angular/common';
 })
 export class GuideEditComponent implements OnInit, OnDestroy {
   @Input() transfer: boolean;
-  @Input() listVouchers: any[];
+  @Input()  listVouchers!: Model[] | Model[];
+  @Output() listVouchersChange = new EventEmitter<Model[]>();
   @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public id: number;
@@ -464,6 +465,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         }
       }
       this.listVouchers = [];
+      this.listVouchersChange.emit(this.listVouchers);
     });
     this.subscriptions.push(sbCreate);
   }
