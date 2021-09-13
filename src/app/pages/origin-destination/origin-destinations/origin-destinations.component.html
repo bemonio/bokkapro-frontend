@@ -1,5 +1,5 @@
 <div class="card card-custom gutter-b">
-  <div class="card-header">
+  <div class="card-header" *ngIf="!showListSchedule">
     <div class="card-title">
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
@@ -49,17 +49,17 @@
               {{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}
             </div>
           </th>
-          <th pSortableColumn="service_order">
+          <th pSortableColumn="service_order" *ngIf="!showListSchedule">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }}
             </div>
           </th>
-          <th pSortableColumn="distrib_charges">
+          <th pSortableColumn="distrib_charges" *ngIf="!showListSchedule">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'ORIGIN_DESTINATION.DISTRIB_CHARGES' | translate }}
             </div>
           </th>
-          <th pSortableColumn="days_month">
+          <th pSortableColumn="days_month" *ngIf="!showListSchedule">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}
             </div>
@@ -69,14 +69,14 @@
               {{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate }} 
             </div>
           </th>
-          <th pSortableColumn="created_at">
+          <th pSortableColumn="created_at" *ngIf="!showListSchedule">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.CREATED_AT' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
-          <th style="width: 10rem">
+          <th style="width: 10rem" *ngIf="!showListSchedule">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
@@ -88,7 +88,7 @@
       <ng-template pTemplate="body" let-value>
         <tr class="p-selectable-row">
           <td *ngIf="showTableCheckbox">
-            <p-tableCheckbox [value]="value"></p-tableCheckbox>
+            <p-tableCheckbox [value]="value" (click)="changeSelectedmodels()"></p-tableCheckbox>
           </td>
           <td>
             {{value.id}}
@@ -99,23 +99,23 @@
           <td>
             {{value.destination.name}}
           </td>
-          <td>
+          <td *ngIf="!showListSchedule">
             {{value.service_order.id}}
           </td>
-          <td>
+          <td *ngIf="!showListSchedule">
             {{value.distrib_charges}}
           </td>
-          <td>
+          <td *ngIf="!showListSchedule">
             {{value.days_month}}
           </td>
           <td>
             <p-badge [value]="'Pick Up'"  severity="secondary"  severity="secondary" *ngIf="value.type_service == 'Pick Up'"></p-badge>
             <p-badge [value]="'Delivery'"  severity="success"  severity="success" *ngIf="value.type_service == 'Delivery'"></p-badge>
           </td>
-          <td>
+          <td *ngIf="!showListSchedule">
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
-          <td style="text-align: right">
+          <td style="text-align: right" *ngIf="!showListSchedule">
             <a title="{{ 'COMMON.COUNT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
             (click)="showModalDialog(value.id, false)" *ngIf="serviceOrderId">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"

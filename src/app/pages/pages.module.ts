@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { InlineSVGModule } from 'ng-inline-svg';
 
+// PrimeFace
 import { TableModule }  from 'primeng/table';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -16,15 +17,31 @@ import { BadgeModule } from 'primeng/badge';
 import { ChipsModule } from 'primeng/chips';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { EditorModule } from 'primeng/editor';
-import { FullCalendarModule } from 'primeng/fullcalendar';
 import { SidebarModule } from 'primeng/sidebar';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 
+// FullCalendar
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin
+]);
+
+// ImageCropperModule
 import { ImageCropperModule } from 'ngx-image-cropper';
 
+// CurrencyMaskModule
 import { CurrencyMaskModule } from "ng2-currency-mask";
 
+// TranslateModule
 import { TranslateModule } from '@ngx-translate/core';
 
 // import { CompanyModule } from './company/company.module';
@@ -279,6 +296,11 @@ import { NotificationsComponent } from './notification/notifications/notificatio
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationEditComponent } from './notification/notifications/notification-edit/notification-edit.component';
 
+// ToursDetails
+import { ToursDetailsComponent } from './tour-detail/tours-details/tours-details.component';
+import { TourDetailComponent } from './tour-detail/tour-detail.component';
+import { TourDetailEditComponent } from './tour-detail/tours-details/tour-detail-edit/tour-detail-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -473,6 +495,9 @@ import { NotificationEditComponent } from './notification/notifications/notifica
     NotificationsComponent,
     NotificationComponent,
     NotificationEditComponent,
+    ToursDetailsComponent,
+    TourDetailComponent,
+    TourDetailEditComponent,
   ]
 })
 export class PagesModule { }

@@ -1,0 +1,102 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="requesting">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="model">
+          {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
+          <span *ngIf="model && model.id">'{{ model.id }} </span>
+        </ng-container>
+      </h3>
+    </div>
+    <div class="card-toolbar" *ngIf="!tourDetailID">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}/tours-details">
+        <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
+      </a>
+      <button class="btn btn-secondary ml-2" (click)="reset()">
+        <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+        <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+          [class.active]="activeTabId === tabs.BASIC_TAB">
+          {{ 'COMMON.BASIC_INFO' | translate }}
+        </a>
+      </li>
+      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PROFILE"
+          [class.active]="activeTabId === tabs.PROFILE">Profile</a>
+      </li> -->
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+      <div class="mt-5" *ngIf="model">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate }}</label>
+              <app-origin-destination-select
+              name="origin_destination" [valid]="isControlValid('origin_destination')" [touched]="isControlTouched('origin_destination')" [class.is-invalid]="isControlInvalid('origin_destination')"
+              [class.is-valid]="isControlValid('origin_destination')" formControlName="origin_destination" id="origin_destination"></app-origin-destination-select>
+              <div class="feedback" *ngIf="!isControlTouched('origin_destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('origin_destination')">{{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'origin_destination')">{{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'origin_destination')">{{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'origin_destination')">{{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'TOUR_DETAIL.DIVISION' | translate }}</label>
+              <app-division-autocomplete
+              name="division" [valid]="isControlValid('division')" [touched]="isControlTouched('division')" [class.is-invalid]="isControlInvalid('division')"
+              [class.is-valid]="isControlValid('division')" formControlName="division" id="division"></app-division-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'TOUR_DETAIL.DIVISION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('division')">{{ 'TOUR_DETAIL.DIVISION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'TOUR_DETAIL.DATE_START' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date_start'))" name="date_start" formControlName="date_start" showTime="true"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('date_start')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'TOUR_DETAIL.DATE_START' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('date_start')">{{ 'TOUR_DETAIL.DATE_START' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date_start')">{{ 'TOUR_DETAIL.DATE_START' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date_start')">{{ 'TOUR_DETAIL.DATE_START' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date_start')">{{ 'TOUR_DETAIL.DATE_START' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'TOUR_DETAIL.DATE_END' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date_end'))" name="date_end" formControlName="date_end" showTime="true"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('date_end')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'TOUR_DETAIL.DATE_END' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('date_end')">{{ 'TOUR_DETAIL.DATE_END' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date_end')">{{ 'TOUR_DETAIL.DATE_END' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date_end')">{{ 'TOUR_DETAIL.DATE_END' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date_end')">{{ 'TOUR_DETAIL.DATE_END' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+          </div>
+          <div class="float-right">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/tours-details" *ngIf="!tourDetailID">{{ 'COMMON.CANCEL' | translate }}</a>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!tourDetailID">{{ 'COMMON.SAVE' | translate }}</button>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+
+    <!-- <ng-container *ngIf="activeTabId === tabs.PROFILE && model && model.id">
+      Profile
+    </ng-container> -->
+
+  </div>
+</div>

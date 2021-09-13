@@ -5,8 +5,9 @@ import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
-export class OriginDestinationService {
-    API_URL = `${environment.apiUrl}origindestinations`;
+export class TourDetailService {
+    API_URL = `${environment.apiUrl}tourdetails`;
+    API_URL_POST_LIST = `${environment.apiUrl}postlisttourdetails`;
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -50,7 +51,7 @@ export class OriginDestinationService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=origin.*&include[]=destination.*&include[]=service_order.*`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=origin_destination.origin.*&include[]=origin_destination.destination.*&include[]=division.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -66,6 +67,10 @@ export class OriginDestinationService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=origin.*&include[]=destination.*&include[]=service_order.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=origin_destination.origin.*&include[]=origin_destination.destination.*&include[]=division.*`);
+    }
+
+    public postList(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL_POST_LIST}`, JSON.stringify(body));
     }
 }

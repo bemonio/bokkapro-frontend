@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OriginDestinationService as ModelService } from '../_services/origin-destination.service';
 import { OriginDestinationModel as Model } from '../_models/origin-destination.model';
@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 @Component({
@@ -15,13 +15,17 @@ import { AuthService } from 'src/app/modules/auth';
     templateUrl: './origin-destinations.component.html',
     styleUrls: ['./origin-destinations.component.scss']
 })
-export class OriginDestinationsComponent implements OnInit {
+export class OriginDestinationsComponent implements OnInit, OnChanges {
     @Input() serviceOrderId: any;
+    @Input() showListSchedule: boolean;
+    @Input() dateSchedule: Date;
+    @Input()  selectedModels!: Model[] | Model[];
+    @Output() selectedModelsChange = new EventEmitter<Model[]>();
 
     public promiseForm: Promise<any>;
 
     public models: Model[];
-    public selectedModels: Model[];
+    // public selectedModels: Model[];
 
     public page: number;
     public total_page: number;
@@ -69,7 +73,7 @@ export class OriginDestinationsComponent implements OnInit {
             this.message_confirm_delete = res;
         });
 
-        this.showTableCheckbox = false;
+        this.showTableCheckbox = true;
         this.parent = '';
 
         this.page = 1;
@@ -96,9 +100,17 @@ export class OriginDestinationsComponent implements OnInit {
         this._with.push({key: 'include[]', value: 'service_order.*'})
     }
 
-    public loadLazy(event: LazyLoadEvent) {
-        this.page = (event.first / this.per_page) + 1;
-        if (event.sortField) {
+    ngOnChanges() {
+        this.ngOnInit();
+        this.loadLazy();
+    }
+
+    public loadLazy(event?: LazyLoadEvent) {
+        if (event && event.first) {
+            this.page = (event.first / this.per_page) + 1;
+        }
+
+        if (event && event.sortField) {
             if (event.sortOrder === -1) {
                 this.sort = '-' + event.sortField;
             } else {
@@ -108,17 +120,45 @@ export class OriginDestinationsComponent implements OnInit {
             this.sort = '-id';
         }
 
-        if (event.globalFilter) {
+        if (event && event.globalFilter) {
             this.query = event.globalFilter;
         } else {
             this.query = undefined;
         }
 
-        if (event.rows) {
+        if (event && event.rows) {
             this.per_page = event.rows;
         }
 
         this.filters = [];
+
+        if (this.showListSchedule) {
+            let date = this.dateSchedule ? this.dateSchedule : new Date();
+            switch (date.getDay()) {
+                case 0:
+                    this.filters.push({ key: 'filter{sunday}', value: 'true' })
+                    break;                                
+                case 1:
+                    this.filters.push({ key: 'filter{monday}', value: 'true' })
+                    break;
+                case 2:
+                    this.filters.push({ key: 'filter{tuesday}', value: 'true' })
+                    break;
+                case 3:
+                    this.filters.push({ key: 'filter{wednesday}', value: 'true' })
+                    break;
+                case 4:
+                    this.filters.push({ key: 'filter{thursday}', value: 'true' })
+                    break;
+                case 5:
+                    this.filters.push({ key: 'filter{friday}', value: 'true' })
+                    break;
+                case 6:
+                    this.filters.push({ key: 'filter{saturday}', value: 'true' })
+                    break;
+            }
+        }
+        
         if (this.serviceOrderId) {
             this.filters.push({ key: 'filter{service_order}', value: this.serviceOrderId.toString() })
             this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.serviceOrderId;
@@ -136,7 +176,7 @@ export class OriginDestinationsComponent implements OnInit {
             } else {
                 this.getModels();
             }  
-        } 
+        }
     }
 
     public getModels() {
@@ -275,5 +315,9 @@ export class OriginDestinationsComponent implements OnInit {
     hideModalDialog() {
         this.displayModal = false;
         this.getModels();
+    }
+
+    changeSelectedmodels() {
+        this.selectedModelsChange.emit(this.selectedModels);
     }
 }

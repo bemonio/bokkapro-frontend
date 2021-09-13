@@ -415,7 +415,10 @@ export const locale = {
       ASIGN: 'Asignar',
       ADMINISTRATION: 'Administración',
       TESTING: 'Prueba',
-      UPLOAD: 'Subir'
+      UPLOAD: 'Subir',
+      ADD_ALL: 'AGREGAR TODOS',
+      ADD_SELECTED: 'AGREGAR SELECCIONADOS',
+      ADD: 'Agregar'
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',
@@ -590,8 +593,16 @@ export const locale = {
       EVENTS: 'Eventos',
       ALL_CAUGHT_UP: '!Estás al día!',
       NO_NEW_NOTIFICATIONS: 'No hay notificaciones nuevas.',
-
     },
+    TOUR_DETAIL: {
+      TOUR_DETAIL: 'Recorrido',
+      TOURS_DETAILS: 'Recorridos',
+      ORIGIN_DESTINATION: 'Origen Destino',
+      DIVISION: 'Division',
+      DATE_START: 'Inicio',
+      DATE_END: 'Final',
+      ID: 'Id',
+    }
   }
 };
 

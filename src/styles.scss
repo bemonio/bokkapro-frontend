@@ -199,3 +199,44 @@
 .svg-icon {
   pointer-events: none;
 }
+
+.card-header {
+  min-height: 50px !important;
+}
+
+.fc-more-popover {
+  max-height: 95%;
+  overflow-y: auto;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button, .fc .fc-toolbar .fc-button.fc-timeGridWeek-button, .fc .fc-toolbar .fc-button.fc-timeGridDay-button, .fc .fc-toolbar .fc-button.fc-listWeek-button {
+  background: #ffffff;
+  border: 1px solid #ced4da;
+  color: #495057;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button:hover, .fc .fc-toolbar .fc-button.fc-timeGridWeek-button:hover, .fc .fc-toolbar .fc-button.fc-timeGridDay-button:hover, .fc .fc-toolbar .fc-button.fc-listWeek-button:hover {
+  background: #e9ecef;
+  border-color: #ced4da;
+  color: #495057;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active {
+  background: #2196F3;
+  border-color: #2196F3;
+  color: #ffffff;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover, .fc .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active:hover, .fc .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active:hover, .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active:hover {
+  background: #0d89ec;
+  border-color: #0d89ec;
+  color: #ffffff;
+}
+
+.fc .fc-toolbar .fc-button.fc-dayGridMonth-button:focus, .fc .fc-toolbar .fc-button.fc-timeGridWeek-button:focus, .fc .fc-toolbar .fc-button.fc-timeGridDay-button:focus, .fc .fc-toolbar .fc-button.fc-listWeek-button:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #a6d5fa;
+  z-index: 1;
+}

@@ -1,0 +1,184 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
+      <!-- <a title="{{ 'COMMON.LIST' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm"
+        (click)="showList()">
+        <span [inlineSVG]="'./assets/media/svg/misc/017-list.svg'" cacheSVG="true"
+          class="svg-icon svg-icon-md svg-icon-danger">
+        </span>
+      </a>
+      <a title="{{ 'COMMON.CALENDAR' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm"
+        (click)="showCalendar()" style="margin-left: 5px;">
+        <span [inlineSVG]="'./assets/media/svg/misc/016-monthly-calendar.svg'" cacheSVG="true"
+          class="svg-icon svg-icon-md svg-icon-danger">
+        </span>
+      </a> -->
+    </div>
+    <div class="card-toolbar">
+      <!-- <a type="button" class="btn btn-primary" routerLink="{{parent}}/toursdetails/add">{{ 'COMMON.NEW' | translate }}</a> -->
+      <button type="button" class="btn btn-primary font-weight-bold mr-2"
+      [disabled]="viewtypecalendar!='timeGridDay'" (click)="showListOriginDestination()">{{ 'COMMON.ADD' | translate }}</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div *ngIf="viewlist">
+      <!-- begin: Filtration form -->
+      <div class="form form-label-right">
+        <div class="form-group row">
+          <div class="col-lg-6">
+            {{ 'COMMON.FILTER' | translate }}
+          </div>
+          <div class="col-lg-6" [formGroup]="searchGroup">
+            <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> </small>
+          </div>
+        </div>
+      </div>
+      <!-- end: Filtration form -->
+      <!-- begin:Table -->
+      <p-table #dt [value]="models" [(selection)]="selectedModels" dataKey="id" styleClass="p-datatable-striped p-datatable-sm" [rowHover]="true"
+      [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
+      [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
+      [filterDelay]="1000" [globalFilterFields]="['id']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
+      [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem" *ngIf="showTableCheckbox">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="id">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                {{ 'TOUR_DETAIL.ID' | translate }}
+              </div>
+            </th>
+            <th pSortableColumn="created_at">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                {{ 'TOUR_DETAIL.DATE_START' | translate }}
+                <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+                <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+              </div>
+            </th>
+            <th pSortableColumn="created_at">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                {{ 'TOUR_DETAIL.DATE_END' | translate }}
+                <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+                <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+              </div>
+            </th>
+            <th pSortableColumn="division">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                {{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate }}
+              </div>
+            </th>
+            <th pSortableColumn="created_at">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                {{ 'COMMON.CREATED_AT' | translate }}
+                <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+                <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+              </div>
+            </th>
+            <th style="width: 10rem">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                {{ 'COMMON.ACTION' | translate }}
+                <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+                <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-value>
+          <tr class="p-selectable-row">
+            <td *ngIf="showTableCheckbox">
+              <p-tableCheckbox [value]="value"></p-tableCheckbox>
+            </td>
+            <td>
+              {{value.id}}
+            </td>
+            <td>
+              {{value.date_start | date: 'MM/dd/yyyy'}}
+            </td>
+            <td>
+              {{value.date_end | date: 'MM/dd/yyyy'}}
+            </td>
+            <td>
+              {{value.origin_destination?.id}}
+            </td>
+            <td>
+              {{value.created_at | date: 'MM/dd/yyyy'}}
+            </td>
+            <td style="text-align: right">
+              <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+                routerLink="{{parent}}/toursdetails/edit/{{value.id}}">
+                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-primary">
+                </span>
+              </a>
+              <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-danger">
+                </span>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="5">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <!-- end: Table -->
+    </div>
+    
+    <!-- begin:Calendar -->
+    <div class="row" *ngIf="viewcalendar">
+      <!--
+      <div class="col-lg-5">
+        <a type="button" class="btn btn-primary" (click)="visibleSidebar = true" *ngIf="viewtypecalendar==='timeGridDay'">{{ 'COMMON.ADD_ALL' | translate }}</a>
+        <br>
+        <app-origin-destinations [showListSchedule]="true" [dateSchedule]="dateSchedule"></app-origin-destinations>
+      </div>-->
+      <div class="col-lg-12">
+        <full-calendar [options]="calendarOptions"></full-calendar>
+      </div>
+    </div>
+    <!-- end: Calendar -->
+  </div>
+</div>
+
+<p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
+
+<p-dialog header="Edit" [(visible)]="showViewTourDetail" [style]="{width: '50vw'}">
+    <br><br>
+    <app-tour-detail-edit [tourDetailID]="{id: selectedModelId, isNew: false}" (hideModal)="hideModal()"></app-tour-detail-edit>
+</p-dialog>
+
+<p-sidebar [(visible)]="visibleSidebar" styleClass="p-sidebar-lg" style="btn btn-xs btn-icon btn-light btn-hover-primary" position="right"  blockScroll="false" [baseZIndex]="10000">
+  <h5 class="text-dark font-weight-bold my-1 mr-5 ng-star-inserted" style="padding-bottom: 10px;">{{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate}}</h5>
+  <form action="#" class="form form-label-right" [formGroup]="formGroup">
+    <div class="form-group row">
+      <div class="col-lg-8">
+        <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.DIVISION' | translate}}</label>
+        <app-division-autocomplete
+        name="division" [valid]="isControlValid('division')" [touched]="isControlTouched('division')" [class.is-invalid]="isControlInvalid('division')"
+        [class.is-valid]="isControlValid('division')" formControlName="division" id="division"></app-division-autocomplete>
+        <div class="feedback" *ngIf="!isControlTouched('division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.DIVISION' | translate}}</b></div>
+        <div class="valid-feedback" *ngIf="isControlValid('division')">{{ 'GUIDE.DIVISION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'GUIDE.DIVISION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division')">{{ 'GUIDE.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'GUIDE.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+      </div>
+      <div class="col-lg-4">
+        <button type="submit" class="btn btn-primary font-weight-bold mr-2" style="width: inherit;"
+        [disabled]="formGroup.invalid" (click)="addAllOriginDestination()">{{ 'COMMON.ADD_ALL' | translate }}</button>
+        <button type="submit" class="btn btn-primary font-weight-bold mr-2"  style="width: inherit;"
+        [disabled]="formGroup.invalid || listOriginDestinationSelectedModels.length <= 0" (click)="addSelectedOriginDestination()">{{ 'COMMON.ADD_SELECTED' | translate }}</button>
+      </div>
+      <div class="col-lg-12">
+        <app-origin-destinations [showListSchedule]="true" [dateSchedule]="dateSchedule" [(selectedModels)]="listOriginDestinationSelectedModels"></app-origin-destinations>
+      </div>
+    </div>
+  </form>
+</p-sidebar>

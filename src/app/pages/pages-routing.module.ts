@@ -349,6 +349,13 @@ const routes: Routes = [
             (m) => m.NotificationRoutingModule
           ),
       },
+      {
+        path: 'toursdetails',
+        loadChildren: () =>
+          import('../pages/tour-detail/tour-detail-routing.module').then(
+            (m) => m.TourDetailRoutingModule
+          ),
+      },
     ],
   },
 ];
