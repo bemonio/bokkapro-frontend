@@ -82,6 +82,30 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employees_open')">{{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employees_open')">{{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.ATM' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="atm" [class.is-invalid]="isControlInvalid('atm')"
+                [class.is-valid]="isControlValid('atm')" formControlName="atm" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('atm')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.ATM' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('atm')">{{ 'REPORT_OPERATION.ATM' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'atm')">{{ 'REPORT_OPERATION.ATM' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'atm')">{{ 'REPORT_OPERATION.ATM' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'atm')">{{ 'REPORT_OPERATION.ATM' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.CASH_OPENING' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="cash_opening" [class.is-invalid]="isControlInvalid('cash_opening')"
+                [class.is-valid]="isControlValid('cash_opening')" formControlName="cash_opening" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('cash_opening')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.CASH_OPENING' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('cash_opening')">{{ 'REPORT_OPERATION.CASH_OPENING' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'cash_opening')">{{ 'REPORT_OPERATION.CASH_OPENING' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'cash_opening')">{{ 'REPORT_OPERATION.CASH_OPENING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'cash_opening')">{{ 'REPORT_OPERATION.CASH_OPENING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/reports/operations">{{ 'COMMON.CANCEL' | translate }}</a>

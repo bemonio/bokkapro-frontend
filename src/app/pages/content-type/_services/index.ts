@@ -1,0 +1,1 @@
+export { ContentTypeService } from './content-type.service';

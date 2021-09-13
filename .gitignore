@@ -51,3 +51,5 @@ Thumbs.db
 
 # visual studio code
 .vscode
+
+dist_prod/

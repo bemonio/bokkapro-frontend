@@ -54,7 +54,12 @@
               {{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }}
             </div>
           </th>
-          <th pSortableColumn="distrib_charges" *ngIf="!showListSchedule">
+          <th pSortableColumn="service_order.contract">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'ORIGIN_DESTINATION.CONTRACT' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="distrib_charges">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'ORIGIN_DESTINATION.DISTRIB_CHARGES' | translate }}
             </div>
@@ -102,7 +107,10 @@
           <td *ngIf="!showListSchedule">
             {{value.service_order.id}}
           </td>
-          <td *ngIf="!showListSchedule">
+          <td>
+            {{value.service_order.contract?.code}}
+          </td>
+          <td>
             {{value.distrib_charges}}
           </td>
           <td *ngIf="!showListSchedule">

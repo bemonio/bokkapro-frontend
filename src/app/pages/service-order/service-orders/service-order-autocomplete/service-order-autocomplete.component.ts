@@ -98,7 +98,7 @@ export class ServiceOrderAutocompleteComponent implements ControlValueAccessor, 
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{total_amount.icontains}', value: event.query })
+            this.filters.push({ key: 'filter{id.icontains}', value: event.query })
         } else {
             this.query = undefined;
         }

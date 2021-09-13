@@ -125,7 +125,6 @@ export class CrewsComponent implements OnInit {
             },
             allDayText: 'Todo el día',
             dateClick: this.handleDateClick.bind(this),
-            datesSet: this.loadLazyCalendar.bind(this),
             editable: false,
             selectable:false,
             selectMirror: true,

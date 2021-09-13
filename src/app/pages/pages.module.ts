@@ -273,6 +273,7 @@ import { RateAutocompleteComponent } from './rate/rates/rate-autocomplete/rate-a
 import { DocumentsServicesOrdersComponent } from './document-service-order/documents-services-orders/documents-services-orders.component';
 import { DocumentServiceOrderComponent } from './document-service-order/document-service-order.component';
 import { DocumentServiceOrderEditComponent } from './document-service-order/documents-services-orders/document-service-order-edit/document-service-order-edit.component';
+
 // ServiceOrders
 import { ServiceOrdersComponent } from './service-order/service-orders/service-orders.component';
 import { ServiceOrderComponent } from './service-order/service-order.component';
@@ -300,6 +301,27 @@ import { NotificationEditComponent } from './notification/notifications/notifica
 import { ToursDetailsComponent } from './tour-detail/tours-details/tours-details.component';
 import { TourDetailComponent } from './tour-detail/tour-detail.component';
 import { TourDetailEditComponent } from './tour-detail/tours-details/tour-detail-edit/tour-detail-edit.component';
+
+// Permission
+import { PermissionsComponent } from './permission/permissions/permissions.component';
+import { PermissionComponent } from './permission/permission.component';
+import { PermissionEditComponent } from './permission/permissions/permission-edit/permission-edit.component';
+import { PermissionAutocompleteComponent } from './permission/permissions/permission-autocomplete/permission-autocomplete.component';
+import { PermissionMultiselectComponent } from './permission/permissions/permission-multiselect/permission-multiselect.component';
+
+// Groups
+import { GroupsComponent } from './group/groups/groups.component';
+import { GroupComponent } from './group/group.component';
+import { GroupEditComponent } from './group/groups/group-edit/group-edit.component';
+import { GroupAutocompleteComponent } from './group/groups/group-autocomplete/group-autocomplete.component';
+import { GroupMultiselectComponent } from './group/groups/group-multiselect/group-multiselect.component';
+
+// ContentTypes
+import { ContentTypesComponent } from './content-type/content-types/content-types.component';
+import { ContentTypeComponent } from './content-type/content-type.component';
+import { ContentTypeEditComponent } from './content-type/content-types/content-type-edit/content-type-edit.component';
+import { ContentTypeSelectComponent } from './content-type/content-types/content-type-select/content-type-select.component';
+import { ContentTypeAutocompleteComponent } from './content-type/content-types/content-type-autocomplete/content-type-autocomplete.component';
 
 @NgModule({
   imports: [
@@ -498,6 +520,21 @@ import { TourDetailEditComponent } from './tour-detail/tours-details/tour-detail
     ToursDetailsComponent,
     TourDetailComponent,
     TourDetailEditComponent,
+    PermissionsComponent,
+    PermissionComponent,
+    PermissionEditComponent,
+    PermissionAutocompleteComponent,
+    PermissionMultiselectComponent,
+    GroupsComponent,
+    GroupComponent,
+    GroupEditComponent,
+    GroupAutocompleteComponent,
+    GroupMultiselectComponent,
+    ContentTypesComponent,
+    ContentTypeComponent,
+    ContentTypeEditComponent,
+    ContentTypeSelectComponent,
+    ContentTypeAutocompleteComponent,
   ]
 })
 export class PagesModule { }

@@ -5,6 +5,9 @@ export class UserModel {
   fullname: string;
   email: string;
   is_active: boolean;
+  is_staff: boolean;
+  is_superuser: boolean;
+  user_permissions: any[];
   userprofile: {
     id: number;
     bio: string;
