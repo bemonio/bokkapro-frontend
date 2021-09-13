@@ -10,10 +10,7 @@ import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import { CalendarOptions } from '@fullcalendar/angular';
 
 @Component({
     selector: 'app-crews',
@@ -55,7 +52,7 @@ export class CrewsComponent implements OnInit {
     public parent: string;
 
     public events: any[];
-    public options: any;        
+    public calendarOptions: CalendarOptions;        
 
     public viewcalendar: boolean;
     public viewlist: boolean;
@@ -108,18 +105,38 @@ export class CrewsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
-        this.options = {
-            plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-            defaultDate: new Date(),
-            header: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
+        this.calendarOptions = {
+            initialView: 'timeGridDay',
             eventClick: (e) => {
-                this.router.navigate([this.parent + '/crews/edit/' + e.event.id]);
-            }
+                this.showViewTourDetail = true;
+                this.selectedModelId = e.event.id;
+            },
+            headerToolbar: {
+                left: 'prev,next,today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            },
+            buttonText: {
+                today:    'Hoy',
+                month:    'mes',
+                week:     'semana',
+                day:      'día',
+                list:     'lista'
+            },
+            allDayText: 'Todo el día',
+            dateClick: this.handleDateClick.bind(this),
+            datesSet: this.loadLazyCalendar.bind(this),
+            editable: false,
+            selectable:false,
+            selectMirror: true,
+            dayMaxEvents: true,
+            locale: 'es',
+            themeSystem: 'bootstrap'
         }
+    }
+
+    handleDateClick(arg) {
+        console.log('date click! ' + arg.dateStr)
     }
 
     public loadLazy(event: LazyLoadEvent) {

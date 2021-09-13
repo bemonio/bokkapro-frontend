@@ -98,7 +98,7 @@ export class CrewAutocompleteComponent implements ControlValueAccessor, OnInit {
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{crewname.icontains}', value: event.query })
+            this.filters.push({ key: 'filter', value: event.query })
         } else {
             this.query = undefined;
         }
