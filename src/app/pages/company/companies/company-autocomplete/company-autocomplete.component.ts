@@ -79,9 +79,9 @@ export class CompanyAutocompleteComponent implements ControlValueAccessor, OnIni
         this.onTouched(this.value);
     }
 
-    public loadLazy(event) {
+    public loadLazy(event?) {
         this.filters = [];
-        if (event.sortField) {
+        if (event && event.sortField) {
             if (event.sortOrder === -1) {
                 this.sort = '-' + event.sortField;
             } else {
@@ -103,7 +103,7 @@ export class CompanyAutocompleteComponent implements ControlValueAccessor, OnIni
             this.query = undefined;
         }
 
-        if (event.rows) {
+        if (event && event.rows) {
             this.per_page = event.rows;
         }
 

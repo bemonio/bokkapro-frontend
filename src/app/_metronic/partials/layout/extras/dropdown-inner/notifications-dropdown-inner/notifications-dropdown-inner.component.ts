@@ -56,7 +56,7 @@ export class NotificationsDropdownInnerComponent implements OnInit, OnChanges {
   }
 
   public loadLazy(event?: LazyLoadEvent) {
-    if (event) {
+    if (event && event.first) {
     }
 
     this.filters = [];

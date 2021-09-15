@@ -108,7 +108,10 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
 
     public loadLazy(event?: LazyLoadEvent) {
         if (event && event.first) {
+            if (event && event.first) {
             this.page = (event.first / this.per_page) + 1;
+        }
+
         }
 
         if (event && event.sortField) {

@@ -110,9 +110,12 @@ export class RatesComponent implements OnInit {
     }
 
     public loadLazy(event?: LazyLoadEvent) {
-        if (event) {
+        if (event && event.first) {
+            if (event && event.first) {
             this.page = (event.first / this.per_page) + 1;
-            if (event.sortField) {
+        }
+
+            if (event && event.sortField) {
                 if (event.sortOrder === -1) {
                     this.sort = '-' + event.sortField;
                 } else {
@@ -122,13 +125,13 @@ export class RatesComponent implements OnInit {
                 this.sort = '-id';
             }
 
-            if (event.globalFilter) {
+            if (event && event.globalFilter) {
                 this.query = event.globalFilter;
             } else {
                 this.query = undefined;
             }
 
-            if (event.rows) {
+            if (event && event.rows) {
                 this.per_page = event.rows;
             }    
         }
