@@ -25,33 +25,45 @@
     </div>
   </div>
   <div class="card-body">
-    <ul class="nav nav-tabs nav-tabs-line" role="tablist" *ngIf="!showCashier && !showCertifiedCart">
-      <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
-        <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
-          [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}">
-          {{ 'COMMON.BASIC_INFO' | translate }}
+    <ul class="nav nav-tabs nav-tabs-line d-flex justify-content-between" role="tablist" *ngIf="!showCashier && !showCertifiedCart">
+      <div class="d-flex">
+        <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+          <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+            [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}">
+            {{ 'COMMON.BASIC_INFO' | translate }}
+          </a>
+        </li>
+        <li *ngIf="(model && model.id && authService.hasPermission('view_packing'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.PACKINGS_TAB)">
+          <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PACKINGS_TAB"
+            [class.active]="activeTabId === tabs.PACKINGS_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/packings">{{ 'VOUCHER.PACKINGS' | translate }}</a>
+        </li>
+        <li *ngIf="(model && model.id && authService.hasPermission('view_guide'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.GUIDES_TAB)">
+          <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.GUIDES_TAB"
+            [class.active]="activeTabId === tabs.GUIDES_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/guides">{{ 'VOUCHER.GUIDES' | translate }}</a>
+        </li>
+      </div>
+
+      <div class="float-right" *ngIf="activeTabId === tabs.BASIC_TAB && model">
+        <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning ml-auto" style="margin-right: 5px;" 
+          (click)="verification('center')" *ngIf="authService.currentDivisionValue.id === 2 && direct_operation.value === true && is_active.value === true && verified_oi.value === false">
+          <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
+            class="svg-icon svg-icon-md svg-icon-warning">
+          </span>
         </a>
-      </li>
-      <li *ngIf="(model && model.id && authService.hasPermission('view_packing'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.PACKINGS_TAB)">
-        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PACKINGS_TAB"
-          [class.active]="activeTabId === tabs.PACKINGS_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/packings">{{ 'VOUCHER.PACKINGS' | translate }}</a>
-      </li>
-      <li *ngIf="(model && model.id && authService.hasPermission('view_guide'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.GUIDES_TAB)">
-        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.GUIDES_TAB"
-          [class.active]="activeTabId === tabs.GUIDES_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/guides">{{ 'VOUCHER.GUIDES' | translate }}</a>
-      </li>
-      <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning ml-auto" style="margin-right: 5px;" 
-        (click)="verification('center')" *ngIf="authService.currentDivisionValue.id === 2 && direct_operation.value === true && is_active.value === true && verified_oi.value === false">
-        <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
-          class="svg-icon svg-icon-md svg-icon-warning">
-        </span>
-      </a>
-      <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning ml-auto" style="margin-right: 5px;" 
-      (click)="verification('center')" *ngIf="authService.currentDivisionValue.id === 2 && direct_operation.value === false && is_active.value === true && verified_oi.value === false">
-      <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
-        class="svg-icon svg-icon-md svg-icon-warning">
-      </span>
-    </a>
+        <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning ml-auto" style="margin-right: 5px;" 
+          (click)="verification('center')" *ngIf="authService.currentDivisionValue.id === 2 && direct_operation.value === false && is_active.value === true && verified_oi.value === false">
+          <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
+            class="svg-icon svg-icon-md svg-icon-warning">
+          </span>
+        </a>
+        <a class="btn btn-default font-weight-bold mr-1 py-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
+        <a class="btn btn-default font-weight-bold mr-1 py-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
+        <!-- <button type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
+          [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button> -->
+        <button type="submit" class="btn btn-primary font-weight-bold py-2"
+          [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}
+        </button>
+      </div>
     </ul>
 
     <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
@@ -152,15 +164,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count_packings')">{{ 'VOUCHER.COUNT_PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div> 
-            <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.DIRECTOPERATION' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="direct_operation" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
-              <div class="feedback" *ngIf="!isControlTouched('direct_operation')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.DIRECTOPERATION' | translate}}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>   
             <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.IS_ACTIVE' | translate}}</label>
               <p-toggleButton disabled="true" class="form-control form-control-lg form-control-solid" formControlName="is_active" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
@@ -179,15 +182,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date_delivery')">{{ 'VOUCHER.DATE_DELIVERY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date_delivery')">{{ 'VOUCHER.DATE_DELIVERY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>   -->
-            <div class="col-lg-4" *ngIf="authService.currentDivisionValue.id === 2">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PICKUP_DATE' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('pickup_date'))" name="pickup_date" formControlName="pickup_date" showTime="true" hourFormat="24"></p-calendar>
-              <div class="feedback" *ngIf="!isControlTouched('pickup_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PICKUP_DATE' | translate}}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>  
             <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CHECKIN_DATE' | translate}}</label>
               <p-calendar [inputStyleClass]="getValidClass(isControlValid('checkin_date'))" name="checkin_date" formControlName="checkin_date" showTime="true" hourFormat="24"></p-calendar>
@@ -208,6 +202,24 @@
               <div class="invalid-feedback"  style="display: block;" *ngIf="packings.value.length > count_packings.value">{{ 'VOUCHER.PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{count_packings.value}}
                 items</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.DIRECTOPERATION' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="direct_operation" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('direct_operation')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.DIRECTOPERATION' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div> 
+            <div class="col-lg-4" *ngIf="authService.currentDivisionValue.id === 2">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PICKUP_DATE' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('pickup_date'))" name="pickup_date" formControlName="pickup_date" showTime="true" hourFormat="24"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('pickup_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PICKUP_DATE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>    
             <!-- <div class="col-lg-4">
               <label>Verificated</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="verificated" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>

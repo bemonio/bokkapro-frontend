@@ -40,6 +40,13 @@
               <p-columnFilter type="text" field="name" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
           <th pSortableColumn="username">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'REPORT_OPERATION.CLOSED_AT' | translate }} 
@@ -110,13 +117,6 @@
               </p-columnFilter>
             </div>
           </th> -->
-          <th pSortableColumn="created_at">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.CREATED_AT' | translate }}
-              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
-            </div>
-          </th>
           <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -135,6 +135,9 @@
             {{value.id}}
           </td>
           <td>
+            {{value.created_at | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
             {{value.closed_at}}
           </td>
           <td>
@@ -145,9 +148,6 @@
           </td>
           <td>
             {{value.employees_close}}
-          </td>
-          <td>
-            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
             <!-- <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"

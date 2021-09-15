@@ -39,6 +39,13 @@
               {{ 'CLIENT_BINNACLE.ID' | translate }}
             </div>
           </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
           <th pSortableColumn="company">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'CLIENT_BINNACLE.COMPANY' | translate }}
@@ -59,13 +66,6 @@
               {{ 'CLIENT_BINNACLE.HOUR' | translate }}
             </div>
           </th>
-          <th pSortableColumn="created_at">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.CREATED_AT' | translate }}
-              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
-            </div>
-          </th>
           <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -84,6 +84,9 @@
             {{value.id}}
           </td>
           <td>
+            {{value.created_at | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
             {{value.company?.name}}
           </td>
           <td>
@@ -94,9 +97,6 @@
           </td>
           <td>
             {{value.hour | date: 'MM/dd/yyyy hh:mm'}}
-          </td>
-          <td>
-            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"

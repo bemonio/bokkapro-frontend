@@ -54,6 +54,13 @@
             </th>
             <th pSortableColumn="created_at">
               <div class="p-d-flex p-jc-between p-ai-center">
+                {{ 'COMMON.CREATED_AT' | translate }}
+                <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+                <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+              </div>
+            </th>
+            <th pSortableColumn="created_at">
+              <div class="p-d-flex p-jc-between p-ai-center">
                 {{ 'TOUR_DETAIL.DATE_START' | translate }}
                 <!-- <p-sortIcon field="date_joined"></p-sortIcon>
                 <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
@@ -69,13 +76,6 @@
             <th pSortableColumn="division">
               <div class="p-d-flex p-jc-between p-ai-center">
                 {{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate }}
-              </div>
-            </th>
-            <th pSortableColumn="created_at">
-              <div class="p-d-flex p-jc-between p-ai-center">
-                {{ 'COMMON.CREATED_AT' | translate }}
-                <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-                <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
               </div>
             </th>
             <th style="width: 10rem">
@@ -96,6 +96,9 @@
               {{value.id}}
             </td>
             <td>
+              {{value.created_at | date: 'MM/dd/yyyy'}}
+            </td>
+            <td>
               {{value.date_start | date: 'MM/dd/yyyy'}}
             </td>
             <td>
@@ -103,9 +106,6 @@
             </td>
             <td>
               {{value.origin_destination?.id}}
-            </td>
-            <td>
-              {{value.created_at | date: 'MM/dd/yyyy'}}
             </td>
             <td style="text-align: right">
               <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
@@ -155,7 +155,7 @@
     <app-tour-detail-edit [tourDetailID]="{id: selectedModelId, isNew: false}" (hideModal)="hideModal()"></app-tour-detail-edit>
 </p-dialog>
 
-<p-sidebar [(visible)]="visibleSidebar" styleClass="p-sidebar-lg" style="btn btn-xs btn-icon btn-light btn-hover-primary" position="right"  blockScroll="false" [baseZIndex]="10000">
+<p-sidebar [(visible)]="visibleSidebar" styleClass="p-sidebar-lg" position="right"  blockScroll="false" [baseZIndex]="10000">
   <h5 class="text-dark font-weight-bold my-1 mr-5 ng-star-inserted" style="padding-bottom: 10px;">{{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate}}</h5>
   <form action="#" class="form form-label-right" [formGroup]="formGroup">
     <div class="form-group row">

@@ -32,11 +32,18 @@
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3rem" *ngIf="showTableCheckbox">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'ORIGIN_DESTINATION.ID' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="created_at" *ngIf="!showListSchedule">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
           <th pSortableColumn="origin">
@@ -74,13 +81,6 @@
               {{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate }} 
             </div>
           </th>
-          <th pSortableColumn="created_at" *ngIf="!showListSchedule">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.CREATED_AT' | translate }}
-              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
-            </div>
-          </th>
           <th style="width: 10rem" *ngIf="!showListSchedule">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -97,6 +97,9 @@
           </td>
           <td>
             {{value.id}}
+          </td>
+          <td *ngIf="!showListSchedule">
+            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td>
             {{value.origin.name}}
@@ -119,9 +122,6 @@
           <td>
             <p-badge [value]="'Pick Up'"  severity="secondary"  severity="secondary" *ngIf="value.type_service == 'Pick Up'"></p-badge>
             <p-badge [value]="'Delivery'"  severity="success"  severity="success" *ngIf="value.type_service == 'Delivery'"></p-badge>
-          </td>
-          <td *ngIf="!showListSchedule">
-            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right" *ngIf="!showListSchedule">
             <a title="{{ 'COMMON.COUNT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"

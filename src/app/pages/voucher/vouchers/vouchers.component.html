@@ -45,6 +45,13 @@
               {{ 'VOUCHER.ID' | translate }}
             </div>
           </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
           <th pSortableColumn="code">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'VOUCHER.CODE' | translate }}
@@ -80,13 +87,6 @@
               Verificated
             </div>
           </th> -->
-          <th pSortableColumn="created_at">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.CREATED_AT' | translate }}
-              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
-            </div>
-          </th>
           <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -105,6 +105,9 @@
           <td *ngIf="(authService.currentDivisionValue.id === 2 && showTableCheckbox && value.verified_oi === false) || authService.currentDivisionValue.id === 2 && value.is_active === false || authService.currentDivisionValue.id != 2 && value.is_active === false"></td>
           <td>
             {{value.id}}
+          </td>
+          <td>
+            {{value.created_at | date: 'MM/dd/yyyy HH:mm:ss'}}
           </td>
           <td>
             {{value.code}}
@@ -127,9 +130,6 @@
           <!-- <td>
             {{value.verificated}}
           </td> -->
-          <td>
-            {{value.created_at | date: 'MM/dd/yyyy HH:mm:ss'}}
-          </td>
           <td style="text-align: right">
             <!-- <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning" style="margin-right: 5px;" 
               (click)="verification(value, 'center')" *ngIf="authService.currentDivisionValue.id === 2 && value.direct_operation && value.is_active === true">

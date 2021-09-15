@@ -39,6 +39,13 @@
               {{ 'DEPOSITFORM.ID' | translate }}
             </div>
           </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
           <th pSortableColumn="bank_account_number">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'DEPOSITFORM.BANKACCOUNT' | translate }}
@@ -52,13 +59,6 @@
           <th pSortableColumn="difference_amount">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}
-            </div>
-          </th>
-          <th pSortableColumn="created_at">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.CREATED_AT' | translate }}
-              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
-              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
           <th style="width: 10rem">
@@ -79,6 +79,9 @@
             {{value.id}}
           </td>
           <td>
+            {{value.created_at | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
             {{value.bank_account_number}}
           </td>
           <td>
@@ -86,9 +89,6 @@
           </td>
           <td>
             {{value.difference_amount}}
-          </td>
-          <td>
-            {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.COUNT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
