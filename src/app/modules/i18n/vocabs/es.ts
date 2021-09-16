@@ -99,24 +99,24 @@ export const locale = {
       PERMISSIONS: 'Permisos'
     },
     SEGMENT_COMPANY: {
-      SEGMENT_COMPANY: 'Segmento Cliente',
-      SEGMENTS_COMPANIES: 'Segmentos Clientes',
+      SEGMENT_COMPANY: 'Segmento Grupo Empresarial',
+      SEGMENTS_COMPANIES: 'Segmentos Grupo Empresarial',
       ID: 'Id',
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción'
     },
     TYPE_COMPANY: {
-      TYPE_COMPANY: 'Tipo Cliente',
-      TYPES_COMPANIES: 'Tipos Clientes',
+      TYPE_COMPANY: 'Tipo Grupo Empresarial',
+      TYPES_COMPANIES: 'Tipos Grupo Empresarial',
       ID: 'Id',
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción'
     },
     COMPANY: {
-      COMPANY: 'Cliente',
-      COMPANIES: 'Clientes',
+      COMPANY: 'Grupo Empresarial',
+      COMPANIES: 'Grupos Empresariales',
       ID: 'Id',
-      CODE: 'Código/Cliente',
+      CODE: 'Código/Grupo Empresarial',
       NAME: 'Nombre',
       CODE_BRINKS: 'Código Brinks',
       IDENTIFICATION_NUMBER: 'Número Identificación',
@@ -127,8 +127,8 @@ export const locale = {
       ALIAS: 'Alias',
       ABBREVIATION: 'Abreviatura',
       ADDRESS: 'Dirección',
-      SEGMENT_COMPANY: 'Rubro Cliente',
-      TYPE_COMPANY: 'Tipo Cliente',
+      SEGMENT_COMPANY: 'Rubro Grupo Empresarial',
+      TYPE_COMPANY: 'Tipo Grupo Empresarial',
       IS_ACTIVE: "Activo?",
       IS_CARRIER: "Transportadora?",
       IS_FINANCIAL_INSTITUTION: "Institución Financiera?",
@@ -145,7 +145,7 @@ export const locale = {
       PHONE: 'Teléfono',
       EMAIL: 'Correo',
       DESCRIPTION: 'Descripción',
-      COMPANY: 'Companía',
+      COMPANY: 'Grupo Empresarial',
       CURRENCY: 'Divisa'
     },
     TYPE_DIVISION: {
@@ -219,7 +219,7 @@ export const locale = {
       CODE: 'Código/Location',
       CODE_BRINKS: 'Código Brinks',
       TYPE_LOCATION: 'Tipo Dirección',
-      COMPANY: 'Companía',
+      COMPANY: 'Grupo Empresarial',
       ZONE: 'Zona',
       TYPEADDRESS: 'Origen / Destino'
     },
@@ -268,7 +268,7 @@ export const locale = {
       AMOUNT: 'Monto',
       LOCATION_ORIGIN: 'Dirección Origen',
       LOCATION_DESTINATION: 'Dirección Destino',
-      COMPANY: 'Cliente',
+      COMPANY: 'Grupo Empresarial',
       COUNT_PACKINGS: 'Cant. Envases',
       CASHIER: 'Cajero/a',
       DIVISION: 'División',
@@ -369,8 +369,8 @@ export const locale = {
       TYPESCONTRACTS: 'Tipos Contratos',
     },
     COMPANYCONTACT: {
-      COMPANYCONTACT: 'Contacto Cliente',
-      COMPANYCONTACTS: 'Contactos Cliente',
+      COMPANYCONTACT: 'Contacto Grupo Empresarial',
+      COMPANYCONTACTS: 'Contactos Grupo Empresarial',
       ID: 'Id',
       NAME: 'Nombre',
       PHONE: 'Teléfono',
@@ -562,7 +562,7 @@ export const locale = {
       COMPANY: 'Compañía',
       EMPLOYEE: 'Empleado',
       CONTRACT: 'Contrato',
-      COMPANY_CONTACT: 'Contacto Cliente',
+      COMPANY_CONTACT: 'Contacto Grupo Empresarial',
       NOTE: 'Nota',
     },
     ORIGIN_DESTINATION: {
@@ -600,8 +600,8 @@ export const locale = {
       SUNDAY_END_TIME: 'Hora Fin Domingo',
     },
     CLIENT_BINNACLE: {
-      CLIENT_BINNACLE: 'Bitácora Cliente',
-      CLIENT_BINNACLES: 'Bitácoras Clientes',
+      CLIENT_BINNACLE: 'Bitácora Grupo Empresarial',
+      CLIENT_BINNACLES: 'Bitácoras Grupo Empresarial',
       ID: 'Id',
       NOTE: 'Nota',
       HOUR: 'Fecha y Hora',
