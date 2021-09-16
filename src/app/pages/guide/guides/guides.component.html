@@ -159,7 +159,7 @@
               </span>
             </button>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('delete_' + permission)">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('delete_' + permission) && value.division_origin.id != value.division_destination.id">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>

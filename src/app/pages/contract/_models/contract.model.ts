@@ -8,6 +8,13 @@ export class ContractModel {
   name_invoce_to: string;
   start_billing_date: string;
   end_billing_date: string;
+  identification_number: number;
+  email: string;
+  phone: number;
+  web: string;
+  alias: string;
+  abbreviation: string;
+  address: string;
   created_at: string;
   updated_at: string;
 }
