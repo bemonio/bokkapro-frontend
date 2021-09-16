@@ -272,6 +272,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.division_origin.setValue(this.authService.currentDivisionValue);
       this.employee_origin.setValue(this.authService.currentUserValue.employee);
       this.date.setValue(new Date());
+      this.am_pm.reset();
       this.division_destination.reset();
       if(this.division_origin.value.name === "Apertura"){
         this.getDivision(1);
@@ -391,7 +392,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    model.am_pm = this.am_pm.value.value;
+    model.am_pm = this.am_pm.value;
     model.certified_cart = this.certified_cart.value;
     model.certified_cart_code = this.certified_cart_code.value;
 
@@ -405,6 +406,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
         this.typeGuide = 3;
         this.am_pm.setValidators(Validators.compose([Validators.required]))
         this.date.setValidators(Validators.compose([Validators.required]))
+      }
+      if (this.division_destination.value.schedule){
+        let am_pm = this.division_destination.value.schedule;
+        model.am_pm = am_pm;
       }
     }
 

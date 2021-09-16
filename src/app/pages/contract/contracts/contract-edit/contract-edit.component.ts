@@ -34,6 +34,13 @@ export class ContractEditComponent implements OnInit, OnDestroy {
   public name_invoce_to: AbstractControl;
   public start_billing_date: AbstractControl;
   public end_billing_date: AbstractControl;
+  public identification_number: AbstractControl;
+  public email: AbstractControl;
+  public phone: AbstractControl;
+  public web: AbstractControl;
+  public alias: AbstractControl;
+  public abbreviation: AbstractControl;
+  public address: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -63,6 +70,13 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       name_invoce_to: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       start_billing_date: ['', Validators.compose([Validators.required,])],
       end_billing_date: ['', Validators.compose([Validators.required,])],
+      identification_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      email: [''],
+      phone: [''],
+      web: [''],
+      alias: [''],
+      abbreviation: [''],
+      address: [''],
     });
     this.code = this.formGroup.controls['code'];
     this.company = this.formGroup.controls['company'];
@@ -70,6 +84,14 @@ export class ContractEditComponent implements OnInit, OnDestroy {
     this.name_invoce_to = this.formGroup.controls['name_invoce_to'];
     this.start_billing_date = this.formGroup.controls['start_billing_date'];
     this.end_billing_date = this.formGroup.controls['end_billing_date'];
+
+    this.identification_number = this.formGroup.controls['identification_number'];
+    this.email = this.formGroup.controls['email'];
+    this.phone = this.formGroup.controls['phone'];
+    this.web = this.formGroup.controls['web'];
+    this.alias = this.formGroup.controls['alias'];
+    this.abbreviation = this.formGroup.controls['abbreviation'];
+    this.address = this.formGroup.controls['address'];
   }
 
   ngOnInit(): void {
@@ -133,6 +155,13 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       this.name_invoce_to.setValue(this.model.name_invoce_to);
       this.start_billing_date.setValue(new Date(this.model.start_billing_date));
       this.end_billing_date.setValue(new Date(this.model.end_billing_date));
+      this.identification_number.setValue(this.model.identification_number);
+      this.email.setValue(this.model.email);
+      this.phone.setValue(this.model.phone);
+      this.web.setValue(this.model.web);
+      this.alias.setValue(this.model.alias);
+      this.abbreviation.setValue(this.model.abbreviation);
+      this.address.setValue(this.model.address);
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }

@@ -106,10 +106,10 @@
                 name="name_invoce_to" [class.is-invalid]="isControlInvalid('name_invoce_to')"
                 [class.is-valid]="isControlValid('name_invoce_to')" formControlName="name_invoce_to" />
               <div class="feedback" *ngIf="!isControlTouched('name_invoce_to')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.NAME_INVOICE_TO' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('name_invoce_to')">{{ 'COMPANY.NAME_INVOICE_TO' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name_invoce_to')">{{ 'COMPANY.NAME_INVOICE_TO' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name_invoce_to')">{{ 'COMPANY.NAME_INVOICE_TO' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name_invoce_to')">{{ 'COMPANY.NAME_INVOICE_TO' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="valid-feedback" *ngIf="isControlValid('name_invoce_to')">{{ 'CONTRACT.NAME_INVOICE_TO' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name_invoce_to')">{{ 'CONTRACT.NAME_INVOICE_TO' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name_invoce_to')">{{ 'CONTRACT.NAME_INVOICE_TO' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name_invoce_to')">{{ 'CONTRACT.NAME_INVOICE_TO' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CONTRACT.START_BILLING_DATE' | translate}}</label>
@@ -128,6 +128,83 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'end_billing_date')">{{ 'CONTRACT.END_BILLING_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'end_billing_date')">{{ 'CONTRACT.END_BILLING_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'end_billing_date')">{{ 'CONTRACT.END_BILLING_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.IDENTIFICATION_NUMBER' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="identification_number" [class.is-invalid]="isControlInvalid('identification_number')"
+                [class.is-valid]="isControlValid('identification_number')" formControlName="identification_number" />
+              <div class="feedback" *ngIf="!isControlTouched('identification_number')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.IDENTIFICATION_NUMBER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('identification_number')">{{ 'COMPANY.IDENTIFICATION_NUMBER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'identification_number')">{{ 'COMPANY.IDENTIFICATION_NUMBER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'identification_number')">{{ 'COMPANY.IDENTIFICATION_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'identification_number')">{{ 'COMPANY.IDENTIFICATION_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.EMAIL' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="email" [class.is-invalid]="isControlInvalid('email')"
+                [class.is-valid]="isControlValid('email')" formControlName="email" />
+              <div class="feedback" *ngIf="!isControlTouched('email')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.EMAIL' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('email')">{{ 'COMPANY.EMAIL' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'email')">{{ 'COMPANY.EMAIL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'email')">{{ 'COMPANY.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">{{ 'COMPANY.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.PHONE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="phone" [class.is-invalid]="isControlInvalid('phone')"
+                [class.is-valid]="isControlValid('phone')" formControlName="phone" />
+              <div class="feedback" *ngIf="!isControlTouched('phone')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.PHONE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('phone')">{{ 'COMPANY.PHONE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'phone')">{{ 'COMPANY.PHONE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'phone')">{{ 'COMPANY.PHONE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'phone')">{{ 'COMPANY.PHONE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.WEB' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="web" [class.is-invalid]="isControlInvalid('web')"
+                [class.is-valid]="isControlValid('web')" formControlName="web" />
+              <div class="feedback" *ngIf="!isControlTouched('web')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.WEB' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('web')">{{ 'COMPANY.WEB' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'web')">{{ 'COMPANY.WEB' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'web')">{{ 'COMPANY.WEB' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'web')">{{ 'COMPANY.WEB' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.ALIAS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="alias" [class.is-invalid]="isControlInvalid('alias')"
+                [class.is-valid]="isControlValid('alias')" formControlName="alias" />
+              <div class="feedback" *ngIf="!isControlTouched('alias')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.ALIAS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('alias')">{{ 'COMPANY.ALIAS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'alias')">{{ 'COMPANY.ALIAS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'alias')">{{ 'COMPANY.ALIAS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'alias')">{{ 'COMPANY.ALIAS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.ABBREVIATION' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="abbreviation" [class.is-invalid]="isControlInvalid('abbreviation')"
+                [class.is-valid]="isControlValid('abbreviation')" formControlName="abbreviation" />
+              <div class="feedback" *ngIf="!isControlTouched('abbreviation')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.ABBREVIATION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('abbreviation')">{{ 'COMPANY.ABBREVIATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'abbreviation')">{{ 'COMPANY.ABBREVIATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'abbreviation')">{{ 'COMPANY.ABBREVIATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'abbreviation')">{{ 'COMPANY.ABBREVIATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.ADDRESS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="address" [class.is-invalid]="isControlInvalid('address')"
+                [class.is-valid]="isControlValid('address')" formControlName="address" />
+              <div class="feedback" *ngIf="!isControlTouched('address')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.ADDRESS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('address')">{{ 'COMPANY.ADDRESS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'address')">{{ 'COMPANY.ADDRESS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'address')">{{ 'COMPANY.ADDRESS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'address')">{{ 'COMPANY.ADDRESS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
           </div>
           <div class="float-right">
