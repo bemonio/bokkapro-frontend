@@ -105,7 +105,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">{{ 'GUIDE.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">{{ 'GUIDE.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>                     
-            <div class="col-lg-4">
+            <!--<div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.CERTIFIED_CART' | translate}}</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="certified_cart" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('certified_cart')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CERTIFIED_CART' | translate}}</b></div>
@@ -124,9 +124,10 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'certified_cart_code')">{{ 'GUIDE.CERTIFIED_CART_CODE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'certified_cart_code')">{{ 'GUIDE.CERTIFIED_CART_CODE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'certified_cart_code')">{{ 'GUIDE.CERTIFIED_CART_CODE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
+            </div>-->
           </div>
           <div class="float-right">
+            {{getFormValidationErrors(formGroup)}}
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}" *ngIf="!transfer">{{ 'COMMON.CANCEL' | translate }}</a>
             <a class="btn btn-default font-weight-bold mr-2" (click)="closeEmit()" *ngIf="transfer">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
