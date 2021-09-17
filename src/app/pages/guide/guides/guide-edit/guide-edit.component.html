@@ -127,7 +127,6 @@
             </div>-->
           </div>
           <div class="float-right">
-            {{getFormValidationErrors(formGroup)}}
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}" *ngIf="!transfer">{{ 'COMMON.CANCEL' | translate }}</a>
             <a class="btn btn-default font-weight-bold mr-2" (click)="closeEmit()" *ngIf="transfer">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

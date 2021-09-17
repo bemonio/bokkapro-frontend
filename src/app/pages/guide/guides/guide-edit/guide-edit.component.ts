@@ -570,19 +570,4 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
       this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
-
-  getFormValidationErrors(form) {
-    console.log('%c ==>> Validation Errors: ', 'color: red; font-weight: bold; font-size:25px;');
-    let totalErrors = 0;
-    Object.keys(form.controls).forEach(key => {
-      const controlErrors: ValidationErrors = form.get(key).errors;
-      if (controlErrors != null) {
-        totalErrors++;
-        Object.keys(controlErrors).forEach(keyError => {
-        console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-      });
-      }
-    });
-    console.log('Number of errors: ' ,totalErrors);
-  }
 }
