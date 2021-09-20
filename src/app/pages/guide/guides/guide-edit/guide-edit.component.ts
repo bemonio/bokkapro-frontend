@@ -206,7 +206,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     const sb = this.route.paramMap.pipe(
         switchMap(params => {
             if (id || id > 0) {
-              return this.crewService.get(1, 1, '-id', undefined, [{ key: 'filter{date}[]', value: formatDate(Date.now(),'yyyy-MM-dd','en-US')}], []);
+              return this.crewService.get(1, 1, '-id', undefined, [{key: 'filter{division}', value: this.division_origin.value ? this.division_origin.value.id : ''},{ key: 'filter{date.icontains}[]', value: formatDate(Date.now(),'yyyy-MM-dd','en-US')}], []);
             }
             return of({ 'crew': new Model() });
         }),
@@ -548,7 +548,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   public changeDivisionOrigin(event) {
-    this.getCrew(this.division_origin.value.crew)
+    this.getCrew(this.division_origin.value.crew);
     this.loadForm();
   }
 

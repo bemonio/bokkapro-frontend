@@ -57,8 +57,8 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.EMPLOYEE_ORIGIN' | translate}}</label>
               <app-employee-autocomplete [isCrewInput]="true"
               name="employee_origin" [valid]="isControlValid('employee_origin')" [touched]="isControlTouched('employee_origin')" [class.is-invalid]="isControlInvalid('employee_origin')"
-              [class.is-valid]="isControlValid('employee_origin')" formControlName="employee_origin" id="employee_origin" [model]="model.employee_origin" 
-              [disabled]="division_origin.value ? false : true"></app-employee-autocomplete>
+              [class.is-valid]="isControlValid('employee_origin')" formControlName="employee_origin" id="employee_origin" [model]="model.employee_origin"
+              [addFilters]="[{key: 'division', value: division_origin.value ? division_origin.value.id : ''}]" [disabled]="division_origin.value ? false : true"></app-employee-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('employee_origin')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.EMPLOYEE_ORIGIN' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('employee_origin')">{{ 'GUIDE.EMPLOYEE_ORIGIN' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee_origin')">{{ 'GUIDE.EMPLOYEE_ORIGIN' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
