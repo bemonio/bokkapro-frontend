@@ -352,6 +352,7 @@ export const locale = {
       BANKSACCOUNTS: 'Cuentas Bancarias',
       ID: 'Id',
       ACCOUNT: 'Número de Cuenta',
+      BANK: 'Banco'
     },
     CONTRACT: {
       CONTRACT: 'Contrato',

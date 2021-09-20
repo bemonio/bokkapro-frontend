@@ -16,7 +16,7 @@ import { CompanyService } from 'src/app/pages/company/_services';
 })
 export class ContentTypeEditComponent implements OnInit, OnDestroy {
   public id: number;
-  public thismodel: Model;
+  public model: Model;
   public previous: Model;
   public formGroup: FormGroup;
   public requesting: boolean = false;
@@ -39,7 +39,7 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private thismodelsService: ModelsService,
+    private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService,
@@ -60,7 +60,7 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.id = undefined;
-    this.thismodel = undefined;
+    this.model = undefined;
     this.previous = undefined;
 
     this.route.parent.parent.parent.params.subscribe((params) => {
@@ -79,7 +79,7 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
         // get id from URL
         this.id = Number(params.get('id'));
         if (this.id || this.id > 0) {
-          return this.thismodelsService.getById(this.id);
+          return this.modelsService.getById(this.id);
         }
         return of({ 'content_type': new Model() });
       }),
@@ -99,8 +99,8 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.thismodel = response.content_type;
-        this.previous = Object.assign({}, this.thismodel);
+        this.model = response.content_type;
+        this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
     });
@@ -108,16 +108,16 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.thismodel.id) {
-      this.app_label.setValue(this.thismodel.app_label);
-      this.model.setValue(this.thismodel.model);
+    if (this.model.id) {
+      this.app_label.setValue(this.model.app_label);
+      this.model.setValue(this.model.model);
     } 
     this.formGroup.markAllAsTouched();
   }
 
   reset() {
     if (this.previous) {
-      this.thismodel = Object.assign({}, this.previous);
+      this.model = Object.assign({}, this.previous);
       this.loadForm();
     }
   }
@@ -127,7 +127,7 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       const formValues = this.formGroup.value;
-      this.thismodel = Object.assign(this.thismodel, formValues);
+      this.model = Object.assign(this.model, formValues);
       if (this.id) {
         this.edit();
       } else {
@@ -138,9 +138,9 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
 
   edit() {
     this.requesting = true;
-    let thismodel = this.thismodel;
+    let model = this.model;
 
-    const sbUpdate = this.thismodelsService.patch(this.id, thismodel).pipe(
+    const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
@@ -162,20 +162,20 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of(this.thismodel);
+        return of(this.model);
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.thismodel = response.content_type
+      this.model = response.content_type
     });
     this.subscriptions.push(sbUpdate);
   }
 
   create() {
     this.requesting = true;
-    let thismodel = this.thismodel;
+    let model = this.model;
 
-    const sbCreate = this.thismodelsService.post(thismodel).pipe(
+    const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
@@ -199,11 +199,11 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of(this.thismodel);
+        return of(this.model);
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.thismodel = response.content_type as Model
+      this.model = response.content_type as Model
     });
     this.subscriptions.push(sbCreate);
   }
