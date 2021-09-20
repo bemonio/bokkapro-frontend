@@ -40,9 +40,7 @@
           <div class="form-group row">
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.CLOSED_AT' | translate }}</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                placeholder="{{ 'REPORT_OPERATION.CLOSED_AT' | translate }}" name="closed_at" [class.is-invalid]="isControlInvalid('closed_at')"
-                [class.is-valid]="isControlValid('closed_at')" formControlName="closed_at" />
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('closed_at'))" name="closed_at" formControlName="closed_at" timeOnly="true"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('closed_at')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.CLOSED_AT' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('closed_at')">{{ 'REPORT_OPERATION.CLOSED_AT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'closed_at')">{{ 'REPORT_OPERATION.CLOSED_AT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

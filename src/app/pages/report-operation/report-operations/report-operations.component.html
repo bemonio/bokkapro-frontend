@@ -138,7 +138,7 @@
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td>
-            {{value.closed_at}}
+            {{value.closed_at | date: 'HH:mm'}}
           </td>
           <td>
             {{value.hours_close}}
@@ -150,18 +150,18 @@
             {{value.employees_close}}
           </td>
           <td style="text-align: right">
-            <!-- <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/reports/operations/edit/' + value.id" *ngIf="authService.hasPermission('add_user')">
+            <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              [routerLink]="'/reports/operations/edit/' + value.id" *ngIf="authService.hasPermission('add_reportoperation')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_user')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_reportoperation')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
-            </a> -->
+            </a>
             <a title="{{ 'COMMON.PRINT' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
               (click)="print(value.id)">
               <span [inlineSVG]="'./assets/media/svg/icons/Devices/Printer.svg'" cacheSVG="true"

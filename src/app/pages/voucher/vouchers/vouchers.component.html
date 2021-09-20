@@ -107,7 +107,7 @@
             {{value.id}}
           </td>
           <td>
-            {{value.created_at | date: 'MM/dd/yyyy HH:mm:ss'}}
+            {{value.created_at | date: 'MM/dd/yyyy HH:mm:ss':'UTC -4'}}
           </td>
           <td>
             {{value.code}}
