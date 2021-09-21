@@ -1,7 +1,7 @@
 <div class="card card-custom gutter-b">
   <div class="card-header">
     <div class="card-title">
-      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
+      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'VOUCHER.VOUCHERS' | translate }}
     </div>
     <div class="card-toolbar">
       <a type="button" class="btn btn-secondary" (click)="showModalDialogCertifiedCart()" *ngIf="(authService.currentDivisionValue.id === 2 || authService.currentDivisionValue.id === 9) && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CERTIFIED_CART' | translate }}</a>
