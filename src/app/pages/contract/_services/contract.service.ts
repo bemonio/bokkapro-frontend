@@ -50,7 +50,7 @@ export class ContractService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=company.*&include[]=type_contract.*&include[]=contractserviceorder.od_service_order.origin.*&include[]=contractserviceorder.od_service_order.destination.*`);
     }
 
     public post(body: Object): Observable<any> {
