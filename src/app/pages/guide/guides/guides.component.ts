@@ -175,7 +175,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.filters = [];
         
         if (this.date_filter.value) {
-            this.filters.push({ key: 'filter{date}[]', value: this.formatDate(this.date_filter.value) })
+            this.filters.push({ key: 'filter{date.icontains}[]', value: this.formatDate(this.date_filter.value) })
         }
 
         if (this.am_pm_filter.value) {
