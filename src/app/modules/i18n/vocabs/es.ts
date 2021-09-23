@@ -357,9 +357,9 @@ export const locale = {
       CONTRACT: 'Contrato',
       CONTRACTS: 'Contratos',
       ID: 'Id',
-      CODE: 'Código',
-      COMPANY: 'Compañía',
-      NAME_INVOICE_TO: 'Factura a nombre de',
+      CODE: 'Código de Contrato',
+      COMPANY: 'Grupo Económico',
+      NAME_INVOICE_TO: 'Nombre Legal Cliente',
       START_BILLING_DATE: 'Inicio Fecha de Facturación',
       END_BILLING_DATE: 'Final Fecha de Facturación',
       BILLING_START_END: 'Facturación. Inicio - Fin'
