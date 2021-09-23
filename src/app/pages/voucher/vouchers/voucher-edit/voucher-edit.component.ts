@@ -191,7 +191,15 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         }
         if (response.origin_destinations) {
           this.model.origin_destination = response.origin_destinations[0];
-        }
+          response.locations.forEach(location => {
+              if (this.model.origin_destination.origin === location.id) {
+                this.model.origin_destination.origin = location;
+              }
+              if (this.model.origin_destination.destination === location.id) {
+                this.model.origin_destination.destination = location;
+              }
+          });
+       }
         if (response.cashier) {
           this.model.cashier = response.cashier[0];
         }

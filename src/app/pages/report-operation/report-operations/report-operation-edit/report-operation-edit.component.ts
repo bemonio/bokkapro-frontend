@@ -131,7 +131,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
 
   loadForm() {
     if (this.model && this.model.id) {
-      this.closed_at.setValue(this.model.closed_at);
+      this.closed_at.setValue(new Date(this.model.closed_at));
       this.hours_close.setValue(this.model.hours_close);
       this.atm.setValue(this.model.atm);
       this.cash_opening.setValue(this.model.cash_opening);
@@ -164,6 +164,20 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
 
   edit() {
     this.requesting = true;
+    let model = this.model;
+    let employees_open = [];
+    this.model.employees_open.forEach(element => {
+      employees_open.push(element.id);
+    });
+    model.employees_open = employees_open;
+
+    let employees_close = [];
+    this.model.employees_close.forEach(element => {
+      employees_close.push(element.id);
+    });
+    model.employees_close = employees_close;
+    model.closed_at = this.formatDate(this.closed_at.value);
+
     const sbUpdate = this.modelsService.patch(this.id, this.model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
@@ -204,6 +218,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
       employees_close.push(element.id);
     });
     model.employees_close = employees_close;
+    model.closed_at = this.formatDate(this.closed_at.value);
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
@@ -261,5 +276,46 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
   isControlTouched(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
     return control.dirty || control.touched;
+  }
+
+  public getValidClass(valid) {
+    let stringClass = 'form-control form-control-lg form-control-solid';
+    if (valid) {
+      stringClass += ' is-valid';
+    } else {
+      stringClass += ' is-invalid';
+    }
+    return stringClass;
+  }
+
+  public formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    let hours = '' + d.getHours();
+    let minutes = '' + d.getMinutes();
+    let seconds = '' + d.getSeconds();
+
+    if (month.length < 2) {
+        month = '0' + month;
+    }
+    if (day.length < 2) {
+        day = '0' + day;
+    }
+
+    if (hours.length < 2) {
+        hours = '0' + hours;
+    }
+
+    if (minutes.length < 2) {
+        minutes = '0' + minutes;
+    }
+
+    if (seconds.length < 2) {
+        seconds = '0' + seconds;
+    }
+
+    return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
   }
 }

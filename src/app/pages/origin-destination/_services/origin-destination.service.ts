@@ -50,7 +50,7 @@ export class OriginDestinationService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=origin.*&include[]=destination.*&include[]=service_order.*`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=origin.*&include[]=destination.*&include[]=service_order.*&include[]=service_order.company.*`);
     }
 
     public post(body: Object): Observable<any> {

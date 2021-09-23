@@ -167,9 +167,12 @@ export class CrewsComponent implements OnInit {
         this.getModelsCalendar();
     }
 
-    public loadLazy(event: LazyLoadEvent) {
-        this.page = (event.first / this.per_page) + 1;
-        if (event.sortField) {
+    public loadLazy(event?: LazyLoadEvent) {
+        if (event && event.first) {
+            this.page = (event.first / this.per_page) + 1;
+        }
+
+        if (event && event.sortField) {
             if (event.sortOrder === -1) {
                 this.sort = '-' + event.sortField;
             } else {
@@ -179,13 +182,13 @@ export class CrewsComponent implements OnInit {
             this.sort = '-id';
         }
 
-        if (event.globalFilter) {
+        if (event && event.globalFilter) {
             this.query = event.globalFilter;
         } else {
             this.query = undefined;
         }
 
-        if (event.rows) {
+        if (event && event.rows) {
             this.per_page = event.rows;
         }
 

@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
@@ -35,10 +35,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public description: AbstractControl;
   public status: AbstractControl;
-  public am_pm: AbstractControl;
+  // public am_pm: AbstractControl;
   public date: AbstractControl;
-  public certified_cart: AbstractControl;
-  public certified_cart_code: AbstractControl;
+  // public certified_cart: AbstractControl;
+  // public certified_cart_code: AbstractControl;
   public division_origin: AbstractControl;
   public division_destination: AbstractControl;
   public employee_origin: AbstractControl;
@@ -86,10 +86,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       description: [''],
       status: [''],
-      am_pm: [''],
+      // am_pm: [''],
       date: [''],
-      certified_cart: [''],
-      certified_cart_code: [''],
+      // certified_cart: [''],
+      // certified_cart_code: [''],
       division_origin: ['', Validators.compose([Validators.required,])],
       division_destination: [''],
       employee_origin: ['', Validators.compose([Validators.required,])],
@@ -99,9 +99,9 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.description = this.formGroup.controls['description'];
     this.status = this.formGroup.controls['status'];
     this.date = this.formGroup.controls['date'];
-    this.am_pm = this.formGroup.controls['am_pm'];
-    this.certified_cart = this.formGroup.controls['certified_cart'];
-    this.certified_cart_code = this.formGroup.controls['certified_cart_code'];
+    // this.am_pm = this.formGroup.controls['am_pm'];
+    // this.certified_cart = this.formGroup.controls['certified_cart'];
+    // this.certified_cart_code = this.formGroup.controls['certified_cart_code'];
     this.division_origin = this.formGroup.controls['division_origin'];
     this.division_destination = this.formGroup.controls['division_destination'];
     this.employee_origin = this.formGroup.controls['employee_origin'];
@@ -206,7 +206,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     const sb = this.route.paramMap.pipe(
         switchMap(params => {
             if (id || id > 0) {
-              return this.crewService.get(1, 1, '-id', undefined, [{ key: 'filter{date}[]', value: formatDate(Date.now(),'yyyy-MM-dd','en-US')}], []);
+              return this.crewService.get(1, 1, '-id', undefined, [{key: 'filter{division}', value: this.division_origin.value ? this.division_origin.value.id : ''},{ key: 'filter{date.icontains}[]', value: formatDate(Date.now(),'yyyy-MM-dd','en-US')}], []);
             }
             return of({ 'crew': new Model() });
         }),
@@ -245,15 +245,15 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    this.certified_cart.setValue(false);
+    // this.certified_cart.setValue(false);
 
     if (this.model && this.model.id) {
       this.description.setValue(this.model.description);
       this.status.setValue(this.model.status);
-      this.am_pm.setValue({ key: this.model.am_pm, value: this.model.am_pm });
+      // this.am_pm.setValue({ key: this.model.am_pm, value: this.model.am_pm });
       this.date.setValue(new Date(this.model.date));
-      this.certified_cart.setValue(this.model.certified_cart);
-      this.certified_cart_code.setValue(this.model.certified_cart_code);
+      // this.certified_cart.setValue(this.model.certified_cart);
+      // this.certified_cart_code.setValue(this.model.certified_cart_code);
         if (this.model.division_origin) {
         this.division_origin.setValue(this.model.division_origin);
       }
@@ -272,7 +272,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.division_origin.setValue(this.authService.currentDivisionValue);
       this.employee_origin.setValue(this.authService.currentUserValue.employee);
       this.date.setValue(new Date());
-      this.am_pm.reset();
+      // this.am_pm.reset();
       this.division_destination.reset();
       if(this.division_origin.value.name === "Apertura"){
         this.getDivision(1);
@@ -300,12 +300,12 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.am_pm.setValidators(Validators.compose([]))
+    // this.am_pm.setValidators(Validators.compose([]))
     this.date.setValidators(Validators.compose([]))
     if (this.division_destination.value) {
       if (this.division_destination.value.type_division == 2) {
         this.typeGuide = 3;
-        this.am_pm.setValidators(Validators.compose([Validators.required]))
+        // this.am_pm.setValidators(Validators.compose([Validators.required]))
         this.date.setValidators(Validators.compose([Validators.required]))
       }
     }
@@ -342,7 +342,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    model.am_pm = this.am_pm.value.value;
+    // model.am_pm = this.am_pm.value.value;
     model.date = this.formatDate(this.date.value);
     model.certified_cart = this.model.certified_cart;
     model.certified_cart_code = this.model.certified_cart_code;
@@ -392,9 +392,9 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
-    model.am_pm = this.am_pm.value;
-    model.certified_cart = this.certified_cart.value;
-    model.certified_cart_code = this.certified_cart_code.value;
+    // model.am_pm = this.am_pm.value;
+    // model.certified_cart = this.certified_cart.value;
+    // model.certified_cart_code = this.certified_cart_code.value;
 
     model.date = undefined;
     if (this.date.value) {
@@ -404,7 +404,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     if (this.division_destination.value) {
       if (this.division_destination.value.type_division == 2) {
         this.typeGuide = 3;
-        this.am_pm.setValidators(Validators.compose([Validators.required]))
+        // this.am_pm.setValidators(Validators.compose([Validators.required]))
         this.date.setValidators(Validators.compose([Validators.required]))
       }
       if (this.division_destination.value.schedule){
@@ -548,7 +548,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   public changeDivisionOrigin(event) {
-    this.getCrew(this.division_origin.value.crew)
+    this.getCrew(this.division_origin.value.crew);
     this.loadForm();
   }
 

@@ -11,7 +11,7 @@
       <h3 class="card-label">
         <ng-container *ngIf="thismodel">
           {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
-          <span *ngIf="thismodel && thismodel.id">{{ thismodel.id }} </span>
+          <span *ngIf="thismodel && thismodel.id">{{ 'COMPANY_CONTACT.COMPANY_CONTACT' | translate }} : {{ thismodel.id }}</span>
         </ng-container>
       </h3>
     </div>
