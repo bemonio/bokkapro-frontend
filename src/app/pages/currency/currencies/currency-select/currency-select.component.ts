@@ -1,4 +1,4 @@
-import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CurrencyService as ModelsService } from '../../_services/currency.service';
 import { LazyLoadEvent } from 'primeng/api';
@@ -16,7 +16,7 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     styleUrls: ['./currency-select.component.scss'],
     providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
-export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
+export class CurrencySelectComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input() model: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
@@ -53,6 +53,10 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
             this.placeholder = '';
         }
         this.load();
+    }
+    
+    ngOnChanges(): void {
+        this.ngOnInit();
     }
 
     writeValue(value: any) {
@@ -100,6 +104,15 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit {
                 //         this.filters = [];
                 //     }
                 // }
+
+                response.offices.forEach(office => {
+                    this.models.forEach(element => {
+                        if (element.office === office.id) {
+                            element.office = office;
+                        }
+                    });
+                });
+    
             },
             error => {
                 let messageError = [];

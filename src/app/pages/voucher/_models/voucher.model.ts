@@ -8,6 +8,7 @@ export class VoucherModel {
   id: number;
   code: string;
   amount: number;
+  exchange_rate: string;
   count_packings: number;
   verificated: boolean;
   date_delivery: string;

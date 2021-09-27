@@ -280,7 +280,8 @@ export const locale = {
       ORIGIN_DESTINATION: 'Origen Destino',
       DATE_DELIVERY: 'Fecha Entrega',
       PICKUP_DATE: 'Fecha Recogida',
-      CHECKIN_DATE: 'Fecha Checkin'
+      CHECKIN_DATE: 'Fecha Checkin',
+      EXCHANGE_RATE: 'Tasa de Cambio'
     },
     PACKING: {
       PACKING: 'Envase',
