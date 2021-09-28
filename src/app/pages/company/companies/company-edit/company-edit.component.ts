@@ -87,7 +87,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       code_brinks: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       identification_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(70)])],
       alias: [''],
       abbreviation: [''],
       // logo: [''],
@@ -282,9 +282,10 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/companies']);
-        } else {
-          this.formGroup.reset()
         }
+        // else {
+        //   this.formGroup.reset()
+        // }
       }),
       catchError((error) => {
         let messageError = [];

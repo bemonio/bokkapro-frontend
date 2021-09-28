@@ -35,7 +35,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public description: AbstractControl;
   public status: AbstractControl;
-  // public am_pm: AbstractControl;
+  public am_pm: AbstractControl;
   public date: AbstractControl;
   // public certified_cart: AbstractControl;
   // public certified_cart_code: AbstractControl;
@@ -86,7 +86,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       description: [''],
       status: [''],
-      // am_pm: [''],
+      am_pm: [''],
       date: [''],
       // certified_cart: [''],
       // certified_cart_code: [''],
@@ -99,7 +99,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.description = this.formGroup.controls['description'];
     this.status = this.formGroup.controls['status'];
     this.date = this.formGroup.controls['date'];
-    // this.am_pm = this.formGroup.controls['am_pm'];
+    this.am_pm = this.formGroup.controls['am_pm'];
     // this.certified_cart = this.formGroup.controls['certified_cart'];
     // this.certified_cart_code = this.formGroup.controls['certified_cart_code'];
     this.division_origin = this.formGroup.controls['division_origin'];
@@ -272,7 +272,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.division_origin.setValue(this.authService.currentDivisionValue);
       this.employee_origin.setValue(this.authService.currentUserValue.employee);
       this.date.setValue(new Date());
-      // this.am_pm.reset();
+      this.am_pm.reset();
       this.division_destination.reset();
       if(this.division_origin.value.name === "Apertura"){
         this.getDivision(1);

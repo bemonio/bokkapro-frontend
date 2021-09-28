@@ -13,6 +13,7 @@ import { LocationService } from 'src/app/pages/location/_services';
 import { ContractService } from 'src/app/pages/contract/_services';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-voucher-edit',
@@ -328,7 +329,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.formGroup.markAllAsTouched();
   }
 
-  reset() {
+  public reset() {
     if (this.previous) {
       this.model = Object.assign({}, this.previous);
       this.loadForm();
@@ -493,10 +494,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
-    model.cashier = this.model.cashier.id;
-    model.contract = this.model.contract.id;
-    model.origin_destination = this.model.origin_destination.id;
-    model.location_origin = this.model.location_origin.id;
+    this.model.cashier ? model.cashier = this.model.cashier.id : model.cashier = undefined;    
+    this.model.contract ? model.contract = this.model.contract.id : model.contract = undefined;
+    this.model.origin_destination ? model.origin_destination = this.model.origin_destination.id : model.origin_destination = undefined;
+    this.model.location_origin ? model.location_origin = this.model.location_origin.id : model.location_origin = undefined;
 
     model.date_delivery = undefined;
     if (this.date_delivery.value) {
@@ -536,6 +537,15 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
+        if (this.saveAndExit) {
+          if(this.parent){
+            this.router.navigate([this.parent + '/vouchers']);
+          } else {
+            this.router.navigate(['/vouchers']);
+          }
+        } else {
+
+        }
       }),
       catchError((error) => {
         if (Array.isArray(error.error)) {
@@ -556,16 +566,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.voucher as Model
-      if (this.saveAndExit) {
-        if(this.parent){
-          this.router.navigate([this.parent + '/vouchers']);
-        } else {
-          this.router.navigate(['/vouchers']);
-        }
-      } else {
-        this.formGroup.reset()
-      }
+      // this.model = response.voucher as Model
+      this.id = 0;
+      this.model = new Model;
+      this.formGroup.reset()
+      this.formGroup.markAllAsTouched();
     });
     // this.subscriptions.push(sbCreate);
   }
