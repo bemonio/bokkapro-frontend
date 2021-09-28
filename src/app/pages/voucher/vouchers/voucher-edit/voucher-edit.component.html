@@ -58,7 +58,9 @@
         </a>
         <a class="btn btn-default font-weight-bold mr-1 py-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
         <a class="btn btn-default font-weight-bold mr-1 py-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
-        <button type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
+        <button *ngIf="model.id" type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
+          [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+        <button *ngIf="!model.id" type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
           [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE_AND_NEW' | translate }}</button>
         <button type="submit" class="btn btn-primary font-weight-bold py-2"
           [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}
@@ -265,7 +267,9 @@
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
             <a class="btn btn-default font-weight-bold mr-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
-            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+            <button *ngIf="model.id" type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+            <button *ngIf="!model.id" type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE_AND_NEW' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
