@@ -51,6 +51,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public optionsAmPm: { key: string, value: string }[];
 
+  public filterIsCrew: boolean;
+
   public newVoucher: boolean;
 
   public parent: string;
@@ -82,6 +84,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
+    this.filterIsCrew = false;
 
     this.formGroup = this.fb.group({
       description: [''],
@@ -548,7 +551,15 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   public changeDivisionOrigin(event) {
-    this.getCrew(this.division_origin.value.crew);
+    this.employee_origin.setValue(undefined);
+    if(this.division_origin.value) {
+      if(this.division_origin.value.type_division == 2){
+        this.filterIsCrew = true;
+        this.getCrew(this.division_origin.value.crew);
+      } else {
+        this.filterIsCrew = false;
+      }
+    }
     this.loadForm();
   }
 

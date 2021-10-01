@@ -316,14 +316,14 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.verificated.setValidators([]);
       this.packings.setValidators([]);
       this.contract.setValidators([]);
-      this.contract.setValidators([]);
+      this.origin_destination.setValidators([]);
       this.location_origin.setValidators([]);
       this.location_destination.setValidators([]);
       this.currency.setValidators([]);
       this.certified_cart.setValidators([]);
-      this.direct_operation.setValidators([])
-      this.is_active.setValidators([])
-      this.verified_oi.setValidators([])
+      this.direct_operation.setValidators([]);
+      this.is_active.setValidators([]);
+      this.verified_oi.setValidators([]);
     }
 
     this.formGroup.markAllAsTouched();
