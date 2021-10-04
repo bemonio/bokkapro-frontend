@@ -35,7 +35,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   public description: AbstractControl;
   public status: AbstractControl;
-  // public am_pm: AbstractControl;
+  public am_pm: AbstractControl;
   public date: AbstractControl;
   // public certified_cart: AbstractControl;
   // public certified_cart_code: AbstractControl;
@@ -50,6 +50,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   public saveAndExit;
 
   public optionsAmPm: { key: string, value: string }[];
+
+  public filterIsCrew: boolean;
 
   public newVoucher: boolean;
 
@@ -82,11 +84,12 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
+    this.filterIsCrew = false;
 
     this.formGroup = this.fb.group({
       description: [''],
       status: [''],
-      // am_pm: [''],
+      am_pm: [''],
       date: [''],
       // certified_cart: [''],
       // certified_cart_code: [''],
@@ -99,7 +102,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.description = this.formGroup.controls['description'];
     this.status = this.formGroup.controls['status'];
     this.date = this.formGroup.controls['date'];
-    // this.am_pm = this.formGroup.controls['am_pm'];
+    this.am_pm = this.formGroup.controls['am_pm'];
     // this.certified_cart = this.formGroup.controls['certified_cart'];
     // this.certified_cart_code = this.formGroup.controls['certified_cart_code'];
     this.division_origin = this.formGroup.controls['division_origin'];
@@ -272,7 +275,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.division_origin.setValue(this.authService.currentDivisionValue);
       this.employee_origin.setValue(this.authService.currentUserValue.employee);
       this.date.setValue(new Date());
-      // this.am_pm.reset();
+      this.am_pm.reset();
       this.division_destination.reset();
       if(this.division_origin.value.name === "Apertura"){
         this.getDivision(1);
@@ -548,7 +551,15 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   }
 
   public changeDivisionOrigin(event) {
-    this.getCrew(this.division_origin.value.crew);
+    this.employee_origin.setValue(undefined);
+    if(this.division_origin.value) {
+      if(this.division_origin.value.type_division == 2){
+        this.filterIsCrew = true;
+        this.getCrew(this.division_origin.value.crew);
+      } else {
+        this.filterIsCrew = false;
+      }
+    }
     this.loadForm();
   }
 

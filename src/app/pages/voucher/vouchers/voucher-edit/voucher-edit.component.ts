@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnDestroy, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
@@ -13,6 +13,7 @@ import { LocationService } from 'src/app/pages/location/_services';
 import { ContractService } from 'src/app/pages/contract/_services';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-voucher-edit',
@@ -39,6 +40,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   public code: AbstractControl;
   public amount: AbstractControl;
+  public exchange_rate: AbstractControl;
   public count_packings: AbstractControl;
   public verificated: AbstractControl;
   public date_delivery: AbstractControl;
@@ -92,7 +94,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      amount: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      amount: ['', Validators.compose([Validators.required])],
+      exchange_rate: [''],
       count_packings: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       verificated: [''],
       date_delivery: [''],
@@ -112,6 +115,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     });
     this.code = this.formGroup.controls['code'];
     this.amount = this.formGroup.controls['amount'];
+    this.exchange_rate = this.formGroup.controls['exchange_rate'];
     this.count_packings = this.formGroup.controls['count_packings'];
     this.verificated = this.formGroup.controls['verificated'];
     this.date_delivery = this.formGroup.controls['date_delivery'];
@@ -128,7 +132,6 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.direct_operation = this.formGroup.controls['direct_operation'];
     this.is_active = this.formGroup.controls['is_active'];
     this.verified_oi = this.formGroup.controls['verified_oi'];
-    this.currency = this.formGroup.controls['currency']
 
     this.confirmDialogPosition = 'center';
 
@@ -199,7 +202,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
                 this.model.origin_destination.destination = location;
               }
           });
-       }
+        }
         if (response.cashier) {
           this.model.cashier = response.cashier[0];
         }
@@ -210,7 +213,18 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
           this.model.packings = response.packings;
         }
         if (response.currencies) {
-          this.model.currency = response.currencies[0];
+          // this.model.currency = response.currencies[0];
+          response.currencies.forEach(currency => {
+            if (this.model.currency === currency.id) {
+              this.model.currency = currency;
+            }
+            response.offices.forEach(office => {
+              if(this.model.currency.office === office.id){
+                this.model.currency.office = office;
+              }
+            });
+          });
+
         }
         if (response.certified_cart) {
           this.model.certified_cart = response.certified_cart[0];
@@ -262,6 +276,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       if (this.model.currency) {
         this.currency.setValue(this.model.currency);
       }
+      if(this.model.exchange_rate){
+        this.exchange_rate.setValue(this.model.exchange_rate);
+      }
       if (this.model.certified_cart) {
         this.certified_cart.setValue(this.model.certified_cart);
       }
@@ -278,6 +295,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.cashier.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
         this.code.setValidators([]);
         this.amount.setValidators([]);
+        this.exchange_rate.setValidators([]);
         this.count_packings.setValidators([]);
         this.verificated.setValidators([]);
         this.packings.setValidators([]);
@@ -293,24 +311,25 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.cashier.setValidators([]);
       this.code.setValidators([]);
       this.amount.setValidators([]);
+      this.exchange_rate.setValidators([]);
       this.count_packings.setValidators([]);
       this.verificated.setValidators([]);
       this.packings.setValidators([]);
       this.contract.setValidators([]);
-      this.contract.setValidators([]);
+      this.origin_destination.setValidators([]);
       this.location_origin.setValidators([]);
       this.location_destination.setValidators([]);
       this.currency.setValidators([]);
       this.certified_cart.setValidators([]);
-      this.direct_operation.setValidators([])
-      this.is_active.setValidators([])
-      this.verified_oi.setValidators([])
+      this.direct_operation.setValidators([]);
+      this.is_active.setValidators([]);
+      this.verified_oi.setValidators([]);
     }
 
     this.formGroup.markAllAsTouched();
   }
 
-  reset() {
+  public reset() {
     if (this.previous) {
       this.model = Object.assign({}, this.previous);
       this.loadForm();
@@ -408,6 +427,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     ? model.location_destination = this.model.location_destination.id 
     : model.location_destination = null;
 
+    if(this.model.exchange_rate === ""){
+      model.exchange_rate = this.currency.value?.exchange_rate;
+    } else {
+      model.exchange_rate = this.model.exchange_rate;
+    }
     model.currency = this.model.currency.id;
 
     this.model.certified_cart = null;
@@ -470,10 +494,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '')
-    model.cashier = this.model.cashier.id;
-    model.contract = this.model.contract.id;
-    model.origin_destination = this.model.origin_destination.id;
-    model.location_origin = this.model.location_origin.id;
+    this.model.cashier ? model.cashier = this.model.cashier.id : model.cashier = undefined;    
+    this.model.contract ? model.contract = this.model.contract.id : model.contract = undefined;
+    this.model.origin_destination ? model.origin_destination = this.model.origin_destination.id : model.origin_destination = undefined;
+    this.model.location_origin ? model.location_origin = this.model.location_origin.id : model.location_origin = undefined;
 
     model.date_delivery = undefined;
     if (this.date_delivery.value) {
@@ -492,6 +516,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     ? model.location_destination = this.model.location_destination.id 
     : model.location_destination = null;
 
+    model.exchange_rate = this.currency.value?.exchange_rate;
     model.currency = this.model.currency.id;
 
     this.model.certified_cart = null;
@@ -512,6 +537,15 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
+        if (this.saveAndExit) {
+          if(this.parent){
+            this.router.navigate([this.parent + '/vouchers']);
+          } else {
+            this.router.navigate(['/vouchers']);
+          }
+        } else {
+
+        }
       }),
       catchError((error) => {
         if (Array.isArray(error.error)) {
@@ -532,16 +566,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.voucher as Model
-      if (this.saveAndExit) {
-        if(this.parent){
-          this.router.navigate([this.parent + '/vouchers']);
-        } else {
-          this.router.navigate(['/vouchers']);
-        }
-      } else {
-        this.formGroup.reset()
-      }
+      // this.model = response.voucher as Model
+      this.id = 0;
+      this.model = new Model;
+      this.formGroup.reset()
+      this.formGroup.markAllAsTouched();
     });
     // this.subscriptions.push(sbCreate);
   }

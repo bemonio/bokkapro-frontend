@@ -58,8 +58,10 @@
         </a>
         <a class="btn btn-default font-weight-bold mr-1 py-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
         <a class="btn btn-default font-weight-bold mr-1 py-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
-        <!-- <button type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
-          [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button> -->
+        <button *ngIf="model.id" type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
+          [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+        <button *ngIf="!model.id" type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
+          [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE_AND_NEW' | translate }}</button>
         <button type="submit" class="btn btn-primary font-weight-bold py-2"
           [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}
         </button>
@@ -92,7 +94,18 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">{{ 'VOUCHER.CURRENCY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">{{ 'VOUCHER.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">{{ 'VOUCHER.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>            
+            </div>         
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.EXCHANGE_RATE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="exchange_rate" value='{{this.model.exchange_rate === null || !model.id ? currency.value?.exchange_rate : undefined}}' [class.is-invalid]="isControlInvalid('exchange_rate')"
+                [class.is-valid]="isControlValid('exchange_rate')" formControlName="exchange_rate" disabled="true"/>
+              <div class="feedback" *ngIf="!isControlTouched('exchange_rate')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.EXCHANGE_RATE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('exchange_rate')">{{ 'VOUCHER.EXCHANGE_RATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'exchange_rate')">{{ 'VOUCHER.EXCHANGE_RATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'exchange_rate')">{{ 'VOUCHER.EXCHANGE_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'exchange_rate')">{{ 'VOUCHER.EXCHANGE_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>   
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.AMOUNT' | translate }}</label>
               <label style="float:right; color: red;">{{ amount.value * currency.value?.exchange_rate | currency }} {{office?.currency?.symbol}}</label>
@@ -195,11 +208,11 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PACKINGS' | translate }}</label>
               <p-chips [styleClass]="getValidClass(isControlValid('packings'))" formControlName="packings" [allowDuplicate]="false" [disabled]="model && model.id"></p-chips>
               <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('packings')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PACKINGS' | translate }}</b></div>
-              <div class="valid-feedback"  style="display: block;" *ngIf="packings.value.length == count_packings.value">{{ 'VOUCHER.PACKINGS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="valid-feedback"  style="display: block;" *ngIf="packings.value != undefined ? packings.value.length == count_packings.value : undefined">{{ 'VOUCHER.PACKINGS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'packings')">{{ 'VOUCHER.PACKINGS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
-              <div class="invalid-feedback"  style="display: block;" *ngIf="packings.value.length < count_packings.value">{{ 'VOUCHER.PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{count_packings.value}}
+              <div class="invalid-feedback"  style="display: block;" *ngIf="packings.value != undefined ? packings.value.length < count_packings.value : undefined">{{ 'VOUCHER.PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{count_packings.value}}
                 item</div>
-              <div class="invalid-feedback"  style="display: block;" *ngIf="packings.value.length > count_packings.value">{{ 'VOUCHER.PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{count_packings.value}}
+              <div class="invalid-feedback"  style="display: block;" *ngIf="packings.value != undefined ? packings.value.length > count_packings.value : undefined">{{ 'VOUCHER.PACKINGS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{count_packings.value}}
                 items</div>
             </div>
             <div class="col-lg-4">
@@ -254,8 +267,10 @@
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
             <a class="btn btn-default font-weight-bold mr-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
-            <!-- <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button> -->
+            <button *ngIf="model.id" type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+            <button *ngIf="!model.id" type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE_AND_NEW' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>

@@ -44,7 +44,7 @@
           <div class="form-group row">
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.DIVISION' | translate }}</label>
-              <app-division-autocomplete
+              <app-division-autocomplete [addFilters]="[{key: 'type_division', value: 2}]"
               name="division" [valid]="isControlValid('division')" [touched]="isControlTouched('division')" [class.is-invalid]="isControlInvalid('division')"
               [class.is-valid]="isControlValid('division')" formControlName="division" id="division" [model]="model.division"></app-division-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.DIVISION' | translate }}</b></div>
