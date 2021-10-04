@@ -4,6 +4,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { NgbDatepickerModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule }  from 'primeng/table';
+import { TranslateModule } from '@ngx-translate/core';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
@@ -15,6 +16,7 @@ import { GuideEditComponent } from './guides/guide-edit/guide-edit.component';
 import { GuideAutocompleteComponent } from './guides/guide-autocomplete/guide-autocomplete.component';
 import { GuideService } from './_services/';
 import { RouterModule } from '@angular/router';
+import { TranslationModule } from 'src/app/modules/i18n/translation.module';
 
 @NgModule({
   declarations: [
@@ -32,10 +34,12 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     TableModule,
+    TranslateModule,
     ToggleButtonModule,
     ConfirmDialogModule,
     AutoCompleteModule,
-    RouterModule
+    RouterModule,
+    TranslationModule
   ],
   entryComponents: [
   ],

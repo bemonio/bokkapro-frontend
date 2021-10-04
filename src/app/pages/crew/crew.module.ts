@@ -9,6 +9,7 @@ import { CrewEditComponent } from './crews/crew-edit/crew-edit.component';
 import { CrewService } from './_services/';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule }  from 'primeng/table';
+import { TranslateModule } from '@ngx-translate/core';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
@@ -28,6 +29,7 @@ import { ConfirmationService } from 'primeng/api';
     FormsModule,
     ReactiveFormsModule,
     TableModule,
+    TranslateModule,
     ToggleButtonModule,
     ConfirmDialogModule
   ],
