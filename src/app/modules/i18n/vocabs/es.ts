@@ -479,7 +479,7 @@ export const locale = {
       OPERATIONS: 'Operaciones',
       ID: 'Id',
       CLOSED_AT: 'Cerrado',
-      HOURS_CLOSE: 'Horas de Cierre',
+      HOURS_CLOSE: 'Horas colocadas al Reloj',
       ATM: 'ATM', 
       CASH_OPENING: 'Apertura Efectivo',
       EMPLOYEES_OPEN: 'Empleados Aperturan',
