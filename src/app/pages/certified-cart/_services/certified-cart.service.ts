@@ -7,6 +7,8 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 @Injectable()
 export class CertifiedCartService {
     API_URL = `${environment.apiUrl}certifiedcarts`;
+    API_URL_CERTIFIED_CART_TRANSFER = `${environment.apiUrl}certifiedcarttransfer`;
+
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -55,6 +57,10 @@ export class CertifiedCartService {
 
     public post(body: Object): Observable<any> {
         return this.http.post(`${this.API_URL}`, JSON.stringify(body));
+    }
+
+    public transferDivision(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL_CERTIFIED_CART_TRANSFER}`, JSON.stringify(body));
     }
 
     public patch(id: number, body: Object): Observable<any> {

@@ -6,7 +6,7 @@
     </div>
   </ng-container>
 
-  <div class="card-header">
+  <div class="card-header" *ngIf="!showTransferDivision">
     <div class="card-title">
       <h3 class="card-label">
         <ng-container *ngIf="model">
@@ -42,7 +42,7 @@
       <div class="mt-5" *ngIf="model">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
-            <div class="col-lg-4">
+            <div class="col-lg-4" *ngIf="!showTransferDivision">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CERTIFIED_CART.CODE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="code" [class.is-invalid]="isControlInvalid('code')"
@@ -53,11 +53,34 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">{{ 'CERTIFIED_CART.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">{{ 'CERTIFIED_CART.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4" *ngIf="showTransferDivision">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CERTIFIED_CART.DIVISION_LAST' | translate}}</label>
+              <app-division-autocomplete
+              name="division_last" [valid]="isControlValid('division_last')" [touched]="isControlTouched('division_last')" [class.is-invalid]="isControlInvalid('division_last')"
+              [class.is-valid]="isControlValid('division_last')" formControlName="division_last" id="division_last" [model]="model.division_last" disabled="true"></app-division-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('division_last')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CERTIFIED_CART.DIVISION_LAST' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('division_last')">{{ 'CERTIFIED_CART.DIVISION_LAST' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'division_last')">{{ 'CERTIFIED_CART.DIVISION_LAST' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division_last')">{{ 'CERTIFIED_CART.DIVISION_LAST' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division_last')">{{ 'CERTIFIED_CART.DIVISION_LAST' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4" *ngIf="showTransferDivision">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CERTIFIED_CART.DIVISION' | translate}}</label>
+              <app-division-autocomplete
+              name="division" [valid]="isControlValid('division')" [touched]="isControlTouched('division')" [class.is-invalid]="isControlInvalid('division')"
+              [class.is-valid]="isControlValid('division')" formControlName="division" id="division" [model]="model.division"></app-division-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CERTIFIED_CART.DIVISION' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('division')">{{ 'CERTIFIED_CART.DIVISION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'CERTIFIED_CART.DIVISION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division')">{{ 'CERTIFIED_CART.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'CERTIFIED_CART.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/certifiedcarts">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/certifiedcarts" *ngIf="!showTransferDivision">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-1 py-2" (click)="closeEmit()" *ngIf="showTransferDivision">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!showTransferDivision">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>

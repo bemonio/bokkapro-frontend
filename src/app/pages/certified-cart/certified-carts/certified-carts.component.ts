@@ -4,13 +4,14 @@ import { CertifiedCartService as ModelService } from '../_services/certified-car
 import { CertifiedCartModel as Model } from '../_models/certified-cart.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { catchError, switchMap, tap } from 'rxjs/operators';
+import { DivisionService } from '../../division/_services';
 
 @Component({
     selector: 'app-certified-carts',
@@ -51,8 +52,11 @@ export class CertifiedCartsComponent implements OnInit {
     public parent: string;
 
     public displayModal: boolean;
+    public displayModalTransfer: boolean;
     public verificationCertifiedCart: any;
     public listVouchers: any[];
+
+    private unsubscribe: Subscription[] = [];
 
     public verificationGroup: FormGroup;
     public vouchers: AbstractControl;
@@ -66,6 +70,7 @@ export class CertifiedCartsComponent implements OnInit {
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
+        public divisionService: DivisionService,
         fb: FormBuilder) {
         // this.formGroup = fb.group({
         //     'employee_id_filter': [''],
@@ -91,7 +96,7 @@ export class CertifiedCartsComponent implements OnInit {
             this.message_confirm_delete = res;
         });
 
-        this.showTableCheckbox = false;
+        this.showTableCheckbox = true;
         this.parent = '';
 
         this.page = 1;
@@ -102,6 +107,7 @@ export class CertifiedCartsComponent implements OnInit {
         this.requesting = false;
 
         this.displayModal = false;
+        this.displayModalTransfer = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -112,6 +118,7 @@ export class CertifiedCartsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this.subscribeToDivisionChange();
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -140,6 +147,7 @@ export class CertifiedCartsComponent implements OnInit {
         }
 
         this.filters = [];
+        this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
         this.getModels();
     }
 
@@ -409,5 +417,25 @@ export class CertifiedCartsComponent implements OnInit {
             this.displayModal = false;
             this.getModels();
         });
+    }
+
+    showModalTranferDialog() {
+        this.displayModalTransfer = true;
+    }
+
+    hideModalDialogCertifiedCart() {
+        this.displayModalTransfer = false;
+        this.getModels();
+    }
+
+    public subscribeToDivisionChange() {
+        const divisionChangeSubscription = this.divisionService._change$
+        .subscribe(response => {
+            if (response) {
+                this.selectedModels = [];
+                this.loadLazy();
+            }
+        });
+        this.unsubscribe.push(divisionChangeSubscription);
     }
 }
