@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { OriginDestinationModel as Model } from '../../_models/origin-destination.model';
 import { OriginDestinationService as ModelsService } from '../../_services/origin-destination.service';
 import { ServiceOrderService } from 'src/app/pages/service-order/_services';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-origin-destination-edit',
@@ -544,5 +545,44 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
 
   hideModal(){
     this.displayModal.emit()
+  }
+
+  changeStartTime(event, day) {
+
+    let num = event;
+    let format = moment(num).add(60, 'm').toDate();
+
+    switch (day) {
+      case 'monday':
+        console.log('monday')
+        this.monday_end_time.setValue(format)
+        break;
+      case 'tuesday':
+        console.log('tuesday')
+        this.tuesday_end_time.setValue(format)
+        break;
+      case 'wednesday':
+        console.log('wednesday')
+        this.wednesday_end_time.setValue(format)
+        break;
+      case 'thursday':
+        console.log('thursday')
+        this.thursday_end_time.setValue(format)
+        break;
+      case 'friday':
+        console.log('friday')
+        this.friday_end_time.setValue(format)
+        break;
+      case 'saturday':
+        console.log('saturday')
+        this.saturday_end_time.setValue(format)
+        break;
+      case 'sunday':
+        console.log('sunday')
+        this.sunday_end_time.setValue(format)
+        break;
+      default:
+        break;
+    }
   }
 }
