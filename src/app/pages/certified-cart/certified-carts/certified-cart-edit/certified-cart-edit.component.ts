@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
@@ -15,6 +15,10 @@ import { DivisionService } from 'src/app/pages/division/_services';
   styleUrls: ['./certified-cart-edit.component.scss']
 })
 export class CertifiedCartEditComponent implements OnInit, OnDestroy {
+  @Input() showTransferDivision: boolean;
+  @Input() listCertifiedCart: any[];
+  @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public id: number;
   public model: Model;
   public previous: Model;
@@ -36,6 +40,8 @@ export class CertifiedCartEditComponent implements OnInit, OnDestroy {
   public parent: string;
 
   public code: AbstractControl;
+  public division: AbstractControl;
+  public division_last: AbstractControl;
 
   constructor(
     private fb: FormBuilder,
@@ -52,9 +58,13 @@ export class CertifiedCartEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      division: [''],
+      division_last: [''],
       vouchers: [''],
     });
     this.code = this.formGroup.controls['code'];
+    this.division = this.formGroup.controls['division'];
+    this.division_last = this.formGroup.controls['division_last'];
     this.vouchers = this.formGroup.controls['vouchers'];
 
     this.parent = '/certifiedcarts';
@@ -103,6 +113,9 @@ export class CertifiedCartEditComponent implements OnInit, OnDestroy {
         if (response.vouchers) {
           this.model.vouchers = response.vouchers;
         }
+        if (response.division) {
+        this.model.division = response.division[0];
+        }
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -117,7 +130,17 @@ export class CertifiedCartEditComponent implements OnInit, OnDestroy {
       if (this.model.vouchers) {
         this.vouchers.setValue(this.model.vouchers);
       }
+      if (this.model.division) {
+        this.division.setValue(this.model.division);
+      }
     }
+
+    if(this.showTransferDivision){
+      this.code.setValidators([]);
+      this.division_last.setValue(this.authService.currentDivisionValue);
+      this.division.setValidators([Validators.compose([Validators.required,])]);
+    }
+    this.formGroup.markAllAsTouched();
   }
 
   reset() {
@@ -135,16 +158,50 @@ export class CertifiedCartEditComponent implements OnInit, OnDestroy {
       this.model = Object.assign(this.model, formValues);
       if (this.id) {
         this.edit();
+      } else if (this.showTransferDivision) {
+        this.transferDivision();
       } else {
         this.create();
       }
     }
   }
 
+  transferDivision(){
+    let params = {
+      divisionId: this.division.value.id,
+      division_lastId: this.division_last.value.id,
+      carts: this.listCertifiedCart
+    }
+    const sbUpdate = this.modelsService.transferDivision(params).pipe(
+      tap(() => {
+        this.toastService.growl('success', 'success');
+        this.division.reset();
+        this.division_last.reset();
+      }),
+      catchError((error) => {
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+        );
+        return of(this.model);
+      })
+    ).subscribe(response => {
+      this.requesting = false;
+      this.closeEmit()
+    });
+  }
+
   edit() {
     this.requesting = true;
 
     let model = this.model;
+    model.division = this.model.division.id;
+    model.division_last = this.model.division_last.id;
     model.vouchers = [];
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
@@ -236,6 +293,11 @@ export class CertifiedCartEditComponent implements OnInit, OnDestroy {
   isControlTouched(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
     return control.dirty || control.touched;
+  }
+
+  public closeEmit() {
+    this.close.emit(true);
+    this.loadForm();
   }
 
   public getValidClass(valid) {

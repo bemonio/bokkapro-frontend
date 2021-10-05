@@ -5,6 +5,7 @@
     </div>
     <div class="card-toolbar">
       <!-- <a type="button" class="btn btn-primary" routerLink="{{parent}}/certifiedcarts/add">{{ 'COMMON.NEW' | translate }}</a> -->
+      <a type="button" class="btn btn-secondary" (click)="showModalTranferDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -31,7 +32,7 @@
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3rem" *ngIf="showTableCheckbox">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
@@ -67,7 +68,7 @@
       <ng-template pTemplate="body" let-value>
         <tr class="p-selectable-row">
           <td *ngIf="showTableCheckbox">
-            <p-tableCheckbox [value]="value"></p-tableCheckbox>
+            <p-tableCheckbox [value]="value" *ngIf="value.verificated === true"></p-tableCheckbox>
           </td>
           <td>
             {{value.id}}
@@ -105,7 +106,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="4">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          <td colspan="6">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -161,4 +162,9 @@
       </div>
     </div>
   </form>
+</p-dialog>
+
+<p-dialog header="{{ 'VOUCHER.CERTIFIED_CART' | translate }}" [(visible)]="displayModalTransfer" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-certified-cart-edit (close)="hideModalDialogCertifiedCart()" [listCertifiedCart]="selectedModels" [showTransferDivision]="true"></app-certified-cart-edit>
 </p-dialog>
