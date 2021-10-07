@@ -83,6 +83,11 @@
               {{ 'VOUCHER.CERTIFIED_CART' | translate }}
             </div>
           </th>
+          <th pSortableColumn="certified_cart">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.VAULT' | translate }}
+            </div>
+          </th>
           <!-- <th pSortableColumn="verificated">
             <div class="p-d-flex p-jc-between p-ai-center">
               Verificated
@@ -127,6 +132,10 @@
           </td>
           <td>
             {{value.certified_cart?.code}}
+          </td>
+          <td>
+            <p-badge [value]="'SI'"  severity="success"  severity="success" *ngIf="value.insured == true"></p-badge>
+            <p-badge [value]="'NO'"  severity="warning"  severity="warning" *ngIf="value.insured == false"></p-badge>
           </td>
           <!-- <td>
             {{value.verificated}}

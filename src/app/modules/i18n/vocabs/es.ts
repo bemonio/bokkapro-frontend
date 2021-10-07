@@ -283,7 +283,8 @@ export const locale = {
       PICKUP_DATE: 'Fecha Recogida',
       CHECKIN_DATE: 'Fecha Checkin',
       EXCHANGE_RATE: 'Tasa de Cambio',
-      SECURITY: 'Seguridad'
+      SECURITY: 'Seguridad',
+      VAULT: 'Bóveda'
     },
     PACKING: {
       PACKING: 'Envase',
