@@ -119,28 +119,28 @@ export class DepositFormsDetailsComponent implements OnInit, OnChanges {
         if (event && event.first) {
             if (event && event.first) {
             this.page = (event.first / this.per_page) + 1;
+            }
         }
 
-            if (event && event.sortField) {
-                if (event.sortOrder === -1) {
-                    this.sort = '-' + event.sortField;
-                } else {
-                    this.sort = event.sortField;
-                }
+        if (event && event.sortField) {
+            if (event.sortOrder === -1) {
+                this.sort = '-' + event.sortField;
             } else {
-                this.sort = '-id';
+                this.sort = event.sortField;
             }
-
-            if (event && event.globalFilter) {
-                this.query = event.globalFilter;
-            } else {
-                this.query = undefined;
-            }
-
-            if (event && event.rows) {
-                this.per_page = event.rows;
-            }    
+        } else {
+            this.sort = '-id';
         }
+
+        if (event && event.globalFilter) {
+            this.query = event.globalFilter;
+        } else {
+            this.query = undefined;
+        }
+
+        if (event && event.rows) {
+            this.per_page = event.rows;
+        }    
 
         this.filters = [];
         if(this.depositFormID){
