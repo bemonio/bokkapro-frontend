@@ -528,6 +528,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         }
                     });
                     if (!found){
+                        models[0].packings.forEach(element => {
+                            element.verificated = false;
+                        });
                         this.listVouchersSecurity.push(models[0]);
                     }
                 }
@@ -540,7 +543,6 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         found = true;
                     }
                     element.packings.forEach(element2 => {
-                        element2.verificated = false;
                         if (element2.code === evenValue) {
                             element2.verificated = true;
                             found = true;
