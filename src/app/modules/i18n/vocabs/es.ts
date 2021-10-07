@@ -263,6 +263,7 @@ export const locale = {
       CODE: 'Código / Comprobante',
       CODE_START: 'Código Inicio / Comprobante',
       CODE_END: 'Código Final / Comprobante',
+      CODES: 'Códigos',
       PACKINGS: 'Envases',
       CURRENCY: 'Divisa',
       AMOUNT: 'Monto',
@@ -281,7 +282,8 @@ export const locale = {
       DATE_DELIVERY: 'Fecha Entrega',
       PICKUP_DATE: 'Fecha Recogida',
       CHECKIN_DATE: 'Fecha Checkin',
-      EXCHANGE_RATE: 'Tasa de Cambio'
+      EXCHANGE_RATE: 'Tasa de Cambio',
+      SECURITY: 'Seguridad'
     },
     PACKING: {
       PACKING: 'Envase',
