@@ -190,7 +190,7 @@
 </p-dialog>
 
 <p-dialog header="{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.SECURITY' | translate }}" [(visible)]="displayModalSecurity" [modal]="true" [style]="{width: '50vw'}" 
-  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}" (onHide)="loadLazy()">
   <form action="#" class="form form-label-right" [formGroup]="securityGroup">
     <div class="form-group row" style="margin-top: 20px;">
       <div class="col-lg-12">
