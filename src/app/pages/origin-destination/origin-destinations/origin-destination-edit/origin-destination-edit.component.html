@@ -129,7 +129,7 @@
             <div class="col-lg-4">
               <div *ngIf="monday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.MONDAY_START_TIME' | translate}}</label>
-                <p-calendar [inputStyleClass]="getValidClass(isControlValid('monday_start_time'))" name="monday_start_time" formControlName="monday_start_time" timeOnly="true"></p-calendar>
+                <p-calendar [inputStyleClass]="getValidClass(isControlValid('monday_start_time'))" name="monday_start_time" formControlName="monday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'monday')"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('monday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('monday_start_time')">{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'monday_start_time')">{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -160,7 +160,7 @@
             <div class="col-lg-4">
               <div *ngIf="tuesday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME' | translate}}</label>
-                <p-calendar [inputStyleClass]="getValidClass(isControlValid('tuesday_start_time'))" name="tuesday_start_time" formControlName="tuesday_start_time" timeOnly="true"></p-calendar>
+                <p-calendar [inputStyleClass]="getValidClass(isControlValid('tuesday_start_time'))" name="tuesday_start_time" formControlName="tuesday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'tuesday')"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('tuesday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('tuesday_start_time')">{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'tuesday_start_time')">{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -191,7 +191,7 @@
             <div class="col-lg-4">
               <div *ngIf="wednesday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME' | translate}}</label>
-                <p-calendar [inputStyleClass]="getValidClass(isControlValid('wednesday_start_time'))" name="wednesday_start_time" formControlName="wednesday_start_time" timeOnly="true"></p-calendar>
+                <p-calendar [inputStyleClass]="getValidClass(isControlValid('wednesday_start_time'))" name="wednesday_start_time" formControlName="wednesday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'wednesday')"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('wednesday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('wednesday_start_time')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'wednesday_start_time')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -222,7 +222,7 @@
             <div class="col-lg-4">
               <div *ngIf="thursday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME' | translate}}</label>
-                <p-calendar [inputStyleClass]="getValidClass(isControlValid('thursday_start_time'))" name="thursday_start_time" formControlName="thursday_start_time" timeOnly="true"></p-calendar>
+                <p-calendar [inputStyleClass]="getValidClass(isControlValid('thursday_start_time'))" name="thursday_start_time" formControlName="thursday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'thursday')"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('thursday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('thursday_start_time')">{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'thursday_start_time')">{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -253,7 +253,7 @@
             <div class="col-lg-4">
               <div *ngIf="friday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME' | translate}}</label>
-                <p-calendar [inputStyleClass]="getValidClass(isControlValid('friday_start_time'))" name="friday_start_time" formControlName="friday_start_time" timeOnly="true"></p-calendar>
+                <p-calendar [inputStyleClass]="getValidClass(isControlValid('friday_start_time'))" name="friday_start_time" formControlName="friday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'friday')"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('friday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('friday_start_time')">{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'friday_start_time')">{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -284,7 +284,7 @@
             <div class="col-lg-4">
               <div *ngIf="saturday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME' | translate}}</label>
-                <p-calendar [inputStyleClass]="getValidClass(isControlValid('saturday_start_time'))" name="saturday_start_time" formControlName="saturday_start_time" timeOnly="true"></p-calendar>
+                <p-calendar [inputStyleClass]="getValidClass(isControlValid('saturday_start_time'))" name="saturday_start_time" formControlName="saturday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'saturday')"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('saturday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('saturday_start_time')">{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'saturday_start_time')">{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -315,7 +315,7 @@
             <div class="col-lg-4">
               <div *ngIf="sunday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME' | translate}}</label>
-                <p-calendar [inputStyleClass]="getValidClass(isControlValid('sunday_start_time'))" name="sunday_start_time" formControlName="sunday_start_time" timeOnly="true"></p-calendar>
+                <p-calendar [inputStyleClass]="getValidClass(isControlValid('sunday_start_time'))" name="sunday_start_time" formControlName="sunday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'sunday')"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('sunday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('sunday_start_time')">{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'sunday_start_time')">{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
