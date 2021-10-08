@@ -231,6 +231,15 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         });
                     });
                 }
+                if(response.divisions){
+                    response.divisions.forEach(division => {
+                        this.models.forEach(element => {
+                            if (element.division === division.id) {
+                                element.division = division;
+                            }
+                        });
+                    });
+                }
                 if(response.contracts){
                     response.contracts.forEach(contract => {
                         this.models.forEach(element => {

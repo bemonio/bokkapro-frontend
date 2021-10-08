@@ -53,7 +53,7 @@ export class VoucherService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=division.*`);
     }
 
     public post(body: Object): Observable<any> {
