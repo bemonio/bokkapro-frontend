@@ -1,0 +1,225 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'VOUCHER.VOUCHERS' | translate }}
+    </div>
+    <!-- <div class="card-toolbar">
+      <a type="button" class="btn btn-secondary" (click)="showModalDialogCertifiedCart()" *ngIf="authService.currentDivisionValue.id === 1 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CERTIFIED_CART' | translate }}</a>
+      <a type="button" class="btn btn-secondary" (click)="showModalDialogCashier()" *ngIf="authService.currentDivisionValue.id === 3 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CASHIER' | translate }}</a>
+      <a type="button" class="btn btn-secondary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a>
+      <a type="button" class="btn btn-secondary" (click)="showModalDialogSecurity()" *ngIf="authService.currentDivisionValue.id === 1">{{ 'COMMON.TRANSFER' | translate }} {{ '' | translate}} {{ 'VOUCHER.SECURITY' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/voucherssecurities/add" *ngIf="parent.startsWith('/guidesinput')">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/voucherssecurities/addList" *ngIf="!parent">{{ 'COMMON.NEW' | translate }}</a>
+    </div> -->
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <span class="mb-3 d-flex">{{ 'COMMON.FILTERS' | translate }}</span>
+          <!-- <p-toggleButton styleClass="form-control" onLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.ALL' | translate }}" offLabel="{{ 'COMMON.ASSIGNED_TO_ME' | translate}}"  [style]="{'width': '11em'}" (click)="loadLazy(null, 'yesIsCashierFilter')"></p-toggleButton> -->
+          <!-- <p-toggleButton styleClass="form-control" onLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.ALL' | translate }}" offLabel="{{ 'COMMON.ASSIGNED_TO_ME' | translate}}"  [style]="{'width': '11em'}" (click)="applyFilter('cashier')"></p-toggleButton>
+          <p-toggleButton styleClass="form-control ml-3" onLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.ACTIVES' | translate }}" offLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.INACTIVES' | translate}}"  [style]="{'width': '11em'}" (click)="applyFilter('active')"></p-toggleButton> -->
+          <div class="d-flex align-items-center">
+            <app-division-select class="w-50" (divisionValue)="changeDivisionValue($event)"></app-division-select>
+            <a type="button" class="btn btn-primary d-flex align-items-center h-50 ml-3" *ngIf="division_id_filter.id != undefined" (click)="changeDivisionValue(undefined)">{{ 'COMMON.CLEAR' | translate }}</a>
+          </div>
+        </div>
+        <div class="col-lg-6" [formGroup]="searchGroup">
+          <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> </small>
+        </div>
+      </div>
+    </div>
+    <!-- end: Filtration form -->
+
+    <!-- begin:Table -->
+    <p-table #dt [value]="models" [(selection)]="selectedModels" dataKey="id" styleClass="p-datatable-striped p-datatable-sm" [rowHover]="true"
+    [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
+    [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
+    [filterDelay]="1000" [globalFilterFields]="['id','username']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
+    [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem" *ngIf="showTableCheckbox">
+            <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
+          </th>
+          <th pSortableColumn="id">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.ID' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="created_at">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.CREATED_AT' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+          <th pSortableColumn="code">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.CODE' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="code">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.PACKINGS' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="contract">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.CONTRACT' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="origin_destination">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.ORIGIN_DESTINATION' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="division">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.DIVISION' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="certified_cart">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.CERTIFIED_CART' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="certified_cart">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.VAULT' | translate }}
+            </div>
+          </th>
+          <!-- <th pSortableColumn="verificated">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Verificated
+            </div>
+          </th> -->
+          <th style="width: 10rem">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'COMMON.ACTION' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-value>
+        <tr class="p-selectable-row" data-toggle="tooltip" data-placement="left">
+          <!-- title="Divisa: {{value.currency.code}} - Monto: {{value.amount}} - Dir Destino: {{value.location_destination.name}}" -->
+          <td *ngIf="authService.currentDivisionValue.id != 2 && value.is_active === true || showTableCheckbox && value.is_active === true && value.verified_oi === true">
+            <p-tableCheckbox [value]="value"></p-tableCheckbox>
+          </td>
+          <td *ngIf="(authService.currentDivisionValue.id === 2 && showTableCheckbox && value.verified_oi === false) || authService.currentDivisionValue.id === 2 && value.is_active === false || authService.currentDivisionValue.id != 2 && value.is_active === false"></td>
+          <td>
+            {{value.id}}
+          </td>
+          <td>
+            {{value.created_at | date: 'MM/dd/yyyy HH:mm:ss':'UTC -4'}}
+          </td>
+          <td>
+            {{value.code}}
+          </td>
+          <td>
+            {{value.packings.length}}
+          </td>
+          <td>
+            {{value.contract?.code}}
+          </td>
+          <td>
+            {{value.origin_destination?.origin?.name}} - {{value.origin_destination?.destination?.name}} 
+          </td>
+          <td>
+            {{value.division?.name}}
+          </td>
+          <td>
+            {{value.certified_cart?.code}}
+          </td>
+          <td>
+            <p-badge [value]="'SI'"  severity="success"  severity="success" *ngIf="value.insured == true"></p-badge>
+            <p-badge [value]="'NO'"  severity="warning"  severity="warning" *ngIf="value.insured == false"></p-badge>
+          </td>
+          <!-- <td>
+            {{value.verificated}}
+          </td> -->
+          <td style="text-align: right">
+            <!-- <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning" style="margin-right: 5px;" 
+              (click)="verification(value, 'center')" *ngIf="authService.currentDivisionValue.id === 2 && value.direct_operation && value.is_active === true">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-warning">
+              </span>
+            </a> -->
+            <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              routerLink="{{parent}}/voucherssecurities/edit/{{value.id}}">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-primary">
+              </span>
+            </a>
+            <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-danger">
+              </span>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td class="text-center" colspan="10">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <!-- end: Table -->
+  </div>
+</div>
+
+<!-- <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog> -->
+
+<p-dialog header="{{ 'VOUCHER.CERTIFIED_CART' | translate }}" [(visible)]="displayModalCertifiedCart" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-voucher-edit (close)="hideModalDialogCertifiedCart()" [listVouchers]="selectedModels" [showCertifiedCart]="true"></app-voucher-edit>
+</p-dialog>
+
+<p-dialog header="{{ 'VOUCHER.CASHIER' | translate }}" [(visible)]="displayModalCashier" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-voucher-edit (close)="hideModalDialogCashier()" [listVouchers]="selectedModels" [showCashier]="true"></app-voucher-edit>
+</p-dialog>
+
+<p-dialog header="{{ 'COMMON.TRANSFER' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  <app-guide-edit (close)="hideModalDialog()" [(listVouchers)]="selectedModels" [transfer]="true"></app-guide-edit>
+</p-dialog>
+
+<p-dialog header="{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.SECURITY' | translate }}" [(visible)]="displayModalSecurity" [modal]="true" [style]="{width: '50vw'}" 
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}" (onHide)="loadLazy()">
+  <form action="#" class="form form-label-right" [formGroup]="securityGroup">
+    <div class="form-group row" style="margin-top: 20px;">
+      <div class="col-lg-12">
+        <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CODES' | translate }}</label>
+        <p-chips [styleClass]="getValidClass(isControlValid('vouchers',securityGroup))" formControlName="vouchers" [allowDuplicate]="false" (onAdd)="addListVouchers($event)" (onRemove)="removeListVouchers($event)" [(ngModel)]="listVouchersSecurityList"></p-chips>
+        <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers',securityGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CODES' | translate }}</b></div>
+      </div>
+      <div class="col-lg-12" style="margin-top: 15px; margin-bottom: 5px;">
+        <b>{{ 'COMMON.LIST' | translate }} {{ 'COMMON.VERIFICATION' | translate }}:</b><br>
+        <div style="overflow: scroll; max-height: 400px;" class="py-5">
+          <span *ngFor="let voucher of listVouchersSecurity">
+            <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br>
+            <span *ngFor="let packing of voucher.packings"> 
+              - <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="float-right">
+          <a class="btn btn-default font-weight-bold mr-2" (click)="displayModal = false">{{ 'COMMON.CANCEL' | translate }}</a>
+          <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+            [disabled]="securityGroup.invalid" (click)="transferSecurity()">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</p-dialog>

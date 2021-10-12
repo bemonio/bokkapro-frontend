@@ -189,6 +189,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'voucherssecurities',
+        loadChildren: () =>
+          import('../pages/voucher-security/voucher-security-routing.module').then(
+            (m) => m.VoucherSecurityRoutingModule
+          ),
+      },
+      {
         path: 'currencies',
         loadChildren: () =>
           import('../pages/currency/currency-routing.module').then(

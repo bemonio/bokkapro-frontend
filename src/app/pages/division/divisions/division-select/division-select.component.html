@@ -1,0 +1,7 @@
+<div>
+    <p-dropdown optionLabel="name" [styleClass]="isValid()" [options]="models" (onChange)="change($event)" [(ngModel)]="value" placeholder="{{placeholder}}" [disabled]="disabled" [required]="required">
+        <ng-template let-item pTemplate="item">
+            <div>{{item.name}}</div>
+        </ng-template>
+    </p-dropdown>
+</div>

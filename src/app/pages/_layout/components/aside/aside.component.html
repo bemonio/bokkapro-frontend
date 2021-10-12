@@ -253,6 +253,15 @@
       </li>
       <!-- end::1 Level -->
 
+      <!-- begin::1 Level Voucher -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_voucher')">
+        <a class="menu-link" routerLink="/voucherssecurities" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Files/File-done.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ 'VOUCHERSECURITY.VOUCHERSSECURITIES' | translate }}</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+
       <!-- begin::1 Level Packing -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_packing')">
         <a class="menu-link" routerLink="/packings" routerLinkActive="active">

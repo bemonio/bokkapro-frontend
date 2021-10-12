@@ -13,6 +13,7 @@ import { DivisionsComponent } from './divisions/divisions.component';
 import { DivisionComponent } from './division.component';
 // import { DivisionRoutingModule} from './division-routing.module';
 import { DivisionEditComponent } from './divisions/division-edit/division-edit.component';
+import { DivisionSelectComponent } from './divisions/division-select/division-select.component';
 import { DivisionAutocompleteComponent } from './divisions/division-autocomplete/division-autocomplete.component';
 import { DivisionService } from './_services/';
 import { RouterModule } from '@angular/router';
@@ -22,6 +23,7 @@ import { RouterModule } from '@angular/router';
     DivisionsComponent,
     DivisionComponent,
     DivisionEditComponent,
+    DivisionSelectComponent,
     DivisionAutocompleteComponent,
   ],
   imports: [

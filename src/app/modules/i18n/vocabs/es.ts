@@ -286,6 +286,10 @@ export const locale = {
       SECURITY: 'Seguridad',
       VAULT: 'Bóveda'
     },
+    VOUCHERSECURITY:{
+      VOUCHERSECURITY: 'Comprobante Seguridad',
+      VOUCHERSSECURITIES: 'Comprobantes Seguridad',
+    },
     PACKING: {
       PACKING: 'Envase',
       PACKINGS: 'Envases',
@@ -454,7 +458,8 @@ export const locale = {
       UPLOAD: 'Subir',
       ADD_ALL: 'AGREGAR TODOS',
       ADD_SELECTED: 'AGREGAR SELECCIONADOS',
-      ADD: 'Agregar'
+      ADD: 'Agregar',
+      CLEAR: 'Limpiar',
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',

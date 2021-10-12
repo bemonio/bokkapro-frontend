@@ -46,6 +46,7 @@ import { PackingService } from './pages/packing/_services';
 import { DepositFormService } from './pages/deposit-form/_services';
 import { DepositFormDetailService } from './pages/deposit-formdetail/_services';
 import { VoucherService } from './pages/voucher/_services';
+import { VoucherSecurityService } from './pages/voucher-security/_services';
 import { CurrencyService } from './pages/currency/_services';
 import { CurrencyDetailService } from './pages/currency-detail/_services';
 import { TypeCurrencyService } from './pages/type-currency/_services';
@@ -156,6 +157,7 @@ export function getHighlightLanguages() {
     DepositFormDetailService,
     ModerationService,
     VoucherService,
+    VoucherSecurityService,
     CurrencyService,
     CurrencyDetailService,
     TypeCurrencyService,

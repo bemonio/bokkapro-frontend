@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VoucherService as ModelService } from '../_services/voucher.service';
-import { VoucherModel as Model } from '../_models/voucher.model';
+import { VoucherSecurityService as ModelService } from '../_services/voucher-security.service';
+import { VoucherSecurityModel as Model } from '../_models/voucher-security.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of, Subscription } from 'rxjs';
@@ -17,11 +17,11 @@ import { GuideModel } from '../../guide/_models/guide.model';
 import { GuideService } from '../../guide/_services/guide.service';
 
 @Component({
-    selector: 'app-vouchers',
-    templateUrl: './vouchers.component.html',
-    styleUrls: ['./vouchers.component.scss']
+    selector: 'app-vouchers-securities',
+    templateUrl: './vouchers-securities.component.html',
+    styleUrls: ['./vouchers-securities.component.scss']
 })
-export class VouchersComponent implements OnInit, OnDestroy {
+export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges {
 
     public promiseForm: Promise<any>;
 
@@ -68,6 +68,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public securityGroup: FormGroup;
     public vouchers: AbstractControl;
 
+    public formGroup: FormGroup;
+    public division_id_filter: any;
+
     public listVouchers: any[];
     public listVouchersSecurity: any[];
     public listVouchersSecurityList: any[];
@@ -83,14 +86,16 @@ export class VouchersComponent implements OnInit, OnDestroy {
         public divisionService: DivisionService,
         public guideService: GuideService,
         fb: FormBuilder) {
-        // this.formGroup = fb.group({
-        //     'employee_id_filter': [''],
-        //     'department_id_filter': [''],
-        //     'venue_id_filter': [''],
-        // });
+        this.formGroup = fb.group({
+            // 'employee_id_filter': [''],
+            // 'department_id_filter': [''],
+            // 'venue_id_filter': [''],
+            'division_id_filter': [''],
+        });
         // this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
         // this.department_id_filter = this.formGroup.controls['department_id_filter'];
         // this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
+        this.division_id_filter = this.formGroup.controls['division_id_filter'];
 
 
         this.searchGroup = fb.group({
@@ -152,6 +157,10 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this._with.push({key: 'include[]', value: 'origin_destination.origin.*'})
         this._with.push({key: 'include[]', value: 'origin_destination.destination.*'})
     }
+
+    ngOnChanges(): void {
+        this.ngOnInit();
+    }
     
     public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
         if (event && event.first) {
@@ -181,6 +190,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
         }    
 
         this.filters = [];
+        if(this.division_id_filter.id) {
+            this.filters.push({ key: 'filter{division}', value: this.division_id_filter.id.toString() })
+        }
         if (this.route.parent.parent.parent.snapshot.url.length > 0) {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
@@ -195,7 +207,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                 }
             });
         } else {
-            this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
+            // this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
             this.filters.push({ key: 'filter{verificated}', value: '1' })
         }
 
@@ -218,15 +230,6 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         this.models.forEach(element => {
                             if (element.currency === currency.id) {
                                 element.currency = currency;
-                            }
-                        });
-                    });
-                }
-                if(response.cashiers){
-                    response.cashiers.forEach(cashier => {
-                        this.models.forEach(element => {
-                            if (element.cashier === cashier.id) {
-                                element.cashier = cashier;
                             }
                         });
                     });
@@ -676,5 +679,14 @@ export class VouchersComponent implements OnInit, OnDestroy {
           this.listVouchersSecurity = [];
           this.listVouchersSecurityList = [];
         });
+    }
+
+    changeDivisionValue(event) {
+        if(event === undefined){
+            this.division_id_filter.id = event;
+        } else {
+            this.division_id_filter.id = event.id;
+        }
+        this.loadLazy();
     }
 }

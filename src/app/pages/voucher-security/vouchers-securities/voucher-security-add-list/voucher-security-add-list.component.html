@@ -1,0 +1,88 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="requesting">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="model">
+          {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
+          <span *ngIf="model && model.id">{{ 'VOCUHER_ADD_LIST.VOCUHER_ADD_LIST' | translate }} : {{ model.id }}</span>
+        </ng-container>
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}/voucherssecurities">
+        <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
+      </a>
+      <button class="btn btn-secondary ml-2" (click)="reset()">
+        <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+      <div class="mt-5" *ngIf="model">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CODE_START' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="code_start" [class.is-invalid]="isControlInvalid('code_start')"
+                [class.is-valid]="isControlValid('code_start')" formControlName="code_start" />
+              <div class="feedback" *ngIf="!isControlTouched('code_start')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CODE_START' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('code_start')">{{ 'VOUCHER.CODE_START' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code_start')">{{ 'VOUCHER.CODE_START' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_start')">{{ 'VOUCHER.CODE_START' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_start')">{{ 'VOUCHER.CODE_START' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CODE_END' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="code_end" [class.is-invalid]="isControlInvalid('code_end')"
+                [class.is-valid]="isControlValid('code_end')" formControlName="code_end" />
+              <div class="feedback" *ngIf="!isControlTouched('code_end')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CODE_END' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('code_end')">{{ 'VOUCHER.CODE_END' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code_end')">{{ 'VOUCHER.CODE_END' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_end')">{{ 'VOUCHER.CODE_END' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_end')">{{ 'VOUCHER.CODE_END' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CONTRACT' | translate }}</label>
+              <!-- <div class="text-danger"> Hola {{ }}</div> -->
+              <app-contract-autocomplete
+              name="contract" [valid]="isControlValid('contract')" [touched]="isControlTouched('contract')" [class.is-invalid]="isControlInvalid('contract')"
+              [class.is-valid]="isControlValid('contract')" formControlName="contract" id="contract" [model]="model.contract"></app-contract-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('contract')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CONTRACT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('contract')">{{ 'VOUCHER.CONTRACT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'contract')">{{ 'VOUCHER.CONTRACT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'contract')">{{ 'VOUCHER.CONTRACT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'contract')">{{ 'VOUCHER.CONTRACT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+          </div>
+          <div class="float-right">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/voucherssecurities">{{ 'COMMON.CANCEL' | translate }}</a>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTabId === tabs.PACKINGS_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-packing></app-packing>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTabId === tabs.GUIDES_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-guides></app-guides>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>

@@ -90,6 +90,7 @@ import { DivisionsComponent } from './division/divisions/divisions.component';
 import { DivisionComponent } from './division/division.component';
 import { DivisionEditComponent } from './division/divisions/division-edit/division-edit.component';
 import { DivisionAutocompleteComponent } from './division/divisions/division-autocomplete/division-autocomplete.component';
+import { DivisionSelectComponent } from './division/divisions/division-select/division-select.component';
 
 // Offices
 import { OfficesComponent } from './office/offices/offices.component';
@@ -163,6 +164,13 @@ import { VoucherComponent } from './voucher/voucher.component';
 import { VoucherEditComponent } from './voucher/vouchers/voucher-edit/voucher-edit.component';
 import { VoucherAddListComponent } from './voucher/vouchers/voucher-add-list/voucher-add-list.component';
 import { VoucherAutocompleteComponent } from './voucher/vouchers/voucher-autocomplete/voucher-autocomplete.component';
+
+// VouchersSecurities
+import { VouchersSecuritiesComponent } from './voucher-security/vouchers-securities/vouchers-securities.component';
+import { VoucherSecurityComponent } from './voucher-security/voucher-security.component';
+import { VoucherSecurityEditComponent } from './voucher-security/vouchers-securities/voucher-security-edit/voucher-security-edit.component';
+import { VoucherSecurityAddListComponent } from './voucher-security/vouchers-securities/voucher-security-add-list/voucher-security-add-list.component';
+import { VoucherSecurityAutocompleteComponent } from './voucher-security/vouchers-securities/voucher-security-autocomplete/voucher-security-autocomplete.component';
 
 // Currencies
 import { CurrenciesComponent } from './currency/currencies/currencies.component';
@@ -386,6 +394,7 @@ import { ContentTypeAutocompleteComponent } from './content-type/content-types/c
     DivisionComponent,
     DivisionEditComponent,
     DivisionAutocompleteComponent,
+    DivisionSelectComponent,
     PositionsComponent,
     PositionComponent,
     PositionEditComponent,
@@ -431,6 +440,11 @@ import { ContentTypeAutocompleteComponent } from './content-type/content-types/c
     VoucherEditComponent,
     VoucherAddListComponent,
     VoucherAutocompleteComponent,
+    VouchersSecuritiesComponent,
+    VoucherSecurityComponent,
+    VoucherSecurityEditComponent,
+    VoucherSecurityAddListComponent,
+    VoucherSecurityAutocompleteComponent,
     CurrenciesComponent,
     CurrencyComponent,
     CurrencyEditComponent,
