@@ -1,3 +1,4 @@
+import { CertifiedCartComponent } from './../../certified-cart/certified-cart.component';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VoucherService as ModelService } from '../_services/voucher.service';
@@ -67,6 +68,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     public securityGroup: FormGroup;
     public vouchers: AbstractControl;
+    public division: AbstractControl;
+    public certified_cart: AbstractControl;
+    public certified_cart_code: AbstractControl;
 
     public listVouchers: any[];
     public listVouchersSecurity: any[];
@@ -99,8 +103,14 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
         this.securityGroup = fb.group({
             vouchers: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+            division: [''],
+            certified_cart: [''],
+            certified_cart_code: ['']
         });
         this.vouchers = this.securityGroup.controls['vouchers'];
+        this.division = this.securityGroup.controls['division'];
+        this.certified_cart = this.securityGroup.controls['certified_cart'];
+        this.certified_cart_code = this.securityGroup.controls['certified_cart_code'];
 
         this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
             this.message_confirm_delete = res;
@@ -140,6 +150,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.requesting = false;
+
+        this.certified_cart.setValue(false);
+
         this.subscribeToDivisionChange();
 
         this._with = [];
@@ -466,7 +479,10 @@ export class VouchersComponent implements OnInit, OnDestroy {
         let per_page = 1;
         let sort = undefined;
         let query = undefined;
-        let filters = [{ key: 'filter{code.icontains}', value: event.value }];
+        let filters = [{ key: 'filter{code}', value: event.value }];
+        if (this.division.value.id) {
+            filters.push({ key: 'filter{division}', value: this.division.value.id  });
+        }
         let _with = undefined;
 
         this.requesting = true;
@@ -532,6 +548,15 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         });
                     });
                 }
+                if(response.divisions){
+                    response.divisions.forEach(division => {
+                        models.forEach(element => {
+                            if (element.division === division.id) {
+                                element.division = division;
+                            }
+                        });
+                    });
+                }
 
                 if (models[0]) {
                     let found = false
@@ -562,8 +587,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         }
                     });
                 });
+
                 if (!found) {
-                    this.listVouchers.forEach(element => {
+                    this.listVouchersSecurityList.forEach(element => {
                         if (element == event.value) {
                             this.listVouchersSecurityList.pop();
                         }
@@ -636,11 +662,17 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public transferSecurity(){
         this.requesting = true;
 
+        let certified_cart_code = undefined;
+        if (this.certified_cart.value && this.certified_cart_code.value) {
+            certified_cart_code = this.certified_cart_code.value;
+        }
+
         let model = {
             type_guide : 2,
             division_origin : 1,
             division_destination : 20,
             status : '1',
+            certified_cart_code : certified_cart_code,
             vouchers : []
         }
     
@@ -676,5 +708,19 @@ export class VouchersComponent implements OnInit, OnDestroy {
           this.listVouchersSecurity = [];
           this.listVouchersSecurityList = [];
         });
+    }
+
+    changeDivisionValue(event) {
+        this.division.setValue(event)
+        this.listVouchersSecurity = [];
+        this.listVouchersSecurityList = [];
+    }
+
+    closeDialogSecurity(){
+        this.displayModalSecurity = false;
+        this.searchGroup.reset();
+        this.listVouchersSecurity = [];
+        this.listVouchersSecurityList = [];
+        this.loadLazy();
     }
 }

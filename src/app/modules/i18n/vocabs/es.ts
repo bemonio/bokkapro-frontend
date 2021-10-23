@@ -276,6 +276,7 @@ export const locale = {
       DIRECTOPERATION: 'Operación Directa?',
       IS_ACTIVE: 'Activo?',
       CERTIFIED_CART: 'Carrito Certificado',
+      CERTIFIED_CART_CODE: "Código Carrito Certificado",
       GUIDES: 'Transacciones',
       CONTRACT: 'Contrato',
       ORIGIN_DESTINATION: 'Origen Destino',
