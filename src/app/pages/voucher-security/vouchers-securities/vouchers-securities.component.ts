@@ -212,6 +212,7 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         }
 
         this.filters.push({ key: 'filter{is_active}', value: '1'})
+        this.filters.push({ key: 'filter{verificated}', value: 'false'})
         this.getModels();
     }
 

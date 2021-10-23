@@ -213,6 +213,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         }
 
         this.filters.push({ key: 'filter{is_active}', value: '1'})
+        this.filters.push({ key: 'filter{direct_operation}', value: 'false'})
         this.getModels();
     }
 
