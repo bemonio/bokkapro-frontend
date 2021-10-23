@@ -687,7 +687,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   changeRequiredLocation () {
     if (this.direct_operation.value === true) {
-      this.location_destination.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+      // this.location_destination.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
       if (this.location_destination.value) {
         let model = this.model;
         model.location_destination = this.location_destination.value;
@@ -695,7 +695,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.location_destination.setValue(undefined);
       }
     } else {
-      this.location_destination.setValidators([]);
+      // this.location_destination.setValidators([]);
       if (this.location_destination.value) {
         let model = this.model;
         model.location_destination = this.location_destination.value;
