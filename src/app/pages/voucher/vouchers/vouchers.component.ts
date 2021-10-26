@@ -63,8 +63,11 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public displayModalCashier: boolean;
     public displayModalCertifiedCart: boolean;
     public displayModalSecurity: boolean;
+    public displayModalConfirmationDelivered: boolean;
     
     private unsubscribe: Subscription[] = [];
+
+    public listVouchers: any[];
 
     public securityGroup: FormGroup;
     public vouchers: AbstractControl;
@@ -72,9 +75,14 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public certified_cart: AbstractControl;
     public certified_cart_code: AbstractControl;
 
-    public listVouchers: any[];
     public listVouchersSecurity: any[];
     public listVouchersSecurityList: any[];
+
+    public ConfirmationDeliveredGroup: FormGroup;
+    public vouchersConfirmationDelivered: AbstractControl;
+
+    public listVouchersConfirmationDelivered: any[];
+    public listVouchersConfirmationDeliveredList: any[];
 
     constructor(
         public modelsService: ModelService,
@@ -112,6 +120,11 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.certified_cart = this.securityGroup.controls['certified_cart'];
         this.certified_cart_code = this.securityGroup.controls['certified_cart_code'];
 
+        this.ConfirmationDeliveredGroup = fb.group({
+            vouchersConfirmationDelivered: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        });
+        this.vouchersConfirmationDelivered = this.ConfirmationDeliveredGroup.controls['vouchersConfirmationDelivered'];
+
         this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
             this.message_confirm_delete = res;
         });
@@ -137,6 +150,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.displayModalCashier = false;
         this.displayModalCertifiedCart = false;
         this.displayModalSecurity = false;
+        this.displayModalConfirmationDelivered = false;
 
         this.confirmDialogPosition = 'right';
 
@@ -145,6 +159,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
         this.listVouchersSecurity = [];
         this.listVouchersSecurityList = [];
+
+        this.listVouchersConfirmationDelivered = [];
+        this.listVouchersConfirmationDeliveredList = [];
         // this.getModels();
     }
 
@@ -208,12 +225,21 @@ export class VouchersComponent implements OnInit, OnDestroy {
                 }
             });
         } else {
-            this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
-            this.filters.push({ key: 'filter{verificated}', value: '1' })
+            switch (this.route.parent.parent.snapshot.url[0].path) {
+                case 'vouchersconfirmationdelivered':
+                    this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
+                    this.filters.push({ key: 'filter{verificated}', value: '1' })
+                    this.filters.push({ key: 'filter{is_active}', value: '1'})
+                    break;
+                default:    
+                    this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
+                    this.filters.push({ key: 'filter{verificated}', value: '1' })
+                    this.filters.push({ key: 'filter{is_active}', value: '1'})
+                    this.filters.push({ key: 'filter{direct_operation}', value: 'false'})
+                    break;
+            }
         }
 
-        this.filters.push({ key: 'filter{is_active}', value: '1'})
-        this.filters.push({ key: 'filter{direct_operation}', value: 'false'})
         this.getModels();
     }
 
@@ -426,6 +452,15 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.getModels();
     }
 
+    showModalDialogConfirmationDelivered() {
+        this.displayModalConfirmationDelivered = true;
+    }
+
+    hideModalDialogConfirmationDelivered() {
+        this.displayModalConfirmationDelivered = false;
+        this.getModels();
+    }
+
     public subscribeToDivisionChange() {
         const divisionChangeSubscription = this.divisionService._change$
         .subscribe(response => {
@@ -629,6 +664,162 @@ export class VouchersComponent implements OnInit, OnDestroy {
         });
     }    
 
+    public addListVouchersConfirmationDelivered(event) {
+        let found = false;
+
+        let page = 1;
+        let per_page = 1;
+        let sort = undefined;
+        let query = undefined;
+        let filters = [{ key: 'filter{code}', value: event.value }, { key: 'filter{is_active}', value: 'true' }];
+        if (this.division.value.id) {
+            filters.push({ key: 'filter{division}', value: this.division.value.id  });
+        }
+        let _with = undefined;
+
+        this.requesting = true;
+        setTimeout(() => {
+        this.modelsService.get(page, per_page, sort, query, filters, _with).subscribe(
+            response => {
+                this.requesting = false;
+                let models = [];
+                response.vouchers.forEach(element => {
+                    models.push(element);
+                });
+                if(response.currencies){
+                    response.currencies.forEach(currency => {
+                        models.forEach(element => {
+                            if (element.currency === currency.id) {
+                                element.currency = currency;
+                            }
+                        });
+                    });
+                }
+                if(response.cashiers){
+                    response.cashiers.forEach(cashier => {
+                        models.forEach(element => {
+                            if (element.cashier === cashier.id) {
+                                element.cashier = cashier;
+                            }
+                        });
+                    });
+                }
+                if(response.contracts){
+                    response.contracts.forEach(contract => {
+                        models.forEach(element => {
+                            if (element.contract === contract.id) {
+                                element.contract = contract;
+                            }
+                        });
+                    });
+                }
+                if(response.origin_destinations){
+                    response.origin_destinations.forEach(origin_destination => {
+                        models.forEach(element => {
+                            if (element.origin_destination === origin_destination.id) {
+                                element.origin_destination = origin_destination;
+                            }
+                        });
+                    });
+                }
+                if(response.locations){
+                    response.locations.forEach(location => {
+                        models.forEach(element => {
+                            if (element.origin_destination.origin === location.id) {
+                                element.origin_destination.origin = location;
+                            }
+                        });
+                    });
+                }
+                if(response.locations){
+                    response.locations.forEach(location => {
+                        models.forEach(element => {
+                            if (element.origin_destination.destination === location.id) {
+                                element.origin_destination.destination = location;
+                            }
+                        });
+                    });
+                }
+                if(response.divisions){
+                    response.divisions.forEach(division => {
+                        models.forEach(element => {
+                            if (element.division === division.id) {
+                                element.division = division;
+                            }
+                        });
+                    });
+                }
+
+                if (models[0]) {
+                    let found = false
+                    this.listVouchersConfirmationDelivered.forEach(element => {
+                        if (element.code == event.value) {
+                            found = true
+                        }
+                    });
+                    if (!found){
+                        models[0].packings.forEach(element => {
+                            element.verificated = false;
+                        });
+                        this.listVouchersConfirmationDelivered.push(models[0]);
+                    }
+                }
+
+                this.listVouchersConfirmationDelivered.forEach(element => {
+                    let evenValue = event.value.replace(/[^a-zA-Z0-9]/g, '');
+        
+                    if (element.code === evenValue) {
+                        element.verificated = true;
+                        found = true;
+                    }
+                    element.packings.forEach(element2 => {
+                        if (element2.code === evenValue) {
+                            element2.verificated = true;
+                            found = true;
+                        }
+                    });
+                });
+
+                if (!found) {
+                    this.listVouchersConfirmationDeliveredList.forEach(element => {
+                        if (element == event.value) {
+                            this.listVouchersConfirmationDeliveredList.pop();
+                        }
+                    });
+                }
+            },
+            error => {
+                this.requesting = false;
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                );
+            }
+        );
+        }, 0)
+        // this.subscriptions.push(sb);
+    }
+
+    public removeListVouchersConfirmationDelivered(event) {
+        let item = 0;
+        this.listVouchersConfirmationDelivered.forEach(element => {            
+            if (element.code === event.value) {
+                this.listVouchersConfirmationDelivered.splice(item, 1);
+            }
+            element.packings.forEach(element2 => {
+                if (element2.code === event.value) {
+                    element2.verificated = false;
+                }
+            });            
+            item++;
+        });
+    }    
+
     // helpers for View
     isControlValid(controlName: string, formGroup: FormGroup): boolean {
         const control = formGroup.controls[controlName];
@@ -708,6 +899,50 @@ export class VouchersComponent implements OnInit, OnDestroy {
           model = response.guide as GuideModel;
           this.listVouchersSecurity = [];
           this.listVouchersSecurityList = [];
+          this.loadLazy();
+        });
+    }
+
+    public transferConfirmationDelivered(){
+        this.requesting = true;
+
+        let model = {
+            type_guide : 4,
+            status : '1',
+            vouchers : []
+        }
+    
+        if (this.listVouchersConfirmationDelivered) {
+          this.listVouchersConfirmationDelivered.forEach(element => {
+            model.vouchers.push(element.id);
+          });
+        }
+    
+        const sbCreate = this.guideService.post(model).pipe(
+          catchError((error) => {
+            this.requesting = false;
+            if (error.error instanceof Array) {
+              let messageError = [];
+              if (!Array.isArray(error.error)) {
+                messageError.push(error.error);
+              } else {
+                messageError = error.error;
+              }
+              Object.entries(messageError).forEach(
+                ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+              );
+            } else {
+              this.toastService.growl('error', 'error' + ': ' + error.error)
+            }
+            return of(model);
+          })
+        ).subscribe(response => {
+          this.toastService.growl('success', 'success');
+          this.requesting = false;
+          model = response.guide as GuideModel;
+          this.listVouchersConfirmationDelivered = [];
+          this.listVouchersConfirmationDeliveredList = [];
+          this.loadLazy();
         });
     }
 
@@ -722,6 +957,12 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.searchGroup.reset();
         this.listVouchersSecurity = [];
         this.listVouchersSecurityList = [];
-        this.loadLazy();
+    }
+
+    closeDialogConfirmationDelivered(){
+        this.displayModalConfirmationDelivered = false;
+        this.searchGroup.reset();
+        this.listVouchersConfirmationDelivered = [];
+        this.listVouchersConfirmationDeliveredList = [];
     }
 }

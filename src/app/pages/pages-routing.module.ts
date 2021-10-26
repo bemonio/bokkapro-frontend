@@ -196,6 +196,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'vouchersconfirmationdelivered',
+        loadChildren: () =>
+          import('../pages/voucher/voucher-routing.module').then(
+            (m) => m.VoucherRoutingModule
+          ),
+      },
+      {
         path: 'currencies',
         loadChildren: () =>
           import('../pages/currency/currency-routing.module').then(
