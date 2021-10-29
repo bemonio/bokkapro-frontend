@@ -1,3 +1,4 @@
+import { AuthService } from './../_services/auth.service';
 import { HTTP_INTERCEPTORS, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private token: TokenStorageService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -39,12 +41,17 @@ export class AuthInterceptor implements HttpInterceptor {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
             // redirect to the login route
-            this.token.signOut();
+            this.logout();
             this.router.navigate(['login']);
           }
         }
       })
     );
+  }
+
+  logout() {
+    this.authService.logout();
+    document.location.reload();
   }
 }
 
