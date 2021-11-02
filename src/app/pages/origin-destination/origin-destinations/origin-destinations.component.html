@@ -102,10 +102,10 @@
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td>
-            {{value.origin.name}}
+            {{value.origin?.name}}
           </td>
           <td>
-            {{value.destination.name}}
+            {{value.destination?.name}}
           </td>
           <td *ngIf="!showListSchedule">
             {{value.service_order.id}}
