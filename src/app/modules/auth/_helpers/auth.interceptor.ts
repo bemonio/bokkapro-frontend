@@ -1,6 +1,6 @@
 import { AuthService } from './../_services/auth.service';
 import { HTTP_INTERCEPTORS, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
 import { TokenStorageService } from '../_services/auth-http/token-storage.service';
@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private token: TokenStorageService,
     private router: Router,
-    private authService: AuthService
+    private injector: Injector
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -50,7 +50,8 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   logout() {
-    this.authService.logout();
+    const authService = this.injector.get(AuthService);
+    authService.logout();
     document.location.reload();
   }
 }
