@@ -84,6 +84,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public listVouchersConfirmationDelivered: any[];
     public listVouchersConfirmationDeliveredList: any[];
 
+    public showButtonConfirmationDelivered: Boolean;
+
     constructor(
         public modelsService: ModelService,
         private router: Router,
@@ -172,6 +174,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
         this.subscribeToDivisionChange();
 
+        this.showButtonConfirmationDelivered = false;
+
         this._with = [];
         this._with.push({key: 'include[]', value: 'currency.*'})
         this._with.push({key: 'include[]', value: 'cashier.*'})
@@ -227,9 +231,10 @@ export class VouchersComponent implements OnInit, OnDestroy {
         } else {
             switch (this.route.parent.parent.snapshot.url[0].path) {
                 case 'vouchersconfirmationdelivered':
-                    this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
+                    // this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
                     this.filters.push({ key: 'filter{verificated}', value: '1' })
                     this.filters.push({ key: 'filter{is_active}', value: '1'})
+                    this.showButtonConfirmationDelivered = true;
                     break;
                 default:    
                     this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
