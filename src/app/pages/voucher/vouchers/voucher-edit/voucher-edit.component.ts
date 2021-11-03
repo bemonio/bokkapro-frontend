@@ -291,7 +291,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.model.packings.forEach(element => {
           list_packings.push(element.code);
         });
-        this.packings.setValue(list_packings);
+        this.listPackings = list_packings;
+        // this.packings.setValue(list_packings);
       }
     }
 
