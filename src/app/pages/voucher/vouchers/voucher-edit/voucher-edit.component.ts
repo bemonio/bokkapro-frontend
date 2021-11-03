@@ -74,6 +74,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public message_facture_voucher_and_packings: string;
   public message_verification_voucher: string;
 
+  public listPackings: any[];
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -142,6 +144,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.translate.get('COMMON.MESSAGE_VERIFICATION_VOUCHER').subscribe((res: string) => {
         this.message_verification_voucher = res;
     });
+
+    this.listPackings = [];
   }
 
   ngOnInit(): void {
@@ -794,4 +798,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     return [year, month, day].join('-') + ' ' + [hours, minutes].join(':');
   }
 
+  public addListPackings(event) {
+    this.listPackings.forEach(element => {
+      if (element == event.value) {
+        this.listPackings.pop();
+        this.listPackings.push(event.value.replace(/[^a-zA-Z0-9]/g, ''));
+      }
+    });
+  }
 }
