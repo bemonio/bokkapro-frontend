@@ -203,12 +203,22 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       this.requesting = false;
       if (response) {
         this.model = response.origin_destination;
-        if (response.locations) {
-          this.model.origin = response.locations[0];
+        if (response.origin_destination && response.origin_destination.origin) {
+          response.locations.forEach(element => {
+              if (response.origin_destination.origin == element.id) {
+                this.model.origin = element;
+              }
+          });  
         }
-        if (response.locations) {
-          this.model.destination = response.locations[1];
+
+        if (response.origin_destination && response.origin_destination.destination) {
+          response.locations.forEach(element => {
+              if (response.origin_destination.destination == element.id) {
+                this.model.destination = element;
+              }
+          });  
         }
+
         if (response.service_orders) {
           this.model.service_order = response.service_orders[0];
           this.filterServOrdCompany = response.service_orders[0];
