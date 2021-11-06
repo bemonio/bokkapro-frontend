@@ -75,6 +75,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public message_verification_voucher: string;
 
   public listPackings: any[];
+  public officeUser: any;
 
   constructor(
     private fb: FormBuilder,
@@ -146,6 +147,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     });
 
     this.listPackings = [];
+
+    this.officeUser = this.authService.currentUserValue.employee.position.department.office;
   }
 
   ngOnInit(): void {

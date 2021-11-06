@@ -88,7 +88,7 @@
               <label style="float:right; color: red;">{{currency.value?.exchange_rate}}</label>
               <app-currency-select
               name="currency" [valid]="isControlValid('currency')" [touched]="isControlTouched('currency')" [class.is-invalid]="isControlInvalid('currency')"
-              [class.is-valid]="isControlValid('currency')" formControlName="currency" id="currency" [model]="model.currency"></app-currency-select>              
+              [class.is-valid]="isControlValid('currency')" formControlName="currency" id="currency" [model]="model.currency" [addFilters]="[{key: 'office', value: officeUser}]"></app-currency-select>
               <div class="feedback" *ngIf="!isControlTouched('currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CURRENCY' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('currency')">{{ 'VOUCHER.CURRENCY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">{{ 'VOUCHER.CURRENCY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

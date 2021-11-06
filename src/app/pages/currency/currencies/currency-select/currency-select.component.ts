@@ -46,6 +46,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
     ) {
         this.page = 1;
         this.per_page = 100;
+        this.sort = 'id';
     }
 
     public ngOnInit() {
