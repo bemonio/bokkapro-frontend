@@ -46,7 +46,7 @@ export class PermissionMultiselectComponent implements ControlValueAccessor, OnI
         public toastService: ToastService
     ) {
         this.page = 1;
-        this.per_page = 100;
+        this.per_page = 1000;
         this.firstTime = true;
     }
 
