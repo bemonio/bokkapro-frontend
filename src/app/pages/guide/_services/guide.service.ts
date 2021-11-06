@@ -7,6 +7,8 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 @Injectable()
 export class GuideService {
     API_URL = `${environment.apiUrl}guides`;
+    API_URL_LIST_GUIDES = `${environment.apiUrl}listguides`;
+    
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -67,5 +69,9 @@ export class GuideService {
 
     public getById(id: number): Observable<any> {
         return this.http.get(`${this.API_URL}/${id}/?include[]=vouchers.*`);
+    }
+
+    public postList(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL_LIST_GUIDES}`, JSON.stringify(body));
     }
 }

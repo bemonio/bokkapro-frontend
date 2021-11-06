@@ -64,7 +64,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
     public displayModal: boolean;
     public displayModalExport: boolean;
 
-    public verificationGuide: any;
+    public verificationGuides: any[];
     public listVouchers: any[];
 
     public optionsAmPm: { key: string, value: string }[];
@@ -108,7 +108,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
             this.message_confirm_delete = res;
         });
 
-        this.showTableCheckbox = false;
+        this.showTableCheckbox = true;
         this.parent = '';
 
         this.page = 1;
@@ -128,6 +128,8 @@ export class GuidesComponent implements OnInit, OnDestroy {
 
         this.models = [];
         this.selectedModels = [];
+        this.verificationGuides = [];
+        this.listVouchers = [];
 
         this.optionsAmPm = [];
         this.optionsAmPm.push({ key: 'TODO', value: 'ALL' });
@@ -340,9 +342,12 @@ export class GuidesComponent implements OnInit, OnDestroy {
             }),
         ).subscribe((response: any) => {
             if (response) {
-                this.verificationGuide = response.guide;
-                this.verificationGuide.vouchers = response.guide.vouchers;
-                let count = this.verificationGuide.vouchers.length + this.countPackings(this.verificationGuide, true);
+                this.verificationGuides = [];
+                this.verificationGuides.push(response.guide);
+                let count = 0;
+                this.verificationGuides.forEach(element => {
+                    count += element.vouchers.length + this.countPackings([element], true);
+                });
                 this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
                 if (response.guide.certified_cart) {
                     this.certified_cart_code.setValidators(Validators.compose([Validators.required, Validators.pattern(response.guide.certified_cart_code)]));
@@ -357,24 +362,44 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.get(guide.id)
     }
 
+    public verificationList() {
+        this.displayModal = true;
+        this.listVouchers = [];
+        this.verificationGuides = this.selectedModels;
+        let count = 0;
+        this.verificationGuides.forEach(element => {
+            count += element.vouchers.length + this.countPackings([element], true);
+        });
+        this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
+    }
+
+    public voucherLenght(guides) {
+        let count = 0;
+        guides.forEach(element => {
+            count += element.vouchers.length;
+        });
+        return count;
+    }
+
     public addListVouchers(event) {
         let found = false;
-        this.verificationGuide.vouchers.forEach(element => {
-            
-            let evenValue = event.value.replace(/[^a-zA-Z0-9]/g, '');
+        this.verificationGuides.forEach(guide => {
+                guide.vouchers.forEach(voucher => {
+                    let evenValue = event.value.replace(/[^a-zA-Z0-9]/g, '');
 
-            if (element.code === evenValue) {
-                element.verificated = true;
-                found = true;
-            }
-            if (this.verificationGuide.division_destination.name !== 'Operaciones Internas') {
-                element.packings.forEach(element2 => {
-                    if (element2.code === evenValue) {
-                        element2.verificated = true;
+                    if (voucher.code === evenValue) {
+                        voucher.verificated = true;
                         found = true;
                     }
+                    if (guide.division_destination.name !== 'Operaciones Internas') {
+                        voucher.packings.forEach(packing => {
+                            if (packing.code === evenValue) {
+                                packing.verificated = true;
+                                found = true;
+                            }
+                        });
+                    }
                 });
-            }
         });
         if (!found) {
             this.listVouchers.forEach(element => {
@@ -386,16 +411,16 @@ export class GuidesComponent implements OnInit, OnDestroy {
     }
 
     public removeListVouchers(event) {
-        this.verificationGuide.vouchers.forEach(element => {
-            if (element.code === event.value) {
-                element.verificated = false;
-            }
-            element.packings.forEach(element2 => {
-                if (element2.code === event.value) {
-                    element2.verificated = false;
-                }
-            });
-        });
+        // this.verificationGuides.vouchers.forEach(element => {
+        //     if (element.code === event.value) {
+        //         element.verificated = false;
+        //     }
+        //     element.packings.forEach(element2 => {
+        //         if (element2.code === event.value) {
+        //             element2.verificated = false;
+        //         }
+        //     });
+        // });
     }
 
     // helpers for View
@@ -433,14 +458,14 @@ export class GuidesComponent implements OnInit, OnDestroy {
         let employee = this.authService.currentUserValue.employee.id;
         let params = {
             "status": "1",
-            "vouchers": [],
+            "guides": [],
             "employee_destination": employee
         };
-        this.verificationGuide.vouchers.forEach(element => {
-            params.vouchers.push(element.id);
+        this.verificationGuides.forEach(guide => {            
+            params.guides.push(guide.id);
         });
 
-        const sbUpdate = this.modelsService.patch(this.verificationGuide.id, params).pipe(
+        const sbUpdate = this.modelsService.postList(params).pipe(
             tap(() => {
                 this.toastService.growl('success', 'success');
             }),
@@ -458,7 +483,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
                 } else {
                     this.toastService.growl('error', 'error' + ': ' + error.error)
                 }
-                return of(this.verificationGuide);
+                return of(this.verificationGuides);
             })
         ).subscribe(response => {
             this.displayModal = false;
@@ -466,10 +491,22 @@ export class GuidesComponent implements OnInit, OnDestroy {
         });
     }
 
-    countPackings(guide, operations) {
+    countPackings(guides, operations) {
         let count = 0;
         if (operations) {
-            if (guide.division_destination.name != 'Operaciones Internas') {
+            guides.forEach(guide => {
+                if (guide.division_destination.name != 'Operaciones Internas') {
+                    if (guide.vouchers) {
+                        guide.vouchers.forEach(element => {
+                            if (element.packings) {
+                                count = count + element.count_packings;
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            guides.forEach(guide => {
                 if (guide.vouchers) {
                     guide.vouchers.forEach(element => {
                         if (element.packings) {
@@ -477,15 +514,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
                         }
                     });
                 }
-            }
-        } else {
-            if (guide.vouchers) {
-                guide.vouchers.forEach(element => {
-                    if (element.packings) {
-                        count = count + element.count_packings;
-                    }
-                });
-            }
+            });
         }
         return count;
     }
@@ -574,5 +603,11 @@ export class GuidesComponent implements OnInit, OnDestroy {
             }
         }
         return response;
+    }
+
+    public closeVerificationModal() {
+        this.displayModal = false;
+        this.listVouchers = [];
+        this.verificationGuides = [];
     }
 }
