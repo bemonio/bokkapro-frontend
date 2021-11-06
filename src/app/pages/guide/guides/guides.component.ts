@@ -90,6 +90,8 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.date_filter = this.searchGroup.controls['date_filter'];
         this.am_pm_filter = this.searchGroup.controls['am_pm_filter'];
 
+        this.date_filter.setValue(new Date());
+        
         this.exportGroup = fb.group({
             'date_export': [''],
             'am_pm_export': [''],
