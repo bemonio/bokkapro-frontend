@@ -463,6 +463,7 @@ export const locale = {
       ADD_SELECTED: 'AGREGAR SELECCIONADOS',
       ADD: 'Agregar',
       CLEAR: 'Limpiar',
+      VERIFICATED: 'Verificado',
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',
@@ -612,6 +613,7 @@ export const locale = {
       SUNDAY: 'Domingo',
       SUNDAY_START_TIME: 'Hora Inicio Domingo',
       SUNDAY_END_TIME: 'Hora Fin Domingo',
+      DIVISION: 'División'
     },
     CLIENT_BINNACLE: {
       CLIENT_BINNACLE: 'Bitácora Grupo Económico',
