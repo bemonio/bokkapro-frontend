@@ -1,3 +1,4 @@
+import { DivisionService } from './../../../division/_services/division.service';
 import { Component, Input, Output, OnDestroy, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -77,6 +78,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public listPackings: any[];
   public officeUser: any;
 
+  private unsubscribe: Subscription[] = [];
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -88,7 +91,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     private contractService: ContractService,
     private officeService: OfficeService,
     private confirmationService: ConfirmationService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public divisionService: DivisionService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
@@ -158,6 +162,17 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
     this.division = this.authService.currentDivisionValue;
     this.getOfficeById(this.division.office);
+
+    if (this.division.id == 1){
+      this.amount.setValidators([]);
+      this.contract.setValidators([]);
+      this.origin_destination.setValidators([]);
+      this.currency.setValidators([]);
+      this.amount.setValue(0);
+    }
+    this.formGroup.markAllAsTouched();
+
+    this.subscribeToDivisionChange();
 
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
@@ -588,7 +603,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.subscriptions.forEach(sb => sb.unsubscribe());
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 
   // helpers for View
@@ -809,5 +824,30 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.listPackings.push(event.value.replace(/[^a-zA-Z0-9]/g, ''));
       }
     });
+  }
+
+  public subscribeToDivisionChange() {
+    const divisionChangeSubscription = this.divisionService._change$
+    .subscribe(response => {
+        if (response) {
+          if (this.division.id == 1){
+            this.amount.setValidators([]);
+            this.contract.setValidators([]);
+            this.origin_destination.setValidators([]);
+            this.currency.setValidators([]);
+            this.amount.setValue(0);
+          } else {
+            this.code.setValidators(Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)]));
+            this.amount.setValidators(Validators.compose([Validators.required]));
+            this.count_packings.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+            this.packings.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+            this.contract.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+            this.origin_destination.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+            this.currency.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+          }
+        }
+        this.formGroup.markAllAsTouched();
+    });
+    this.unsubscribe.push(divisionChangeSubscription);
   }
 }
