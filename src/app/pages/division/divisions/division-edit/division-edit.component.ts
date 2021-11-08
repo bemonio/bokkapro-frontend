@@ -53,8 +53,8 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: ['', Validators.compose([Validators.maxLength(30)])],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      description: ['', Validators.compose([Validators.maxLength(255)])],
       office: ['', Validators.compose([Validators.required])],
       type: [''],
       employees: ['', Validators.compose([Validators.required])],

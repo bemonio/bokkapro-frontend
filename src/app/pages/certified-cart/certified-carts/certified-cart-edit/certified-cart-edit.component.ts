@@ -57,7 +57,7 @@ export class CertifiedCartEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       division: [''],
       division_last: [''],
       vouchers: [''],

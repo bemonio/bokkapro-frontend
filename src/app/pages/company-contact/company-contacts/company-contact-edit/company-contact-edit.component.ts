@@ -58,12 +58,12 @@ export class CompanyContactEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      phone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      mobile: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      employee_position: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      phone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      mobile: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      employee_position: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
     this.name = this.formGroup.controls['name'];

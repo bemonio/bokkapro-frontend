@@ -50,7 +50,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       file_uploaded: [''],
     });
     this.name = this.formGroup.controls['name'];

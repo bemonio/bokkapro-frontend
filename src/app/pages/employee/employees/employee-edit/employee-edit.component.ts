@@ -46,8 +46,8 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: ['', Validators.compose([Validators.maxLength(30)])],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      description: ['', Validators.compose([Validators.maxLength(255)])],
       position: ['', Validators.compose([Validators.required])],
       user: [''],
     });

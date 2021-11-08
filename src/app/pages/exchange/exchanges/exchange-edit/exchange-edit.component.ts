@@ -45,8 +45,8 @@ export class ExchangeEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      rate: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      date: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
+      rate: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      date: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(255)])],
       currency: ['', Validators.compose([Validators.required])],
     });
     this.rate = this.formGroup.controls['rate'];

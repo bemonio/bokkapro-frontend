@@ -65,14 +65,14 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      amount: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      amount: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       difference_amount: [''],
       review: [''],
-      bank_account_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      bank_account_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       currency: ['', Validators.compose([Validators.required])],
       verified: [''],
       verified_at: [''],
-      packing: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      packing: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       bank_account: [''],
       employee_who_counts: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       supervisor: [''],

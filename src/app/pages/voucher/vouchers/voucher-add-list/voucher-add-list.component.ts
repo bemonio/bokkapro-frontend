@@ -74,8 +74,8 @@ export class VoucherAddListComponent implements OnInit, OnDestroy {
     this.editBool = false;
 
     this.formGroup = this.fb.group({
-      code_start: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      code_end: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      code_start: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      code_end: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       verificated: [''],
       contract: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       is_active: [''],

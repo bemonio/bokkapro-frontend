@@ -48,10 +48,10 @@ export class CurrencyEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      symbol: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      format: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
+      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      symbol: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(255)])],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      format: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(255)])],
       exchange_rate: ['', Validators.compose([Validators.required])],
       office: ['', Validators.compose([Validators.required])],
     });

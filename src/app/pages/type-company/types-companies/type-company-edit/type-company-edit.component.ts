@@ -44,8 +44,8 @@ export class TypeCompanyEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: ['', Validators.compose([Validators.maxLength(30)])],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      description: ['', Validators.compose([Validators.maxLength(255)])],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];

@@ -56,7 +56,7 @@ export class QuotationEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      content: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      content: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       template: [''],
     });

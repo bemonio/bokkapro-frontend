@@ -49,11 +49,11 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: ['', Validators.compose([Validators.maxLength(30)])],
-      address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      phone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      description: ['', Validators.compose([Validators.maxLength(255)])],
+      address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      phone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       company: ['', Validators.compose([Validators.required])],
       currency: [''],
     });

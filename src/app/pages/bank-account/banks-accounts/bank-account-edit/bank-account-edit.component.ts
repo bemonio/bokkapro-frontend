@@ -45,8 +45,8 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      bank: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      account: ['', Validators.compose([Validators.maxLength(30)])],
+      bank: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      account: ['', Validators.compose([Validators.maxLength(255)])],
       company: ['', Validators.compose([Validators.required])],
     });
     this.bank = this.formGroup.controls['bank'];

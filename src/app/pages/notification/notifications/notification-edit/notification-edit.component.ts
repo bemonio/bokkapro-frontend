@@ -62,13 +62,13 @@ export class NotificationEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      icon: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      title: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      link: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      icon: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      title: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      description: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      link: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       is_read: [''],
-      type: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      module: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      type: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      module: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       employee_origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       employee_destination: ['', Validators.compose([Validators.required])],
     });

@@ -100,7 +100,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.editBool = false;
 
     this.formGroup = this.fb.group({
-      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       amount: ['', Validators.compose([Validators.required])],
       exchange_rate: [''],
       count_packings: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -838,7 +838,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
             this.origin_destination.setValidators([]);
             this.amount.setValue(0);
           } else {
-            this.code.setValidators(Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)]));
+            this.code.setValidators(Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)]));
             this.amount.setValidators(Validators.compose([Validators.required]));
             this.count_packings.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
             this.packings.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));

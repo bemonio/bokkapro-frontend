@@ -84,9 +84,9 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.requesting = false;
 
     this.formGroup = this.fb.group({
-      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      code_brinks: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      identification_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      code_brinks: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      identification_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(70)])],
       alias: [''],
       abbreviation: [''],
