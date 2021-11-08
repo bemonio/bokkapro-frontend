@@ -267,7 +267,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.date_delivery.setValue(undefined)
     this.pickup_date.setValue(undefined)
     this.checkin_date.setValue(undefined)
-
+    this.amount.setValue(0);
+    
     if (this.model.id) {
       this.editBool = true;
       this.code.setValue(this.model.code);
@@ -593,7 +594,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.id = 0;
       this.model = new Model;
       this.formGroup.reset()
-      this.formGroup.markAllAsTouched();
+      this.loadForm();
+      this.getOfficeById(this.division.office);
     });
     // this.subscriptions.push(sbCreate);
   }
@@ -834,7 +836,6 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
             this.amount.setValidators([]);
             this.contract.setValidators([]);
             this.origin_destination.setValidators([]);
-            this.currency.setValidators([]);
             this.amount.setValue(0);
           } else {
             this.code.setValidators(Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)]));
@@ -843,7 +844,6 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
             this.packings.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
             this.contract.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
             this.origin_destination.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
-            this.currency.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
           }
         }
         this.formGroup.markAllAsTouched();
