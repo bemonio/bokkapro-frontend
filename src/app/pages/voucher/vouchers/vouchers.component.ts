@@ -236,6 +236,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     this.filters.push({ key: 'filter{is_active}', value: '1'})
                     this.showButtonConfirmationDelivered = true;
                     break;
+                case 'vouchersadmin':
+                        this.showButtonConfirmationDelivered = true;
+                        break;
                 default:    
                     this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
                     this.filters.push({ key: 'filter{verificated}', value: '1' })
