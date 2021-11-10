@@ -58,6 +58,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
   public origin: AbstractControl;
   public destination: AbstractControl;
   public service_order: AbstractControl;
+  public division: AbstractControl;
 
   public filterServOrdCompany: any;
 
@@ -112,6 +113,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       destination: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       service_order: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      division: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
     this.type_service = this.formGroup.controls['type_service'];
     this.distrib_charges = this.formGroup.controls['distrib_charges'];
@@ -141,6 +143,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
     this.origin = this.formGroup.controls['origin'];
     this.destination = this.formGroup.controls['destination'];
     this.service_order = this.formGroup.controls['service_order'];
+    this.division = this.formGroup.controls['division'];
   }
 
   ngOnInit(): void {
@@ -203,6 +206,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       this.requesting = false;
       if (response) {
         this.model = response.origin_destination;
+
         if (response.origin_destination && response.origin_destination.origin) {
           response.locations.forEach(element => {
               if (response.origin_destination.origin == element.id) {
@@ -222,6 +226,9 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
         if (response.service_orders) {
           this.model.service_order = response.service_orders[0];
           this.filterServOrdCompany = response.service_orders[0];
+        }
+        if (response.divisions) {
+          this.model.division = response.divisions[0];
         }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -267,6 +274,9 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       if (this.model.service_order) {
         this.service_order.setValue(this.model.service_order);
       }
+      if (this.model.division) {
+        this.division.setValue(this.model.division);
+      }
     } else {
       this.type_service.setValue('');
       this.distrib_charges.setValue('');
@@ -274,6 +284,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       this.origin.setValue('');
       this.destination.setValue('');
       this.service_order.setValue('');
+      this.division.setValue('');
       this.precall.setValue(false);
       this.monday.setValue(false);
       this.tuesday.setValue(false);
@@ -347,6 +358,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
     model.origin = this.model.origin.id;
     model.destination = this.model.destination.id;
     model.service_order = this.model.service_order.id;
+    model.division = this.model.division.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -404,6 +416,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
     model.origin = this.model.origin.id;
     model.destination = this.model.destination.id;
     model.service_order = this.model.service_order.id;
+    model.division = this.model.division.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

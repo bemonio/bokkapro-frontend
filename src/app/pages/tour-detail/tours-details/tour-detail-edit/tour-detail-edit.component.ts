@@ -127,12 +127,44 @@ export class TourDetailEditComponent implements OnInit, OnChanges, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.tour_detail;
-        if (response.origin_destinations) {
-          this.model.origin_destination = response.origin_destinations[0];
+        if(response.origin_destinations){
+          response.origin_destinations.forEach(origin_destination => {
+              if(this.model.origin_destination) {
+                  if (this.model.origin_destination === origin_destination.id) {
+                      this.model.origin_destination = origin_destination;
+                  }
+              }
+          });
         }
-
-        if (response.divisions) {
-          this.model.division = response.divisions[0];
+        if(response.locations){
+          response.locations.forEach(location => {
+              if(this.model.origin_destination) {
+                  if (this.model.origin_destination.origin === location.id) {
+                      this.model.origin_destination.origin = location;
+                  }
+              }
+          });
+        }
+        if(response.locations){
+          response.locations.forEach(location => {
+              if(this.model.origin_destination) {
+                  if (this.model.origin_destination.destination === location.id) {
+                      this.model.origin_destination.destination = location;
+                  }
+              }
+          });
+        }
+        if(response.divisions){
+          response.divisions.forEach(division => {
+              if(this.model.origin_destination) {
+                  if (this.model.origin_destination.division === division.id) {
+                      this.model.origin_destination.division = division;
+                  }
+              }
+              if (this.model.division === division.id) {
+                this.model.division = division;
+              }
+          });
         }
 
         this.previous = Object.assign({}, this.model);
@@ -194,7 +226,7 @@ export class TourDetailEditComponent implements OnInit, OnChanges, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/tours']);
+          // this.router.navigate(['/tours']);
           this.emitHideModal();
         }
       }),
@@ -231,7 +263,8 @@ export class TourDetailEditComponent implements OnInit, OnChanges, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/tours']);
+          // this.router.navigate(['/tours']);
+          this.emitHideModal();
         } else {
           this.formGroup.reset()
         }

@@ -464,6 +464,7 @@ export const locale = {
       ADD: 'Agregar',
       CLEAR: 'Limpiar',
       VERIFICATED: 'Verificado',
+      PRINT: 'Imprimir',
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',

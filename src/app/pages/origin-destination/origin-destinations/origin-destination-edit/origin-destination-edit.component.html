@@ -74,8 +74,8 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-2">
+            </div>            
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}</label>
               <p-dropdown [styleClass]="getValidClass(isControlValid('type_service'))" [options]="optionsTypeService" optionLabel="key" name="type_service" formControlName="type_service" placeholder="Selecciona"></p-dropdown>
               <div class="feedback" *ngIf="!isControlTouched('type_service')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}</b></div>
@@ -84,7 +84,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_service')">{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_service')">{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
-            <div class="col-lg-2">
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.PRECALL' | translate}}</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="precall" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('precall')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.PRECALL' | translate}}</b></div>
@@ -93,6 +93,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'precall')">{{ 'ORIGIN_DESTINATION.PRECALL' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'precall')">{{ 'ORIGIN_DESTINATION.PRECALL' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.DIVISION' | translate }}</label>
+              <app-division-autocomplete 
+              name="division" [valid]="isControlValid('division')" [touched]="isControlTouched('division')" [class.is-invalid]="isControlInvalid('division')"
+              [class.is-valid]="isControlValid('division')" formControlName="division" id="division" [model]="model.division" [disabled]="service_order.value ? false : true"></app-division-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.DIVISION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('division')">{{ 'ORIGIN_DESTINATION.DIVISION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'ORIGIN_DESTINATION.DIVISION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division')">{{ 'ORIGIN_DESTINATION.DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'ORIGIN_DESTINATION.DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.DISTRIB_CHARGES' | translate }}</label>
               <!-- <label style="float:right; color: red;">{{ distrib_charges.value * currency.value?.exchange_rate | currency }} {{office?.currency?.symbol}}</label> -->
@@ -116,6 +127,8 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.MONDAY' | translate}}</label>

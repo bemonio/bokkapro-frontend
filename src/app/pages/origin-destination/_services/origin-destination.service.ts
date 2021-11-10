@@ -50,7 +50,7 @@ export class OriginDestinationService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=origin.*&include[]=destination.*&include[]=service_order.*&include[]=service_order.company.*`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=origin.*&include[]=destination.*&include[]=service_order.*&include[]=service_order.company.*&include[]=division.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -66,6 +66,6 @@ export class OriginDestinationService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=origin.*&include[]=destination.*&include[]=service_order.*&include[]=service_order.company.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=origin.*&include[]=destination.*&include[]=service_order.*&include[]=service_order.company.*&include[]=division.*`);
     }
 }

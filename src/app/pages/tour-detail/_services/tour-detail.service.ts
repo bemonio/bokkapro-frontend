@@ -51,7 +51,7 @@ export class TourDetailService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=origin_destination.origin.*&include[]=origin_destination.destination.*&include[]=division.*`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=origin_destination.origin.*&include[]=origin_destination.destination.*&include[]=origin_destination.division.*&include[]=origin_destination.service_order.company.*&include[]=division.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -67,7 +67,7 @@ export class TourDetailService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=origin_destination.origin.*&include[]=origin_destination.destination.*&include[]=division.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=origin_destination.origin.*&include[]=origin_destination.destination.*&include[]=origin_destination.division.*&include[]=origin_destination.service_order.company.*&include[]=division.*`);
     }
 
     public postList(body: Object): Observable<any> {

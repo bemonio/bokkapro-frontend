@@ -99,6 +99,7 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
         this._with.push({key: 'include[]', value: 'destination.*'})
         this._with.push({key: 'include[]', value: 'service_order.*'})
         this._with.push({key: 'include[]', value: 'service_order.contract.*'})
+        this._with.push({key: 'include[]', value: 'division.*'})
     }
 
     ngOnChanges() {
@@ -222,6 +223,15 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
                         this.models.forEach(element => {
                             if (element.service_order.contract === contract.id) {
                                 element.service_order.contract = contract;
+                            }
+                        });
+                    });
+                }
+                if(response.divisions){
+                    response.divisions.forEach(division => {
+                        this.models.forEach(element => {
+                            if (element.division === division.id) {
+                                element.division = division;
                             }
                         });
                     });

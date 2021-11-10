@@ -18,6 +18,8 @@
     <div class="card-toolbar">
       <!-- <a type="button" class="btn btn-primary" routerLink="{{parent}}/toursdetails/add">{{ 'COMMON.NEW' | translate }}</a> -->
       <button type="button" class="btn btn-primary font-weight-bold mr-2"
+      [disabled]="viewtypecalendar!='timeGridDay'" (click)="printReport()">{{ 'COMMON.PRINT' | translate }}</button>
+      <button type="button" class="btn btn-primary font-weight-bold mr-2"
       [disabled]="viewtypecalendar!='timeGridDay'" (click)="showListOriginDestination()">{{ 'COMMON.ADD' | translate }}</button>
     </div>
   </div>
@@ -159,6 +161,12 @@
   <h5 class="text-dark font-weight-bold my-1 mr-5 ng-star-inserted" style="padding-bottom: 10px;">{{ 'TOUR_DETAIL.ORIGIN_DESTINATION' | translate}}</h5>
   <form action="#" class="form form-label-right" [formGroup]="formGroup">
     <div class="form-group row">
+      <div class="col-lg-4">
+        <button type="submit" class="btn btn-primary font-weight-bold mr-2" style="width: inherit;"
+        (click)="addAllOriginDestination()">{{ 'COMMON.ADD_ALL' | translate }}</button>
+        <button type="submit" class="btn btn-primary font-weight-bold mr-2"  style="width: inherit;"
+        [disabled]="listOriginDestinationSelectedModels.length <= 0" (click)="addSelectedOriginDestination()">{{ 'COMMON.ADD_SELECTED' | translate }}</button>
+      </div>
       <div class="col-lg-8">
         <label>{{ 'COMMON.ENTER' | translate }} {{ 'TOUR_DETAIL.DIVISION' | translate}}</label>
         <app-division-autocomplete
@@ -169,12 +177,6 @@
         <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
         <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
         <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-      </div>
-      <div class="col-lg-4">
-        <button type="submit" class="btn btn-primary font-weight-bold mr-2" style="width: inherit;"
-        [disabled]="formGroup.invalid" (click)="addAllOriginDestination()">{{ 'COMMON.ADD_ALL' | translate }}</button>
-        <button type="submit" class="btn btn-primary font-weight-bold mr-2"  style="width: inherit;"
-        [disabled]="formGroup.invalid || listOriginDestinationSelectedModels.length <= 0" (click)="addSelectedOriginDestination()">{{ 'COMMON.ADD_SELECTED' | translate }}</button>
       </div>
       <div class="col-lg-12">
         <app-origin-destinations [showListSchedule]="true" [dateSchedule]="dateSchedule" [(selectedModels)]="listOriginDestinationSelectedModels"></app-origin-destinations>

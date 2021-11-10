@@ -28,4 +28,5 @@ export class OriginDestinationModel {
   origin: any;
   destination: any;
   service_order: any;
+  division: any;
 }

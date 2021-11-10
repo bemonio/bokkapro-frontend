@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { OriginDestinationService } from '../../origin-destination/_services';
 import { OriginDestinationModel } from '../../origin-destination/_models/origin-destination.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-tours-details',
@@ -291,9 +292,22 @@ export class ToursDetailsComponent implements OnInit {
 
                 this.events = [];
                 this.modelsCalendar.forEach(element => {
+                    let origin_name = 'N/A';
+                    let destination_name = 'N/A';
+                    let division_name = 'N/A';
+                    if (element.origin_destination && element.origin_destination.origin){
+                        origin_name = element.origin_destination.origin.name;
+                    }
+                    if (element.origin_destination  && element.origin_destination.destination){
+                        destination_name = element.origin_destination.destination.name;
+                    }
+                    if (element.division){
+                        division_name = element.division.name;
+                    }
+
                     this.events.push({
                         "id": element.id,
-                        "title": element.origin_destination.origin.name + ' - ' + element.origin_destination.destination.name + ' [' + element.division.name + ']',
+                        "title": origin_name + ' - ' + destination_name + ' [' + division_name + ']',
                         "start": element.date_start,
                         "end": element.date_end,
                     });
@@ -451,12 +465,30 @@ export class ToursDetailsComponent implements OnInit {
                     end_time = element.saturday_end_time ? date.toISOString().split('T')[0] + ' ' + element.saturday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                     break;
             }
+            let division;
+            if (element.division && element.division.id) {
+                division = element.division.id;
+            }
+            if (this.division.value && this.division.value.id) {
+                division = this.division.value.id;
+            }
+
+            let origin_name;
+            if (element.origin && element.origin.id) {
+                origin_name = element.origin.name;
+            }
+
+            let destination_name;
+            if (element.destination && element.destination.id) {
+                destination_name = element.destination.name;
+            }
+
             this.events.push({
                 "id": element.id,
-                "title": element.origin.name + ' - ' + element.destination.name,
+                "title": origin_name + ' - ' + destination_name,
                 "start": start_time,
                 "end": end_time,
-                "division": this.division.value.id
+                "division": division
             });
         });
         // this.calendarOptions.events = this.events;
@@ -473,6 +505,7 @@ export class ToursDetailsComponent implements OnInit {
         _with.push({key: 'include[]', value: 'origin.*'})
         _with.push({key: 'include[]', value: 'destination.*'})
         _with.push({key: 'include[]', value: 'service_order.*'})
+        _with.push({key: 'include[]', value: 'division.*'})
 
         let date = this.dateSchedule ? this.dateSchedule : new Date();
         switch (date.getDay()) {
@@ -568,12 +601,30 @@ export class ToursDetailsComponent implements OnInit {
                             end_time = element.saturday_end_time ? date.toISOString().split('T')[0] + ' ' + element.saturday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                             break;
                     }
+                    let division;
+                    if (element.division && element.division.id) {
+                        division = element.division.id;
+                    }
+                    if (this.division.value && this.division.value.id) {
+                        division = this.division.value.id;
+                    }
+        
+                    let origin_name;
+                    if (element.origin && element.origin.id) {
+                        origin_name = element.origin.name;
+                    }
+        
+                    let destination_name;
+                    if (element.destination && element.destination.id) {
+                        destination_name = element.destination.name;
+                    }
+        
                     this.events.push({
                         "id": element.id,
-                        "title": element.origin.name + ' - ' + element.destination.name,
+                        "title": origin_name + ' - ' + destination_name,
                         "start": start_time,
                         "end": end_time,
-                        "division": this.division.value.id
+                        "division": division
                     });
                 });
                 // this.calendarOptions.events = this.events;
@@ -626,6 +677,7 @@ export class ToursDetailsComponent implements OnInit {
     hideModal() {
         this.getModelsCalendar();
         this.showViewTourDetail = false;
+        this.selectedModelId = undefined;
     }
 
     // helpers for View
@@ -653,5 +705,10 @@ export class ToursDetailsComponent implements OnInit {
         this.formGroup.reset();
         this.listOriginDestinationSelectedModels = [];
         this.visibleSidebar = true;
+    }
+
+    public printReport() {
+        let url = environment.apiUrl + 'pdf/toursdetails?start=' + this.calendarStart + '&end=' + this.calendarEnd;
+        window.open(url, '_blank');
     }
 }
