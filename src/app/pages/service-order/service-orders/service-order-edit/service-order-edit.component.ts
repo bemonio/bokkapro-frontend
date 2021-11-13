@@ -119,7 +119,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'service_order': new Model() });
       }),
@@ -217,7 +217,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
             this.router.navigate([this.parent + '/serviceorders']);
@@ -235,7 +235,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -259,7 +259,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
             this.router.navigate([this.parent + '/serviceorders']);
@@ -279,7 +279,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })

@@ -340,7 +340,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -371,7 +371,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public delete(id) {
         this.modelsService.delete(id).toPromise().then(
             response => {
-                this.toastService.growl('success', 'Delete');
+                this.toastService.growl('top-right', 'success', 'Delete');
                 this.getModels();
             },
             error => {
@@ -382,7 +382,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -396,7 +396,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
             const promise = this.modelsService.patch(values.id, param);
             this.promiseForm = promise.toPromise().then(
                 response => {
-                    this.toastService.growl('success', 'Patch');
+                    this.toastService.growl('top-right', 'success', 'Patch');
                     this.getModels();
                 },
                 error => {
@@ -407,7 +407,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         messageError = error.error;
                     }
                     Object.entries(messageError).forEach(
-                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                     );
                 }
             );
@@ -649,7 +649,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -805,7 +805,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -894,15 +894,15 @@ export class VouchersComponent implements OnInit, OnDestroy {
                 messageError = error.error;
               }
               Object.entries(messageError).forEach(
-                ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
               );
             } else {
-              this.toastService.growl('error', 'error' + ': ' + error.error)
+              this.toastService.growl('top-right', 'error', 'error' + ': ' + error.error)
             }
             return of(model);
           })
         ).subscribe(response => {
-          this.toastService.growl('success', 'success');
+          this.toastService.growl('top-right', 'success', 'success');
           this.requesting = false;
           model = response.guide as GuideModel;
           this.listVouchersSecurity = [];
@@ -937,15 +937,15 @@ export class VouchersComponent implements OnInit, OnDestroy {
                 messageError = error.error;
               }
               Object.entries(messageError).forEach(
-                ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
               );
             } else {
-              this.toastService.growl('error', 'error' + ': ' + error.error)
+              this.toastService.growl('top-right', 'error', 'error' + ': ' + error.error)
             }
             return of(model);
           })
         ).subscribe(response => {
-          this.toastService.growl('success', 'success');
+          this.toastService.growl('top-right', 'success', 'success');
           this.requesting = false;
           model = response.guide as GuideModel;
           this.listVouchersConfirmationDelivered = [];

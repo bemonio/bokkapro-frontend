@@ -78,7 +78,7 @@ export class TypeCurrencyEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'type_currency': new Model() });
       }),
@@ -127,7 +127,7 @@ export class TypeCurrencyEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/typescurrencies']);
         }
@@ -141,7 +141,7 @@ export class TypeCurrencyEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -157,7 +157,7 @@ export class TypeCurrencyEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/typescurrencies']);
         } else {
@@ -173,7 +173,7 @@ export class TypeCurrencyEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })

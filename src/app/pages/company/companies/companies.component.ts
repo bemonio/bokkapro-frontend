@@ -150,7 +150,7 @@ export class CompaniesComponent implements OnInit, OnChanges {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -181,7 +181,7 @@ export class CompaniesComponent implements OnInit, OnChanges {
     public delete(id) {
         this.modelsService.delete(id).toPromise().then(
             response => {
-                this.toastService.growl('success', 'Delete');
+                this.toastService.growl('top-right', 'success', 'Delete');
                 this.getModels();
             },
             error => {
@@ -192,7 +192,7 @@ export class CompaniesComponent implements OnInit, OnChanges {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -206,7 +206,7 @@ export class CompaniesComponent implements OnInit, OnChanges {
             const promise = this.modelsService.patch(values.id, param);
             this.promiseForm = promise.toPromise().then(
                 response => {
-                    this.toastService.growl('success', 'Patch');
+                    this.toastService.growl('top-right', 'success', 'Patch');
                 },
                 error => {
                     let messageError = [];
@@ -216,7 +216,7 @@ export class CompaniesComponent implements OnInit, OnChanges {
                         messageError = error.error;
                     }
                     Object.entries(messageError).forEach(
-                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                     );
                 }
             );

@@ -98,7 +98,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'documentserviceorder': new Model() });
       }),
@@ -152,7 +152,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
 
     const sbUpdate = this.modelsService.patch(this.id, model, this.files).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
             this.router.navigate([this.parent + '/documentserviceorders']);
@@ -170,7 +170,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -188,7 +188,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
 
     const sbCreate = this.modelsService.post(model, this.files).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/documentserviceorders']);
         } else {
@@ -204,7 +204,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })

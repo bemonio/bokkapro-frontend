@@ -105,7 +105,7 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'vehicle': new Model() });
       }),
@@ -178,7 +178,7 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/vehicles']);
         }
@@ -192,7 +192,7 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -218,7 +218,7 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/vehicles']);
         } else {
@@ -234,7 +234,7 @@ export class VehicleEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })

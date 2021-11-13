@@ -154,7 +154,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'guide': new Model() });
       }),
@@ -194,7 +194,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
                 messageError = error.error;
             }
             Object.entries(messageError).forEach(
-                ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
             );
             return of({ 'division': new Model() });
         }),
@@ -221,7 +221,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
                 messageError = error.error;
             }
             Object.entries(messageError).forEach(
-                ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
             );
             return of({ 'crew': new Model() });
         }),
@@ -373,13 +373,13 @@ export class GuideEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
     ).subscribe(response => {
       if (response.guide.id) {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate([this.parent]);
         }
@@ -446,15 +446,15 @@ export class GuideEditComponent implements OnInit, OnDestroy {
             messageError = error.error;
           }
           Object.entries(messageError).forEach(
-            ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+            ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
           );
         } else {
-          this.toastService.growl('error', 'error' + ': ' + error.error)
+          this.toastService.growl('top-right', 'error', 'error' + ': ' + error.error)
         }
         return of(this.model);
       })
     ).subscribe(response => {
-      this.toastService.growl('success', 'success');
+      this.toastService.growl('top-right', 'success', 'success');
       this.requesting = false;
       this.model = response.guide as Model;
       if (response.guide.id) {

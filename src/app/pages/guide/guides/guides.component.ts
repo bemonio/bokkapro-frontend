@@ -239,7 +239,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -270,7 +270,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
     public delete(id) {
         this.modelsService.delete(id).toPromise().then(
             response => {
-                this.toastService.growl('success', 'Delete');
+                this.toastService.growl('top-right', 'success', 'Delete');
                 this.getModels();
             },
             error => {
@@ -281,7 +281,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -295,7 +295,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
             const promise = this.modelsService.patch(values.id, param);
             this.promiseForm = promise.toPromise().then(
                 response => {
-                    this.toastService.growl('success', 'Patch');
+                    this.toastService.growl('top-right', 'success', 'Patch');
                 },
                 error => {
                     let messageError = [];
@@ -305,7 +305,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
                         messageError = error.error;
                     }
                     Object.entries(messageError).forEach(
-                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                     );
                 }
             );
@@ -338,7 +338,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
                 return of({ 'guide': new Model() });
             }),
@@ -409,6 +409,9 @@ export class GuidesComponent implements OnInit, OnDestroy {
                     this.listVouchers.pop();
                 }
             });
+            this.toastService.growl('top-right', 'error', 'error', 'Código: No Encontrado');
+        } else {
+            this.toastService.growl('top-right', 'success', 'success', 'Código: Encontrado');
         }
     }
 
@@ -469,7 +472,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
 
         const sbUpdate = this.modelsService.postList(params).pipe(
             tap(() => {
-                this.toastService.growl('success', 'success');
+                this.toastService.growl('top-right', 'success', 'success');
             }),
             catchError((error) => {
                 if (error.error instanceof Array) {
@@ -480,10 +483,10 @@ export class GuidesComponent implements OnInit, OnDestroy {
                         messageError = error.error;
                     }
                     Object.entries(messageError).forEach(
-                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                     );
                 } else {
-                    this.toastService.growl('error', 'error' + ': ' + error.error)
+                    this.toastService.growl('top-right', 'error', 'error' + ': ' + error.error)
                 }
                 return of(this.verificationGuides);
             })

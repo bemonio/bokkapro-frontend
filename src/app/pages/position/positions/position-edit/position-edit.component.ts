@@ -81,7 +81,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'position': new Model() });
       }),
@@ -138,7 +138,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/positions']);
         }
@@ -152,7 +152,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -171,7 +171,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/positions']);
         } else {
@@ -187,7 +187,7 @@ export class PositionEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })

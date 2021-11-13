@@ -109,7 +109,7 @@ export class CompanyContactEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'company_contact': new Model() });
       }),
@@ -175,7 +175,7 @@ export class CompanyContactEditComponent implements OnInit, OnDestroy {
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
             this.router.navigate([this.parent + '/companycontacts']);
@@ -192,7 +192,7 @@ export class CompanyContactEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -210,7 +210,7 @@ export class CompanyContactEditComponent implements OnInit, OnDestroy {
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
       }),
       catchError((error) => {
         if (Array.isArray(error.error)) {
@@ -221,10 +221,10 @@ export class CompanyContactEditComponent implements OnInit, OnDestroy {
             messageError = error.error;
           }
           Object.entries(messageError).forEach(
-            ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+            ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
           );
         } else {
-          this.toastService.growl('error', error.error)
+          this.toastService.growl('top-right', 'error', error.error)
         }
         console.error('CREATE ERROR', error);
         return of(this.model);

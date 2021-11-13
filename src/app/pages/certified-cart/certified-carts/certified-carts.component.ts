@@ -178,7 +178,7 @@ export class CertifiedCartsComponent implements OnInit {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -209,7 +209,7 @@ export class CertifiedCartsComponent implements OnInit {
     public delete(id) {
         this.modelsService.delete(id).toPromise().then(
             response => {
-                this.toastService.growl('success', 'Delete');
+                this.toastService.growl('top-right', 'success', 'Delete');
                 this.getModels();
             },
             error => {
@@ -220,7 +220,7 @@ export class CertifiedCartsComponent implements OnInit {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );
@@ -234,7 +234,7 @@ export class CertifiedCartsComponent implements OnInit {
             const promise = this.modelsService.patch(values.id, param);
             this.promiseForm = promise.toPromise().then(
                 response => {
-                    this.toastService.growl('success', 'Patch');
+                    this.toastService.growl('top-right', 'success', 'Patch');
                 },
                 error => {
                     let messageError = [];
@@ -244,7 +244,7 @@ export class CertifiedCartsComponent implements OnInit {
                         messageError = error.error;
                     }
                     Object.entries(messageError).forEach(
-                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                     );
                 }
             );
@@ -283,7 +283,7 @@ export class CertifiedCartsComponent implements OnInit {
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
                 return of({ 'certified_cart': new Model() });
             }),
@@ -395,7 +395,7 @@ export class CertifiedCartsComponent implements OnInit {
 
         const sbUpdate = this.modelsService.patch(this.verificationCertifiedCart.id, params).pipe(
             tap(() => {
-                this.toastService.growl('success', 'success');
+                this.toastService.growl('top-right', 'success', 'success');
             }),
             catchError((error) => {
                 if (error.error instanceof Array) {
@@ -406,10 +406,10 @@ export class CertifiedCartsComponent implements OnInit {
                         messageError = error.error;
                     }
                     Object.entries(messageError).forEach(
-                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                     );
                 } else {
-                    this.toastService.growl('error', 'error' + ': ' + error.error)
+                    this.toastService.growl('top-right', 'error', 'error' + ': ' + error.error)
                 }
                 return of(this.verificationCertifiedCart);
             })

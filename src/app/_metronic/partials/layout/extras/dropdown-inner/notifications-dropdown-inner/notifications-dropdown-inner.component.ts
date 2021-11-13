@@ -121,7 +121,7 @@ export class NotificationsDropdownInnerComponent implements OnInit, OnChanges {
                 messageError = error.error;
             }
             Object.entries(messageError).forEach(
-                ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
             );
         }
     );

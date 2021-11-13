@@ -123,7 +123,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
                     messageError = error.error;
                 }
                 Object.entries(messageError).forEach(
-                    ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
             }
         );

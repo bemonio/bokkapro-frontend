@@ -78,7 +78,7 @@ export class ZoneEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'zone': new Model() });
       }),
@@ -126,7 +126,7 @@ export class ZoneEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     const sbUpdate = this.modelsService.patch(this.id, this.model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/zones']);
         }
@@ -140,7 +140,7 @@ export class ZoneEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -155,7 +155,7 @@ export class ZoneEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     const sbCreate = this.modelsService.post(this.model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           this.router.navigate(['/zones']);
         } else {
@@ -171,7 +171,7 @@ export class ZoneEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })

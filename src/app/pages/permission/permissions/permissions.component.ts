@@ -132,7 +132,7 @@ export class PermissionsComponent implements OnInit {
             error => {
                 this.requesting = false;
                 if (error.status == 404) {
-                    this.toastService.growl('error', 'Not Found')
+                    this.toastService.growl('top-right', 'error', 'Not Found')
                 } else {
                     let messageError = [];
                     if (!Array.isArray(error.error)) {
@@ -141,7 +141,7 @@ export class PermissionsComponent implements OnInit {
                         messageError = error.error;
                     }
                     Object.entries(messageError).forEach(
-                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                     );
                 }
             }
@@ -152,12 +152,12 @@ export class PermissionsComponent implements OnInit {
     public delete(id) {
         this.modelsService.delete(id).toPromise().then(
             response => {
-                this.toastService.growl('success', 'Delete');
+                this.toastService.growl('top-right', 'success', 'Delete');
                 this.getModels();
             },
             error => {
                 if (error.status == 404) {
-                    this.toastService.growl('error', 'Not Found')
+                    this.toastService.growl('top-right', 'error', 'Not Found')
                 } else {
                     let messageError = [];
                     if (!Array.isArray(error.error)) {
@@ -166,7 +166,7 @@ export class PermissionsComponent implements OnInit {
                         messageError = error.error;
                     }
                     Object.entries(messageError).forEach(
-                        ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                     );
                 }
             }
@@ -181,11 +181,11 @@ export class PermissionsComponent implements OnInit {
             const promise = this.modelsService.patch(values.id, param);
             this.promiseForm = promise.toPromise().then(
                 response => {
-                    this.toastService.growl('success', 'Patch');
+                    this.toastService.growl('top-right', 'success', 'Patch');
                 },
                 error => {
                     if (error.status == 404) {
-                        this.toastService.growl('error', 'Not Found')
+                        this.toastService.growl('top-right', 'error', 'Not Found')
                     } else {
                         let messageError = [];
                         if (!Array.isArray(error.error)) {
@@ -194,7 +194,7 @@ export class PermissionsComponent implements OnInit {
                             messageError = error.error;
                         }
                         Object.entries(messageError).forEach(
-                            ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+                            ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                         );
                     }
                 }

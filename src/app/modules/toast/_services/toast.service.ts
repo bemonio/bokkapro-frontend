@@ -6,7 +6,7 @@ type Severities = 'success' | 'info' | 'warn' | 'error';
 export class ToastService {
   growlChange: Subject<Object> = new Subject<Object>();
 
-  growl(severity: Severities, summary: string, detail?: string, key?: string) {
+  growl(key: string, severity: Severities, summary: string, detail?: string) {
     this.growlChange.next({ severity, summary, detail, key });
   }
 }

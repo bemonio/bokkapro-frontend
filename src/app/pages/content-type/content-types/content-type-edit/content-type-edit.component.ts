@@ -92,7 +92,7 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'content_type': new Model() });
       }),
@@ -142,7 +142,7 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
 
     const sbUpdate = this.thismodelsService.patch(this.id, thismodel).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
             this.router.navigate([this.parent + '/contenttypes']);
@@ -160,7 +160,7 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.thismodel);
       })
@@ -177,7 +177,7 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
 
     const sbCreate = this.thismodelsService.post(thismodel).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
             this.router.navigate([this.parent + '/contenttypes']);
@@ -197,7 +197,7 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.thismodel);
       })

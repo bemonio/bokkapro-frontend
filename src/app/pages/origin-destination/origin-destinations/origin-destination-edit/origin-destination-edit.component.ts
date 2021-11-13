@@ -198,7 +198,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of({ 'origin_destination': new Model() });
       }),
@@ -362,7 +362,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           if (this.originDestinationID) {
             this.hideModal();
@@ -382,7 +382,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
@@ -420,7 +420,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
-        this.toastService.growl('success', 'success');
+        this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           if (this.originDestinationID) {
             this.hideModal();
@@ -442,7 +442,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
           messageError = error.error;
         }
         Object.entries(messageError).forEach(
-          ([key, value]) => this.toastService.growl('error', key + ': ' + value)
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
         return of(this.model);
       })
