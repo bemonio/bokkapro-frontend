@@ -87,7 +87,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
     this.formGroup = this.fb.group({
       type_service: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       distrib_charges: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      days_month: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      days_month: [''],
       precall: [''],
       monday: [''],
       tuesday: [''],
@@ -113,7 +113,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       destination: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       service_order: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      division: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      division: [''],
     });
     this.type_service = this.formGroup.controls['type_service'];
     this.distrib_charges = this.formGroup.controls['distrib_charges'];
