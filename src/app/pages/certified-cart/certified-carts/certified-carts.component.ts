@@ -147,7 +147,7 @@ export class CertifiedCartsComponent implements OnInit {
         }
 
         this.filters = [];
-        this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
+        // this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
         this.getModels();
     }
 
