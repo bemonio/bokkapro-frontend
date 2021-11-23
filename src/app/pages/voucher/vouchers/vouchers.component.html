@@ -94,6 +94,11 @@
               {{ 'VOUCHER.VAULT' | translate }}
             </div>
           </th>
+          <th pSortableColumn="direct_operation">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.DIRECTOPERATION' | translate }}
+            </div>
+          </th>          
           <!-- <th pSortableColumn="verificated">
             <div class="p-d-flex p-jc-between p-ai-center">
               Verificated
@@ -145,6 +150,10 @@
           <td>
             <p-badge [value]="'SI'"  severity="success"  severity="success" *ngIf="value.insured == true"></p-badge>
             <p-badge [value]="'NO'"  severity="warning"  severity="warning" *ngIf="value.insured == false"></p-badge>
+          </td>
+          <td>
+            <p-badge [value]="'SI'"  severity="success"  severity="success" *ngIf="value.direct_operation == true"></p-badge>
+            <p-badge [value]="'NO'"  severity="warning"  severity="warning" *ngIf="value.direct_operation == false"></p-badge>
           </td>
           <!-- <td>
             {{value.verificated}}
