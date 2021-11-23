@@ -286,7 +286,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       }
       this.employee_destination.setValidators([])
     } else {
-      this.employee_destination.setValidators(Validators.compose([Validators.required,]))
+      // this.employee_destination.setValidators(Validators.compose([Validators.required,]))
       switch (this.route.parent.parent.snapshot.url[0].path) {
         case 'guidesinput':
           this.typeGuide = 1;
