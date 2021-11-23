@@ -179,15 +179,19 @@ export class UserEditComponent implements OnInit, OnDestroy {
     model.password = this.model.password;
 
     let user_permissions = [];
-    this.model.user_permissions.forEach(element => {
-      user_permissions.push(element.id);
-    });
+    if (this.model.user_permissions) {
+      this.model.user_permissions.forEach(element => {
+        user_permissions.push(element.id);
+      });
+    }
     model.user_permissions = user_permissions;
 
     let groups = [];
-    this.model.groups.forEach(element => {
-      groups.push(element.id);
-    });
+    if (this.model.groups) {
+      this.model.groups.forEach(element => {
+        groups.push(element.id);
+      });
+    }
     model.groups = groups;
 
     const sbUpdate = this.modelsService.patch(this.id, this.model).pipe(
@@ -227,15 +231,19 @@ export class UserEditComponent implements OnInit, OnDestroy {
     model.password = this.model.password;
 
     let user_permissions = [];
-    this.model.user_permissions.forEach(element => {
-      user_permissions.push(element.id);
-    });
+    if (this.model.user_permissions) {
+      this.model.user_permissions.forEach(element => {
+        user_permissions.push(element.id);
+      });
+    }
     model.user_permissions = user_permissions;
 
     let groups = [];
-    this.model.groups.forEach(element => {
-      groups.push(element.id);
-    });
+    if (this.model.groups) {
+      this.model.groups.forEach(element => {
+        groups.push(element.id);
+      });
+    }
     model.groups = groups;
 
     const sbCreate = this.modelsService.post(this.model).pipe(
