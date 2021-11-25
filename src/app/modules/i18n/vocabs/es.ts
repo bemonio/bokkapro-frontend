@@ -428,6 +428,7 @@ export const locale = {
       CANCEL: 'Cancelar',
       SAVE: 'Guardar',
       SAVE_AND_EXIT: 'Guardar y Salir',
+      DELETE_AND_EXIT: 'Eliminar y Salir',
       SAVE_AND_NEW: 'Guardar y Nuevo',
       EXPORT: 'Exportar',
       CONFIRMATION: 'Confirmación',

@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/modules/auth';
 import { TourDetailModel as Model } from '../../_models/tour-detail.model';
 import { TourDetailService as ModelsService } from '../../_services/tour-detail.service';
 import { OriginDestinationService } from 'src/app/pages/origin-destination/_services';
+import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-tour-detail-edit',
@@ -43,17 +45,28 @@ export class TourDetailEditComponent implements OnInit, OnChanges, OnDestroy {
   public originDestinationId: number;
   public parent: string;
 
+  public confirmDialogPosition: string;
+  public message_confirm_delete: string;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
+    public translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService,
     private originDestinationService: OriginDestinationService,
+    private confirmationService: ConfirmationService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
+
+    this.confirmDialogPosition = 'right';
+
+    this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
+      this.message_confirm_delete = res;
+    });
 
     this.formGroup = this.fb.group({
     });
@@ -374,4 +387,34 @@ export class TourDetailEditComponent implements OnInit, OnChanges, OnDestroy {
   emitHideModal(){
     this.hideModal.emit();
   }
+
+  confirm(position: string) {
+    this.confirmDialogPosition = position;
+    this.confirmationService.confirm({
+        message: this.message_confirm_delete,
+        accept: () => {
+            this.delete();
+        }
+    });
+  }
+
+  public delete() {
+    this.modelsService.delete(this.tourDetailID.id).toPromise().then(
+        response => {
+          this.toastService.growl('top-right', 'success', 'Delete');
+          this.emitHideModal();
+        },
+        error => {
+            let messageError = [];
+            if (!Array.isArray(error.error)) {
+                messageError.push(error.error);
+            } else {
+                messageError = error.error;
+            }
+            Object.entries(messageError).forEach(
+                ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
+            );
+        }
+    );
+  }  
 }

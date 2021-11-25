@@ -87,6 +87,8 @@
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/tours-details" *ngIf="!tourDetailID">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!tourDetailID">{{ 'COMMON.SAVE' | translate }}</button>
+            <button type="submit" class="btn btn-danger font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="confirm('right')" *ngIf="tourDetailID">{{ 'COMMON.DELETE_AND_EXIT' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
