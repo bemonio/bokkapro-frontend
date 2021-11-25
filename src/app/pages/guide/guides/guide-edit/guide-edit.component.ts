@@ -354,6 +354,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     model.employee_origin = this.model.employee_origin.id;
     if (this.model.employee_destination) {
       model.employee_destination = this.model.employee_destination.id;
+    } else {
+      model.employee_destination = undefined;
     }
 
     let listVouchers = model.vouchers;
@@ -428,6 +430,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     model.employee_origin = this.model.employee_origin.id;
     if (this.model.employee_destination) {
       model.employee_destination = this.model.employee_destination.id;
+    } else {
+      model.employee_destination = undefined;
     }
     model.status = '1';
     model.vouchers = [];
