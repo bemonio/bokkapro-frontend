@@ -215,6 +215,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         }    
 
         this.filters = [];
+        this.parent = '';
         if (this.route.parent.parent.parent.snapshot.url.length > 0) {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
@@ -227,23 +228,37 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     this.paramId = params.id;
                     this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.paramId;
                 }
+                switch (this.route.parent.parent.snapshot.url[0].path) {
+                    case 'vouchersconfirmationdelivered':
+                        this.parent = this.parent + '/vouchersconfirmationdelivered/';
+                        break;
+                    case 'vouchersadmin':
+                        this.parent = this.parent + '/vouchersadmin/';
+                        break;
+                    default:    
+                        this.parent = this.parent + '/vouchers/';
+                        break;
+                }
             });
         } else {
             switch (this.route.parent.parent.snapshot.url[0].path) {
                 case 'vouchersconfirmationdelivered':
                     // this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
-                    this.filters.push({ key: 'filter{verificated}', value: '1' })
-                    this.filters.push({ key: 'filter{is_active}', value: '1'})
+                    this.filters.push({ key: 'filter{verificated}', value: '1' });
+                    this.filters.push({ key: 'filter{is_active}', value: '1'});
                     this.showButtonConfirmationDelivered = true;
+                    this.parent = '/vouchersconfirmationdelivered/';
                     break;
                 case 'vouchersadmin':
-                        this.showButtonConfirmationDelivered = true;
-                        break;
+                    this.showButtonConfirmationDelivered = true;
+                    this.parent = '/vouchersadmin/';
+                    break;
                 default:    
-                    this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
-                    this.filters.push({ key: 'filter{verificated}', value: '1' })
-                    this.filters.push({ key: 'filter{is_active}', value: '1'})
-                    this.filters.push({ key: 'filter{direct_operation}', value: 'false'})
+                    this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() });
+                    this.filters.push({ key: 'filter{verificated}', value: '1' });
+                    this.filters.push({ key: 'filter{is_active}', value: '1'});
+                    this.filters.push({ key: 'filter{direct_operation}', value: 'false'});
+                    this.parent = '/vouchers/';
                     break;
             }
         }

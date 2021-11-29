@@ -178,6 +178,29 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
         this.guideId = params.id;
         this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+        switch (this.route.parent.parent.snapshot.url[0].path) {
+          case 'vouchersconfirmationdelivered':
+              this.parent = this.parent + '/vouchersconfirmationdelivered/';
+              break;
+          case 'vouchersadmin':
+              this.parent = this.parent + '/vouchersadmin/';
+              break;
+          default:    
+              this.parent = this.parent + '/vouchers/';
+              break;
+        }
+      } else {
+        switch (this.route.parent.parent.snapshot.url[0].path) {
+          case 'vouchersconfirmationdelivered':
+              this.parent = '/vouchersconfirmationdelivered/';
+              break;
+          case 'vouchersadmin':
+              this.parent = '/vouchersadmin/';
+              break;
+          default:    
+              this.parent = '/vouchers/';
+              break;
+        }
       }
       this.get();
     });

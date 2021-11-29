@@ -16,7 +16,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-light" routerLink="{{parent}}/vouchers">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}">
         <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <button class="btn btn-secondary ml-2" (click)="reset()">
@@ -29,17 +29,17 @@
       <div class="d-flex">
         <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
           <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
-            [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}">
+            [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/edit/{{model.id}}">
             {{ 'COMMON.BASIC_INFO' | translate }}
           </a>
         </li>
         <li *ngIf="(model && model.id && authService.hasPermission('view_packing'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.PACKINGS_TAB)">
           <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PACKINGS_TAB"
-            [class.active]="activeTabId === tabs.PACKINGS_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/packings">{{ 'VOUCHER.PACKINGS' | translate }}</a>
+            [class.active]="activeTabId === tabs.PACKINGS_TAB" routerLink="{{parent}}/edit/{{model.id}}/packings">{{ 'VOUCHER.PACKINGS' | translate }}</a>
         </li>
         <li *ngIf="(model && model.id && authService.hasPermission('view_guide'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.GUIDES_TAB)">
           <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.GUIDES_TAB"
-            [class.active]="activeTabId === tabs.GUIDES_TAB" routerLink="{{parent}}/vouchers/edit/{{model.id}}/guides">{{ 'VOUCHER.GUIDES' | translate }}</a>
+            [class.active]="activeTabId === tabs.GUIDES_TAB" routerLink="{{parent}}/edit/{{model.id}}/guides">{{ 'VOUCHER.GUIDES' | translate }}</a>
         </li>
       </div>
 
@@ -56,7 +56,7 @@
             class="svg-icon svg-icon-md svg-icon-warning">
           </span>
         </a>
-        <a class="btn btn-default font-weight-bold mr-1 py-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
+        <a class="btn btn-default font-weight-bold mr-1 py-2" routerLink="{{parent}}" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
         <a class="btn btn-default font-weight-bold mr-1 py-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
         <button *ngIf="model.id" type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
           [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
@@ -265,7 +265,7 @@
             </div>
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/vouchers" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}" *ngIf="!showCashier && !showCertifiedCart">{{ 'COMMON.CANCEL' | translate }}</a>
             <a class="btn btn-default font-weight-bold mr-2" (click)="closeEmit()" *ngIf="showCashier">{{ 'COMMON.CANCEL' | translate }}</a>
             <button *ngIf="model.id" type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
               [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
