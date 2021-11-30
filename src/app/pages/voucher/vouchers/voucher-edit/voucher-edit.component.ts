@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { VoucherModel as Model } from '../../_models/voucher.model';
 import { VoucherService as ModelsService } from '../../_services/voucher.service';
 import { OfficeService } from 'src/app/pages/office/_services';
+import { PackingService } from 'src/app/pages/packing/_services';
 import { LocationService } from 'src/app/pages/location/_services';
 import { ContractService } from 'src/app/pages/contract/_services';
 import { ConfirmationService } from 'primeng/api';
@@ -70,6 +71,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   public division: any;
   public office: any;
+  public packing: any;
 
   public confirmDialogPosition: string;
   public message_facture_voucher_and_packings: string;
@@ -90,6 +92,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     private locationService: LocationService,
     private contractService: ContractService,
     private officeService: OfficeService,
+    private packingService: PackingService,
     private confirmationService: ConfirmationService,
     public translate: TranslateService,
     public divisionService: DivisionService,
@@ -733,6 +736,30 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     );
   }
 
+  getPackingById(id) {
+    let page = 1;
+    let per_page = 1;
+    let sort = '-id';
+    let query = '';
+    let filters = [{key: 'filter{code}', value: id}];
+    let _with = [];
+    this.packingService.get(page, per_page, sort, query, filters, _with).toPromise().then(
+      response => {
+        this.packing = response.packings[0];
+        if (!this.packing) {
+          this.listPackings.push(id);
+        } else if (this.packing.is_active == false) {
+          this.listPackings.push(id);
+        } else {
+          this.toastService.growl('top-right', 'error', 'error', 'Envase aún activo');
+        }
+      },
+      error => {
+        console.log('error getting office');
+      }
+    );
+  }
+
   changeRequiredLocation () {
     if (this.direct_operation.value === true) {
       // this.location_destination.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
@@ -846,9 +873,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.listPackings.forEach(element => {
       if (element == event.value) {
         this.listPackings.pop();
-        this.listPackings.push(event.value.replace(/[^a-zA-Z0-9]/g, ''));
       }
     });
+    this.getPackingById(event.value.replace(/[^a-zA-Z0-9]/g, ''));
   }
 
   public subscribeToDivisionChange() {
