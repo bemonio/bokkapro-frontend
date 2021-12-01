@@ -416,16 +416,18 @@ export class GuidesComponent implements OnInit, OnDestroy {
     }
 
     public removeListVouchers(event) {
-        // this.verificationGuides.vouchers.forEach(element => {
-        //     if (element.code === event.value) {
-        //         element.verificated = false;
-        //     }
-        //     element.packings.forEach(element2 => {
-        //         if (element2.code === event.value) {
-        //             element2.verificated = false;
-        //         }
-        //     });
-        // });
+        this.verificationGuides.forEach(guide => {
+            guide.vouchers.forEach(voucher => {
+                if (voucher.code === event.value) {
+                    voucher.verificated = false;
+                }
+                voucher.packings.forEach(packing => {
+                    if (packing.code === event.value) {
+                        packing.verificated = false;
+                    }
+                });
+            });
+        });
     }
 
     // helpers for View
