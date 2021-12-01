@@ -9,8 +9,8 @@
       <a type="button" class="btn btn-secondary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a>
       <!-- <a type="button" class="btn btn-secondary" (click)="showModalDialogSecurity()" *ngIf="authService.currentDivisionValue.id === 1">{{ 'COMMON.TRANSFER' | translate }} {{ '' | translate}} {{ 'VOUCHER.SECURITY' | translate }}</a> -->
       <a type="button" class="btn btn-secondary" (click)="showModalDialogConfirmationDelivered()" *ngIf="authService.currentDivisionValue.id === 1 && showButtonConfirmationDelivered">{{ 'COMMON.CONFIRMATION' | translate }} {{ '' | translate}} {{ 'VOUCHER.DELIVERED' | translate }}</a>
-      <a type="button" class="btn btn-primary" routerLink="{{parent}}/add" *ngIf="parent.startsWith('/guidesinput')">{{ 'COMMON.NEW' | translate }}</a>
-      <a type="button" class="btn btn-primary" routerLink="{{parent}}/addList" *ngIf="!parent">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/add" *ngIf="authService.hasPermission('add_voucher') && parent.startsWith('/guidesinput')">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/addList" *ngIf="authService.hasPermission('add_voucher') && !parent">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -166,13 +166,13 @@
               </span>
             </a> -->
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              routerLink="{{parent}}/edit/{{value.id}}">
+              routerLink="{{parent}}/edit/{{value.id}}" *ngIf="authService.hasPermission('change_voucher')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('delete_voucher')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>

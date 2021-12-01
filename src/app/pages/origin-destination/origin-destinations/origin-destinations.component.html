@@ -4,8 +4,8 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'ORIGIN_DESTINATION.ORIGIN_DESTINATIONS' | translate }}
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" (click)="showModalDialog(undefined, true)" *ngIf="serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
-      <a type="button" class="btn btn-primary" routerLink="{{parent}}/origindestinations/add" *ngIf="!serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" (click)="showModalDialog(undefined, true)" *ngIf="authService.hasPermission('add_origindestination') && serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/origindestinations/add" *ngIf="authService.hasPermission('add_origindestination') && !serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -139,13 +139,13 @@
               </span>
             </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              routerLink="{{parent}}/origindestinations/edit/{{value.id}}" *ngIf="authService.hasPermission('add_contract') && !serviceOrderId">
+              routerLink="{{parent}}/origindestinations/edit/{{value.id}}" *ngIf="authService.hasPermission('change_origindestination') && !serviceOrderId">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_contract')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('delete_origindestination')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>

@@ -287,7 +287,8 @@ export const locale = {
       SECURITY: 'Seguridad',
       VAULT: 'Bóveda',
       CONFIRMATION: 'Confirmar',
-      DELIVERED: 'Entrega'
+      DELIVERED: 'Entrega',
+      ADMIN: 'Administración',
     },
     VOUCHERSECURITY:{
       VOUCHERSECURITY: 'Comprobante Seguridad',

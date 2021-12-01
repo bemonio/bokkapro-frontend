@@ -5,7 +5,7 @@
     </div>
     <div class="card-toolbar">
       <!-- <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a> -->
-      <a type="button" class="btn btn-primary" routerLink="{{parent}}/depositforms/add">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/depositforms/add" *ngIf="authService.hasPermission('add_depositform')">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -98,13 +98,13 @@
               </span>
             </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              routerLink="{{parent}}/depositforms/edit/{{value.id}}">
+              routerLink="{{parent}}/depositforms/edit/{{value.id}}" *ngIf="authService.hasPermission('change_depositform')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_voucher')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('delete_depositform')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
