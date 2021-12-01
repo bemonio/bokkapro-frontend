@@ -310,6 +310,7 @@ export class ToursDetailsComponent implements OnInit {
                         "title": origin_name + ' - ' + destination_name + ' [' + division_name + ']',
                         "start": element.date_start,
                         "end": element.date_end,
+                        "origin_destination": element.origin_destination.id,
                     });
                 });            
                 this.calendarOptions.events = this.events;
@@ -429,9 +430,12 @@ export class ToursDetailsComponent implements OnInit {
         _with.push({key: 'include[]', value: 'service_order.*'})
 
         let events = this.listOriginDestinationSelectedModels;
+        let copyEvents = this.events;
         this.events = [];
         let start_time = undefined;
         let end_time = undefined;
+
+        let found = false;
 
         let date = this.dateSchedule ? this.dateSchedule : new Date();
         events.forEach(element => {
@@ -483,14 +487,27 @@ export class ToursDetailsComponent implements OnInit {
                 destination_name = element.destination.name;
             }
 
-            this.events.push({
-                "id": element.id,
-                "title": origin_name + ' - ' + destination_name,
-                "start": start_time,
-                "end": end_time,
-                "division": division
+            let foundAux = false;
+            copyEvents.forEach(event => {
+                if (element.id == event.origin_destination && date.toISOString().split('T')[0] == event.start.split('T')[0]) {
+                    foundAux = true;
+                    found = true;
+                }
             });
+            if (!foundAux) {
+                this.events.push({
+                    "id": element.id,
+                    "title": origin_name + ' - ' + destination_name,
+                    "start": start_time,
+                    "end": end_time,
+                    "division": division,
+                });
+            }
         });
+
+        if (found) {
+            this.toastService.growl('top-right', 'error', 'Uno o más Recorrido(s) Existente(s)') 
+        }
         // this.calendarOptions.events = this.events;
         this.createTourDetail(this.events);
     }
