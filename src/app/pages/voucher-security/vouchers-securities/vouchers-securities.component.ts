@@ -220,7 +220,7 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
             });
         } else {
             // this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
-            this.filters.push({ key: 'filter{verificated}', value: '1' })
+            // this.filters.push({ key: 'filter{verificated}', value: '1' })
         }
 
         this.filters.push({ key: 'filter{is_active}', value: '1'})
