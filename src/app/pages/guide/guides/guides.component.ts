@@ -346,10 +346,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
             if (response) {
                 this.verificationGuides = [];
                 this.verificationGuides.push(response.guide);
-                let count = 0;
-                this.verificationGuides.forEach(element => {
-                    count += element.vouchers.length + this.countPackings([element], true);
-                });
+                let count = this.voucherLenght(this.verificationGuides) + this.countPackings(this.verificationGuides, true);                
                 this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
                 if (response.guide.certified_cart) {
                     this.certified_cart_code.setValidators(Validators.compose([Validators.required, Validators.pattern(response.guide.certified_cart_code)]));
@@ -368,10 +365,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.displayModal = true;
         this.listVouchers = [];
         this.verificationGuides = this.selectedModels;
-        let count = 0;
-        this.verificationGuides.forEach(element => {
-            count += element.vouchers.length + this.countPackings([element], true);
-        });
+        let count = this.voucherLenght(this.verificationGuides) + this.countPackings(this.verificationGuides, true);
         this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
     }
 
@@ -504,10 +498,12 @@ export class GuidesComponent implements OnInit, OnDestroy {
             guides.forEach(guide => {
                 if (guide.division_destination.name != 'Operaciones Internas') {
                     if (guide.vouchers) {
-                        guide.vouchers.forEach(element => {
-                            if (element.packings) {
-                                count = count + element.count_packings;
-                            }
+                        guide.vouchers.forEach(voucher => {
+                            if (voucher.packings) {
+                                voucher.packings.forEach(packing => {
+                                    count = count + 1;
+                                });
+                            }        
                         });
                     }
                 }
@@ -515,10 +511,12 @@ export class GuidesComponent implements OnInit, OnDestroy {
         } else {
             guides.forEach(guide => {
                 if (guide.vouchers) {
-                    guide.vouchers.forEach(element => {
-                        if (element.packings) {
-                            count = count + element.count_packings;
-                        }
+                    guide.vouchers.forEach(voucher => {
+                        if (voucher.packings) {
+                            voucher.packings.forEach(packing => {
+                                count = count + 1;
+                            });
+                        }        
                     });
                 }
             });
@@ -527,7 +525,8 @@ export class GuidesComponent implements OnInit, OnDestroy {
     }
 
     public changeCountPackings() {
-        this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(this.listVouchers.length), Validators.maxLength(this.listVouchers.length)]));
+        let count = this.voucherLenght(this.verificationGuides) + this.countPackings(this.verificationGuides, true);
+        this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count), Validators.maxLength(count)]));
         this.verificationGroup.markAllAsTouched();
     }
 

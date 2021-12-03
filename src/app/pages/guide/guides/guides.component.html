@@ -210,7 +210,7 @@
             <span *ngFor="let voucher of guide.vouchers">
               <div *ngIf="!voucher.verificated"> - <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br></div>
               <div *ngIf="guide.division_destination.name !== 'Operaciones Internas'">
-                  <span *ngFor="let packing of voucher.packings"> 
+                <span *ngFor="let packing of voucher.packings"> 
                     <div *ngIf="!packing.verificated"> -- <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;" *ngIf="!packing.verificated"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br></div>
                   </span>
               </div>
