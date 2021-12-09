@@ -130,6 +130,114 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_amount')">{{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_amount')">{{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_fixed_costs" [class.is-invalid]="isControlInvalid('total_fixed_costs')"
+                [class.is-valid]="isControlValid('total_fixed_costs')" formControlName="total_fixed_costs" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_fixed_costs')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_fixed_costs')">{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_fixed_costs')">{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_fixed_costs')">{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_fixed_costs')">{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>            
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.TRAVELS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="travels" [class.is-invalid]="isControlInvalid('travels')"
+                [class.is-valid]="isControlValid('travels')" formControlName="travels" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('travels')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.TRAVELS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('travels')">{{ 'SERVICE_ORDER.TRAVELS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'travels')">{{ 'SERVICE_ORDER.TRAVELS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'travels')">{{ 'SERVICE_ORDER.TRAVELS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'travels')">{{ 'SERVICE_ORDER.TRAVELS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="travels_directs" [class.is-invalid]="isControlInvalid('travels_directs')"
+                [class.is-valid]="isControlValid('travels_directs')" formControlName="travels_directs" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('travels_directs')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('travels_directs')">{{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'travels_directs')">{{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'travels_directs')">{{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'travels_directs')">{{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>                       
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.APPRAISAL' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="appraisal" [class.is-invalid]="isControlInvalid('appraisal')"
+                [class.is-valid]="isControlValid('appraisal')" formControlName="appraisal" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('appraisal')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.APPRAISAL' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('appraisal')">{{ 'SERVICE_ORDER.APPRAISAL' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'appraisal')">{{ 'SERVICE_ORDER.APPRAISAL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'appraisal')">{{ 'SERVICE_ORDER.APPRAISAL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'appraisal')">{{ 'SERVICE_ORDER.APPRAISAL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>            
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.HANDLING' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="handling" [class.is-invalid]="isControlInvalid('handling')"
+                [class.is-valid]="isControlValid('handling')" formControlName="handling" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('handling')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.HANDLING' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('handling')">{{ 'SERVICE_ORDER.HANDLING' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'handling')">{{ 'SERVICE_ORDER.HANDLING' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'handling')">{{ 'SERVICE_ORDER.HANDLING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'handling')">{{ 'SERVICE_ORDER.HANDLING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>            
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.MATERIALS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="materials" [class.is-invalid]="isControlInvalid('materials')"
+                [class.is-valid]="isControlValid('materials')" formControlName="materials" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('materials')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.MATERIALS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('materials')">{{ 'SERVICE_ORDER.MATERIALS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'materials')">{{ 'SERVICE_ORDER.MATERIALS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'materials')">{{ 'SERVICE_ORDER.MATERIALS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'materials')">{{ 'SERVICE_ORDER.MATERIALS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>            
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.CUSTODY_CPV' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="custody_cpv" [class.is-invalid]="isControlInvalid('custody_cpv')"
+                [class.is-valid]="isControlValid('custody_cpv')" formControlName="custody_cpv" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('custody_cpv')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.CUSTODY_CPV' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('custody_cpv')">{{ 'SERVICE_ORDER.CUSTODY_CPV' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'custody_cpv')">{{ 'SERVICE_ORDER.CUSTODY_CPV' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'custody_cpv')">{{ 'SERVICE_ORDER.CUSTODY_CPV' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'custody_cpv')">{{ 'SERVICE_ORDER.CUSTODY_CPV' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.CUSTODY_VAULT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="custody_vault" [class.is-invalid]="isControlInvalid('custody_vault')"
+                [class.is-valid]="isControlValid('custody_vault')" formControlName="custody_vault" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('custody_vault')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.CUSTODY_VAULT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('custody_vault')">{{ 'SERVICE_ORDER.CUSTODY_VAULT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'custody_vault')">{{ 'SERVICE_ORDER.CUSTODY_VAULT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'custody_vault')">{{ 'SERVICE_ORDER.CUSTODY_VAULT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'custody_vault')">{{ 'SERVICE_ORDER.CUSTODY_VAULT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.PIECES' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="pieces" [class.is-invalid]="isControlInvalid('pieces')"
+                [class.is-valid]="isControlValid('pieces')" formControlName="pieces" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('pieces')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.PIECES' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('pieces')">{{ 'SERVICE_ORDER.PIECES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'pieces')">{{ 'SERVICE_ORDER.PIECES' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'pieces')">{{ 'SERVICE_ORDER.PIECES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'pieces')">{{ 'SERVICE_ORDER.PIECES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>            
             <div class="col-lg-12">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.NOTE' | translate }}</label>
               <p-editor formControlName="note" [style]="{'height':'200px'}" placeholder="{{ 'SERVICE_ORDER.NOTE' | translate }}"></p-editor>

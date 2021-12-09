@@ -34,6 +34,15 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
   public office: AbstractControl;
   public product_and_service: AbstractControl;
   public note: AbstractControl;
+  public total_fixed_costs: AbstractControl;
+  public travels: AbstractControl;
+  public travels_directs: AbstractControl;
+  public appraisal: AbstractControl;
+  public handling: AbstractControl;
+  public materials: AbstractControl;
+  public custody_cpv: AbstractControl;
+  public custody_vault: AbstractControl;
+  public pieces: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -66,6 +75,15 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       office: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       product_and_service: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       note: [''],
+      total_fixed_costs: [''],
+      travels: [''],
+      travels_directs: [''],
+      appraisal: [''],
+      handling: [''],
+      materials: [''],
+      custody_cpv: [''],
+      custody_vault: [''],
+      pieces: [''],
     });
     this.total_amount = this.formGroup.controls['total_amount'];
     this.status = this.formGroup.controls['status'];
@@ -76,6 +94,15 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
     this.office = this.formGroup.controls['office'];
     this.product_and_service = this.formGroup.controls['product_and_service'];
     this.note = this.formGroup.controls['note'];
+    this.total_fixed_costs = this.formGroup.controls['total_fixed_costs'];
+    this.travels = this.formGroup.controls['travels'];
+    this.travels_directs = this.formGroup.controls['travels_directs'];
+    this.appraisal = this.formGroup.controls['appraisal'];
+    this.handling = this.formGroup.controls['handling'];
+    this.materials = this.formGroup.controls['materials'];
+    this.custody_cpv = this.formGroup.controls['custody_cpv'];
+    this.custody_vault = this.formGroup.controls['custody_vault'];
+    this.pieces = this.formGroup.controls['pieces'];  
   }
 
   ngOnInit(): void {
@@ -157,6 +184,15 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       this.total_amount.setValue(this.model.total_amount);
       this.status.setValue({ key: this.model.status, value: this.model.status });
       this.note.setValue(this.model.note);
+      this.total_fixed_costs.setValue(this.model.total_fixed_costs);
+      this.travels.setValue(this.model.travels);
+      this.travels_directs.setValue(this.model.travels_directs);
+      this.appraisal.setValue(this.model.appraisal);
+      this.handling.setValue(this.model.handling);
+      this.materials.setValue(this.model.materials);
+      this.custody_cpv.setValue(this.model.custody_cpv);
+      this.custody_vault.setValue(this.model.custody_vault);
+      this.pieces.setValue(this.model.pieces);
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }
