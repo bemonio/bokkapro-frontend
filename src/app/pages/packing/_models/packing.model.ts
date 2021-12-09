@@ -6,7 +6,8 @@ export class PackingModel {
   id: number;
   code: string;
   verificated: boolean;
-  voucher: any;
+  voucher_current: any;
+  vouchers: any[];
   created_at: string;
   updated_at: string;
 }

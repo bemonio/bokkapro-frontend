@@ -136,12 +136,12 @@ export class PackingsComponent implements OnInit {
                             if (this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
                                 this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
                                 this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.voucherId;
-                                this.filters.push({ key: 'filter{voucher}', value: this.voucherId.toString() })
+                                this.filters.push({ key: 'filter{vouchesr}', value: this.voucherId.toString() })
                             }
                         })
                     } else {
                         this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.voucherId;
-                        this.filters.push({ key: 'filter{voucher}', value: this.voucherId.toString() })
+                        this.filters.push({ key: 'filter{vouchers}', value: this.voucherId.toString() })
                     }
                 }
                 this.getModels();

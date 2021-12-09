@@ -45,13 +45,13 @@
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'PACKING.VOUCHER' | translate }}</label>
               <app-voucher-autocomplete
-              name="voucher" [valid]="isControlValid('voucher')" [touched]="isControlTouched('voucher')" [class.is-invalid]="isControlInvalid('voucher')"
-              [class.is-valid]="isControlValid('voucher')" formControlName="voucher" id="voucher" [model]="model.voucher"></app-voucher-autocomplete>
-              <div class="feedback" *ngIf="!isControlTouched('voucher')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PACKING.VOUCHER' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('voucher')">{{ 'PACKING.VOUCHER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'voucher')">{{ 'PACKING.VOUCHER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'voucher')">{{ 'PACKING.VOUCHER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'voucher')">{{ 'PACKING.VOUCHER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              name="voucher" [valid]="isControlValid('voucher_current')" [touched]="isControlTouched('voucher_current')" [class.is-invalid]="isControlInvalid('voucher_current')"
+              [class.is-valid]="isControlValid('voucher_current')" formControlName="voucher_current" id="voucher_current" [model]="model.voucher_current"></app-voucher-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('voucher_current')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PACKING.VOUCHER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('voucher_current')">{{ 'PACKING.VOUCHER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'voucher_current')">{{ 'PACKING.VOUCHER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'voucher_current')">{{ 'PACKING.VOUCHER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'voucher_current')">{{ 'PACKING.VOUCHER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'PACKING.CODE' | translate }}</label>

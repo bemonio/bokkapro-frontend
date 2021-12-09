@@ -29,7 +29,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
 
   public code: AbstractControl;
   public verificated: AbstractControl;
-  public voucher: AbstractControl;
+  public voucher_current: AbstractControl;
 
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
@@ -68,11 +68,11 @@ export class PackingEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       verificated: [''],
-      voucher: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      voucher_current: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
     });
     this.code = this.formGroup.controls['code'];
     this.verificated = this.formGroup.controls['verificated'];
-    this.voucher = this.formGroup.controls['voucher'];
+    this.voucher_current = this.formGroup.controls['voucher_current'];
   }
 
   ngOnInit(): void {
@@ -148,7 +148,11 @@ export class PackingEditComponent implements OnInit, OnDestroy {
       if (response) {
         this.model = response.packing;
         if (response.vouchers) {
-          this.model.voucher = response.vouchers[0]; //ACAAAAAAAAA
+          response.vouchers.forEach(voucher => {
+            if (this.model.voucher_current == voucher.id) {
+              this.model.voucher_current = voucher
+            }
+          });
         }
 
         this.previous = Object.assign({}, this.model);
@@ -162,8 +166,8 @@ export class PackingEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.code.setValue(this.model.code);
       this.verificated.setValue(this.model.verificated);
-      if (this.model.voucher) {
-        this.voucher.setValue(this.model.voucher);
+      if (this.model.voucher_current) {
+        this.voucher_current.setValue(this.model.voucher_current);
       }
     } else {
       this.verificated.setValue(false);
@@ -199,8 +203,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '');
-    model.voucher = this.model.voucher.id;
-    // model.logo = this.croppedImage;
+    model.voucher_current = this.model.voucher_current.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -239,9 +242,9 @@ export class PackingEditComponent implements OnInit, OnDestroy {
     model.code = this.model.code.replace(/[^a-zA-Z0-9]/g, '');
 
     if (this.voucherId) {
-      model.voucher = this.voucherId;
+      model.voucher_current = this.voucherId;
     } else {
-      model.voucher = this.model.voucher.id;
+      model.voucher_current = this.model.voucher_current.id;
     }
 
     const sbCreate = this.modelsService.post(model).pipe(
@@ -309,7 +312,7 @@ export class PackingEditComponent implements OnInit, OnDestroy {
   getVoucherById(id) {
     this.voucherService.getById(id).toPromise().then(
       response => {
-        this.voucher.setValue(response.voucher)
+        this.voucher_current.setValue(response.voucher)
       },
       error => {
         console.log('error getting voucher');
