@@ -920,9 +920,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
           this.toastService.growl('top-right', 'success', 'success');
           this.requesting = false;
           model = response.guide as GuideModel;
-          this.listVouchersSecurity = [];
-          this.listVouchersSecurityList = [];
-          this.loadLazy();
+          this.closeDialogSecurity();
         });
     }
 
@@ -963,9 +961,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
           this.toastService.growl('top-right', 'success', 'success');
           this.requesting = false;
           model = response.guide as GuideModel;
-          this.listVouchersConfirmationDelivered = [];
-          this.listVouchersConfirmationDeliveredList = [];
-          this.loadLazy();
+          this.closeDialogConfirmationDelivered();
         });
     }
 
@@ -980,6 +976,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.searchGroup.reset();
         this.listVouchersSecurity = [];
         this.listVouchersSecurityList = [];
+        this.loadLazy();
     }
 
     closeDialogConfirmationDelivered(){
@@ -987,5 +984,6 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.searchGroup.reset();
         this.listVouchersConfirmationDelivered = [];
         this.listVouchersConfirmationDeliveredList = [];
+        this.loadLazy();
     }
 }

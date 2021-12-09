@@ -708,8 +708,7 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
           this.toastService.growl('top-right', 'success', 'success');
           this.requesting = false;
           model = response.guide as GuideModel;
-          this.listVouchersSecurity = [];
-          this.listVouchersSecurityList = [];
+          this.closeDialogSecurity();
         });
     }
 
