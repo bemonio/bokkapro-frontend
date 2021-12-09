@@ -72,6 +72,11 @@
               {{ 'VOUCHER.CONTRACT' | translate }}
             </div>
           </th>
+          <th pSortableColumn="date_delivery">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.DATE_DELIVERY' | translate }}
+            </div>
+          </th>
           <th pSortableColumn="origin_destination">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'VOUCHER.ORIGIN_DESTINATION' | translate }}
@@ -127,6 +132,9 @@
           </td>
           <td>
             {{value.contract?.code}}
+          </td>
+          <td>
+            {{value.date_delivery | date: 'MM/dd/yyyy HH:mm:ss':'UTC -4'}}
           </td>
           <td>
             {{value.origin_destination?.origin?.name}} - {{value.origin_destination?.destination?.name}} 
