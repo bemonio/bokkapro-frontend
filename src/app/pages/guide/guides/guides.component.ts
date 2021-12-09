@@ -40,6 +40,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
     public searchGroup: FormGroup;
     public search_filter: AbstractControl;
     public date_filter: AbstractControl;
+    public created_at_filter: AbstractControl;
     public am_pm_filter: AbstractControl;
 
     public exportGroup: FormGroup;
@@ -84,14 +85,16 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.searchGroup = fb.group({
             'search_filter': [''],
             'date_filter': [''],
+            'created_at_filter': [''],
             'am_pm_filter': [''],
         });
         this.search_filter = this.searchGroup.controls['search_filter'];
         this.date_filter = this.searchGroup.controls['date_filter'];
+        this.created_at_filter = this.searchGroup.controls['created_at_filter'];
         this.am_pm_filter = this.searchGroup.controls['am_pm_filter'];
 
         this.date_filter.setValue(new Date());
-        
+
         this.exportGroup = fb.group({
             'date_export': [''],
             'am_pm_export': [''],
@@ -178,8 +181,12 @@ export class GuidesComponent implements OnInit, OnDestroy {
 
         this.filters = [];
         
+        if (this.created_at_filter.value) {
+            this.filters.push({ key: 'filter{created_at.icontains}[]', value: this.formatDate(this.created_at_filter.value) })
+        }
+
         if (this.date_filter.value) {
-            this.filters.push({ key: 'filter{created_at.icontains}[]', value: this.formatDate(this.date_filter.value) })
+            this.filters.push({ key: 'filter{date.icontains}[]', value: this.formatDate(this.date_filter.value) })
         }
 
         if (this.am_pm_filter.value) {

@@ -20,17 +20,20 @@
       {{ 'COMMON.FILTER' | translate }}
       <div class="form-group row" [formGroup]="searchGroup">
         <div class="col-lg-3">
+          <p-calendar styleClass="form-control form-control-lg form-control-solid" name="created_at_filter" formControlName="created_at_filter" showButtonBar="true" (onSelect)="loadLazy()" (onClickOutside)="loadLazy()" (onClearClick)="loadLazy()"></p-calendar>
+          <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} {{ 'COMMON.CREATED_AT' | translate }}</small>
+        </div>
+        <div class="col-lg-3">
           <p-calendar styleClass="form-control form-control-lg form-control-solid" name="date_filter" formControlName="date_filter" showButtonBar="true" (onSelect)="loadLazy()" (onClickOutside)="loadLazy()" (onClearClick)="loadLazy()"></p-calendar>
           <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} {{ 'GUIDE.DATE' | translate }}</small>
-        </div>
-        <div class="col-lg-3" *ngIf="parent === 'guidesinput'"></div>
-        <div class="col-lg-3" *ngIf="parent != 'guidesinput'">
-          <p-dropdown styleClass="form-control form-control-lg form-control-solid" [options]="optionsAmPm" optionLabel="key" name="am_pm_filter" formControlName="am_pm_filter" placeholder="seleccione" dateFormat="dd.mm.yy" (onChange)="loadLazy()"></p-dropdown>
-          <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} {{ 'GUIDE.SHIFT' | translate }}</small>
         </div>
         <div class="col-lg-6">
           <input type="text" class="form-control" name="search_filter" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
             formControlName="search_filter" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> </small>
+        </div>
+        <div class="col-lg-3" *ngIf="parent != 'guidesinput'">
+          <p-dropdown styleClass="form-control form-control-lg form-control-solid" [options]="optionsAmPm" optionLabel="key" name="am_pm_filter" formControlName="am_pm_filter" placeholder="seleccione" dateFormat="dd.mm.yy" (onChange)="loadLazy()"></p-dropdown>
+          <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} {{ 'GUIDE.SHIFT' | translate }}</small>
         </div>
       </div>
     </div>
