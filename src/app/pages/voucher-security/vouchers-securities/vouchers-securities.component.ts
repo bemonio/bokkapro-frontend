@@ -483,8 +483,8 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         let sort = undefined;
         let query = undefined;
         let filters = [{ key: 'filter{code}', value: event.value }];
-        if (this.division.value.id) {
-            filters.push({ key: 'filter{division}', value: this.division.value.id  });
+        if(this.division_id_filter.id) {
+            filters.push({ key: 'filter{division}', value: this.division_id_filter.id.toString() })
         }
         let _with = undefined;
 
@@ -597,6 +597,9 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
                             this.listVouchersSecurityList.pop();
                         }
                     });
+                    this.toastService.growl('top-right', 'error', 'error', 'Código: No Encontrado');
+                } else {
+                    this.toastService.growl('top-right', 'success', 'success', 'Código: Encontrado');
                 }
             },
             error => {
@@ -718,6 +721,8 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         } else {
             this.division_id_filter.id = event.id;
         }
+        this.listVouchersSecurity = [];
+        this.listVouchersSecurityList = [];
         this.loadLazy();
     }
 
