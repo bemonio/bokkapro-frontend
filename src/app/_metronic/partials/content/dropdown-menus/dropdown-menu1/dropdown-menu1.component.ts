@@ -25,8 +25,6 @@ export class DropdownMenu1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.authService.currentUserValue);
-    console.log(this.authService.currentUserValue.groups[0].id);
     if (this.authService.currentUserValue.groups[0].id == 6) {
       this.getCrew();
     } else {

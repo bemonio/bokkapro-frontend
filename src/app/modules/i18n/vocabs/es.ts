@@ -19,6 +19,7 @@ export const locale = {
         LEGAL: 'Legal',
         TERMS: 'Términos',
         CONTACT: 'Contacto',
+        MESSAGE: 'Proyecto Caribe'
       },
       LOGIN: {
         TITLE: 'Crear una cuenta',
