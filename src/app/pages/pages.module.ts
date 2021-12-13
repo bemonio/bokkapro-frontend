@@ -237,10 +237,14 @@ import { QuotationsComponent } from './quotation/quotations/quotations.component
 import { QuotationComponent } from './quotation/quotation.component';
 import { QuotationEditComponent } from './quotation/quotations/quotation-edit/quotation-edit.component';
 
-// ReportOperations
+// Reports
 import { ReportOperationsComponent } from './report-operation/report-operations/report-operations.component';
 import { ReportOperationComponent } from './report-operation/report-operation.component';
 import { ReportOperationEditComponent } from './report-operation/report-operations/report-operation-edit/report-operation-edit.component';
+
+// ReportOperations
+import { ReportsComponent } from './report/reports/reports.component';
+import { ReportComponent } from './report/report.component';
 
 // Clauses
 import { ClausesComponent } from './clause/clauses/clauses.component';
@@ -487,6 +491,8 @@ import { ContentTypeAutocompleteComponent } from './content-type/content-types/c
     QuotationsComponent,
     QuotationComponent,
     QuotationEditComponent,
+    ReportsComponent,
+    ReportComponent,
     ReportOperationsComponent,
     ReportOperationComponent,
     ReportOperationEditComponent,

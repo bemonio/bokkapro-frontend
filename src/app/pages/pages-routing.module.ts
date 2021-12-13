@@ -287,6 +287,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'reports/reports',
+        loadChildren: () =>
+          import('../pages/report/report-routing.module').then(
+            (m) => m.ReportRoutingModule
+          ),
+      },
+      {
         path: 'reports/operations',
         loadChildren: () =>
           import('../pages/report-operation/report-operation-routing.module').then(
