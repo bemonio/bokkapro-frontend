@@ -56,6 +56,7 @@ export class DropdownMenu1Component implements OnInit {
     this.crewService.get(page, per_page, sort, query, filters, _with).subscribe(
         response => {
             this.divisions = response.divisions;
+            this.changeDivision(response.divisions[0]);
         },
         error => {
             let messageError = [];
