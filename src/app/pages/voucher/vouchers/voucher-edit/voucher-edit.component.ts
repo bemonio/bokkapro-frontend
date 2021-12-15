@@ -900,4 +900,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     });
     this.unsubscribe.push(divisionChangeSubscription);
   }
+
+  public changeCurrency() {
+    this.exchange_rate.setValue(this.currency.value.exchange_rate);
+  }
 }

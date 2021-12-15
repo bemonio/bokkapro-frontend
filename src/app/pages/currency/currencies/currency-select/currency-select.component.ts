@@ -24,6 +24,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
     @Input() disabled: boolean;
     @Input() placeholder: string;
     @Input() addFilters: { key: string, value: string }[];
+    @Output() onMyChange: EventEmitter<any> = new EventEmitter<any>();
 
     public models: any[];
 
@@ -81,6 +82,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
     public change($event) {
         this.onChange(this.value);
         this.onTouched(this.value);
+        this.onMyChange.emit(this.value);
     }
 
     public load() {
