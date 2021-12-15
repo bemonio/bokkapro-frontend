@@ -41,7 +41,7 @@ export class DropdownMenu1Component implements OnInit {
 
   getCrew() {
     let page = 1;
-    let per_page = 1;
+    let per_page = 100;
     let sort = undefined;
     let query = undefined;
     let _with = undefined;
