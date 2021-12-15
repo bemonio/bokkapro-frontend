@@ -46,8 +46,12 @@ export class DropdownMenu1Component implements OnInit {
     let query = undefined;
     let _with = undefined;
     let filters = [];
+
+    const today = new Date();
+    const date = today.getFullYear()  + '-'+ today.getMonth()  + '-' + String(today.getDate()).padStart(2, '0');
+
     filters.push({ key: 'filter{driver}', value: this.authService.currentUserValue.employee.id });
-    filters.push({ key: 'filter{date.icontains}[]', value: '2021-10-10'  });
+    filters.push({ key: 'filter{date.icontains}[]', value: date });
 
     this.crewService.get(page, per_page, sort, query, filters, _with).subscribe(
         response => {
