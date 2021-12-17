@@ -538,6 +538,15 @@ export class VouchersComponent implements OnInit, OnDestroy {
         let per_page = 1;
         let sort = undefined;
         let query = undefined;
+
+        this.listVouchersSecurityList.forEach(element => {
+            if (element == event.value) {                
+                event.value = event.value.replace(/[^a-zA-Z0-9]/g, '')
+                this.listVouchersSecurityList.pop();
+                this.listVouchersSecurityList.push(event.value);
+            }
+        });
+
         let filters = [{ key: 'filter{code}', value: event.value }];
         if (this.division.value.id) {
             filters.push({ key: 'filter{division}', value: this.division.value.id  });
@@ -694,6 +703,15 @@ export class VouchersComponent implements OnInit, OnDestroy {
         let per_page = 1;
         let sort = undefined;
         let query = undefined;
+
+        this.listVouchersConfirmationDeliveredList.forEach(element => {
+            if (element == event.value) {                
+                event.value = event.value.replace(/[^a-zA-Z0-9]/g, '')
+                this.listVouchersConfirmationDeliveredList.pop();
+                this.listVouchersConfirmationDeliveredList.push(event.value);
+            }
+        });
+
         let filters = [{ key: 'filter{code}', value: event.value }, { key: 'filter{is_active}', value: 'true' }];
         if (this.division.value.id) {
             filters.push({ key: 'filter{division}', value: this.division.value.id  });
