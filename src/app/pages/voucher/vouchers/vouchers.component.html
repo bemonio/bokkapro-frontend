@@ -4,7 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'VOUCHER.VOUCHERS' | translate }}
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-secondary" (click)="showModalDialogCertifiedCart()" *ngIf="authService.currentDivisionValue.id === 1 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CERTIFIED_CART' | translate }}</a>
+      <!-- <a type="button" class="btn btn-secondary" (click)="showModalDialogCertifiedCart()" *ngIf="authService.currentDivisionValue.id === 1 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CERTIFIED_CART' | translate }}</a> -->
       <a type="button" class="btn btn-secondary" (click)="showModalDialogCashier()" *ngIf="authService.currentDivisionValue.id === 3 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CASHIER' | translate }}</a>
       <a type="button" class="btn btn-secondary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a>
       <!-- <a type="button" class="btn btn-secondary" (click)="showModalDialogSecurity()" *ngIf="authService.currentDivisionValue.id === 1">{{ 'COMMON.TRANSFER' | translate }} {{ '' | translate}} {{ 'VOUCHER.SECURITY' | translate }}</a> -->
