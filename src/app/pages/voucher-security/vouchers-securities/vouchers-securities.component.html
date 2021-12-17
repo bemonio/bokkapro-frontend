@@ -114,8 +114,8 @@
       <ng-template pTemplate="body" let-value>
         <tr class="p-selectable-row" data-toggle="tooltip" data-placement="left">
           <!-- title="Divisa: {{value.currency.code}} - Monto: {{value.amount}} - Dir Destino: {{value.location_destination.name}}" -->
-          <td *ngIf="authService.currentDivisionValue.id != 2 && value.is_active === true || showTableCheckbox && value.is_active === true && value.verified_oi === true">
-            <p-tableCheckbox [value]="value"></p-tableCheckbox>
+          <td>
+            <p-tableCheckbox [value]="value" *ngIf="authService.currentDivisionValue.id != 2 && value.is_active === true || showTableCheckbox && value.is_active === true && value.verified_oi === true"></p-tableCheckbox>
           </td>
           <td *ngIf="(authService.currentDivisionValue.id === 2 && showTableCheckbox && value.verified_oi === false) || authService.currentDivisionValue.id === 2 && value.is_active === false || authService.currentDivisionValue.id != 2 && value.is_active === false"></td>
           <td>
