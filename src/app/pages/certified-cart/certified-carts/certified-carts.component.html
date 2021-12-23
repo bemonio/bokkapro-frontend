@@ -5,7 +5,13 @@
     </div>
     <div class="card-toolbar">
       <!-- <a type="button" class="btn btn-primary" routerLink="{{parent}}/certifiedcarts/add" *ngIf="authService.hasPermission('add_certifiedcart')">{{ 'COMMON.NEW' | translate }}</a> -->
-      <a type="button" class="btn btn-secondary" (click)="showModalTranferDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a>
+      <!-- <a type="button" class="btn btn-secondary" (click)="showModalTranferDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a> -->
+      <a title="{{ 'COMMON.VERIFICATION' | translate }}" class="btn btn-icon btn-light btn-hover-warning btn-sm text-warning" style="margin-right: 5px;" 
+      (click)="verificationList()" *ngIf="selectedModels && selectedModels.length > 0">
+      <span [inlineSVG]="'./assets/media/svg/icons/General/Check-mark.svg'" cacheSVG="true"
+        class="svg-icon svg-icon-md svg-icon-warning">
+      </span>
+      </a>
     </div>
   </div>
   <div class="card-body">
@@ -68,7 +74,7 @@
       <ng-template pTemplate="body" let-value>
         <tr class="p-selectable-row">
           <td *ngIf="showTableCheckbox">
-            <p-tableCheckbox [value]="value" *ngIf="value.verificated === true"></p-tableCheckbox>
+            <p-tableCheckbox [value]="value" *ngIf="value.verificated === false"></p-tableCheckbox>
           </td>
           <td>
             {{value.id}}
@@ -117,47 +123,61 @@
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
 <p-dialog header="{{ 'COMMON.VERIFICATION' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
-  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}" (onHide)="closeVerificationModal()">
   <form action="#" class="form form-label-right" [formGroup]="verificationGroup">
-    <div class="form-group row" *ngIf="verificationCertifiedCart" style="margin-top: 20px;">
-      <div class="col-lg-12" *ngIf="verificationCertifiedCart.code">
-        <label>{{ 'COMMON.ENTER' | translate }} {{ 'CERTIFIED_CART.CODE' | translate }}</label><label style="float: right;"><i class="fas fa-unlock" style="color: Dodgerblue; font-size: 16px;"></i> {{verificationCertifiedCart.code}}</label>
-        <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-          placeholder="{{ 'CERTIFIED_CART.CODE' | translate }}" name="code" [class.is-invalid]="isControlInvalid('code',verificationGroup)"
-          [class.is-valid]="isControlValid('code',verificationGroup)" formControlName="code" />
-        <div class="feedback" *ngIf="!isControlTouched('code',verificationGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CERTIFIED_CART.CODE' | translate }}</b></div>
-        <div class="valid-feedback" *ngIf="isControlValid('code',verificationGroup)">{{ 'CERTIFIED_CART.CODE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('required', 'code',verificationGroup)">{{ 'CERTIFIED_CART.CODE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code',verificationGroup)">{{ 'CERTIFIED_CART.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code',verificationGroup)">{{ 'CERTIFIED_CART.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-      </div>
+    <div class="form-group row" *ngIf="verificationCertifiedCarts" style="margin-top: 20px;">
       <div class="col-lg-12">
-        <label>{{ 'COMMON.ENTER' | translate }} {{ 'CERTIFIED_CART.CODES' | translate }}</label>
+        <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.CODES' | translate }}</label>
         <p-chips [styleClass]="getValidClass(isControlValid('vouchers',verificationGroup))" formControlName="vouchers" [allowDuplicate]="false" (onAdd)="addListVouchers($event)" (onRemove)="removeListVouchers($event)" [(ngModel)]="listVouchers"></p-chips>
-        <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers',verificationGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CERTIFIED_CART.CODES' | translate }}</b></div>
-        <div class="valid-feedback"  style="display: block;" *ngIf="verificationCertifiedCart.vouchers.length + countPackings(this.verificationCertifiedCart) == listVouchers.length">{{ 'CERTIFIED_CART.CODES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+        <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers',verificationGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CODES' | translate }}</b></div>
+        <div class="valid-feedback"  style="display: block;" *ngIf="voucherLenght(verificationCertifiedCarts) + countPackings(verificationCertifiedCarts, true) == listVouchers.length">{{ 'GUIDE.CODES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
         <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'vouchers')">Vouchers  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
-        <div class="invalid-feedback"  style="display: block;" *ngIf="verificationCertifiedCart.vouchers.length + countPackings(this.verificationCertifiedCart) > listVouchers.length">{{ 'CERTIFIED_CART.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{verificationCertifiedCart.vouchers.length + countPackings(this.verificationCertifiedCart)}}
+        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(verificationCertifiedCarts) + countPackings(verificationCertifiedCarts, true) > listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{voucherLenght(verificationCertifiedCarts) + countPackings(verificationCertifiedCarts, true)}}
           item</div>
-        <div class="invalid-feedback"  style="display: block;" *ngIf="verificationCertifiedCart.vouchers.length + countPackings(this.verificationCertifiedCart) < listVouchers.length">{{ 'CERTIFIED_CART.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{verificationCertifiedCart.vouchers.length + countPackings(this.verificationCertifiedCart)}}
+        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(verificationCertifiedCarts) + countPackings(verificationCertifiedCarts, true) < listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{voucherLenght(verificationCertifiedCarts) + countPackings(verificationCertifiedCarts, true)}}
           items</div>
       </div>
-      <div class="col-lg-12" style="margin-top: 15px; margin-bottom: 5px;">
+      <div class="col-lg-6" style="margin-top: 15px; margin-bottom: 5px;">
         <b>{{ 'COMMON.LIST' | translate }} {{ 'COMMON.VERIFICATION' | translate }}:</b><br>
         <div style="overflow: scroll; max-height: 400px;" class="py-5">
-          <span *ngFor="let voucher of verificationCertifiedCart.vouchers">
-            <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br>
-            <span *ngFor="let packing of voucher.packings"> 
-              - <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br>
+
+          <span *ngFor="let certifiedcart of verificationCertifiedCarts">
+            <!-- <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{certifiedcart.id}}<br> -->
+            <span *ngFor="let voucher of certifiedcart.vouchers">
+              <div *ngIf="!voucher.verificated"> - <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br></div>
+              <!-- <div *ngIf="certifiedcart.division_destination.name !== 'Operaciones Internas'"> -->
+                <span *ngFor="let packing of voucher.packings"> 
+                    <div *ngIf="!packing.verificated"> -- <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;" *ngIf="!packing.verificated"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br></div>
+                  </span>
+              <!-- </div> -->
             </span>
           </span>
+
+        </div>
+      </div>
+      <div class="col-lg-6" style="margin-top: 15px; margin-bottom: 5px;">
+        <b>{{ 'COMMON.LIST' | translate }} {{ 'COMMON.VERIFICATED' | translate }}:</b><br>
+        <div style="overflow: scroll; max-height: 400px;" class="py-5">
+
+          <span *ngFor="let certifiedcart of verificationCertifiedCarts">
+            <!-- <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{certifiedcart.id}}<br> -->
+            <span *ngFor="let voucher of certifiedcart.vouchers">
+              <div *ngIf="voucher.verificated"> - <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br></div>
+              <!-- <div *ngIf="certifiedcart.division_destination.name !== 'Operaciones Internas'"> -->
+                  <span *ngFor="let packing of voucher.packings"> 
+                    <div *ngIf="packing.verificated"> -- <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;" *ngIf="!packing.verificated"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br></div>
+                  </span>
+              <!-- </div> -->
+            </span>
+          </span>
+
         </div>
       </div>
       <div class="col-lg-12">
         <div class="float-right">
-          <a class="btn btn-default font-weight-bold mr-2" (click)="displayModal = false">{{ 'COMMON.CANCEL' | translate }}</a>
+          <a class="btn btn-default font-weight-bold mr-2" (click)="closeVerificationModal()">{{ 'COMMON.CANCEL' | translate }}</a>
           <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-            [disabled]="verificationGroup.invalid" (click)="save()">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+            [disabled]="verificationGroup.invalid" (click)="saveVerification()">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
         </div>
       </div>
     </div>

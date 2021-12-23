@@ -8,6 +8,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 export class CertifiedCartService {
     API_URL = `${environment.apiUrl}certifiedcarts`;
     API_URL_CERTIFIED_CART_TRANSFER = `${environment.apiUrl}certifiedcarttransfer`;
+    API_URL_LIST_CERTIFIED_CARTS = `${environment.apiUrl}postlistcertifiedarts`;
 
     private _subscriptions: Subscription[] = [];
 
@@ -73,5 +74,9 @@ export class CertifiedCartService {
 
     public getById(id: number): Observable<any> {
         return this.http.get(`${this.API_URL}/${id}/?include[]=vouchers.*`);
+    }
+
+    public postList(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL_LIST_CERTIFIED_CARTS}`, JSON.stringify(body));
     }
 }

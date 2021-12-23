@@ -665,55 +665,42 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         return stringClass;
     }
     
-    public transferSecurity(){
-        this.requesting = true;
-
-        let certified_cart_code = undefined;
-        if (this.certified_cart.value && this.certified_cart_code.value) {
-            certified_cart_code = this.certified_cart_code.value;
-        }
-
-        let model = {
-            type_guide : 2,
-            division_origin : 1,
-            division_destination : 20,
-            status : '1',
-            certified_cart_code : certified_cart_code,
-            vouchers : []
-        }
-    
-        if (this.listVouchersSecurity) {
-          this.listVouchersSecurity.forEach(element => {
-            model.vouchers.push(element.id);
-          });
-          model.status = '0';
-        }
-    
-        const sbCreate = this.guideService.post(model).pipe(
-          catchError((error) => {
-            this.requesting = false;
-            if (error.error instanceof Array) {
-              let messageError = [];
-              if (!Array.isArray(error.error)) {
-                messageError.push(error.error);
-              } else {
-                messageError = error.error;
-              }
-              Object.entries(messageError).forEach(
-                ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
-              );
-            } else {
-              this.toastService.growl('top-right', 'error', 'error' + ': ' + error.error)
-            }
-            return of(model);
-          })
-        ).subscribe(response => {
-          this.toastService.growl('top-right', 'success', 'success');
-          this.requesting = false;
-          model = response.guide as GuideModel;
-          this.closeDialogSecurity();
+    transferSecurity() {
+        // let employee = this.authService.currentUserValue.employee.id;
+        let params = {
+            "certified_cart_code":this.certified_cart_code.value,
+            "vouchers": [],
+            // "employee_destination": employee
+        };
+        this.listVouchersSecurity.forEach(voucher => {
+            params.vouchers.push(voucher.id);
         });
-    }
+
+        const sbUpdate = this.modelsService.postListSecurity(params).pipe(
+            tap(() => {
+                this.toastService.growl('top-right', 'success', 'success');
+            }),
+            catchError((error) => {
+                if (error.error instanceof Array) {
+                    let messageError = [];
+                    if (!Array.isArray(error.error)) {
+                        messageError.push(error.error);
+                    } else {
+                        messageError = error.error;
+                    }
+                    Object.entries(messageError).forEach(
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
+                    );
+                } else {
+                    this.toastService.growl('top-right', 'error', 'error' + ': ' + error.error)
+                }
+                return of(this.listVouchersSecurity);
+            })
+        ).subscribe(response => {
+            this.displayModal = false;
+            this.getModels();
+        });
+    }    
 
     changeDivisionValue(event) {
         if(event === undefined){

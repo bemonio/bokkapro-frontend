@@ -10,6 +10,7 @@ export class VoucherSecurityService {
     API_URL_ASIGN_CASHIER = `${environment.apiUrl}asigncashier`;
     API_URL_ASIGN_CERTIFIED_CART = `${environment.apiUrl}asigncertifiedcart`;
     API_URL_POST_LIST = `${environment.apiUrl}postlistvouchers`;
+    API_URL_POST_LIST_SECURITY = `${environment.apiUrl}postlistvoucherssecurities`;
     // private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -82,5 +83,9 @@ export class VoucherSecurityService {
 
     public postList(body: Object): Observable<any> {
         return this.http.post(`${this.API_URL_POST_LIST}`, JSON.stringify(body));
+    }
+
+    public postListSecurity(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL_POST_LIST_SECURITY}`, JSON.stringify(body));
     }
 }

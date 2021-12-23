@@ -56,6 +56,8 @@ export class CertifiedCartsComponent implements OnInit {
     public verificationCertifiedCart: any;
     public listVouchers: any[];
 
+    public verificationCertifiedCarts: any[];
+
     private unsubscribe: Subscription[] = [];
 
     public verificationGroup: FormGroup;
@@ -113,6 +115,8 @@ export class CertifiedCartsComponent implements OnInit {
 
         this.models = [];
         this.selectedModels = [];
+        this.verificationCertifiedCarts = [];
+        this.listVouchers = [];
         // this.getModels();
     }
 
@@ -156,17 +160,23 @@ export class CertifiedCartsComponent implements OnInit {
         setTimeout(() => {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
-                this.models = response.certified_carts;
+                this.models = [];
                 this.totalRecords = response.meta.total_results;
                 if(response.vouchers){
-                    response.vouchers.forEach(voucher => {
-                        this.models.forEach(element => {
-                            if (element.vouchers === voucher.id) {
-                                element.vouchers = voucher;
-                            }
+                    response.certified_carts.forEach(certified_cart => {
+                        let vouchers = [];
+                        response.vouchers.forEach(voucher => {
+                            certified_cart.vouchers.forEach(element => {
+                                if (element === voucher.id) {
+                                    vouchers.push(voucher);
+                                }
+                            });
                         });
+                        certified_cart.vouchers = vouchers;
+                        this.models.push(certified_cart);
                     });
                 }
+                this.verificationCertifiedCarts = this.models;
                 this.requesting = false;
             },
             error => {
@@ -263,8 +273,16 @@ export class CertifiedCartsComponent implements OnInit {
 
     public verification(certified_cart) {
         this.displayModal = true;
-        this.listVouchers = [];
+        this.listVouchers = [];        
         this.get(certified_cart.id)
+    }
+
+    public verificationList() {
+        this.displayModal = true;
+        this.listVouchers = [];
+        this.verificationCertifiedCarts = this.selectedModels;
+        let count = this.voucherLenght(this.verificationCertifiedCarts) + this.countPackings(this.verificationCertifiedCarts, true);
+        this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
     }
 
     get(id) {
@@ -273,7 +291,7 @@ export class CertifiedCartsComponent implements OnInit {
                 if (id || id > 0) {
                     return this.modelsService.getById(id);
                 }
-                return of({ 'certified_cart': new Model() });
+                return of({ 'certifiedcart': new Model() });
             }),
             catchError((error) => {
                 let messageError = [];
@@ -285,37 +303,44 @@ export class CertifiedCartsComponent implements OnInit {
                 Object.entries(messageError).forEach(
                     ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
                 );
-                return of({ 'certified_cart': new Model() });
+                return of({ 'certifiedcart': new Model() });
             }),
         ).subscribe((response: any) => {
             if (response) {
-                this.verificationCertifiedCart = response.certified_cart;
-                this.verificationCertifiedCart.vouchers = response.vouchers;
-                let count = this.verificationCertifiedCart.vouchers.length + this.countPackings(this.verificationCertifiedCart);
-                this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
-                if (response.certified_cart.code) {
-                    this.code.setValidators(Validators.compose([Validators.required, Validators.pattern(response.certified_cart.code)]));
+                this.verificationCertifiedCarts = [];
+                let certified_cart = response.certified_cart;
+                if (response.vouchers) {
+                    certified_cart.vouchers = response.vouchers;
                 }
+                this.verificationCertifiedCarts.push(certified_cart);
+                let count = this.voucherLenght(this.verificationCertifiedCarts) + this.countPackings(this.verificationCertifiedCarts, true);                
+                this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
+                // if (response.certifiedcart.certified_cart) {
+                //     this.certified_cart_code.setValidators(Validators.compose([Validators.required, Validators.pattern(response.certifiedcart.certified_cart_code)]));
+                // }
             }
         });
     }
 
     public addListVouchers(event) {
         let found = false;
-        this.verificationCertifiedCart.vouchers.forEach(element => {
-            
-            let evenValue = event.value.replace(/[^a-zA-Z0-9]/g, '');
+        this.verificationCertifiedCarts.forEach(certifiedcart => {
+                certifiedcart.vouchers.forEach(voucher => {
+                    let evenValue = event.value.replace(/[^a-zA-Z0-9]/g, '');
 
-            if (element.code === evenValue) {
-                element.verificated = true;
-                found = true;
-            }
-            element.packings.forEach(element2 => {
-                if (element2.code === evenValue) {
-                    element2.verificated = true;
-                    found = true;
-                }
-            });
+                    if (voucher.code === evenValue) {
+                        voucher.verificated = true;
+                        found = true;
+                    }
+                    // if (certifiedcart.division_destination.name !== 'Operaciones Internas') {
+                        voucher.packings.forEach(packing => {
+                            if (packing.code === evenValue) {
+                                packing.verificated = true;
+                                found = true;
+                            }
+                        });
+                    // }
+                });
         });
         if (!found) {
             this.listVouchers.forEach(element => {
@@ -323,32 +348,63 @@ export class CertifiedCartsComponent implements OnInit {
                     this.listVouchers.pop();
                 }
             });
+            this.toastService.growl('top-right', 'error', 'error', 'Código: No Encontrado');
+        } else {
+            this.toastService.growl('top-right', 'success', 'success', 'Código: Encontrado');
         }
     }
 
     public removeListVouchers(event) {
-        this.verificationCertifiedCart.vouchers.forEach(element => {
-            if (element.code === event.value) {
-                element.verificated = false;
-            }
-            element.packings.forEach(element2 => {
-                if (element2.code === event.value) {
-                    element2.verificated = false;
+        this.verificationCertifiedCarts.forEach(certifiedcart => {
+            certifiedcart.vouchers.forEach(voucher => {
+                if (voucher.code === event.value) {
+                    voucher.verificated = false;
                 }
+                voucher.packings.forEach(packing => {
+                    if (packing.code === event.value) {
+                        packing.verificated = false;
+                    }
+                });
             });
         });
     }
 
-    countPackings(certified_cart) {
+    countPackings(certifiedcarts, operations) {
         let count = 0;
-        if (certified_cart.vouchers) {
-            certified_cart.vouchers.forEach(element => {
-                if (element.packings) {
-                    count = count + element.count_packings;
+        if (operations) {
+            certifiedcarts.forEach(certifiedcart => {
+                // if (certifiedcart.division_destination.name != 'Operaciones Internas') {
+                    if (certifiedcart.vouchers) {
+                        certifiedcart.vouchers.forEach(voucher => {
+                            if (voucher.packings) {
+                                voucher.packings.forEach(packing => {
+                                    count = count + 1;
+                                });
+                            }        
+                        });
+                    }
+                // }
+            });
+        } else {
+            certifiedcarts.forEach(certifiedcart => {
+                if (certifiedcart.vouchers) {
+                    certifiedcart.vouchers.forEach(voucher => {
+                        if (voucher.packings) {
+                            voucher.packings.forEach(packing => {
+                                count = count + 1;
+                            });
+                        }        
+                    });
                 }
             });
         }
         return count;
+    }
+
+    public changeCountPackings() {
+        let count = this.voucherLenght(this.verificationCertifiedCarts) + this.countPackings(this.verificationCertifiedCarts, true);
+        this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count), Validators.maxLength(count)]));
+        this.verificationGroup.markAllAsTouched();
     }
 
     // helpers for View
@@ -383,14 +439,13 @@ export class CertifiedCartsComponent implements OnInit {
     }
 
     save() {
-        let division = this.authService.currentDivisionValue.id.toString();
+        // let division = this.authService.currentDivisionValue.id.toString();
         let params = {
             "verificated": true,
-            "vouchers": [],
-            "division": division
+            "certifiedcarts": [],
         };
-        this.verificationCertifiedCart.vouchers.forEach(element => {
-            params.vouchers.push(element.id);
+        this.verificationCertifiedCarts.forEach(certifiedcart => {            
+            params.certifiedcarts.push(certifiedcart.id);
         });
 
         const sbUpdate = this.modelsService.patch(this.verificationCertifiedCart.id, params).pipe(
@@ -419,6 +474,51 @@ export class CertifiedCartsComponent implements OnInit {
         });
     }
 
+    saveVerification() {
+        // let employee = this.authService.currentUserValue.employee.id;
+        let params = {
+            "verificated": true,
+            "certifiedcarts": [],
+            // "employee_destination": employee
+        };
+        this.verificationCertifiedCarts.forEach(certifiedcart => {            
+            params.certifiedcarts.push(certifiedcart.id);
+        });
+
+        const sbUpdate = this.modelsService.postList(params).pipe(
+            tap(() => {
+                this.toastService.growl('top-right', 'success', 'success');
+            }),
+            catchError((error) => {
+                if (error.error instanceof Array) {
+                    let messageError = [];
+                    if (!Array.isArray(error.error)) {
+                        messageError.push(error.error);
+                    } else {
+                        messageError = error.error;
+                    }
+                    Object.entries(messageError).forEach(
+                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
+                    );
+                } else {
+                    this.toastService.growl('top-right', 'error', 'error' + ': ' + error.error)
+                }
+                return of(this.verificationCertifiedCarts);
+            })
+        ).subscribe(response => {
+            this.displayModal = false;
+            this.getModels();
+        });
+    }
+
+    public voucherLenght(certifiedcarts) {
+        let count = 0;
+        certifiedcarts.forEach(element => {
+            count += element.vouchers.length;
+        });
+        return count;
+    }
+
     showModalTranferDialog() {
         this.displayModalTransfer = true;
     }
@@ -437,5 +537,11 @@ export class CertifiedCartsComponent implements OnInit {
             }
         });
         this.unsubscribe.push(divisionChangeSubscription);
+    }
+
+    public closeVerificationModal() {
+        this.displayModal = false;
+        this.listVouchers = [];
+        this.verificationCertifiedCarts = [];
     }
 }
