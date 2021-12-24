@@ -135,7 +135,7 @@
             {{value.vouchers.length}}
           </td>
           <td>
-            {{countPackings([value], false)}}
+            {{countPackings([value], false, true)}}
           </td>
           <td>
             {{value.division_origin?.name}}
@@ -197,11 +197,11 @@
         <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.CODES' | translate }}</label>
         <p-chips [styleClass]="getValidClass(isControlValid('vouchers',verificationGroup))" formControlName="vouchers" [allowDuplicate]="false" (onAdd)="addListVouchers($event)" (onRemove)="removeListVouchers($event)" [(ngModel)]="listVouchers"></p-chips>
         <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers',verificationGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CODES' | translate }}</b></div>
-        <div class="valid-feedback"  style="display: block;" *ngIf="voucherLenght(verificationGuides) + countPackings(verificationGuides, true) == listVouchers.length">{{ 'GUIDE.CODES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+        <div class="valid-feedback"  style="display: block;" *ngIf="voucherLenght(verificationGuides, true) + countPackings(verificationGuides, true, true) == listVouchers.length">{{ 'GUIDE.CODES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
         <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'vouchers')">Vouchers  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
-        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(verificationGuides) + countPackings(verificationGuides, true) > listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{voucherLenght(verificationGuides) + countPackings(verificationGuides, true)}}
+        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(verificationGuides, true) + countPackings(verificationGuides, true, true) > listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{voucherLenght(verificationGuides, true) + countPackings(verificationGuides, true, true)}}
           item</div>
-        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(verificationGuides) + countPackings(verificationGuides, true) < listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{voucherLenght(verificationGuides) + countPackings(verificationGuides, true)}}
+        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(verificationGuides, true) + countPackings(verificationGuides, true, true) < listVouchers.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{voucherLenght(verificationGuides, true) + countPackings(verificationGuides, true, true)}}
           items</div>
       </div>
       <div class="col-lg-6" style="margin-top: 15px; margin-bottom: 5px;">

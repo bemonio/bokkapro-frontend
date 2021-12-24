@@ -281,7 +281,7 @@ export class CertifiedCartsComponent implements OnInit {
         this.displayModal = true;
         this.listVouchers = [];
         this.verificationCertifiedCarts = this.selectedModels;
-        let count = this.voucherLenght(this.verificationCertifiedCarts) + this.countPackings(this.verificationCertifiedCarts, true);
+        let count = this.voucherLenght(this.verificationCertifiedCarts, true) + this.countPackings(this.verificationCertifiedCarts, true, true);
         this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
     }
 
@@ -313,7 +313,7 @@ export class CertifiedCartsComponent implements OnInit {
                     certified_cart.vouchers = response.vouchers;
                 }
                 this.verificationCertifiedCarts.push(certified_cart);
-                let count = this.voucherLenght(this.verificationCertifiedCarts) + this.countPackings(this.verificationCertifiedCarts, true);                
+                let count = this.voucherLenght(this.verificationCertifiedCarts, true) + this.countPackings(this.verificationCertifiedCarts, true, true);                
                 this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
                 // if (response.certifiedcart.certified_cart) {
                 //     this.certified_cart_code.setValidators(Validators.compose([Validators.required, Validators.pattern(response.certifiedcart.certified_cart_code)]));
@@ -369,7 +369,7 @@ export class CertifiedCartsComponent implements OnInit {
         });
     }
 
-    countPackings(certifiedcarts, operations) {
+    countPackings(certifiedcarts, operations, only_not_verified) {
         let count = 0;
         if (operations) {
             certifiedcarts.forEach(certifiedcart => {
@@ -378,7 +378,9 @@ export class CertifiedCartsComponent implements OnInit {
                         certifiedcart.vouchers.forEach(voucher => {
                             if (voucher.packings) {
                                 voucher.packings.forEach(packing => {
-                                    count = count + 1;
+                                    if ((only_not_verified == false) || (only_not_verified && packing.verified == false)) {
+                                        count = count + 1;
+                                    }
                                 });
                             }        
                         });
@@ -402,7 +404,7 @@ export class CertifiedCartsComponent implements OnInit {
     }
 
     public changeCountPackings() {
-        let count = this.voucherLenght(this.verificationCertifiedCarts) + this.countPackings(this.verificationCertifiedCarts, true);
+        let count = this.voucherLenght(this.verificationCertifiedCarts, true) + this.countPackings(this.verificationCertifiedCarts, true, true);
         this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count), Validators.maxLength(count)]));
         this.verificationGroup.markAllAsTouched();
     }
@@ -511,10 +513,14 @@ export class CertifiedCartsComponent implements OnInit {
         });
     }
 
-    public voucherLenght(certifiedcarts) {
+    public voucherLenght(certifiedcarts, only_not_verified) {
         let count = 0;
-        certifiedcarts.forEach(element => {
-            count += element.vouchers.length;
+        certifiedcarts.forEach(certifiedcarts => {
+            certifiedcarts.vouchers.forEach(voucher => {
+                if ((only_not_verified == false) || (only_not_verified && voucher.verified == false)) {
+                    count = count + 1;
+                }
+            });
         });
         return count;
     }
