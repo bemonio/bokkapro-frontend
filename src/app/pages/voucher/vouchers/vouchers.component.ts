@@ -227,6 +227,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     }
                     this.paramId = params.id;
                     this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.paramId;
+                    this.showTableCheckbox = false;
                 }
                 switch (this.route.parent.parent.snapshot.url[0].path) {
                     case 'vouchersconfirmationdelivered':
@@ -662,6 +663,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
                             this.listVouchersSecurityList.pop();
                         }
                     });
+                    this.toastService.growl('top-right', 'error', 'error', 'Código: No Encontrado');
+                } else {
+                    this.toastService.growl('top-right', 'success', 'success', 'Código: Encontrado');
                 }
             },
             error => {
@@ -827,6 +831,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
                             this.listVouchersConfirmationDeliveredList.pop();
                         }
                     });
+                    this.toastService.growl('top-right', 'error', 'error', 'Código: No Encontrado');
+                } else {
+                    this.toastService.growl('top-right', 'success', 'success', 'Código: Encontrado');
                 }
             },
             error => {

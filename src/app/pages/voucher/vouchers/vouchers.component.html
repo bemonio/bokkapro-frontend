@@ -39,8 +39,8 @@
     [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 3rem" *ngIf="showTableCheckbox">
-            <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
+          <th style="width: 3rem">
+            <p-tableHeaderCheckbox  *ngIf="showTableCheckbox"></p-tableHeaderCheckbox>
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
