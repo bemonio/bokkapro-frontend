@@ -93,6 +93,41 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'atm')">{{ 'REPORT_OPERATION.ATM' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div> 
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.ATM_TRANSIT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="atm_transit" [class.is-invalid]="isControlInvalid('atm_transit')"
+                [class.is-valid]="isControlValid('atm_transit')" formControlName="atm_transit" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('atm_transit')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.ATM_TRANSIT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('atm_transit')">{{ 'REPORT_OPERATION.ATM_TRANSIT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'atm_transit')">{{ 'REPORT_OPERATION.ATM_TRANSIT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'atm_transit')">{{ 'REPORT_OPERATION.ATM_TRANSIT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'atm_transit')">{{ 'REPORT_OPERATION.ATM_TRANSIT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.PACKINGS_PENDING' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                placeholder="{{ 'REPORT_OPERATION.PACKINGS_PENDING' | translate }}" name="packings_pending" [class.is-invalid]="isControlInvalid('packings_pending')"
+                [class.is-valid]="isControlValid('packings_pending')" formControlName="packings_pending" />
+              <div class="feedback" *ngIf="!isControlTouched('packings_pending')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.PACKINGS_PENDING' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('packings_pending')">{{ 'REPORT_OPERATION.PACKINGS_PENDING' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'packings_pending')">{{ 'REPORT_OPERATION.PACKINGS_PENDING' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'packings_pending')">{{ 'REPORT_OPERATION.PACKINGS_PENDING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'packings_pending')">{{ 'REPORT_OPERATION.PACKINGS_PENDING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.PACKINGS_PENDING_AMOUNT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="packings_pending_amount" [class.is-invalid]="isControlInvalid('packings_pending_amount')"
+                [class.is-valid]="isControlValid('packings_pending_amount')" formControlName="packings_pending_amount" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('packings_pending_amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.PACKINGS_PENDING_AMOUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('packings_pending_amount')">{{ 'REPORT_OPERATION.PACKINGS_PENDING_AMOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'packings_pending_amount')">{{ 'REPORT_OPERATION.PACKINGS_PENDING_AMOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'packings_pending_amount')">{{ 'REPORT_OPERATION.PACKINGS_PENDING_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'packings_pending_amount')">{{ 'REPORT_OPERATION.PACKINGS_PENDING_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.CASH_OPENING' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="cash_opening" [class.is-invalid]="isControlInvalid('cash_opening')"
