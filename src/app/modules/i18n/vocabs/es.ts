@@ -286,7 +286,7 @@ export const locale = {
       CHECKIN_DATE: 'Fecha Checkin',
       EXCHANGE_RATE: 'Tasa de Cambio',
       SECURITY: 'Seguridad',
-      VAULT: 'Bóveda',
+      VAULT: 'Bóveda Seguridad',
       CONFIRMATION: 'Confirmar',
       DELIVERED: 'Entrega',
       ADMIN: 'Administración',
