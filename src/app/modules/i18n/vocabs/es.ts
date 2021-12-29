@@ -436,6 +436,7 @@ export const locale = {
       CONFIRMATION: 'Confirmación',
       VERIFICATION: 'Verificación',
       MESSAGE_CONFIRM_DELETE: '¿Estás seguro que deseas eliminar?',
+      MESSAGE_CONFIRM_DEVOLUTION: '¿Estás seguro que deseas devolver a operaciones internas?',
       MESSAGE_VERIFICATION_VOUCHER: '¿Estás seguro de verificar este comprobante?',
       MESSAGE_FACTURE_VOUCHER_AND_PACKINGS: '¿Estás seguro de facturar este comprobante y sus envases?',
       ENTER: 'Ingrese',
@@ -468,6 +469,7 @@ export const locale = {
       CLEAR: 'Limpiar',
       VERIFICATED: 'Verificado',
       PRINT: 'Imprimir',
+      DEVOLUTION: 'Devolución',
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',

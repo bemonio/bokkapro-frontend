@@ -53,6 +53,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
     public message_verification_voucher: string;
+    public message_confirm_devolution: string;
 
     public showTableCheckbox: boolean;
 
@@ -85,6 +86,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public listVouchersConfirmationDeliveredList: any[];
 
     public showButtonConfirmationDelivered: Boolean;
+    public showButtonDevolutionVoucher: Boolean;
 
     constructor(
         public modelsService: ModelService,
@@ -129,6 +131,10 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
         this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
             this.message_confirm_delete = res;
+        });
+
+        this.translate.get('COMMON.MESSAGE_CONFIRM_DEVOLUTION').subscribe((res: string) => {
+            this.message_confirm_devolution = res;
         });
         
         this.translate.get('COMMON.MESSAGE_VERIFICATION_VOUCHER').subscribe((res: string) => {
@@ -175,6 +181,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.subscribeToDivisionChange();
 
         this.showButtonConfirmationDelivered = false;
+        this.showButtonDevolutionVoucher = false;
 
         this._with = [];
         this._with.push({key: 'include[]', value: 'currency.*'})
@@ -222,6 +229,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     this.paramId = params.id;
                     if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path.startsWith('guide')) {
                         this.filters.push({ key: 'filter{guides}', value: this.paramId.toString() })
+                        if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path == 'guidesoutput') {
+                            this.showButtonDevolutionVoucher = true;
+                        }
                     } else if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path == 'certifiedcarts') {
                         this.filters.push({ key: 'filter{certified_cart}', value: this.paramId.toString() })
                     }
@@ -404,6 +414,30 @@ export class VouchersComponent implements OnInit, OnDestroy {
         );
     }
 
+    public devolution(voucher_id) {
+        let params = {
+            voucher_id: voucher_id, 
+            guide_id: this.paramId
+        }
+        this.modelsService.devolution(voucher_id, params).toPromise().then(
+            response => {
+                this.toastService.growl('top-right', 'success', 'Delete');
+                this.getModels();
+            },
+            error => {
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
+                );
+            }
+        );
+    }
+
     public patch(values: Model) {
         const param = {
             // 'activated': values.activated
@@ -436,6 +470,16 @@ export class VouchersComponent implements OnInit, OnDestroy {
             message: this.message_confirm_delete,
             accept: () => {
                 this.delete(id);
+            }
+        });
+    }
+
+    confirmDevolution(id, position: string) {
+        this.confirmDialogPosition = position;
+        this.confirmationService.confirm({
+            message: this.message_confirm_devolution,
+            accept: () => {
+                this.devolution(id);
             }
         });
     }
