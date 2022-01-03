@@ -42,7 +42,22 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
   public materials: AbstractControl;
   public custody_cpv: AbstractControl;
   public custody_vault: AbstractControl;
+  public custody_personal_atm:AbstractControl;
   public pieces: AbstractControl;
+  public fixed_costs_packing:AbstractControl;
+  public vigilant:AbstractControl;
+  public atm_supply:AbstractControl;
+  public atm_failure_1_2_levels:AbstractControl;
+  public excess_travels:AbstractControl;
+  public excess_travels_directs:AbstractControl;
+  public excess_appraisal:AbstractControl;
+  public excess_handling:AbstractControl;
+  public excess_materials:AbstractControl;
+  public excess_vigilant_extra_hours:AbstractControl;
+  public excess_custody_cpv:AbstractControl;
+  public excess_custody_vault:AbstractControl;
+  public excess_custody_personal_atm:AbstractControl;
+  public excess_pieces:AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -75,6 +90,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       office: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       product_and_service: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       note: [''],
+
       total_fixed_costs: [''],
       travels: [''],
       travels_directs: [''],
@@ -83,7 +99,22 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       materials: [''],
       custody_cpv: [''],
       custody_vault: [''],
+      custody_personal_atm: [''],
       pieces: [''],
+      fixed_costs_packing: [''],
+      vigilant: [''],
+      atm_supply: [''],
+      atm_failure_1_2_levels: [''],
+      excess_travels: [''],
+      excess_travels_directs: [''],
+      excess_appraisal: [''],
+      excess_handling: [''],
+      excess_materials: [''],
+      excess_vigilant_extra_hours: [''],
+      excess_custody_cpv: [''],
+      excess_custody_vault: [''],
+      excess_custody_personal_atm: [''],
+      excess_pieces: [''],
     });
     this.total_amount = this.formGroup.controls['total_amount'];
     this.status = this.formGroup.controls['status'];
@@ -102,7 +133,22 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
     this.materials = this.formGroup.controls['materials'];
     this.custody_cpv = this.formGroup.controls['custody_cpv'];
     this.custody_vault = this.formGroup.controls['custody_vault'];
-    this.pieces = this.formGroup.controls['pieces'];  
+    this.custody_personal_atm = this.formGroup.controls['custody_personal_atm'];
+    this.pieces = this.formGroup.controls['pieces'];
+    this.fixed_costs_packing = this.formGroup.controls['fixed_costs_packing'];
+    this.vigilant = this.formGroup.controls['vigilant'];
+    this.atm_supply = this.formGroup.controls['atm_supply'];
+    this.atm_failure_1_2_levels = this.formGroup.controls['atm_failure_1_2_levels'];
+    this.excess_travels = this.formGroup.controls['excess_travels'];
+    this.excess_travels_directs = this.formGroup.controls['excess_travels_directs'];
+    this.excess_appraisal = this.formGroup.controls['excess_appraisal'];
+    this.excess_handling = this.formGroup.controls['excess_handling'];
+    this.excess_materials = this.formGroup.controls['excess_materials'];
+    this.excess_vigilant_extra_hours = this.formGroup.controls['excess_vigilant_extra_hours'];
+    this.excess_custody_cpv = this.formGroup.controls['excess_custody_cpv'];
+    this.excess_custody_vault = this.formGroup.controls['excess_custody_vault'];
+    this.excess_custody_personal_atm = this.formGroup.controls['excess_custody_personal_atm'];
+    this.excess_pieces = this.formGroup.controls['excess_pieces'];
   }
 
   ngOnInit(): void {
@@ -192,7 +238,22 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       this.materials.setValue(this.model.materials);
       this.custody_cpv.setValue(this.model.custody_cpv);
       this.custody_vault.setValue(this.model.custody_vault);
+      this.custody_personal_atm.setValue(this.model.custody_personal_atm);
       this.pieces.setValue(this.model.pieces);
+      this.fixed_costs_packing.setValue(this.model.fixed_costs_packing);
+      this.vigilant.setValue(this.model.vigilant);
+      this.atm_supply.setValue(this.model.atm_supply);
+      this.atm_failure_1_2_levels.setValue(this.model.atm_failure_1_2_levels);
+      this.excess_travels.setValue(this.model.excess_travels);
+      this.excess_travels_directs.setValue(this.model.excess_travels_directs);
+      this.excess_appraisal.setValue(this.model.excess_appraisal);
+      this.excess_handling.setValue(this.model.excess_handling);
+      this.excess_materials.setValue(this.model.excess_materials);
+      this.excess_vigilant_extra_hours.setValue(this.model.excess_vigilant_extra_hours);
+      this.excess_custody_cpv.setValue(this.model.excess_custody_cpv);
+      this.excess_custody_vault.setValue(this.model.excess_custody_vault);
+      this.excess_custody_personal_atm.setValue(this.model.excess_custody_personal_atm);
+      this.excess_pieces.setValue(this.model.excess_pieces);
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }

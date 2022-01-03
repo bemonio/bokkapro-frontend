@@ -3,6 +3,7 @@ export class ServiceOrderModel {
   total_amount: string;
   status: string;
   note: string;
+
   total_fixed_costs: number;
   travels: number;
   travels_directs: number;
@@ -11,7 +12,22 @@ export class ServiceOrderModel {
   materials: number;
   custody_cpv: number;
   custody_vault: number;
+  custody_personal_atm: number;
   pieces: number;
+  fixed_costs_packing: number;
+  vigilant: number;
+  atm_supply: number;
+  atm_failure_1_2_levels: number;
+  excess_travels: number;
+  excess_travels_directs: number;
+  excess_appraisal: number;
+  excess_handling: number;
+  excess_materials: number;
+  excess_vigilant_extra_hours: number;
+  excess_custody_cpv: number;
+  excess_custody_vault: number;
+  excess_custody_personal_atm: number;
+  excess_pieces: number;
   company: any;
   employee: any;
   contract: any;
