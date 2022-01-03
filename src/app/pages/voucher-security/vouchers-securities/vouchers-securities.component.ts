@@ -697,7 +697,7 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
                 return of(this.listVouchersSecurity);
             })
         ).subscribe(response => {
-            this.displayModal = false;
+            this.closeDialogSecurity()
             this.getModels();
         });
     }    
@@ -707,6 +707,7 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
             this.division_id_filter.id = event;
         } else {
             this.division_id_filter.id = event.id;
+            this.division.setValue(event);
         }
         this.listVouchersSecurity = [];
         this.listVouchersSecurityList = [];

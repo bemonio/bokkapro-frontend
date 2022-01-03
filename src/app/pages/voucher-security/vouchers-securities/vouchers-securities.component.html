@@ -15,6 +15,7 @@
   <div class="card-body">
     <!-- begin: Filtration form -->
     <div class="form form-label-right">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
       <div class="form-group row">
         <div class="col-lg-6">
           <span class="mb-3 d-flex">{{ 'COMMON.FILTERS' | translate }}</span>
@@ -22,15 +23,20 @@
           <!-- <p-toggleButton styleClass="form-control" onLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.ALL' | translate }}" offLabel="{{ 'COMMON.ASSIGNED_TO_ME' | translate}}"  [style]="{'width': '11em'}" (click)="applyFilter('cashier')"></p-toggleButton>
           <p-toggleButton styleClass="form-control ml-3" onLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.ACTIVES' | translate }}" offLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.INACTIVES' | translate}}"  [style]="{'width': '11em'}" (click)="applyFilter('active')"></p-toggleButton> -->
           <div class="d-flex align-items-center">
-            <app-division-select class="w-50" (divisionValue)="changeDivisionValue($event)"></app-division-select>
-            <a type="button" class="btn btn-primary d-flex align-items-center h-50 ml-3" *ngIf="division_id_filter.id != undefined" (click)="changeDivisionValue(undefined)">{{ 'COMMON.CLEAR' | translate }}</a>
+            <!-- <app-division-select class="w-50" (divisionValue)="changeDivisionValue($event)"></app-division-select> -->
+            <app-division-select class="w-50" 
+            [valid]="isControlValid('division_id_filter',formGroup)" [touched]="isControlTouched('division_id_filter',formGroup)" [class.is-invalid]="isControlInvalid('division_id_filter',formGroup)"
+            [class.is-valid]="isControlValid('division_id_filter',formGroup)" formControlName="division_id_filter" id="division_id_filter"
+            name="division_id_filter"  (divisionValue)="changeDivisionValue($event)"></app-division-select>
+            <!-- <a type="button" class="btn btn-primary d-flex align-items-center h-50 ml-3" *ngIf="division_id_filter.id != undefined" (click)="changeDivisionValue(undefined)">{{ 'COMMON.CLEAR' | translate }}</a> -->
           </div>
         </div>
-        <div class="col-lg-6" [formGroup]="searchGroup">
+        <div class="col-lg-6">
           <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
             formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> </small>
         </div>
       </div>
+      </form>
     </div>
     <!-- end: Filtration form -->
 
@@ -202,7 +208,7 @@
 </p-dialog>
 
 <p-dialog header="{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.SECURITY' | translate }}" [(visible)]="displayModalSecurity" [modal]="true" [style]="{width: '50vw'}" 
-  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}" (onHide)="closeDialogSecurity">
+  [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}" (onHide)="closeDialogSecurity()">
   <form action="#" class="form form-label-right" [formGroup]="securityGroup">
     <div class="form-group row" style="margin-top: 20px;">
       <div class="col-lg-12">
@@ -227,13 +233,24 @@
         <p-chips [styleClass]="getValidClass(isControlValid('vouchers',securityGroup))" formControlName="vouchers" [allowDuplicate]="false" (onAdd)="addListVouchers($event)" (onRemove)="removeListVouchers($event)" [(ngModel)]="listVouchersSecurityList"></p-chips>
         <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers',securityGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CODES' | translate }}</b></div>
       </div>
-      <div class="col-lg-12" style="margin-top: 15px; margin-bottom: 5px;">
+      <div class="col-lg-6" style="margin-top: 15px; margin-bottom: 5px;">
         <b>{{ 'COMMON.LIST' | translate }} {{ 'COMMON.VERIFICATION' | translate }}:</b><br>
         <div style="overflow: scroll; max-height: 400px;" class="py-5">
           <span *ngFor="let voucher of listVouchersSecurity">
-            <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} - {{voucher.division.name}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br>
+            <div *ngIf="!voucher.verificated"><i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} - {{voucher.division.name}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br></div>
             <span *ngFor="let packing of voucher.packings"> 
-              - <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br>
+              <div *ngIf="!packing.verificated">- <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br></div>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-6" style="margin-top: 15px; margin-bottom: 5px;">
+        <b>{{ 'COMMON.LIST' | translate }} {{ 'COMMON.VERIFICATED' | translate }}:</b><br>
+        <div style="overflow: scroll; max-height: 400px;" class="py-5">
+          <span *ngFor="let voucher of listVouchersSecurity">
+            <div *ngIf="voucher.verificated"><i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} - {{voucher.division.name}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br></div>
+            <span *ngFor="let packing of voucher.packings"> 
+              <div *ngIf="packing.verificated">- <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br></div>
             </span>
           </span>
         </div>
