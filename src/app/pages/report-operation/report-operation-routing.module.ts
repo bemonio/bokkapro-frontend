@@ -11,7 +11,7 @@ const routes: Routes = [
     component: ReportOperationComponent,
     children: [
       {
-        path: 'reports/operations',
+        path: 'reportsoperations',
         component: ReportOperationsComponent,
       },
       {
@@ -22,8 +22,8 @@ const routes: Routes = [
         path: 'edit/:id',
         component: ReportOperationEditComponent
       },
-      { path: '', redirectTo: 'reports/operations', pathMatch: 'full' },
-      { path: '**', redirectTo: 'reports/operations', pathMatch: 'full' },
+      { path: '', redirectTo: 'reportsoperations', pathMatch: 'full' },
+      { path: '**', redirectTo: 'reportsoperations', pathMatch: 'full' },
     ],
   },
 ];

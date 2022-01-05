@@ -10,11 +10,11 @@ const routes: Routes = [
     component: ReportRequestComponent,
     children: [
       {
-        path: 'reports/requests',
+        path: 'reportsrequests',
         component: ReportRequestsComponent,
       },
-      { path: '', redirectTo: 'reports/requests', pathMatch: 'full' },
-      { path: '**', redirectTo: 'reports/requests', pathMatch: 'full' },
+      { path: '', redirectTo: 'reportsrequests', pathMatch: 'full' },
+      { path: '**', redirectTo: 'reportsrequests', pathMatch: 'full' },
     ],
   },
 ];

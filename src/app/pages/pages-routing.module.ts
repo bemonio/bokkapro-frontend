@@ -287,21 +287,21 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'reports/reports',
+        path: 'reportsexpress',
         loadChildren: () =>
           import('../pages/report/report-routing.module').then(
             (m) => m.ReportRoutingModule
           ),
       },
       {
-        path: 'reports/operations',
+        path: 'reportsoperations',
         loadChildren: () =>
           import('../pages/report-operation/report-operation-routing.module').then(
             (m) => m.ReportOperationRoutingModule
           ),
       },
       {
-        path: 'reports/requests',
+        path: 'reportsrequests',
         loadChildren: () =>
           import('../pages/report-request/report-request-routing.module').then(
             (m) => m.ReportRequestRoutingModule
