@@ -301,6 +301,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'reports/requests',
+        loadChildren: () =>
+          import('../pages/report-request/report-request-routing.module').then(
+            (m) => m.ReportRequestRoutingModule
+          ),
+      },
+      {
         path: 'clauses',
         loadChildren: () =>
           import('../pages/clause/clause-routing.module').then(

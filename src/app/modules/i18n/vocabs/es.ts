@@ -490,6 +490,7 @@ export const locale = {
       REPORT: 'Reporte',
       REPORTS: 'Reportes',
       OPERATIONS: 'Operaciones',
+      REQUESTS: 'Solicitudes',
     },
     REPORT_OPERATION: { 
       REPORT_OPERATION: 'Reporte',
@@ -505,6 +506,13 @@ export const locale = {
       CASH_OPENING: 'Apertura Efectivo',
       EMPLOYEES_OPEN: 'Empleados Aperturan',
       EMPLOYEES_CLOSE: 'Empleados Cierre',
+    },
+    REPORT_REQUEST: { 
+      REPORT_REQUEST: 'Reporte Solicitud',
+      REPORT_REQUESTS: 'Reporte Solicitudes',
+      ID: 'Id',
+      REPORT: 'Reporte',
+      EMPLOYEE: 'Empleado',
     },
     CLAUSE: {
       CLAUSE: 'Clausula',

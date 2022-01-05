@@ -59,6 +59,7 @@ import { ModerationService } from './pages/moderation/_services';
 import { QuoteTemplateService } from './pages/quote-template/_services';
 import { QuotationService } from './pages/quotation/_services';
 import { ReportOperationService } from './pages/report-operation/_services';
+import { ReportRequestService } from './pages/report-request/_services';
 import { ClauseService } from './pages/clause/_services';
 import { CrewService } from './pages/crew/_services';
 import { CertifiedCartService } from './pages/certified-cart/_services';
@@ -169,6 +170,7 @@ export function getHighlightLanguages() {
     QuoteTemplateService,
     QuotationService,
     ReportOperationService,
+    ReportRequestService,
     ClauseService,
     CrewService,
     CertifiedCartService,

@@ -613,6 +613,16 @@
               </a>
             </li>
             <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover" *ngIf="authService.hasPermission('view_reportrequest')">
+              <a class="menu-link" routerLink="/reports/requests" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'REPORT.REQUESTS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
           </ul>
         </div>
       </li>
