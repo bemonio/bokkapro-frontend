@@ -1042,7 +1042,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     closeDialogSecurity(){
         this.displayModalSecurity = false;
-        this.searchGroup.reset();
+        this.securityGroup.reset();
         this.listVouchersSecurity = [];
         this.listVouchersSecurityList = [];
         this.loadLazy();
