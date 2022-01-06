@@ -1,5 +1,6 @@
 import { SegmentCompanyModel } from "../../segment-company/_models/segment-company.model";
 import { TypeCompanyModel } from "../../type-company/_models/type-company.model";
+import { OfficeModel } from "../../office/_models/office.model";
 
 export class CompanyModel {
   id: number;
@@ -23,6 +24,7 @@ export class CompanyModel {
   dubious_reputation: boolean;
   segment_company: any;
   type_company: any;
+  office_belongs: any;
   created_at: string;
   updated_at: string;
 }

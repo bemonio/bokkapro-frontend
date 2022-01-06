@@ -205,6 +205,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'segment_company')">{{ 'COMPANY.SEGMENT_COMPANY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.OFFICE_BELONGS' | translate }}</label>
+              <app-office-autocomplete
+              name="office_belongs" [valid]="isControlValid('office_belongs')" [touched]="isControlTouched('office_belongs')" [class.is-invalid]="isControlInvalid('office_belongs')"
+              [class.is-valid]="isControlValid('office_belongs')" formControlName="office_belongs" id="office_belongs" [model]="model.office_belongs"></app-office-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('office_belongs')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'COMPANY.OFFICE_BELONGS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('office_belongs')">{{ 'COMPANY.OFFICE_BELONGS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'office_belongs')">{{ 'COMPANY.OFFICE_BELONGS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'office_belongs')">{{ 'COMPANY.OFFICE_BELONGS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'office_belongs')">{{ 'COMPANY.OFFICE_BELONGS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.TYPE_COMPANY' | translate }}</label>
               <app-type-company-autocomplete
               name="type_company" [valid]="isControlValid('type_company')" [touched]="isControlTouched('type_company')" [class.is-invalid]="isControlInvalid('type_company')"

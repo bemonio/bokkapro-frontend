@@ -135,7 +135,8 @@ export const locale = {
       IS_FINANCIAL_INSTITUTION: "Institución Financiera?",
       GOVERNMENT_INSTITUTION: "Institución Gubernamental?",
       COMMERCIAL_INSTITUTION: "Institución Comercial?",
-      DUBIOUS_REPUTATION: "Reputación Dudosa"
+      DUBIOUS_REPUTATION: "Reputación Dudosa",
+      OFFICE_BELONGS: "Oficina a la que Pertenece"
     },
     OFFICE: {
       OFFICE: 'Oficina',

@@ -50,6 +50,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   public dubious_reputation: AbstractControl;
   public segment_company: AbstractControl;
   public type_company: AbstractControl;
+  public office_belongs: AbstractControl;
 
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
@@ -103,6 +104,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       dubious_reputation: [''],
       segment_company: ['', Validators.compose([Validators.required])],
       type_company: ['', Validators.compose([Validators.required])],
+      office_belongs: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];
     this.code_brinks = this.formGroup.controls['code_brinks'];
@@ -123,6 +125,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     this.dubious_reputation = this.formGroup.controls['dubious_reputation'];
     this.segment_company = this.formGroup.controls['segment_company'];
     this.type_company = this.formGroup.controls['type_company'];
+    this.office_belongs = this.formGroup.controls['office_belongs'];
 
     this.parent = '/companies';
   }
@@ -173,6 +176,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
           this.model.type_company = response.type_companies[0];
         if (response.segment_companies)
           this.model.segment_company = response.segment_companies[0];
+        if (response.offices)
+          this.model.office_belongs = response.offices[0];
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -212,6 +217,9 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       if (this.model.type_company) {
         this.type_company.setValue(this.model.type_company);
       }
+      if (this.model.office_belongs) {
+        this.office_belongs.setValue(this.model.office_belongs);
+      }
     }
     this.formGroup.markAllAsTouched();
   }
@@ -242,6 +250,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.segment_company = this.model.segment_company.id;
     model.type_company = this.model.type_company.id;
+    model.office_belongs = this.model.office_belongs.id;
     // // model.logo = this.croppedImage;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
@@ -276,6 +285,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.segment_company = this.model.segment_company.id;
     model.type_company = this.model.type_company.id;
+    model.office_belongs = this.model.office_belongs.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

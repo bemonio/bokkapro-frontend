@@ -66,6 +66,6 @@ export class CompanyService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=type_company.*&include[]=segment_company.*&include[]=locations.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=type_company.*&include[]=segment_company.*&include[]=locations.*&include[]=office_belongs.*`);
     }
 }
