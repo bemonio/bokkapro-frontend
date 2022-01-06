@@ -54,6 +54,7 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
     public message_verification_voucher: string;
 
     public showTableCheckbox: boolean;
+    public showRowCheckbox: boolean;
 
     public paramId: number;
     public parent: string;
@@ -124,7 +125,8 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
             this.message_verification_voucher = res;
         });
 
-        this.showTableCheckbox = true;
+        this.showTableCheckbox = false;
+        this.showRowCheckbox = true;
         this.cashier_filter = false;
         this.active_filter = false;
         this.parent = '';
@@ -724,8 +726,9 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
 
     verifyShowCheckBox(value) {
         let response = false;
-        if (this.authService.currentDivisionValue.id != 2 && value.is_active === true || 
-            this.showTableCheckbox && value.is_active === true && value.verified_oi === true) {
+        if ((this.authService.currentDivisionValue.id === 2 && this.showRowCheckbox && value.verified_oi === false) || 
+            (this.authService.currentDivisionValue.id === 2 && value.is_active === false) ||
+            (this.authService.currentDivisionValue.id != 2 && value.is_active === false)) {
             response = true;
         }
         if (this.route.parent.parent.snapshot.url[0].path == "vouchersadmin") {
@@ -735,6 +738,9 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
             response = false;
         }
         if (this.route.parent.parent.snapshot.url[0].path == "voucherssecurities") {
+            response = false;
+        }
+        if (!this.showRowCheckbox) {
             response = false;
         }
         return response;

@@ -48,8 +48,8 @@
     [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 3rem" *ngIf="showTableCheckbox">
-            <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
+          <th style="width: 3rem">
+            <p-tableHeaderCheckbox  *ngIf="showTableCheckbox"></p-tableHeaderCheckbox>
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
@@ -123,7 +123,6 @@
           <td>
             <p-tableCheckbox [value]="value" *ngIf="verifyShowCheckBox(value)"></p-tableCheckbox>
           </td>
-          <td *ngIf="(authService.currentDivisionValue.id === 2 && showTableCheckbox && value.verified_oi === false) || authService.currentDivisionValue.id === 2 && value.is_active === false || authService.currentDivisionValue.id != 2 && value.is_active === false"></td>
           <td>
             {{value.id}}
           </td>

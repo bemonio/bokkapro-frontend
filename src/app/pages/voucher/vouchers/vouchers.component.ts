@@ -144,6 +144,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         });
 
         this.showTableCheckbox = false;
+        this.showRowCheckbox = true;
         this.cashier_filter = false;
         this.active_filter = false;
         this.parent = '';
@@ -240,7 +241,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     }
                     this.paramId = params.id;
                     this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.paramId;
-                    this.showTableCheckbox = false;
+                    this.showRowCheckbox = false;
                 }
                 switch (this.route.parent.parent.snapshot.url[0].path) {
                     case 'vouchersconfirmationdelivered':
@@ -1063,7 +1064,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     verifyShowCheckBox(value) {
         let response = false;
         if (this.authService.currentDivisionValue.id != 2 && value.is_active === true || 
-            this.showTableCheckbox && value.is_active === true && value.verified_oi === true) {
+            this.showRowCheckbox && value.is_active === true && value.verified_oi === true) {
             response = true;
         }
         if (this.route.parent.parent.snapshot.url[0].path == "vouchersadmin") {
@@ -1073,6 +1074,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
             response = false;
         }
         if (this.route.parent.parent.snapshot.url[0].path == "voucherssecurities") {
+            response = false;
+        }
+        if (!this.showRowCheckbox) {
             response = false;
         }
         return response;
