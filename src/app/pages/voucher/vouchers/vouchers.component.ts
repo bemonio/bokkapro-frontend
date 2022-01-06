@@ -56,6 +56,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public message_confirm_devolution: string;
 
     public showTableCheckbox: boolean;
+    public showRowCheckbox: boolean;
 
     public paramId: number;
     public parent: string;
@@ -87,6 +88,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     public showButtonConfirmationDelivered: Boolean;
     public showButtonDevolutionVoucher: Boolean;
+    public showButtonTransferDivisionVoucher: Boolean;
 
     constructor(
         public modelsService: ModelService,
@@ -141,7 +143,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
             this.message_verification_voucher = res;
         });
 
-        this.showTableCheckbox = true;
+        this.showTableCheckbox = false;
         this.cashier_filter = false;
         this.active_filter = false;
         this.parent = '';
@@ -182,6 +184,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
         this.showButtonConfirmationDelivered = false;
         this.showButtonDevolutionVoucher = false;
+        this.showButtonTransferDivisionVoucher = false;
 
         this._with = [];
         this._with.push({key: 'include[]', value: 'currency.*'})
@@ -265,6 +268,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     this.parent = '/vouchersadmin/';
                     break;
                 default:    
+                    this.showButtonTransferDivisionVoucher = true;
                     this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() });
                     this.filters.push({ key: 'filter{verificated}', value: '1' });
                     this.filters.push({ key: 'filter{is_active}', value: '1'});
@@ -1054,5 +1058,23 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.listVouchersConfirmationDelivered = [];
         this.listVouchersConfirmationDeliveredList = [];
         this.loadLazy();
+    }
+
+    verifyShowCheckBox(value) {
+        let response = false;
+        if (this.authService.currentDivisionValue.id != 2 && value.is_active === true || 
+            this.showTableCheckbox && value.is_active === true && value.verified_oi === true) {
+            response = true;
+        }
+        if (this.route.parent.parent.snapshot.url[0].path == "vouchersadmin") {
+            response = false;
+        }
+        if (this.route.parent.parent.snapshot.url[0].path == "vouchersconfirmationdelivered") {
+            response = false;
+        }
+        if (this.route.parent.parent.snapshot.url[0].path == "voucherssecurities") {
+            response = false;
+        }
+        return response;
     }
 }

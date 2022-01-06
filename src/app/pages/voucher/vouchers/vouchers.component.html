@@ -6,7 +6,7 @@
     <div class="card-toolbar">
       <!-- <a type="button" class="btn btn-secondary" (click)="showModalDialogCertifiedCart()" *ngIf="authService.currentDivisionValue.id === 1 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CERTIFIED_CART' | translate }}</a> -->
       <a type="button" class="btn btn-secondary" (click)="showModalDialogCashier()" *ngIf="authService.currentDivisionValue.id === 3 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CASHIER' | translate }}</a>
-      <a type="button" class="btn btn-secondary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a>
+      <a type="button" class="btn btn-secondary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0 && showButtonTransferDivisionVoucher">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a>
       <!-- <a type="button" class="btn btn-secondary" (click)="showModalDialogSecurity()" *ngIf="authService.currentDivisionValue.id === 1">{{ 'COMMON.TRANSFER' | translate }} {{ '' | translate}} {{ 'VOUCHER.SECURITY' | translate }}</a> -->
       <a type="button" class="btn btn-secondary" (click)="showModalDialogConfirmationDelivered()" *ngIf="authService.currentDivisionValue.id === 1 && showButtonConfirmationDelivered">{{ 'COMMON.CONFIRMATION' | translate }} {{ '' | translate}} {{ 'VOUCHER.DELIVERED' | translate }}</a>
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/add" *ngIf="authService.hasPermission('add_voucher') && parent.startsWith('/guidesinput')">{{ 'COMMON.NEW' | translate }}</a>
@@ -40,7 +40,7 @@
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3rem">
-            <p-tableHeaderCheckbox  *ngIf="showTableCheckbox"></p-tableHeaderCheckbox>
+            <!-- <p-tableHeaderCheckbox  *ngIf="showTableCheckbox"></p-tableHeaderCheckbox> -->
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
@@ -117,7 +117,7 @@
         <tr class="p-selectable-row" data-toggle="tooltip" data-placement="left">
           <!-- title="Divisa: {{value.currency.code}} - Monto: {{value.amount}} - Dir Destino: {{value.location_destination.name}}" -->
           <td>
-            <p-tableCheckbox [value]="value" *ngIf="authService.currentDivisionValue.id != 2 && value.is_active === true || showTableCheckbox && value.is_active === true && value.verified_oi === true"></p-tableCheckbox>
+            <p-tableCheckbox [value]="value" *ngIf="verifyShowCheckBox(value)"></p-tableCheckbox>
           </td>
           <td>
             {{value.id}}

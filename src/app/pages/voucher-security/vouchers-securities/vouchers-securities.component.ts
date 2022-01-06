@@ -721,4 +721,22 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         this.listVouchersSecurityList = [];
         this.loadLazy();
     }    
+
+    verifyShowCheckBox(value) {
+        let response = false;
+        if (this.authService.currentDivisionValue.id != 2 && value.is_active === true || 
+            this.showTableCheckbox && value.is_active === true && value.verified_oi === true) {
+            response = true;
+        }
+        if (this.route.parent.parent.snapshot.url[0].path == "vouchersadmin") {
+            response = false;
+        }
+        if (this.route.parent.parent.snapshot.url[0].path == "vouchersconfirmationdelivered") {
+            response = false;
+        }
+        if (this.route.parent.parent.snapshot.url[0].path == "voucherssecurities") {
+            response = false;
+        }
+        return response;
+    }
 }
