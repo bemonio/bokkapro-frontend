@@ -131,7 +131,17 @@ export class LoginComponent implements OnInit, OnDestroy {
               }
               this.authService.currentUserValue = model.user;
   
-              this.router.navigate(['/dashboard']);
+              let foundGroup6 = false;
+              this.authService.currentUserValue.groups.forEach(group => {
+                if (group.id == 6) {
+                  foundGroup6 = true;
+                }
+              });
+              if (foundGroup6) {
+                this.router.navigate(['/guidesinput']);
+              } else {
+                this.router.navigate(['/dashboard']);
+              }
             });
           } else {
             this.hasError = true;
