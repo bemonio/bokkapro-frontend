@@ -304,8 +304,8 @@ export class TourDetailEditComponent implements OnInit, OnChanges, OnDestroy {
 
   changeTab(tabId: number) {
     this.activeTabId = tabId;
+    this.ngOnInit();
   }
-
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }

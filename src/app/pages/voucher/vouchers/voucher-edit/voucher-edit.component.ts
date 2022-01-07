@@ -1,5 +1,5 @@
 import { DivisionService } from './../../../division/_services/division.service';
-import { Component, Input, Output, OnDestroy, OnInit, OnChanges, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
@@ -628,6 +628,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   changeTab(tabId: number) {
     this.activeTabId = tabId;
+    this.ngOnInit();
   }
 
   ngOnDestroy() {

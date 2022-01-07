@@ -257,8 +257,8 @@ export class DepositFormDetailEditComponent implements OnInit, OnDestroy, OnChan
 
   changeTab(tabId: number) {
     this.activeTabId = tabId;
+    this.ngOnInit();
   }
-
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }

@@ -268,8 +268,8 @@ export class ClientBinnacleEditComponent implements OnInit, OnDestroy, OnChanges
 
   changeTab(tabId: number) {
     this.activeTabId = tabId;
+    this.ngOnInit();
   }
-
   ngOnDestroy() {
     // this.subscriptions.forEach(sb => sb.unsubscribe());
   }

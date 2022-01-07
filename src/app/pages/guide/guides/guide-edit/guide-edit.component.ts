@@ -488,8 +488,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   changeTab(tabId: number) {
     this.activeTabId = tabId;
+    this.ngOnInit();
   }
-
   // helpers for View
   isControlValid(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];

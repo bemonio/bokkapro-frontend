@@ -200,8 +200,8 @@ export class DepartmentEditComponent implements OnInit, OnDestroy {
 
   changeTab(tabId: number) {
     this.activeTabId = tabId;
+    this.ngOnInit();
   }
-
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
