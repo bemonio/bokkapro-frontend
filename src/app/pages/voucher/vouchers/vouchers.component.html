@@ -317,9 +317,9 @@
         <div style="overflow: scroll; max-height: 200px; height: 200px;" class="py-5">
           <span *ngFor="let voucher of listVouchersConfirmationDelivered">
             <div *ngIf="!voucher.verificated"> - <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br></div>
-              <span *ngFor="let packing of voucher.packings"> 
+              <!-- <span *ngFor="let packing of voucher.packings"> 
                 <div *ngIf="!packing.verificated"> -- <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;" *ngIf="!packing.verificated"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br></div>
-              </span>
+              </span> -->
           </span>
         </div>
       </div>
@@ -328,9 +328,9 @@
         <div style="overflow: scroll; max-height: 200px; height: 200px;" class="py-5">
           <span *ngFor="let voucher of listVouchersConfirmationDelivered">
             <div *ngIf="voucher.verificated"> - <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br></div>
-              <span *ngFor="let packing of voucher.packings"> 
+              <!-- <span *ngFor="let packing of voucher.packings"> 
                 <div *ngIf="packing.verificated"> -- <i class="fas fa-archive" style="color: Dodgerblue; font-size: 16px;" *ngIf="packing.verificated"></i> {{packing.code}} <i [ngClass]="packing.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': packing.verificated ? 'green' : 'red' }"></i><br></div>
-              </span>
+              </span> -->
           </span>
         </div>
       </div>

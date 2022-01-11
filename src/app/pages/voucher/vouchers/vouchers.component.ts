@@ -578,11 +578,11 @@ export class VouchersComponent implements OnInit, OnDestroy {
         let count = 0;
         listVouchers.forEach(voucher => {
             count = count + 1;
-            if (voucher.packings) {
-                voucher.packings.forEach(packing => {
-                    count = count + 1;
-                });
-            }
+            // if (voucher.packings) {
+            //     voucher.packings.forEach(packing => {
+            //         count = count + 1;
+            //     });
+            // }
         });
         return count;
     }
