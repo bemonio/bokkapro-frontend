@@ -694,6 +694,18 @@ export const locale = {
       DATE_START: 'Inicio',
       DATE_END: 'Final',
       ID: 'Id',
+    },
+    CHEST: {
+      CHEST: 'Cofre',
+      CHESTS: 'Cofres',
+      ID: 'Id',
+      CODE: 'Código',
+      RENTAL: 'Alquiler Cofre',
+      RISK: 'Riesgo Cofre',
+      COST_RISK: 'Cargo Fijo Riesgo Cofre',
+      KEY_CUSTODY: 'Custodia de llaves Cofre',
+      TOTAL_COST: 'Cargo Fijo Monto Alquiler',
+      SERVICE_ORDER: 'Orden de Servicio'
     }
   }
 };

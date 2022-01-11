@@ -431,6 +431,9 @@
           <div *ngIf="model.id">
             <app-origin-destinations [serviceOrderId]="model.id"></app-origin-destinations>
           </div>
+          <div *ngIf="model.id">
+            <app-chests [serviceOrderId]="model.id"></app-chests>
+          </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/serviceorders">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

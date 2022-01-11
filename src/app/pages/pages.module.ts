@@ -339,6 +339,11 @@ import { ContentTypeEditComponent } from './content-type/content-types/content-t
 import { ContentTypeSelectComponent } from './content-type/content-types/content-type-select/content-type-select.component';
 import { ContentTypeAutocompleteComponent } from './content-type/content-types/content-type-autocomplete/content-type-autocomplete.component';
 
+// Chests
+import { ChestsComponent } from './chest/chests/chests.component';
+import { ChestComponent } from './chest/chest.component';
+import { ChestEditComponent } from './chest/chests/chest-edit/chest-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -561,6 +566,9 @@ import { ContentTypeAutocompleteComponent } from './content-type/content-types/c
     ContentTypeEditComponent,
     ContentTypeSelectComponent,
     ContentTypeAutocompleteComponent,
+    ChestsComponent,
+    ChestComponent,
+    ChestEditComponent,
   ]
 })
 export class PagesModule { }

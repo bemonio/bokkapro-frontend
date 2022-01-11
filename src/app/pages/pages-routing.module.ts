@@ -412,6 +412,13 @@ const routes: Routes = [
             (m) => m.ContentTypeRoutingModule
           ),
       },
+      {
+        path: 'chests',
+        loadChildren: () =>
+          import('../pages/chest/chest-routing.module').then(
+            (m) => m.ChestRoutingModule
+          ),
+      },
     ],
   },
 ];

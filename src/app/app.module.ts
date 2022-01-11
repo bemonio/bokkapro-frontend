@@ -75,6 +75,7 @@ import { TourDetailService } from './pages/tour-detail/_services';
 import { PermissionService } from './pages/permission/_services';
 import { GroupService } from './pages/group/_services';
 import { ContentTypeService } from './pages/content-type/_services';
+import { ChestService } from './pages/chest/_services';
 
 // OTHER MODULES
 import { CompaniesComponent } from 'src/app/pages/company/companies/companies.component';
@@ -186,7 +187,7 @@ export function getHighlightLanguages() {
     PermissionService,
     GroupService,
     ContentTypeService,
-
+    ChestService,
     //Others
     CompaniesComponent
   ],
