@@ -97,6 +97,7 @@ import { OfficesComponent } from './office/offices/offices.component';
 import { OfficeComponent } from './office/office.component';
 import { OfficeEditComponent } from './office/offices/office-edit/office-edit.component';
 import { OfficeAutocompleteComponent } from './office/offices/office-autocomplete/office-autocomplete.component';
+import { OfficeMultiselectComponent } from './office/offices/office-multiselect/office-multiselect.component';
 
 // Positions
 import { PositionsComponent } from './position/positions/positions.component';
@@ -394,6 +395,7 @@ import { ChestEditComponent } from './chest/chests/chest-edit/chest-edit.compone
     OfficeComponent,
     OfficeEditComponent,
     OfficeAutocompleteComponent,
+    OfficeMultiselectComponent,
     DepartmentsComponent,
     DepartmentComponent,
     DepartmentEditComponent,
