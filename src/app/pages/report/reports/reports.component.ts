@@ -36,6 +36,7 @@ export class ReportsComponent implements OnInit {
     }
 
     ngAfterViewInit() {
+        //TODO: pasar el token, el userid, el employeeid
         this.iframe.nativeElement.setAttribute('src', this.REPORT_URL + '/token=' + this.token.getToken());
     }
 }

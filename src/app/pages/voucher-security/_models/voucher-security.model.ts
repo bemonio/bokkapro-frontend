@@ -17,7 +17,7 @@ export class VoucherSecurityModel {
   division: any;
   guides: any;
   cashier: any;
-  certified_cart: any;
+  certified_cart_code: string;
   contract: any;
   origin_destination: any;
   location_origin: any;

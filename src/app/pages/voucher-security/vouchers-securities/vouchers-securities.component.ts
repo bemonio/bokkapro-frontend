@@ -164,7 +164,7 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         this._with = [];
         this._with.push({key: 'include[]', value: 'currency.*'})
         this._with.push({key: 'include[]', value: 'cashier.*'})
-        this._with.push({key: 'include[]', value: 'certified_cart.*'})
+        // this._with.push({key: 'include[]', value: 'certified_cart.*'})
         this._with.push({key: 'include[]', value: 'crew.*'})
         this._with.push({key: 'include[]', value: 'crew_last.*'})
         this._with.push({key: 'include[]', value: 'contract.*'})

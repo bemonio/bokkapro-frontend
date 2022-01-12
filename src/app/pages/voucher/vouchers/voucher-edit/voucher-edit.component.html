@@ -254,15 +254,15 @@
           </div>
           <div class="form-group row" *ngIf="showCertifiedCart">
             <div class="col-lg-12">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CERTIFIED_CART' | translate }}</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CERTIFIED_CART_CODE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="certified_cart" [class.is-invalid]="isControlInvalid('certified_cart')"
-                [class.is-valid]="isControlValid('certified_cart')" formControlName="certified_cart" />
-              <div class="feedback" *ngIf="!isControlTouched('certified_cart')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CERTIFIED_CART' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('certified_cart')">{{ 'VOUCHER.CERTIFIED_CART' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'certified_cart')">{{ 'VOUCHER.CERTIFIED_CART' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'certified_cart')">{{ 'VOUCHER.CERTIFIED_CART' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'certified_cart')">{{ 'VOUCHER.CERTIFIED_CART' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+                name="certified_cart_code" [class.is-invalid]="isControlInvalid('certified_cart_code')"
+                [class.is-valid]="isControlValid('certified_cart_code')" formControlName="certified_cart_code" />
+              <div class="feedback" *ngIf="!isControlTouched('certified_cart_code')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CERTIFIED_CART_CODE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('certified_cart_code')">{{ 'VOUCHER.CERTIFIED_CART_CODE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'certified_cart_code')">{{ 'VOUCHER.CERTIFIED_CART_CODE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'certified_cart_code')">{{ 'VOUCHER.CERTIFIED_CART_CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'certified_cart_code')">{{ 'VOUCHER.CERTIFIED_CART_CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
           </div>
           <div class="float-right">

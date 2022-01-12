@@ -98,7 +98,7 @@
               {{ 'VOUCHER.CERTIFIED_CART' | translate }}
             </div>
           </th>
-          <th pSortableColumn="certified_cart">
+          <th pSortableColumn="insured">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'VOUCHER.VAULT' | translate }}
             </div>
@@ -148,7 +148,7 @@
             {{value.division?.name}}
           </td>
           <td>
-            {{value.certified_cart?.code}}
+            {{value.certified_cart_code}}
           </td>
           <td>
             <p-badge [value]="'SI'"  severity="success"  severity="success" *ngIf="value.insured == true"></p-badge>

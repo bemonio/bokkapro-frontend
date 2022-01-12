@@ -353,11 +353,8 @@ export class GuidesComponent implements OnInit, OnDestroy {
             if (response) {
                 this.verificationGuides = [];
                 this.verificationGuides.push(response.guide);
-                let count = this.voucherLenght(this.verificationGuides, true) + this.countPackings(this.verificationGuides, true, true);                
+                let count = this.voucherLenght(this.verificationGuides, true) + this.countPackings(this.verificationGuides, true, true) + this.countCerifiedCart(this.verificationGuides);                
                 this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
-                if (response.guide.certified_cart) {
-                    this.certified_cart_code.setValidators(Validators.compose([Validators.required, Validators.pattern(response.guide.certified_cart_code)]));
-                }
             }
         });
     }
@@ -372,7 +369,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.displayModal = true;
         this.listVouchers = [];
         this.verificationGuides = this.selectedModels;
-        let count = this.voucherLenght(this.verificationGuides, true) + this.countPackings(this.verificationGuides, true, true);
+        let count = this.voucherLenght(this.verificationGuides, true) + this.countPackings(this.verificationGuides, true, true) + this.countCerifiedCart(this.verificationGuides);
         this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
     }
 
@@ -388,25 +385,38 @@ export class GuidesComponent implements OnInit, OnDestroy {
         return count;
     }
 
+    public countCerifiedCart(guides) {
+        let count = 0;
+        guides.forEach(guide => {
+            if (guide.certified_cart == true) {
+                count = count + 1;
+            }
+        });
+        return count;
+    }
+
     public addListVouchers(event) {
         let found = false;
         this.verificationGuides.forEach(guide => {
-                guide.vouchers.forEach(voucher => {
-                    let evenValue = event.value.replace(/[^a-zA-Z0-9]/g, '');
-
-                    if (voucher.code === evenValue) {
-                        voucher.verificated = true;
-                        found = true;
-                    }
-                    if (guide.division_destination.name !== 'Operaciones Internas') {
-                        voucher.packings.forEach(packing => {
-                            if (packing.code === evenValue) {
-                                packing.verificated = true;
-                                found = true;
-                            }
-                        });
-                    }
-                });
+            let evenValue = event.value.replace(/[^a-zA-Z0-9]/g, '');
+            guide.vouchers.forEach(voucher => {
+                if (voucher.code === evenValue) {
+                    voucher.verificated = true;
+                    found = true;
+                }
+                if (guide.division_destination.name !== 'Operaciones Internas') {
+                    voucher.packings.forEach(packing => {
+                        if (packing.code === evenValue) {
+                            packing.verificated = true;
+                            found = true;
+                        }
+                    });
+                }
+            });
+            if (guide.certified_cart_code === evenValue) {
+                guide.verificated = true;
+                found = true;                        
+            }
         });
         if (!found) {
             this.listVouchers.forEach(element => {
@@ -538,7 +548,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
     }
 
     public changeCountPackings() {
-        let count = this.voucherLenght(this.verificationGuides, true) + this.countPackings(this.verificationGuides, true, true);
+        let count = this.voucherLenght(this.verificationGuides, true) + this.countPackings(this.verificationGuides, true, true) + this.countCerifiedCart(this.verificationGuides);
         this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count), Validators.maxLength(count)]));
         this.verificationGroup.markAllAsTouched();
     }

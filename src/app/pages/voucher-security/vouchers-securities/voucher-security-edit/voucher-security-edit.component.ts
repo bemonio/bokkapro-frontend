@@ -56,7 +56,7 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
   public is_active: AbstractControl;
   public verified_oi: AbstractControl;
   public currency: AbstractControl;
-  public certified_cart: AbstractControl;
+  public certified_cart_code: AbstractControl;
   
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
@@ -111,7 +111,7 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
       is_active: [''],
       verified_oi: [''],
       currency: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      certified_cart: [''] 
+      certified_cart_code: [''] 
     });
     this.code = this.formGroup.controls['code'];
     this.amount = this.formGroup.controls['amount'];
@@ -128,7 +128,7 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
     this.location_origin = this.formGroup.controls['location_origin'];
     this.location_destination = this.formGroup.controls['location_destination'];
     this.currency = this.formGroup.controls['currency'];
-    this.certified_cart = this.formGroup.controls['certified_cart'];
+    this.certified_cart_code = this.formGroup.controls['certified_cart_code'];
     this.direct_operation = this.formGroup.controls['direct_operation'];
     this.is_active = this.formGroup.controls['is_active'];
     this.verified_oi = this.formGroup.controls['verified_oi'];
@@ -226,9 +226,9 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
           });
 
         }
-        if (response.certified_cart) {
-          this.model.certified_cart = response.certified_cart[0];
-        }
+        // if (response.certified_cart_code) {
+        //   this.model.certified_cart_code = response.certified_cart_code[0];
+        // }
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -279,9 +279,9 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
       if(this.model.exchange_rate){
         this.exchange_rate.setValue(this.model.exchange_rate);
       }
-      if (this.model.certified_cart) {
-        this.certified_cart.setValue(this.model.certified_cart);
-      }
+      // if (this.model.certified_cart_code) {
+      //   this.certified_cart_code.setValue(this.model.certified_cart_code);
+      // }
       if (this.model.packings) {
         let list_packings = [];
         this.model.packings.forEach(element => {
@@ -304,7 +304,7 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
         this.location_origin.setValidators([]);
         this.location_destination.setValidators([]);
         this.currency.setValidators([]);
-        this.certified_cart.setValidators([]);
+        this.certified_cart_code.setValidators([]);
     }
 
     if(this.showCertifiedCart){
@@ -320,7 +320,7 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
       this.location_origin.setValidators([]);
       this.location_destination.setValidators([]);
       this.currency.setValidators([]);
-      this.certified_cart.setValidators([]);
+      this.certified_cart_code.setValidators([]);
       this.direct_operation.setValidators([]);
       this.is_active.setValidators([]);
       this.verified_oi.setValidators([]);
@@ -384,14 +384,14 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
 
   asignCertifiedCart(){
     let params = {
-      certifiedCartId: this.certified_cart.value,
+      certifiedCartId: this.certified_cart_code.value,
       division: this.division.id.toString(),
       vouchers: this.listVouchers
     }
     const sbUpdate = this.modelsService.asignCertifiedCart(params).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
-        this.certified_cart.reset();
+        this.certified_cart_code.reset();
       }),
       catchError((error) => {
         let messageError = [];
@@ -434,7 +434,7 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
     }
     model.currency = this.model.currency.id;
 
-    this.model.certified_cart = null;
+    this.model.certified_cart_code = null;
 
     model.division = this.division.id;
     // model.verificated = true;
@@ -519,7 +519,7 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
     model.exchange_rate = this.currency.value?.exchange_rate;
     model.currency = this.model.currency.id;
 
-    this.model.certified_cart = null;
+    this.model.certified_cart_code = null;
 
     model.division = this.division.id;
     // model.verificated = true;
@@ -665,8 +665,8 @@ export class VoucherSecurityEditComponent implements OnInit, OnDestroy {
         if (response.currencies) {
           this.office.currency = response.currencies[0];
         }
-        if (response.certified_carts) {
-          this.office.certified_cart = response.certified_carts[0];
+        if (response.certified_cart_codes) {
+          this.office.certified_cart_code = response.certified_cart_codes[0];
         }
         if (response.companies) {
           this.office.company = response.companies[0];

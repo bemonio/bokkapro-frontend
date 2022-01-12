@@ -597,6 +597,7 @@ export const locale = {
       CONTRACT: 'Contrato',
       COMPANY_CONTACT: 'Contacto Grupo Económico',
       NOTE: 'Nota',
+      FIXED_COSTS: 'Cargos Fijos',
       TOTAL_FIXED_COSTS: 'Total Cargos Fijos',
       TRAVELS: 'Viajes Unidad',
       TRAVELS_DIRECTS: 'Viajes Directos',
