@@ -484,6 +484,15 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         let per_page = 1;
         let sort = undefined;
         let query = undefined;
+
+        this.listVouchersSecurityList.forEach(element => {
+            if (element == event.value) {                
+                event.value = event.value.replace(/[^a-zA-Z0-9]/g, '')
+                this.listVouchersSecurityList.pop();
+                this.listVouchersSecurityList.push(event.value);
+            }
+        });
+
         let filters = [{ key: 'filter{code}', value: event.value }];
         if(this.division_id_filter.id) {
             filters.push({ key: 'filter{division}', value: this.division_id_filter.id.toString() })
