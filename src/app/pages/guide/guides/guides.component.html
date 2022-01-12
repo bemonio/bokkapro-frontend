@@ -217,7 +217,7 @@
         <div style="overflow: scroll; max-height: 200px; height: 200px;" class="py-5">
           <span *ngFor="let guide of verificationGuides">
             <!-- <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{guide.id}}<br> -->
-            <div *ngIf="!guide.verificated"> - <i class="fas fa-lock" style="color: Dodgerblue; font-size: 16px;"></i> {{guide.certified_cart_code}} <i [ngClass]="guide.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': guide.verificated ? 'green' : 'red' }"></i><br></div>
+            <div *ngIf="!guide.verificated && guide.certified_cart"> - <i class="fas fa-lock" style="color: Dodgerblue; font-size: 16px;"></i> {{guide.certified_cart_code}} <i [ngClass]="guide.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': guide.verificated ? 'green' : 'red' }"></i><br></div>
             <span *ngFor="let voucher of guide.vouchers">
               <div *ngIf="!voucher.verificated"> - <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br></div>
               <div *ngIf="guide.division_destination.name !== 'Operaciones Internas'">
@@ -234,7 +234,7 @@
         <div style="overflow: scroll; max-height: 200px; height: 200px;" class="py-5">
           <span *ngFor="let guide of verificationGuides">
             <!-- <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{guide.id}}<br> -->
-            <div *ngIf="guide.verificated"> - <i class="fas fa-lock" style="color: Dodgerblue; font-size: 16px;"></i> {{guide.certified_cart_code}} <i [ngClass]="guide.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': guide.verificated ? 'green' : 'red' }"></i><br></div>
+            <div *ngIf="guide.verificated  && guide.certified_cart"> - <i class="fas fa-lock" style="color: Dodgerblue; font-size: 16px;"></i> {{guide.certified_cart_code}} <i [ngClass]="guide.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': guide.verificated ? 'green' : 'red' }"></i><br></div>
             <span *ngFor="let voucher of guide.vouchers">
               <div *ngIf="voucher.verificated"> - <i class="fas fa-clipboard-list" style="color: Dodgerblue; font-size: 16px;"></i> {{voucher.code}} <i [ngClass]="voucher.verificated ? 'fas fa-check-circle' : 'fas fa-question-circle'" aria-hidden="true" [ngStyle]="{'color': voucher.verificated ? 'green' : 'red' }"></i><br></div>
               <div *ngIf="guide.division_destination.name !== 'Operaciones Internas'">
