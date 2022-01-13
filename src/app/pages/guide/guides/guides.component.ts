@@ -369,6 +369,9 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.displayModal = true;
         this.listVouchers = [];
         this.verificationGuides = this.selectedModels;
+        console.log(this.voucherLenght(this.verificationGuides, true))
+        console.log(this.countPackings(this.verificationGuides, true, true))
+        console.log(this.countCerifiedCart(this.verificationGuides))
         let count = this.voucherLenght(this.verificationGuides, true) + this.countPackings(this.verificationGuides, true, true) + this.countCerifiedCart(this.verificationGuides);
         this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
     }
@@ -377,7 +380,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
         let count = 0;
         guides.forEach(guides => {
             guides.vouchers.forEach(voucher => {
-                if ((only_not_verified == false) || (only_not_verified && voucher.verified == false)) {
+                if ((only_not_verified == false) || (only_not_verified && voucher.verificated == false)) {
                     count = count + 1;
                 }
             });
@@ -513,16 +516,16 @@ export class GuidesComponent implements OnInit, OnDestroy {
         });
     }
 
-    countPackings(certifiedcarts, operations, only_not_verified) {
+    countPackings(guides, operations, only_not_verified) {
         let count = 0;
         if (operations) {
-            certifiedcarts.forEach(certifiedcart => {
-                // if (certifiedcart.division_destination.name != 'Operaciones Internas') {
-                    if (certifiedcart.vouchers) {
-                        certifiedcart.vouchers.forEach(voucher => {
+            guides.forEach(guide => {
+                // if (guide.division_destination.name != 'Operaciones Internas') {
+                    if (guide.vouchers) {
+                        guide.vouchers.forEach(voucher => {
                             if (voucher.packings) {
                                 voucher.packings.forEach(packing => {
-                                    if ((only_not_verified == false) || (only_not_verified && packing.verified == false)) {
+                                    if ((only_not_verified == false) || (only_not_verified && packing.verificated == false)) {
                                         count = count + 1;
                                     }
                                 });
@@ -532,9 +535,9 @@ export class GuidesComponent implements OnInit, OnDestroy {
                 // }
             });
         } else {
-            certifiedcarts.forEach(certifiedcart => {
-                if (certifiedcart.vouchers) {
-                    certifiedcart.vouchers.forEach(voucher => {
+            guides.forEach(guide => {
+                if (guide.vouchers) {
+                    guide.vouchers.forEach(voucher => {
                         if (voucher.packings) {
                             voucher.packings.forEach(packing => {
                                 count = count + 1;
