@@ -504,6 +504,7 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         });
 
         let filters = [{ key: 'filter{code}', value: event.value }];
+        filters.push({ key: 'filter{insured}', value: false })
         if(this.division_id_filter.id) {
             filters.push({ key: 'filter{division}', value: this.division_id_filter.id.toString() })
         }
