@@ -547,12 +547,6 @@ export class GuidesComponent implements OnInit, OnDestroy {
         return count;
     }
 
-    public changeCountPackings() {
-        let count = this.voucherLenght(this.verificationGuides, true) + this.countPackings(this.verificationGuides, true, true) + this.countCerifiedCart(this.verificationGuides);
-        this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count), Validators.maxLength(count)]));
-        this.verificationGroup.markAllAsTouched();
-    }
-
     public formatDate(date) {
         const d = new Date(date);
         let month = '' + (d.getMonth() + 1);
