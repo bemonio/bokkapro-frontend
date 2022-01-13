@@ -304,11 +304,11 @@
         <p-chips [styleClass]="getValidClass(isControlValid('vouchersConfirmationDelivered',ConfirmationDeliveredGroup))" formControlName="vouchersConfirmationDelivered" [allowDuplicate]="false" (onAdd)="addListVouchersConfirmationDelivered($event)" (onRemove)="removeListVouchersConfirmationDelivered($event)" [(ngModel)]="listVouchersConfirmationDeliveredList"></p-chips>
         <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchersConfirmationDelivered',ConfirmationDeliveredGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CODES' | translate }}</b></div>
         <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchersConfirmationDelivered',ConfirmationDeliveredGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CODES' | translate }}</b></div>
-        <div class="valid-feedback"  style="display: block;" *ngIf="countPackings(listVouchersConfirmationDelivered) == listVouchersConfirmationDeliveredList.length">{{ 'GUIDE.CODES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+        <div class="valid-feedback"  style="display: block;" *ngIf="voucherLenght(listVouchersConfirmationDelivered) == listVouchersConfirmationDeliveredList.length">{{ 'GUIDE.CODES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
         <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'vouchers')">Vouchers  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
-        <div class="invalid-feedback"  style="display: block;" *ngIf="countPackings(listVouchersConfirmationDelivered) > listVouchersConfirmationDeliveredList.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{countPackings(listVouchersConfirmationDelivered)}}
+        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(listVouchersConfirmationDelivered) > listVouchersConfirmationDeliveredList.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{voucherLenght(listVouchersConfirmationDelivered)}}
           item</div>
-        <div class="invalid-feedback"  style="display: block;" *ngIf="countPackings(listVouchersConfirmationDelivered) < listVouchersConfirmationDeliveredList.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{countPackings(listVouchersConfirmationDelivered)}}
+        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(listVouchersConfirmationDelivered) < listVouchersConfirmationDeliveredList.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{voucherLenght(listVouchersConfirmationDelivered)}}
           items</div>
       </div>
 

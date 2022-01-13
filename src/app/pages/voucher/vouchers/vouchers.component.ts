@@ -574,15 +574,22 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.getModels();
     }
 
-    countPackings(listVouchers) {
+    countPackings(vouchers) {
         let count = 0;
-        listVouchers.forEach(voucher => {
+        vouchers.forEach(voucher => {
+            if (voucher.packings) {
+                voucher.packings.forEach(packing => {
+                    count = count + 1;
+                });
+            }        
+        });
+        return count;
+    }
+
+    public voucherLenght(vouchers) {
+        let count = 0;
+        vouchers.forEach(voucher => {
             count = count + 1;
-            // if (voucher.packings) {
-            //     voucher.packings.forEach(packing => {
-            //         count = count + 1;
-            //     });
-            // }
         });
         return count;
     }
@@ -722,6 +729,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
                 } else {
                     this.toastService.growl('top-right', 'success', 'success', 'Código: Encontrado');
                 }
+                let count = this.voucherLenght(this.listVouchersSecurity) + this.countPackings(this.listVouchersSecurity);
+                this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
+                this.securityGroup.markAllAsTouched();        
             },
             error => {
                 this.requesting = false;
@@ -794,7 +804,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         let item = 0;
         this.listVouchersConfirmationDelivered.forEach(element => {            
             if (element.code === event.value) {
-                this.listVouchersConfirmationDelivered.splice(item, 1);
+                element.verificated = false
             }
             element.packings.forEach(element2 => {
                 if (element2.code === event.value) {
@@ -805,6 +815,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         });
     }    
 
+    
     // helpers for View
     isControlValid(controlName: string, formGroup: FormGroup): boolean {
         const control = formGroup.controls[controlName];
@@ -1077,7 +1088,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     });
                 }
                 this.listVouchersConfirmationDelivered = models;
-                let count = this.countPackings(this.listVouchersConfirmationDelivered);
+                let count = this.voucherLenght(this.listVouchersConfirmationDelivered);
                 this.vouchersConfirmationDelivered.setValidators(Validators.compose([Validators.required, Validators.minLength(count), Validators.maxLength(count)]));
                 this.ConfirmationDeliveredGroup.markAllAsTouched();        
             },

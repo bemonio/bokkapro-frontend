@@ -467,13 +467,23 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         this.getModels();
     }
 
-    public changeCountPackings() {
-        // this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(this.listVouchers.length), Validators.maxLength(this.listVouchers.length)]));
-        // this.securityGroup.markAllAsTouched();
+    countPackings(vouchers) {
+        let count = 0;
+        vouchers.forEach(voucher => {
+            if (voucher.packings) {
+                voucher.packings.forEach(packing => {
+                    count = count + 1;
+                });
+            }        
+        });
+        return count;
     }
 
-    countPackings(guide, operations) {
+    public voucherLenght(vouchers) {
         let count = 0;
+        vouchers.forEach(voucher => {
+            count = count + 1;
+        });
         return count;
     }
 
@@ -612,6 +622,9 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
                 } else {
                     this.toastService.growl('top-right', 'success', 'success', 'Código: Encontrado');
                 }
+                let count = this.voucherLenght(this.listVouchersSecurity) + this.countPackings(this.listVouchersSecurity);
+                this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
+                this.securityGroup.markAllAsTouched();        
             },
             error => {
                 this.requesting = false;

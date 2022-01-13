@@ -231,6 +231,13 @@
         <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CODES' | translate }}</label>
         <p-chips [styleClass]="getValidClass(isControlValid('vouchers',securityGroup))" formControlName="vouchers" [allowDuplicate]="false" (onAdd)="addListVouchers($event)" (onRemove)="removeListVouchers($event)" [(ngModel)]="listVouchersSecurityList"></p-chips>
         <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers',securityGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CODES' | translate }}</b></div>
+        <div class="feedback"  style="display: block;" *ngIf="!isControlTouched('vouchers',securityGroup)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.CODES' | translate }}</b></div>
+        <div class="valid-feedback"  style="display: block;" *ngIf="voucherLenght(listVouchersSecurity) + countPackings(listVouchersSecurity) == listVouchersSecurityList.length">{{ 'GUIDE.CODES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+        <!-- <div class="invalid-feedback"  style="display: block;" *ngIf="controlHasError('required', 'vouchers')">Vouchers  {{ 'COMMON.IS_REQUIRED' | translate }}</div> -->
+        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(listVouchersSecurity) + countPackings(listVouchersSecurity) > listVouchersSecurityList.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{voucherLenght(listVouchersSecurity) + countPackings(listVouchersSecurity)}}
+          item</div>
+        <div class="invalid-feedback"  style="display: block;" *ngIf="voucherLenght(listVouchersSecurity) + countPackings(listVouchersSecurity) < listVouchersSecurityList.length">{{ 'GUIDE.CODES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{voucherLenght(listVouchersSecurity) + countPackings(listVouchersSecurity)}}
+          items</div>
       </div>
       <div class="col-lg-6" style="margin-top: 15px; margin-bottom: 5px;">
         <b>{{ 'COMMON.LIST' | translate }} {{ 'COMMON.VERIFICATION' | translate }}:</b><br>
