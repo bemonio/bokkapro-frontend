@@ -194,7 +194,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/reports/operations']);
+          this.router.navigate(['/reportsoperations']);
         }
       }),
       catchError((error) => {
@@ -236,7 +236,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/reports/operations']);
+          this.router.navigate(['/reportsoperations']);
         } else {
           this.formGroup.reset()
         }
