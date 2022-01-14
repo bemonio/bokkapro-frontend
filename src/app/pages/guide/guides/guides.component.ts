@@ -520,7 +520,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
         let count = 0;
         if (operations) {
             guides.forEach(guide => {
-                // if (guide.division_destination.name != 'Operaciones Internas') {
+                if (guide.division_destination.name != 'Operaciones Internas') {
                     if (guide.vouchers) {
                         guide.vouchers.forEach(voucher => {
                             if (voucher.packings) {
@@ -532,7 +532,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
                             }        
                         });
                     }
-                // }
+                }
             });
         } else {
             guides.forEach(guide => {
