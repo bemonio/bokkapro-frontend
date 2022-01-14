@@ -428,10 +428,10 @@
               <p-editor formControlName="note" [style]="{'height':'200px'}" placeholder="{{ 'SERVICE_ORDER.NOTE' | translate }}"></p-editor>
             </div>
           </div>
-          <div *ngIf="model.id" *ngIf="authService.hasPermission('view_origindestination')">
+          <div *ngIf="model.id && authService.hasPermission('view_origindestination')">
             <app-origin-destinations [serviceOrderId]="model.id"></app-origin-destinations>
           </div>
-          <div *ngIf="model.id" *ngIf="authService.hasPermission('view_chest')">
+          <div *ngIf="model.id && authService.hasPermission('view_chest')">
             <app-chests [serviceOrderId]="model.id"></app-chests>
           </div>
           <div class="float-right">

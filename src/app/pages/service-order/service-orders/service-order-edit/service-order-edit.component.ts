@@ -75,6 +75,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private toastService: ToastService,
     private companyService: CompanyService,
+    public authService: AuthService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
