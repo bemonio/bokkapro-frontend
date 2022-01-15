@@ -420,6 +420,7 @@ export const locale = {
       NEWS: 'Nuevos',
       TOTAL: 'Total',
       TRANSFER: 'Transferir',
+      VIEW: 'Ver',
       EDIT: 'Editar',
       DELETE: 'Eliminar',
       ACTION: 'Acción',
