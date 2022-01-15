@@ -148,6 +148,12 @@
             <p-progressBar [value]="value.activity" [showValue]="false"></p-progressBar>
           </td> -->
           <td style="text-align: right">
+            <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              [routerLink]="'/users/view/' + value.id" *ngIf="authService.hasPermission('view_user')">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/Eye.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-info">
+              </span>
+            </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               [routerLink]="'/users/edit/' + value.id" *ngIf="authService.hasPermission('add_user')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
