@@ -38,6 +38,26 @@ const routes: Routes = [
           },  
         ]
       },
+      {
+        path: 'view/:id',
+        component: DivisionEditComponent,
+        children: [
+          {
+            path: 'employees',
+            loadChildren: () =>
+              import('../../pages/employee/employee-routing.module').then(
+                (m) => m.EmployeeRoutingModule
+              ),
+          },
+          {
+            path: 'crews',
+            loadChildren: () =>
+              import('../../pages/crew/crew-routing.module').then(
+                (m) => m.CrewRoutingModule
+              ),
+          },  
+        ]
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

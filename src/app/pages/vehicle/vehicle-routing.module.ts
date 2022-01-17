@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: VehicleEditComponent
       },
+      {
+        path: 'view/:id',
+        component: VehicleEditComponent
+      },
       { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
       { path: '**', redirectTo: 'vehicles', pathMatch: 'full' },
     ],

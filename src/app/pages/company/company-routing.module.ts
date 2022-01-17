@@ -58,6 +58,47 @@ const routes: Routes = [
               ),
           },
         ]
+      },
+      {
+        path: 'view/:id',
+        component: CompanyEditComponent,
+        children: [
+          {
+            path: 'contracts',
+            loadChildren: () =>
+              import('../../pages/contract/contract-routing.module').then(
+                (m) => m.ContractRoutingModule
+              ),
+          },
+          {
+            path: 'companycontacts',
+            loadChildren: () =>
+              import('../../pages/company-contact/company-contact-routing.module').then(
+                (m) => m.CompanyContactRoutingModule
+              ),
+          },
+          {
+            path: 'quotations',
+            loadChildren: () =>
+              import('../../pages/quotation/quotation-routing.module').then(
+                (m) => m.QuotationRoutingModule
+              ),
+          },
+          {
+            path: 'locations',
+            loadChildren: () =>
+              import('../../pages/location/location-routing.module').then(
+                (m) => m.LocationRoutingModule
+              ),
+          },
+          {
+            path: 'serviceorders',
+            loadChildren: () =>
+              import('../../pages/service-order/service-order-routing.module').then(
+                (m) => m.ServiceOrderRoutingModule
+              ),
+          },
+        ]
 
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },

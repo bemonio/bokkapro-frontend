@@ -31,6 +31,19 @@ const routes: Routes = [
           },
         ]
       },
+      {
+        path: 'view/:id',
+        component: CertifiedCartEditComponent,
+        children: [
+          {
+            path: 'vouchers',
+            loadChildren: () =>
+              import('../../pages/voucher/voucher-routing.module').then(
+                (m) => m.VoucherRoutingModule
+              ),
+          },
+        ]
+      },
       { path: '', redirectTo: 'certifiedcarts', pathMatch: 'full' },
       { path: '**', redirectTo: 'certifiedcarts', pathMatch: 'full' },
     ],

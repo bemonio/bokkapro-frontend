@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: GroupEditComponent
       },
+      {
+        path: 'view/:id',
+        component: GroupEditComponent
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

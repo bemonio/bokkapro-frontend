@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: BankAccountEditComponent
       },
+      {
+        path: 'view/:id',
+        component: BankAccountEditComponent
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

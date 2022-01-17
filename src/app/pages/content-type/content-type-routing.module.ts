@@ -31,6 +31,19 @@ const routes: Routes = [
           },
         ]
       },
+      {
+        path: 'view/:id',
+        component: ContentTypeEditComponent,
+        children: [
+          {
+            path: 'origindestinations',
+            loadChildren: () =>
+              import('../../pages/origin-destination/origin-destination-routing.module').then(
+                (m) => m.OriginDestinationRoutingModule
+            ),
+          },
+        ]
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

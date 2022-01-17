@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: ClientBinnacleEditComponent
       },
+      {
+        path: 'view/:id',
+        component: ClientBinnacleEditComponent
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

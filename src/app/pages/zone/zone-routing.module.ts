@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: ZoneEditComponent
       },
+      {
+        path: 'view/:id',
+        component: ZoneEditComponent
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

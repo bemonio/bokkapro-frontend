@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: TypeGuideEditComponent
       },
+      {
+        path: 'view/:id',
+        component: TypeGuideEditComponent
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

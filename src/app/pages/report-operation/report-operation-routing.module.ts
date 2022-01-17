@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: ReportOperationEditComponent
       },
+      {
+        path: 'view/:id',
+        component: ReportOperationEditComponent
+      },
       { path: '', redirectTo: 'reportsoperations', pathMatch: 'full' },
       { path: '**', redirectTo: 'reportsoperations', pathMatch: 'full' },
     ],

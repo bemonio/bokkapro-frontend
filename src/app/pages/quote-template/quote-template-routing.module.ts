@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: QuoteTemplateEditComponent
       },
+      {
+        path: 'view/:id',
+        component: QuoteTemplateEditComponent
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

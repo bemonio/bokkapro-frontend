@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: ModerationEditComponent
       },
+      {
+        path: 'view/:id',
+        component: ModerationEditComponent
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

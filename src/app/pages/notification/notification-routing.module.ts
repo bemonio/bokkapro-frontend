@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: NotificationEditComponent
       },
+      {
+        path: 'view/:id',
+        component: NotificationEditComponent
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],

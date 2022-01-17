@@ -139,7 +139,7 @@
               </span>
             </a>
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/users/view/' + value.id" *ngIf="authService.hasPermission('view_origindestination')">
+              [routerLink]="'/origindestinations/view/' + value.id" *ngIf="authService.hasPermission('view_origindestination')">
               <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-info">
               </span>

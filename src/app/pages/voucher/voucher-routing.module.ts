@@ -43,7 +43,26 @@ const routes: Routes = [
           },
         ]
       },
-      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      {
+        path: 'view/:id',
+        component: VoucherEditComponent,
+        children: [
+          {
+            path: 'packings',
+            loadChildren: () =>
+              import('../../pages/packing/packing-routing.module').then(
+                (m) => m.PackingRoutingModule
+              ),
+          },
+          {
+            path: 'guides',
+            loadChildren: () =>
+              import('../../pages/guide/guide-routing.module').then(
+                (m) => m.GuideRoutingModule
+              ),
+          },
+        ]
+      },      { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],
   },

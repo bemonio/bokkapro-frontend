@@ -42,6 +42,26 @@ const routes: Routes = [
               ),
           },
         ]
+      },      
+      {
+        path: 'view/:id',
+        component: VoucherSecurityEditComponent,
+        children: [
+          {
+            path: 'packings',
+            loadChildren: () =>
+              import('../../pages/packing/packing-routing.module').then(
+                (m) => m.PackingRoutingModule
+              ),
+          },
+          {
+            path: 'guides',
+            loadChildren: () =>
+              import('../../pages/guide/guide-routing.module').then(
+                (m) => m.GuideRoutingModule
+              ),
+          },
+        ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

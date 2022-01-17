@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'edit/:id',
         component: OfficeEditComponent
       },
+      {
+        path: 'view/:id',
+        component: OfficeEditComponent
+      },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
     ],
