@@ -50,6 +50,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
   public packingId: number;
   public parent: string;
+  
+  public view: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -63,6 +65,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       amount: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],

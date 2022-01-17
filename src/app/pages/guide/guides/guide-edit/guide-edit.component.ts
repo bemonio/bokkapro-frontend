@@ -61,6 +61,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   private unsubscribe: Subscription[] = [];
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -74,17 +76,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
-
-    this.parent = '/guides';
-
-    this.newVoucher = false;
-  }
-
-  ngOnInit(): void {
-    this.id = undefined;
-    this.model = undefined;
-    this.previous = undefined;
-    this.filterIsCrew = false;
+    
+    this.view = false;
 
     this.formGroup = this.fb.group({
       description: [''],
@@ -120,6 +113,17 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       {key: 'PM', value: 'PM'},
     ];
 
+    this.parent = '/guides';
+
+    this.newVoucher = false;
+  }
+
+  ngOnInit(): void {
+    this.id = undefined;
+    this.model = undefined;
+    this.previous = undefined;
+    this.filterIsCrew = false;
+
     if (this.route.parent.parent.snapshot.url[0].path) {
       this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
     }
@@ -127,6 +131,13 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.get();
 
     this.subscribeToDivisionChange();
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   get() {

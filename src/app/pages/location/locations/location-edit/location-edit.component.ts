@@ -48,6 +48,8 @@ export class LocationEditComponent implements OnInit, OnDestroy {
   public companyId: number;
   public parent: string;
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -58,6 +60,8 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],

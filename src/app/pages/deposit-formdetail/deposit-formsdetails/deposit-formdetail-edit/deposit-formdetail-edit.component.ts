@@ -44,6 +44,8 @@ export class DepositFormDetailEditComponent implements OnInit, OnDestroy, OnChan
   public depositFormId: number;
   public parent: string;
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -57,6 +59,8 @@ export class DepositFormDetailEditComponent implements OnInit, OnDestroy, OnChan
     this.requesting = false;
     this.redirectURL = true;
     this.createOrEdit = {create: false, id: undefined}
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       quantity: ['', Validators.compose([Validators.required])],
@@ -82,6 +86,13 @@ export class DepositFormDetailEditComponent implements OnInit, OnDestroy, OnChan
       }
       this.get();
     });
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   ngOnChanges(): void {

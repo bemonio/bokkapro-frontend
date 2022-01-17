@@ -71,6 +71,8 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
   public serviceOrderId: number;
   public parent: string;
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -83,6 +85,8 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
     this.saveAndExit = false;
     this.requesting = false;
     this.filterServOrdCompany = undefined;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       type_service: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -171,6 +175,13 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       }
       this.get();
     });
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   ngOnChanges() {

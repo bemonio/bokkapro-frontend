@@ -49,6 +49,8 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
   public serviceOrderId: number;
   public parent: string;
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -61,6 +63,8 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
     this.saveAndExit = false;
     this.requesting = false;
     this.filterServOrdCompany = undefined;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -105,6 +109,13 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
       }
       this.get();
     });
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   ngOnChanges() {

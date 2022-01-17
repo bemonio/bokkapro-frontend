@@ -82,6 +82,12 @@
             {{value.date  | date: 'MM/dd/yyyy hh:mm'}}
           </td>
           <td style="text-align: right">
+            <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              [routerLink]="'/users/view/' + value.id" *ngIf="authService.hasPermission('view_exchange')">
+              <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-info">
+              </span>
+            </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               [routerLink]="'/exchanges/edit/' + value.id"  *ngIf="authService.hasPermission('add_exchange')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"

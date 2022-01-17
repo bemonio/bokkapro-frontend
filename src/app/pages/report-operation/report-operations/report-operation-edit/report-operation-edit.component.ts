@@ -39,6 +39,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
+  public view: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -50,6 +51,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       closed_at: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
@@ -78,6 +81,13 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
     this.get();
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   get() {

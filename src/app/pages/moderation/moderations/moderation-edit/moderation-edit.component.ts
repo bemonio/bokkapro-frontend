@@ -32,6 +32,7 @@ export class ModerationEditComponent implements OnInit, OnDestroy {
   // private subscriptions: Subscription[] = [];
 
   public saveAndExit;
+  public view: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -43,6 +44,8 @@ export class ModerationEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       status: [''],
@@ -56,6 +59,13 @@ export class ModerationEditComponent implements OnInit, OnDestroy {
     this.previous = undefined;
 
     this.get();
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   get() {

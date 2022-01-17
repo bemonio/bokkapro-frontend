@@ -48,6 +48,8 @@ export class TourDetailEditComponent implements OnInit, OnChanges, OnDestroy {
   public confirmDialogPosition: string;
   public message_confirm_delete: string;
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -77,6 +79,8 @@ export class TourDetailEditComponent implements OnInit, OnChanges, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
 
+    this.view = false;
+
     this.formGroup = this.fb.group({
       date_start: ['', Validators.compose([Validators.required,])],
       date_end: ['', Validators.compose([Validators.required,])],
@@ -105,6 +109,13 @@ export class TourDetailEditComponent implements OnInit, OnChanges, OnDestroy {
       }
       this.get();
     });
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   ngOnChanges() {

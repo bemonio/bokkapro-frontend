@@ -40,6 +40,8 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
 
   public parent: string;
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -51,6 +53,8 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
@@ -86,6 +90,13 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     }
 
     this.get();
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   get() {

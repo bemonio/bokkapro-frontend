@@ -81,9 +81,9 @@
               <div class="col-lg-12 float-right">
                 <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/clientbinnacles">{{ 'COMMON.CANCEL' | translate }}</a>
                 <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-                  [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
+                  [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!view">{{ 'COMMON.SAVE' | translate }}</button>
                 <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-                  [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+                  [disabled]="formGroup.invalid" (click)="save(true)" *ngIf="!view">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
               </div>
             </div>
           </form>
@@ -104,7 +104,7 @@
               </div>
               <div class="text-right" style="height: 0;">
                 <button type="submit" class="btn btn-primary font-weight-bold" style="transform: translate(-10%, -175%);"
-                  [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE' | translate }}
+                  [disabled]="formGroup.invalid" (click)="save(true)" *ngIf="!view">{{ 'COMMON.SAVE' | translate }}
                 </button>
               </div>
             </form>

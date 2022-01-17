@@ -33,6 +33,8 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
 
   public saveAndExit;
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -43,6 +45,8 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       bank: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
@@ -59,6 +63,13 @@ export class BankAccountEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
     this.get();
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   get() {

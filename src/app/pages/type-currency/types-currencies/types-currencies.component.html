@@ -82,14 +82,20 @@
             {{value.description}}
           </td>
           <td style="text-align: right">
+            <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              [routerLink]="'/users/view/' + value.id" *ngIf="authService.hasPermission('view_typecurrency')">
+              <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-info">
+              </span>
+            </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/typescurrencies/edit/' + value.id"  *ngIf="authService.hasPermission('add_currency')">
+              [routerLink]="'/typescurrencies/edit/' + value.id"  *ngIf="authService.hasPermission('add_typecurrency')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_currency')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_typecurrency')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>

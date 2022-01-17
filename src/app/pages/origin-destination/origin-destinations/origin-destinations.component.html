@@ -138,6 +138,12 @@
                 class="svg-icon svg-icon-md svg-icon-success">
               </span>
             </a>
+            <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              [routerLink]="'/users/view/' + value.id" *ngIf="authService.hasPermission('view_origindestination')">
+              <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-info">
+              </span>
+            </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               routerLink="{{parent}}/origindestinations/edit/{{value.id}}" *ngIf="authService.hasPermission('change_origindestination') && !serviceOrderId">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"

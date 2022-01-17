@@ -82,6 +82,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   private unsubscribe: Subscription[] = [];
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -101,6 +103,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.saveAndExit = false;
     this.requesting = false;
     this.editBool = false;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
@@ -207,6 +211,13 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       }
       this.get();
     });
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   get() {

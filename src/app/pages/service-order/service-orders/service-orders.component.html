@@ -109,6 +109,12 @@
             <p-badge [value]="'Rechazado'"  severity="danger"  severity="danger" *ngIf="value.status == 'Rechazado'"></p-badge>
           </td>
           <td style="text-align: right">
+            <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              [routerLink]="'/users/view/' + value.id" *ngIf="authService.hasPermission('view_serviceorder')">
+              <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-info">
+              </span>
+            </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               routerLink="{{parent}}/serviceorders/edit/{{value.id}}" *ngIf="authService.hasPermission('change_serviceorder')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"

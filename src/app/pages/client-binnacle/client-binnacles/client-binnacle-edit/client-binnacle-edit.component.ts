@@ -43,6 +43,8 @@ export class ClientBinnacleEditComponent implements OnInit, OnDestroy, OnChanges
   public companyId: number;
   public parent: string;
 
+  public view: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -56,6 +58,8 @@ export class ClientBinnacleEditComponent implements OnInit, OnDestroy, OnChanges
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
+
+    this.view = false;
 
     this.formGroup = this.fb.group({
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
