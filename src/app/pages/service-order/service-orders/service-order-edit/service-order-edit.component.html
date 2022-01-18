@@ -185,7 +185,8 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="travels_directs" [class.is-invalid]="isControlInvalid('travels_directs')"
-                [class.is-valid]="isControlValid('travels_directs')" formControlName="travels_directs"/>
+                [class.is-valid]="isControlValid('travels_directs')" formControlName="travels_directs"
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
               <div class="feedback" *ngIf="!isControlTouched('travels_directs')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('travels_directs')">{{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'travels_directs')">{{ 'SERVICE_ORDER.TRAVELS_DIRECTS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
