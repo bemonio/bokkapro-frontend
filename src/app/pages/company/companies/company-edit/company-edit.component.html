@@ -28,29 +28,29 @@
     <ul class="nav nav-tabs nav-tabs-line" role="tablist">
       <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
         <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
-          [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/edit/{{model.id}}">
+          [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}">
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
       <li *ngIf="(model && model.id && authService.hasPermission('view_contract'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.CONTRACT_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.CONTRACT_TAB"
-          [class.active]="activeTabId === tabs.CONTRACT_TAB" routerLink="{{parent}}/edit/{{model.id}}/contracts">{{ 'CONTRACT.CONTRACTS' | translate }}</a>
+          [class.active]="activeTabId === tabs.CONTRACT_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}/contracts">{{ 'CONTRACT.CONTRACTS' | translate }}</a>
       </li>
       <li *ngIf="(model && model.id && authService.hasPermission('view_contract'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.CONTACT_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.CONTACT_TAB"
-          [class.active]="activeTabId === tabs.CONTACT_TAB" routerLink="{{parent}}/edit/{{model.id}}/companycontacts">{{ 'COMPANYCONTACT.COMPANYCONTACTS' | translate }}</a>
+          [class.active]="activeTabId === tabs.CONTACT_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}/companycontacts">{{ 'COMPANYCONTACT.COMPANYCONTACTS' | translate }}</a>
       </li>
       <li *ngIf="(model && model.id && authService.hasPermission('view_contract'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.TEMPLATE_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.TEMPLATE_TAB"
-          [class.active]="activeTabId === tabs.TEMPLATE_TAB" routerLink="{{parent}}/edit/{{model.id}}/quotations">{{ 'QUOTATION.QUOTATIONS' | translate }}</a>
+          [class.active]="activeTabId === tabs.TEMPLATE_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}/quotations">{{ 'QUOTATION.QUOTATIONS' | translate }}</a>
       </li>
       <li *ngIf="(model && model.id && authService.hasPermission('view_contract'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.LOCATIONS_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.LOCATIONS_TAB"
-          [class.active]="activeTabId === tabs.LOCATIONS_TAB" routerLink="{{parent}}/edit/{{model.id}}/locations">{{ 'LOCATION.LOCATIONS' | translate }}</a>
+          [class.active]="activeTabId === tabs.LOCATIONS_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}/locations">{{ 'LOCATION.LOCATIONS' | translate }}</a>
       </li>
       <li *ngIf="(model && model.id && authService.hasPermission('view_serviceorder'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.SERVICE_ORDERS_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.SERVICE_ORDERS_TAB"
-          [class.active]="activeTabId === tabs.SERVICE_ORDERS_TAB" routerLink="{{parent}}/edit/{{model.id}}/serviceorders">{{ 'SERVICE_ORDER.SERVICE_ORDERS' | translate }}</a>
+          [class.active]="activeTabId === tabs.SERVICE_ORDERS_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}/serviceorders">{{ 'SERVICE_ORDER.SERVICE_ORDERS' | translate }}</a>
       </li>
     </ul>
 

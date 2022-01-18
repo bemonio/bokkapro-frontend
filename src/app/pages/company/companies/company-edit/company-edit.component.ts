@@ -457,4 +457,8 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   toggleContainWithinAspectRatio() {
     this.containWithinAspectRatio = !this.containWithinAspectRatio;
   }
+
+  public getEditOrView() {
+    return this.view ? 'view' : 'edit';
+  }
 }

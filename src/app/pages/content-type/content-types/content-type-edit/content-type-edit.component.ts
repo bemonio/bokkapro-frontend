@@ -70,7 +70,15 @@ export class ContentTypeEditComponent implements OnInit, OnDestroy {
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
         this.companyId = params.id;
-        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
+        if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+          this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
+        } else {
+          Object.keys(this.formGroup.controls).forEach(control => {
+            this.formGroup.controls[control].disable();
+          });
+          this.view = true;
+          this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.companyId;
+        }
       }
       this.get();
     });

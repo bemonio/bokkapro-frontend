@@ -141,7 +141,11 @@ export class NotificationsComponent implements OnInit {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
                     this.companyId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
+                    if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.companyId;
+                    } else {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.companyId;
+                    }
                     this.filters.push({ key: 'filter{company}', value: this.companyId.toString() })
                 }
                 this.getModels();
