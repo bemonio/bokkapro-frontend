@@ -701,7 +701,7 @@ export const locale = {
       CHEST: 'Cofre',
       CHESTS: 'Cofres',
       ID: 'Id',
-      CODE: 'Código',
+      CODE: 'Serial',
       RENTAL: 'Alquiler Cofre',
       RISK: 'Riesgo Cofre',
       COST_RISK: 'Cargo Fijo Riesgo Cofre',
