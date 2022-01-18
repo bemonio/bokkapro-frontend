@@ -68,13 +68,24 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.RENTAL' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="rental" [class.is-invalid]="isControlInvalid('rental')"
-                [class.is-valid]="isControlValid('rental')" formControlName="rental" 
-                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+                [class.is-valid]="isControlValid('rental')" formControlName="rental"/>
               <div class="feedback" *ngIf="!isControlTouched('rental')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.RENTAL' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('rental')">{{ 'CHEST.RENTAL' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'rental')">{{ 'CHEST.RENTAL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'rental')">{{ 'CHEST.RENTAL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'rental')">{{ 'CHEST.RENTAL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.TOTAL_COST' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_cost" [class.is-invalid]="isControlInvalid('total_cost')"
+                [class.is-valid]="isControlValid('total_cost')" formControlName="total_cost" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_cost')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.TOTAL_COST' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_cost')">{{ 'CHEST.TOTAL_COST' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_cost')">{{ 'CHEST.TOTAL_COST' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_cost')">{{ 'CHEST.TOTAL_COST' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_cost')">{{ 'CHEST.TOTAL_COST' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.RISK' | translate }}</label>
@@ -111,18 +122,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'key_custody')">{{ 'CHEST.KEY_CUSTODY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'key_custody')">{{ 'CHEST.KEY_CUSTODY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'key_custody')">{{ 'CHEST.KEY_CUSTODY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.TOTAL_COST' | translate }}</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="total_cost" [class.is-invalid]="isControlInvalid('total_cost')"
-                [class.is-valid]="isControlValid('total_cost')" formControlName="total_cost" 
-                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
-              <div class="feedback" *ngIf="!isControlTouched('total_cost')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.TOTAL_COST' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('total_cost')">{{ 'CHEST.TOTAL_COST' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_cost')">{{ 'CHEST.TOTAL_COST' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_cost')">{{ 'CHEST.TOTAL_COST' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_cost')">{{ 'CHEST.TOTAL_COST' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
           </div>
           <div class="float-right">
