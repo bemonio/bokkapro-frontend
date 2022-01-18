@@ -441,7 +441,7 @@ export const locale = {
       MESSAGE_CONFIRM_DEVOLUTION: '¿Estás seguro que deseas devolver a operaciones internas?',
       MESSAGE_VERIFICATION_VOUCHER: '¿Estás seguro de verificar este comprobante?',
       MESSAGE_FACTURE_VOUCHER_AND_PACKINGS: '¿Estás seguro de facturar este comprobante y sus envases?',
-      ENTER: 'Ingrese',
+      ENTER: '',
       PLEASE_ENTER: 'Por favor ingrese',
       IS_REQUIRED: 'es Requerido',
       WAS_ENTERED_CORRECT: 'ingresado correctamente',
