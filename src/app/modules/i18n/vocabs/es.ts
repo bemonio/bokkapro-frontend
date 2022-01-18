@@ -393,7 +393,7 @@ export const locale = {
       ADDRESS: 'Dirección',
       EMPLOYEEPOSITION: 'Cargo',
       EMAIL: 'Correo',
-      COMPANY: 'Compañía'
+      COMPANY: 'Grupo Económico'
     },
     MODERATION: {
       MODERATION: 'Moderación',
@@ -484,7 +484,7 @@ export const locale = {
       QUOTATION: 'Cotización',
       QUOTATIONS: 'Cotizaciones',
       ID: 'Id',
-      COMPANY: 'Compañía',
+      COMPANY: 'Grupo Económico',
       TEMPLATE: 'Template',
       CONTENT: 'Contenido',
     },
@@ -593,7 +593,7 @@ export const locale = {
       PRODUCTANDSERVICE: 'Producto y Servicio',
       TOTAL_AMOUNT: 'Monto Total',
       STATUS: 'Estado',
-      COMPANY: 'Compañía',
+      COMPANY: 'Grupo Económico',
       EMPLOYEE: 'Empleado',
       CONTRACT: 'Contrato',
       COMPANY_CONTACT: 'Contacto Grupo Económico',
@@ -666,7 +666,7 @@ export const locale = {
       ID: 'Id',
       NOTE: 'Nota',
       HOUR: 'Fecha y Hora',
-      COMPANY: 'Compañía',
+      COMPANY: 'Grupo Económico',
       EMPLOYEE: 'Empleado',
     },
     NOTIFICATION: {
