@@ -29,17 +29,17 @@
       <div class="d-flex">
         <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
           <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
-            [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/edit/{{model.id}}">
+            [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}">
             {{ 'COMMON.BASIC_INFO' | translate }}
           </a>
         </li>
         <li *ngIf="(model && model.id && authService.hasPermission('view_packing'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.PACKINGS_TAB)">
           <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PACKINGS_TAB"
-            [class.active]="activeTabId === tabs.PACKINGS_TAB" routerLink="{{parent}}/edit/{{model.id}}/packings">{{ 'VOUCHER.PACKINGS' | translate }}</a>
+            [class.active]="activeTabId === tabs.PACKINGS_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}/packings">{{ 'VOUCHER.PACKINGS' | translate }}</a>
         </li>
         <li *ngIf="(model && model.id && authService.hasPermission('view_guide'))" class="nav-item cursor-pointer" (click)="changeTab(tabs.GUIDES_TAB)">
           <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.GUIDES_TAB"
-            [class.active]="activeTabId === tabs.GUIDES_TAB" routerLink="{{parent}}/edit/{{model.id}}/guides">{{ 'VOUCHER.GUIDES' | translate }}</a>
+            [class.active]="activeTabId === tabs.GUIDES_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}/guides">{{ 'VOUCHER.GUIDES' | translate }}</a>
         </li>
       </div>
 

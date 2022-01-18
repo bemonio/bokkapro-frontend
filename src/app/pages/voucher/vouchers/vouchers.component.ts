@@ -243,7 +243,11 @@ export class VouchersComponent implements OnInit, OnDestroy {
                         this.filters.push({ key: 'filter{certified_cart}', value: this.paramId.toString() })
                     }
                     this.paramId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.paramId;
+                    if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.paramId;
+                    } else {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.paramId;
+                    }
                     this.showRowCheckbox = false;
                 }
                 switch (this.route.parent.parent.snapshot.url[0].path) {

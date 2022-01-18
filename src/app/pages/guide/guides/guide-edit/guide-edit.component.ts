@@ -600,4 +600,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
       this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
+
+  public getEditOrView() {
+    return this.view ? 'view' : 'edit';
+  }
 }

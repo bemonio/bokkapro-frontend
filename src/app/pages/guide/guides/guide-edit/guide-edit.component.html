@@ -28,13 +28,13 @@
     <ul class="nav nav-tabs nav-tabs-line" role="tablist"  *ngIf="!transfer">
       <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
         <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
-          [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/edit/{{model.id}}">
+          [class.active]="activeTabId === tabs.BASIC_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}">
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
       <li *ngIf="(model && model.id && authService.hasPermission('view_voucher')) || transfer" class="nav-item cursor-pointer" (click)="changeTab(tabs.VOUCHER_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.VOUCHER_TAB"
-          [class.active]="activeTabId === tabs.VOUCHER_TAB" routerLink="{{parent}}/edit/{{model.id}}/vouchers">{{ 'VOUCHER.VOUCHERS' | translate }}</a>
+          [class.active]="activeTabId === tabs.VOUCHER_TAB" routerLink="{{parent}}/{{getEditOrView()}}/{{model.id}}/vouchers">{{ 'VOUCHER.VOUCHERS' | translate }}</a>
       </li>
     </ul>
 

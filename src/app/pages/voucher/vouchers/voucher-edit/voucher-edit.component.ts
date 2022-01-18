@@ -184,7 +184,15 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
         this.guideId = params.id;
-        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+        if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+          this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+        } else {
+          Object.keys(this.formGroup.controls).forEach(control => {
+            this.formGroup.controls[control].disable();
+          });
+          this.view = true;
+          this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.guideId;
+        }
         switch (this.route.parent.parent.snapshot.url[0].path) {
           case 'vouchersconfirmationdelivered':
               this.parent = this.parent + '/vouchersconfirmationdelivered/';
@@ -197,6 +205,13 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
               break;
         }
       } else {
+        if (this.route.snapshot.url[0].path == 'view') {
+          Object.keys(this.formGroup.controls).forEach(control => {
+            this.formGroup.controls[control].disable();
+          });
+          this.view = true;
+        }
+    
         switch (this.route.parent.parent.snapshot.url[0].path) {
           case 'vouchersconfirmationdelivered':
               this.parent = '/vouchersconfirmationdelivered/';
@@ -211,13 +226,6 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       }
       this.get();
     });
-
-    if (this.route.snapshot.url[0].path == 'view') {
-      Object.keys(this.formGroup.controls).forEach(control => {
-        this.formGroup.controls[control].disable();
-      });
-      this.view = true;
-    }
   }
 
   get() {
@@ -915,5 +923,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   public changeCurrency() {
     this.exchange_rate.setValue(this.currency.value.exchange_rate);
+  }
+
+  public getEditOrView() {
+    return this.view ? 'view' : 'edit';
   }
 }

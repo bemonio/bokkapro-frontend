@@ -134,13 +134,27 @@ export class PackingsComponent implements OnInit {
                         this.route.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
                             this.guideId = params.id;
                             if (this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                                this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
-                                this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.voucherId;
+                                if (this.route.parent.parent.parent.parent.parent.parent.snapshot.url[0].path === 'edit') {
+                                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
+                                } else {
+                                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.guideId;
+                                }
+
+                                if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+                                    this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.voucherId;
+                                } else {
+                                    this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.voucherId;
+                                }
+        
                                 this.filters.push({ key: 'filter{vouchers}', value: this.voucherId.toString() })
                             }
                         })
                     } else {
-                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.voucherId;
+                        if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.voucherId;
+                        } else {
+                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.voucherId;
+                        }
                         this.filters.push({ key: 'filter{vouchers}', value: this.voucherId.toString() })
                     }
                 }
