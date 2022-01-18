@@ -106,12 +106,12 @@
             {{value.phone}}
           </td>
           <td style="text-align: right">
-            <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-success btn-sm" style="margin-right: 5px;"
-              (click)="(visibleSidebar = true) && AsignID(value.id)" *ngIf="authService.hasPermission('add_company')">
+            <!-- <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-success btn-sm" style="margin-right: 5px;"
+              (click)="(visibleSidebar = true) && AsignID(value.id)" *ngIf="authService.hasPermission('add_clientbinnacle')">
               <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-left.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-success">
               </span>
-            </a>
+            </a> -->
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               [routerLink]="'/companies/view/' + value.id" *ngIf="authService.hasPermission('view_company')">
               <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
