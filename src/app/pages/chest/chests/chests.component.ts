@@ -139,7 +139,11 @@ export class ChestsComponent implements OnInit, OnChanges {
                 this.route.parent.parent.parent.params.subscribe((params) => {
                     if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
                         this.serOrderId = params.id;
-                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.serOrderId;
+                        if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.serOrderId;
+                        } else {
+                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.serOrderId;
+                        }
                         this.filters.push({ key: 'filter{service_order}', value: this.serOrderId.toString() })
                     }
                     this.getModels();

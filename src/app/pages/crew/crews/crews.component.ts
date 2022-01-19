@@ -197,7 +197,11 @@ export class CrewsComponent implements OnInit {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
                     this.divisionId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.divisionId;
+                    if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.divisionId;
+                    } else {
+                        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.divisionId;
+                    }
                     this.filters.push({ key: 'filter{division}', value: this.divisionId.toString() })
                 }
                 this.getModels();

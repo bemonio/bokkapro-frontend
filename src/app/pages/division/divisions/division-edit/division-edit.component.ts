@@ -303,4 +303,8 @@ export class DivisionEditComponent implements OnInit, OnDestroy {
     }
     return stringClass;
   }
+
+  public getEditOrView() {
+    return this.view ? 'view' : 'edit';
+  }
 }

@@ -85,7 +85,22 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
         this.divisionId = params.id;
-        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.divisionId;
+        if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+          this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.divisionId;
+        } else {
+          Object.keys(this.formGroup.controls).forEach(control => {
+            this.formGroup.controls[control].disable();
+          });
+          this.view = true;
+          this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.divisionId;
+        }
+      } else {
+        if (this.route.snapshot.url[0].path == 'view') {
+          Object.keys(this.formGroup.controls).forEach(control => {
+            this.formGroup.controls[control].disable();
+          });
+          this.view = true;
+        }
       }
       this.get();
     });
