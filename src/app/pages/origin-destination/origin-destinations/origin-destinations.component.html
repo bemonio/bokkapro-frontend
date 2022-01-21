@@ -4,7 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'ORIGIN_DESTINATION.ORIGIN_DESTINATIONS' | translate }}
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" (click)="showModalDialog(undefined, true)" *ngIf="authService.hasPermission('add_origindestination') && serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" (click)="showModalDialog(undefined, true, false)" *ngIf="authService.hasPermission('add_origindestination') && serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/origindestinations/add" *ngIf="authService.hasPermission('add_origindestination') && !serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
@@ -132,16 +132,22 @@
             <p-badge [value]="'Delivery'"  severity="success"  severity="success" *ngIf="value.type_service == 'Delivery'"></p-badge>
           </td>
           <td style="text-align: right" *ngIf="!showListSchedule">
-            <a title="{{ 'COMMON.COUNT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-            (click)="showModalDialog(value.id, false)" *ngIf="serviceOrderId">
-              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
-                class="svg-icon svg-icon-md svg-icon-success">
+            <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              (click)="showModalDialog(value.id, false, true)" *ngIf="authService.hasPermission('view_origindestination') && serviceOrderId">
+              <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-md svg-icon-info">
               </span>
             </a>
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/origindestinations/view/' + value.id" *ngIf="authService.hasPermission('view_origindestination')">
+              [routerLink]="'/origindestinations/view/' + value.id" *ngIf="authService.hasPermission('view_origindestination') && !serviceOrderId">
               <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-info">
+              </span>
+            </a>
+            <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              (click)="showModalDialog(value.id, false, false)" *ngIf="authService.hasPermission('change_origindestination') && serviceOrderId">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
@@ -175,6 +181,6 @@
   [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
 
   <div class="mt-5">
-    <app-origin-destination-edit [originDestinationID]="originDestinationID" (displayModal)="hideModalDialog()"></app-origin-destination-edit>
+    <app-origin-destination-edit [originDestinationID]="originDestinationID" (displayModal)="hideModalDialog()" [setView]="setViewOriginDestination"></app-origin-destination-edit>
   </div>
 </p-dialog>

@@ -17,6 +17,7 @@ import * as moment from 'moment';
 })
 export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
   @Input() chestID: { id: number, isNew: boolean};
+  @Input() setView: boolean;
   @Output() displayModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public id: number;
@@ -110,7 +111,7 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
       this.get();
     });
 
-    if (this.route.snapshot.url[0].path == 'view') {
+    if (this.route.snapshot.url[0].path == 'view'  || this.setView) {
       Object.keys(this.formGroup.controls).forEach(control => {
         this.formGroup.controls[control].disable();
       });

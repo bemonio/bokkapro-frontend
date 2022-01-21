@@ -52,6 +52,7 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
     public serOrderId: number;
     public parent: string;
     public originDestinationID: { id: number, isNew: boolean };
+    public setViewOriginDestination: boolean;
 
     constructor(
         public modelsService: ModelService,
@@ -100,6 +101,8 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
         this._with.push({key: 'include[]', value: 'service_order.*'})
         this._with.push({key: 'include[]', value: 'service_order.contract.*'})
         this._with.push({key: 'include[]', value: 'division.*'})
+
+        this.setViewOriginDestination = false;
     }
 
     ngOnChanges() {
@@ -329,9 +332,10 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
         });
     }
 
-    showModalDialog(id, isNew) {
+    showModalDialog(id, isNew, setView) {
         this.displayModal = true;
         this.originDestinationID = {id: id, isNew: isNew}
+        this.setViewOriginDestination = setView;
     }
 
     hideModalDialog() {

@@ -124,9 +124,21 @@
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/chests/view/' + value.id" *ngIf="authService.hasPermission('view_chest')">
+              (click)="showModalDialog(value.id, false, true)" *ngIf="authService.hasPermission('view_chest') && serviceOrderId">
+              <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-md svg-icon-info">
+              </span>
+            </a>
+            <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+            routerLink="{{parent}}/chests/view/{{value.id}}" *ngIf="authService.hasPermission('view_chest') && !serviceOrderId">
               <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Arrow-to-right.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-info">
+              </span>
+            </a>
+            <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+              (click)="showModalDialog(value.id, false, false)" *ngIf="authService.hasPermission('change_chest') && serviceOrderId">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
@@ -160,6 +172,6 @@
   [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
 
   <div class="mt-5">
-    <app-chest-edit [chestID]="chestID" (displayModal)="hideModalDialog()"></app-chest-edit>
+    <app-chest-edit [chestID]="chestID" (displayModal)="hideModalDialog()" [setView]="setViewOriginDestination"></app-chest-edit>
   </div>
 </p-dialog>

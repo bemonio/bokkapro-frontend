@@ -50,6 +50,7 @@ export class ChestsComponent implements OnInit, OnChanges {
     public serOrderId: number;
     public parent: string;
     public chestID: { id: number, isNew: boolean };
+    public setViewOriginDestination: boolean;
 
     constructor(
         public modelsService: ModelService,
@@ -264,9 +265,10 @@ export class ChestsComponent implements OnInit, OnChanges {
         });
     }
 
-    showModalDialog(id, isNew) {
+    showModalDialog(id, isNew, setView) {
         this.displayModal = true;
         this.chestID = {id: id, isNew: isNew}
+        this.setViewOriginDestination = setView;
     }
 
     hideModalDialog() {

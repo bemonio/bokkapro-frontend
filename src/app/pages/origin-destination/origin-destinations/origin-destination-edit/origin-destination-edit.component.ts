@@ -17,6 +17,7 @@ import * as moment from 'moment';
 })
 export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDestroy {
   @Input() originDestinationID: { id: number, isNew: boolean};
+  @Input() setView: boolean;
   @Output() displayModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public id: number;
@@ -176,7 +177,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       this.get();
     });
 
-    if (this.route.snapshot.url[0].path == 'view') {
+    if (this.route.snapshot.url[0].path == 'view' || this.setView) {
       Object.keys(this.formGroup.controls).forEach(control => {
         this.formGroup.controls[control].disable();
       });
