@@ -43,6 +43,8 @@ export class GuidesComponent implements OnInit, OnDestroy {
     public created_at_filter: AbstractControl;
     public am_pm_filter: AbstractControl;
 
+    public showFilter: boolean;
+
     public exportGroup: FormGroup;
     public date_export: AbstractControl;
     public am_pm_export: AbstractControl;
@@ -141,6 +143,8 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.optionsAmPm.push({ key: 'AM', value: 'AM' });
         this.optionsAmPm.push({ key: 'PM', value: 'PM' });    
         // this.getModels();
+
+        this.showFilter = false;
     }
 
     ngOnInit() {
@@ -185,7 +189,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
             this.filters.push({ key: 'filter{created_at.icontains}[]', value: this.formatDate(this.created_at_filter.value) })
         }
 
-        if (this.date_filter.value) {
+        if (this.date_filter.value && this.showFilter) {
             this.filters.push({ key: 'filter{date.icontains}[]', value: this.formatDate(this.date_filter.value) })
         }
 
@@ -200,16 +204,22 @@ export class GuidesComponent implements OnInit, OnDestroy {
                 this.filters.push({ key: 'filter{division_destination}[]', value: this.authService.currentDivisionValue.id.toString() })
                 this.parent = 'guidesinput';
                 this.permission = 'guideinput';
+                this.showFilter = true;
                 break;
             case 'guidesoutput':
                 this.filters.push({ key: 'filter{division_origin}[]', value: this.authService.currentDivisionValue.id.toString() })
                 this.parent = 'guidesoutput';
                 this.permission = 'guideoutput';
+                this.showFilter = true;
                 break;
             case 'guidescheck':
                 this.filters.push({ key: 'filter{type_guide}[]', value: '3' })
                 this.parent = 'guidescheck';
                 this.permission = 'guidecheck';
+                this.showFilter = true;
+                break;
+            default: 
+                this.showFilter = false;
                 break;
         }
 
