@@ -57,6 +57,7 @@
         formControlName="username"
         autocomplete="off"
         [ngClass]="{ 'is-invalid': loginForm.controls['username'].invalid }"
+        style="text-transform: lowercase;"
       />
       <ng-container
         [ngTemplateOutlet]="formError"
