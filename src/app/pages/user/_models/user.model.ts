@@ -10,13 +10,7 @@ export class UserModel {
   user_permissions: any[];
   userprofile: {
     id: number;
-    bio: string;
     avatar: string;
-    phone: string;
-    location: string;
-    birth_date: string;
-    occupation: string;
-    website: string;
   }
   groups: any[];
   employee: any;

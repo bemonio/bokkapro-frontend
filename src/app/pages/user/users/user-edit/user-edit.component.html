@@ -44,6 +44,31 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
             <div class="col-lg-4">
+              <div class="image-input image-input-outline"
+                id="kt_profile_avatar" [class.image-input-empty]="!newAvatar && ifModelAvatar()">
+                <div class="image-input-wrapper" [style.backgroundImage]="'url(' + getModelAvatar() + ')'" *ngIf="!newAvatar"></div>
+                <div class="image-input-wrapper" [style.backgroundImage]="'url(' + croppedImage + ')'" *ngIf="newAvatar"></div>
+                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                  data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                  <i class="fa fa-pen icon-sm text-muted"></i>
+                  <input type="file" name="avatar" accept=".png, .jpg, .jpeg" (change)="fileChangeEvent($event)" formControlName="avatar"/>
+                </label>
+                <span *ngIf="newAvatar"
+                  class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                  (click)="cancelAvatar()"
+                  data-action="remove" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
+                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+                <span *ngIf="!newAvatar && ifModelAvatar()"
+                  class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                  (click)="deleteAvatar()"
+                  data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
+                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+              </div>
+              <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+            </div>
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'USER.FIRST_NAME' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="{{ 'USER.FIRST_NAME' | translate }}" name="first_name" [class.is-invalid]="isControlInvalid('first_name')"
@@ -150,3 +175,38 @@
 
   </div>
 </div>
+
+<p-dialog header="Avatar" [(visible)]="displayModalAvatar" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+  [draggable]="false" [resizable]="false">
+
+  <button (click)="rotateLeft()">Rotate left</button>
+  <button (click)="rotateRight()">Rotate right</button>
+  <button (click)="flipHorizontal()">Flip horizontal</button>
+  <button (click)="flipVertical()">Flip vertical</button>
+  <button (click)="toggleContainWithinAspectRatio()">{{containWithinAspectRatio?'Fill Aspect Ratio':'Contain Within Aspect Ratio'}}</button>
+  <button (click)="resetImage()">Reset image</button>
+
+  <image-cropper 
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [containWithinAspectRatio]="containWithinAspectRatio"
+    [aspectRatio]="4 / 3"
+    [resizeToWidth]="256"
+    [cropperMinWidth]="128"
+    [onlyScaleDown]="true"
+    [roundCropper]="false"
+    [canvasRotation]="canvasRotation"
+    [transform]="transform"
+    [alignImage]="'left'"
+    [style.display]="showCropper ? null : 'none'"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady($event)"
+    (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+  
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayModalAvatar=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { UserModel as Model } from '../../_models/user.model';
 import { UserService as ModelsService } from '../../_services/user.service';
+import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-user-edit',
@@ -35,6 +36,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   public is_active: AbstractControl;
   public is_staff: AbstractControl;
   public is_superuser: AbstractControl;
+  public avatar: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -42,6 +44,17 @@ export class UserEditComponent implements OnInit, OnDestroy {
   public saveAndExit;
 
   public view: boolean;
+
+  public newAvatar: boolean;
+  public imageChangedEvent: any = '';
+  public croppedImage: any = '';
+  canvasRotation = 0;
+  rotation = 0;
+  scale = 1;
+  showCropper = false;
+  containWithinAspectRatio = false;
+  transform: ImageTransform = {};
+  public displayModalAvatar: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -66,7 +79,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
       groups: [''],
       is_active: [''],
       is_staff: [''],
-      is_superuser: ['']
+      is_superuser: [''],
+      avatar: ['']
     });
     this.username = this.formGroup.controls['username'];
     this.first_name = this.formGroup.controls['first_name'];
@@ -78,6 +92,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.is_active = this.formGroup.controls['is_active'];
     this.is_staff = this.formGroup.controls['is_staff'];
     this.is_superuser = this.formGroup.controls['is_superuser'];
+    this.avatar = this.formGroup.controls['avatar'];
   }
 
   ngOnInit(): void {
@@ -85,6 +100,9 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
     this.get();
+
+    this.newAvatar = false;
+    this.displayModalAvatar = false;
 
     if (this.route.snapshot.url[0].path == 'view') {
       Object.keys(this.formGroup.controls).forEach(control => {
@@ -127,6 +145,11 @@ export class UserEditComponent implements OnInit, OnDestroy {
         }
         if (response.groups) {
           this.model.groups = response.groups;
+        }
+        if (response.user_profiles) {
+          if (response.user_profiles[0]) {
+            this.model.userprofile = response.user_profiles[0];
+          }
         }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -205,7 +228,17 @@ export class UserEditComponent implements OnInit, OnDestroy {
     }
     model.groups = groups;
 
-    const sbUpdate = this.modelsService.patch(this.id, this.model).pipe(
+    let userprofile_id = undefined;
+    if (this.model.userprofile) {
+      userprofile_id = this.model.userprofile.id;
+    }
+    let userprofile = {
+      id: userprofile_id,
+      avatar: this.croppedImage,
+    }
+    model.userprofile = userprofile;
+
+    const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
@@ -227,7 +260,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.user
+      // this.model = response.user
     });
     this.subscriptions.push(sbUpdate);
   }
@@ -257,6 +290,13 @@ export class UserEditComponent implements OnInit, OnDestroy {
     }
     model.groups = groups;
 
+    let userprofile = {
+      id: undefined,
+      avatar: this.croppedImage,
+    }
+    model.userprofile = userprofile;
+    delete (model.userprofile.id);
+
     const sbCreate = this.modelsService.post(this.model).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
@@ -264,6 +304,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
           this.router.navigate(['/users']);
         } else {
           this.formGroup.reset()
+          this.croppedImage = undefined;
         }
       }),
       catchError((error) => {
@@ -281,7 +322,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.user as Model
+      // this.model = response.user as Model
     });
     this.subscriptions.push(sbCreate);
   }
@@ -313,5 +354,128 @@ export class UserEditComponent implements OnInit, OnDestroy {
   isControlTouched(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
     return control.dirty || control.touched;
+  }
+
+  showModalAvatarDialog() {
+    this.displayModalAvatar = true;
+    this.requesting = false;
+  }
+
+  fileChangeEvent(event: any): void {
+    this.requesting = true;
+    this.imageChangedEvent = event;
+    this.showModalAvatarDialog();
+    this.newAvatar = true;
+    // this.model.userprofile.avatar = this.croppedImage;
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+  }
+
+  imageLoaded() {
+    this.showCropper = true;
+    // console.log('Image loaded');
+  }
+
+  cropperReady(sourceImageDimensions: Dimensions) {
+    // console.log('Cropper ready', sourceImageDimensions);
+  }
+
+  loadImageFailed() {
+    // console.log('Load failed');
+  }
+
+  deleteAvatar() {
+    this.newAvatar = false;
+  }
+
+  cancelAvatar() {
+    this.newAvatar = false;
+    // this.logo.setValue('');
+  }
+
+  rotateLeft() {
+    this.canvasRotation--;
+    this.flipAfterRotate();
+  }
+
+  rotateRight() {
+    this.canvasRotation++;
+    this.flipAfterRotate();
+  }
+
+  private flipAfterRotate() {
+    const flippedH = this.transform.flipH;
+    const flippedV = this.transform.flipV;
+    this.transform = {
+      ...this.transform,
+      flipH: flippedV,
+      flipV: flippedH
+    };
+  }
+
+
+  flipHorizontal() {
+    this.transform = {
+      ...this.transform,
+      flipH: !this.transform.flipH
+    };
+  }
+
+  flipVertical() {
+    this.transform = {
+      ...this.transform,
+      flipV: !this.transform.flipV
+    };
+  }
+
+  resetImage() {
+    this.scale = 1;
+    this.rotation = 0;
+    this.canvasRotation = 0;
+    this.transform = {};
+  }
+
+  zoomOut() {
+    this.scale -= .1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
+  }
+
+  zoomIn() {
+    this.scale += .1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
+  }
+
+  toggleContainWithinAspectRatio() {
+    this.containWithinAspectRatio = !this.containWithinAspectRatio;
+  }
+
+  ifModelAvatar() {
+    let result = false;
+    if (!this.model.userprofile) {
+      result = true;
+    } else {
+      if (!this.model.userprofile.avatar) {
+        result = true;
+      }
+    }
+    return result;
+  }
+
+  getModelAvatar() {
+    let result = undefined;
+    if (this.model.userprofile) {
+      if (this.model.userprofile.avatar) {
+        result = this.model.userprofile.avatar
+      }
+    }
+    return result
   }
 }

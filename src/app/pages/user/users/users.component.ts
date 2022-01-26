@@ -126,6 +126,15 @@ export class UsersComponent implements OnInit {
             response => {
                 this.requesting = false;
                 this.models = response.users;
+                if(response.user_profiles){
+                    response.user_profiles.forEach(userprofile => {
+                        this.models.forEach(element => {
+                            if (element.userprofile === userprofile.id) {
+                                element.userprofile = userprofile;
+                            }
+                        });
+                    });
+                }
                 this.totalRecords = response.meta.total_results;
             },
             error => {
