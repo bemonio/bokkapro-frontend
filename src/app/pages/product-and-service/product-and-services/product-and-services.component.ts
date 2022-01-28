@@ -82,7 +82,7 @@ export class ProductAndServicesComponent implements OnInit {
     }
 
     public loadLazy(event?: LazyLoadEvent) {
-        if (event && event.first) {
+        if (event && (event.first || event.first == 0)) {
             this.page = (event.first / this.per_page) + 1;
         }
 

@@ -202,10 +202,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
     }
     
     public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
-        if (event && event.first) {
-            if (event && event.first) {
+        if (event && (event.first || event.first == 0)) {
             this.page = (event.first / this.per_page) + 1;
-            }
         }
 
         if (event && event.sortField) {
