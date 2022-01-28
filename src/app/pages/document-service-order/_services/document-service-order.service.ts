@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
@@ -53,20 +53,12 @@ export class DocumentServiceOrderService {
         return this.http.get(`${this.API_URL}?${params}`);
     }
 
-    public post(body: Object, files?:any[]): Observable<any> {
-        const formData: FormData = new FormData();
-        for (let i = 0; i < files.length; i++) {
-            formData.append('file_uploaded', files[i], files[i].name);
-        }
-        return this.http.post(`${this.API_URL}`, formData);
+    public post(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL}`, body);
     }
 
     public patch(id: number, body: Object, files?:any[]): Observable<any> {
-        const formData: FormData = new FormData();
-        for (let i = 0; i < files.length; i++) {
-            formData.append('file_uploaded', files[i], files[i].name);
-        }
-        return this.http.patch(`${this.API_URL}/${id}`, formData);
+        return this.http.patch(`${this.API_URL}/${id}`, body);
     }
 
     public delete(id: number): Observable<any> {

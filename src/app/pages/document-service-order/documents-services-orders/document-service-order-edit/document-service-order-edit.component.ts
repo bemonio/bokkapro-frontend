@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, of, ReplaySubject, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
@@ -28,6 +28,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
   public file_uploaded: AbstractControl;
 
   public files = [];
+  public fileBase64: string;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -99,7 +100,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'documentserviceorder': new Model() });
+        return of({ 'document_service_order': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -112,7 +113,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
-        return of({ 'documentserviceorder': new Model() });
+        return of({ 'document_service_order': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -126,7 +127,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model.id) {
+    if (this.model && this.model.id) {
       this.name.setValue(this.model.name);
       this.files = [];
       if (this.model.file_uploaded) {
@@ -161,6 +162,7 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
+    model.file_uploaded = this.fileBase64;
 
     const sbUpdate = this.modelsService.patch(this.id, model, this.files).pipe(
       tap(() => {
@@ -197,8 +199,9 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
 
     let model = this.model;
+    model.file_uploaded = this.fileBase64;
 
-    const sbCreate = this.modelsService.post(model, this.files).pipe(
+    const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
@@ -280,10 +283,20 @@ export class DocumentServiceOrderEditComponent implements OnInit, OnDestroy {
     for(let file of event.files) {
       this.files.push(file);
     }
+    this.convertFile(event.files[0]).subscribe(base64 => {
+      this.fileBase64 = 'data:' + this.files[0].type + ';base64,' + base64;
+    });    
   }
 
   public showFile(url) {
     window.open(url, '_blank');
   }    
 
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    return result;
+  }
 }
