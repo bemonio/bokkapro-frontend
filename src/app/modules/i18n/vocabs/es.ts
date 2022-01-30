@@ -76,6 +76,7 @@ export const locale = {
       GROUPS: 'Grupos',
       IS_STAFF: 'Staff?',
       IS_SUPERUSER: 'Super Usuario?',
+      AVATAR: 'Avatar',
     },
     PERMISSION: {
       PERMISSION: 'Permiso',
@@ -508,6 +509,9 @@ export const locale = {
       CASH_OPENING: 'Apertura Efectivo',
       EMPLOYEES_OPEN: 'Empleados Aperturan',
       EMPLOYEES_CLOSE: 'Empleados Cierre',
+      NEXT_BUSINESS_DAY: 'Próximo Día Hábil',
+      OFFICE: 'Oficina',
+      GENERATE_FILE: 'GENERAR ARCHIVO',
     },
     REPORT_REQUEST: { 
       REPORT_REQUEST: 'Reporte Solicitud',
