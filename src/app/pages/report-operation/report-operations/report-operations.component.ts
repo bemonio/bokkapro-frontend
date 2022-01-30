@@ -231,8 +231,11 @@ export class ReportOperationsComponent implements OnInit {
         });
     }
 
-    print(id) {
-        let url = environment.apiUrl + 'pdf/operations?id=' + id;
+    print(model) {
+        let url = environment.apiUrl + 'pdf/operations?id=' + model.id;
+        if (model.file) {
+            url = model.file
+        }
         window.open(url, '_blank');
     }
 }
