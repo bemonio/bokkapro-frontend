@@ -128,6 +128,15 @@ export class ReportRequestsComponent implements OnInit {
             response => {
                 this.requesting = false;
                 this.models = response.report_requests;
+                if(response.employees){
+                    response.employees.forEach(employee => {
+                        this.models.forEach(element => {
+                            if (element.employee === employee.id) {
+                                element.employee = employee;
+                            }
+                        });
+                    });
+                }
                 this.totalRecords = response.meta.total_results;
             },
             error => {
