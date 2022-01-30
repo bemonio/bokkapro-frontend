@@ -47,7 +47,7 @@
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
-          <th pSortableColumn="username">
+          <th pSortableColumn="closed_at">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'REPORT_OPERATION.CLOSED_AT' | translate }} 
               <!-- <p-sortIcon field="username"></p-sortIcon>
@@ -60,7 +60,20 @@
               </p-columnFilter> -->
             </div>
           </th>
-          <th pSortableColumn="email">
+          <th pSortableColumn="next_business_day">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'REPORT_OPERATION.NEXT_BUSINESS_DAY' | translate }} 
+              <!-- <p-sortIcon field="username"></p-sortIcon>
+              <p-columnFilter field="username" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" class="p-ml-auto">
+                  <ng-template pTemplate="header">
+                      <div class="p-px-3 p-pt-3 p-pb-0">
+                          <span class="p-text-bold">User Picker</span>
+                      </div>
+                  </ng-template>
+              </p-columnFilter> -->
+            </div>
+          </th>
+          <th pSortableColumn="hours_close">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'REPORT_OPERATION.HOURS_CLOSE' | translate }} 
               <!-- <p-sortIcon field="email"></p-sortIcon>
@@ -73,7 +86,7 @@
               </p-columnFilter> -->
             </div>
           </th>
-          <th pSortableColumn="date">
+          <th pSortableColumn="employees_open">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'REPORT_OPERATION.EMPLOYEES_OPEN' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
@@ -87,7 +100,7 @@
               <p-columnFilter type="numeric" field="balance" display="menu" currency="USD" class="p-ml-auto"></p-columnFilter>
             </div>
           </th> -->
-          <th pSortableColumn="status">
+          <th pSortableColumn="employees_close">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'REPORT_OPERATION.EMPLOYEES_CLOSE' | translate }}
               <!-- <p-sortIcon field="status"></p-sortIcon>
@@ -102,6 +115,21 @@
               </p-columnFilter> -->
             </div>
           </th>
+          <th pSortableColumn="office">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'REPORT_OPERATION.OFFICE' | translate }}
+              <!-- <p-sortIcon field="status"></p-sortIcon>
+              <p-columnFilter field="status" matchMode="equals" display="menu" class="p-ml-auto">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                  <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
+                    <ng-template let-option pTemplate="item">
+                      <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                    </ng-template>
+                  </p-dropdown>
+                </ng-template>
+              </p-columnFilter> -->
+            </div>
+          </th>          
           <!-- <th pSortableColumn="activity">
             <div class="p-d-flex p-jc-between p-ai-center">
               Activity
@@ -117,7 +145,7 @@
               </p-columnFilter>
             </div>
           </th> -->
-          <th style="width: 10rem">
+          <th style="width: 15rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
@@ -141,6 +169,9 @@
             {{value.closed_at | date: 'HH:mm'}}
           </td>
           <td>
+            {{value.next_business_day | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
             {{value.hours_close}}
           </td>
           <td>
@@ -148,6 +179,9 @@
           </td>
           <td>
             {{value.employees_close}}
+          </td>
+          <td>
+            {{value.office?.name}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
@@ -162,7 +196,7 @@
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
-            <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+            <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm" style="margin-right: 5px;"
               (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_reportoperation')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">

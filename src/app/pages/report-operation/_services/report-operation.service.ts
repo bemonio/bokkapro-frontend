@@ -50,7 +50,7 @@ export class ReportOperationService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=employees_open.*&include[]=employees_close.*&include[]=office.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -66,6 +66,6 @@ export class ReportOperationService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=employees_open.*&include[]=employees_close.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=employees_open.*&include[]=employees_close.*&include[]=office.*`);
     }
 }

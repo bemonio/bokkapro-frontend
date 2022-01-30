@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { ReportOperationModel as Model } from '../../_models/report-operation.model';
 import { ReportOperationService as ModelsService } from '../../_services/report-operation.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-report-operation-edit',
@@ -34,6 +35,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
   public cash_opening: AbstractControl;
   public employees_close: AbstractControl;
   public employees_open: AbstractControl;
+  public next_business_day: AbstractControl;
+  public office: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -45,6 +48,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private modelsService: ModelsService,
     private router: Router,
+    public authService: AuthService,
     private route: ActivatedRoute,
     private toastService: ToastService
   ) {
@@ -64,6 +68,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
       cash_opening: [''],
       employees_open: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       employees_close: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      next_business_day: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      office: [''],
     });
     this.closed_at = this.formGroup.controls['closed_at'];
     this.hours_close = this.formGroup.controls['hours_close'];
@@ -74,6 +80,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     this.cash_opening = this.formGroup.controls['cash_opening'];
     this.employees_open = this.formGroup.controls['employees_open'];
     this.employees_close = this.formGroup.controls['employees_close'];
+    this.next_business_day = this.formGroup.controls['next_business_day'];
+    this.office = this.formGroup.controls['office'];
   }
 
   ngOnInit(): void {
@@ -141,6 +149,9 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
           });
           this.model.employees_open = employees;
         }
+        if (response.offices) {
+          this.model.office = response.offices[0];
+        }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -159,6 +170,12 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
       this.cash_opening.setValue(this.model.cash_opening);
       this.employees_open.setValue(this.model.employees_open);
       this.employees_close.setValue(this.model.employees_close);
+      this.next_business_day.setValue(new Date(this.model.next_business_day));
+      if (this.model.office) {
+        this.office.setValue(this.model.office);
+      }
+    } else{
+      this.office.setValue(this.authService.currentUserValue.employee.position.department.office);
     }
     this.formGroup.markAllAsTouched();
   }
@@ -199,6 +216,9 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     });
     model.employees_close = employees_close;
     model.closed_at = this.formatDate(this.closed_at.value);
+    model.next_business_day = this.formatDate(this.next_business_day.value);
+    // model.office = this.model.office.id;
+    delete(model.file);
 
     const sbUpdate = this.modelsService.patch(this.id, this.model).pipe(
       tap(() => {
@@ -241,6 +261,9 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     });
     model.employees_close = employees_close;
     model.closed_at = this.formatDate(this.closed_at.value);
+    model.next_business_day = this.formatDate(this.next_business_day.value);
+    model.office = this.model.office.id;
+    delete(model.file);
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
@@ -339,5 +362,10 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     }
 
     return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
+  }
+
+  generateFile() {
+    let url = environment.apiUrl + 'save/pdf/operations?id=' + this.model.id;
+    window.open(url, '_blank');
   }
 }

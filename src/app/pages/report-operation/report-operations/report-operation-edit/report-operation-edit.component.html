@@ -16,6 +16,9 @@
       </h3>
     </div>
     <div class="card-toolbar">
+      <a type="button" class="btn btn-secondary" (click)="generateFile()">
+        {{ 'REPORT_OPERATION.GENERATE_FILE' | translate }}
+      </a>
       <a type="button" class="btn btn-light" routerLink="/reportsoperations">
         <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
@@ -139,6 +142,26 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'cash_opening')">{{ 'REPORT_OPERATION.CASH_OPENING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'cash_opening')">{{ 'REPORT_OPERATION.CASH_OPENING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.NEXT_BUSINESS_DAY' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('next_business_day'))" name="next_business_day" formControlName="next_business_day" placeholder="{{ 'REPORT_OPERATION.NEXT_BUSINESS_DAY' | translate }}"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('next_business_day')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.NEXT_BUSINESS_DAY' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('next_business_day')">{{ 'REPORT_OPERATION.NEXT_BUSINESS_DAY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'next_business_day')">{{ 'REPORT_OPERATION.NEXT_BUSINESS_DAY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'next_business_day')">{{ 'REPORT_OPERATION.NEXT_BUSINESS_DAY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'next_business_day')">{{ 'REPORT_OPERATION.NEXT_BUSINESS_DAY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>                     
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.OFFICE' | translate }}</label>
+              <app-office-autocomplete
+              name="office" [valid]="isControlValid('office')" [touched]="isControlTouched('office')" [class.is-invalid]="isControlInvalid('office')"
+              [class.is-valid]="isControlValid('office')" formControlName="office" id="office" [model]="model.office"></app-office-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('office')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.OFFICE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('office')">{{ 'REPORT_OPERATION.OFFICE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'office')">{{ 'REPORT_OPERATION.OFFICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'office')">{{ 'REPORT_OPERATION.OFFICE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'office')">{{ 'REPORT_OPERATION.OFFICE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/reportsoperations">{{ 'COMMON.CANCEL' | translate }}</a>
