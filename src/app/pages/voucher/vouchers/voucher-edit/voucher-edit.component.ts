@@ -187,10 +187,6 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
           this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.guideId;
         } else {
-          Object.keys(this.formGroup.controls).forEach(control => {
-            this.formGroup.controls[control].disable();
-          });
-          this.view = true;
           this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.guideId;
         }
         switch (this.route.parent.parent.snapshot.url[0].path) {
@@ -204,14 +200,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
               this.parent = this.parent + '/vouchers/';
               break;
         }
-      } else {
-        if (this.route.snapshot.url[0].path == 'view') {
-          Object.keys(this.formGroup.controls).forEach(control => {
-            this.formGroup.controls[control].disable();
-          });
-          this.view = true;
-        }
-    
+      } else {    
         switch (this.route.parent.parent.snapshot.url[0].path) {
           case 'vouchersconfirmationdelivered':
               this.parent = '/vouchersconfirmationdelivered/';
@@ -226,6 +215,13 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       }
       this.get();
     });
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   get() {

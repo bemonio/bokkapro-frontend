@@ -1108,4 +1108,11 @@ export class VouchersComponent implements OnInit, OnDestroy {
             }
         );
     }
+
+    compareDateVoucherNow(date) {
+        let today = new Date();    
+        let value = new Date(date);
+        value.setDate(value.getDate() + 1);
+        return value.getTime() < today.getDate();
+    }
 }
