@@ -43,7 +43,8 @@
       <div class="mt-5" *ngIf="model">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
-            <div class="col-lg-4">
+            <div class="col-lg-4" style="text-align: center;">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'USER.AVATAR' | translate }}</label><br>
               <div class="image-input image-input-outline"
                 id="kt_profile_avatar" [class.image-input-empty]="!newAvatar && ifModelAvatar()">
                 <div class="image-input-wrapper" [style.backgroundImage]="'url(' + getModelAvatar() + ')'" *ngIf="!newAvatar"></div>
@@ -69,6 +70,9 @@
               <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
             </div>
             <div class="col-lg-4">
+              <br>
+              <br>
+              <br>
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'USER.FIRST_NAME' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="{{ 'USER.FIRST_NAME' | translate }}" name="first_name" [class.is-invalid]="isControlInvalid('first_name')"
@@ -80,6 +84,9 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'first_name')">{{ 'USER.FIRST_NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
+              <br>
+              <br>
+              <br>
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'USER.LAST_NAME' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 placeholder="{{ 'USER.LAST_NAME' | translate }}" name="last_name" [class.is-invalid]="isControlInvalid('last_name')"
