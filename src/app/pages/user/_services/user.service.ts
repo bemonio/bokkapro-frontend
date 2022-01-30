@@ -66,10 +66,10 @@ export class UserService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*&include[]=groups.*&include[]=employee.position.department.*&include[]=employee.divisions.*&include[]=user_permissions.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*&include[]=groups.*&include[]=employee.position.department.office.*&include[]=employee.divisions.*&include[]=user_permissions.*`);
     }
 
     public getByIdPermissions(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*&include[]=groups.permissions.*&include[]=employee.position.department.*&include[]=employee.divisions.*&include[]=user_permissions.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*&include[]=groups.permissions.*&include[]=employee.position.department.office.*&include[]=employee.divisions.*&include[]=user_permissions.*`);
     }
 }

@@ -104,6 +104,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                   if (user.departments) {
                     model.user.employee.position.department = user.departments[0];
                   }
+                  if (user.offices) {
+                    model.user.employee.position.department.office = user.offices[0];
+                  }
                 }
   
                 if (user.divisions) {
