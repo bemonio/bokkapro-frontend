@@ -304,7 +304,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
           this.router.navigate(['/users']);
         } else {
           this.formGroup.reset()
-          this.croppedImage = undefined;
+          this.croppedImage = "";
         }
       }),
       catchError((error) => {
