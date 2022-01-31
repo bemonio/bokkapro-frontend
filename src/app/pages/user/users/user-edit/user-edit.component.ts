@@ -31,7 +31,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   public last_name: AbstractControl;
   public email: AbstractControl;
   public password: AbstractControl;
-  public user_permissions: AbstractControl;
+  // public user_permissions: AbstractControl;
   public groups: AbstractControl;
   public is_active: AbstractControl;
   public is_staff: AbstractControl;
@@ -75,7 +75,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
       last_name: [''],
       email: [''],
       password: [''],
-      user_permissions: [''],
+      // user_permissions: [''],
       groups: [''],
       is_active: [''],
       is_staff: [''],
@@ -87,7 +87,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.last_name = this.formGroup.controls['last_name'];
     this.email = this.formGroup.controls['email'];
     this.password = this.formGroup.controls['password'];
-    this.user_permissions = this.formGroup.controls['user_permissions'];
+    // this.user_permissions = this.formGroup.controls['user_permissions'];
     this.groups = this.formGroup.controls['groups'];
     this.is_active = this.formGroup.controls['is_active'];
     this.is_staff = this.formGroup.controls['is_staff'];
@@ -140,9 +140,9 @@ export class UserEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.user;
-        if (response.permissions) {
-          this.model.user_permissions = response.permissions;
-        }
+        // if (response.permissions) {
+        //   this.model.user_permissions = response.permissions;
+        // }
         if (response.groups) {
           this.model.groups = response.groups;
         }
@@ -168,9 +168,9 @@ export class UserEditComponent implements OnInit, OnDestroy {
       this.is_active.setValue(this.model.is_active);
       this.is_staff.setValue(this.model.is_staff);
       this.is_superuser.setValue(this.model.is_superuser);
-      if (this.model.user_permissions) {
-        this.user_permissions.setValue(this.model.user_permissions);
-      }
+      // if (this.model.user_permissions) {
+      //   this.user_permissions.setValue(this.model.user_permissions);
+      // }
       if (this.model.groups) {
         this.groups.setValue(this.model.groups);
       }
@@ -212,13 +212,13 @@ export class UserEditComponent implements OnInit, OnDestroy {
     model.email = this.model.email;
     model.password = this.model.password;
 
-    let user_permissions = [];
-    if (this.model.user_permissions) {
-      this.model.user_permissions.forEach(element => {
-        user_permissions.push(element.id);
-      });
-    }
-    model.user_permissions = user_permissions;
+    // let user_permissions = [];
+    // if (this.model.user_permissions) {
+    //   this.model.user_permissions.forEach(element => {
+    //     user_permissions.push(element.id);
+    //   });
+    // }
+    // model.user_permissions = user_permissions;
 
     let groups = [];
     if (this.model.groups) {
@@ -274,13 +274,13 @@ export class UserEditComponent implements OnInit, OnDestroy {
     model.email = this.model.email;
     model.password = this.model.password;
 
-    let user_permissions = [];
-    if (this.model.user_permissions) {
-      this.model.user_permissions.forEach(element => {
-        user_permissions.push(element.id);
-      });
-    }
-    model.user_permissions = user_permissions;
+    // let user_permissions = [];
+    // if (this.model.user_permissions) {
+    //   this.model.user_permissions.forEach(element => {
+    //     user_permissions.push(element.id);
+    //   });
+    // }
+    // model.user_permissions = user_permissions;
 
     let groups = [];
     if (this.model.groups) {

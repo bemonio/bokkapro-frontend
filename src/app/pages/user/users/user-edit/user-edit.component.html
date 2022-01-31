@@ -130,7 +130,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'groups')">{{ 'USER.GROUPS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'groups')">{{ 'USER.GROUPS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'USER.PERMISSIONS' | translate }}</label>
               <app-permission-multiselect
               name="user_permissions" [valid]="isControlValid('user_permissions')" [touched]="isControlTouched('user_permissions')" [class.is-invalid]="isControlInvalid('user_permissions')"
@@ -140,7 +140,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'user_permissions')">{{ 'USER.PERMISSIONS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'user_permissions')">{{ 'USER.PERMISSIONS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'user_permissions')">{{ 'USER.PERMISSIONS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
+            </div> -->
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'USER.PASSWORD' | translate }}</label>
               <input type="password" class="form-control form-control-lg form-control-solid" autocomplete="off"
