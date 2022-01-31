@@ -58,6 +58,23 @@
 
     <!--begin::Toolbar-->
     <div class="d-flex align-items-center">
+      <div style="margin-right: 5px" *ngIf="showCrew && employees">
+        <span *ngFor="let employee of employees">
+          <span
+          [inlineSVG]="'./assets/media/svg/icons/General/User.svg'"
+          cacheSVG="true"
+          class="svg-icon svg-icon-success svg-icon-2x"
+          ></span> {{employee.name}}
+        </span>
+      </div>
+      <div style="margin-right: 5px" *ngIf="showCrew && !employees">
+        <span
+        [inlineSVG]="'./assets/media/svg/icons/General/User.svg'"
+        cacheSVG="true"
+        class="svg-icon svg-icon-success svg-icon-2x"
+        ></span> Sin Tripulación Asignada
+      </div>
+
       <!--begin::Dropdown-->
       <div
         class="dropdown dropdown-inline"
@@ -74,11 +91,11 @@
           ngbDropdownToggle
           style="width: auto; margin-right: 3px;"
         >
-          <span
+          <!-- <span
             [inlineSVG]="'./assets/media/svg/icons/General/User.svg'"
             cacheSVG="true"
             class="svg-icon svg-icon-success svg-icon-2x"
-          ></span>
+          ></span> -->
           <span class="label label-xl label-inline label-light-success">{{authService.currentDivisionValue?.name}}</span>
         </a>
         <div
