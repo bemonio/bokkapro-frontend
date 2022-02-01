@@ -536,7 +536,8 @@ export const locale = {
       DRIVER: 'Chofer',
       ASSISTANT: 'Asistente',
       ASSISTANT2: 'Cajero',
-      VEHICLE: 'Vehículo'
+      VEHICLE: 'Vehículo',
+      OFFICE: 'Oficina'
     },
     CERTIFIED_CART: {
       CERTIFIED_CART: 'Carrito Certificado',

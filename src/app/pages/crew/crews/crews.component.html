@@ -89,6 +89,11 @@
                 {{ 'CREW.VEHICLE' | translate }}
               </div>
             </th>
+            <th pSortableColumn="office">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                {{ 'CREW.OFFICE' | translate }}
+              </div>
+            </th>
             <th style="width: 10rem">
               <div class="p-d-flex p-jc-between p-ai-center">
                 {{ 'COMMON.ACTION' | translate }}
@@ -127,6 +132,9 @@
             <td>
               {{value.vehicle?.code}}
             </td>
+            <td>
+              {{value.office?.name}}
+            </td>  
             <td style="text-align: right">
               <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               routerLink="{{parent}}/crews/view/{{value.id}}" *ngIf="authService.hasPermission('view_crew')">

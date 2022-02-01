@@ -32,6 +32,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
   public assistant: AbstractControl;
   public assistant2: AbstractControl;
   public vehicle: AbstractControl;
+  public office: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -47,6 +48,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private modelsService: ModelsService,
     private router: Router,
+    public authService: AuthService,
     private route: ActivatedRoute,
     private toastService: ToastService,
     private divisionService: DivisionService,
@@ -73,6 +75,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
       assistant: ['', Validators.compose([Validators.required,])],
       assistant2: ['', Validators.compose([Validators.required,])],
       vehicle: ['', Validators.compose([Validators.required,])],
+      office: [''],
     });
 
     this.date = this.formGroup.controls['date'];
@@ -81,6 +84,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.assistant = this.formGroup.controls['assistant'];
     this.assistant2 = this.formGroup.controls['assistant2'];
     this.vehicle = this.formGroup.controls['vehicle'];
+    this.office = this.formGroup.controls['office'];
 
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
@@ -149,6 +153,9 @@ export class CrewEditComponent implements OnInit, OnDestroy {
         if (response.vehicles) {
           this.model.vehicle = response.vehicles[0];
         }
+        if (response.offices) {
+          this.model.office = response.offices[0];
+        }
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -175,10 +182,14 @@ export class CrewEditComponent implements OnInit, OnDestroy {
       if (this.model.vehicle) {
         this.vehicle.setValue(this.model.vehicle);
       }
+      if (this.model.office) {
+        this.office.setValue(this.model.office);
+      }
     } else {
       if (this.divisionId) {
         this.getDivisionById(this.divisionId);
       }
+      this.office.setValue(this.authService.currentUserValue.employee.position.department.office);
     }
     this.formGroup.markAllAsTouched();
     this.assistant2.updateValueAndValidity();
@@ -215,6 +226,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     model.assistant = this.model.assistant.id;
     model.assistant2 = this.model.assistant2.id;
     model.vehicle = this.model.vehicle.id;
+    // model.office = this.model.office.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -253,6 +265,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     model.assistant = this.model.assistant.id;
     model.assistant2 = this.model.assistant2.id;
     model.vehicle = this.model.vehicle.id;
+    model.office = this.model.office.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

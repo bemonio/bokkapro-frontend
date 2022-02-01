@@ -251,6 +251,15 @@ export class CrewsComponent implements OnInit {
                         });
                     });
                 }
+                if(response.offices){
+                    response.offices.forEach(office => {
+                        this.models.forEach(element => {
+                            if (element.office === office.id) {
+                                element.office = office;
+                            }
+                        });
+                    });
+                }
 
                 this.events = [];
                 this.models.forEach(element => {

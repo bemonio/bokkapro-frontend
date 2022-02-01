@@ -106,6 +106,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.OFFICE' | translate }}</label>
+              <app-office-autocomplete
+              name="office" [valid]="isControlValid('office')" [touched]="isControlTouched('office')" [class.is-invalid]="isControlInvalid('office')"
+              [class.is-valid]="isControlValid('office')" formControlName="office" id="office" [model]="model.office" [readOnly]="true"></app-office-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('office')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'REPORT_OPERATION.OFFICE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('office')">{{ 'REPORT_OPERATION.OFFICE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'office')">{{ 'REPORT_OPERATION.OFFICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'office')">{{ 'REPORT_OPERATION.OFFICE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'office')">{{ 'REPORT_OPERATION.OFFICE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/crews">{{ 'COMMON.CANCEL' | translate }}</a>
