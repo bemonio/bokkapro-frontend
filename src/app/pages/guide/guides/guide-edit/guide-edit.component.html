@@ -46,7 +46,8 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.DIVISION_ORIGIN' | translate}}</label>
               <app-division-autocomplete
               name="division_origin" [valid]="isControlValid('division_origin')" [touched]="isControlTouched('division_origin')" [class.is-invalid]="isControlInvalid('division_origin')"
-              [class.is-valid]="isControlValid('division_origin')" formControlName="division_origin" id="division_origin" [model]="model.division_origin" (change)="changeDivisionOrigin($event)"></app-division-autocomplete>
+              [class.is-valid]="isControlValid('division_origin')" formControlName="division_origin" id="division_origin" [model]="model.division_origin" 
+              (change)="changeDivisionOrigin($event)" [addFilters]="[{key: 'office', value: officeUser}]"></app-division-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('division_origin')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.DIVISION_ORIGIN' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('division_origin')">{{ 'GUIDE.DIVISION_ORIGIN' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'division_origin')">{{ 'GUIDE.DIVISION_ORIGIN' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -70,7 +71,8 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.DIVISION_DESTINATION' | translate}}</label>
               <app-division-autocomplete
               name="division_destination" [valid]="isControlValid('division_destination')" [touched]="isControlTouched('division_destination')" [class.is-invalid]="isControlInvalid('division_destination')"
-              [class.is-valid]="isControlValid('division_destination')" formControlName="division_destination" id="division_destination" [model]="model.division_destination" (change)="changeDivisionDestination($event)"></app-division-autocomplete>
+              [class.is-valid]="isControlValid('division_destination')" formControlName="division_destination" id="division_destination" [model]="model.division_destination" 
+              (change)="changeDivisionDestination($event)" [addFilters]="[{key: 'office', value: officeUser}]"></app-division-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('division_destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.DIVISION_DESTINATION' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('division_destination')">{{ 'GUIDE.DIVISION_DESTINATION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'division_destination')">{{ 'GUIDE.DIVISION_DESTINATION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

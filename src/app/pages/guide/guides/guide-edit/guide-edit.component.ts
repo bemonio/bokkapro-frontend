@@ -61,6 +61,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   private unsubscribe: Subscription[] = [];
 
+  public officeUser: any;
+
   public view: boolean;
 
   constructor(
@@ -116,6 +118,8 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     this.parent = '/guides';
 
     this.newVoucher = false;
+
+    this.officeUser = this.authService.currentDivisionValue.office;
   }
 
   ngOnInit(): void {
@@ -591,6 +595,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
     const divisionChangeSubscription = this.divisionService._change$
     .subscribe(response => {
       if (response) {
+        this.officeUser = this.authService.currentDivisionValue.office;
         this.loadForm();
       }
     });
