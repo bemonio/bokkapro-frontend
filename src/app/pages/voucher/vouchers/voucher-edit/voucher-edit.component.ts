@@ -159,7 +159,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
     this.listPackings = [];
 
-    this.officeUser = this.authService.currentUserValue.employee.position.department.office;
+    this.officeUser = this.authService.currentDivisionValue.office;
   }
 
   ngOnInit(): void {
@@ -912,6 +912,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
             this.origin_destination.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
           }
         }
+        this.contract.reset();
+        this.officeUser = this.authService.currentDivisionValue.office;
         this.formGroup.markAllAsTouched();
     });
     this.unsubscribe.push(divisionChangeSubscription);
