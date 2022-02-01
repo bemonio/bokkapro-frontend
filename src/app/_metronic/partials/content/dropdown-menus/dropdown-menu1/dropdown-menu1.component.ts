@@ -29,6 +29,7 @@ export class DropdownMenu1Component implements OnInit {
       this.getCrew();
     } else {
       this.divisions = this.authService.currentUserValue.employee.divisions;
+      this.divisions.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
       this.division = this.authService.currentDivisionValue;
     }
   }
@@ -56,6 +57,7 @@ export class DropdownMenu1Component implements OnInit {
     this.crewService.get(page, per_page, sort, query, filters, _with).subscribe(
         response => {
             this.divisions = response.divisions;
+            this.divisions.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
             if (response.divisions) {
               this.changeDivision(response.divisions[0]);
             }
