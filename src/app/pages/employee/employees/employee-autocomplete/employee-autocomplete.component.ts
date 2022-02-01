@@ -25,6 +25,7 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
     @Input() touched: boolean;
     @Input() required: boolean;
     @Input() disabled: boolean;
+    @Input() readOnly: boolean;
     @Input() placeholder: string;
     @Input() isCrewInput: boolean;
     @Input() addFilters: { key: string, value: string }[];
@@ -77,6 +78,10 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
 
     setDisabledState(isDisabled: boolean) {
         this.disabled = isDisabled;
+    }
+
+    setReadOnly(isreadOnly: boolean) {
+        this.readOnly = isreadOnly;
     }
 
     public change($event) {
