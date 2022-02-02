@@ -124,6 +124,15 @@ export class DivisionAutocompleteComponent implements ControlValueAccessor, OnIn
             response => {
                 this.models = response.divisions;
                 this.totalRecords = response.meta.total_results;
+                if(response.offices){
+                    response.offices.forEach(office => {
+                        this.models.forEach(element => {
+                            if (element.office === office.id) {
+                                element.office = office;
+                            }
+                        });
+                    });
+                }
                 // if (this.model) {
                 //     if (this.model.id) {
                 //         this.model.id = undefined;
