@@ -189,7 +189,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
       if (this.divisionId) {
         this.getDivisionById(this.divisionId);
       }
-      this.office.setValue(this.authService.currentUserValue.employee.position.department.office);
+      // this.office.setValue(this.authService.currentUserValue.employee.position.department.office);
     }
     this.formGroup.markAllAsTouched();
     this.assistant2.updateValueAndValidity();
@@ -385,5 +385,13 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     }
     this.assistant2.updateValueAndValidity();
     this.formGroup.markAllAsTouched();
+  }
+
+  public changeDivision(event) {
+    let division = this.division.value;
+    this.formGroup.reset()
+    this.division.setValue(division)
+    this.office.setValue(division.office)
+    this.loadForm();
   }
 }

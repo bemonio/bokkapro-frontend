@@ -46,7 +46,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.DIVISION' | translate }}</label>
               <app-division-autocomplete [addFilters]="[{key: 'type_division', value: 2}]"
               name="division" [valid]="isControlValid('division')" [touched]="isControlTouched('division')" [class.is-invalid]="isControlInvalid('division')"
-              [class.is-valid]="isControlValid('division')" formControlName="division" id="division" [model]="model.division"></app-division-autocomplete>
+              [class.is-valid]="isControlValid('division')" formControlName="division" id="division" [model]="model.division" (change)="changeDivision($event)"></app-division-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.DIVISION' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('division')">{{ 'CREW.DIVISION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'CREW.DIVISION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -54,10 +54,20 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'CREW.DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.DATE' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.DATE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('date')">{{ 'CREW.DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">{{ 'CREW.DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.VEHICLE' | translate }}</label>
               <app-vehicle-autocomplete
               name="vehicle" [valid]="isControlValid('vehicle')" [touched]="isControlTouched('vehicle')" [class.is-invalid]="isControlInvalid('vehicle')"
-              [class.is-valid]="isControlValid('vehicle')" formControlName="vehicle" id="vehicle" [model]="model.vehicle" (change)="changeVehicle()"></app-vehicle-autocomplete>
+              [class.is-valid]="isControlValid('vehicle')" formControlName="vehicle" id="vehicle" [model]="model.vehicle" (change)="changeVehicle()" 
+              [disabled]="office.value? '' : 'disabled'" [addFilters]="[{key: 'office', value: office.value.id}]"></app-vehicle-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('vehicle')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.VEHICLE' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('vehicle')">{{ 'CREW.VEHICLE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'vehicle')">{{ 'CREW.VEHICLE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -68,7 +78,8 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.DRIVER' | translate }}</label>
               <app-employee-autocomplete
               name="driver" [valid]="isControlValid('driver')" [touched]="isControlTouched('driver')" [class.is-invalid]="isControlInvalid('driver')"
-              [class.is-valid]="isControlValid('driver')" formControlName="driver" id="driver" [model]="model.driver"></app-employee-autocomplete>
+              [class.is-valid]="isControlValid('driver')" formControlName="driver" id="driver" [model]="model.driver" 
+              [disabled]="office.value? '' : 'disabled'" [addFilters]="[{key: 'position.department.office', value: office.value.id}]"></app-employee-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('driver')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.DRIVER' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('driver')">{{ 'CREW.DRIVER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'driver')">{{ 'CREW.DRIVER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -79,7 +90,8 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.ASSISTANT' | translate }}</label>
               <app-employee-autocomplete
               name="assistant" [valid]="isControlValid('assistant')" [touched]="isControlTouched('assistant')" [class.is-invalid]="isControlInvalid('assistant')"
-              [class.is-valid]="isControlValid('assistant')" formControlName="assistant" id="assistant" [model]="model.assistant"></app-employee-autocomplete>
+              [class.is-valid]="isControlValid('assistant')" formControlName="assistant" id="assistant" [model]="model.assistant" 
+              [disabled]="office.value? '' : 'disabled'" [addFilters]="[{key: 'position.department.office', value: office.value.id}]"></app-employee-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('assistant')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.ASSISTANT' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('assistant')">{{ 'CREW.ASSISTANT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'assistant')">{{ 'CREW.ASSISTANT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -90,21 +102,13 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.ASSISTANT2' | translate }}</label>
               <app-employee-autocomplete
               name="assistant2" [valid]="isControlValid('assistant2')" [touched]="isControlTouched('assistant2')" [class.is-invalid]="isControlInvalid('assistant2')"
-              [class.is-valid]="isControlValid('assistant2')" formControlName="assistant2" id="assistant2" [model]="model.assistant2"></app-employee-autocomplete>
+              [class.is-valid]="isControlValid('assistant2')" formControlName="assistant2" id="assistant2" [model]="model.assistant2" 
+              [disabled]="office.value? '' : 'disabled'" [addFilters]="[{key: 'position.department.office', value: office.value.id}]"></app-employee-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('assistant2')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.ASSISTANT2' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('assistant2')">{{ 'CREW.ASSISTANT2' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'assistant2')">{{ 'CREW.ASSISTANT2' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'assistant2')">{{ 'CREW.ASSISTANT2' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'assistant2')">{{ 'CREW.ASSISTANT2' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.DATE' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
-              <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.DATE' | translate}}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('date')">{{ 'CREW.DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">{{ 'CREW.DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'date')">{{ 'CREW.DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'REPORT_OPERATION.OFFICE' | translate }}</label>
