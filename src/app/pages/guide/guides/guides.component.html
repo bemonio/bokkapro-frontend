@@ -20,11 +20,11 @@
       {{ 'COMMON.FILTER' | translate }}
       <div class="form-group row" [formGroup]="searchGroup" *ngIf="showFilter">
         <div class="col-lg-3">
-          <p-calendar styleClass="form-control form-control-lg form-control-solid" name="created_at_filter" formControlName="created_at_filter" showButtonBar="true" (onSelect)="loadLazy()" (onClickOutside)="loadLazy()" (onClearClick)="loadLazy()"></p-calendar>
+          <p-calendar dateFormat="dd/mm/yy" styleClass="form-control form-control-lg form-control-solid" name="created_at_filter" formControlName="created_at_filter" showButtonBar="true" (onSelect)="loadLazy()" (onClickOutside)="loadLazy()" (onClearClick)="loadLazy()"></p-calendar>
           <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} {{ 'COMMON.CREATED_AT' | translate }}</small>
         </div>
         <div class="col-lg-3">
-          <p-calendar styleClass="form-control form-control-lg form-control-solid" name="date_filter" formControlName="date_filter" showButtonBar="true" (onSelect)="loadLazy()" (onClickOutside)="loadLazy()" (onClearClick)="loadLazy()"></p-calendar>
+          <p-calendar dateFormat="dd/mm/yy" styleClass="form-control form-control-lg form-control-solid" name="date_filter" formControlName="date_filter" showButtonBar="true" (onSelect)="loadLazy()" (onClickOutside)="loadLazy()" (onClearClick)="loadLazy()"></p-calendar>
           <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} {{ 'GUIDE.DATE' | translate }}</small>
         </div>
         <div class="col-lg-6">
@@ -267,7 +267,7 @@
   [baseZIndex]="10000" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'visible'}">
   <div class="form-group row" [formGroup]="exportGroup" style="margin-top: 20px;">
     <div class="col-lg-6">
-      <p-calendar styleClass="form-control form-control-lg form-control-solid" name="date_export" formControlName="date_export" showButtonBar="true" (onSelect)="loadLazy()" (onClickOutside)="loadLazy()" (onClearClick)="loadLazy()"></p-calendar>
+      <p-calendar dateFormat="dd/mm/yy" styleClass="form-control form-control-lg form-control-solid" name="date_export" formControlName="date_export" showButtonBar="true" (onSelect)="loadLazy()" (onClickOutside)="loadLazy()" (onClearClick)="loadLazy()"></p-calendar>
       <small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b>  {{ 'COMMON.IN' | translate }} AM/PM</small>
     </div>
     <div class="col-lg-6">

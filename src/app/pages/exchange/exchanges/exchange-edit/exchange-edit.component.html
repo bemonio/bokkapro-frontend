@@ -55,7 +55,7 @@
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'EXCHANGE.DATE' | translate }}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'EXCHANGE.DATE' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('date')">{{ 'EXCHANGE.DATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">{{ 'EXCHANGE.DATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

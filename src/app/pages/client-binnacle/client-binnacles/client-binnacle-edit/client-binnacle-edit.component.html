@@ -67,7 +67,7 @@
               </div>
               <div class="col-lg-4">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'CLIENT_BINNACLE.HOUR' | translate}}</label>
-                <p-calendar [inputStyleClass]="getValidClass(isControlValid('hour'))" name="hour" formControlName="hour"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('hour'))" name="hour" formControlName="hour"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('hour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CLIENT_BINNACLE.HOUR' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('hour')">{{ 'CLIENT_BINNACLE.HOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'hour')">{{ 'CLIENT_BINNACLE.HOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

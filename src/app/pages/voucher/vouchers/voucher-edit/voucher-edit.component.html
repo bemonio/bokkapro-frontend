@@ -190,7 +190,7 @@
             </div>  -->
             <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.DATE_DELIVERY' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date_delivery'))" name="date_delivery" formControlName="date_delivery" showTime="true" hourFormat="24"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('date_delivery'))" name="date_delivery" formControlName="date_delivery" showTime="true" hourFormat="24"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('date_delivery')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.DATE_DELIVERY' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('date_delivery')">{{ 'VOUCHER.DATE_DELIVERY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'date_delivery')">{{ 'VOUCHER.DATE_DELIVERY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -199,7 +199,7 @@
             </div>   -->
             <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CHECKIN_DATE' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('checkin_date'))" name="checkin_date" formControlName="checkin_date" showTime="true" hourFormat="24"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('checkin_date'))" name="checkin_date" formControlName="checkin_date" showTime="true" hourFormat="24"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('checkin_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CHECKIN_DATE' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('checkin_date')">{{ 'VOUCHER.CHECKIN_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'checkin_date')">{{ 'VOUCHER.CHECKIN_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -228,7 +228,7 @@
             </div> 
             <div class="col-lg-4" *ngIf="authService.currentDivisionValue.id === 2">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PICKUP_DATE' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('pickup_date'))" name="pickup_date" formControlName="pickup_date" showTime="true" hourFormat="24"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('pickup_date'))" name="pickup_date" formControlName="pickup_date" showTime="true" hourFormat="24"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('pickup_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.PICKUP_DATE' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

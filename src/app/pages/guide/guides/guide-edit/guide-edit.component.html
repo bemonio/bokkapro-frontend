@@ -101,7 +101,7 @@
             </div> -->
             <div class="col-lg-4" *ngIf="division_destination.value?.type_division == 2">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'GUIDE.DATE' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date" showTime="true" placeholder="{{ 'GUIDE.DATE' | translate }}"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('date'))" name="date" formControlName="date" showTime="true" placeholder="{{ 'GUIDE.DATE' | translate }}"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'GUIDE.DATE' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('date')">{{ 'GUIDE.DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">{{ 'GUIDE.DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

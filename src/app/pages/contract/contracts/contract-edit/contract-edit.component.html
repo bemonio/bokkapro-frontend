@@ -113,7 +113,7 @@
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CONTRACT.START_BILLING_DATE' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('start_billing_date'))" name="start_billing_date" formControlName="start_billing_date"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('start_billing_date'))" name="start_billing_date" formControlName="start_billing_date"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('start_billing_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CONTRACT.START_BILLING_DATE' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('start_billing_date')">{{ 'CONTRACT.START_BILLING_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'start_billing_date')">{{ 'CONTRACT.START_BILLING_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -122,7 +122,7 @@
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CONTRACT.END_BILLING_DATE' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('end_billing_date'))" name="end_billing_date" formControlName="end_billing_date"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('end_billing_date'))" name="end_billing_date" formControlName="end_billing_date"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('end_billing_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CONTRACT.END_BILLING_DATE' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('end_billing_date')">{{ 'CONTRACT.END_BILLING_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'end_billing_date')">{{ 'CONTRACT.END_BILLING_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

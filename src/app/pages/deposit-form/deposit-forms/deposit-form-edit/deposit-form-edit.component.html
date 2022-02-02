@@ -119,7 +119,7 @@
             </div>
             <div class="col-lg-4" *ngIf="model.id">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.VERIFIEDAT' | translate}}</label>
-              <p-calendar [inputStyleClass]="getValidClass(isControlValid('verified_at'))" name="verified_at" formControlName="verified_at"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('verified_at'))" name="verified_at" formControlName="verified_at"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('verified_at')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.VERIFIEDAT' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('verified_at')">{{ 'DEPOSITFORM.VERIFIEDAT' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'verified_at')">{{ 'DEPOSITFORM.VERIFIEDAT' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
