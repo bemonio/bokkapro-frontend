@@ -391,7 +391,9 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     let division = this.division.value;
     this.formGroup.reset()
     this.division.setValue(division)
-    this.office.setValue(division.office)
+    if (division) {
+      this.office.setValue(division.office)
+    }
     this.loadForm();
   }
 }
