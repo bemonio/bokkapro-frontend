@@ -763,10 +763,11 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       response => {
         this.packing = response.packings[0];
         if (!this.packing) {
-          this.listPackings.push(id);
+          this.toastService.growl('top-right', 'success', 'success', 'Envase agregado');
         } else if (this.packing.is_active == false) {
-          this.listPackings.push(id);
+          this.toastService.growl('top-right', 'success', 'success', 'Envase agregado');
         } else {
+          this.listPackings.pop();
           this.toastService.growl('top-right', 'error', 'error', 'Envase aún activo');
         }
       },
@@ -887,11 +888,14 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   public addListPackings(event) {
     this.listPackings.forEach(element => {
-      if (element == event.value) {
+    if (element == event.value) {                
+        event.value = event.value.replace(/[^a-zA-Z0-9]/g, '')
         this.listPackings.pop();
+        this.listPackings.push(event.value);
       }
     });
-    this.getPackingById(event.value.replace(/[^a-zA-Z0-9]/g, ''));
+
+    this.getPackingById(event.value);
   }
 
   public subscribeToDivisionChange() {
