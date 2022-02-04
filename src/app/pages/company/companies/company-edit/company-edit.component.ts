@@ -96,7 +96,7 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
       alias: [''],
       abbreviation: [''],
       // logo: [''],
-      email: [''],
+      email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
       phone: [''],
       web: [''],
       address: [''],

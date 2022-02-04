@@ -71,7 +71,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       point_name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       reference_point: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       telephone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-      email: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       description: ['', Validators.compose([Validators.maxLength(255)])],
       type_location: ['', Validators.compose([Validators.required])],
       address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],

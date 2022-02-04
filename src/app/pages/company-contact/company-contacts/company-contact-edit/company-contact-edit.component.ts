@@ -67,7 +67,7 @@ export class CompanyContactEditComponent implements OnInit, OnDestroy {
       mobile: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       employee_position: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
       company: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
     this.name = this.formGroup.controls['name'];

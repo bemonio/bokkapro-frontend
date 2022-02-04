@@ -75,7 +75,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       start_billing_date: ['', Validators.compose([Validators.required,])],
       end_billing_date: ['', Validators.compose([Validators.required,])],
       identification_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-      email: [''],
+      email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
       phone: [''],
       web: [''],
       alias: [''],
