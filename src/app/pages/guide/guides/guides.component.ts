@@ -420,7 +420,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
                     voucher.verificated = true;
                     found = true;
                 }
-                if (guide.division_destination.name !== 'Operaciones Internas') {
+                if (guide.division_destination.type_division !== 1) {
                     voucher.packings.forEach(packing => {
                         if (packing.code === evenValue) {
                             packing.verificated = true;
@@ -533,7 +533,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
         let count = 0;
         if (operations) {
             guides.forEach(guide => {
-                if (guide.division_destination.name != 'Operaciones Internas') {
+                if (guide.division_destination.type_division != 1) {
                     if (guide.vouchers) {
                         guide.vouchers.forEach(voucher => {
                             if (voucher.packings) {

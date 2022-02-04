@@ -170,7 +170,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.division = this.authService.currentDivisionValue;
     this.getOfficeById(this.division.office);
 
-    if (this.division.id == 1){
+    if (this.division.type_division == 5){
       this.amount.setValidators([]);
       this.contract.setValidators([]);
       this.origin_destination.setValidators([]);
@@ -898,18 +898,19 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     const divisionChangeSubscription = this.divisionService._change$
     .subscribe(response => {
         if (response) {
-          if (this.division.id == 1){
+          if (this.division.type_division == 5){
             this.amount.setValidators([]);
             this.contract.setValidators([]);
             this.origin_destination.setValidators([]);
+            this.currency.setValidators([]);
             this.amount.setValue(0);
           } else {
             this.code.setValidators(Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)]));
             this.amount.setValidators(Validators.compose([Validators.required]));
-            this.count_packings.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
-            this.packings.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
             this.contract.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
             this.origin_destination.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+            this.count_packings.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
+            this.packings.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]));
           }
         }
         this.contract.reset();

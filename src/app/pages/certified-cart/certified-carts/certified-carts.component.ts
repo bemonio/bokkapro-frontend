@@ -332,7 +332,7 @@ export class CertifiedCartsComponent implements OnInit {
                         voucher.verificated = true;
                         found = true;
                     }
-                    // if (certifiedcart.division_destination.name !== 'Operaciones Internas') {
+                    // if (certifiedcart.division_destination.type_division !== 1) {
                         voucher.packings.forEach(packing => {
                             if (packing.code === evenValue) {
                                 packing.verificated = true;
