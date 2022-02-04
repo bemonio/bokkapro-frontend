@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { LocationModel as Model } from '../../_models/location.model';
 import { LocationService as ModelsService } from '../../_services/location.service';
+import { CompanyService } from 'src/app/pages/company/_services';
 
 @Component({
   selector: 'app-location-edit',
@@ -55,7 +56,8 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private companyService: CompanyService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
@@ -71,7 +73,7 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       point_name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       reference_point: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       telephone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
       description: ['', Validators.compose([Validators.maxLength(255)])],
       type_location: ['', Validators.compose([Validators.required])],
       address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
@@ -187,6 +189,10 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       }
       if (this.model.zone) {
         this.zone.setValue(this.model.zone);
+      }
+    } else {
+      if (this.companyId) {
+        this.getCompanyById(this.companyId);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -341,5 +347,16 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       stringClass += ' is-invalid';
     }
     return stringClass;
+  }
+
+  getCompanyById(id) {
+    this.companyService.getById(id).toPromise().then(
+      response => {
+        this.company.setValue(response.company)
+      },
+      error => {
+        console.log('error getting company');
+      }
+    );
   }
 }
