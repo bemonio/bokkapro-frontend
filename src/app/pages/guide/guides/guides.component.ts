@@ -218,6 +218,9 @@ export class GuidesComponent implements OnInit, OnDestroy {
                 this.permission = 'guidecheck';
                 this.showFilter = true;
                 break;
+            case 'guides':
+                this.showFilter = true;
+                break;
             default: 
                 this.showFilter = false;
                 break;
