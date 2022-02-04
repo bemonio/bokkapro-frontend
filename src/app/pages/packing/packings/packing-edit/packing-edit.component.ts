@@ -107,30 +107,30 @@ export class PackingEditComponent implements OnInit, OnDestroy {
                                   this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params3;
                                 } else {
                                   this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + params3;
-                                  Object.keys(this.formGroup.controls).forEach(control => {
-                                    this.formGroup.controls[control].disable();
-                                  });
-                                  this.view = true;
+                                  // Object.keys(this.formGroup.controls).forEach(control => {
+                                  //   this.formGroup.controls[control].disable();
+                                  // });
+                                  // this.view = true;
                                 }
 
                                 if (this.route.parent.parent.parent.parent.parent.parent.snapshot.url[0].path === 'edit') {
                                   this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params2;
                                 } else {
                                   this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + params2;
-                                  Object.keys(this.formGroup.controls).forEach(control => {
-                                    this.formGroup.controls[control].disable();
-                                  });
-                                  this.view = true;
+                                  // Object.keys(this.formGroup.controls).forEach(control => {
+                                  //   this.formGroup.controls[control].disable();
+                                  // });
+                                  // this.view = true;
                                 }
 
                                 if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
                                   this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
                                 } else {
                                   this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + params1;
-                                  Object.keys(this.formGroup.controls).forEach(control => {
-                                    this.formGroup.controls[control].disable();
-                                  });
-                                  this.view = true;
+                                  // Object.keys(this.formGroup.controls).forEach(control => {
+                                  //   this.formGroup.controls[control].disable();
+                                  // });
+                                  // this.view = true;
                                 }
                               }
                           })
@@ -139,20 +139,20 @@ export class PackingEditComponent implements OnInit, OnDestroy {
                           this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params2;
                         } else {
                           this.parent = '/' + this.route.parent.parent.parent.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + params2;
-                          Object.keys(this.formGroup.controls).forEach(control => {
-                            this.formGroup.controls[control].disable();
-                          });
-                          this.view = true;
+                          // Object.keys(this.formGroup.controls).forEach(control => {
+                          //   this.formGroup.controls[control].disable();
+                          // });
+                          // this.view = true;
                         }
         
                         if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
                           this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
                         } else {
                           this.parent = this.parent + '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + params1;
-                          Object.keys(this.formGroup.controls).forEach(control => {
-                            this.formGroup.controls[control].disable();
-                          });
-                          this.view = true;
+                          // Object.keys(this.formGroup.controls).forEach(control => {
+                          //   this.formGroup.controls[control].disable();
+                          // });
+                          // this.view = true;
                         }
                       }
                   })
@@ -161,10 +161,10 @@ export class PackingEditComponent implements OnInit, OnDestroy {
                   this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + params1;
                 } else {
                   this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + params1;
-                  Object.keys(this.formGroup.controls).forEach(control => {
-                    this.formGroup.controls[control].disable();
-                  });
-                  this.view = true;
+                  // Object.keys(this.formGroup.controls).forEach(control => {
+                  //   this.formGroup.controls[control].disable();
+                  // });
+                  // this.view = true;
                 }
               }
           }
@@ -172,6 +172,13 @@ export class PackingEditComponent implements OnInit, OnDestroy {
       });
     } else {
         this.get();
+    }
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
     }
   }
 
