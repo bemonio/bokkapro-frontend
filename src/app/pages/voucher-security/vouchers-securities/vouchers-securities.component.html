@@ -7,7 +7,7 @@
       <!-- <a type="button" class="btn btn-secondary" (click)="showModalDialogCertifiedCart()" *ngIf="authService.currentDivisionValue.id === 1 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CERTIFIED_CART' | translate }}</a>
       <a type="button" class="btn btn-secondary" (click)="showModalDialogCashier()" *ngIf="authService.currentDivisionValue.id === 3 && selectedModels.length > 0">{{ 'COMMON.ASIGN' | translate }} {{ 'VOUCHER.CASHIER' | translate }}</a>
       <a type="button" class="btn btn-secondary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }} {{ 'VOUCHER.DIVISION' | translate }}</a> -->
-      <a type="button" class="btn btn-secondary" (click)="showModalDialogSecurity()" *ngIf="authService.currentDivisionValue.id === 1">{{ 'COMMON.TRANSFER' | translate }} {{ '' | translate}} {{ 'VOUCHER.SECURITY' | translate }}</a>
+      <a type="button" class="btn btn-secondary" (click)="showModalDialogSecurity()" *ngIf="authService.currentDivisionValue.type_division === 5">{{ 'COMMON.TRANSFER' | translate }} {{ '' | translate}} {{ 'VOUCHER.SECURITY' | translate }}</a>
       <!-- <a type="button" class="btn btn-primary" routerLink="{{parent}}/voucherssecurities/add" *ngIf="parent.startsWith('/guidesinput')">{{ 'COMMON.NEW' | translate }}</a>
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/voucherssecurities/addList" *ngIf="!parent">{{ 'COMMON.NEW' | translate }}</a> -->
     </div>

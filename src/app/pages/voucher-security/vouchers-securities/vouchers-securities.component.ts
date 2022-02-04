@@ -749,9 +749,9 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
 
     verifyShowCheckBox(value) {
         let response = false;
-        if ((this.authService.currentDivisionValue.id === 2 && this.showRowCheckbox && value.verified_oi === false) || 
-            (this.authService.currentDivisionValue.id === 2 && value.is_active === false) ||
-            (this.authService.currentDivisionValue.id != 2 && value.is_active === false)) {
+        if ((this.authService.currentDivisionValue.type_division === 1 && this.showRowCheckbox && value.verified_oi === false) || 
+            (this.authService.currentDivisionValue.type_division === 1 && value.is_active === false) ||
+            (this.authService.currentDivisionValue.type_division != 1 && value.is_active === false)) {
             response = true;
         }
         if (this.route.parent.parent.snapshot.url[0].path == "vouchersadmin") {

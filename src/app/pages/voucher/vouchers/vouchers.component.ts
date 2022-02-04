@@ -973,7 +973,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     verifyShowCheckBox(value) {
         let response = false;
-        if (this.authService.currentDivisionValue.id != 2 && value.is_active === true || 
+        if (this.authService.currentDivisionValue.type_division != 1 && value.is_active === true || 
             this.showRowCheckbox && value.is_active === true && value.verified_oi === true) {
             response = true;
         }
