@@ -272,7 +272,7 @@
             <button type="submit" class="btn btn-primary font-weight-bold mr-1 py-2"
               [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="model.id && !view">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="model.id && !view">{{ 'COMMON.SAVE_AND_NEW' | translate }}</button>
+              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!view">{{ 'COMMON.SAVE_AND_NEW' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)" *ngIf="!view">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
