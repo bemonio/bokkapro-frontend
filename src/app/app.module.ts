@@ -76,6 +76,7 @@ import { PermissionService } from './pages/permission/_services';
 import { GroupService } from './pages/group/_services';
 import { ContentTypeService } from './pages/content-type/_services';
 import { ChestService } from './pages/chest/_services';
+import { TypeChestService } from './pages/type-chest/_services';
 
 // OTHER MODULES
 import { CompaniesComponent } from 'src/app/pages/company/companies/companies.component';
@@ -188,6 +189,7 @@ export function getHighlightLanguages() {
     GroupService,
     ContentTypeService,
     ChestService,
+    TypeChestService,
     //Others
     CompaniesComponent
   ],

@@ -787,6 +787,17 @@
             </li>
             <!-- end::2 Level -->
 
+            <!-- begin::2 Level TypeChest -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typechest')">
+              <a class="menu-link" routerLink="/typeschests" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'TYPE_CHEST.TYPES_CHESTS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+
             <!-- begin::2 Level DocumentServiceOrder -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_documentserviceorder')">
               <a class="menu-link" routerLink="/documentsservicesorders" routerLinkActive="active">

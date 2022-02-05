@@ -1,0 +1,1 @@
+export { TypeChestService } from './type-chest.service';

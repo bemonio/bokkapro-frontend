@@ -719,7 +719,14 @@ export const locale = {
       KEY_CUSTODY: 'Custodia de llaves Cofre',
       TOTAL_COST: 'Cargo Fijo Monto Alquiler Cofre Unidad',
       SERVICE_ORDER: 'Orden de Servicio'
-    }
+    },
+    TYPE_CHEST: {
+      TYPE_CHEST: 'Tipo Cofre',
+      TYPES_CHESTS: 'Tipos Cofres',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción'
+    },
   }
 };
 

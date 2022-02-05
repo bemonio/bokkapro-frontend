@@ -345,6 +345,11 @@ import { ChestsComponent } from './chest/chests/chests.component';
 import { ChestComponent } from './chest/chest.component';
 import { ChestEditComponent } from './chest/chests/chest-edit/chest-edit.component';
 
+// TypeChests
+import { TypesChestsComponent } from './type-chest/types-chests/types-chests.component';
+import { TypeChestComponent } from './type-chest/type-chest.component';
+import { TypeChestEditComponent } from './type-chest/types-chests/type-chest-edit/type-chest-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -571,6 +576,9 @@ import { ChestEditComponent } from './chest/chests/chest-edit/chest-edit.compone
     ChestsComponent,
     ChestComponent,
     ChestEditComponent,
+    TypesChestsComponent,
+    TypeChestComponent,
+    TypeChestEditComponent,
   ]
 })
 export class PagesModule { }
