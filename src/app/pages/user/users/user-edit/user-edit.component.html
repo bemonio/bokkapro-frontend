@@ -186,12 +186,12 @@
 <p-dialog header="Avatar" [(visible)]="displayModalAvatar" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
   [draggable]="false" [resizable]="false">
 
-  <button (click)="rotateLeft()">Rotate left</button>
-  <button (click)="rotateRight()">Rotate right</button>
-  <button (click)="flipHorizontal()">Flip horizontal</button>
-  <button (click)="flipVertical()">Flip vertical</button>
+  <button (click)="rotateLeft()">{{ 'COMMON.ROTATE_LEFT' | translate }}</button>
+  <button (click)="rotateRight()">{{ 'COMMON.ROTATE_RIGTH' | translate }}</button>
+  <button (click)="flipHorizontal()">{{ 'COMMON.FLIP_HORIZONTAL' | translate }}</button>
+  <button (click)="flipVertical()">{{ 'COMMON.ROTATE_VERTICAL' | translate }}</button>
   <button (click)="toggleContainWithinAspectRatio()">{{containWithinAspectRatio?'Fill Aspect Ratio':'Contain Within Aspect Ratio'}}</button>
-  <button (click)="resetImage()">Reset image</button>
+  <button (click)="resetImage()">{{ 'COMMON.RESET_IMAGE' | translate }}</button>
 
   <image-cropper 
     [imageChangedEvent]="imageChangedEvent"
