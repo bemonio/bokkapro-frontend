@@ -19,7 +19,6 @@ export const locale = {
         LEGAL: 'Legal',
         TERMS: 'Términos',
         CONTACT: 'Contacto',
-        MESSAGE: 'Proyecto Caribe'
       },
       LOGIN: {
         TITLE: 'Crear una cuenta',
@@ -456,7 +455,7 @@ export const locale = {
       OF: 'de',
       RECORDS: 'Registros',
       TODAY: 'Hoy',
-      WELCOME_TO: 'Bienvenido a',
+      WELCOME_TO: 'Bienvenidos a',
       CHOOSE: 'Eligir',
       HI: 'Hola',
       CREATED_AT: 'Creado en',
@@ -473,6 +472,13 @@ export const locale = {
       VERIFICATED: 'Verificado',
       PRINT: 'Imprimir',
       DEVOLUTION: 'Devolución',
+      ROTATE_LEFT: 'Rotar Izquierda',
+      ROTATE_RIGTH: 'Rotar Derecha',
+      FLIP_HORIZONTAL: 'Girar Horizontal',
+      ROTATE_VERTICAL: 'Girar Vertical',
+      RESET_IMAGE: 'Resetear Imagen',
+      PLACE: 'Caribbean Island / Brinks',
+      PROJECT_NAME: 'Ingenious Caribe'
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',
