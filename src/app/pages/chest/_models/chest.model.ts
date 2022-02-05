@@ -7,4 +7,5 @@ export class ChestModel {
   key_custody: number;
   total_cost: number;
   service_order: any;
+  type_chest: any;
 }

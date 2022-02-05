@@ -54,6 +54,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'service_order')">{{ 'CHEST.SERVICE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.TYPE_CHEST' | translate }}</label>
+              <app-type-chest-select
+              placeholder="{{ 'CHEST.TYPE_CHEST' | translate }}" name="type_chest" [valid]="isControlValid('type_chest')" [touched]="isControlTouched('type_chest')" [class.is-invalid]="isControlInvalid('type_chest')"
+              [class.is-valid]="isControlValid('type_chest')" formControlName="type_chest" id="type_chest" [model]="model.type_chest"></app-type-chest-select>
+              <div class="feedback" *ngIf="!isControlTouched('type_chest')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.TYPE_CHEST' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('type_chest')">{{ 'CHEST.TYPE_CHEST' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_chest')">{{ 'CHEST.TYPE_CHEST' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_chest')">{{ 'CHEST.TYPE_CHEST' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_chest')">{{ 'CHEST.TYPE_CHEST' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.CODE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="code" [class.is-invalid]="isControlInvalid('code')"

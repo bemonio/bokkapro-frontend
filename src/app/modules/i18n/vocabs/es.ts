@@ -718,7 +718,8 @@ export const locale = {
       COST_RISK: 'Cargo Fijo Riesgo Cofre',
       KEY_CUSTODY: 'Custodia de llaves Cofre',
       TOTAL_COST: 'Cargo Fijo Monto Alquiler Cofre Unidad',
-      SERVICE_ORDER: 'Orden de Servicio'
+      SERVICE_ORDER: 'Orden de Servicio',
+      TYPE_CHEST: 'Tipo de Cofre'
     },
     TYPE_CHEST: {
       TYPE_CHEST: 'Tipo Cofre',

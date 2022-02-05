@@ -36,6 +36,7 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
   public cost_risk: AbstractControl;
   public key_custody: AbstractControl;
   public total_cost: AbstractControl;
+  public type_chest: AbstractControl;
 
   public service_order: AbstractControl;
 
@@ -75,6 +76,7 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
       key_custody: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       total_cost: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       service_order: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      type_chest: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];
     this.rental = this.formGroup.controls['rental'];
@@ -83,6 +85,7 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
     this.key_custody = this.formGroup.controls['key_custody'];
     this.total_cost = this.formGroup.controls['total_cost'];
     this.service_order = this.formGroup.controls['service_order'];
+    this.type_chest = this.formGroup.controls['type_chest'];
   }
 
   ngOnInit(): void {
@@ -152,7 +155,9 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.chest;
-
+        if (response.type_chests) {
+          this.model.type_chest = response.type_chests[0];
+        }
         if (response.service_orders) {
           this.model.service_order = response.service_orders[0];
           this.filterServOrdCompany = response.service_orders[0];
@@ -174,6 +179,9 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
         this.key_custody.setValue(this.model.key_custody);
         this.total_cost.setValue(this.model.total_cost);
         this.service_order.setValue(this.model.service_order);
+      }
+      if (this.model.type_chest) {
+        this.type_chest.setValue(this.model.type_chest);
       }
     } else {
       this.code.setValue('');
@@ -221,6 +229,7 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
     model.key_custody = this.model.key_custody;
     model.total_cost = this.model.total_cost;
     model.service_order = this.model.service_order.id;
+    model.type_chest = this.model.type_chest.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -265,6 +274,7 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
     model.key_custody = this.model.key_custody;
     model.total_cost = this.model.total_cost;
     model.service_order = this.model.service_order.id;
+    model.type_chest = this.model.type_chest.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
