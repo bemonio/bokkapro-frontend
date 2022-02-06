@@ -569,6 +569,13 @@ export const locale = {
       ID: 'Id',
       CODE: 'Código',
       NAME: 'Nombre',
+      COUNT: 'Cantidad',
+      DESCRIPTION: 'Descripción',
+      PRICE: 'Precio',
+      COST: 'Costo',
+      IS_SERIALIZER: 'Es Serializable?',
+      HAS_PARTS: 'Tiene Partes?',
+      IS_SERVICE: 'Es Servicio?'
     },
     RATE: {
       RATE: 'Tarifa',

@@ -26,6 +26,13 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
 
   public code: AbstractControl;
   public name: AbstractControl;
+  public count: AbstractControl;
+  public description: AbstractControl;
+  public price: AbstractControl;
+  public cost: AbstractControl;
+  public is_serializer: AbstractControl;
+  public has_part: AbstractControl;
+  public is_service: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -49,9 +56,23 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required])],
       name: ['', Validators.compose([Validators.required])],
+      count: ['', Validators.compose([Validators.required])],
+      description: ['', Validators.compose([Validators.required])],
+      price: ['', Validators.compose([Validators.required])],
+      cost: ['', Validators.compose([Validators.required])],
+      is_serializer: ['', Validators.compose([Validators.required])],
+      has_part: ['', Validators.compose([Validators.required])],
+      is_service: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];
     this.name = this.formGroup.controls['name'];
+    this.count = this.formGroup.controls['count'];
+    this.description = this.formGroup.controls['description'];
+    this.price = this.formGroup.controls['price'];
+    this.cost = this.formGroup.controls['cost'];
+    this.is_serializer = this.formGroup.controls['is_serializer'];
+    this.has_part = this.formGroup.controls['has_part'];
+    this.is_service = this.formGroup.controls['is_service'];
   }
 
   ngOnInit(): void {
@@ -107,6 +128,13 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.code.setValue(this.model.code);
       this.name.setValue(this.model.name);
+      this.count.setValue(this.model.count);
+      this.description.setValue(this.model.description);
+      this.price.setValue(this.model.price);
+      this.cost.setValue(this.model.cost);
+      this.is_serializer.setValue(this.model.is_serializer);
+      this.has_part.setValue(this.model.has_part);
+      this.is_service.setValue(this.model.is_service);
     }
     this.formGroup.markAllAsTouched();
   }

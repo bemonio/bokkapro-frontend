@@ -52,7 +52,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">{{ 'PRODUCTANDSERVICE.CODE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">{{ 'PRODUCTANDSERVICE.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">{{ 'PRODUCTANDSERVICE.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>   
+            </div>      
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} Name</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -64,6 +64,79 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">Name {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">Name {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.COUNT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="count" [class.is-invalid]="isControlInvalid('count')"
+                [class.is-valid]="isControlValid('count')" formControlName="count"/> 
+              <div class="feedback" *ngIf="!isControlTouched('count')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.COUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('count')">{{ 'PRODUCTANDSERVICE.COUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'count')">{{ 'PRODUCTANDSERVICE.COUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count')">{{ 'PRODUCTANDSERVICE.COUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count')">{{ 'PRODUCTANDSERVICE.COUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.DESCRIPTION' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="description" [class.is-invalid]="isControlInvalid('description')"
+                [class.is-valid]="isControlValid('description')" formControlName="description" />
+              <div class="feedback" *ngIf="!isControlTouched('description')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.DESCRIPTION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('description')">{{ 'PRODUCTANDSERVICE.DESCRIPTION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'description')">{{ 'PRODUCTANDSERVICE.DESCRIPTION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'description')">{{ 'PRODUCTANDSERVICE.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'description')">{{ 'PRODUCTANDSERVICE.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_serializer" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('is_serializer')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('is_serializer')">{{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_serializer')">{{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_serializer')">{{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_serializer')">{{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_serializer" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('is_serializer')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('is_serializer')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_serializer')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_serializer')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_serializer')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_service" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('is_service')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('is_service')">{{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_service')">{{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_service')">{{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_service')">{{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.PRICE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="price" [class.is-invalid]="isControlInvalid('price')"
+                [class.is-valid]="isControlValid('price')" formControlName="price" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('price')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.PRICE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('price')">{{ 'PRODUCTANDSERVICE.PRICE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'price')">{{ 'PRODUCTANDSERVICE.PRICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'price')">{{ 'PRODUCTANDSERVICE.PRICE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'price')">{{ 'PRODUCTANDSERVICE.PRICE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.COST' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="cost" [class.is-invalid]="isControlInvalid('cost')"
+                [class.is-valid]="isControlValid('cost')" formControlName="cost" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('cost')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.COST' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('cost')">{{ 'PRODUCTANDSERVICE.COST' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'cost')">{{ 'PRODUCTANDSERVICE.COST' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'cost')">{{ 'PRODUCTANDSERVICE.COST' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'cost')">{{ 'PRODUCTANDSERVICE.COST' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/productandservices">{{ 'COMMON.CANCEL' | translate }}</a>
