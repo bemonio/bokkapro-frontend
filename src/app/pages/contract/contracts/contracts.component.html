@@ -51,9 +51,9 @@
               {{ 'CONTRACT.CODE' | translate }}
             </div>
           </th>
-          <th pSortableColumn="company">
+          <th pSortableColumn="name_invoce_to">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'CONTRACT.COMPANY' | translate }}
+              {{ 'CONTRACT.NAME_INVOICE_TO' | translate }}
             </div>
           </th>
           <th pSortableColumn="type_contract">
@@ -64,6 +64,11 @@
           <th pSortableColumn="start_billing_date">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'CONTRACT.BILLING_START_END' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="company">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'CONTRACT.COMPANY' | translate }}
             </div>
           </th>
           <th style="width: 10rem">
@@ -90,13 +95,16 @@
             {{value.code}}
           </td>
           <td>
-            {{value.company?.name}}
+            {{value.name_invoce_to}}
           </td>
           <td>
             {{value.type_contract?.name}}
           </td>
           <td>
             {{value.start_billing_date | date: 'MM/dd/yyyy'}} - {{value.end_billing_date | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
+            {{value.company?.name}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
