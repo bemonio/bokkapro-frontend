@@ -65,6 +65,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_chest')">{{ 'CHEST.TYPE_CHEST' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.LOCATION' | translate }}</label>
+              <app-location-autocomplete
+              placeholder="{{ 'CHEST.LOCATION' | translate }}" name="location" [valid]="isControlValid('location')" [touched]="isControlTouched('location')" [class.is-invalid]="isControlInvalid('location')"
+              [class.is-valid]="isControlValid('location')" formControlName="location" id="location" [model]="model.location"></app-location-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('location')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.LOCATION' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('location')">{{ 'CHEST.LOCATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'location')">{{ 'CHEST.LOCATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'location')">{{ 'CHEST.LOCATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'location')">{{ 'CHEST.LOCATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.CODE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="code" [class.is-invalid]="isControlInvalid('code')"
@@ -85,18 +96,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'rental')">{{ 'CHEST.RENTAL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'rental')">{{ 'CHEST.RENTAL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'rental')">{{ 'CHEST.RENTAL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.TOTAL_COST' | translate }}</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="total_cost" [class.is-invalid]="isControlInvalid('total_cost')"
-                [class.is-valid]="isControlValid('total_cost')" formControlName="total_cost" 
-                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
-              <div class="feedback" *ngIf="!isControlTouched('total_cost')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.TOTAL_COST' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('total_cost')">{{ 'CHEST.TOTAL_COST' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_cost')">{{ 'CHEST.TOTAL_COST' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_cost')">{{ 'CHEST.TOTAL_COST' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_cost')">{{ 'CHEST.TOTAL_COST' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.RISK' | translate }}</label>
@@ -133,6 +132,45 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'key_custody')">{{ 'CHEST.KEY_CUSTODY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'key_custody')">{{ 'CHEST.KEY_CUSTODY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'key_custody')">{{ 'CHEST.KEY_CUSTODY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.COST_KEY_CUSTODY' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="cost_key_custody" [class.is-invalid]="isControlInvalid('cost_key_custody')"
+                [class.is-valid]="isControlValid('cost_key_custody')" formControlName="cost_key_custody" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('cost_key_custody')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.COST_KEY_CUSTODY' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('cost_key_custody')">{{ 'CHEST.COST_KEY_CUSTODY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'cost_key_custody')">{{ 'CHEST.COST_KEY_CUSTODY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'cost_key_custody')">{{ 'CHEST.COST_KEY_CUSTODY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'cost_key_custody')">{{ 'CHEST.COST_KEY_CUSTODY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.CODE_LOCK' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="code_lock" [class.is-invalid]="isControlInvalid('code_lock')"
+                [class.is-valid]="isControlValid('code_lock')" formControlName="code_lock"/>
+              <div class="feedback" *ngIf="!isControlTouched('code_lock')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.CODE_LOCK' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('code_lock')">{{ 'CHEST.CODE_LOCK' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code_lock')">{{ 'CHEST.CODE_LOCK' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_lock')">{{ 'CHEST.CODE_LOCK' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_lock')">{{ 'CHEST.CODE_LOCK' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.COST_LOCK' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="cost_lock" [class.is-invalid]="isControlInvalid('cost_lock')"
+                [class.is-valid]="isControlValid('cost_lock')" formControlName="cost_lock" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('cost_lock')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.COST_LOCK' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('cost_lock')">{{ 'CHEST.COST_LOCK' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'cost_lock')">{{ 'CHEST.COST_LOCK' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'cost_lock')">{{ 'CHEST.COST_LOCK' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'cost_lock')">{{ 'CHEST.COST_LOCK' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'CHEST.IS_INCLUDED_PACKAGE' | translate }}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_included_package" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
             </div>
           </div>
           <div class="float-right">

@@ -50,7 +50,7 @@ export class ChestService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=service_order.*&include[]=service_order.company.*`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=service_order.*&include[]=service_order.company.*&include[]=type_chest.*&include[]=location.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -66,6 +66,6 @@ export class ChestService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=service_order.*&include[]=service_order.company.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=service_order.*&include[]=service_order.company.*&include[]=type_chest.*&include[]=location.*`);
     }
 }

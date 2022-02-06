@@ -35,8 +35,12 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
   public risk: AbstractControl;
   public cost_risk: AbstractControl;
   public key_custody: AbstractControl;
-  public total_cost: AbstractControl;
+  public cost_key_custody: AbstractControl;
+  public code_lock: AbstractControl;
+  public cost_lock: AbstractControl;
+  public is_included_package: AbstractControl;
   public type_chest: AbstractControl;
+  public location: AbstractControl;
 
   public service_order: AbstractControl;
 
@@ -74,18 +78,26 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
       risk: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       cost_risk: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       key_custody: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      total_cost: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      cost_key_custody: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      code_lock: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      cost_lock: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      is_included_package: ['', Validators.compose([Validators.required, Validators.minLength(1)])],    
       service_order: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      type_chest: ['', Validators.compose([Validators.required])],
+      type_chest: [''],
+      location: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];
     this.rental = this.formGroup.controls['rental'];
     this.risk = this.formGroup.controls['risk'];
     this.cost_risk = this.formGroup.controls['cost_risk'];
     this.key_custody = this.formGroup.controls['key_custody'];
-    this.total_cost = this.formGroup.controls['total_cost'];
+    this.cost_key_custody = this.formGroup.controls['cost_key_custody'];
+    this.code_lock = this.formGroup.controls['code_lock'];
+    this.cost_lock = this.formGroup.controls['cost_lock'];
+    this.is_included_package = this.formGroup.controls['is_included_package'];    
     this.service_order = this.formGroup.controls['service_order'];
     this.type_chest = this.formGroup.controls['type_chest'];
+    this.location = this.formGroup.controls['location'];
   }
 
   ngOnInit(): void {
@@ -158,6 +170,9 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
         if (response.type_chests) {
           this.model.type_chest = response.type_chests[0];
         }
+        if (response.locations) {
+          this.model.location = response.locations[0];
+        }
         if (response.service_orders) {
           this.model.service_order = response.service_orders[0];
           this.filterServOrdCompany = response.service_orders[0];
@@ -177,11 +192,17 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
         this.risk.setValue(this.model.risk);
         this.cost_risk.setValue(this.model.cost_risk);
         this.key_custody.setValue(this.model.key_custody);
-        this.total_cost.setValue(this.model.total_cost);
+        this.cost_key_custody.setValue(this.model.cost_key_custody);
+        this.code_lock.setValue(this.model.code_lock);
+        this.cost_lock.setValue(this.model.cost_lock);
+        this.is_included_package.setValue(this.model.is_included_package);    
         this.service_order.setValue(this.model.service_order);
       }
       if (this.model.type_chest) {
         this.type_chest.setValue(this.model.type_chest);
+      }
+      if (this.model.location) {
+        this.location.setValue(this.model.location);
       }
     } else {
       this.code.setValue('');
@@ -189,7 +210,10 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
       this.risk.setValue('');
       this.cost_risk.setValue('');
       this.key_custody.setValue('');
-      this.total_cost.setValue('');
+      this.cost_key_custody.setValue('');
+      this.code_lock.setValue('');
+      this.cost_lock.setValue('');
+      this.is_included_package.setValue('');    
       this.service_order.setValue('');
       if (this.serviceOrderId) {
         this.getServiceOrderById(this.serviceOrderId);
@@ -227,9 +251,13 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
     model.risk = this.model.risk;
     model.cost_risk = this.model.cost_risk;
     model.key_custody = this.model.key_custody;
-    model.total_cost = this.model.total_cost;
+    model.cost_key_custody = this.model.cost_key_custody;
+    model.code_lock = this.model.code_lock;
+    model.cost_lock = this.model.cost_lock;
+    model.is_included_package = this.model.is_included_package;    
     model.service_order = this.model.service_order.id;
     model.type_chest = this.model.type_chest.id;
+    model.location = this.model.location.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -272,9 +300,13 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
     model.risk = this.model.risk;
     model.cost_risk = this.model.cost_risk;
     model.key_custody = this.model.key_custody;
-    model.total_cost = this.model.total_cost;
+    model.cost_key_custody = this.model.cost_key_custody;
+    model.code_lock = this.model.code_lock;
+    model.cost_lock = this.model.cost_lock;
+    model.is_included_package = this.model.is_included_package;    
     model.service_order = this.model.service_order.id;
     model.type_chest = this.model.type_chest.id;
+    model.location = this.model.location.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
@@ -315,6 +347,7 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
     this.activeTabId = tabId;
     this.ngOnInit();
   }
+  
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
