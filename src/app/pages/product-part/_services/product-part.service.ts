@@ -50,7 +50,7 @@ export class ProductPartService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=product_and_service.*`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=product_and_service.*&include[]=product_and_service_part_of.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -66,6 +66,6 @@ export class ProductPartService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}?include[]=product_and_service.*`);
+        return this.http.get(`${this.API_URL}/${id}?include[]=product_and_service.*&include[]=product_and_service_part_of.*`);
     }
 }

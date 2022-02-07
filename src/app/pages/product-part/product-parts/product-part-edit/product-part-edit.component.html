@@ -43,15 +43,15 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }}</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTPART.PRODUCTANDSERVICE' | translate }}</label>
               <app-product-and-service-select
-              name="product_and_service" [valid]="isControlValid('product_and_service')" [touched]="isControlTouched('product_and_service')" [class.is-invalid]="isControlInvalid('product_and_service')"
-              [class.is-valid]="isControlValid('product_and_service')" formControlName="product_and_service" id="product_and_service" [model]="model.product_and_service"></app-product-and-service-select>
-              <div class="feedback" *ngIf="!isControlTouched('product_and_service')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('product_and_service')">{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'product_and_service')">{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'product_and_service')">{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'product_and_service')">{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              name="product_and_service_part_of" [valid]="isControlValid('product_and_service_part_of')" [touched]="isControlTouched('product_and_service_part_of')" [class.is-invalid]="isControlInvalid('product_and_service_part_of')"
+              [class.is-valid]="isControlValid('product_and_service_part_of')" formControlName="product_and_service_part_of" id="product_and_service_part_of" [model]="model.product_and_service_part_of"></app-product-and-service-select>
+              <div class="feedback" *ngIf="!isControlTouched('product_and_service_part_of')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTPART.PRODUCTANDSERVICE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('product_and_service_part_of')">{{ 'PRODUCTPART.PRODUCTANDSERVICE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'product_and_service_part_of')">{{ 'PRODUCTPART.PRODUCTANDSERVICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'product_and_service_part_of')">{{ 'PRODUCTPART.PRODUCTANDSERVICE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'product_and_service_part_of')">{{ 'PRODUCTPART.PRODUCTANDSERVICE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTPART.COUNT' | translate }}</label>
@@ -64,13 +64,24 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count')">{{ 'PRODUCTPART.COUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count')">{{ 'PRODUCTPART.COUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div> 
-          </div>
-          <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="/productparts">{{ 'COMMON.CANCEL' | translate }}</a>
-            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!view">{{ 'COMMON.SAVE' | translate }}</button>
-            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(true)" *ngIf="!view">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTPART.HAS_PART' | translate }}</label>
+              <app-product-and-service-select
+              name="product_and_service" [valid]="isControlValid('product_and_service')" [touched]="isControlTouched('product_and_service')" [class.is-invalid]="isControlInvalid('product_and_service')"
+              [class.is-valid]="isControlValid('product_and_service')" formControlName="product_and_service" id="product_and_service" [model]="model.product_and_service"></app-product-and-service-select>
+              <div class="feedback" *ngIf="!isControlTouched('product_and_service')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTPART.HAS_PART' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('product_and_service')">{{ 'PRODUCTPART.HAS_PART' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'product_and_service')">{{ 'PRODUCTPART.HAS_PART' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'product_and_service')">{{ 'PRODUCTPART.HAS_PART' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'product_and_service')">{{ 'PRODUCTPART.HAS_PART' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="float-right">
+              <a class="btn btn-default font-weight-bold mr-2" routerLink="/productparts">{{ 'COMMON.CANCEL' | translate }}</a>
+              <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+                [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!view">{{ 'COMMON.SAVE' | translate }}</button>
+              <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+                [disabled]="formGroup.invalid" (click)="save(true)" *ngIf="!view">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+            </div>
           </div>
         </form>
       </div>

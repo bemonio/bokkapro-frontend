@@ -45,9 +45,19 @@
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
-          <th pSortableColumn="product_and_service">
+          <th pSortableColumn="product_and_service_part_of">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'PRODUCTPART.PRODUCTANDSERVICE' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="product_and_service">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'PRODUCTPART.HAS_PART' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="count">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'PRODUCTPART.HAS_COUNT' | translate }}
             </div>
           </th>
           <th style="width: 10rem">
@@ -71,7 +81,13 @@
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td>
+            {{value.product_and_service_part_of?.name}}
+          </td>
+          <td>
             {{value.product_and_service?.name}}
+          </td>
+          <td>
+            {{value.count}}
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"

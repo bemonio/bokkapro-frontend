@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductPartService as ModelService } from '../_services/product-part.service';
 import { ProductPartModel as Model } from '../_models/product-part.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -15,6 +16,7 @@ import { AuthService } from 'src/app/modules/auth';
     styleUrls: ['./product-parts.component.scss']
 })
 export class ProductPartsComponent implements OnInit {
+    @Input() productAndServiceId: any;
 
     public promiseForm: Promise<any>;
 
@@ -42,11 +44,15 @@ export class ProductPartsComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
+    public prodAndServiceId: number;
+    public parent: string;
+
     constructor(
         public modelsService: ModelService,
         public translate: TranslateService,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
+        private route: ActivatedRoute,
         public authService: AuthService,
         fb: FormBuilder) {
         this.formGroup = fb.group({
@@ -106,8 +112,30 @@ export class ProductPartsComponent implements OnInit {
             this.per_page = event.rows;
         }
 
+        this.filters = [];
 
-        this.getModels();
+        if (this.productAndServiceId) {
+            this.filters.push({ key: 'filter{product_and_service_part_of}', value: this.productAndServiceId.toString() })
+            this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.productAndServiceId;
+            this.getModels();
+        } else {
+            if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+                this.route.parent.parent.parent.params.subscribe((params) => {
+                    if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                        this.prodAndServiceId = params.id;
+                        if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
+                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.prodAndServiceId;
+                        } else {
+                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.prodAndServiceId;
+                        }
+                        this.filters.push({ key: 'filter{product_and_service_part_of}', value: this.prodAndServiceId.toString() })
+                    }
+                    this.getModels();
+                });
+            } else {
+                this.getModels();
+            }  
+        }
     }
 
     public getModels() {
@@ -122,6 +150,9 @@ export class ProductPartsComponent implements OnInit {
                         this.models.forEach(element => {
                             if (element.product_and_service === product_and_service.id) {
                                 element.product_and_service = product_and_service;
+                            }
+                            if (element.product_and_service_part_of === product_and_service.id) {
+                                element.product_and_service_part_of = product_and_service;
                             }
                         });
                     });

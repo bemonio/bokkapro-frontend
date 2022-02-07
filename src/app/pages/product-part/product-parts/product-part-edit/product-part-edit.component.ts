@@ -26,6 +26,7 @@ export class ProductPartEditComponent implements OnInit, OnDestroy {
 
   public count: AbstractControl;
   public product_and_service: AbstractControl;
+  public product_and_service_part_of: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -49,9 +50,11 @@ export class ProductPartEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       count: ['', Validators.compose([Validators.required])],
       product_and_service: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      product_and_service_part_of: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
     this.count = this.formGroup.controls['count'];
     this.product_and_service = this.formGroup.controls['product_and_service'];
+    this.product_and_service_part_of = this.formGroup.controls['product_and_service_part_of'];
   }
 
   ngOnInit(): void {
@@ -99,6 +102,9 @@ export class ProductPartEditComponent implements OnInit, OnDestroy {
         if (response.product_and_services) {
           this.model.product_and_service = response.product_and_services[0];
         }
+        if (response.product_and_service_part_ofs) {
+          this.model.product_and_service_part_of = response.product_and_service_part_ofs[0];
+        }
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -112,6 +118,9 @@ export class ProductPartEditComponent implements OnInit, OnDestroy {
       this.count.setValue(this.model.count);
       if (this.model.product_and_service) {
         this.product_and_service.setValue(this.model.product_and_service);
+      }
+      if (this.model.product_and_service_part_of) {
+        this.product_and_service_part_of.setValue(this.model.product_and_service_part_of);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -142,6 +151,7 @@ export class ProductPartEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.product_and_service = this.model.product_and_service.id;
+    model.product_and_service_part_of = this.model.product_and_service_part_of.id;
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
@@ -173,6 +183,7 @@ export class ProductPartEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.product_and_service = this.model.product_and_service.id;
+    model.product_and_service_part_of = this.model.product_and_service_part_of.id;
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');

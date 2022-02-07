@@ -45,7 +45,8 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
+    public authService: AuthService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
@@ -58,11 +59,11 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
       name: ['', Validators.compose([Validators.required])],
       count: ['', Validators.compose([Validators.required])],
       description: ['', Validators.compose([Validators.required])],
-      price: ['', Validators.compose([Validators.required])],
-      cost: ['', Validators.compose([Validators.required])],
-      is_serializer: ['', Validators.compose([Validators.required])],
-      has_part: ['', Validators.compose([Validators.required])],
-      is_service: ['', Validators.compose([Validators.required])],
+      price: ['',],
+      cost: ['',],
+      is_serializer: [''],
+      has_part: [''],
+      is_service: [''],
     });
     this.code = this.formGroup.controls['code'];
     this.name = this.formGroup.controls['name'];
@@ -125,6 +126,9 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
+    this.is_serializer.setValue(false);
+    this.has_part.setValue(false);
+    this.is_service.setValue(false);
     if (this.model.id) {
       this.code.setValue(this.model.code);
       this.name.setValue(this.model.name);
