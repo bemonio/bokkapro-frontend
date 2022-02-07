@@ -463,7 +463,8 @@
       *ngIf="authService.hasPermission('view_rate') 
         || authService.hasPermission('view_origindestination') 
         || authService.hasPermission('view_serviceorder') 
-        || authService.hasPermission('view_productandservice')">  
+        || authService.hasPermission('view_productandservice')
+        || authService.hasPermission('view_productpart')">  
         <a class="menu-link menu-toggle" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Cart3.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
@@ -495,6 +496,17 @@
             </li>
             <!-- end::1 Level -->
 
+            <!-- begin::1 Level Types Product Parts -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_productpart')">
+              <a class="menu-link" routerLink="/productparts" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'PRODUCTPART.PRODUCTPARTS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::1 Level -->
+            
             <!-- begin::1 Level Types Product and Services -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_serviceorder')">
               <a class="menu-link" routerLink="/serviceorders" routerLinkActive="active">

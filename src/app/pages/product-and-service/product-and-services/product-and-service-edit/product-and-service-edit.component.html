@@ -88,7 +88,7 @@
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_serializer" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_serializer" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('is_serializer')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('is_serializer')">{{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_serializer')">{{ 'PRODUCTANDSERVICE.IS_SERIALIZER' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -97,7 +97,7 @@
             </div> 
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_serializer" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_serializer" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('is_serializer')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('is_serializer')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_serializer')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -106,7 +106,7 @@
             </div> 
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_service" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_service" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('is_service')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('is_service')">{{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_service')">{{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

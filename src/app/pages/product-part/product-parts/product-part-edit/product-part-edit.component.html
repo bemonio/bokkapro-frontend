@@ -1,0 +1,79 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="requesting">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="model">
+          {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
+          <span *ngIf="model && model.id">{{ 'PRODUCTPART.PRODUCTPART' | translate }} : {{ model.id }}</span>
+        </ng-container>
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="/productparts">
+        <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
+      </a>
+      <!-- <button class="btn btn-secondary ml-2" (click)="reset()">
+        <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
+      </button> -->
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+        <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+          [class.active]="activeTabId === tabs.BASIC_TAB">
+          {{ 'COMMON.BASIC_INFO' | translate }}
+        </a>
+      </li>
+      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PROFILE"
+          [class.active]="activeTabId === tabs.PROFILE">Profile</a>
+      </li> -->
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+      <div class="mt-5" *ngIf="model">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }}</label>
+              <app-product-and-service-select
+              name="product_and_service" [valid]="isControlValid('product_and_service')" [touched]="isControlTouched('product_and_service')" [class.is-invalid]="isControlInvalid('product_and_service')"
+              [class.is-valid]="isControlValid('product_and_service')" formControlName="product_and_service" id="product_and_service" [model]="model.product_and_service"></app-product-and-service-select>
+              <div class="feedback" *ngIf="!isControlTouched('product_and_service')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('product_and_service')">{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'product_and_service')">{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'product_and_service')">{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'product_and_service')">{{ 'SERVICE_ORDER.PRODUCTANDSERVICE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTPART.COUNT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="count" [class.is-invalid]="isControlInvalid('count')"
+                [class.is-valid]="isControlValid('count')" formControlName="count"/> 
+              <div class="feedback" *ngIf="!isControlTouched('count')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTPART.COUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('count')">{{ 'PRODUCTPART.COUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'count')">{{ 'PRODUCTPART.COUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count')">{{ 'PRODUCTPART.COUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count')">{{ 'PRODUCTPART.COUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> 
+          </div>
+          <div class="float-right">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="/productparts">{{ 'COMMON.CANCEL' | translate }}</a>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!view">{{ 'COMMON.SAVE' | translate }}</button>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(true)" *ngIf="!view">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+  </div>
+</div>

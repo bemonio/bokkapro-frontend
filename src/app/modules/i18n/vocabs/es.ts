@@ -739,6 +739,15 @@ export const locale = {
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción'
     },
+    PRODUCTPART: {
+      PRODUCTPART: 'Producto Parte',
+      PRODUCTPARTS: 'Productos Partes',
+      PRODUCTANDSERVICE: 'Producto y Servicio',
+      ID: 'Id',
+      CODE: 'Código',
+      NAME: 'Nombre',
+      COUNT: 'Cantidad',
+    },
   }
 };
 

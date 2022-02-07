@@ -351,6 +351,11 @@ import { TypeChestComponent } from './type-chest/type-chest.component';
 import { TypeChestEditComponent } from './type-chest/types-chests/type-chest-edit/type-chest-edit.component';
 import { TypeChestSelectComponent } from './type-chest/types-chests/type-chest-select/type-chest-select.component';
 
+// ProductParts
+import { ProductPartsComponent } from './product-part/product-parts/product-parts.component';
+import { ProductPartComponent } from './product-part/product-part.component';
+import { ProductPartEditComponent } from './product-part/product-parts/product-part-edit/product-part-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -580,7 +585,10 @@ import { TypeChestSelectComponent } from './type-chest/types-chests/type-chest-s
     TypesChestsComponent,
     TypeChestComponent,
     TypeChestEditComponent,
-    TypeChestSelectComponent
+    TypeChestSelectComponent,
+    ProductPartsComponent,
+    ProductPartComponent,
+    ProductPartEditComponent
   ]
 })
 export class PagesModule { }

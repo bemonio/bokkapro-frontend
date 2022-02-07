@@ -426,6 +426,13 @@ const routes: Routes = [
             (m) => m.TypeChestRoutingModule
           ),
       },
+      {
+        path: 'productparts',
+        loadChildren: () =>
+          import('../pages/product-part/product-part-routing.module').then(
+            (m) => m.ProductPartRoutingModule
+          ),
+      },
     ],
   },
 ];

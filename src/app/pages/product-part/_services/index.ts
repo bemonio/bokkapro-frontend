@@ -1,0 +1,1 @@
+export { ProductPartService } from './product-part.service';
