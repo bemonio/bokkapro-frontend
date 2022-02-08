@@ -53,7 +53,7 @@
         <div class="menu-submenu">
           <i class="menu-arrow"></i>
           <ul class="menu-subnav">
-            <!-- begin::2 Level Company -->
+            <!-- begin::2 Level COMPANIES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_company')">
               <a class="menu-link" routerLink="/companies" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -64,7 +64,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Type Company -->
+            <!-- begin::2 Level TYPES_COMPANIES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typecompany')">
               <a class="menu-link" routerLink="/typescompanies" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -75,7 +75,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Segment Company -->
+            <!-- begin::2 Level SEGMENTS_COMPANIES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_segmentcompany')">
               <a class="menu-link" routerLink="/segmentscompanies" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -86,7 +86,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Company Contacts -->
+            <!-- begin::2 Level COMPANYCONTACTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_companycontact')">
               <a class="menu-link" routerLink="/companycontacts" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -97,7 +97,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::1 Level Package -->
+            <!-- begin::1 Level BANKSACCOUNTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_bankaccount')">
               <a class="menu-link" routerLink="/banksaccounts" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -108,7 +108,7 @@
             </li>
             <!-- end::1 Level -->
 
-            <!-- begin::1 Level Chest -->
+            <!-- begin::1 Level CHESTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_chest')">
               <a class="menu-link" routerLink="/chests" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -119,7 +119,29 @@
             </li>
             <!-- end::1 Level -->
             
-            <!-- begin::1 Level Package -->
+            <!-- begin::1 Level SERVICE_ORDERS -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_serviceorder')">
+              <a class="menu-link" routerLink="/serviceorders" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'SERVICE_ORDER.SERVICE_ORDERS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::1 Level -->
+
+            <!-- begin::1 Level ORIGIN_DESTINATIONS -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_origindestination')">
+              <a class="menu-link" routerLink="/origindestinations" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'ORIGIN_DESTINATION.ORIGIN_DESTINATIONS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::1 Level -->
+            
+            <!-- begin::1 Level CLIENT_BINNACLES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_clientbinnacle')">
               <a class="menu-link" routerLink="/clientbinnacles" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -146,7 +168,7 @@
         <div class="menu-submenu">
           <i class="menu-arrow"></i>
           <ul class="menu-subnav">
-            <!-- begin::1 Level Location -->
+            <!-- begin::1 Level LOCATIONS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_location')">
               <a class="menu-link" routerLink="/locations" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -156,7 +178,7 @@
               </a>
             </li>
             <!-- end::1 Level -->
-            <!-- begin::1 Level TypeLocation -->
+            <!-- begin::1 Level TYPES_LOCATIONS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typelocation')">
               <a class="menu-link" routerLink="/typeslocations" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -187,7 +209,7 @@
                 <span class="menu-text">User Management</span>
               </span>
             </li> -->
-            <!-- begin::2 Level Guide -->
+            <!-- begin::2 Level GUIDES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guide')">
               <a class="menu-link" routerLink="/guides" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -198,7 +220,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Guide -->
+            <!-- begin::2 Level GUIDES_INPUTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guideinput')">
               <a class="menu-link" routerLink="/guidesinput" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -209,7 +231,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Guide -->
+            <!-- begin::2 Level GUIDES_OUTPUTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guideoutput')">
               <a class="menu-link" routerLink="/guidesoutput" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -220,7 +242,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Guide -->
+            <!-- begin::2 Level GUIDES_CHECKS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guidecheck')">
               <a class="menu-link" routerLink="/guidescheck" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -231,7 +253,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level TypeGuide -->
+            <!-- begin::2 Level TYPES_GUIDES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typeguide')">
               <a class="menu-link" routerLink="/typesguides" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -246,7 +268,7 @@
       </li>
       <!-- end::1 Level -->
 
-      <!-- begin::1 Level Voucher -->
+      <!-- begin::1 Level CERTIFIED_CARTS -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_certifiedcart')">
         <a class="menu-link" routerLink="/certifiedcarts" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/General/Lock.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
@@ -255,7 +277,7 @@
       </li>
       <!-- end::1 Level -->
       
-      <!-- begin::1 Level Voucher -->
+      <!-- begin::1 Level VOUCHERS -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_voucher')">
         <a class="menu-link" routerLink="/vouchers" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Files/File-done.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
@@ -264,7 +286,7 @@
       </li>
       <!-- end::1 Level -->
 
-      <!-- begin::1 Level Voucher -->
+      <!-- begin::1 Level VOUCHERSSECURITIES -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_vouchersecurity')">
         <a class="menu-link" routerLink="/voucherssecurities" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Files/File-done.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
@@ -273,7 +295,7 @@
       </li>
       <!-- end::1 Level -->
 
-      <!-- begin::1 Level Voucher -->
+      <!-- begin::1 Level VOUCHERSDELIVERED -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_voucherconfirmationdelivered')">
         <a class="menu-link" routerLink="/vouchersconfirmationdelivered" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Files/File-done.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
@@ -282,7 +304,7 @@
       </li>
       <!-- end::1 Level -->
 
-      <!-- begin::1 Level Voucher -->
+      <!-- begin::1 Level VOUCHERSADMIN -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_voucheradmin')">
         <a class="menu-link" routerLink="/vouchersadmin" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Files/File-done.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
@@ -291,7 +313,7 @@
       </li>
       <!-- end::1 Level -->
             
-      <!-- begin::1 Level Packing -->
+      <!-- begin::1 Level PACKINGS -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_packing')">
         <a class="menu-link" routerLink="/packings" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Box.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
@@ -300,7 +322,7 @@
       </li>
       <!-- end::1 Level -->
 
-      <!-- begin::1 Level Moderation -->
+      <!-- begin::1 Level MODERATIONS -->
       <!-- <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_moderatedobject')">
         <a class="menu-link" routerLink="/moderations" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Broom.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
@@ -320,7 +342,7 @@
         <div class="menu-submenu">
           <i class="menu-arrow"></i>
           <ul class="menu-subnav">
-            <!-- begin::1 Level DepositForm -->
+            <!-- begin::1 Level DEPOSITFORMS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_depositform')">
               <a class="menu-link" routerLink="/depositforms" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -331,7 +353,7 @@
             </li>
             <!-- end::1 Level -->
 
-            <!-- begin::1 Level DepositFormDetail -->
+            <!-- begin::1 Level DEPOSITFORMSDETAILS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_depositformdetail')">
               <a class="menu-link" routerLink="/depositformsdetails" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -362,7 +384,7 @@
                 <span class="menu-text">User Management</span>
               </span>
             </li> -->
-            <!-- begin::2 Level Package -->
+            <!-- begin::2 Level CURRENCIES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_currency')">
               <a class="menu-link" routerLink="/currencies" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -373,7 +395,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Package -->
+            <!-- begin::2 Level TYPESCURRENCIES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typecurrency')">
               <a class="menu-link" routerLink="/typescurrencies" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -384,7 +406,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Package -->
+            <!-- begin::2 Level CURRENCIESDETAILS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_currencydetail')">
               <a class="menu-link" routerLink="/currenciesdetails" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -395,7 +417,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Package -->
+            <!-- begin::2 Level EXCHANGES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_exchange')">
               <a class="menu-link" routerLink="/exchanges" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -421,7 +443,7 @@
         <div class="menu-submenu">
           <i class="menu-arrow"></i>
           <ul class="menu-subnav">
-            <!-- begin::1 Level Contract -->
+            <!-- begin::1 Level CONTRACTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_contract')">
               <a class="menu-link" routerLink="/contracts" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -432,7 +454,7 @@
             </li>
             <!-- end::1 Level -->
 
-            <!-- begin::1 Level Types Contracts -->
+            <!-- begin::1 Level TYPESCONTRACTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typecontract')">
               <a class="menu-link" routerLink="/typescontracts" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -443,7 +465,7 @@
             </li>
             <!-- end::1 Level -->
 
-            <!-- begin::1 Level Clause -->
+            <!-- begin::1 Level CLAUSES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_clause')">
               <a class="menu-link" routerLink="/clauses" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -474,18 +496,7 @@
         <div class="menu-submenu">
           <i class="menu-arrow"></i>
           <ul class="menu-subnav">
-            <!-- begin::1 Level Rate -->
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_rate')">
-              <a class="menu-link" routerLink="/rates" routerLinkActive="active">
-                <i class="menu-bullet menu-bullet-dot">
-                  <span></span>
-                </i>
-                <span class="menu-text">{{ 'RATE.RATES' | translate }}</span>
-              </a>
-            </li>
-            <!-- end::1 Level -->
-
-            <!-- begin::1 Level Types Product and Services -->
+            <!-- begin::1 Level Product and Services -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_productandservice')">
               <a class="menu-link" routerLink="/productandservices" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -506,29 +517,18 @@
               </a>
             </li>
             <!-- end::1 Level -->
+
+              <!-- begin::1 Level RATES -->
+              <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_rate')">
+                <a class="menu-link" routerLink="/rates" routerLinkActive="active">
+                  <i class="menu-bullet menu-bullet-dot">
+                    <span></span>
+                  </i>
+                  <span class="menu-text">{{ 'RATE.RATES' | translate }}</span>
+                </a>
+              </li>
+              <!-- end::1 Level -->
             
-            <!-- begin::1 Level Types Product and Services -->
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_serviceorder')">
-              <a class="menu-link" routerLink="/serviceorders" routerLinkActive="active">
-                <i class="menu-bullet menu-bullet-dot">
-                  <span></span>
-                </i>
-                <span class="menu-text">{{ 'SERVICE_ORDER.SERVICE_ORDERS' | translate }}</span>
-              </a>
-            </li>
-            <!-- end::1 Level -->
-
-            <!-- begin::1 Level Types Product and Services -->
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_origindestination')">
-              <a class="menu-link" routerLink="/origindestinations" routerLinkActive="active">
-                <i class="menu-bullet menu-bullet-dot">
-                  <span></span>
-                </i>
-                <span class="menu-text">{{ 'ORIGIN_DESTINATION.ORIGIN_DESTINATIONS' | translate }}</span>
-              </a>
-            </li>
-            <!-- end::1 Level -->
-
           </ul>
         </div>
       </li>
@@ -545,7 +545,7 @@
         <div class="menu-submenu">
           <i class="menu-arrow"></i>
           <ul class="menu-subnav">
-            <!-- begin::2 Level Package -->
+            <!-- begin::2 Level QUOTATIONS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_quotation')">
               <a class="menu-link" routerLink="/quotations" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -555,7 +555,7 @@
               </a>
             </li>
             <!-- end::2 Level -->
-            <!-- begin::2 Level Package -->
+            <!-- begin::2 Level QUOTETEMPLATES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_quotetemplate')">
               <a class="menu-link" routerLink="/quotetemplates" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -582,7 +582,7 @@
       <!-- begin::1 Level -->
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_tourdetail')">
         <a class="menu-link menu-toggle" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Files/Folder-star.svg'" cacheSVG="true" class="svg-icon menu-icon">
+          <span [inlineSVG]="'./assets/media/svg/icons/General/delivery-truck-time-svgrepo-com.svg'" cacheSVG="true" class="svg-icon menu-icon">
           </span>
           <span class="menu-text">{{ 'TOUR_DETAIL.TOURS_DETAILS' | translate }}</span>
           <i class="menu-arrow"></i>
@@ -590,7 +590,7 @@
         <div class="menu-submenu">
           <i class="menu-arrow"></i>
           <ul class="menu-subnav">
-            <!-- begin::1 Level Types Contracts -->
+            <!-- begin::1 Level Types TOURS_DETAILS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_tourdetail')">
               <a class="menu-link" routerLink="/toursdetails" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -616,7 +616,7 @@
         <div class="menu-submenu">
           <i class="menu-arrow"></i>
           <ul class="menu-subnav">
-            <!-- begin::2 Level Reports -->
+            <!-- begin::2 Level REPORTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_report')">
               <a class="menu-link" routerLink="/reportsexpress" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -626,7 +626,7 @@
               </a>
             </li>
             <!-- end::2 Level -->
-            <!-- begin::2 Level -->
+            <!-- begin::2 Level REPORTOPERATIONS -->
             <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover" *ngIf="authService.hasPermission('view_reportoperation')">
               <a class="menu-link" routerLink="/reportsoperations" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -636,7 +636,7 @@
               </a>
             </li>
             <!-- end::2 Level -->
-            <!-- begin::2 Level -->
+            <!-- begin::2 Level REPORTREQUESTS -->
             <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover" *ngIf="authService.hasPermission('view_reportrequest')">
               <a class="menu-link" routerLink="/reportsrequests" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -667,7 +667,7 @@
                 <span class="menu-text">User Management</span>
               </span>
             </li> -->
-            <!-- begin::2 Level Users -->
+            <!-- begin::2 Level USERS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_user')">
               <a class="menu-link" routerLink="/users" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -678,7 +678,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Employee -->
+            <!-- begin::2 Level EMPLOYEES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_employee')">
               <a class="menu-link" routerLink="/employees" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -689,7 +689,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Permission -->
+            <!-- begin::2 Level PERMISSIONS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_permission')">
               <a class="menu-link" routerLink="/permissions" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -700,7 +700,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level ContentType -->
+            <!-- begin::2 Level CONTENT_TYPES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_permission')">
               <a class="menu-link" routerLink="/contenttypes" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -711,7 +711,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Group -->
+            <!-- begin::2 Level GROUPS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_group')">
               <a class="menu-link" routerLink="/groups" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -722,7 +722,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Office -->
+            <!-- begin::2 Level OFFICES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_office')">
               <a class="menu-link" routerLink="/offices" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -733,7 +733,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Zone -->
+            <!-- begin::2 Level ZONES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_zone')">
               <a class="menu-link" routerLink="/zones" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -744,7 +744,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Department -->
+            <!-- begin::2 Level DEPARTMENTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_department')">
               <a class="menu-link" routerLink="/departments" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -755,7 +755,7 @@
             </li>
             <!-- end::2 Level -->
           
-            <!-- begin::2 Level Position -->
+            <!-- begin::2 Level POSITIONS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_position')">
               <a class="menu-link" routerLink="/positions" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -766,7 +766,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level Office -->
+            <!-- begin::2 Level VEHICLES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_vehicle')">
               <a class="menu-link" routerLink="/vehicles" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -777,7 +777,7 @@
             </li>
             <!-- end::2 Level -->
             
-            <!-- begin::2 Level Division -->
+            <!-- begin::2 Level DIVISIONS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_division')">
               <a class="menu-link" routerLink="/divisions" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -788,7 +788,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level TypeDivision -->
+            <!-- begin::2 Level TYPES_DIVISIONS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typedivision')">
               <a class="menu-link" routerLink="/typesdivisions" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -799,7 +799,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level TypeChest -->
+            <!-- begin::2 Level TYPES_CHESTS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typechest')">
               <a class="menu-link" routerLink="/typeschests" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -810,7 +810,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level DocumentServiceOrder -->
+            <!-- begin::2 Level DOCUMENTS_SERVICES_ORDERS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_documentserviceorder')">
               <a class="menu-link" routerLink="/documentsservicesorders" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
@@ -821,7 +821,7 @@
             </li>
             <!-- end::2 Level -->
 
-            <!-- begin::2 Level DocumentServiceOrder -->
+            <!-- begin::2 Level NOTIFICATIONS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_notification')">
               <a class="menu-link" routerLink="/notifications" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
