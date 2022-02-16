@@ -29,7 +29,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
   public closed_at: AbstractControl;
   public hours_close: AbstractControl;
   public atm: AbstractControl;
-  public atm_transit: AbstractControl;
+  public atm_transit_amount: AbstractControl;
+  public atm_transit_packings: AbstractControl;
   public packings_pending: AbstractControl;
   public packings_pending_amount: AbstractControl;
   public cash_opening: AbstractControl;
@@ -62,7 +63,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
       closed_at: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
       hours_close: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       atm: [''],
-      atm_transit: [''],
+      atm_transit_amount: [''],
+      atm_transit_packings: [''],
       packings_pending: [''],
       packings_pending_amount: [''],
       cash_opening: [''],
@@ -74,7 +76,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     this.closed_at = this.formGroup.controls['closed_at'];
     this.hours_close = this.formGroup.controls['hours_close'];
     this.atm = this.formGroup.controls['atm'];
-    this.atm_transit = this.formGroup.controls['atm_transit'];
+    this.atm_transit_amount = this.formGroup.controls['atm_transit_amount'];
+    this.atm_transit_packings = this.formGroup.controls['atm_transit_packings'];
     this.packings_pending = this.formGroup.controls['packings_pending'];
     this.packings_pending_amount = this.formGroup.controls['packings_pending_amount'];
     this.cash_opening = this.formGroup.controls['cash_opening'];
@@ -164,7 +167,8 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
       this.closed_at.setValue(new Date(this.model.closed_at));
       this.hours_close.setValue(this.model.hours_close);
       this.atm.setValue(this.model.atm);
-      this.atm_transit.setValue(this.model.atm_transit);
+      this.atm_transit_amount.setValue(this.model.atm_transit_amount);
+      this.atm_transit_packings.setValue(this.model.atm_transit_packings);
       this.packings_pending.setValue(this.model.packings_pending);
       this.packings_pending_amount.setValue(this.model.packings_pending_amount);
       this.cash_opening.setValue(this.model.cash_opening);
@@ -217,7 +221,7 @@ export class ReportOperationEditComponent implements OnInit, OnDestroy {
     model.employees_close = employees_close;
     model.closed_at = this.formatDate(this.closed_at.value);
     model.next_business_day = this.formatDate(this.next_business_day.value);
-    // model.office = this.model.office.id;
+    model.office = this.model.office.id;
     delete(model.file);
 
     const sbUpdate = this.modelsService.patch(this.id, this.model).pipe(

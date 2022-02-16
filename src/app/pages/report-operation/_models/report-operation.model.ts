@@ -3,7 +3,8 @@ export class ReportOperationModel {
   closed_at: string;
   hours_close: string;
   atm: number;
-  atm_transit: number;
+  atm_transit_amount: number;
+  atm_transit_packings: number;
   packings_pending: number;
   packings_pending_amount: number;
   next_business_day: string;
