@@ -752,6 +752,13 @@ export const locale = {
       NAME: 'Nombre',
       COUNT: 'Cantidad',
     },
+    TYPE_PRODUCT_TRANSACTION: {
+      TYPE_PRODUCT_TRANSACTION: 'Tipo Transacción Producto',
+      TYPES_PRODUCT_TRANSACTIONS: 'Tipos Transacciones Productos',
+      ID: 'Id',
+      NAME: 'Nombre',
+      DESCRIPTION: 'Descripción'
+    },
   }
 };
 

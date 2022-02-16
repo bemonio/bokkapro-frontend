@@ -1,0 +1,1 @@
+export { TypeProductTransactionService } from './type-product-transaction.service';

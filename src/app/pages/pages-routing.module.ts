@@ -343,6 +343,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'typesproducttransactions',
+        loadChildren: () =>
+          import('../pages/type-product-transaction/type-product-transaction-routing.module').then(
+            (m) => m.TypeProductTransactionRoutingModule
+          ),
+      },
+      {
         path: 'rates',
         loadChildren: () =>
           import('../pages/rate/rate-routing.module').then(

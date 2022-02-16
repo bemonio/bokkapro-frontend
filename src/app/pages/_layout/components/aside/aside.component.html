@@ -518,16 +518,27 @@
             </li>
             <!-- end::1 Level -->
 
-              <!-- begin::1 Level RATES -->
-              <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_rate')">
-                <a class="menu-link" routerLink="/rates" routerLinkActive="active">
-                  <i class="menu-bullet menu-bullet-dot">
-                    <span></span>
-                  </i>
-                  <span class="menu-text">{{ 'RATE.RATES' | translate }}</span>
-                </a>
-              </li>
-              <!-- end::1 Level -->
+            <!-- begin::2 Level TYPES_PRODUCT_TRANSACTIONS -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typeproducttransaction')">
+              <a class="menu-link" routerLink="/typesproducttransactions" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'TYPE_PRODUCT_TRANSACTION.TYPES_PRODUCT_TRANSACTIONS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+
+            <!-- begin::1 Level RATES -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_rate')">
+              <a class="menu-link" routerLink="/rates" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'RATE.RATES' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::1 Level -->
             
           </ul>
         </div>
