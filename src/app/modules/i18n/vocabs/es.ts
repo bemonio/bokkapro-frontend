@@ -565,8 +565,8 @@ export const locale = {
       OFFICE: 'Oficina',
     },
     PRODUCTANDSERVICE: {
-      PRODUCTANDSERVICE: 'Producto y Servicio',
-      PRODUCTANDSERVICES: 'Productos y Servicios',
+      PRODUCTANDSERVICE: 'Producto & Servicio',
+      PRODUCTANDSERVICES: 'Productos & Servicios',
       ID: 'Id',
       CODE: 'Código',
       NAME: 'Nombre',
@@ -595,7 +595,7 @@ export const locale = {
       EXCESSMANIPULATION: 'Exceso Por Manipulación',
       EXCESSMATERIALS: 'Exceso Por Materiales',
       OFFICE: 'Oficina',
-      PRODUCTANDSERVICE: 'Producto y Servicio',
+      PRODUCTANDSERVICE: 'Producto & Servicio',
     },
     DOCUMENT_SERVICE_ORDER: {
       DOCUMENT_SERVICE_ORDER: 'Doc Orden de Servicio',
@@ -609,7 +609,7 @@ export const locale = {
       SERVICE_ORDERS: 'Ordenes de Servicio',
       ID: 'Id',
       OFFICE: 'Oficina',
-      PRODUCTANDSERVICE: 'Producto y Servicio',
+      PRODUCTANDSERVICE: 'Producto & Servicio',
       TOTAL_AMOUNT: 'Monto Total',
       STATUS: 'Estado',
       COMPANY: 'Grupo Económico',
@@ -741,9 +741,9 @@ export const locale = {
       DESCRIPTION: 'Descripción'
     },
     PRODUCTPART: {
-      PRODUCTPART: 'Producto Parte',
-      PRODUCTPARTS: 'Productos Partes',
-      PRODUCTANDSERVICE: 'Producto y Servicio',
+      PRODUCTPART: 'Producto & Servicio Parte',
+      PRODUCTPARTS: 'Productos & Servicios Partes',
+      PRODUCTANDSERVICE: 'Producto & Servicio',
       PRODUCTANDSERVICEPARTOF: 'Parte de',
       HAS_PART: 'Tiene Parte',
       HAS_COUNT: 'Tiene Cantidad',
@@ -753,8 +753,8 @@ export const locale = {
       COUNT: 'Cantidad',
     },
     TYPE_PRODUCT_TRANSACTION: {
-      TYPE_PRODUCT_TRANSACTION: 'Tipo Transacción Producto',
-      TYPES_PRODUCT_TRANSACTIONS: 'Tipos Transacciones Productos',
+      TYPE_PRODUCT_TRANSACTION: 'Tipo Transacción P&S',
+      TYPES_PRODUCT_TRANSACTIONS: 'Tipos Transacciones P&S',
       ID: 'Id',
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción'
