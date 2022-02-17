@@ -362,6 +362,11 @@ import { TypeProductTransactionComponent } from './type-product-transaction/type
 import { TypeProductTransactionEditComponent } from './type-product-transaction/types-product-transactions/type-product-transaction-edit/type-product-transaction-edit.component';
 import { TypeProductTransactionSelectComponent } from './type-product-transaction/types-product-transactions/type-product-transaction-select/type-product-transaction-select.component';
 
+// Stocks
+import { StocksComponent } from './stock/stocks/stocks.component';
+import { StockComponent } from './stock/stock.component';
+import { StockEditComponent } from './stock/stocks/stock-edit/stock-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -598,7 +603,10 @@ import { TypeProductTransactionSelectComponent } from './type-product-transactio
     TypesProductTransactionsComponent,
     TypeProductTransactionComponent,
     TypeProductTransactionEditComponent,
-    TypeProductTransactionSelectComponent
+    TypeProductTransactionSelectComponent,
+    StocksComponent,
+    StockComponent,
+    StockEditComponent
   ]
 })
 export class PagesModule { }

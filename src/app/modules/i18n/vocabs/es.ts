@@ -759,6 +759,14 @@ export const locale = {
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción'
     },
+    STOCK: {
+      STOCK: 'Inventario',
+      STOCKS: 'Inventarios',
+      ID: 'Id',
+      COUNT: 'Cantidad',
+      OFFICE: 'Oficina',
+      PRODUCTANDSERVICE: 'Producto & Service'
+    },
   }
 };
 

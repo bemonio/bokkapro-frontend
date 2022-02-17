@@ -529,6 +529,17 @@
             </li>
             <!-- end::2 Level -->
 
+            <!-- begin::2 Level STOCK -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_stock')">
+              <a class="menu-link" routerLink="/stocks" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'STOCK.STOCK' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+
             <!-- begin::1 Level RATES -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_rate')">
               <a class="menu-link" routerLink="/rates" routerLinkActive="active">

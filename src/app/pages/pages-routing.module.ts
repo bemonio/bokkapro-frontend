@@ -343,6 +343,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'stocks',
+        loadChildren: () =>
+          import('../pages/stock/stock-routing.module').then(
+            (m) => m.StockRoutingModule
+          ),
+      },
+      {
         path: 'typesproducttransactions',
         loadChildren: () =>
           import('../pages/type-product-transaction/type-product-transaction-routing.module').then(
