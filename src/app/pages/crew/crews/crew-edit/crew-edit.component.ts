@@ -226,7 +226,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     model.assistant = this.model.assistant.id;
     model.assistant2 = this.model.assistant2.id;
     model.vehicle = this.model.vehicle.id;
-    // model.office = this.model.office.id;
+    model.office = this.model.office.id;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
