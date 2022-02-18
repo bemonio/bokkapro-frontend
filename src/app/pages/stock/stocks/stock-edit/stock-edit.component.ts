@@ -80,7 +80,7 @@ export class StockEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'type_product_transaction': new Model() });
+        return of({ 'stock': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -93,12 +93,18 @@ export class StockEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
-        return of({ 'type_product_transaction': new Model() });
+        return of({ 'stock': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.model = response.type_product_transaction;
+        this.model = response.stock;
+        if (response.offices) {
+          this.model.office = response.offices[0];
+        }
+        if (response.product_and_services) {
+          this.model.product_and_service = response.product_and_services[0];
+        }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -165,7 +171,7 @@ export class StockEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.type_product_transaction
+      this.model = response.stock
     });
     this.subscriptions.push(sbUpdate);
   }
@@ -201,7 +207,7 @@ export class StockEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.type_product_transaction as Model
+      this.model = response.stock as Model
     });
     this.subscriptions.push(sbCreate);
   }

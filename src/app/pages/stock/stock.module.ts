@@ -9,20 +9,18 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { StocksTransactionsComponent } from './stocks/stocks.component';
+import { StocksComponent } from './stocks/stocks.component';
 import { StockComponent } from './stock.component';
 // import { StockRoutingModule} from './stock-routing.module';
 import { StockEditComponent } from './stocks/stock-edit/stock-edit.component';
-import { StockSelectComponent } from './stocks/stock-select/stock-select.component';
 import { StockService } from './_services/';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    StocksTransactionsComponent,
+    StocksComponent,
     StockComponent,
     StockEditComponent,
-    StockSelectComponent,
   ],
   imports: [
     CommonModule,
