@@ -1,0 +1,1 @@
+export { StockTransactionService } from './stock-transaction.service';

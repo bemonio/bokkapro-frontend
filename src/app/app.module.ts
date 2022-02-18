@@ -80,6 +80,7 @@ import { TypeChestService } from './pages/type-chest/_services';
 import { ProductPartService } from './pages/product-part/_services';
 import { TypeProductTransactionService } from './pages/type-product-transaction/_services';
 import { StockService } from './pages/stock/_services';
+import { StockTransactionService } from './pages/stock-transaction/_services';
 
 // OTHER MODULES
 import { CompaniesComponent } from 'src/app/pages/company/companies/companies.component';
@@ -196,6 +197,7 @@ export function getHighlightLanguages() {
     ProductPartService,
     TypeProductTransactionService,
     StockService,
+    StockTransactionService,
     //Others
     CompaniesComponent
   ],

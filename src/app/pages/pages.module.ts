@@ -367,6 +367,11 @@ import { StocksComponent } from './stock/stocks/stocks.component';
 import { StockComponent } from './stock/stock.component';
 import { StockEditComponent } from './stock/stocks/stock-edit/stock-edit.component';
 
+// StockTransactions
+import { StockTransactionsComponent } from './stock-transaction/stock-transactions/stock-transactions.component';
+import { StockTransactionComponent } from './stock-transaction/stock-transaction.component';
+import { StockTransactionEditComponent } from './stock-transaction/stock-transactions/stock-transaction-edit/stock-transaction-edit.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -606,7 +611,10 @@ import { StockEditComponent } from './stock/stocks/stock-edit/stock-edit.compone
     TypeProductTransactionSelectComponent,
     StocksComponent,
     StockComponent,
-    StockEditComponent
+    StockEditComponent,
+    StockTransactionsComponent,
+    StockTransactionComponent,
+    StockTransactionEditComponent
   ]
 })
 export class PagesModule { }

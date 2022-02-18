@@ -767,6 +767,15 @@ export const locale = {
       OFFICE: 'Oficina',
       PRODUCTANDSERVICE: 'Producto & Service'
     },
+    STOCKTRANSACTION: {
+      STOCKTRANSACTION: 'Inventario Transación',
+      STOCKTRANSACTIONS: 'Inventario Transacciones',
+      ID: 'Id',
+      OFFICE: 'Oficina',
+      SERVICE_ORDER: 'Orden de Servicio',
+      EMPLOYEE: 'Empleado',
+      TYPEPRODUCTTRANSACTION: 'Tipo Transacción P&S',      
+    },
   }
 };
 
