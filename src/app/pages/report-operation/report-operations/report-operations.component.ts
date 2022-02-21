@@ -10,6 +10,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { environment } from '../../../../environments/environment';
+import { TokenStorageService } from './../../../modules/auth/_services/auth-http/token-storage.service';
 
 @Component({
     selector: 'app-report-operations',
@@ -17,6 +18,7 @@ import { environment } from '../../../../environments/environment';
     styleUrls: ['./report-operations.component.scss']
 })
 export class ReportOperationsComponent implements OnInit {
+    REPORT_URL = `${environment.reportUrl}`;
 
     public promiseForm: Promise<any>;
 
@@ -53,6 +55,7 @@ export class ReportOperationsComponent implements OnInit {
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
+        private token: TokenStorageService,
         fb: FormBuilder) {
         // this.formGroup = fb.group({
         //     'employee_id_filter': [''],
@@ -236,6 +239,29 @@ export class ReportOperationsComponent implements OnInit {
         if (model.file) {
             url = model.file
         }
+        window.open(url, '_blank');
+    }
+
+    getUrlReport (value) {
+        let start = value.created_at.substring(5, 7) + '/' + value.created_at.substring(8, 10) + '/' + value.created_at.substring(0, 4);
+        let next_day = new Date(start);
+        next_day.setDate(next_day.getDate() + 1);
+        let end = String(next_day.getMonth() + 1).toString().padStart(2, '0') + '/' + String(next_day.getDate()).padStart(2, '0') + '/' + next_day.getFullYear();
+        
+        if (value.next_business_day) {
+            if (new Date(value.next_business_day) > new Date(start)) {
+                end = value.next_business_day.substring(5, 7) + '/' + value.next_business_day.substring(8, 10) + '/' + value.next_business_day.substring(0, 4);
+            }
+        }
+
+        let url = 
+            this.REPORT_URL +
+            '/Reports/Viewer' + 
+            '?id=' + 4 +
+            '&token=' + this.token.getToken() + 
+            '&user=' + this.authService.currentUserValue.id + 
+            '&employee=' + this.authService.currentUserValue.employee.id +
+            '&json_params={"desde":"' + start + '","hasta":"' + end + '"}';
         window.open(url, '_blank');
     }
 }
