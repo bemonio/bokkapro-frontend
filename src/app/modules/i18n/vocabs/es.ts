@@ -753,8 +753,8 @@ export const locale = {
       COUNT: 'Cantidad',
     },
     TYPE_PRODUCT_TRANSACTION: {
-      TYPE_PRODUCT_TRANSACTION: 'Tipo Transacción P&S',
-      TYPES_PRODUCT_TRANSACTIONS: 'Tipos Transacciones P&S',
+      TYPE_PRODUCT_TRANSACTION: 'Tipo Transacción Inventario',
+      TYPES_PRODUCT_TRANSACTIONS: 'Tipos Transacciones Inventario',
       ID: 'Id',
       NAME: 'Nombre',
       DESCRIPTION: 'Descripción'
@@ -774,7 +774,7 @@ export const locale = {
       OFFICE: 'Oficina',
       SERVICE_ORDER: 'Orden de Servicio',
       EMPLOYEE: 'Empleado',
-      TYPEPRODUCTTRANSACTION: 'Tipo Transacción P&S',      
+      TYPEPRODUCTTRANSACTION: 'Tipo Transacción Inventario',      
     },
   }
 };
