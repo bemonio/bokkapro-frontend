@@ -9,24 +9,22 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { StockTransactionsComponent } from './stock-transactions/stock-transactions.component';
-import { StockTransactionComponent } from './stock-transaction.component';
-// import { StockTransactionRoutingModule} from './stock-transaction-routing.module';
-import { StockTransactionEditComponent } from './stock-transactions/stock-transaction-edit/stock-transaction-edit.component';
-import { StockTransactionAutocompleteComponent } from './stock-transactions/stock-transaction-autocomplete/stock-transaction-autocomplete.component';
-import { StockTransactionService } from './_services/';
+import { StockTransactionDetailsComponent } from './stock-transaction-details/stock-transaction-details.component';
+import { StockTransactionDetailComponent } from './stock-transaction-detail.component';
+// import { StockTransactionDetailRoutingModule} from './stock-transaction-detail-routing.module';
+import { StockTransactionDetailEditComponent } from './stock-transaction-details/stock-transaction-detail-edit/stock-transaction-detail-edit.component';
+import { StockTransactionDetailService } from './_services/';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    StockTransactionsComponent,
-    StockTransactionComponent,
-    StockTransactionEditComponent,
-    StockTransactionAutocompleteComponent
+    StockTransactionDetailsComponent,
+    StockTransactionDetailComponent,
+    StockTransactionDetailEditComponent,
   ],
   imports: [
     CommonModule,
-    // StockTransactionRoutingModule,
+    // StockTransactionDetailRoutingModule,
     InlineSVGModule,
     NgbModalModule,
     NgbDatepickerModule,
@@ -42,8 +40,8 @@ import { RouterModule } from '@angular/router';
   entryComponents: [
   ],
   providers: [
-    StockTransactionService,
+    StockTransactionDetailService,
     ConfirmationService
   ]
 })
-export class StockTransactionModule {}
+export class StockTransactionDetailModule {}

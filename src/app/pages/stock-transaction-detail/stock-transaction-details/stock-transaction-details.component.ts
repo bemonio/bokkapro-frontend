@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChestService as ModelService } from '../_services/chest.service';
-import { ChestModel as Model } from '../_models/chest.model';
+import { StockTransactionDetailService as ModelService } from '../_services/stock-transaction-detail.service';
+import { StockTransactionDetailModel as Model } from '../_models/stock-transaction-detail.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -11,12 +11,12 @@ import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 @Component({
-    selector: 'app-chests',
-    templateUrl: './chests.component.html',
-    styleUrls: ['./chests.component.scss']
+    selector: 'app-stock-transaction-details',
+    templateUrl: './stock-transaction-details.component.html',
+    styleUrls: ['./stock-transaction-details.component.scss']
 })
-export class ChestsComponent implements OnInit, OnChanges {
-    @Input() serviceOrderId: any;
+export class StockTransactionDetailsComponent implements OnInit {
+    @Input() stockTransactionId: any;
     @Input()  selectedModels!: Model[] | Model[];
     @Output() selectedModelsChange = new EventEmitter<Model[]>();
 
@@ -47,10 +47,10 @@ export class ChestsComponent implements OnInit, OnChanges {
     public displayModal: boolean;
     public showTableCheckbox: boolean;
 
-    public serOrderId: number;
+    public stockTransId: number;
     public parent: string;
-    public chestID: { id: number, isNew: boolean };
-    public setViewChest: boolean;
+    public stockTransactionDetailID: { id: number, isNew: boolean };
+    public setViewStockTransactionDetail: boolean;
 
     constructor(
         public modelsService: ModelService,
@@ -72,7 +72,7 @@ export class ChestsComponent implements OnInit, OnChanges {
             this.message_confirm_delete = res;
         });
 
-        this.showTableCheckbox = true;
+        this.showTableCheckbox = false;
         this.parent = '';
 
         this.page = 1;
@@ -92,9 +92,11 @@ export class ChestsComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.requesting = false;
-        this.chestID = {id: undefined, isNew: false};
+        this.stockTransactionDetailID = {id: undefined, isNew: false};
         this._with = [];
-        this._with.push({key: 'include[]', value: 'service_order.*'})
+        this._with.push({key: 'include[]', value: 'stock_transaction.*'})
+
+        this.setViewStockTransactionDetail = false;
     }
 
     ngOnChanges() {
@@ -131,21 +133,21 @@ export class ChestsComponent implements OnInit, OnChanges {
 
         this.filters = [];
 
-        if (this.serviceOrderId) {
-            this.filters.push({ key: 'filter{service_order}', value: this.serviceOrderId.toString() })
-            this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.serviceOrderId;
+        if (this.stockTransactionId) {
+            this.filters.push({ key: 'filter{stock_transaction}', value: this.stockTransactionId.toString() })
+            this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.stockTransactionId;
             this.getModels();
         } else {
             if (this.route.parent.parent.parent.snapshot.url.length > 0) {
                 this.route.parent.parent.parent.params.subscribe((params) => {
                     if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                        this.serOrderId = params.id;
+                        this.stockTransId = params.id;
                         if (this.route.parent.parent.parent.snapshot.url[0].path === 'edit') {
-                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.serOrderId;
+                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.stockTransId;
                         } else {
-                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.serOrderId;
+                            this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.stockTransId;
                         }
-                        this.filters.push({ key: 'filter{service_order}', value: this.serOrderId.toString() })
+                        this.filters.push({ key: 'filter{stock_transaction}', value: this.stockTransId.toString() })
                     }
                     this.getModels();
                 });
@@ -161,13 +163,40 @@ export class ChestsComponent implements OnInit, OnChanges {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.requesting = false;
-                this.models = response.chests;
+                this.models = response.stock_transaction_details;
                 this.totalRecords = response.meta.total_results;
-                if(response.service_orders){
-                    response.service_orders.forEach(service_order => {
+                if(response.stocks){                
+                    response.stocks.forEach(stock => {
                         this.models.forEach(element => {
-                            if (element.service_order === service_order.id) {
-                                element.service_order = service_order;
+                            if (element.stock === stock.id) {
+                                element.stock = stock;
+                            }
+                        });
+                    });
+                }
+                if (response.product_and_services) {
+                    response.product_and_services.forEach(product_and_service => {
+                        this.models.forEach(element => {
+                            if (element.product_and_service === product_and_service.id) {
+                                element.product_and_service = product_and_service;
+                            }
+                        });
+                    });
+                }
+                if(response.stock_transactions){                
+                    response.stock_transactions.forEach(stock_transaction => {
+                        this.models.forEach(element => {
+                            if (element.stock_transaction === stock_transaction.id) {
+                                element.stock_transaction = stock_transaction;
+                            }
+                        });
+                    });
+                }
+                if(response.type_product_transactions){                
+                    response.type_product_transactions.forEach(type_product_transaction => {
+                        this.models.forEach(element => {
+                            if (element.type_product_transaction === type_product_transaction.id) {
+                                element.type_product_transaction = type_product_transaction;
                             }
                         });
                     });
@@ -267,8 +296,8 @@ export class ChestsComponent implements OnInit, OnChanges {
 
     showModalDialog(id, isNew, setView) {
         this.displayModal = true;
-        this.chestID = {id: id, isNew: isNew}
-        this.setViewChest = setView;
+        this.stockTransactionDetailID = {id: id, isNew: isNew}
+        this.setViewStockTransactionDetail = setView;
     }
 
     hideModalDialog() {

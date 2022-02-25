@@ -87,6 +87,9 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'service_order')">{{ 'STOCKTRANSACTION.SERVICE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
           </div>
+          <div *ngIf="model.id && authService.hasPermission('view_stocktransactiondetail')">
+            <app-stock-transaction-details [stockTransactionId]="model.id"></app-stock-transaction-details>
+          </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/stocktransactions">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

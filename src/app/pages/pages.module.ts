@@ -185,7 +185,6 @@ import { TypeCurrencyComponent } from './type-currency/type-currency.component';
 import { TypeCurrencyEditComponent } from './type-currency/types-currencies/type-currency-edit/type-currency-edit.component';
 import { TypeCurrencySelectComponent } from './type-currency/types-currencies/type-currency-select/type-currency-select.component';
 
-
 // CurrenciesDetails
 import { CurrenciesDetailsComponent } from './currency-detail/currencies-details/currencies-details.component';
 import { CurrencyDetailComponent } from './currency-detail/currency-detail.component';
@@ -371,6 +370,12 @@ import { StockEditComponent } from './stock/stocks/stock-edit/stock-edit.compone
 import { StockTransactionsComponent } from './stock-transaction/stock-transactions/stock-transactions.component';
 import { StockTransactionComponent } from './stock-transaction/stock-transaction.component';
 import { StockTransactionEditComponent } from './stock-transaction/stock-transactions/stock-transaction-edit/stock-transaction-edit.component';
+
+// StockTransactionDetails
+import { StockTransactionDetailsComponent } from './stock-transaction-detail/stock-transaction-details/stock-transaction-details.component';
+import { StockTransactionDetailComponent } from './stock-transaction-detail/stock-transaction-detail.component';
+import { StockTransactionDetailEditComponent } from './stock-transaction-detail/stock-transaction-details/stock-transaction-detail-edit/stock-transaction-detail-edit.component';
+import { StockTransactionAutocompleteComponent } from './stock-transaction/stock-transactions/stock-transaction-autocomplete/stock-transaction-autocomplete.component';
 
 @NgModule({
   imports: [
@@ -614,7 +619,11 @@ import { StockTransactionEditComponent } from './stock-transaction/stock-transac
     StockEditComponent,
     StockTransactionsComponent,
     StockTransactionComponent,
-    StockTransactionEditComponent
+    StockTransactionEditComponent,
+    StockTransactionDetailsComponent,
+    StockTransactionDetailComponent,
+    StockTransactionDetailEditComponent,
+    StockTransactionAutocompleteComponent
   ]
 })
 export class PagesModule { }
