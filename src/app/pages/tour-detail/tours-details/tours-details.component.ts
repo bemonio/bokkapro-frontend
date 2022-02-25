@@ -441,32 +441,32 @@ export class ToursDetailsComponent implements OnInit {
         events.forEach(element => {
             switch (date.getDay()) {
                 case 0:
-                    start_time = element.sunday_start_time ? date.toISOString().split('T')[0] + ' ' + element.sunday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                    end_time = element.sunday_end_time ? date.toISOString().split('T')[0] + ' ' + element.sunday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                    start_time = element.sunday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.sunday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                    end_time = element.sunday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.sunday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                     break;                                
                 case 1:
-                    start_time = element.monday_start_time ? date.toISOString().split('T')[0] + ' ' + element.monday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                    end_time = element.monday_end_time ? date.toISOString().split('T')[0] + ' ' + element.monday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                    start_time = element.monday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.monday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                    end_time = element.monday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.monday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                     break;
                 case 2:
-                    start_time = element.tuesday_start_time ? date.toISOString().split('T')[0] + ' ' + element.tuesday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                    end_time = element.tuesday_end_time ? date.toISOString().split('T')[0] + ' ' + element.tuesday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                    start_time = element.tuesday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.tuesday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                    end_time = element.tuesday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.tuesday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                     break;
                 case 3:
-                    start_time = element.wednesday_start_time ? date.toISOString().split('T')[0] + ' ' + element.wednesday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                    end_time = element.wednesday_end_time ? date.toISOString().split('T')[0] + ' ' + element.wednesday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                    start_time = element.wednesday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.wednesday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                    end_time = element.wednesday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.wednesday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                     break;
                 case 4:
-                    start_time = element.thursday_start_time ? date.toISOString().split('T')[0] + ' ' + element.thursday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                    end_time = element.thursday_end_time ? date.toISOString().split('T')[0] + ' ' + element.thursday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                    start_time = element.thursday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.thursday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                    end_time = element.thursday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.thursday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                     break;
                 case 5:
-                    start_time = element.friday_start_time ? date.toISOString().split('T')[0] + ' ' + element.friday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                    end_time = element.friday_end_time ? date.toISOString().split('T')[0] + ' ' + element.friday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                    start_time = element.friday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.friday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                    end_time = element.friday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.friday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                     break;
                 case 6:
-                    start_time = element.saturday_start_time ? date.toISOString().split('T')[0] + ' ' + element.saturday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                    end_time = element.saturday_end_time ? date.toISOString().split('T')[0] + ' ' + element.saturday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                    start_time = element.saturday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.saturday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                    end_time = element.saturday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.saturday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                     break;
             }
             let division;
@@ -506,7 +506,7 @@ export class ToursDetailsComponent implements OnInit {
         });
 
         if (found) {
-            this.toastService.growl('top-right', 'error', 'Uno o más Recorrido(s) Existente(s)') 
+            this.toastService.growl('top-right', 'info', 'Uno o más Recorrido(s) Existente(s)') 
         }
         // this.calendarOptions.events = this.events;
         this.createTourDetail(this.events);
@@ -590,32 +590,32 @@ export class ToursDetailsComponent implements OnInit {
                 events.forEach(element => {
                     switch (date.getDay()) {
                         case 0:
-                            start_time = element.sunday_start_time ? date.toISOString().split('T')[0] + ' ' + element.sunday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                            end_time = element.sunday_end_time ? date.toISOString().split('T')[0] + ' ' + element.sunday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            start_time = element.sunday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.sunday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.sunday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.sunday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                             break;                                
                         case 1:
-                            start_time = element.monday_start_time ? date.toISOString().split('T')[0] + ' ' + element.monday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                            end_time = element.monday_end_time ? date.toISOString().split('T')[0] + ' ' + element.monday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            start_time = element.monday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.monday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.monday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.monday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                             break;
                         case 2:
-                            start_time = element.tuesday_start_time ? date.toISOString().split('T')[0] + ' ' + element.tuesday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                            end_time = element.tuesday_end_time ? date.toISOString().split('T')[0] + ' ' + element.tuesday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            start_time = element.tuesday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.tuesday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.tuesday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.tuesday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                             break;
                         case 3:
-                            start_time = element.wednesday_start_time ? date.toISOString().split('T')[0] + ' ' + element.wednesday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                            end_time = element.wednesday_end_time ? date.toISOString().split('T')[0] + ' ' + element.wednesday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            start_time = element.wednesday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.wednesday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.wednesday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.wednesday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                             break;
                         case 4:
-                            start_time = element.thursday_start_time ? date.toISOString().split('T')[0] + ' ' + element.thursday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                            end_time = element.thursday_end_time ? date.toISOString().split('T')[0] + ' ' + element.thursday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            start_time = element.thursday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.thursday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.thursday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.thursday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                             break;
                         case 5:
-                            start_time = element.friday_start_time ? date.toISOString().split('T')[0] + ' ' + element.friday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                            end_time = element.friday_end_time ? date.toISOString().split('T')[0] + ' ' + element.friday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            start_time = element.friday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.friday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.friday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.friday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                             break;
                         case 6:
-                            start_time = element.saturday_start_time ? date.toISOString().split('T')[0] + ' ' + element.saturday_start_time + '' : date.toISOString().split('T')[0] + ' 00:00:00';
-                            end_time = element.saturday_end_time ? date.toISOString().split('T')[0] + ' ' + element.saturday_end_time + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            start_time = element.saturday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.saturday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.saturday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.saturday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
                             break;
                     }
                     let division;
@@ -662,6 +662,158 @@ export class ToursDetailsComponent implements OnInit {
         );
         }, 5)
     }
+
+    public addNotPrecallOriginDestination() {
+        let page = 1;
+        let per_page = 10000000;
+        let sort = "-id"
+        let query = undefined;
+        let filters = [];
+        let _with = [];
+        _with.push({key: 'include[]', value: 'origin.*'})
+        _with.push({key: 'include[]', value: 'destination.*'})
+        _with.push({key: 'include[]', value: 'service_order.*'})
+        _with.push({key: 'include[]', value: 'division.*'})
+
+        filters.push({ key: 'filter{precall}', value: 'false' })
+        let date = this.dateSchedule ? this.dateSchedule : new Date();
+        switch (date.getDay()) {
+            case 0:
+                filters.push({ key: 'filter{sunday}', value: 'true' })
+                break;                                
+            case 1:
+                filters.push({ key: 'filter{monday}', value: 'true' })
+                break;
+            case 2:
+                filters.push({ key: 'filter{tuesday}', value: 'true' })
+                break;
+            case 3:
+                filters.push({ key: 'filter{wednesday}', value: 'true' })
+                break;
+            case 4:
+                filters.push({ key: 'filter{thursday}', value: 'true' })
+                break;
+            case 5:
+                filters.push({ key: 'filter{friday}', value: 'true' })
+                break;
+            case 6:
+                filters.push({ key: 'filter{saturday}', value: 'true' })
+                break;
+        }
+
+        this.requesting = true;
+        setTimeout(() => {
+        this.originDestinationsService.get(page, per_page, sort, query, filters, _with).subscribe(
+            response => {
+                this.requesting = false;
+                let events = response.origin_destinations;
+                this.totalRecords = response.meta.total_results;
+                if(response.locations){
+                    response.locations.forEach(origin => {
+                        events.forEach(element => {
+                            if (element.origin === origin.id) {
+                                element.origin = origin;
+                            }
+                        });
+                    });
+                }
+                if(response.locations){
+                    response.locations.forEach(destination => {
+                        events.forEach(element => {
+                            if (element.destination === destination.id) {
+                                element.destination = destination;
+                            }
+                        });
+                    });
+                }
+                if(response.service_orders){
+                    response.service_orders.forEach(service_order => {
+                        events.forEach(element => {
+                            if (element.service_order === service_order.id) {
+                                element.service_order = service_order;
+                            }
+                        });
+                    });
+                }
+                this.events = [];
+                let start_time = undefined;
+                let end_time = undefined;
+
+                events.forEach(element => {
+                    switch (date.getDay()) {
+                        case 0:
+                            start_time = element.sunday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.sunday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.sunday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.sunday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            break;                                
+                        case 1:
+                            start_time = element.monday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.monday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.monday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.monday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            break;
+                        case 2:
+                            start_time = element.tuesday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.tuesday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.tuesday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.tuesday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            break;
+                        case 3:
+                            start_time = element.wednesday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.wednesday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.wednesday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.wednesday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            break;
+                        case 4:
+                            start_time = element.thursday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.thursday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.thursday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.thursday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            break;
+                        case 5:
+                            start_time = element.friday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.friday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.friday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.friday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            break;
+                        case 6:
+                            start_time = element.saturday_start_time_tour ? date.toISOString().split('T')[0] + ' ' + element.saturday_start_time_tour + '' : date.toISOString().split('T')[0] + ' 00:00:00';
+                            end_time = element.saturday_end_time_tour ? date.toISOString().split('T')[0] + ' ' + element.saturday_end_time_tour + '' : date.toISOString().split('T')[0] + 'T01:00:00';
+                            break;
+                    }
+                    let division;
+                    if (element.division && element.division.id) {
+                        division = element.division.id;
+                    }
+                    if (this.division.value && this.division.value.id) {
+                        division = this.division.value.id;
+                    }
+        
+                    let origin_name;
+                    if (element.origin && element.origin.id) {
+                        origin_name = element.origin.name;
+                    }
+        
+                    let destination_name;
+                    if (element.destination && element.destination.id) {
+                        destination_name = element.destination.name;
+                    }
+        
+                    this.events.push({
+                        "id": element.id,
+                        "title": origin_name + ' - ' + destination_name,
+                        "start": start_time,
+                        "end": end_time,
+                        "division": division
+                    });
+                });
+                // this.calendarOptions.events = this.events;
+                this.createTourDetail(this.events);
+            },
+            error => {
+                this.requesting = false;
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
+                );
+            }
+        );
+        }, 5)
+    }    
 
     createTourDetail(listModel) {
         this.requesting = true;

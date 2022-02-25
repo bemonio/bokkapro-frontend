@@ -18,6 +18,7 @@ import * as moment from 'moment';
 export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDestroy {
   @Input() originDestinationID: { id: number, isNew: boolean};
   @Input() setView: boolean;
+  @Input() showListSchedule: boolean;
   @Output() displayModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public id: number;
@@ -55,6 +56,21 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
   public saturday_end_time: AbstractControl;
   public sunday_start_time: AbstractControl;
   public sunday_end_time: AbstractControl;
+  
+  public monday_start_time_tour: AbstractControl;
+  public monday_end_time_tour: AbstractControl;
+  public tuesday_start_time_tour: AbstractControl;
+  public tuesday_end_time_tour: AbstractControl;
+  public wednesday_start_time_tour: AbstractControl;
+  public wednesday_end_time_tour: AbstractControl;
+  public thursday_start_time_tour: AbstractControl;
+  public thursday_end_time_tour: AbstractControl;
+  public friday_start_time_tour: AbstractControl;
+  public friday_end_time_tour: AbstractControl;
+  public saturday_start_time_tour: AbstractControl;
+  public saturday_end_time_tour: AbstractControl;
+  public sunday_start_time_tour: AbstractControl;
+  public sunday_end_time_tour: AbstractControl;
 
   public origin: AbstractControl;
   public destination: AbstractControl;
@@ -115,6 +131,20 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       saturday_end_time: [''],
       sunday_start_time: [''],
       sunday_end_time: [''],
+      monday_start_time_tour: [''],
+      monday_end_time_tour: [''],
+      tuesday_start_time_tour: [''],
+      tuesday_end_time_tour: [''],
+      wednesday_start_time_tour: [''],
+      wednesday_end_time_tour: [''],
+      thursday_start_time_tour: [''],
+      thursday_end_time_tour: [''],
+      friday_start_time_tour: [''],
+      friday_end_time_tour: [''],
+      saturday_start_time_tour: [''],
+      saturday_end_time_tour: [''],
+      sunday_start_time_tour: [''],
+      sunday_end_time_tour: [''],
       origin: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       destination: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       service_order: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -145,6 +175,20 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
     this.saturday_end_time = this.formGroup.controls['saturday_end_time'];
     this.sunday_start_time = this.formGroup.controls['sunday_start_time'];
     this.sunday_end_time = this.formGroup.controls['sunday_end_time'];
+    this.monday_start_time_tour = this.formGroup.controls['monday_start_time_tour'];
+    this.monday_end_time_tour = this.formGroup.controls['monday_end_time_tour'];
+    this.tuesday_start_time_tour = this.formGroup.controls['tuesday_start_time_tour'];
+    this.tuesday_end_time_tour = this.formGroup.controls['tuesday_end_time_tour'];
+    this.wednesday_start_time_tour = this.formGroup.controls['wednesday_start_time_tour'];
+    this.wednesday_end_time_tour = this.formGroup.controls['wednesday_end_time_tour'];
+    this.thursday_start_time_tour = this.formGroup.controls['thursday_start_time_tour'];
+    this.thursday_end_time_tour = this.formGroup.controls['thursday_end_time_tour'];
+    this.friday_start_time_tour = this.formGroup.controls['friday_start_time_tour'];
+    this.friday_end_time_tour = this.formGroup.controls['friday_end_time_tour'];
+    this.saturday_start_time_tour = this.formGroup.controls['saturday_start_time_tour'];
+    this.saturday_end_time_tour = this.formGroup.controls['saturday_end_time_tour'];
+    this.sunday_start_time_tour = this.formGroup.controls['sunday_start_time_tour'];
+    this.sunday_end_time_tour = this.formGroup.controls['sunday_end_time_tour'];
     this.origin = this.formGroup.controls['origin'];
     this.destination = this.formGroup.controls['destination'];
     this.service_order = this.formGroup.controls['service_order'];
@@ -262,7 +306,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       this.friday.setValue(this.model.friday);
       this.saturday.setValue(this.model.saturday);
       this.sunday.setValue(this.model.sunday);
-      // this.monday_start_time.setValue(new Date(this.model.monday_start_time));
+
       this.monday_start_time.setValue(this.getFormatHour(this.model.monday_start_time));
       this.monday_end_time.setValue(this.getFormatHour(this.model.monday_end_time));
       this.tuesday_start_time.setValue(this.getFormatHour(this.model.tuesday_start_time));
@@ -277,6 +321,21 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       this.saturday_end_time.setValue(this.getFormatHour(this.model.saturday_end_time));
       this.sunday_start_time.setValue(this.getFormatHour(this.model.sunday_start_time));
       this.sunday_end_time.setValue(this.getFormatHour(this.model.sunday_end_time));
+
+      this.monday_start_time_tour.setValue(this.getFormatHour(this.model.monday_start_time_tour));
+      this.monday_end_time_tour.setValue(this.getFormatHour(this.model.monday_end_time_tour));
+      this.tuesday_start_time_tour.setValue(this.getFormatHour(this.model.tuesday_start_time_tour));
+      this.tuesday_end_time_tour.setValue(this.getFormatHour(this.model.tuesday_end_time_tour));
+      this.wednesday_start_time_tour.setValue(this.getFormatHour(this.model.wednesday_start_time_tour));
+      this.wednesday_end_time_tour.setValue(this.getFormatHour(this.model.wednesday_end_time_tour));
+      this.thursday_start_time_tour.setValue(this.getFormatHour(this.model.thursday_start_time_tour));
+      this.thursday_end_time_tour.setValue(this.getFormatHour(this.model.thursday_end_time_tour));
+      this.friday_start_time_tour.setValue(this.getFormatHour(this.model.friday_start_time_tour));
+      this.friday_end_time_tour.setValue(this.getFormatHour(this.model.friday_end_time_tour));
+      this.saturday_start_time_tour.setValue(this.getFormatHour(this.model.saturday_start_time_tour));
+      this.saturday_end_time_tour.setValue(this.getFormatHour(this.model.saturday_end_time_tour));
+      this.sunday_start_time_tour.setValue(this.getFormatHour(this.model.sunday_start_time_tour));
+      this.sunday_end_time_tour.setValue(this.getFormatHour(this.model.sunday_end_time_tour));
       if (this.model.origin) {
         this.origin.setValue(this.model.origin);
       }
@@ -305,6 +364,7 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       this.friday.setValue(false);
       this.saturday.setValue(false);
       this.sunday.setValue(false);
+
       this.monday_start_time.setValue(undefined)
       this.monday_end_time.setValue(undefined)
       this.tuesday_start_time.setValue(undefined)
@@ -319,6 +379,21 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
       this.saturday_end_time.setValue(undefined)
       this.sunday_start_time.setValue(undefined)
       this.sunday_end_time.setValue(undefined)
+      
+      this.monday_start_time_tour.setValue(undefined)
+      this.monday_end_time_tour.setValue(undefined)
+      this.tuesday_start_time_tour.setValue(undefined)
+      this.tuesday_end_time_tour.setValue(undefined)
+      this.wednesday_start_time_tour.setValue(undefined)
+      this.wednesday_end_time_tour.setValue(undefined)
+      this.thursday_start_time_tour.setValue(undefined)
+      this.thursday_end_time_tour.setValue(undefined)
+      this.friday_start_time_tour.setValue(undefined)
+      this.friday_end_time_tour.setValue(undefined)
+      this.saturday_start_time_tour.setValue(undefined)
+      this.saturday_end_time_tour.setValue(undefined)
+      this.sunday_start_time_tour.setValue(undefined)
+      this.sunday_end_time_tour.setValue(undefined)
       if (this.serviceOrderId) {
         this.getServiceOrderById(this.serviceOrderId);
       }
@@ -366,6 +441,21 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
     this.saturday_end_time.value ? model.saturday_end_time = this.formatDateHour(this.saturday_end_time.value) : undefined;
     this.sunday_start_time.value ? model.sunday_start_time = this.formatDateHour(this.sunday_start_time.value) : undefined;
     this.sunday_end_time.value ? model.sunday_end_time = this.formatDateHour(this.sunday_end_time.value) : undefined;
+
+    this.monday_start_time_tour.value ? model.monday_start_time_tour = this.formatDateHour(this.monday_start_time_tour.value) : undefined;
+    this.monday_end_time_tour.value ? model.monday_end_time_tour = this.formatDateHour(this.monday_end_time_tour.value) : undefined;
+    this.tuesday_start_time_tour.value ? model.tuesday_start_time_tour = this.formatDateHour(this.tuesday_start_time_tour.value) : undefined;
+    this.tuesday_end_time_tour.value ? model.tuesday_end_time_tour = this.formatDateHour(this.tuesday_end_time_tour.value) : undefined;
+    this.wednesday_start_time_tour.value ? model.wednesday_start_time_tour = this.formatDateHour(this.wednesday_start_time_tour.value) : undefined;
+    this.wednesday_end_time_tour.value ? model.wednesday_end_time_tour = this.formatDateHour(this.wednesday_end_time_tour.value) : undefined;
+    this.thursday_start_time_tour.value ? model.thursday_start_time_tour = this.formatDateHour(this.thursday_start_time_tour.value) : undefined;
+    this.thursday_end_time_tour.value ? model.thursday_end_time_tour = this.formatDateHour(this.thursday_end_time_tour.value) : undefined;
+    this.friday_start_time_tour.value ? model.friday_start_time_tour = this.formatDateHour(this.friday_start_time_tour.value) : undefined;
+    this.friday_end_time_tour.value ? model.friday_end_time_tour = this.formatDateHour(this.friday_end_time_tour.value) : undefined;
+    this.saturday_start_time_tour.value ? model.saturday_start_time_tour = this.formatDateHour(this.saturday_start_time_tour.value) : undefined;
+    this.saturday_end_time_tour.value ? model.saturday_end_time_tour = this.formatDateHour(this.saturday_end_time_tour.value) : undefined;
+    this.sunday_start_time_tour.value ? model.sunday_start_time_tour = this.formatDateHour(this.sunday_start_time_tour.value) : undefined;
+    this.sunday_end_time_tour.value ? model.sunday_end_time_tour = this.formatDateHour(this.sunday_end_time_tour.value) : undefined;
 
     model.origin = this.model.origin.id;
     model.destination = this.model.destination.id;
@@ -424,6 +514,21 @@ export class OriginDestinationEditComponent implements OnInit, OnChanges, OnDest
     this.saturday_end_time.value ? model.saturday_end_time = this.formatDateHour(this.saturday_end_time.value) : undefined;
     this.sunday_start_time.value ? model.sunday_start_time = this.formatDateHour(this.sunday_start_time.value) : undefined;
     this.sunday_end_time.value ? model.sunday_end_time = this.formatDateHour(this.sunday_end_time.value) : undefined;
+
+    this.monday_start_time_tour.value ? model.monday_start_time_tour = this.formatDateHour(this.monday_start_time_tour.value) : undefined;
+    this.monday_end_time_tour.value ? model.monday_end_time_tour = this.formatDateHour(this.monday_end_time_tour.value) : undefined;
+    this.tuesday_start_time_tour.value ? model.tuesday_start_time_tour = this.formatDateHour(this.tuesday_start_time_tour.value) : undefined;
+    this.tuesday_end_time_tour.value ? model.tuesday_end_time_tour = this.formatDateHour(this.tuesday_end_time_tour.value) : undefined;
+    this.wednesday_start_time_tour.value ? model.wednesday_start_time_tour = this.formatDateHour(this.wednesday_start_time_tour.value) : undefined;
+    this.wednesday_end_time_tour.value ? model.wednesday_end_time_tour = this.formatDateHour(this.wednesday_end_time_tour.value) : undefined;
+    this.thursday_start_time_tour.value ? model.thursday_start_time_tour = this.formatDateHour(this.thursday_start_time_tour.value) : undefined;
+    this.thursday_end_time_tour.value ? model.thursday_end_time_tour = this.formatDateHour(this.thursday_end_time_tour.value) : undefined;
+    this.friday_start_time_tour.value ? model.friday_start_time_tour = this.formatDateHour(this.friday_start_time_tour.value) : undefined;
+    this.friday_end_time_tour.value ? model.friday_end_time_tour = this.formatDateHour(this.friday_end_time_tour.value) : undefined;
+    this.saturday_start_time_tour.value ? model.saturday_start_time_tour = this.formatDateHour(this.saturday_start_time_tour.value) : undefined;
+    this.saturday_end_time_tour.value ? model.saturday_end_time_tour = this.formatDateHour(this.saturday_end_time_tour.value) : undefined;
+    this.sunday_start_time_tour.value ? model.sunday_start_time_tour = this.formatDateHour(this.sunday_start_time_tour.value) : undefined;
+    this.sunday_end_time_tour.value ? model.sunday_end_time_tour = this.formatDateHour(this.sunday_end_time_tour.value) : undefined;
 
     model.origin = this.model.origin.id;
     model.destination = this.model.destination.id;

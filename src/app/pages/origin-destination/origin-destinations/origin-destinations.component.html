@@ -66,7 +66,7 @@
               {{ 'ORIGIN_DESTINATION.CONTRACT' | translate }}
             </div>
           </th>
-          <th pSortableColumn="distrib_charges">
+          <th pSortableColumn="distrib_charges" *ngIf="!showListSchedule">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'ORIGIN_DESTINATION.DISTRIB_CHARGES' | translate }}
             </div>
@@ -86,7 +86,12 @@
               {{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate }} 
             </div>
           </th>
-          <th style="width: 10rem" *ngIf="!showListSchedule">
+          <th pSortableColumn="precall">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'ORIGIN_DESTINATION.PRECALL' | translate }} 
+            </div>
+          </th>
+          <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
@@ -118,7 +123,7 @@
           <td>
             {{value.service_order.contract?.code}}
           </td>
-          <td>
+          <td *ngIf="!showListSchedule">
             {{value.distrib_charges}}
           </td>
           <td>
@@ -131,27 +136,31 @@
             <p-badge [value]="'Pick Up'"  severity="secondary"  severity="secondary" *ngIf="value.type_service == 'Pick Up'"></p-badge>
             <p-badge [value]="'Delivery'"  severity="success"  severity="success" *ngIf="value.type_service == 'Delivery'"></p-badge>
           </td>
-          <td style="text-align: right" *ngIf="!showListSchedule">
+          <td>
+            <p-badge [value]="'No'"  severity="secondary"  severity="secondary" *ngIf="!value.precall"></p-badge>
+            <p-badge [value]="'Precall'"  severity="success"  severity="success" *ngIf="value.precall"></p-badge>
+          </td>
+          <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              (click)="showModalDialog(value.id, false, true)" *ngIf="authService.hasPermission('view_origindestination') && serviceOrderId">
+              (click)="showModalDialog(value.id, false, true)" *ngIf="authService.hasPermission('view_origindestination') && (serviceOrderId || showListSchedule)">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Eye.svg'" cacheSVG="true"
               class="svg-icon svg-icon-md svg-icon-info">
               </span>
             </a>
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/origindestinations/view/' + value.id" *ngIf="authService.hasPermission('view_origindestination') && !serviceOrderId">
+              [routerLink]="'/origindestinations/view/' + value.id" *ngIf="authService.hasPermission('view_origindestination') && !serviceOrderId && !showListSchedule">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Eye.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-info">
               </span>
             </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              (click)="showModalDialog(value.id, false, false)" *ngIf="authService.hasPermission('change_origindestination') && serviceOrderId">
+              (click)="showModalDialog(value.id, false, false)" *ngIf="authService.hasPermission('change_origindestination') && (serviceOrderId || showListSchedule)">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              routerLink="{{parent}}/origindestinations/edit/{{value.id}}" *ngIf="authService.hasPermission('change_origindestination') && !serviceOrderId">
+              routerLink="{{parent}}/origindestinations/edit/{{value.id}}" *ngIf="authService.hasPermission('change_origindestination') && !serviceOrderId && !showListSchedule">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
@@ -181,6 +190,6 @@
   [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
 
   <div class="mt-5">
-    <app-origin-destination-edit [originDestinationID]="originDestinationID" (displayModal)="hideModalDialog()" [setView]="setViewOriginDestination"></app-origin-destination-edit>
+    <app-origin-destination-edit [originDestinationID]="originDestinationID" (displayModal)="hideModalDialog()" [setView]="setViewOriginDestination" [showListSchedule]="showListSchedule"></app-origin-destination-edit>
   </div>
 </p-dialog>

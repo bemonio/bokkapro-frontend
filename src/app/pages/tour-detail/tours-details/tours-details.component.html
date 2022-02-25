@@ -170,10 +170,16 @@
       <div class="col-lg-4">
         <button type="submit" class="btn btn-primary font-weight-bold mr-2" style="width: inherit;"
         (click)="addAllOriginDestination()">{{ 'COMMON.ADD_ALL' | translate }}</button>
+      </div>
+      <div class="col-lg-4">
+        <button type="submit" class="btn btn-primary font-weight-bold mr-2" style="width: inherit;"
+        (click)="addNotPrecallOriginDestination()">{{ 'COMMON.ADD_NOT_PRECALL' | translate }}</button>
+      </div>
+      <div class="col-lg-4">
         <button type="submit" class="btn btn-primary font-weight-bold mr-2"  style="width: inherit;"
         [disabled]="listOriginDestinationSelectedModels.length <= 0" (click)="addSelectedOriginDestination()">{{ 'COMMON.ADD_SELECTED' | translate }}</button>
       </div>
-      <div class="col-lg-8">
+      <!-- <div class="col-lg-12">
         <label>{{ 'COMMON.ENTER' | translate }} {{ 'TOUR_DETAIL.DIVISION' | translate}}</label>
         <app-division-autocomplete
         name="division" [valid]="isControlValid('division')" [touched]="isControlTouched('division')" [class.is-invalid]="isControlInvalid('division')"
@@ -183,7 +189,7 @@
         <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
         <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
         <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'TOUR_DETAIL.DIVISION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-      </div>
+      </div> -->
       <div class="col-lg-12">
         <app-origin-destinations [showListSchedule]="true" [dateSchedule]="dateSchedule" [(selectedModels)]="listOriginDestinationSelectedModels"></app-origin-destinations>
       </div>

@@ -46,7 +46,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }}</label>
               <app-service-order-autocomplete
               name="service_order" [valid]="isControlValid('service_order')" [touched]="isControlTouched('service_order')" [class.is-invalid]="isControlInvalid('service_order')"
-              [class.is-valid]="isControlValid('service_order')" formControlName="service_order" id="service_order" [model]="model.service_order"></app-service-order-autocomplete>
+              [class.is-valid]="isControlValid('service_order')" formControlName="service_order" id="service_order" [model]="model.service_order" [readOnly]="showListSchedule"></app-service-order-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('service_order')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('service_order')">{{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'service_order')">{{ 'ORIGIN_DESTINATION.SERVICE_ORDER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -57,7 +57,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}</label>
               <app-location-autocomplete [addFilters]="filterServOrdCompany ? [{key: 'company', value: filterServOrdCompany.company}] : undefined " 
               name="origin" [valid]="isControlValid('origin')" [touched]="isControlTouched('origin')" [class.is-invalid]="isControlInvalid('origin')"
-              [class.is-valid]="isControlValid('origin')" formControlName="origin" id="origin" [model]="model.origin" [disabled]="service_order.value ? false : true"></app-location-autocomplete>
+              [class.is-valid]="isControlValid('origin')" formControlName="origin" id="origin" [model]="model.origin" [disabled]="service_order.value ? false : true" [readOnly]="showListSchedule"></app-location-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('origin')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'origin')">{{ 'ORIGIN_DESTINATION.ORIGIN' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -68,7 +68,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}</label>
               <app-location-autocomplete [addFilters]="filterServOrdCompany ? [{key: 'company', value: filterServOrdCompany.company}] : undefined " 
               name="destination" [valid]="isControlValid('destination')" [touched]="isControlTouched('destination')" [class.is-invalid]="isControlInvalid('destination')"
-              [class.is-valid]="isControlValid('destination')" formControlName="destination" id="destination" [model]="model.destination" [disabled]="service_order.value ? false : true"></app-location-autocomplete>
+              [class.is-valid]="isControlValid('destination')" formControlName="destination" id="destination" [model]="model.destination" [disabled]="service_order.value ? false : true" [readOnly]="showListSchedule"></app-location-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'destination')">{{ 'ORIGIN_DESTINATION.DESTINATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -77,16 +77,16 @@
             </div>            
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}</label>
-              <p-dropdown [styleClass]="getValidClass(isControlValid('type_service'))" [options]="optionsTypeService" optionLabel="key" name="type_service" formControlName="type_service" placeholder="Selecciona"></p-dropdown>
+              <p-dropdown [styleClass]="getValidClass(isControlValid('type_service'))" [options]="optionsTypeService" optionLabel="key" name="type_service" formControlName="type_service" placeholder="Selecciona" [readonly]="showListSchedule"></p-dropdown>
               <div class="feedback" *ngIf="!isControlTouched('type_service')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('type_service')">{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_service')">{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_service')">{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_service')">{{ 'ORIGIN_DESTINATION.TYPE_SERVICE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
-            <div class="col-lg-4">
+            <div class="col-lg-4" *ngIf="!showListSchedule">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.PRECALL' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="precall" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="precall" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" [disabled]="showListSchedule"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('precall')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.PRECALL' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('precall')">{{ 'ORIGIN_DESTINATION.PRECALL' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'precall')">{{ 'ORIGIN_DESTINATION.PRECALL' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -104,7 +104,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'division')">{{ 'ORIGIN_DESTINATION.DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'division')">{{ 'ORIGIN_DESTINATION.DIVISION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" *ngIf="!showListSchedule">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.DISTRIB_CHARGES' | translate }}</label>
               <!-- <label style="float:right; color: red;">{{ distrib_charges.value * currency.value?.exchange_rate | currency }} {{office?.currency?.symbol}}</label> -->
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -117,32 +117,33 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'distrib_charges')">{{ 'ORIGIN_DESTINATION.DISTRIB_CHARGES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'distrib_charges')">{{ 'ORIGIN_DESTINATION.DISTRIB_CHARGES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div> 
-            <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}</label>
+            <div class="col-lg-4" *ngIf="!showListSchedule">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="days_month" [class.is-invalid]="isControlInvalid('days_month')"
                 [class.is-valid]="isControlValid('days_month')" formControlName="days_month" />
-              <div class="feedback" *ngIf="!isControlTouched('days_month')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              <div class="feedback" *ngIf="!isControlTouched('days_month')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('days_month')">{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'days_month')">{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'days_month')">{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'days_month')">{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
             </div>
+
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.MONDAY' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="monday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="monday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" [disabled]="showListSchedule"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('monday')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.MONDAY' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('monday')">{{ 'ORIGIN_DESTINATION.MONDAY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'monday')">{{ 'ORIGIN_DESTINATION.MONDAY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'monday')">{{ 'ORIGIN_DESTINATION.MONDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'monday')">{{ 'ORIGIN_DESTINATION.MONDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="monday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.MONDAY_START_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('monday_start_time'))" name="monday_start_time" formControlName="monday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'monday')"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('monday_start_time'))" name="monday_start_time" formControlName="monday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'monday')" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('monday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('monday_start_time')">{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'monday_start_time')">{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -150,10 +151,10 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'monday_start_time')">{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="monday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.MONDAY_END_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('monday_end_time'))" name="monday_end_time" formControlName="monday_end_time" timeOnly="true"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('monday_end_time'))" name="monday_end_time" formControlName="monday_end_time" timeOnly="true" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('monday_end_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.MONDAY_END_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('monday_end_time')">{{ 'ORIGIN_DESTINATION.MONDAY_END_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'monday_end_time')">{{ 'ORIGIN_DESTINATION.MONDAY_END_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -161,19 +162,42 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'monday_end_time')">{{ 'ORIGIN_DESTINATION.MONDAY_END_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
+            <div class="col-lg-2">
+              <div *ngIf="monday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.MONDAY_START_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('monday_start_time_tour'))" name="monday_start_time_tour" formControlName="monday_start_time_tour" timeOnly="true" (onSelect)="changeStartTime($event, 'monday')" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('monday_start_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('monday_start_time_tour')">{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'monday_start_time_tour')">{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'monday_start_time_tour')">{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'monday_start_time_tour')">{{ 'ORIGIN_DESTINATION.MONDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div *ngIf="monday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.MONDAY_END_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('monday_end_time_tour'))" name="monday_end_time_tour" formControlName="monday_end_time_tour" timeOnly="true" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('monday_end_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.MONDAY_END_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('monday_end_time_tour')">{{ 'ORIGIN_DESTINATION.MONDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'monday_end_time_tour')">{{ 'ORIGIN_DESTINATION.MONDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'monday_end_time_tour')">{{ 'ORIGIN_DESTINATION.MONDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'monday_end_time_tour')">{{ 'ORIGIN_DESTINATION.MONDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TUESDAY' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="tuesday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="tuesday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" [disabled]="showListSchedule"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('tuesday')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TUESDAY' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('tuesday')">{{ 'ORIGIN_DESTINATION.TUESDAY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'tuesday')">{{ 'ORIGIN_DESTINATION.TUESDAY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'tuesday')">{{ 'ORIGIN_DESTINATION.TUESDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tuesday')">{{ 'ORIGIN_DESTINATION.TUESDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="tuesday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('tuesday_start_time'))" name="tuesday_start_time" formControlName="tuesday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'tuesday')"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('tuesday_start_time'))" name="tuesday_start_time" formControlName="tuesday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'tuesday')" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('tuesday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('tuesday_start_time')">{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'tuesday_start_time')">{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -181,10 +205,10 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tuesday_start_time')">{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="tuesday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('tuesday_end_time'))" name="tuesday_end_time" formControlName="tuesday_end_time" timeOnly="true"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('tuesday_end_time'))" name="tuesday_end_time" formControlName="tuesday_end_time" timeOnly="true" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('tuesday_end_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('tuesday_end_time')">{{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'tuesday_end_time')">{{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -192,19 +216,42 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tuesday_end_time')">{{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
+            <div class="col-lg-2">
+              <div *ngIf="tuesday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('tuesday_start_time_tour'))" name="tuesday_start_time_tour" formControlName="tuesday_start_time_tour" timeOnly="true" (onSelect)="changeStartTime($event, 'tuesday')" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('tuesday_start_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('tuesday_start_time_tour')">{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'tuesday_start_time_tour')">{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'tuesday_start_time_tour')">{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tuesday_start_time_tour')">{{ 'ORIGIN_DESTINATION.TUESDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div *ngIf="tuesday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('tuesday_end_time_tour'))" name="tuesday_end_time_tour" formControlName="tuesday_end_time_tour" timeOnly="true" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('tuesday_end_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('tuesday_end_time_tour')">{{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'tuesday_end_time_tour')">{{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'tuesday_end_time_tour')">{{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tuesday_end_time_tour')">{{ 'ORIGIN_DESTINATION.TUESDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.WEDNESDAY' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="wednesday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="wednesday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" [disabled]="showListSchedule"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('wednesday')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.WEDNESDAY' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('wednesday')">{{ 'ORIGIN_DESTINATION.WEDNESDAY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'wednesday')">{{ 'ORIGIN_DESTINATION.WEDNESDAY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'wednesday')">{{ 'ORIGIN_DESTINATION.WEDNESDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'wednesday')">{{ 'ORIGIN_DESTINATION.WEDNESDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="wednesday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('wednesday_start_time'))" name="wednesday_start_time" formControlName="wednesday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'wednesday')"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('wednesday_start_time'))" name="wednesday_start_time" formControlName="wednesday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'wednesday')" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('wednesday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('wednesday_start_time')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'wednesday_start_time')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -212,10 +259,10 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'wednesday_start_time')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="wednesday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('wednesday_end_time'))" name="wednesday_end_time" formControlName="wednesday_end_time" timeOnly="true"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('wednesday_end_time'))" name="wednesday_end_time" formControlName="wednesday_end_time" timeOnly="true" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('wednesday_end_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('wednesday_end_time')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'wednesday_end_time')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -223,19 +270,42 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'wednesday_end_time')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
+            <div class="col-lg-2">
+              <div *ngIf="wednesday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('wednesday_start_time_tour'))" name="wednesday_start_time_tour" formControlName="wednesday_start_time_tour" timeOnly="true" (onSelect)="changeStartTime($event, 'wednesday')" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('wednesday_start_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('wednesday_start_time_tour')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'wednesday_start_time_tour')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'wednesday_start_time_tour')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'wednesday_start_time_tour')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div *ngIf="wednesday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('wednesday_end_time_tour'))" name="wednesday_end_time_tour" formControlName="wednesday_end_time_tour" timeOnly="true" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('wednesday_end_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('wednesday_end_time_tour')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'wednesday_end_time_tour')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'wednesday_end_time_tour')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'wednesday_end_time_tour')">{{ 'ORIGIN_DESTINATION.WEDNESDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>          
+
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.THURSDAY' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="thursday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="thursday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" [disabled]="showListSchedule"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('thursday')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.THURSDAY' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('thursday')">{{ 'ORIGIN_DESTINATION.THURSDAY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'thursday')">{{ 'ORIGIN_DESTINATION.THURSDAY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'thursday')">{{ 'ORIGIN_DESTINATION.THURSDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'thursday')">{{ 'ORIGIN_DESTINATION.THURSDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="thursday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('thursday_start_time'))" name="thursday_start_time" formControlName="thursday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'thursday')"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('thursday_start_time'))" name="thursday_start_time" formControlName="thursday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'thursday')" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('thursday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('thursday_start_time')">{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'thursday_start_time')">{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -243,10 +313,10 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'thursday_start_time')">{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="thursday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('thursday_end_time'))" name="thursday_end_time" formControlName="thursday_end_time" timeOnly="true"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('thursday_end_time'))" name="thursday_end_time" formControlName="thursday_end_time" timeOnly="true" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('thursday_end_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('thursday_end_time')">{{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'thursday_end_time')">{{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -254,19 +324,42 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'thursday_end_time')">{{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
+            <div class="col-lg-2">
+              <div *ngIf="thursday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('thursday_start_time_tour'))" name="thursday_start_time_tour" formControlName="thursday_start_time_tour" timeOnly="true" (onSelect)="changeStartTime($event, 'thursday')" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('thursday_start_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('thursday_start_time_tour')">{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'thursday_start_time_tour')">{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'thursday_start_time_tour')">{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'thursday_start_time_tour')">{{ 'ORIGIN_DESTINATION.THURSDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div *ngIf="thursday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('thursday_end_time_tour'))" name="thursday_end_time_tour" formControlName="thursday_end_time_tour" timeOnly="true" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('thursday_end_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('thursday_end_time_tour')">{{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'thursday_end_time_tour')">{{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'thursday_end_time_tour')">{{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'thursday_end_time_tour')">{{ 'ORIGIN_DESTINATION.THURSDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>          
+
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.FRIDAY' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="friday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="friday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" [disabled]="showListSchedule"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('friday')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.FRIDAY' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('friday')">{{ 'ORIGIN_DESTINATION.FRIDAY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'friday')">{{ 'ORIGIN_DESTINATION.FRIDAY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'friday')">{{ 'ORIGIN_DESTINATION.FRIDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'friday')">{{ 'ORIGIN_DESTINATION.FRIDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="friday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('friday_start_time'))" name="friday_start_time" formControlName="friday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'friday')"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('friday_start_time'))" name="friday_start_time" formControlName="friday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'friday')" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('friday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('friday_start_time')">{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'friday_start_time')">{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -274,10 +367,10 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'friday_start_time')">{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="friday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('friday_end_time'))" name="friday_end_time" formControlName="friday_end_time" timeOnly="true"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('friday_end_time'))" name="friday_end_time" formControlName="friday_end_time" timeOnly="true" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('friday_end_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('friday_end_time')">{{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'friday_end_time')">{{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -285,19 +378,42 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'friday_end_time')">{{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
+            <div class="col-lg-2">
+              <div *ngIf="friday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('friday_start_time_tour'))" name="friday_start_time_tour" formControlName="friday_start_time_tour" timeOnly="true" (onSelect)="changeStartTime($event, 'friday')" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('friday_start_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('friday_start_time_tour')">{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'friday_start_time_tour')">{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'friday_start_time_tour')">{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'friday_start_time_tour')">{{ 'ORIGIN_DESTINATION.FRIDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div *ngIf="friday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('friday_end_time_tour'))" name="friday_end_time_tour" formControlName="friday_end_time_tour" timeOnly="true" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('friday_end_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('friday_end_time_tour')">{{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'friday_end_time_tour')">{{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'friday_end_time_tour')">{{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'friday_end_time_tour')">{{ 'ORIGIN_DESTINATION.FRIDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+          
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SATURDAY' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="saturday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="saturday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" [disabled]="showListSchedule"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('saturday')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SATURDAY' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('saturday')">{{ 'ORIGIN_DESTINATION.SATURDAY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'saturday')">{{ 'ORIGIN_DESTINATION.SATURDAY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'saturday')">{{ 'ORIGIN_DESTINATION.SATURDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'saturday')">{{ 'ORIGIN_DESTINATION.SATURDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="saturday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('saturday_start_time'))" name="saturday_start_time" formControlName="saturday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'saturday')"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('saturday_start_time'))" name="saturday_start_time" formControlName="saturday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'saturday')" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('saturday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('saturday_start_time')">{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'saturday_start_time')">{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -305,10 +421,10 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'saturday_start_time')">{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="saturday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('saturday_end_time'))" name="saturday_end_time" formControlName="saturday_end_time" timeOnly="true"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('saturday_end_time'))" name="saturday_end_time" formControlName="saturday_end_time" timeOnly="true" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('saturday_end_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('saturday_end_time')">{{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'saturday_end_time')">{{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -316,19 +432,42 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'saturday_end_time')">{{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
+            <div class="col-lg-2">
+              <div *ngIf="saturday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('saturday_start_time_tour'))" name="saturday_start_time_tour" formControlName="saturday_start_time_tour" timeOnly="true" (onSelect)="changeStartTime($event, 'saturday')" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('saturday_start_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('saturday_start_time_tour')">{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'saturday_start_time_tour')">{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'saturday_start_time_tour')">{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'saturday_start_time_tour')">{{ 'ORIGIN_DESTINATION.SATURDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div *ngIf="saturday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('saturday_end_time_tour'))" name="saturday_end_time_tour" formControlName="saturday_end_time_tour" timeOnly="true" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('saturday_end_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('saturday_end_time_tour')">{{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'saturday_end_time_tour')">{{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'saturday_end_time_tour')">{{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'saturday_end_time_tour')">{{ 'ORIGIN_DESTINATION.SATURDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+          
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SUNDAY' | translate}}</label>
-              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="sunday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="sunday" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" [disabled]="showListSchedule"></p-toggleButton>
               <div class="feedback" *ngIf="!isControlTouched('sunday')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SUNDAY' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('sunday')">{{ 'ORIGIN_DESTINATION.SUNDAY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'sunday')">{{ 'ORIGIN_DESTINATION.SUNDAY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'sunday')">{{ 'ORIGIN_DESTINATION.SUNDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'sunday')">{{ 'ORIGIN_DESTINATION.SUNDAY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="sunday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('sunday_start_time'))" name="sunday_start_time" formControlName="sunday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'sunday')"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('sunday_start_time'))" name="sunday_start_time" formControlName="sunday_start_time" timeOnly="true" (onSelect)="changeStartTime($event, 'sunday')" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('sunday_start_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('sunday_start_time')">{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'sunday_start_time')">{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -336,10 +475,10 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'sunday_start_time')">{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div *ngIf="sunday.value">
                 <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME' | translate}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('sunday_end_time'))" name="sunday_end_time" formControlName="sunday_end_time" timeOnly="true"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('sunday_end_time'))" name="sunday_end_time" formControlName="sunday_end_time" timeOnly="true" [disabled]="showListSchedule"></p-calendar>
                 <div class="feedback" *ngIf="!isControlTouched('sunday_end_time')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME' | translate}}</b></div>
                 <div class="valid-feedback" *ngIf="isControlValid('sunday_end_time')">{{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'sunday_end_time')">{{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -347,6 +486,29 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'sunday_end_time')">{{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
               </div>
             </div>
+            <div class="col-lg-2">
+              <div *ngIf="sunday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('sunday_start_time_tour'))" name="sunday_start_time_tour" formControlName="sunday_start_time_tour" timeOnly="true" (onSelect)="changeStartTime($event, 'sunday')" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('sunday_start_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('sunday_start_time_tour')">{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'sunday_start_time_tour')">{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'sunday_start_time_tour')">{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'sunday_start_time_tour')">{{ 'ORIGIN_DESTINATION.SUNDAY_START_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div *ngIf="sunday.value">
+                <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME_TOUR' | translate}}</label>
+                <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('sunday_end_time_tour'))" name="sunday_end_time_tour" formControlName="sunday_end_time_tour" timeOnly="true" [disabled]="!showListSchedule"></p-calendar>
+                <div class="feedback" *ngIf="!isControlTouched('sunday_end_time_tour')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME_TOUR' | translate}}</b></div>
+                <div class="valid-feedback" *ngIf="isControlValid('sunday_end_time_tour')">{{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'sunday_end_time_tour')">{{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME_TOUR' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'sunday_end_time_tour')">{{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'sunday_end_time_tour')">{{ 'ORIGIN_DESTINATION.SUNDAY_END_TIME_TOUR' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              </div>
+            </div>
+            
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/origindestinations" *ngIf="!originDestinationID">{{ 'COMMON.CANCEL' | translate }}</a>
