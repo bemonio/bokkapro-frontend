@@ -524,6 +524,9 @@ export class ToursDetailsComponent implements OnInit {
         _with.push({key: 'include[]', value: 'service_order.*'})
         _with.push({key: 'include[]', value: 'division.*'})
 
+        let copyEvents = this.events;
+        let found = false;
+
         let date = this.dateSchedule ? this.dateSchedule : new Date();
         switch (date.getDay()) {
             case 0:
@@ -643,7 +646,28 @@ export class ToursDetailsComponent implements OnInit {
                         "end": end_time,
                         "division": division
                     });
+
+                    let foundAux = false;
+                    copyEvents.forEach(event => {
+                        if (element.id == event.origin_destination && date.toISOString().split('T')[0] == event.start.split('T')[0]) {
+                            foundAux = true;
+                            found = true;
+                        }
+                    });
+                    if (!foundAux) {
+                        this.events.push({
+                            "id": element.id,
+                            "title": origin_name + ' - ' + destination_name,
+                            "start": start_time,
+                            "end": end_time,
+                            "division": division,
+                        });
+                    }
                 });
+                if (found) {
+                    this.toastService.growl('top-right', 'info', 'Uno o más Recorrido(s) Existente(s)') 
+                }
+            
                 // this.calendarOptions.events = this.events;
                 this.createTourDetail(this.events);
             },
@@ -676,6 +700,10 @@ export class ToursDetailsComponent implements OnInit {
         _with.push({key: 'include[]', value: 'division.*'})
 
         filters.push({ key: 'filter{precall}', value: 'false' })
+
+        let copyEvents = this.events;
+        let found = false;
+
         let date = this.dateSchedule ? this.dateSchedule : new Date();
         switch (date.getDay()) {
             case 0:
@@ -795,7 +823,27 @@ export class ToursDetailsComponent implements OnInit {
                         "end": end_time,
                         "division": division
                     });
+                    let foundAux = false;
+                    copyEvents.forEach(event => {
+                        if (element.id == event.origin_destination && date.toISOString().split('T')[0] == event.start.split('T')[0]) {
+                            foundAux = true;
+                            found = true;
+                        }
+                    });
+                    if (!foundAux) {
+                        this.events.push({
+                            "id": element.id,
+                            "title": origin_name + ' - ' + destination_name,
+                            "start": start_time,
+                            "end": end_time,
+                            "division": division,
+                        });
+                    }
                 });
+                if (found) {
+                    this.toastService.growl('top-right', 'info', 'Uno o más Recorrido(s) Existente(s)') 
+                }
+
                 // this.calendarOptions.events = this.events;
                 this.createTourDetail(this.events);
             },
