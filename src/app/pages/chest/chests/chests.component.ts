@@ -72,7 +72,7 @@ export class ChestsComponent implements OnInit, OnChanges {
             this.message_confirm_delete = res;
         });
 
-        this.showTableCheckbox = true;
+        this.showTableCheckbox = false;
         this.parent = '';
 
         this.page = 1;

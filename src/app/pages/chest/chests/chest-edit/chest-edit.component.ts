@@ -62,6 +62,7 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private toastService: ToastService,
     private serviceOrderService: ServiceOrderService,
   ) {
