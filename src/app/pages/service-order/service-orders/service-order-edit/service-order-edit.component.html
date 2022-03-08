@@ -435,6 +435,9 @@
           <div *ngIf="model.id && authService.hasPermission('view_chest')">
             <app-chests [serviceOrderId]="model.id"></app-chests>
           </div>
+          <div *ngIf="model.id && authService.hasPermission('view_stocktransaction')">
+            <app-stock-transactions [serviceOrderId]="model.id"></app-stock-transactions>
+          </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/serviceorders">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

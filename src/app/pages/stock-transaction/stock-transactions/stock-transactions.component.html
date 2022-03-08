@@ -4,7 +4,8 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'STOCKTRANSACTION.STOCKTRANSACTIONS' | translate }}
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" routerLink="/stocktransactions/add">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" (click)="showModalDialog(undefined, true, false)" *ngIf="authService.hasPermission('add_stocktransaction') && serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/stocktransactions/add" *ngIf="authService.hasPermission('add_stocktransaction') && !serviceOrderId">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -31,7 +32,7 @@
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 3rem" *ngIf="showTableCheckbox">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            <!-- <p-tableHeaderCheckbox></p-tableHeaderCheckbox> -->
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
@@ -77,7 +78,7 @@
       <ng-template pTemplate="body" let-value>
         <tr class="p-selectable-row">
           <td *ngIf="showTableCheckbox">
-            <p-tableCheckbox [value]="value"></p-tableCheckbox>
+            <p-tableCheckbox [value]="value" (click)="changeSelectedmodels()"></p-tableCheckbox>
           </td>
           <td>
             {{value.id}}
@@ -99,23 +100,35 @@
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/stocktransactions/view/' + value.id" *ngIf="authService.hasPermission('view_stocktransaction')">
-              <span [inlineSVG]="'./assets/media/svg/icons/General/Eye.svg'" cacheSVG="true"
-                class="svg-icon svg-icon-md svg-icon-info">
-              </span>
-            </a>
-            <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/stocktransactions/edit/' + value.id" *ngIf="authService.hasPermission('add_stocktransaction')">
-              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
-                class="svg-icon svg-icon-md svg-icon-primary">
-              </span>
-            </a>
-            <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_stocktransaction')">
-              <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
-                class="svg-icon svg-icon-md svg-icon-danger">
-              </span>
-            </a>
+            (click)="showModalDialog(value.id, false, true)" *ngIf="authService.hasPermission('view_stocktransaction') && serviceOrderId">
+            <span [inlineSVG]="'./assets/media/svg/icons/General/Eye.svg'" cacheSVG="true"
+            class="svg-icon svg-icon-md svg-icon-info">
+            </span>
+          </a>
+          <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+          routerLink="{{parent}}/stocktransactions/view/{{value.id}}" *ngIf="authService.hasPermission('view_stocktransaction') && !serviceOrderId">
+            <span [inlineSVG]="'./assets/media/svg/icons/General/Eye.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-md svg-icon-info">
+            </span>
+          </a>
+          <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+            (click)="showModalDialog(value.id, false, false)" *ngIf="authService.hasPermission('change_stocktransaction') && serviceOrderId">
+            <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-md svg-icon-primary">
+            </span>
+          </a>
+          <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+            routerLink="{{parent}}/stocktransactions/edit/{{value.id}}" *ngIf="authService.hasPermission('change_stocktransaction') && !serviceOrderId">
+            <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-md svg-icon-primary">
+            </span>
+          </a>
+          <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+            (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('delete_stocktransaction')">
+            <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-md svg-icon-danger">
+            </span>
+          </a>
           </td>
         </tr>
       </ng-template>
@@ -130,3 +143,11 @@
 </div>
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
+
+<p-dialog header="{{ 'STOCKTRANSACTION.STOCKTRANSACTIONS' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '60vw'}" 
+  [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
+
+  <div class="mt-5">
+    <app-stock-transaction-edit [stockTransactionID]="stockTransactionID" (displayModal)="hideModalDialog()" [setView]="setViewStockTransaction"></app-stock-transaction-edit>
+  </div>
+</p-dialog>

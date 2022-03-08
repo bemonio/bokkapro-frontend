@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, Output, OnDestroy, OnChanges, OnInit, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
@@ -7,6 +7,8 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { StockTransactionModel as Model } from '../../_models/stock-transaction.model';
 import { StockTransactionService as ModelsService } from '../../_services/stock-transaction.service';
+import { ServiceOrderService } from 'src/app/pages/service-order/_services';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-stock-transaction-edit',
@@ -14,6 +16,10 @@ import { StockTransactionService as ModelsService } from '../../_services/stock-
   styleUrls: ['./stock-transaction-edit.component.scss']
 })
 export class StockTransactionEditComponent implements OnInit, OnDestroy {
+  @Input() stockTransactionID: { id: number, isNew: boolean};
+  @Input() setView: boolean;
+  @Output() displayModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public id: number;
   public model: Model;
   public previous: Model;
@@ -29,10 +35,15 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
   public service_order: AbstractControl;
   public type_product_transaction: AbstractControl;
 
+  public filterServOrdCompany: any;
+
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
+  public serviceOrderId: number;
+  public parent: string;
+
   public view: boolean;
 
   constructor(
@@ -41,7 +52,8 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     public authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private serviceOrderService: ServiceOrderService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
@@ -65,9 +77,23 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
-    this.get();
+    if (this.stockTransactionID){
+      if(this.stockTransactionID.id){
+        this.id = this.stockTransactionID.id; 
+        this.get();
+      } else {
+        this.id = undefined;
+        this.get();
+      }
+    } 
+    this.route.params.subscribe((params) => {
+      if (this.route.snapshot.url.length > 0) {
+        this.serviceOrderId = params.id;
+      }
+      this.get();
+    });
 
-    if (this.route.snapshot.url[0].path == 'view') {
+    if (this.route.snapshot.url[0].path == 'view'  || this.setView) {
       Object.keys(this.formGroup.controls).forEach(control => {
         this.formGroup.controls[control].disable();
       });
@@ -75,12 +101,17 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  ngOnChanges() {
+    this.ngOnInit();
+  }
+
   get() {
     this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
-        // get id from URL
-        this.id = Number(params.get('id'));
+        if(!this.stockTransactionID){
+          this.id = Number(params.get('id'));
+        }
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
@@ -128,6 +159,10 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
       this.employee.setValue(this.model.employee);
       this.service_order.setValue(this.model.service_order);
       this.type_product_transaction.setValue(this.model.type_product_transaction);
+    } else {
+      if (this.serviceOrderId) {
+        this.getServiceOrderById(this.serviceOrderId);
+      }
     }
     this.formGroup.markAllAsTouched();
   }
@@ -169,7 +204,13 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/stocktransactions']);
+          if (this.stockTransactionID) {
+            this.hideModal();
+          } else if(this.parent) {
+            this.router.navigate([this.parent + '/stocktransactions']);
+          } else {
+            this.router.navigate(['/stocktransactions']);
+          }
         }
       }),
       catchError((error) => {
@@ -249,6 +290,7 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
     this.activeTabId = tabId;
     this.ngOnInit();
   }
+
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
@@ -272,5 +314,31 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
   isControlTouched(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
     return control.dirty || control.touched;
+  }
+
+  public getValidClass(valid) {
+    let stringClass = 'form-control form-control-lg form-control-solid';
+    if (valid) {
+      stringClass += ' is-valid';
+    } else {
+      stringClass += ' is-invalid';
+    }
+    return stringClass;
+  }
+
+  getServiceOrderById(id) {
+    this.serviceOrderService.getById(id).toPromise().then(
+      response => {
+        this.service_order.setValue(response.service_order);
+        this.filterServOrdCompany = response.service_order;
+      },
+      error => {
+        console.log('error getting service_order');
+      }
+    );
+  }
+
+  hideModal(){
+    this.displayModal.emit()
   }
 }
