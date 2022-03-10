@@ -801,6 +801,15 @@ export const locale = {
       STOCKTRANSACTION: 'Transacción Inventario',
       TYPEPRODUCTTRANSACTION: 'Tipo Transacción Inventario',      
     },
+    STOCKSERIAL: {
+      STOCKSERIAL: 'Inventario Serial',
+      STOCKSERIALS: 'Inventario Serials',
+      ID: 'Id',
+      CODE: 'Código',
+      PRODUCTANDSERVICE: 'Producto & Servicio',
+      STOCK: 'Inventario',
+      STOCKTRANSACTION: 'Transacción Inventario',
+    },
   }
 };
 

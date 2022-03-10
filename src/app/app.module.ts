@@ -82,6 +82,7 @@ import { TypeProductTransactionService } from './pages/type-product-transaction/
 import { StockService } from './pages/stock/_services';
 import { StockTransactionService } from './pages/stock-transaction/_services';
 import { StockTransactionDetailService } from './pages/stock-transaction-detail/_services';
+import { StockSerialService } from './pages/stock-serial/_services';
 
 // OTHER MODULES
 import { CompaniesComponent } from 'src/app/pages/company/companies/companies.component';
@@ -200,6 +201,7 @@ export function getHighlightLanguages() {
     StockService,
     StockTransactionService,
     StockTransactionDetailService,
+    StockSerialService,
     //Others
     CompaniesComponent
   ],

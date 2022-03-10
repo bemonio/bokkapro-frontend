@@ -377,6 +377,10 @@ import { StockTransactionDetailComponent } from './stock-transaction-detail/stoc
 import { StockTransactionDetailEditComponent } from './stock-transaction-detail/stock-transaction-details/stock-transaction-detail-edit/stock-transaction-detail-edit.component';
 import { StockTransactionAutocompleteComponent } from './stock-transaction/stock-transactions/stock-transaction-autocomplete/stock-transaction-autocomplete.component';
 
+// StockSerials
+import { StockSerialsComponent } from './stock-serial/stock-serials/stock-serials.component';
+import { StockSerialComponent } from './stock-serial/stock-serial.component';
+import { StockSerialEditComponent } from './stock-serial/stock-serials/stock-serial-edit/stock-serial-edit.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -623,7 +627,10 @@ import { StockTransactionAutocompleteComponent } from './stock-transaction/stock
     StockTransactionDetailsComponent,
     StockTransactionDetailComponent,
     StockTransactionDetailEditComponent,
-    StockTransactionAutocompleteComponent
+    StockTransactionAutocompleteComponent,
+    StockSerialsComponent,
+    StockSerialComponent,
+    StockSerialEditComponent,
   ]
 })
 export class PagesModule { }

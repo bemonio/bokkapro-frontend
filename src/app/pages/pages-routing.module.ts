@@ -364,6 +364,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'stockserials',
+        loadChildren: () =>
+          import('../pages/stock-serial/stock-serial-routing.module').then(
+            (m) => m.StockSerialRoutingModule
+          ),
+      },
+      {
         path: 'typesproducttransactions',
         loadChildren: () =>
           import('../pages/type-product-transaction/type-product-transaction-routing.module').then(

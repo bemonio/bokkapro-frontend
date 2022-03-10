@@ -1,0 +1,1 @@
+export { StockSerialService } from './stock-serial.service';
