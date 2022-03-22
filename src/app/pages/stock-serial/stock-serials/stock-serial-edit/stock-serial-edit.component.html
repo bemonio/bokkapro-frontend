@@ -16,7 +16,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-light" routerLink="{{parent}}/stockserials" *ngIf="!stockTransactionDetailID">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}/stockserials" *ngIf="!stockSerialID">
         <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <!-- <button class="btn btn-secondary ml-2" (click)="reset()">
@@ -88,9 +88,9 @@
             </div>
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/stockserials" *ngIf="!stockTransactionDetailID">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/stockserials" *ngIf="!stockSerialID">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!stockTransactionDetailID && !view">{{ 'COMMON.SAVE' | translate }}</button>
+              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!stockSerialID && !view">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)" *ngIf="!view">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>

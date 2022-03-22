@@ -163,7 +163,7 @@ export class StockSerialsComponent implements OnInit {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.requesting = false;
-                this.models = response.stock_transaction_details;
+                this.models = response.stock_serials;
                 this.totalRecords = response.meta.total_results;
                 if(response.stocks){                
                     response.stocks.forEach(stock => {
@@ -188,15 +188,6 @@ export class StockSerialsComponent implements OnInit {
                         this.models.forEach(element => {
                             if (element.stock_transaction === stock_transaction.id) {
                                 element.stock_transaction = stock_transaction;
-                            }
-                        });
-                    });
-                }
-                if(response.type_product_transactions){                
-                    response.type_product_transactions.forEach(type_product_transaction => {
-                        this.models.forEach(element => {
-                            if (element.type_product_transaction === type_product_transaction.id) {
-                                element.type_product_transaction = type_product_transaction;
                             }
                         });
                     });

@@ -134,9 +134,6 @@ export class StockSerialEditComponent implements OnInit, OnDestroy {
         if (response.product_and_services) {
           this.model.product_and_service = response.product_and_services[0];
         }
-        if (response.type_product_transactions) {
-          this.model.type_product_transaction = response.type_product_transactions[0];
-        }  
         if (response.stock_transactions) {
           this.model.stock_transaction = response.stock_transactions[0];
         }
@@ -191,7 +188,6 @@ export class StockSerialEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.product_and_service = this.model.product_and_service.id;
-    model.type_product_transaction = this.model.type_product_transaction.id;
     model.stock_transaction = this.model.stock_transaction.id;
     model.stock = this.model.stock.id;
 

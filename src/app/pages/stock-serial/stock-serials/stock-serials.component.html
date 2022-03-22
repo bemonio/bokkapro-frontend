@@ -98,9 +98,6 @@
           <td>
             {{value.product_and_service.name}}
           </td>
-          <td>
-            {{value.type_product_transaction.name}}
-          </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
             (click)="showModalDialog(value.id, false, true)" *ngIf="authService.hasPermission('view_stockserial') && stockTransactionId">
@@ -152,6 +149,6 @@
   [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
 
   <div class="mt-5">
-    <app-stock-transaction-detail-edit [stockTransactionDetailID]="stockTransactionDetailID" (displayModal)="hideModalDialog()" [setView]="setViewStockTransactionDetail"></app-stock-transaction-detail-edit>
+    <app-stock-serial-edit [stockSerialID]="stockSerialID" (displayModal)="hideModalDialog()" [setView]="setViewStockSerial"></app-stock-serial-edit>
   </div>
 </p-dialog>
