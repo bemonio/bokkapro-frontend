@@ -68,12 +68,45 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'STOCKTRANSACTION.TYPEPRODUCTTRANSACTION' | translate }}</label>
               <app-type-product-transaction-select
               name="type_product_transaction" [valid]="isControlValid('type_product_transaction')" [touched]="isControlTouched('type_product_transaction')" [class.is-invalid]="isControlInvalid('type_product_transaction')"
-              [class.is-valid]="isControlValid('type_product_transaction')" formControlName="type_product_transaction" id="type_product_transaction" [model]="model.type_product_transaction"></app-type-product-transaction-select>
+              [class.is-valid]="isControlValid('type_product_transaction')" formControlName="type_product_transaction" id="type_product_transaction" [model]="model.type_product_transaction" (onMyChange)="changeTypeProductTransaction()"></app-type-product-transaction-select>
               <div class="feedback" *ngIf="!isControlTouched('type_product_transaction')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'STOCKTRANSACTION.TYPEPRODUCTTRANSACTION' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('type_product_transaction')">{{ 'STOCKTRANSACTION.TYPEPRODUCTTRANSACTION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_product_transaction')">{{ 'STOCKTRANSACTION.TYPEPRODUCTTRANSACTION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_product_transaction')">{{ 'STOCKTRANSACTION.TYPEPRODUCTTRANSACTION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_product_transaction')">{{ 'STOCKTRANSACTION.TYPEPRODUCTTRANSACTION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4" *ngIf="type_product_transaction.value.id === 3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'STOCKTRANSACTION.PREFIX' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="prefix" [class.is-invalid]="isControlInvalid('prefix')"
+                [class.is-valid]="isControlValid('prefix')" formControlName="prefix"/>
+              <div class="feedback" *ngIf="!isControlTouched('prefix')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'STOCKTRANSACTION.PREFIX' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('prefix')">{{ 'STOCKTRANSACTION.PREFIX' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'prefix')">{{ 'STOCKTRANSACTION.PREFIX' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'prefix')">{{ 'STOCKTRANSACTION.PREFIX' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'prefix')">{{ 'STOCKTRANSACTION.PREFIX' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4" *ngIf="type_product_transaction.value.id === 3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'STOCKTRANSACTION.CODESERIALSTART' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="code_serial_start" [class.is-invalid]="isControlInvalid('code_serial_start')"
+                [class.is-valid]="isControlValid('code_serial_start')" formControlName="code_serial_start"/>
+              <div class="feedback" *ngIf="!isControlTouched('code_serial_start')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'STOCKTRANSACTION.CODESERIALSTART' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('code_serial_start')">{{ 'STOCKTRANSACTION.CODESERIALSTART' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code_serial_start')">{{ 'STOCKTRANSACTION.CODESERIALSTART' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_serial_start')">{{ 'STOCKTRANSACTION.CODESERIALSTART' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_serial_start')">{{ 'STOCKTRANSACTION.CODESERIALSTART' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4" *ngIf="type_product_transaction.value.id === 3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'STOCKTRANSACTION.CODESERIALEND' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="code_serial_end" [class.is-invalid]="isControlInvalid('code_serial_end')"
+                [class.is-valid]="isControlValid('code_serial_end')" formControlName="code_serial_end"/>
+              <div class="feedback" *ngIf="!isControlTouched('code_serial_end')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'STOCKTRANSACTION.CODESERIALEND' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('code_serial_end')">{{ 'STOCKTRANSACTION.CODESERIALEND' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'code_serial_end')">{{ 'STOCKTRANSACTION.CODESERIALEND' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_serial_end')">{{ 'STOCKTRANSACTION.CODESERIALEND' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_serial_end')">{{ 'STOCKTRANSACTION.CODESERIALEND' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'STOCKTRANSACTION.SERVICE_ORDER' | translate }}</label>

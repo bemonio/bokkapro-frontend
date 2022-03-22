@@ -34,6 +34,9 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
   public employee: AbstractControl;
   public service_order: AbstractControl;
   public type_product_transaction: AbstractControl;
+  public prefix: AbstractControl;
+  public code_serial_start: AbstractControl;
+  public code_serial_end: AbstractControl;
 
   public filterServOrdCompany: any;
 
@@ -66,11 +69,17 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
       employee: ['', Validators.compose([Validators.maxLength(255)])],
       service_order: [''],
       type_product_transaction: ['', Validators.compose([Validators.maxLength(255)])],
+      prefix: [''],
+      code_serial_start: [''],
+      code_serial_end: [''],
     });
     this.office = this.formGroup.controls['office'];
     this.employee = this.formGroup.controls['employee'];
     this.service_order = this.formGroup.controls['service_order'];
     this.type_product_transaction = this.formGroup.controls['type_product_transaction'];
+    this.prefix = this.formGroup.controls['prefix'];
+    this.code_serial_start = this.formGroup.controls['code_serial_start'];
+    this.code_serial_end = this.formGroup.controls['code_serial_end'];
   }
 
   ngOnInit(): void {
@@ -340,5 +349,9 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
 
   hideModal(){
     this.displayModal.emit()
+  }
+
+  changeTypeProductTransaction(){
+    console.log("changeTypeProductTransaction")
   }
 }
