@@ -20,11 +20,29 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: ContractEditComponent
+        component: ContractEditComponent,
+        children: [
+          {
+            path: 'stockserials',
+            loadChildren: () =>
+              import('../../pages/stock-serial/stock-serial-routing.module').then(
+                (m) => m.StockSerialRoutingModule
+              ),
+          },
+        ]
       },
       {
         path: 'view/:id',
-        component: ContractEditComponent
+        component: ContractEditComponent,
+        children: [
+          {
+            path: 'stockserials',
+            loadChildren: () =>
+              import('../../pages/stock-serial/stock-serial-routing.module').then(
+                (m) => m.StockSerialRoutingModule
+              ),
+          },
+        ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

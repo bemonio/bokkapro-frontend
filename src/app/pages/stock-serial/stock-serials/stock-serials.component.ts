@@ -147,7 +147,11 @@ export class StockSerialsComponent implements OnInit {
                         } else {
                             this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.stockTransId;
                         }
-                        this.filters.push({ key: 'filter{stock_transaction}', value: this.stockTransId.toString() })
+                        if (this.route.parent.parent.parent.parent.parent.snapshot.routeConfig.path == 'contracts') {
+                            this.filters.push({ key: 'filter{service_order.contract}', value: this.stockTransId.toString() })
+                        } else { 
+                            this.filters.push({ key: 'filter{stock_transaction}', value: this.stockTransId.toString() })
+                        }
                     }
                     this.getModels();
                 });

@@ -25,7 +25,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
-    OFFICE_TAB: 1,
+    STOCK_SERIAL_TAB: 1,
   };
 
   public code: AbstractControl;
@@ -369,5 +369,9 @@ export class ContractEditComponent implements OnInit, OnDestroy {
     }
 
     return [year, month, day].join('-') + ' ' + [hours, minutes, seconds].join(':');
+  }
+
+  public getEditOrView() {
+    return this.view ? 'view' : 'edit';
   }
 }
