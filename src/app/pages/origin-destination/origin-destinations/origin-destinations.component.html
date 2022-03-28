@@ -118,10 +118,10 @@
             {{value.destination?.name}}
           </td>
           <td *ngIf="!showListSchedule">
-            {{value.service_order.id}}
+            {{value.service_order?.id}}
           </td>
           <td>
-            {{value.service_order.contract?.code}}
+            {{value.service_order?.contract?.code}}
           </td>
           <td *ngIf="!showListSchedule">
             {{value.distrib_charges}}

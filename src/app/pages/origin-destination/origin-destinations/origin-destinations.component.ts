@@ -203,15 +203,6 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
                         });
                     });
                 }
-                if(response.locations){
-                    response.locations.forEach(destination => {
-                        this.models.forEach(element => {
-                            if (element.destination === destination.id) {
-                                element.destination = destination;
-                            }
-                        });
-                    });
-                }
                 if(response.service_orders){
                     response.service_orders.forEach(service_order => {
                         this.models.forEach(element => {
@@ -224,8 +215,10 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
                 if(response.contracts){
                     response.contracts.forEach(contract => {
                         this.models.forEach(element => {
-                            if (element.service_order.contract === contract.id) {
-                                element.service_order.contract = contract;
+                            if (element.service_order) {
+                                if (element.service_order.contract === contract.id) {
+                                    element.service_order.contract = contract;
+                                }
                             }
                         });
                     });
