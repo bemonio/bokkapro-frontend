@@ -118,15 +118,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'distrib_charges')">{{ 'ORIGIN_DESTINATION.DISTRIB_CHARGES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div> 
             <div class="col-lg-4" *ngIf="!showListSchedule">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }}</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="days_month" [class.is-invalid]="isControlInvalid('days_month')"
                 [class.is-valid]="isControlValid('days_month')" formControlName="days_month" />
-              <div class="feedback" *ngIf="!isControlTouched('days_month')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('days_month')">{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'days_month')">{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'days_month')">{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'days_month')">{{ 'ORIGIN_DESTINATION.TUESDAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              <div class="feedback" *ngIf="!isControlTouched('days_month')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'days_month')">{{ 'ORIGIN_DESTINATION.DAYS_MONTH' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
             </div>
