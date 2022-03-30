@@ -1065,8 +1065,10 @@ export class VouchersComponent implements OnInit, OnDestroy {
                 if(response.locations){
                     response.locations.forEach(location => {
                         models.forEach(element => {
-                            if (element.origin_destination.origin === location.id) {
-                                element.origin_destination.origin = location;
+                            if (element.origin_destination) {
+                                if (element.origin_destination.origin === location.id) {
+                                    element.origin_destination.origin = location;
+                                }
                             }
                         });
                     });
@@ -1074,8 +1076,10 @@ export class VouchersComponent implements OnInit, OnDestroy {
                 if(response.locations){
                     response.locations.forEach(location => {
                         models.forEach(element => {
-                            if (element.origin_destination.destination === location.id) {
-                                element.origin_destination.destination = location;
+                            if (element.origin_destination) {
+                                if (element.origin_destination.destination === location.id) {
+                                    element.origin_destination.destination = location;
+                                }
                             }
                         });
                     });
