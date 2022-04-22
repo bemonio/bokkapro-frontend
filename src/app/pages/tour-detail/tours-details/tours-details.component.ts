@@ -305,12 +305,15 @@ export class ToursDetailsComponent implements OnInit {
                         division_name = element.division.name;
                     }
 
+                    let label_precall = element.origin_destination.precall ? 'Contratado' : 'Precall';
                     this.events.push({
                         "id": element.id,
-                        "title": origin_name + ' - ' + destination_name + ' [' + division_name + ']',
+                        "title": origin_name + ' - ' + destination_name + ' - ' + division_name + ' - ' + label_precall,
                         "start": element.date_start,
                         "end": element.date_end,
                         "origin_destination": element.origin_destination.id,
+                        "backgroundColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
+                        "borderColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
                     });
                 });            
                 this.calendarOptions.events = this.events;
@@ -501,6 +504,8 @@ export class ToursDetailsComponent implements OnInit {
                     "start": start_time,
                     "end": end_time,
                     "division": division,
+                    "backgroundColor": '#2196F3',
+                    "borderColor": '#2196F3',
                 });
             }
         });
@@ -644,7 +649,9 @@ export class ToursDetailsComponent implements OnInit {
                         "title": origin_name + ' - ' + destination_name,
                         "start": start_time,
                         "end": end_time,
-                        "division": division
+                        "division": division,
+                        "backgroundColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
+                        "borderColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
                     });
 
                     let foundAux = false;
@@ -661,6 +668,8 @@ export class ToursDetailsComponent implements OnInit {
                             "start": start_time,
                             "end": end_time,
                             "division": division,
+                            "backgroundColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
+                            "borderColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
                         });
                     }
                 });
@@ -821,7 +830,9 @@ export class ToursDetailsComponent implements OnInit {
                         "title": origin_name + ' - ' + destination_name,
                         "start": start_time,
                         "end": end_time,
-                        "division": division
+                        "division": division,
+                        "backgroundColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
+                        "borderColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
                     });
                     let foundAux = false;
                     copyEvents.forEach(event => {
@@ -837,6 +848,8 @@ export class ToursDetailsComponent implements OnInit {
                             "start": start_time,
                             "end": end_time,
                             "division": division,
+                            "backgroundColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
+                            "borderColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
                         });
                     }
                 });
