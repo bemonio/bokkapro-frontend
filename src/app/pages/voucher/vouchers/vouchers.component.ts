@@ -1119,4 +1119,70 @@ export class VouchersComponent implements OnInit, OnDestroy {
         value.setDate(value.getDate() + 1);
         return value.getTime() < today.getDate();
     }
+
+    hasPermissionView() {
+        let result = false;
+        switch (this.route.parent.parent.snapshot.url[0].path) {
+            case 'vouchersconfirmationdelivered':
+                if (this.authService.hasPermission('view_vouchersconfirmationdelivered')) {
+                    result = true;
+                }
+                break;
+            case 'vouchersadmin':
+                if (this.authService.hasPermission('view_voucheradmin')) {
+                    result = true;
+                }
+                break;
+            default:    
+                if (this.authService.hasPermission('view_voucher')) {
+                    result = true;
+                }
+                break;
+        }
+        return result;
+    }
+
+    hasPermissionChange() {
+        let result = false;
+        switch (this.route.parent.parent.snapshot.url[0].path) {
+            case 'vouchersconfirmationdelivered':
+                if (this.authService.hasPermission('change_vouchersconfirmationdelivered')) {
+                    result = true;
+                }
+                break;
+            case 'vouchersadmin':
+                if (this.authService.hasPermission('change_voucheradmin')) {
+                    result = true;
+                }
+                break;
+            default:    
+                if (this.authService.hasPermission('change_voucher')) {
+                    result = true;
+                }
+                break;
+        }
+        return result;
+    }
+
+    hasPermissionDelete() {
+        let result = false;
+        switch (this.route.parent.parent.snapshot.url[0].path) {
+            case 'vouchersconfirmationdelivered':
+                if (this.authService.hasPermission('delete_vouchersconfirmationdelivered')) {
+                    result = true;
+                }
+                break;
+            case 'vouchersadmin':
+                if (this.authService.hasPermission('delete_voucheradmin')) {
+                    result = true;
+                }
+                break;
+            default:    
+                if (this.authService.hasPermission('delete_voucher')) {
+                    result = true;
+                }
+                break;
+        }
+        return result;
+    }    
 }
