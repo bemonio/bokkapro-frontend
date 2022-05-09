@@ -249,7 +249,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
                     this.showRowCheckbox = false;
                 }
                 switch (this.route.parent.parent.snapshot.url[0].path) {
-                    case 'voucherconfirmationdelivered':
+                    case 'vouchersconfirmationdelivered':
                         this.parent = this.parent + '/vouchersconfirmationdelivered/';
                         break;
                     case 'vouchersadmin':
@@ -262,7 +262,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
             });
         } else {
             switch (this.route.parent.parent.snapshot.url[0].path) {
-                case 'voucherconfirmationdelivered':
+                case 'vouchersconfirmationdelivered':
                     // this.filters.push({ key: 'filter{division}', value: this.authService.currentDivisionValue.id.toString() })
                     this.filters.push({ key: 'filter{verificated}', value: '1' });
                     this.filters.push({ key: 'filter{is_active}', value: '1'});
@@ -1123,7 +1123,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     hasPermissionView() {
         let result = false;
         switch (this.route.parent.parent.snapshot.url[0].path) {
-            case 'voucherconfirmationdelivered':
+            case 'vouchersconfirmationdelivered':
                 if (this.authService.hasPermission('view_voucherconfirmationdelivered')) {
                     result = true;
                 }
@@ -1145,7 +1145,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     hasPermissionChange() {
         let result = false;
         switch (this.route.parent.parent.snapshot.url[0].path) {
-            case 'voucherconfirmationdelivered':
+            case 'vouchersconfirmationdelivered':
                 if (this.authService.hasPermission('change_voucherconfirmationdelivered')) {
                     result = true;
                 }
@@ -1167,7 +1167,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     hasPermissionDelete() {
         let result = false;
         switch (this.route.parent.parent.snapshot.url[0].path) {
-            case 'voucherconfirmationdelivered':
+            case 'vouchersconfirmationdelivered':
                 if (this.authService.hasPermission('delete_voucherconfirmationdelivered')) {
                     result = true;
                 }
