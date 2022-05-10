@@ -110,30 +110,34 @@ export class OriginDestinationSelectComponent implements ControlValueAccessor, O
             response => {
                 this.models = response.origin_destinations;
                 this.totalRecords = response.meta.total_results;
-
-                response.locations.forEach(location => {
-                    this.models.forEach(element => {
-                        if (element.origin === location.id) {
-                            element.origin = location;
-                        }
-                    });
-                });
     
-                response.locations.forEach(location => {
-                    this.models.forEach(element => {
-                        if (element.destination === location.id) {
-                            element.destination = location;
-                        }
+                if(response.locations){
+                    response.locations.forEach(location => {
+                        this.models.forEach(element => {
+                            if (element.origin === location.id) {
+                                element.origin = location;
+                            }
+                        });
                     });
-                });
     
-                response.divisions.forEach(division => {
-                    this.models.forEach(element => {
-                        if (element.division === division.id) {
-                            element.division = division;
-                        }
+                    response.locations.forEach(location => {
+                        this.models.forEach(element => {
+                            if (element.destination === location.id) {
+                                element.destination = location;
+                            }
+                        });
                     });
-                });
+                }
+    
+                if(response.divisions){
+                    response.divisions.forEach(division => {
+                        this.models.forEach(element => {
+                            if (element.division === division.id) {
+                                element.division = division;
+                            }
+                        });
+                    });
+                }
 
                 // if (this.model) {
                 //     if (this.model.id) {

@@ -831,8 +831,6 @@ export class ToursDetailsComponent implements OnInit {
                         "start": start_time,
                         "end": end_time,
                         "division": division,
-                        "backgroundColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
-                        "borderColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
                     });
                     let foundAux = false;
                     copyEvents.forEach(event => {
@@ -848,8 +846,6 @@ export class ToursDetailsComponent implements OnInit {
                             "start": start_time,
                             "end": end_time,
                             "division": division,
-                            "backgroundColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
-                            "borderColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
                         });
                     }
                 });
