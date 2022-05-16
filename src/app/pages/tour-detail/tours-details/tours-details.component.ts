@@ -919,7 +919,7 @@ export class ToursDetailsComponent implements OnInit {
     }
 
     public printReport() {
-        let url = environment.apiUrl + 'pdf/toursdetails?start=' + this.calendarStart + '&end=' + this.calendarEnd;
+        let url = environment.apiUrl + 'pdf/toursdetails?start=' + this.calendarStart + '&end=' + this.calendarEnd + '&token=' + this.authService.currentUserValue.id;
         window.open(url, '_blank');
     }
 }
