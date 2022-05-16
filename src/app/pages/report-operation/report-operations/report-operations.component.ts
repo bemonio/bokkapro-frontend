@@ -254,10 +254,12 @@ export class ReportOperationsComponent implements OnInit {
             }
         }
 
+        let id = value.office.id == 1 ? 4 : 7;
+
         let url = 
             this.REPORT_URL +
             '/Reports/Viewer' + 
-            '?id=' + 4 +
+            '?id=' + id +
             '&token=' + this.token.getToken() + 
             '&user=' + this.authService.currentUserValue.id + 
             '&employee=' + this.authService.currentUserValue.employee.id +
