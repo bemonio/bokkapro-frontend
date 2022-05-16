@@ -50,6 +50,11 @@
               {{ 'EXCHANGE.RATE' | translate }}
             </div>
           </th>
+          <th pSortableColumn="currency">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'EXCHANGE.CURRENCY' | translate }}
+            </div>
+          </th>
           <th pSortableColumn="date">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'EXCHANGE.DATE' | translate }}
@@ -77,6 +82,9 @@
           </td>
           <td>
             {{value.rate}}
+          </td>
+          <td>
+            {{value.currency.name}}
           </td>
           <td>
             {{value.date  | date: 'MM/dd/yyyy hh:mm'}}

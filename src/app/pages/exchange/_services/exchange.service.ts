@@ -50,7 +50,7 @@ export class ExchangeService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=currency.office.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -66,6 +66,6 @@ export class ExchangeService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=currency.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=currency.office.*`);
     }
 }

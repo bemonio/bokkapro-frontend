@@ -99,9 +99,15 @@ export class ExchangeEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.exchange;
+
         if (response.currencies) {
           this.model.currency = response.currencies[0];
         }
+
+        if (response.offices) {
+          this.model.currency.office = response.offices[0];
+        }
+
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
