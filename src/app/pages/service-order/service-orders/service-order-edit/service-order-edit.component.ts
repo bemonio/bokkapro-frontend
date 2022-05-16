@@ -288,6 +288,31 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       if (this.companyId) {
         this.getCompanyById(this.companyId);
       }
+      this.total_amount.setValue(0);
+      this.total_fixed_costs.setValue(0);
+      this.travels.setValue(0);
+      this.travels_directs.setValue(0);
+      this.appraisal.setValue(0);
+      this.handling.setValue(0);
+      this.materials.setValue(0);
+      this.custody_cpv.setValue(0);
+      this.custody_vault.setValue(0);
+      this.custody_personal_atm.setValue(0);
+      this.pieces.setValue(0);
+      this.fixed_costs_packing.setValue(0);
+      this.vigilant.setValue(0);
+      this.atm_supply.setValue(0);
+      this.atm_failure_1_2_levels.setValue(0);
+      this.excess_travels.setValue(0);
+      this.excess_travels_directs.setValue(0);
+      this.excess_appraisal.setValue(0);
+      this.excess_handling.setValue(0);
+      this.excess_materials.setValue(0);
+      this.excess_vigilant_extra_hours.setValue(0);
+      this.excess_custody_cpv.setValue(0);
+      this.excess_custody_vault.setValue(0);
+      this.excess_custody_personal_atm.setValue(0);
+      this.excess_pieces.setValue(0);
     }
     this.formGroup.markAllAsTouched();
   }
