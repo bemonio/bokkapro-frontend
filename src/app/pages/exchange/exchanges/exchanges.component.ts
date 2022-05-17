@@ -126,6 +126,15 @@ export class ExchangesComponent implements OnInit {
             response => {
                 this.requesting = false;
                 this.models = response.exchanges;
+                if(response.currencies){
+                    response.currencies.forEach(currency => {
+                        this.models.forEach(element => {
+                            if (element.currency === currency.id) {
+                                element.currency = currency;
+                            }
+                        });
+                    });
+                }
                 this.totalRecords = response.meta.total_results;
             },
             error => {

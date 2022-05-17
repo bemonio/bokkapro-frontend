@@ -120,7 +120,14 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
                         }
                     });
                 });
-    
+
+                response.currencies.forEach(currency => {
+                    this.models.forEach(element => {
+                        if (element.currency === currency.id) {
+                            element.currency = currency;
+                        }
+                    });
+                });
             },
             error => {
                 let messageError = [];
