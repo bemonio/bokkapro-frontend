@@ -71,6 +71,11 @@
               {{ 'CONTRACT.COMPANY' | translate }}
             </div>
           </th>
+          <th pSortableColumn="is_active">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'CONTRACT.IS_ACTIVE' | translate }}
+            </div>
+          </th>
           <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -105,6 +110,10 @@
           </td>
           <td>
             {{value.company?.name}}
+          </td>
+          <td>
+            <p-badge [value]="'No'"  severity="secondary"  severity="secondary" *ngIf="!value.is_active"></p-badge>
+            <p-badge [value]="'Si'"  severity="success"  severity="success" *ngIf="value.is_active"></p-badge>
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"

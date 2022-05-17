@@ -15,6 +15,7 @@ export class ContractModel {
   alias: string;
   abbreviation: string;
   address: string;
+  is_active: boolean;
   created_at: string;
   updated_at: string;
 }

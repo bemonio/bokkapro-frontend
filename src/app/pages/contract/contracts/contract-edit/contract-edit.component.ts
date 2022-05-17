@@ -41,6 +41,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
   public alias: AbstractControl;
   public abbreviation: AbstractControl;
   public address: AbstractControl;
+  public is_active: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -81,6 +82,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       alias: [''],
       abbreviation: [''],
       address: [''],
+      is_active: [''],
     });
     this.code = this.formGroup.controls['code'];
     this.company = this.formGroup.controls['company'];
@@ -96,6 +98,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
     this.alias = this.formGroup.controls['alias'];
     this.abbreviation = this.formGroup.controls['abbreviation'];
     this.address = this.formGroup.controls['address'];
+    this.is_active = this.formGroup.controls['is_active'];
   }
 
   ngOnInit(): void {
@@ -118,6 +121,13 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       }
       this.get();
     });
+
+    if (this.route.snapshot.url[0].path == 'view') {
+      Object.keys(this.formGroup.controls).forEach(control => {
+        this.formGroup.controls[control].disable();
+      });
+      this.view = true;
+    }
   }
 
   get() {
@@ -174,6 +184,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       this.alias.setValue(this.model.alias);
       this.abbreviation.setValue(this.model.abbreviation);
       this.address.setValue(this.model.address);
+      this.is_active.setValue(this.model.is_active);
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }
@@ -181,6 +192,7 @@ export class ContractEditComponent implements OnInit, OnDestroy {
         this.type_contract.setValue(this.model.type_contract);
       }
     } else {
+      this.is_active.setValue(false);
       if (this.companyId) {
         this.getCompanyById(this.companyId);
       }
