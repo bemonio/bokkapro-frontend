@@ -12,9 +12,13 @@
     <!-- begin: Filtration form -->
     <div class="form form-label-right">
       <div class="form-group row">
-        <div class="col-lg-6">
+       <!--<div class="col-lg-6">
           {{ 'COMMON.FILTER' | translate }}
-        </div>
+        </div>-->
+        <div class="col-lg-6">
+            <span class="mb-3 d-flex">{{ 'COMMON.FILTERS' | translate }}</span>
+            <p-toggleButton styleClass="form-control" onLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.ALL' | translate }}" offLabel="{{ 'ORIGIN_DESTINATION.PRECALL' | translate}}"  [style]="{'width': '11em'}" (click)="applyFilter('precall')"></p-toggleButton>            
+          </div>
         <div class="col-lg-6" [formGroup]="searchGroup">
           <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
             formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> </small>
