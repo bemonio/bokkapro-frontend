@@ -613,6 +613,7 @@ export const locale = {
       PRODUCTANDSERVICE: 'Producto y Servicio',
       TOTAL_AMOUNT: 'Monto Total',
       STATUS: 'Estado',
+      IS_ACTIVE: "activo?",
       COMPANY: 'Grupo Económico',
       EMPLOYEE: 'Empleado',
       CONTRACT: 'Contrato',

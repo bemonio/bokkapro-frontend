@@ -70,6 +70,11 @@
               {{ 'SERVICE_ORDER.STATUS' | translate }}
             </div>
           </th>
+          <th pSortableColumn="is_active">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'SERVICE_ORDER.IS_ACTIVE' | translate }}
+            </div>
+          </th>
           <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -107,6 +112,10 @@
             <p-badge [value]="'Aprobado'"  severity="success"  severity="success" *ngIf="value.status == 'Aprobado'"></p-badge>
             <p-badge [value]="'No Aprobado'"  severity="warning"  severity="warning" *ngIf="value.status == 'No Aprobado'"></p-badge>
             <p-badge [value]="'Rechazado'"  severity="danger"  severity="danger" *ngIf="value.status == 'Rechazado'"></p-badge>
+          </td>
+          <td>
+            <p-badge [value]="'No'"  severity="secondary"  severity="secondary" *ngIf="!value.is_active"></p-badge>
+            <p-badge [value]="'Si'"  severity="success"  severity="success" *ngIf="value.is_active"></p-badge>
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
