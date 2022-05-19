@@ -377,7 +377,8 @@ export const locale = {
       NAME_INVOICE_TO: 'Nombre Legal Cliente',
       START_BILLING_DATE: 'Inicio Fecha de Facturación',
       END_BILLING_DATE: 'Final Fecha de Facturación',
-      BILLING_START_END: 'Facturación. Inicio - Fin'
+      BILLING_START_END: 'Facturación. Inicio - Fin',
+      IS_ACTIVE: 'Activo?',
     },
     TYPECONTRACT: {
       TYPECONTRACT: 'Tipo Contrato',
@@ -613,7 +614,7 @@ export const locale = {
       PRODUCTANDSERVICE: 'Producto y Servicio',
       TOTAL_AMOUNT: 'Monto Total',
       STATUS: 'Estado',
-      IS_ACTIVE: "activo?",
+      IS_ACTIVE: 'Activo?',
       COMPANY: 'Grupo Económico',
       EMPLOYEE: 'Empleado',
       CONTRACT: 'Contrato',

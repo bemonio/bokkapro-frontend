@@ -34,4 +34,5 @@ export class ServiceOrderModel {
   company_contact: any;
   office: any;
   product_and_service: any;
+  is_active: boolean;
 }

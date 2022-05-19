@@ -58,6 +58,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
   public excess_custody_vault:AbstractControl;
   public excess_custody_personal_atm:AbstractControl;
   public excess_pieces:AbstractControl;
+  public is_active: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -119,6 +120,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       excess_custody_vault: [''],
       excess_custody_personal_atm: [''],
       excess_pieces: [''],
+      is_active: [''],
     });
     this.total_amount = this.formGroup.controls['total_amount'];
     this.status = this.formGroup.controls['status'];
@@ -153,6 +155,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
     this.excess_custody_vault = this.formGroup.controls['excess_custody_vault'];
     this.excess_custody_personal_atm = this.formGroup.controls['excess_custody_personal_atm'];
     this.excess_pieces = this.formGroup.controls['excess_pieces'];
+    this.is_active = this.formGroup.controls['is_active'];
   }
 
   ngOnInit(): void {
@@ -266,6 +269,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       this.excess_custody_vault.setValue(this.model.excess_custody_vault);
       this.excess_custody_personal_atm.setValue(this.model.excess_custody_personal_atm);
       this.excess_pieces.setValue(this.model.excess_pieces);
+      this.is_active.setValue(this.model.is_active);
       if (this.model.company) {
         this.company.setValue(this.model.company);
       }
@@ -313,6 +317,8 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       this.excess_custody_vault.setValue(0);
       this.excess_custody_personal_atm.setValue(0);
       this.excess_pieces.setValue(0);
+      this.is_active.setValue(false);
+
     }
     this.formGroup.markAllAsTouched();
   }
