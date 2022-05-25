@@ -41,7 +41,6 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
   public is_included_package: AbstractControl;
   public type_chest: AbstractControl;
   public location: AbstractControl;
-
   public service_order: AbstractControl;
 
   public filterServOrdCompany: any;
@@ -54,6 +53,8 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
 
   public serviceOrderId: number;
   public parent: string;
+
+  public company_id_filter: number;
 
   public view: boolean;
 
@@ -99,6 +100,8 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
     this.service_order = this.formGroup.controls['service_order'];
     this.type_chest = this.formGroup.controls['type_chest'];
     this.location = this.formGroup.controls['location'];
+
+    this.company_id_filter = 0;
   }
 
   ngOnInit(): void {
@@ -389,6 +392,7 @@ export class ChestEditComponent implements OnInit, OnChanges, OnDestroy {
       response => {
         this.service_order.setValue(response.service_order);
         this.filterServOrdCompany = response.service_order;
+        this.company_id_filter = response.companies[0].id;
       },
       error => {
         console.log('error getting service_order');

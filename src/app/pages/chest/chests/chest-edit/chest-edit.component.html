@@ -68,7 +68,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CHEST.LOCATION' | translate }}</label>
               <app-location-autocomplete
               placeholder="{{ 'CHEST.LOCATION' | translate }}" name="location" [valid]="isControlValid('location')" [touched]="isControlTouched('location')" [class.is-invalid]="isControlInvalid('location')"
-              [class.is-valid]="isControlValid('location')" formControlName="location" id="location" [model]="model.location"></app-location-autocomplete>
+              [class.is-valid]="isControlValid('location')" formControlName="location" id="location" [model]="model.location" [addFilters]="[{key: 'company', value:company_id_filter }]"></app-location-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('location')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CHEST.LOCATION' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('location')">{{ 'CHEST.LOCATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'location')">{{ 'CHEST.LOCATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
