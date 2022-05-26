@@ -91,6 +91,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public showButtonDevolutionVoucher: Boolean;
     public showButtonTransferDivisionVoucher: Boolean;
 
+    public guide: GuideModel;
+
     constructor(
         public modelsService: ModelService,
         private router: Router,
@@ -176,6 +178,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
         this.listVouchersConfirmationDelivered = [];
         this.listVouchersConfirmationDeliveredList = [];
+
+        this.guide = undefined;
         // this.getModels();
     }
 
@@ -232,11 +236,9 @@ export class VouchersComponent implements OnInit, OnDestroy {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
                     this.paramId = params.id;
+                    this.getGuideById(params.id);
                     if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path.startsWith('guide')) {
                         this.filters.push({ key: 'filter{guides}', value: this.paramId.toString() })
-                        if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path == 'guidesoutput') {
-                            this.showButtonDevolutionVoucher = true;
-                        }
                     } else if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path == 'certifiedcarts') {
                         this.filters.push({ key: 'filter{certified_cart}', value: this.paramId.toString() })
                     }
@@ -990,6 +992,20 @@ export class VouchersComponent implements OnInit, OnDestroy {
             response = false;
         }
         return response;
+    }
+
+    getGuideById(id) {
+        this.guideService.getById(id).toPromise().then(
+            response => {
+                this.guide = response.guide
+                if (this.route.parent.parent.parent.parent.parent.snapshot.url[0].path == 'guidesoutput' && this.guide.status != '1') {
+                    this.showButtonDevolutionVoucher = true;
+                }
+            },
+            error => {
+                console.log('error getting guide');
+            }
+        );
     }
 
     getVouchersByDivisionId (id) {
