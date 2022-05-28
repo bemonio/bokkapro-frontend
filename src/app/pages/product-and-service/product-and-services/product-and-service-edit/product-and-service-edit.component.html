@@ -65,17 +65,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">Name {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.COUNT' | translate }}</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="count" [class.is-invalid]="isControlInvalid('count')"
-                [class.is-valid]="isControlValid('count')" formControlName="count"/> 
-              <div class="feedback" *ngIf="!isControlTouched('count')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.COUNT' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('count')">{{ 'PRODUCTANDSERVICE.COUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'count')">{{ 'PRODUCTANDSERVICE.COUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'count')">{{ 'PRODUCTANDSERVICE.COUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'count')">{{ 'PRODUCTANDSERVICE.COUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div> 
-            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.DESCRIPTION' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="description" [class.is-invalid]="isControlInvalid('description')"
@@ -129,13 +118,13 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_service')">{{ 'PRODUCTANDSERVICE.IS_SERVICE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.HAS_PART' | translate}}</label>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="has_part" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
-              <div class="feedback" *ngIf="!isControlTouched('has_part')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.HAS_PART' | translate}}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('has_part')">{{ 'PRODUCTANDSERVICE.HAS_PART' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'has_part')">{{ 'PRODUCTANDSERVICE.HAS_PART' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'has_part')">{{ 'PRODUCTANDSERVICE.HAS_PART' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'has_part')">{{ 'PRODUCTANDSERVICE.HAS_PART' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              <div class="feedback" *ngIf="!isControlTouched('has_part')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('has_part')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'has_part')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'has_part')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'has_part')">{{ 'PRODUCTANDSERVICE.HAS_PARTS' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
           </div>
           <div *ngIf="model.id && authService.hasPermission('view_productpart') && has_part.value">

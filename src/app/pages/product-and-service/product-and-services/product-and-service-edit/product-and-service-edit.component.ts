@@ -26,7 +26,6 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
 
   public code: AbstractControl;
   public name: AbstractControl;
-  public count: AbstractControl;
   public description: AbstractControl;
   public price: AbstractControl;
   public cost: AbstractControl;
@@ -57,7 +56,6 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required])],
       name: ['', Validators.compose([Validators.required])],
-      count: ['', Validators.compose([Validators.required])],
       description: ['', Validators.compose([Validators.required])],
       price: ['',],
       cost: ['',],
@@ -67,7 +65,6 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
     });
     this.code = this.formGroup.controls['code'];
     this.name = this.formGroup.controls['name'];
-    this.count = this.formGroup.controls['count'];
     this.description = this.formGroup.controls['description'];
     this.price = this.formGroup.controls['price'];
     this.cost = this.formGroup.controls['cost'];
@@ -132,7 +129,6 @@ export class ProductAndServiceEditComponent implements OnInit, OnDestroy {
     if (this.model.id) {
       this.code.setValue(this.model.code);
       this.name.setValue(this.model.name);
-      this.count.setValue(this.model.count);
       this.description.setValue(this.model.description);
       this.price.setValue(this.model.price);
       this.cost.setValue(this.model.cost);
