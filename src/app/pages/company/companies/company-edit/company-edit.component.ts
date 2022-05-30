@@ -32,22 +32,22 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   };
 
   public code: AbstractControl;
-  public code_brinks: AbstractControl;
+  // public code_brinks: AbstractControl;
   public identification_number: AbstractControl;
   public name: AbstractControl;
-  public alias: AbstractControl;
-  public abbreviation: AbstractControl;
+  // public alias: AbstractControl;
+  // public abbreviation: AbstractControl;
   // public logo: AbstractControl;
   public email: AbstractControl;
   public phone: AbstractControl;
   public web: AbstractControl;
   public address: AbstractControl;
-  public is_carrier: AbstractControl;
-  public is_financial_institution: AbstractControl;
-  public is_government_institution: AbstractControl;
-  public is_commercial_institution: AbstractControl;
+  // public is_carrier: AbstractControl;
+  // public is_financial_institution: AbstractControl;
+  // public is_government_institution: AbstractControl;
+  // public is_commercial_institution: AbstractControl;
   public is_active: AbstractControl;
-  public dubious_reputation: AbstractControl;
+  // public dubious_reputation: AbstractControl;
   public segment_company: AbstractControl;
   public type_company: AbstractControl;
   public office_belongs: AbstractControl;
@@ -90,43 +90,43 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-      code_brinks: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      // code_brinks: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       identification_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(70)])],
-      alias: [''],
-      abbreviation: [''],
+      // alias: [''],
+      // abbreviation: [''],
       // logo: [''],
       email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
       phone: [''],
       web: [''],
       address: [''],
-      is_carrier: [''],
-      is_financial_institution: [''],
-      is_government_institution: [''],
-      is_commercial_institution: [''],
+      // is_carrier: [''],
+      // is_financial_institution: [''],
+      // is_government_institution: [''],
+      // is_commercial_institution: [''],
       is_active: [''],
-      dubious_reputation: [''],
+      // dubious_reputation: [''],
       segment_company: ['', Validators.compose([Validators.required])],
       type_company: ['', Validators.compose([Validators.required])],
       office_belongs: ['', Validators.compose([Validators.required])],
     });
     this.code = this.formGroup.controls['code'];
-    this.code_brinks = this.formGroup.controls['code_brinks'];
+    // this.code_brinks = this.formGroup.controls['code_brinks'];
     this.identification_number = this.formGroup.controls['identification_number'];
     this.name = this.formGroup.controls['name'];
-    this.alias = this.formGroup.controls['alias'];
-    this.abbreviation = this.formGroup.controls['abbreviation'];
+    // this.alias = this.formGroup.controls['alias'];
+    // this.abbreviation = this.formGroup.controls['abbreviation'];
     // this.logo = this.formGroup.controls['logo'];
     this.email = this.formGroup.controls['email'];
     this.phone = this.formGroup.controls['phone'];
     this.web = this.formGroup.controls['web'];
     this.address = this.formGroup.controls['address'];
-    this.is_carrier = this.formGroup.controls['is_carrier'];
-    this.is_financial_institution = this.formGroup.controls['is_financial_institution'];
-    this.is_government_institution = this.formGroup.controls['is_government_institution'];
-    this.is_commercial_institution = this.formGroup.controls['is_commercial_institution'];
+    // this.is_carrier = this.formGroup.controls['is_carrier'];
+    // this.is_financial_institution = this.formGroup.controls['is_financial_institution'];
+    // this.is_government_institution = this.formGroup.controls['is_government_institution'];
+    // this.is_commercial_institution = this.formGroup.controls['is_commercial_institution'];
     this.is_active = this.formGroup.controls['is_active'];
-    this.dubious_reputation = this.formGroup.controls['dubious_reputation'];
+    // this.dubious_reputation = this.formGroup.controls['dubious_reputation'];
     this.segment_company = this.formGroup.controls['segment_company'];
     this.type_company = this.formGroup.controls['type_company'];
     this.office_belongs = this.formGroup.controls['office_belongs'];
@@ -197,31 +197,31 @@ export class CompanyEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    this.is_carrier.setValue(false);
+    // this.is_carrier.setValue(false);
     this.is_active.setValue(false);
-    this.dubious_reputation.setValue(false);
-    this.is_financial_institution.setValue(false);
-    this.is_government_institution.setValue(false);
-    this.is_commercial_institution.setValue(false);
+    // this.dubious_reputation.setValue(false);
+    // this.is_financial_institution.setValue(false);
+    // this.is_government_institution.setValue(false);
+    // this.is_commercial_institution.setValue(false);
 
     if (this.model.id) {
       this.code.setValue(this.model.code);
-      this.code_brinks.setValue(this.model.code_brinks);
+      // this.code_brinks.setValue(this.model.code_brinks);
       this.identification_number.setValue(this.model.identification_number);
       this.name.setValue(this.model.name);
-      this.alias.setValue(this.model.alias);
-      this.abbreviation.setValue(this.model.abbreviation);
+      // this.alias.setValue(this.model.alias);
+      // this.abbreviation.setValue(this.model.abbreviation);
       // this.logo.setValue(this.model.logo);
       this.email.setValue(this.model.email);
       this.phone.setValue(this.model.phone);
       this.web.setValue(this.model.web);
       this.address.setValue(this.model.address);
-      this.is_carrier.setValue(this.model.is_carrier);
-      this.is_financial_institution.setValue(this.model.is_financial_institution);
-      this.is_government_institution.setValue(this.model.is_government_institution);
-      this.is_commercial_institution.setValue(this.model.is_commercial_institution);
+      // this.is_carrier.setValue(this.model.is_carrier);
+      // this.is_financial_institution.setValue(this.model.is_financial_institution);
+      // this.is_government_institution.setValue(this.model.is_government_institution);
+      // this.is_commercial_institution.setValue(this.model.is_commercial_institution);
       this.is_active.setValue(this.model.is_active);
-      this.dubious_reputation.setValue(this.model.dubious_reputation);
+      // this.dubious_reputation.setValue(this.model.dubious_reputation);
       if (this.model.segment_company) {
         this.segment_company.setValue(this.model.segment_company);
       }

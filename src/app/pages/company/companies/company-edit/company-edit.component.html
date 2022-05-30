@@ -105,7 +105,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">{{ 'COMPANY.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">{{ 'COMPANY.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.CODE_BRINKS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="code_brinks" [class.is-invalid]="isControlInvalid('code_brinks')"
@@ -115,7 +115,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'code_brinks')">{{ 'COMPANY.CODE_BRINKS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_brinks')">{{ 'COMPANY.CODE_BRINKS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_brinks')">{{ 'COMPANY.CODE_BRINKS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
+            </div> -->
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.IDENTIFICATION_NUMBER' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -160,7 +160,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'web')">{{ 'COMPANY.WEB' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'web')">{{ 'COMPANY.WEB' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.ALIAS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="alias" [class.is-invalid]="isControlInvalid('alias')"
@@ -170,8 +170,8 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'alias')">{{ 'COMPANY.ALIAS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'alias')">{{ 'COMPANY.ALIAS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'alias')">{{ 'COMPANY.ALIAS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-4">
+            </div> -->
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.ABBREVIATION' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="abbreviation" [class.is-invalid]="isControlInvalid('abbreviation')"
@@ -181,7 +181,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'abbreviation')">{{ 'COMPANY.ABBREVIATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'abbreviation')">{{ 'COMPANY.ABBREVIATION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'abbreviation')">{{ 'COMPANY.ABBREVIATION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
+            </div> -->
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'COMPANY.ADDRESS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -230,7 +230,7 @@
               <label>{{ 'COMPANY.IS_ACTIVE' | translate }}</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_active" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMPANY.IS_CARRIER' | translate }}</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="is_carrier" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
             </div>
@@ -264,7 +264,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'dubious_reputation')">{{ 'COMPANY.DUBIOUS_REPUTATION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'dubious_reputation')">{{ 'COMPANY.DUBIOUS_REPUTATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'dubious_reputation')">{{ 'COMPANY.DUBIOUS_REPUTATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div> 
+            </div>  -->
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/companies">{{ 'COMMON.CANCEL' | translate }}</a>
