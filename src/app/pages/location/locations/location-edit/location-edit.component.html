@@ -64,7 +64,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code')">{{ 'LOCATION.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code')">{{ 'LOCATION.CODE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.CODE_BRINKS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="code_brinks" [class.is-invalid]="isControlInvalid('code_brinks')"
@@ -74,8 +74,8 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'code_brinks')">{{ 'LOCATION.CODE_BRINKS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_brinks')">{{ 'LOCATION.CODE_BRINKS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_brinks')">{{ 'LOCATION.CODE_BRINKS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-4">
+            </div> -->
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.DESCRIPTION' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="description" [class.is-invalid]="isControlInvalid('description')"
@@ -85,7 +85,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'description')">{{ 'LOCATION.DESCRIPTION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'description')">{{ 'LOCATION.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'description')">{{ 'LOCATION.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>
+            </div> -->
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.CONTACT' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -108,7 +108,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'point_name')">{{ 'LOCATION.POINT_NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'point_name')">{{ 'LOCATION.POINT_NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.REFERENCE_POINT' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="reference_point" [class.is-invalid]="isControlInvalid('reference_point')"
@@ -140,7 +140,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'email')">{{ 'LOCATION.EMAIL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'email')">{{ 'LOCATION.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">{{ 'LOCATION.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>
+            </div> -->
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'LOCATION.TYPE_LOCATION' | translate }}</label>
               <app-type-location-autocomplete
