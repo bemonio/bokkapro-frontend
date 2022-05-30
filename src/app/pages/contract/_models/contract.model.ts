@@ -11,9 +11,9 @@ export class ContractModel {
   identification_number: number;
   email: string;
   phone: number;
-  web: string;
-  alias: string;
-  abbreviation: string;
+  // web: string;
+  // alias: string;
+  // abbreviation: string;
   address: string;
   is_active: boolean;
   created_at: string;

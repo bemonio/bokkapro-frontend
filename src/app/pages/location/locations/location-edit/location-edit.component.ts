@@ -26,14 +26,14 @@ export class LocationEditComponent implements OnInit, OnDestroy {
   };
 
   public code: AbstractControl;
-  public code_brinks: AbstractControl;
+  // public code_brinks: AbstractControl;
   public name: AbstractControl;
   public contact: AbstractControl;
   public point_name: AbstractControl;
-  public reference_point: AbstractControl;
-  public telephone: AbstractControl;
-  public email: AbstractControl;
-  public description: AbstractControl;
+  // public reference_point: AbstractControl;
+  // public telephone: AbstractControl;
+  // public email: AbstractControl;
+  // public description: AbstractControl;
   public type_location: AbstractControl;
   public address: AbstractControl;
   public company: AbstractControl;
@@ -67,14 +67,14 @@ export class LocationEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-      code_brinks: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      // code_brinks: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       name: ['', Validators.compose([Validators.required])],
       contact: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       point_name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-      reference_point: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-      telephone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
-      email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
-      description: ['', Validators.compose([Validators.maxLength(255)])],
+      // reference_point: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      // telephone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
+      // email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
+      // description: ['', Validators.compose([Validators.maxLength(255)])],
       type_location: ['', Validators.compose([Validators.required])],
       address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       company: ['', Validators.compose([Validators.required])],
@@ -82,14 +82,14 @@ export class LocationEditComponent implements OnInit, OnDestroy {
       type_address: [''],
     });
     this.code = this.formGroup.controls['code'];
-    this.code_brinks = this.formGroup.controls['code_brinks'];
+    // this.code_brinks = this.formGroup.controls['code_brinks'];
     this.name = this.formGroup.controls['name'];
     this.contact = this.formGroup.controls['contact'];
     this.point_name = this.formGroup.controls['point_name'];
-    this.reference_point = this.formGroup.controls['reference_point'];
-    this.telephone = this.formGroup.controls['telephone'];
-    this.email = this.formGroup.controls['email'];
-    this.description = this.formGroup.controls['description'];
+    // this.reference_point = this.formGroup.controls['reference_point'];
+    // this.telephone = this.formGroup.controls['telephone'];
+    // this.email = this.formGroup.controls['email'];
+    // this.description = this.formGroup.controls['description'];
     this.type_location = this.formGroup.controls['type_location'];
     this.address = this.formGroup.controls['address'];
     this.company = this.formGroup.controls['company'];
@@ -171,14 +171,14 @@ export class LocationEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.code.setValue(this.model.code);
-      this.code_brinks.setValue(this.model.code_brinks);
+      // this.code_brinks.setValue(this.model.code_brinks);
       this.name.setValue(this.model.name);
       this.contact.setValue(this.model.contact);
       this.point_name.setValue(this.model.point_name);
-      this.reference_point.setValue(this.model.reference_point);
-      this.telephone.setValue(this.model.telephone);
-      this.email.setValue(this.model.email);
-      this.description.setValue(this.model.description);
+      // this.reference_point.setValue(this.model.reference_point);
+      // this.telephone.setValue(this.model.telephone);
+      // this.email.setValue(this.model.email);
+      // this.description.setValue(this.model.description);
       this.type_address.setValue({ key: this.model.type_address, value: this.model.type_address });
       this.address.setValue(this.model.address);
       if (this.model.type_location) {

@@ -37,9 +37,9 @@ export class ContractEditComponent implements OnInit, OnDestroy {
   public identification_number: AbstractControl;
   public email: AbstractControl;
   public phone: AbstractControl;
-  public web: AbstractControl;
-  public alias: AbstractControl;
-  public abbreviation: AbstractControl;
+  // public web: AbstractControl;
+  // public alias: AbstractControl;
+  // public abbreviation: AbstractControl;
   public address: AbstractControl;
   public is_active: AbstractControl;
 
@@ -78,9 +78,9 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       identification_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
       phone: [''],
-      web: [''],
-      alias: [''],
-      abbreviation: [''],
+      // web: [''],
+      // alias: [''],
+      // abbreviation: [''],
       address: [''],
       is_active: [''],
     });
@@ -94,9 +94,9 @@ export class ContractEditComponent implements OnInit, OnDestroy {
     this.identification_number = this.formGroup.controls['identification_number'];
     this.email = this.formGroup.controls['email'];
     this.phone = this.formGroup.controls['phone'];
-    this.web = this.formGroup.controls['web'];
-    this.alias = this.formGroup.controls['alias'];
-    this.abbreviation = this.formGroup.controls['abbreviation'];
+    // this.web = this.formGroup.controls['web'];
+    // this.alias = this.formGroup.controls['alias'];
+    // this.abbreviation = this.formGroup.controls['abbreviation'];
     this.address = this.formGroup.controls['address'];
     this.is_active = this.formGroup.controls['is_active'];
   }
@@ -180,9 +180,9 @@ export class ContractEditComponent implements OnInit, OnDestroy {
       this.identification_number.setValue(this.model.identification_number);
       this.email.setValue(this.model.email);
       this.phone.setValue(this.model.phone);
-      this.web.setValue(this.model.web);
-      this.alias.setValue(this.model.alias);
-      this.abbreviation.setValue(this.model.abbreviation);
+      // this.web.setValue(this.model.web);
+      // this.alias.setValue(this.model.alias);
+      // this.abbreviation.setValue(this.model.abbreviation);
       this.address.setValue(this.model.address);
       this.is_active.setValue(this.model.is_active);
       if (this.model.company) {
