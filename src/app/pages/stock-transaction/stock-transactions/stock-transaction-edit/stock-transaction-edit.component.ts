@@ -37,6 +37,7 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
   public prefix: AbstractControl;
   public code_serial_start: AbstractControl;
   public code_serial_end: AbstractControl;
+  public purchase_order: AbstractControl;
 
   public filterServOrdCompany: any;
 
@@ -72,6 +73,7 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
       prefix: [''],
       code_serial_start: [''],
       code_serial_end: [''],
+      purchase_order: ['']
     });
     this.office = this.formGroup.controls['office'];
     this.employee = this.formGroup.controls['employee'];
@@ -80,6 +82,7 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
     this.prefix = this.formGroup.controls['prefix'];
     this.code_serial_start = this.formGroup.controls['code_serial_start'];
     this.code_serial_end = this.formGroup.controls['code_serial_end'];
+    this.purchase_order = this.formGroup.controls['purchase_order'];
   }
 
   ngOnInit(): void {
@@ -164,6 +167,10 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
 
   loadForm() {
     if (this.model.id) {
+      this.prefix.setValue(this.model.prefix);
+      this.code_serial_start.setValue(this.model.code_serial_start);
+      this.code_serial_end.setValue(this.model.code_serial_end);
+      this.purchase_order.setValue(this.model.purchase_order);
       this.office.setValue(this.model.office);
       this.employee.setValue(this.model.employee);
       this.service_order.setValue(this.model.service_order);
@@ -272,7 +279,7 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
         if (this.saveAndExit) {
           this.router.navigate(['/stocktransactions']);
         } else {
-          this.formGroup.reset()
+          // this.formGroup.reset()
         }
       }),
       catchError((error) => {
@@ -291,6 +298,7 @@ export class StockTransactionEditComponent implements OnInit, OnDestroy {
     ).subscribe(response => {
       this.requesting = false;
       this.model = response.stock_transaction as Model
+      this.loadForm();
     });
     this.subscriptions.push(sbCreate);
   }

@@ -16,7 +16,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-light" routerLink="{{parent}}/stockTransactions" *ngIf="!stockTransactionID">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}/stocktransactions" *ngIf="!stockTransactionID">
         <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <!-- <button class="btn btn-secondary ml-2" (click)="reset()">
@@ -75,6 +75,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_product_transaction')">{{ 'STOCKTRANSACTION.TYPEPRODUCTTRANSACTION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_product_transaction')">{{ 'STOCKTRANSACTION.TYPEPRODUCTTRANSACTION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4" *ngIf="type_product_transaction.value.id === 1">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'STOCKTRANSACTION.PURCHASE_ORDER' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="purchase_order" [class.is-invalid]="isControlInvalid('purchase_order')"
+                [class.is-valid]="isControlValid('purchase_order')" formControlName="purchase_order"/>
+              <div class="feedback" *ngIf="!isControlTouched('purchase_order')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'STOCKTRANSACTION.PURCHASE_ORDER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('purchase_order')">{{ 'STOCKTRANSACTION.PURCHASE_ORDER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'purchase_order')">{{ 'STOCKTRANSACTION.PURCHASE_ORDER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'purchase_order')">{{ 'STOCKTRANSACTION.PURCHASE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'purchase_order')">{{ 'STOCKTRANSACTION.PURCHASE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
             <div class="col-lg-4" *ngIf="type_product_transaction.value.id === 3">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'STOCKTRANSACTION.PREFIX' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -108,7 +119,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'code_serial_end')">{{ 'STOCKTRANSACTION.CODESERIALEND' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'code_serial_end')">{{ 'STOCKTRANSACTION.CODESERIALEND' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" *ngIf="type_product_transaction.value.id === 3">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'STOCKTRANSACTION.SERVICE_ORDER' | translate }}</label>
               <app-service-order-autocomplete
               name="service_order" [valid]="isControlValid('service_order')" [touched]="isControlTouched('service_order')" [class.is-invalid]="isControlInvalid('service_order')"

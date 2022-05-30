@@ -795,6 +795,7 @@ export const locale = {
       PREFIX: 'Prefijo',
       CODESERIALSTART: 'Código Serial Inicio',
       CODESERIALEND: 'Código Serial Final',
+      PURCHASE_ORDER: 'Orden de Compra'
     },
     STOCKTRANSACTIONDETAIL: {
       STOCKTRANSACTIONDETAIL: 'Inventario Transacción Detalle',
