@@ -205,6 +205,13 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
                             }
                         });
                     });
+                    response.locations.forEach(destination => {
+                        this.models.forEach(element => {
+                            if (element.destination === destination.id) {
+                                element.destination = destination;
+                            }
+                        });
+                    });
                 }
                 if(response.service_orders){
                     response.service_orders.forEach(service_order => {
