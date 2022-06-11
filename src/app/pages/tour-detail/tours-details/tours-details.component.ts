@@ -591,6 +591,15 @@ export class ToursDetailsComponent implements OnInit {
                         });
                     });
                 }
+                if(response.divisions){
+                    response.divisions.forEach(division => {
+                        events.forEach(element => {
+                            if (element.division === division.id) {
+                                element.division = division;
+                            }
+                        });
+                    });
+                }
                 this.events = [];
                 let start_time = undefined;
                 let end_time = undefined;
@@ -758,6 +767,15 @@ export class ToursDetailsComponent implements OnInit {
                         events.forEach(element => {
                             if (element.service_order === service_order.id) {
                                 element.service_order = service_order;
+                            }
+                        });
+                    });
+                }
+                if(response.divisions){
+                    response.divisions.forEach(division => {
+                        events.forEach(element => {
+                            if (element.division === division.id) {
+                                element.division = division;
                             }
                         });
                     });
