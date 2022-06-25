@@ -59,6 +59,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
   public excess_custody_personal_atm:AbstractControl;
   public excess_pieces:AbstractControl;
   public is_active: AbstractControl;
+  public type_service_order: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -94,6 +95,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       company_contact: ['', Validators.compose([Validators.required, Validators.minLength(1)])],      
       office: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       product_and_service: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      type_service_order: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       note: [''],
 
       total_fixed_costs: [''],
@@ -130,6 +132,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
     this.company_contact = this.formGroup.controls['company_contact'];
     this.office = this.formGroup.controls['office'];
     this.product_and_service = this.formGroup.controls['product_and_service'];
+    this.type_service_order = this.formGroup.controls['type_service_order'];
     this.note = this.formGroup.controls['note'];
     this.total_fixed_costs = this.formGroup.controls['total_fixed_costs'];
     this.travels = this.formGroup.controls['travels'];
@@ -233,6 +236,9 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
         if (response.product_and_services) {
           this.model.product_and_service = response.product_and_services[0];
         }
+        if (response.type_service_orders) {
+          this.model.type_service_order = response.type_service_orders[0];
+        }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -287,6 +293,9 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       }
       if (this.model.product_and_service) {
         this.product_and_service.setValue(this.model.product_and_service);
+      }
+      if (this.model.type_service_order) {
+        this.type_service_order.setValue(this.model.type_service_order);
       }
     } else {
       if (this.companyId) {
@@ -354,6 +363,8 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
     model.company_contact = this.model.company_contact.id;
     model.office = this.model.office.id;
     model.product_and_service = this.model.product_and_service.id;
+    model.type_service_order = this.model.type_service_order.id;
+
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -396,6 +407,7 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
     model.company_contact = this.model.company_contact.id;
     model.office = this.model.office.id;
     model.product_and_service = this.model.product_and_service.id;
+    model.type_service_order = this.model.type_service_order.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

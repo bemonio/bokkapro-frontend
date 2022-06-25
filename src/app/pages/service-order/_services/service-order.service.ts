@@ -66,6 +66,6 @@ export class ServiceOrderService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=office.*&include[]=product_and_service.*&include[]=company.*&include[]=company_contact.*&include[]=employee.*&include[]=contract.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=office.*&include[]=product_and_service.*&include[]=company.*&include[]=company_contact.*&include[]=employee.*&include[]=contract.*&include[]=type_service_order.*`);
     }
 }

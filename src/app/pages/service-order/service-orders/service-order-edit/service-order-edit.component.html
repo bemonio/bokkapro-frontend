@@ -138,7 +138,18 @@
                 <div class="invalid-feedback" *ngIf="controlHasError('required', 'is_active')">{{ 'CONTRACT.IS_ACTIVE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'is_active')">{{ 'CONTRACT.IS_ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
                 <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'is_active')">{{ 'CONTRACT.IS_ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-              </div> 
+            </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.TYPESERVICEORDER' | translate }}</label>
+              <app-type-service-order-select
+              name="type_service_order" [valid]="isControlValid('type_service_order')" [touched]="isControlTouched('type_service_order')" [class.is-invalid]="isControlInvalid('type_service_order')"
+              [class.is-valid]="isControlValid('type_service_order')" formControlName="type_service_order" id="type_service_order" [model]="model.type_service_order"></app-type-service-order-select>
+              <div class="feedback" *ngIf="!isControlTouched('type_service_order')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.TYPESERVICEORDER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('type_service_order')">{{ 'SERVICE_ORDER.TYPESERVICEORDER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_service_order')">{{ 'SERVICE_ORDER.TYPESERVICEORDER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_service_order')">{{ 'SERVICE_ORDER.TYPESERVICEORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_service_order')">{{ 'SERVICE_ORDER.TYPESERVICEORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
             <div class="col-lg-12">
               <br>
               <h3 class="text-dark font-weight-bold my-1 mr-5 ng-star-inserted">{{ 'SERVICE_ORDER.FIXED_COSTS' | translate }}</h3>
