@@ -94,7 +94,7 @@ export class ChestsComponent implements OnInit, OnChanges {
         this.requesting = false;
         this.chestID = {id: undefined, isNew: false};
         this._with = [];
-        this._with.push({key: 'include[]', value: 'service_order.*'})
+        this._with.push({key: 'include[]', value: 'service_order.contract.*'})
     }
 
     ngOnChanges() {
@@ -166,6 +166,15 @@ export class ChestsComponent implements OnInit, OnChanges {
                 if(response.service_orders){
                     response.service_orders.forEach(service_order => {
                         this.models.forEach(element => {
+
+                            if(response.contracts){
+                                response.contracts.forEach(contract => {
+                                    if (service_order.contract === contract.id) {
+                                        service_order.contract = contract;
+                                    }
+                                });
+                            }    
+
                             if (element.service_order === service_order.id) {
                                 element.service_order = service_order;
                             }
