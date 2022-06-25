@@ -816,6 +816,11 @@ export const locale = {
       STOCK: 'Inventario',
       STOCKTRANSACTION: 'Transacción Inventario',
     },
+    TYPESERVICEORDER: {
+      TYPESERVICEORDER: 'Tipo Facturación (OS)',
+      TYPESSERVICEORDERS: 'Tipos de Facturación (OS)',
+    },
+
   }
 };
 

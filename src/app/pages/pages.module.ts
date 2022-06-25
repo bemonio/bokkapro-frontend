@@ -381,6 +381,13 @@ import { StockTransactionAutocompleteComponent } from './stock-transaction/stock
 import { StockSerialsComponent } from './stock-serial/stock-serials/stock-serials.component';
 import { StockSerialComponent } from './stock-serial/stock-serial.component';
 import { StockSerialEditComponent } from './stock-serial/stock-serials/stock-serial-edit/stock-serial-edit.component';
+
+// TypeServiceOrders
+import { TypesServiceOrdersComponent } from './type-service-order/types-service-orders/types-service-orders.component';
+import { TypeServiceOrderComponent } from './type-service-order/type-service-order.component';
+import { TypeServiceOrderEditComponent } from './type-service-order/types-service-orders/type-service-order-edit/type-service-order-edit.component';
+import { TypeServiceOrderSelectComponent } from './type-service-order/types-service-orders/type-service-order-select/type-service-order-select.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -631,6 +638,10 @@ import { StockSerialEditComponent } from './stock-serial/stock-serials/stock-ser
     StockSerialsComponent,
     StockSerialComponent,
     StockSerialEditComponent,
+    TypesServiceOrdersComponent,
+    TypeServiceOrderComponent,
+    TypeServiceOrderEditComponent,
+    TypeServiceOrderSelectComponent,
   ]
 })
 export class PagesModule { }

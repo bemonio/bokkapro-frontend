@@ -468,6 +468,13 @@ const routes: Routes = [
             (m) => m.ProductPartRoutingModule
           ),
       },
+      {
+        path: 'typesserviceorders',
+        loadChildren: () =>
+          import('../pages/type-service-order/type-service-order-routing.module').then(
+            (m) => m.TypeServiceOrderRoutingModule
+          ),
+      },
     ],
   },
 ];

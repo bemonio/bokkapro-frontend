@@ -1,0 +1,1 @@
+export { TypeServiceOrderService } from './type-service-order.service';

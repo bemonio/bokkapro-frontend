@@ -130,6 +130,17 @@
             </li>
             <!-- end::1 Level -->
 
+             <!-- begin::1 Level TYPE_SERVICE_ORDERS -->
+             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typeserviceorder')">
+              <a class="menu-link" routerLink="/typesserviceorders" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'TYPESERVICEORDER.TYPESSERVICEORDERS' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::1 Level -->
+           
             <!-- begin::1 Level ORIGIN_DESTINATIONS -->
             <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_origindestination')">
               <a class="menu-link" routerLink="/origindestinations" routerLinkActive="active">
