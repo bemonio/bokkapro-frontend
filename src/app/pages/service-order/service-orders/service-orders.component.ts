@@ -89,6 +89,7 @@ export class ServiceOrdersComponent implements OnInit {
         this._with.push({key: 'include[]', value: 'company.*'})
         this._with.push({key: 'include[]', value: 'employee.*'})
         this._with.push({key: 'include[]', value: 'contract.*'})
+        this._with.push({key: 'include[]', value: 'type_service_order.*'})
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -170,6 +171,15 @@ export class ServiceOrdersComponent implements OnInit {
                         });
                     });
                 }
+                if(response.type_service_orders){
+                    response.type_service_orders.forEach(type_service_order => {
+                        this.models.forEach(element => {
+                            if (element.type_service_order === type_service_order.id) {
+                                element.type_service_order = type_service_order;
+                            }
+                        });
+                    });
+                }                
             },
             error => {
                 this.requesting = false;

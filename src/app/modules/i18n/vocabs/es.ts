@@ -613,6 +613,7 @@ export const locale = {
       OFFICE: 'Oficina',
       PRODUCTANDSERVICE: 'Producto y Servicio',
       TYPESERVICEORDER: 'Tipo de Facturación (OS)',
+      NAME_INVOICE_TO: 'Nombre Legal Cliente',
       TOTAL_AMOUNT: 'Monto Total',
       STATUS: 'Estado',
       IS_ACTIVE: 'Activo?',

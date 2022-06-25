@@ -50,16 +50,21 @@
               {{ 'SERVICE_ORDER.COMPANY' | translate }}
             </div>
           </th>
-          <th pSortableColumn="employee">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'SERVICE_ORDER.EMPLOYEE' | translate }}
-            </div>
-          </th>
           <th pSortableColumn="contract">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'SERVICE_ORDER.CONTRACT' | translate }} 
             </div>
           </th>
+          <th pSortableColumn="contract.name_invoice_to">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'SERVICE_ORDER.NAME_INVOICE_TO' | translate }}
+            </div>
+          </th>          
+          <th pSortableColumn="type_service_order.name">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'SERVICE_ORDER.TYPESERVICEORDER' | translate }}
+            </div>
+          </th> 
           <th pSortableColumn="code">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'SERVICE_ORDER.TOTAL_AMOUNT' | translate }} 
@@ -99,11 +104,14 @@
             {{value.company.name}}
           </td>
           <td>
-            {{value.employee.name}}
-          </td>
-          <td>
             {{value.contract.code}}
           </td>
+          <td>
+            {{value.contract.name_invoice_to}}
+          </td>
+          <td>
+            {{value.type_service_order?.name}}
+          </td>                      
           <td>
             {{value.total_amount}}
           </td>
