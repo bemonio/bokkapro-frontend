@@ -749,6 +749,7 @@ export const locale = {
       COST_LOCK: 'Cargo Fijo Cerradura Electrónica',
       IS_INCLUDED_PACKAGE: 'Incluido en el Paquete?',
       SERVICE_ORDER: 'Orden de Servicio',
+      CONTRACT: 'Contrato',
       TYPE_CHEST: 'Tipo de Cofre',
       LOCATION: 'Dirección'
     },
