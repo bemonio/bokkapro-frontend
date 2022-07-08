@@ -1,0 +1,1 @@
+export { HeadInvoiceService } from './head-invoice.service';

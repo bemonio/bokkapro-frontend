@@ -469,6 +469,20 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'headinvoices',
+        loadChildren: () =>
+          import('../pages/head-invoice/head-invoice-routing.module').then(
+            (m) => m.HeadInvoiceRoutingModule
+          ),
+      },   
+      // {
+      //   path: 'detailinvoices',
+      //   loadChildren: () =>
+      //     import('../pages/detail-invoice/detail-invoice-routing.module').then(
+      //       (m) => m.DetailInvoiceRoutingModule
+      //     ),
+      // },          
+      {
         path: 'typesserviceorders',
         loadChildren: () =>
           import('../pages/type-service-order/type-service-order-routing.module').then(

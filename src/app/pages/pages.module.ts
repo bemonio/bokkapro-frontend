@@ -382,6 +382,16 @@ import { StockSerialsComponent } from './stock-serial/stock-serials/stock-serial
 import { StockSerialComponent } from './stock-serial/stock-serial.component';
 import { StockSerialEditComponent } from './stock-serial/stock-serials/stock-serial-edit/stock-serial-edit.component';
 
+// HeadInvoices
+import { HeadInvoicesComponent } from './head-invoice/head-invoices/head-invoices.component';
+import { HeadInvoiceComponent } from './head-invoice/head-invoice.component';
+import { HeadInvoiceEditComponent } from './head-invoice/head-invoices/head-invoice-edit/head-invoice-edit.component';
+
+// // DetailInvoices
+// import { DetailInvoicesComponent } from './detail-invoice/detail-invoices/detail-invoices.component';
+// import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.component';
+// import { DetailInvoiceEditComponent } from './detail-invoice/detail-invoices/detail-invoice-edit/detail-invoice-edit.component';
+
 // TypeServiceOrders
 import { TypesServiceOrdersComponent } from './type-service-order/types-service-orders/types-service-orders.component';
 import { TypeServiceOrderComponent } from './type-service-order/type-service-order.component';
@@ -638,6 +648,12 @@ import { TypeServiceOrderSelectComponent } from './type-service-order/types-serv
     StockSerialsComponent,
     StockSerialComponent,
     StockSerialEditComponent,
+    HeadInvoicesComponent,
+    HeadInvoiceComponent,
+    HeadInvoiceEditComponent,
+    // DetailInvoicesComponent,
+    // DetailInvoiceComponent,
+    // DetailInvoiceEditComponent,
     TypesServiceOrdersComponent,
     TypeServiceOrderComponent,
     TypeServiceOrderEditComponent,
