@@ -3,7 +3,7 @@ import { Component, Input, Output, OnDestroy, OnInit, EventEmitter } from '@angu
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, of, ReplaySubject, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
@@ -59,7 +59,12 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public verified_oi: AbstractControl;
   public currency: AbstractControl;
   public certified_cart_code: AbstractControl;
-  
+  public file_uploaded: AbstractControl;
+  public updated_reason: AbstractControl;
+
+  public files = [];
+  public fileBase64: string;
+
   public activeTabId: number;
   // private subscriptions: Subscription[] = [];
 
@@ -97,7 +102,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     private packingService: PackingService,
     private confirmationService: ConfirmationService,
     public translate: TranslateService,
-    public divisionService: DivisionService,
+    public divisionService: DivisionService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
@@ -125,7 +130,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       is_active: [''],
       verified_oi: [''],
       currency: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      certified_cart_code: [''] 
+      certified_cart_code: [''],
+      file_uploaded: [''],
+      updated_reason: ['']
     });
     this.code = this.formGroup.controls['code'];
     this.amount = this.formGroup.controls['amount'];
@@ -146,6 +153,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.direct_operation = this.formGroup.controls['direct_operation'];
     this.is_active = this.formGroup.controls['is_active'];
     this.verified_oi = this.formGroup.controls['verified_oi'];
+    this.file_uploaded = this.formGroup.controls['file_uploaded'];
+    this.updated_reason = this.formGroup.controls['updated_reason'];
 
     this.confirmDialogPosition = 'center';
 
@@ -160,6 +169,8 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.listPackings = [];
 
     this.officeUser = this.authService.currentDivisionValue.office;
+
+    this.files = [];
   }
 
   ngOnInit(): void {
@@ -322,6 +333,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.direct_operation.setValue(this.model.direct_operation);
       this.is_active.setValue(this.model.is_active);
       this.verified_oi.setValue(this.model.verified_oi);
+      this.updated_reason.setValue(this.model.updated_reason);
       if (this.model.cashier) {
         this.cashier.setValue(this.model.cashier);
       }
@@ -354,6 +366,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.listPackings = list_packings;
         // this.packings.setValue(list_packings);
       }
+      this.files = [];
+      if (this.model.file_uploaded) {
+        this.files.push({name:this.model.code, file_uploaded:this.model.file_uploaded})
+      }
     }
 
     if(this.showCashier){
@@ -370,11 +386,13 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         this.location_destination.setValidators([]);
         this.currency.setValidators([]);
         this.certified_cart_code.setValidators([]);
+        this.updated_reason.setValidators([]);
     }
 
     if(this.showCertifiedCart){
       this.cashier.setValidators([]);
       this.code.setValidators([]);
+      this.updated_reason.setValidators([]);
       this.amount.setValidators([]);
       this.exchange_rate.setValidators([]);
       this.count_packings.setValidators([]);
@@ -487,6 +505,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.date_delivery.value != null ? model.date_delivery = this.formatDate(this.date_delivery.value) : model.date_delivery = this.date_delivery.value;
     this.pickup_date.value != null ? model.pickup_date = this.formatDate(this.pickup_date.value) : model.pickup_date = this.pickup_date.value;
     this.checkin_date.value != null ? model.checkin_date = this.formatDate(this.checkin_date.value) : model.checkin_date = this.checkin_date.value;
+    model.file_uploaded = this.fileBase64;
 
     this.model.location_destination 
     ? model.location_destination = this.model.location_destination.id 
@@ -563,6 +582,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.model.contract ? model.contract = this.model.contract.id : model.contract = undefined;
     this.model.origin_destination ? model.origin_destination = this.model.origin_destination.id : model.origin_destination = undefined;
     this.model.location_origin ? model.location_origin = this.model.location_origin.id : model.location_origin = undefined;
+    model.file_uploaded = this.fileBase64;
 
     model.date_delivery = undefined;
     if (this.date_delivery.value) {
@@ -930,5 +950,27 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   public getEditOrView() {
     return this.view ? 'view' : 'edit';
+  }
+
+  public onSelect(event) {
+    this.files = []
+    for(let file of event.files) {
+      this.files.push(file);
+    }
+    this.convertFile(event.files[0]).subscribe(base64 => {
+      this.fileBase64 = 'data:' + this.files[0].type + ';base64,' + base64;
+    });    
+  }
+
+  public showFile(url) {
+    window.open(url, '_blank');
+  }    
+
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    return result;
   }
 }

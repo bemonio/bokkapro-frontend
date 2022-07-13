@@ -235,6 +235,33 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'pickup_date')">{{ 'VOUCHER.PICKUP_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>    
+            <div class="col-lg-12" *ngIf="model.id">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.UPDATED_REASON' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="updated_reason" [class.is-invalid]="isControlInvalid('updated_reason')"
+                [class.is-valid]="isControlValid('updated_reason')" formControlName="updated_reason" />
+              <div class="feedback" *ngIf="!isControlTouched('updated_reason')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.UPDATED_REASON' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('updated_reason')">{{ 'VOUCHER.UPDATED_REASON' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'updated_reason')">{{ 'VOUCHER.UPDATED_REASON' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'updated_reason')">{{ 'VOUCHER.UPDATED_REASON' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'updated_reason')">{{ 'VOUCHER.UPDATED_REASON' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>            
+            <div class="col-lg-12" *ngIf="model.id">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.FILE_UPLOADED' | translate }}</label>
+              <p-fileUpload name="file_uploaded" (onSelect)="onSelect($event)" multiple="false" maxFileSize="1000000" [showUploadButton]="false" [disabled]="view" accept="application/pdf"
+              chooseLabel="{{'COMMON.CHOOSE' | translate}}" uploadLabel="{{'COMMON.UPLOAD' | translate}}" cancelLabel="{{'COMMON.CANCEL' | translate}}">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="files.length > 0">
+                        <li *ngFor="let file of files">
+                          <span style="width: -webkit-fill-available; height: 35px;" class="label label-lg label-inline label-light-primary" (click)="showFile(file.file_uploaded)">
+                            <div style="text-align: left; width: 50%;">{{file.name}}</div>
+                            <div style="text-align: right; width: 50%;">/ size bytes</div>
+                          </span>
+                        </li>
+                    </ul>
+                </ng-template>
+              </p-fileUpload>
+            </div>
             <!-- <div class="col-lg-4">
               <label>Verificated</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="verificated" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>

@@ -291,6 +291,8 @@ export const locale = {
       CONFIRMATION: 'Confirmar',
       DELIVERED: 'Entrega',
       ADMIN: 'Administración',
+      FILE_UPLOADED: 'Archivo Adjunto',
+      UPDATED_REASON: 'Razón Edición',
     },
     VOUCHERSECURITY:{
       VOUCHERSECURITY: 'Comprobante Seguridad',

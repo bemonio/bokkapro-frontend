@@ -1160,23 +1160,27 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     hasPermissionChange(voucher) {
         let result = false;
-        if (this.authService.currentDivisionValue.id === voucher.division.id) {
-            switch (this.route.parent.parent.snapshot.url[0].path) {
-                case 'vouchersconfirmationdelivered':
-                    if (this.authService.hasPermission('change_voucherconfirmationdelivered')) {
-                        result = true;
-                    }
-                    break;
-                case 'vouchersadmin':
-                    if (this.authService.hasPermission('change_voucheradmin')) {
-                        result = true;
-                    }
-                    break;
-                default:    
-                    if (this.authService.hasPermission('change_voucher')) {
-                        result = true;
-                    }
-                    break;
+        if (this.authService.hasPermission('change_voucheradmin_sales')) {
+            result = true;
+        } else {
+            if (this.authService.currentDivisionValue.id === voucher.division.id) {
+                switch (this.route.parent.parent.snapshot.url[0].path) {
+                    case 'vouchersconfirmationdelivered':
+                        if (this.authService.hasPermission('change_voucherconfirmationdelivered')) {
+                            result = true;
+                        }
+                        break;
+                    case 'vouchersadmin':
+                        if (this.authService.hasPermission('change_voucheradmin')) {
+                            result = true;
+                        }
+                        break;
+                    default:    
+                        if (this.authService.hasPermission('change_voucher')) {
+                            result = true;
+                        }
+                        break;
+                }
             }
         }
         return result;
@@ -1205,4 +1209,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
         }
         return result;
     }    
+
+    public showFile(url) {
+        window.open(url, '_blank');
+    }
 }

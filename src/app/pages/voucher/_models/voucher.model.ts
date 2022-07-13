@@ -29,6 +29,8 @@ export class VoucherModel {
   direct_operation: boolean;
   is_active: boolean;
   verified_oi: boolean;
+  file_uploaded: string;
+  updated_reason: string;
   created_at: string;
   updated_at: string;
 }
