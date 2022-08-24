@@ -155,19 +155,7 @@
               <h3 class="text-dark font-weight-bold my-1 mr-5 ng-star-inserted">{{ 'SERVICE_ORDER.FIXED_COSTS' | translate }}</h3>
               <br>
             </div>
-            <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }}</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="total_fixed_costs" [class.is-invalid]="isControlInvalid('total_fixed_costs')"
-                [class.is-valid]="isControlValid('total_fixed_costs')" formControlName="total_fixed_costs" 
-                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
-              <div class="feedback" *ngIf="!isControlTouched('total_fixed_costs')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('total_fixed_costs')">{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_fixed_costs')">{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_fixed_costs')">{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_fixed_costs')">{{ 'SERVICE_ORDER.TOTAL_FIXED_COSTS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            <div class="col-lg-4">
+             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.TRAVELS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="travels" [class.is-invalid]="isControlInvalid('travels')"
@@ -318,7 +306,31 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'fixed_costs_packing')">{{ 'SERVICE_ORDER.FIXED_COSTS_PACKING' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'fixed_costs_packing')">{{ 'SERVICE_ORDER.FIXED_COSTS_PACKING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'fixed_costs_packing')">{{ 'SERVICE_ORDER.FIXED_COSTS_PACKING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>       
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.FUEL_CHARGE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="fuel_charge" [class.is-invalid]="isControlInvalid('fuel_charge')"
+                [class.is-valid]="isControlValid('fuel_charge')" formControlName="fuel_charge" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('fuel_charge')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.FUEL_CHARGE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('fuel_charge')">{{ 'SERVICE_ORDER.FUEL_CHARGE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'fuel_charge')">{{ 'SERVICE_ORDER.FUEL_CHARGE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'fuel_charge')">{{ 'SERVICE_ORDER.FUEL_CHARGE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'fuel_charge')">{{ 'SERVICE_ORDER.FUEL_CHARGE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SERVICE_ORDER.TOTAL_FUEL_CHARGE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_fuel_charge" [class.is-invalid]="isControlInvalid('total_fuel_charge')"
+                [class.is-valid]="isControlValid('total_fuel_charge')" formControlName="total_fuel_charge" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_fuel_charge')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SERVICE_ORDER.TOTAL_FUEL_CHARGE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_fuel_charge')">{{ 'SERVICE_ORDER.TOTAL_FUEL_CHARGE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_fuel_charge')">{{ 'SERVICE_ORDER.TOTAL_FUEL_CHARGE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_fuel_charge')">{{ 'SERVICE_ORDER.TOTAL_FUEL_CHARGE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_fuel_charge')">{{ 'SERVICE_ORDER.TOTAL_FUEL_CHARGE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>            
             <div class="col-lg-12">
               <br>
               <h3 class="text-dark font-weight-bold my-1 mr-5 ng-star-inserted">{{ 'SERVICE_ORDER.EXCESS' | translate }}</h3>

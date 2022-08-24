@@ -15,6 +15,8 @@ export class ServiceOrderModel {
   custody_personal_atm: number;
   pieces: number;
   fixed_costs_packing: number;
+  fuel_charge: number;
+  total_fuel_charge: number;
   vigilant: number;
   atm_supply: number;
   atm_failure_1_2_levels: number;

@@ -626,6 +626,8 @@ export const locale = {
       NOTE: 'Nota',
       FIXED_COSTS: 'Cargos Fijos',
       TOTAL_FIXED_COSTS: 'Cargos Fijos',
+      FUEL_CHARGE: 'Cargo Combustible por Viaje',
+      TOTAL_FUEL_CHARGE: 'Cargo Fijo Combustible',
       TRAVELS: 'Viajes Unidad',
       TRAVELS_DIRECTS: 'Viajes Directos',
       APPRAISAL: 'Avaluo Unidad',

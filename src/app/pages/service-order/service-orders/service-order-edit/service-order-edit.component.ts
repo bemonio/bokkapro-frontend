@@ -35,6 +35,8 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
   public product_and_service: AbstractControl;
   public note: AbstractControl;
   public total_fixed_costs: AbstractControl;
+  public fuel_charge: AbstractControl;
+  public total_fuel_charge: AbstractControl;   
   public travels: AbstractControl;
   public travels_directs: AbstractControl;
   public appraisal: AbstractControl;
@@ -99,6 +101,8 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       note: [''],
 
       total_fixed_costs: [''],
+      fuel_charge: [''],
+      total_fuel_charge: [''], 
       travels: [''],
       travels_directs: [''],
       appraisal: [''],
@@ -135,6 +139,8 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
     this.type_service_order = this.formGroup.controls['type_service_order'];
     this.note = this.formGroup.controls['note'];
     this.total_fixed_costs = this.formGroup.controls['total_fixed_costs'];
+    this.fuel_charge = this.formGroup.controls['fuel_charge'];
+    this.total_fuel_charge = this.formGroup.controls['total_fuel_charge']; 
     this.travels = this.formGroup.controls['travels'];
     this.travels_directs = this.formGroup.controls['travels_directs'];
     this.appraisal = this.formGroup.controls['appraisal'];
@@ -252,6 +258,8 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       this.status.setValue({ key: this.model.status, value: this.model.status });
       this.note.setValue(this.model.note);
       this.total_fixed_costs.setValue(this.model.total_fixed_costs);
+      this.fuel_charge.setValue(this.model.fuel_charge);
+      this.total_fuel_charge.setValue(this.model.total_fuel_charge);
       this.travels.setValue(this.model.travels);
       this.travels_directs.setValue(this.model.travels_directs);
       this.appraisal.setValue(this.model.appraisal);
@@ -303,6 +311,8 @@ export class ServiceOrderEditComponent implements OnInit, OnDestroy {
       }
       this.total_amount.setValue(0);
       this.total_fixed_costs.setValue(0);
+      this.fuel_charge.setValue(0);
+      this.total_fuel_charge.setValue(0);
       this.travels.setValue(0);
       this.travels_directs.setValue(0);
       this.appraisal.setValue(0);
