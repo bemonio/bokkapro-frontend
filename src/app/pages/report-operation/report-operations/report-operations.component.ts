@@ -254,7 +254,18 @@ export class ReportOperationsComponent implements OnInit {
             }
         }
 
-        let id = value.office.id == 1 ? 4 : 7;
+        let id = 4;
+        switch (value.office.id) {
+            case 1: 
+                id = 4;
+                break;
+            case 2: 
+                id = 7;
+                break;
+            case 3: 
+                id = 13;
+                break;                
+        }
 
         let url = 
             this.REPORT_URL +
