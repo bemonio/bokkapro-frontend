@@ -39,6 +39,8 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
   public to_date: AbstractControl;
   public due_date: AbstractControl;
   public total_amount: AbstractControl;
+  public fuel_charge: AbstractControl;
+  public total_fuel_charge: AbstractControl;
   public total_travels: AbstractControl;
   public total_travels_directs: AbstractControl;
   public total_appraisal: AbstractControl;
@@ -95,6 +97,8 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       to_date: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       due_date: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       total_amount: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      fuel_charge: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      total_fuel_charge: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       total_travels: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       total_travels_directs: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       total_appraisal: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
@@ -127,6 +131,8 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
     this.to_date = this.formGroup.controls['to_date'];
     this.due_date = this.formGroup.controls['due_date'];
     this.total_amount = this.formGroup.controls['total_amount'];
+    this.fuel_charge = this.formGroup.controls['fuel_charge'];
+    this.total_fuel_charge = this.formGroup.controls['total_fuel_charge'];
     this.total_travels = this.formGroup.controls['total_travels'];
     this.total_travels_directs = this.formGroup.controls['total_travels_directs'];
     this.total_appraisal = this.formGroup.controls['total_appraisal'];
@@ -244,6 +250,8 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       this.to_date.setValue(this.model.to_date);
       this.due_date.setValue(this.model.due_date);
       this.total_amount.setValue(this.model.total_amount);
+      this.fuel_charge.setValue(this.model.fuel_charge); 
+      this.total_fuel_charge.setValue(this.model.total_fuel_charge);           
       this.total_travels.setValue(this.model.total_travels);
       this.total_travels_directs.setValue(this.model.total_travels_directs);
       this.total_appraisal.setValue(this.model.total_appraisal);
@@ -293,6 +301,8 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       this.to_date.setValue('');
       this.due_date.setValue('');
       this.total_amount.setValue('');
+      this.fuel_charge.setValue('');
+      this.total_fuel_charge.setValue('');
       this.total_travels.setValue('');
       this.total_travels_directs.setValue('');
       this.total_appraisal.setValue('');

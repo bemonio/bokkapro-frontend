@@ -12,6 +12,8 @@ export class HeadInvoiceModel {
   to_date : string;
   due_date : string;
   total_amount : number;
+  fuel_charge : number;
+  total_fuel_charge : number;
   total_travels : number;
   total_travels_directs : number;
   total_appraisal : number;
