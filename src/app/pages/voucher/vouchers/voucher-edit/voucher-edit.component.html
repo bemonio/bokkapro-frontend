@@ -146,6 +146,7 @@
             </div> -->
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.CONTRACT' | translate }}</label>
+              <label style="float:right; color: red;">{{contract.value?.name_invoce_to}}</label>
               <!-- <div class="text-danger"> Hola {{ }}</div> -->
               <app-contract-autocomplete
               name="contract" [valid]="isControlValid('contract')" [touched]="isControlTouched('contract')" [class.is-invalid]="isControlInvalid('contract')"
@@ -159,6 +160,7 @@
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.ORIGIN_DESTINATION' | translate }}</label>
+              <label style="float:right; color: red;">{{origin_destination.value?.origin?.name}} -> {{origin_destination.value?.destination?.name}}</label>
               <app-origin-destination-select
               name="origin_destination" [disabled]="!contract.value" [valid]="isControlValid('origin_destination')" [touched]="isControlTouched('origin_destination')" [class.is-invalid]="isControlInvalid('origin_destination')"
               [addFilters]="[{key: 'contract', value: contract.value ? contract.value.id : undefined }]" [class.is-valid]="isControlValid('origin_destination')" formControlName="origin_destination" id="origin_destination" [model]="model.origin_destination"></app-origin-destination-select>

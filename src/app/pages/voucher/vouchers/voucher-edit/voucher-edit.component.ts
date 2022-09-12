@@ -280,6 +280,9 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
         if (response.cashier) {
           this.model.cashier = response.cashier[0];
         }
+        if (response.contract) {
+          this.model.contract = response.contract[0];
+        }        
         if (response.guides) {
           this.model.guides = response.guides[0];
         }
