@@ -395,7 +395,10 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">{{ 'HEADINVOICE.CURRENCY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">{{ 'HEADINVOICE.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">{{ 'HEADINVOICE.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>             
+            </div>   
+            <!-- <div *ngIf="model.id && authService.hasPermission('view_stocktransaction')">
+              <app-stock-transactions [headInvoiceId]="model.id"></app-stock-transactions>
+            </div>                       -->
            </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/headinvoices">{{ 'COMMON.CANCEL' | translate }}</a>
