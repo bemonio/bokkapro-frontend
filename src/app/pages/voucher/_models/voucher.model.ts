@@ -27,6 +27,7 @@ export class VoucherModel {
   crew: any;
   vouchers: any[];
   direct_operation: boolean;
+  especial_operation: boolean;
   is_active: boolean;
   verified_oi: boolean;
   file_uploaded: string;

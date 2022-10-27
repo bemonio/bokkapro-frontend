@@ -228,6 +228,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'direct_operation')">{{ 'VOUCHER.DIRECTOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div> 
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.ESPECIALOPERATION' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="especial_operation" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}" (click)="changeRequiredLocation()"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('especial_operation')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.ESPECIALOPERATION' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('especial_operation')">{{ 'VOUCHER.ESPECIALOPERATION' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'especial_operation')">{{ 'VOUCHER.ESPECIALOPERATION' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'especial_operation')">{{ 'VOUCHER.ESPECIALOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'especial_operation')">{{ 'VOUCHER.ESPECIALOPERATION' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>             
             <div class="col-lg-4" *ngIf="authService.currentDivisionValue.type_division === 1">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.PICKUP_DATE' | translate}}</label>
               <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('pickup_date'))" name="pickup_date" formControlName="pickup_date" showTime="true" hourFormat="24"></p-calendar>

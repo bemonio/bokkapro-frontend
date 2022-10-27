@@ -511,6 +511,16 @@
               </a>
             </li>
             <!-- end::1 Level -->
+            <!-- begin::1 Level EDITHEADINVOICES -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_headinvoice')">
+              <a class="menu-link" routerLink="/editheadinvoices" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">{{ 'EDITHEADINVOICE.EDITHEADINVOICES' | translate }}</span>
+              </a>
+            </li>
+            <!-- end::1 Level -->            
           </ul>
         </div>
       </li>

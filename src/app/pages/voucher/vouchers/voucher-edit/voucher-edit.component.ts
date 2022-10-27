@@ -55,6 +55,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   public location_origin: AbstractControl;
   public location_destination: AbstractControl;
   public direct_operation: AbstractControl;
+  public especial_operation: AbstractControl;
   public is_active: AbstractControl;
   public verified_oi: AbstractControl;
   public currency: AbstractControl;
@@ -127,6 +128,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       location_origin: [''],
       location_destination: [''],
       direct_operation: [''],
+      especial_operation: [''],
       is_active: [''],
       verified_oi: [''],
       currency: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -151,6 +153,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     this.currency = this.formGroup.controls['currency'];
     this.certified_cart_code = this.formGroup.controls['certified_cart_code'];
     this.direct_operation = this.formGroup.controls['direct_operation'];
+    this.especial_operation = this.formGroup.controls['especial_operation'];
     this.is_active = this.formGroup.controls['is_active'];
     this.verified_oi = this.formGroup.controls['verified_oi'];
     this.file_uploaded = this.formGroup.controls['file_uploaded'];
@@ -317,6 +320,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
   loadForm() {
     this.verificated.setValue(false);
     this.direct_operation.setValue(false);
+    this.especial_operation.setValue(false);
     this.is_active.setValue(true);
     this.verified_oi.setValue(false);
     this.date_delivery.setValue(undefined)
@@ -334,6 +338,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.model.pickup_date != undefined ? this.pickup_date.setValue(new Date(this.formatDate(this.model.pickup_date))) : undefined;
       this.model.checkin_date != undefined ? this.checkin_date.setValue(new Date(this.formatDate(this.model.checkin_date))) : undefined;
       this.direct_operation.setValue(this.model.direct_operation);
+      this.especial_operation.setValue(this.model.especial_operation);
       this.is_active.setValue(this.model.is_active);
       this.verified_oi.setValue(this.model.verified_oi);
       this.updated_reason.setValue(this.model.updated_reason);
@@ -408,6 +413,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
       this.currency.setValidators([]);
       this.certified_cart_code.setValidators([]);
       this.direct_operation.setValidators([]);
+      this.especial_operation.setValidators([]);
       this.is_active.setValidators([]);
       this.verified_oi.setValidators([]);
     }
