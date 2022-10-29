@@ -65,7 +65,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'invoice_number')">{{ 'HEADINVOICE.INVOICE_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'invoice_number')">{{ 'HEADINVOICE.INVOICE_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.EMPLOYEE' | translate }}</label>
               <app-employee-autocomplete
@@ -150,7 +149,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'exchange_rate')">{{ 'HEADINVOICE.EXCHANGE_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'exchange_rate')">{{ 'HEADINVOICE.EXCHANGE_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TAX_RATE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -162,8 +160,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'tax_rate')">{{ 'HEADINVOICE.TAX_RATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'tax_rate')">{{ 'HEADINVOICE.TAX_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tax_rate')">{{ 'HEADINVOICE.TAX_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
-            
+            </div>     
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_TAX_AMOUNT' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -176,7 +173,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_tax_amount')">{{ 'HEADINVOICE.TOTAL_TAX_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_tax_amount')">{{ 'HEADINVOICE.TOTAL_TAX_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TAX_EXEMPT' | translate }}</label>
               <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="tax_exempt" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
@@ -186,7 +182,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'tax_exempt')">{{ 'HEADINVOICE.TAX_EXEMPT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tax_exempt')">{{ 'HEADINVOICE.TAX_EXEMPT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_DISCOUNT' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -199,7 +194,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_disccount')">{{ 'HEADINVOICE.TOTAL_DISCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_disccount')">{{ 'HEADINVOICE.TOTAL_DISCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.FROM_DATE' | translate }}</label>
               <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('from_date'))" name="from_date" formControlName="from_date" showTime="true" hourFormat="24"></p-calendar>
@@ -209,7 +203,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'from_date')">{{ 'HEADINVOICE.FROM_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'from_date')">{{ 'HEADINVOICE.FROM_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TO_DATE' | translate }}</label>
               <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('to_date'))" name="to_date" formControlName="to_date" showTime="true" hourFormat="24"></p-calendar>
@@ -219,7 +212,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'to_date')">{{ 'HEADINVOICE.TO_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'to_date')">{{ 'HEADINVOICE.TO_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.DUE_DATE' | translate }}</label>
               <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('due_date'))" name="due_date" formControlName="due_date" showTime="true" hourFormat="24"></p-calendar>
@@ -229,7 +221,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'due_date')">{{ 'HEADINVOICE.DUE_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'due_date')">{{ 'HEADINVOICE.DUE_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.FUEL_CHARGE' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -268,7 +259,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_amount')">{{ 'HEADINVOICE.TOTAL_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_amount')">{{ 'HEADINVOICE.TOTAL_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_QTY_CHEST' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -320,7 +310,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_travels')">{{ 'HEADINVOICE.TOTAL_TRAVELS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_travels')">{{ 'HEADINVOICE.TOTAL_TRAVELS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_TRAVELS_DIRECTS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -333,7 +322,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_travels_directs')">{{ 'HEADINVOICE.TOTAL_TRAVELS_DIRECTS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_travels_directs')">{{ 'HEADINVOICE.TOTAL_TRAVELS_DIRECTS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_APPRAISAL' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -346,7 +334,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_appraisal')">{{ 'HEADINVOICE.TOTAL_APPRAISAL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_appraisal')">{{ 'HEADINVOICE.TOTAL_APPRAISAL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_COST_APPRAISAL' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -372,7 +359,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_handling')">{{ 'HEADINVOICE.TOTAL_HANDLING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_handling')">{{ 'HEADINVOICE.TOTAL_HANDLING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_COST_HANDLING' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -412,7 +398,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_materials')">{{ 'HEADINVOICE.TOTAL_MATERIALS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_materials')">{{ 'HEADINVOICE.TOTAL_MATERIALS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_COST_MATERIALS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -438,7 +423,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_custody_cpv')">{{ 'HEADINVOICE.TOTAL_CUSTODY_CPV' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_custody_cpv')">{{ 'HEADINVOICE.TOTAL_CUSTODY_CPV' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_CUSTODY_VAULT' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -451,7 +435,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_custody_vault')">{{ 'HEADINVOICE.TOTAL_CUSTODY_VAULT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_custody_vault')">{{ 'HEADINVOICE.TOTAL_CUSTODY_VAULT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_CUSTODY_PERSONAL_ATM' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -464,7 +447,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_custody_personal_atm')">{{ 'HEADINVOICE.TOTAL_CUSTODY_PERSONAL_ATM' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_custody_personal_atm')">{{ 'HEADINVOICE.TOTAL_CUSTODY_PERSONAL_ATM' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_PIECES' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -489,7 +471,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_fixed_costs_packing')">{{ 'HEADINVOICE.TOTAL_FIXED_COSTS_PACKING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_fixed_costs_packing')">{{ 'HEADINVOICE.TOTAL_FIXED_COSTS_PACKING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_VIGILANT' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -502,7 +483,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_vigilant')">{{ 'HEADINVOICE.TOTAL_VIGILANT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_vigilant')">{{ 'HEADINVOICE.TOTAL_VIGILANT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_ATM_SUPPLY' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -515,7 +495,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_atm_supply')">{{ 'HEADINVOICE.TOTAL_ATM_SUPPLY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_atm_supply')">{{ 'HEADINVOICE.TOTAL_ATM_SUPPLY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_ATM_FAILURE_1_2_LEVELS' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"

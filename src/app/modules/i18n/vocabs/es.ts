@@ -849,6 +849,8 @@ export const locale = {
       TYPE_SERVICE_ORDER: 'Tipo de Facturación (OS)',
       NAME_INVOICE_TO: 'Nombre Legal Cliente',
       TOTAL_AMOUNT: 'Monto Total',
+      FUEL_CHARGE: 'Cargo Combustible por Viaje',
+      TOTAL_FUEL_CHARGE: 'Cargo Fijo Combustible',      
       STATUS: 'Estado',
       IS_ACTIVE: 'Activo?',
       COMPANY: 'Grupo Económico',

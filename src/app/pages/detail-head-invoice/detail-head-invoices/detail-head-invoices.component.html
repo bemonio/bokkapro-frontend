@@ -1,11 +1,11 @@
 <div class="card card-custom gutter-b">
   <div class="card-header">
     <div class="card-title">
-      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'HEADINVOICE.HEADINVOICES' | translate }}
+      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'DETAILHEADINVOICE.DETAILHEADINVOICES' | translate }}
     </div>
     <div class="card-toolbar">
       <!-- <a type="button" class="btn btn-primary" (click)="showModalDialog(undefined, true, false)" *ngIf="authService.hasPermission('add_headinvoice') && contractId">{{ 'COMMON.NEW' | translate }}</a> -->
-      <a type="button" class="btn btn-primary" routerLink="{{parent}}/headinvoices/add" *ngIf="authService.hasPermission('add_headinvoice')">{{ 'COMMON.NEW' | translate }}</a>
+      <!-- <a type="button" class="btn btn-primary" routerLink="{{parent}}/headinvoices/add" *ngIf="authService.hasPermission('add_headinvoice') && !contractId">{{ 'COMMON.NEW' | translate }}</a> -->
       <a type="button" class="btn btn-primary" (click)="showModalDialogGenerate()" *ngIf="authService.hasPermission('add_headinvoice')">{{ 'COMMON.GENERATE' | translate }}</a>
     </div>
   </div>
@@ -37,7 +37,7 @@
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'HEADINVOICE.ID' | translate }}
+              {{ 'DETAILHEADINVOICE.ID' | translate }}
             </div>
           </th>
           <th pSortableColumn="created_at">
@@ -47,23 +47,23 @@
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
-          <th pSortableColumn="to_date">
+          <th pSortableColumn="updated_at">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'COMMON.TO_DATE' | translate }}
+              {{ 'COMMON.UPDATED_AT' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
-          <th pSortableColumn="contract.name_invoce_to">
+          <!-- <th pSortableColumn="headinvoice.name_invoce_to">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'HEADINVOICE.CONTRACT' | translate }}
+              {{ 'HEADINVOICE.NAME_INVOICE_TO' | translate }}
             </div>
           </th>
           <th pSortableColumn="office.name">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'HEADINVOICE.OFFICE' | translate }}
+              {{ 'DETAILHEADINVOICE.OFFICE' | translate }}
             </div>
-          </th>
+          </th> -->
           <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -88,7 +88,7 @@
             {{value.to_date | date: 'MMMM/yyyy'}}
           </td>          
           <td>
-            {{value.contract?.code}} - {{value.contract?.name_invoce_to}}
+            {{value.headinvoice?.id}} - {{value.headinvoice?.created_at}}
           </td>
           <td>
             {{value.office?.name}}
@@ -139,7 +139,7 @@
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
-<p-dialog header="{{ 'HEADINVOICE.HEADINVOICES' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '60vw'}" 
+<p-dialog header="{{ 'DETAILHEADINVOICE.DETAILHEADINVOICES' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '60vw'}" 
   [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
 
   <div class="mt-5">
@@ -152,22 +152,22 @@
   <form action="#" class="form form-label-right" [formGroup]="formGroupGenerate">
     <div class="form-group row">
       <div class="col-lg-4">
-        <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOCE.FROM_DATE' | translate}}</label>
-        <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('from_date', formGroupGenerate))" name="from_date" formControlName="from_date" showTime="false"></p-calendar>
-        <div class="feedback" *ngIf="!isControlTouched('from_date',formGroupGenerate)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOCE.FROM_DATE' | translate}}</b></div>
-        <div class="valid-feedback" *ngIf="isControlValid('from_date',formGroupGenerate)">{{ 'HEADINVOCE.FROM_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('required', 'from_date', formGroupGenerate)">{{ 'HEADINVOCE.FROM_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'from_date', formGroupGenerate)">{{ 'HEADINVOCE.FROM_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'from_date', formGroupGenerate)">{{ 'HEADINVOCE.FROM_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+        <label>{{ 'COMMON.ENTER' | translate }} {{ 'DETAILHEADINVOICE.CREATED_AT' | translate}}</label>
+        <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('created_at', formGroupGenerate))" name="created_at" formControlName="created_at" showTime="false"></p-calendar>
+        <div class="feedback" *ngIf="!isControlTouched('created_at',formGroupGenerate)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DETAILHEADINVOICE.CREATED_AT' | translate}}</b></div>
+        <div class="valid-feedback" *ngIf="isControlValid('created_at',formGroupGenerate)">{{ 'DETAILHEADINVOICE.CREATED_AT' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('required', 'created_at', formGroupGenerate)">{{ 'DETAILHEADINVOICE.CREATED_AT' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'created_at', formGroupGenerate)">{{ 'DETAILHEADINVOICE.CREATED_AT' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'created_at', formGroupGenerate)">{{ 'DETAILHEADINVOICE.CREATED_AT' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
       </div>
       <div class="col-lg-4">
-        <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOCE.TO_DATE' | translate}}</label>
+        <label>{{ 'COMMON.ENTER' | translate }} {{ 'DETAILHEADINVOICE.TO_DATE' | translate}}</label>
         <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('to_date', formGroupGenerate))" name="to_date" formControlName="to_date" showTime="false"></p-calendar>
-        <div class="feedback" *ngIf="!isControlTouched('to_date',formGroupGenerate)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOCE.TO_DATE' | translate}}</b></div>
-        <div class="valid-feedback" *ngIf="isControlValid('to_date',formGroupGenerate)">{{ 'HEADINVOCE.TO_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('required', 'to_date', formGroupGenerate)">{{ 'HEADINVOCE.TO_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'to_date', formGroupGenerate)">{{ 'HEADINVOCE.TO_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'to_date', formGroupGenerate)">{{ 'HEADINVOCE.TO_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+        <div class="feedback" *ngIf="!isControlTouched('to_date',formGroupGenerate)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DETAILHEADINVOICE.TO_DATE' | translate}}</b></div>
+        <div class="valid-feedback" *ngIf="isControlValid('to_date',formGroupGenerate)">{{ 'DETAILHEADINVOICE.TO_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('required', 'to_date', formGroupGenerate)">{{ 'DETAILHEADINVOICE.TO_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'to_date', formGroupGenerate)">{{ 'DETAILHEADINVOICE.TO_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'to_date', formGroupGenerate)">{{ 'DETAILHEADINVOICE.TO_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
       </div>
       <br>
       <br>
