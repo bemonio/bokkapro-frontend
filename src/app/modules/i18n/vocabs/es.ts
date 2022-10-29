@@ -475,6 +475,7 @@ export const locale = {
       CLEAR: 'Limpiar',
       VERIFICATED: 'Verificado',
       PRINT: 'Imprimir',
+      GENERATE: 'Generar',
       DEVOLUTION: 'Devolución',
       ROTATE_LEFT: 'Rotar Izquierda',
       ROTATE_RIGTH: 'Rotar Derecha',
