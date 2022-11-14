@@ -29,8 +29,6 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
     BASIC_TAB: 0,
   };
 
-  public created_at: AbstractControl;
-  public updated_at: AbstractControl;
   public details: AbstractControl;
   public details2: AbstractControl;
   public signo: AbstractControl;
@@ -40,8 +38,7 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
   public total_amount: AbstractControl;
   public tax_exempt: AbstractControl;
   public disccount: AbstractControl;
-  
-  public headinvoice: AbstractControl;
+  public head_invoice: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -66,24 +63,18 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
 
     this.view = false;
 
-    this.formGroup = this.fb.group({
-      
-      created_at: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      updated_at: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+    this.formGroup = this.fb.group({      
       details: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       details2: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      signo: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      vaultinc: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      signo: [''],
+      vaultinc: [''],
       quantity: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       quantity2 : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       total_amount: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      tax_exempt: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      tax_exempt: [''],
       disccount: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-     
-      headinvoice: [''],
+      head_invoice: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
-    this.created_at = this.formGroup.controls['created_at'];
-    this.updated_at = this.formGroup.controls['updated_at'];
     this.details = this.formGroup.controls['details'];
     this.details2 = this.formGroup.controls['details2'];
     this.signo = this.formGroup.controls['signo'];
@@ -94,7 +85,7 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
     this.tax_exempt = this.formGroup.controls['tax_exempt'];
     this.disccount = this.formGroup.controls['disccount'];
     
-    this.headinvoice = this.formGroup.controls['headinvoice'];
+    this.head_invoice = this.formGroup.controls['head_invoice'];
   }
 
   ngOnInit(): void {
@@ -169,26 +160,21 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
+    this.signo.setValue(false);
+    this.vaultinc.setValue(false);
+    this.tax_exempt.setValue(false);
     if (this.model && this.model.id) {
-      this.created_at.setValue(this.model.created_at);
-      this.updated_at.setValue(this.model.updated_at);
       this.details.setValue(this.model.details);
       this.details2.setValue(this.model.details2);
-      this.signo.setValue(this.model.signo);
+      this.vaultinc.setValue(this.model.signo);
       this.vaultinc.setValue(this.model.vaultinc);
       this.quantity.setValue(this.model.quantity);
       this.quantity2.setValue(this.model.quantity2);
       this.total_amount.setValue(this.model.total_amount);
       this.tax_exempt.setValue(this.model.tax_exempt);
       this.disccount.setValue(this.model.disccount);
-      
-      if (this.model.head_invoice) {
-        this.headinvoice.setValue(this.model.head_invoice);
-      }
-
+      this.head_invoice.setValue(this.model.head_invoice);
     } else {
-      this.created_at.setValue('');
-      this.updated_at.setValue('');
       this.details.setValue('');
       this.details2.setValue('');
       this.signo.setValue('');
@@ -198,7 +184,7 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
       this.total_amount.setValue('');
       this.tax_exempt.setValue('');
       this.disccount.setValue('');  
-      this.headinvoice.setValue('');
+      this.head_invoice.setValue('');
     }
     this.formGroup.markAllAsTouched();
   }
