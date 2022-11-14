@@ -56,7 +56,7 @@ export class DetailInvoicesComponent implements OnInit {
 
     public contId: number;
     public parent: string;
-    public headInvoiceID: { id: number, isNew: boolean };
+    public detailInvoiceID: { id: number, isNew: boolean };
     public setViewHeadInvoice: boolean;
 
     constructor(
@@ -108,7 +108,7 @@ export class DetailInvoicesComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
-        this.headInvoiceID = {id: undefined, isNew: false};
+        this.detailInvoiceID = {id: undefined, isNew: false};
         this._with = [];
         this._with.push({key: 'include[]', value: 'head_invoice.*'})
 
@@ -320,7 +320,7 @@ export class DetailInvoicesComponent implements OnInit {
 
     showModalDialog(id, isNew, setView) {
         this.displayModal = true;
-        this.headInvoiceID = {id: id, isNew: isNew}
+        this.detailInvoiceID = {id: id, isNew: isNew}
         this.setViewHeadInvoice = setView;
     }
 

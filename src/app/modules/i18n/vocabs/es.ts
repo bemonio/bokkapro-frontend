@@ -894,11 +894,11 @@ export const locale = {
       DETAILS: 'Detalles',
       DETAILS2: 'Detalles 2',
       SIGNO: 'Signo',
-      VAULTINC: 'VAULTINC',
+      VAULTINC: 'Cofre Incluido',
       QUANTITY: 'Cantidad',
       QUANTITY2: 'Cantidad 2',
       TOTAL_AMOUNT: 'Monto Total',
-      TAX_EXEMPT: 'TAX_EXEMPT',
+      TAX_EXEMPT: 'Exento de Impuesto',
       DISCCOUNT: 'Descuento',
     }
   }

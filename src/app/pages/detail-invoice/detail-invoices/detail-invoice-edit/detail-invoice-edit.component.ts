@@ -15,7 +15,7 @@ import { HeadInvoiceService } from 'src/app/pages/head-invoice/_services';
   styleUrls: ['./detail-invoice-edit.component.scss']
 })
 export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
-  @Input() detailHeadInvoiceID: { id: number, isNew: boolean};
+  @Input() detailInvoiceID: { id: number, isNew: boolean};
   @Input() setView: boolean;
   @Output() displayModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -102,9 +102,9 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
 
-    if (this.detailHeadInvoiceID){
-      if(this.detailHeadInvoiceID.id){
-        this.id = this.detailHeadInvoiceID.id; 
+    if (this.detailInvoiceID){
+      if(this.detailInvoiceID.id){
+        this.id = this.detailInvoiceID.id; 
         this.get();
       } else {
         this.id = undefined;
@@ -134,7 +134,7 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     const sb = this.route.paramMap.pipe(
       switchMap(params => {
-        if(!this.detailHeadInvoiceID){
+        if(!this.detailInvoiceID){
           this.id = Number(params.get('id'));
         }
         if (this.id || this.id > 0) {
@@ -233,7 +233,7 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
-          if (this.detailHeadInvoiceID) {
+          if (this.detailInvoiceID) {
             this.hideModal();
           } else if(this.parent) {
             this.router.navigate([this.parent + '/detailinvoices']);
@@ -271,7 +271,7 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
-          if (this.detailHeadInvoiceID) {
+          if (this.detailInvoiceID) {
             this.hideModal();
           } else if(this.parent) {
             this.router.navigate([this.parent + '/detailinvoices']);

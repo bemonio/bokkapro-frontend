@@ -16,7 +16,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-light" routerLink="{{parent}}/detailinvoices">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}/detailinvoices" *ngIf="!detailInvoiceID">
         <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
       </a>
       <!-- <button class="btn btn-secondary ml-2" (click)="reset()">
@@ -142,10 +142,11 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'disccount')">{{ 'DETAILINVOICE.DISCCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
            </div>
-          <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/detailinvoices">{{ 'COMMON.CANCEL' | translate }}</a>
+           <div class="float-right">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/detailinvoices" *ngIf="!detailInvoiceID">{{ 'COMMON.CANCEL' | translate }}</a>
+
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
-              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!view">{{ 'COMMON.SAVE' | translate }}</button>
+              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!detailInvoiceID && !view">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(true)" *ngIf="!view">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
