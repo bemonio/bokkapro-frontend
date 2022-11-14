@@ -386,6 +386,7 @@ import { StockSerialEditComponent } from './stock-serial/stock-serials/stock-ser
 import { HeadInvoicesComponent } from './head-invoice/head-invoices/head-invoices.component';
 import { HeadInvoiceComponent } from './head-invoice/head-invoice.component';
 import { HeadInvoiceEditComponent } from './head-invoice/head-invoices/head-invoice-edit/head-invoice-edit.component';
+import { HeadInvoiceAutocompleteComponent } from './head-invoice/head-invoices/head-invoice-autocomplete/head-invoice-autocomplete.component';
 
 // DetailInvoices
 import { DetailInvoicesComponent } from './detail-invoice/detail-invoices/detail-invoices.component';
@@ -651,6 +652,7 @@ import { TypeServiceOrderSelectComponent } from './type-service-order/types-serv
     HeadInvoicesComponent,
     HeadInvoiceComponent,
     HeadInvoiceEditComponent,
+    HeadInvoiceAutocompleteComponent,
     DetailInvoicesComponent,
     DetailInvoiceComponent,
     DetailInvoiceEditComponent,
