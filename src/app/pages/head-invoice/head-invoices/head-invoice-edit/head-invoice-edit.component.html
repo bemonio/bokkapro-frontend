@@ -526,7 +526,7 @@
             </div>            
            </div>
           <div *ngIf="model.id && authService.hasPermission('view_detailinvoice')">
-            Detalle factura
+            <app-detail-invoices [headInvoiceId]="model.id"></app-detail-invoices>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/headinvoices">{{ 'COMMON.CANCEL' | translate }}</a>

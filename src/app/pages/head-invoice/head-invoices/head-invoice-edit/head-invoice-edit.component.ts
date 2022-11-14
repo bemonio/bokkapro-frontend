@@ -273,7 +273,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model.id) {
+    if (this.model && this.model.id) {
       this.invoice_number.setValue(this.model.invoice_number);
       this.exchange_rate.setValue(this.model.exchange_rate);
       this.tax_rate.setValue(this.model.tax_rate);
