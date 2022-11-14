@@ -1,0 +1,1 @@
+export { DetailInvoiceService } from './detail-invoice.service';

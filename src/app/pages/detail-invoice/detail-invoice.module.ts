@@ -9,22 +9,22 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { DetailHeadInvoicesComponent } from './detail-head-invoices/detail-head-invoices.component';
-import { DetailHeadInvoiceComponent } from './detail-head-invoice.component';
-// import { HeadInvoiceRoutingModule} from './detail-head-invoice-routing.module';
-import { DetailHeadInvoiceEditComponent } from './detail-head-invoices/detail-head-invoice-edit/detail-head-invoice-edit.component';
-import { DetailHeadInvoiceService } from './_services';
+import { DetailInvoicesComponent } from './detail-invoices/detail-invoices.component';
+import { DetailInvoiceComponent } from './detail-invoice.component';
+// import { HeadInvoiceRoutingModule} from './detail-invoice-routing.module';
+import { DetailInvoiceEditComponent } from './detail-invoices/detail-invoice-edit/detail-invoice-edit.component';
+import { DetailInvoiceService } from './_services';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    DetailHeadInvoicesComponent,
-    DetailHeadInvoiceComponent,
-    DetailHeadInvoiceEditComponent,
+    DetailInvoicesComponent,
+    DetailInvoiceComponent,
+    DetailInvoiceEditComponent,
   ],
   imports: [
     CommonModule,
-    // HeadInvoiceRoutingModule,
+    // InvoiceRoutingModule,
     InlineSVGModule,
     NgbModalModule,
     NgbDatepickerModule,
@@ -40,8 +40,8 @@ import { RouterModule } from '@angular/router';
   entryComponents: [
   ],
   providers: [
-    DetailHeadInvoiceService,
+    DetailInvoiceService,
     ConfirmationService
   ]
 })
-export class HeadInvoiceModule {}
+export class DetailInvoiceModule {}

@@ -5,9 +5,8 @@ import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
-export class DetailHeadInvoiceService {
-    API_URL = `${environment.apiUrl}detailheadinvoices`;
-    API_URL_GENERATE = `${environment.apiUrl}generateheadinvoices`;
+export class DetailInvoiceService {
+    API_URL = `${environment.apiUrl}detailinvoices`;
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -67,10 +66,6 @@ export class DetailHeadInvoiceService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}?include[]=contract.*&include[]=employee.*&include[]=company_contact.*&include[]=office.*&include[]=type_service_order.*&include[]=currency.*`);
-    }
-
-    public generate(body: Object): Observable<any> {
-        return this.http.post(`${this.API_URL_GENERATE}`, JSON.stringify(body));
+        return this.http.get(`${this.API_URL}/${id}?include[]=head_invoice.*`);
     }
 }

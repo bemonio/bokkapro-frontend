@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DetailHeadInvoiceService as ModelService } from '../_services/detail-head-invoice.service';
-import { DetailHeadInvoiceModel as Model } from '../_models/detail-head-invoice.model';
+import { DetailInvoiceService as ModelService } from '../_services/detail-invoice.service';
+import { DetailInvoiceModel as Model } from '../_models/detail-invoice.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -11,12 +11,12 @@ import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 @Component({
-    selector: 'app-detail-head-invoices',
-    templateUrl: './detail-head-invoices.component.html',
-    styleUrls: ['./detail-head-invoices.component.scss']
+    selector: 'app-detail-invoices',
+    templateUrl: './detail-invoices.component.html',
+    styleUrls: ['./detail-invoices.component.scss']
 })
-export class DetailHeadInvoicesComponent implements OnInit {
-    @Input() contractId: any;
+export class DetailInvoicesComponent implements OnInit {
+    @Input() headInvoiceId: any;
     @Input()  selectedModels!: Model[] | Model[];
     @Output() selectedModelsChange = new EventEmitter<Model[]>();
 
@@ -110,8 +110,7 @@ export class DetailHeadInvoicesComponent implements OnInit {
         this.requesting = false;
         this.headInvoiceID = {id: undefined, isNew: false};
         this._with = [];
-        this._with.push({key: 'include[]', value: 'contract.*'})
-        this._with.push({key: 'include[]', value: 'office.*'})
+        this._with.push({key: 'include[]', value: 'head_invoice.*'})
 
         this.setViewHeadInvoice = false;
     }
@@ -150,9 +149,9 @@ export class DetailHeadInvoicesComponent implements OnInit {
 
         this.filters = [];
 
-        if (this.contractId) {
-            this.filters.push({ key: 'filter{contract}', value: this.contractId.toString() })
-            this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.contractId;
+        if (this.headInvoiceId) {
+            this.filters.push({ key: 'filter{head_invoice}', value: this.headInvoiceId.toString() })
+            this.parent = '/' + this.route.parent.parent.snapshot.url[0].path + '/edit/' + this.headInvoiceId;
             this.getModels();
         } else {
             if (this.route.parent.parent.parent.snapshot.url.length > 0) {
@@ -164,10 +163,10 @@ export class DetailHeadInvoicesComponent implements OnInit {
                         } else {
                             this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/view/' + this.contId;
                         }
-                        if (this.route.parent.parent.parent.parent.parent.snapshot.routeConfig.path == 'contracts') {
-                            this.filters.push({ key: 'filter{service_order.contract}', value: this.contId.toString() })
+                        if (this.route.parent.parent.parent.parent.parent.snapshot.routeConfig.path == 'headinvoices') {
+                            this.filters.push({ key: 'filter{head_invoice}', value: this.contId.toString() })
                         } else { 
-                            this.filters.push({ key: 'filter{contract}', value: this.contId.toString() })
+                            this.filters.push({ key: 'filter{head_invoice}', value: this.contId.toString() })
                         }
                     }
                     this.getModels();
@@ -184,13 +183,13 @@ export class DetailHeadInvoicesComponent implements OnInit {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.requesting = false;
-                this.models = response.head_invoices;
+                this.models = response.detail_invoices;
                 this.totalRecords = response.meta.total_results;
-                if(response.headinvoices){                
-                    response.headinvoices.forEach(headinvoice => {
+                if(response.head_invoices){                
+                    response.head_invoices.forEach(head_invoice => {
                         this.models.forEach(element => {
-                            if (element.headinvoice === headinvoice.id) {
-                                element.headinvoice = headinvoice;
+                            if (element.head_invoice === head_invoice.id) {
+                                element.head_invoice = head_invoice;
                             }
                         });
                     });
@@ -339,36 +338,6 @@ export class DetailHeadInvoicesComponent implements OnInit {
     }
 
     hideModalDialogGenerate() {
-        this.displayModalGenerate = false;
-        this.getModels();
-    }
-
-    generate() {
-        let from_date = this.formatDate(this.from_date.value);
-        let to_date = this.formatDate(this.to_date.value);
-        const param = {
-            from_date: from_date,
-            to_date: to_date
-        };
-        if (from_date && to_date) {
-            const promise = this.modelsService.generate(param);
-            this.promiseForm = promise.toPromise().then(
-                response => {
-                    this.toastService.growl('top-right', 'success', 'Patch');
-                },
-                error => {
-                    let messageError = [];
-                    if (!Array.isArray(error.error)) {
-                        messageError.push(error.error);
-                    } else {
-                        messageError = error.error;
-                    }
-                    Object.entries(messageError).forEach(
-                        ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
-                    );
-                }
-            );
-        }
         this.displayModalGenerate = false;
         this.getModels();
     }

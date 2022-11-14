@@ -1,4 +1,4 @@
-export class DetailHeadInvoiceModel {
+export class DetailInvoiceModel {
 
   id : number;
   created_at : string;
@@ -13,5 +13,5 @@ export class DetailHeadInvoiceModel {
   tax_exempt : boolean;
   disccount : number;
   
-  headinvoice : any;
+  head_invoice : any;
 }
