@@ -7,6 +7,7 @@
       <!-- <a type="button" class="btn btn-primary" (click)="showModalDialog(undefined, true, false)" *ngIf="authService.hasPermission('add_headinvoice') && contractId">{{ 'COMMON.NEW' | translate }}</a> -->
       <a type="button" class="btn btn-primary" routerLink="{{parent}}/headinvoices/add" *ngIf="authService.hasPermission('add_headinvoice')">{{ 'COMMON.NEW' | translate }}</a>
       <a type="button" class="btn btn-primary" (click)="showModalDialogGenerate()" *ngIf="authService.hasPermission('add_headinvoice')">{{ 'COMMON.GENERATE' | translate }}</a>
+      <a type="button" class="btn btn-primary" (click)="reGenerate()" *ngIf="authService.hasPermission('add_headinvoice')">{{ 'COMMON.REGENERATE' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
