@@ -382,6 +382,28 @@ export class HeadInvoicesComponent implements OnInit {
         this.getModels();
     }
 
+    public reGenerate() {
+        const param = {
+        };
+        const promise = this.modelsService.reGenerate(param);
+        this.promiseForm = promise.toPromise().then(
+            response => {
+                this.toastService.growl('top-right', 'success', 'Patch');
+            },
+            error => {
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
+                );
+            }
+        );
+    }
+
     public formatDate(date) {
         const d = new Date(date);
         let month = '' + (d.getMonth() + 1);

@@ -8,6 +8,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 export class HeadInvoiceService {
     API_URL = `${environment.apiUrl}headinvoices`;
     API_URL_GENERATE = `${environment.apiUrl}generateheadinvoices`;
+    API_URL_REGENERATE = `${environment.apiUrl}regenerateheadinvoices`;
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -72,5 +73,9 @@ export class HeadInvoiceService {
 
     public generate(body: Object): Observable<any> {
         return this.http.post(`${this.API_URL_GENERATE}`, JSON.stringify(body));
+    }
+
+    public reGenerate(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL_REGENERATE}`, JSON.stringify(body));
     }
 }
