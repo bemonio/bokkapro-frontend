@@ -387,10 +387,10 @@ import { HeadInvoicesComponent } from './head-invoice/head-invoices/head-invoice
 import { HeadInvoiceComponent } from './head-invoice/head-invoice.component';
 import { HeadInvoiceEditComponent } from './head-invoice/head-invoices/head-invoice-edit/head-invoice-edit.component';
 
-// // DetailInvoices
-// import { DetailInvoicesComponent } from './detail-invoice/detail-invoices/detail-invoices.component';
-// import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.component';
-// import { DetailInvoiceEditComponent } from './detail-invoice/detail-invoices/detail-invoice-edit/detail-invoice-edit.component';
+// DetailInvoices
+import { DetailInvoicesComponent } from './detail-invoice/detail-invoices/detail-invoices.component';
+import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.component';
+import { DetailInvoiceEditComponent } from './detail-invoice/detail-invoices/detail-invoice-edit/detail-invoice-edit.component';
 
 // TypeServiceOrders
 import { TypesServiceOrdersComponent } from './type-service-order/types-service-orders/types-service-orders.component';
@@ -651,9 +651,9 @@ import { TypeServiceOrderSelectComponent } from './type-service-order/types-serv
     HeadInvoicesComponent,
     HeadInvoiceComponent,
     HeadInvoiceEditComponent,
-    // DetailInvoicesComponent,
-    // DetailInvoiceComponent,
-    // DetailInvoiceEditComponent,
+    DetailInvoicesComponent,
+    DetailInvoiceComponent,
+    DetailInvoiceEditComponent,
     TypesServiceOrdersComponent,
     TypeServiceOrderComponent,
     TypeServiceOrderEditComponent,

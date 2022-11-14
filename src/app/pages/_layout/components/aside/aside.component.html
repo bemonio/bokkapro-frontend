@@ -511,13 +511,13 @@
               </a>
             </li>
             <!-- end::1 Level -->
-            <!-- begin::1 Level EDITHEADINVOICES -->
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_headinvoice')">
-              <a class="menu-link" routerLink="/editheadinvoices" routerLinkActive="active">
+            <!-- begin::1 Level DETAILINVOICES -->
+            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_detailinvoice')">
+              <a class="menu-link" routerLink="/detailinvoices" routerLinkActive="active">
                 <i class="menu-bullet menu-bullet-dot">
                   <span></span>
                 </i>
-                <span class="menu-text">{{ 'EDITHEADINVOICE.EDITHEADINVOICES' | translate }}</span>
+                <span class="menu-text">{{ 'DETAILINVOICE.DETAILINVOICES' | translate }}</span>
               </a>
             </li>
             <!-- end::1 Level -->            

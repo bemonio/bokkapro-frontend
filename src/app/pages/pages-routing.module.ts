@@ -475,13 +475,13 @@ const routes: Routes = [
             (m) => m.HeadInvoiceRoutingModule
           ),
       },   
-      // {
-      //   path: 'detailinvoices',
-      //   loadChildren: () =>
-      //     import('../pages/detail-invoice/detail-invoice-routing.module').then(
-      //       (m) => m.DetailInvoiceRoutingModule
-      //     ),
-      // },          
+      {
+        path: 'detailinvoices',
+        loadChildren: () =>
+          import('../pages/detail-invoice/detail-invoice-routing.module').then(
+            (m) => m.DetailInvoiceRoutingModule
+          ),
+      },          
       {
         path: 'typesserviceorders',
         loadChildren: () =>

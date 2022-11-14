@@ -1,4 +1,4 @@
-export class HeadInvoices {
+export class DetailInvoices {
   public static stockSerials: any = [
     {
       id: 1,

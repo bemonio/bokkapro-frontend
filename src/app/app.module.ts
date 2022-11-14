@@ -84,6 +84,7 @@ import { StockTransactionService } from './pages/stock-transaction/_services';
 import { StockTransactionDetailService } from './pages/stock-transaction-detail/_services';
 import { StockSerialService } from './pages/stock-serial/_services';
 import { HeadInvoiceService } from './pages/head-invoice/_services';
+import { DetailInvoiceService } from './pages/detail-invoice/_services';
 import { TypeServiceOrderService } from './pages/type-service-order/_services';
 
 
@@ -206,6 +207,7 @@ export function getHighlightLanguages() {
     StockTransactionDetailService,
     StockSerialService,
     HeadInvoiceService,
+    DetailInvoiceService,
     TypeServiceOrderService,
     //Others
     CompaniesComponent

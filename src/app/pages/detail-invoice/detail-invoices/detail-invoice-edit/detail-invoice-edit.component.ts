@@ -5,16 +5,16 @@ import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-import { DetailHeadInvoiceModel as Model } from '../../_models/detail-head-invoice.model';
-import { DetailHeadInvoiceService as ModelsService } from '../../_services/detail-head-invoice.service';
-import { ContractService } from 'src/app/pages/contract/_services';
+import { DetailInvoiceModel as Model } from '../../_models/detail-invoice.model';
+import { DetailInvoiceService as ModelsService } from '../../_services/detail-invoice.service';
+import { HeadInvoiceService } from 'src/app/pages/head-invoice/_services';
 
 @Component({
-  selector: 'app-detail-head-invoice-edit',
-  templateUrl: './detail-head-invoice-edit.component.html',
-  styleUrls: ['./detail-head-invoice-edit.component.scss']
+  selector: 'app-detail-invoice-edit',
+  templateUrl: './detail-invoice-edit.component.html',
+  styleUrls: ['./detail-invoice-edit.component.scss']
 })
-export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
+export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
   @Input() detailHeadInvoiceID: { id: number, isNew: boolean};
   @Input() setView: boolean;
   @Output() displayModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -47,7 +47,7 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   public saveAndExit;
-  public contractId: number;
+  public headInvoiceId: number;
   public parent: string;
 
   public view: boolean;
@@ -58,7 +58,7 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private toastService: ToastService,
-    private contractService: ContractService,
+    private headInvoiceService: HeadInvoiceService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
@@ -113,7 +113,7 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
     } 
     this.route.params.subscribe((params) => {
       if (this.route.snapshot.url.length > 0) {
-        this.contractId = params.id;
+        this.headInvoiceId = params.id;
       }
       this.get();
     });
@@ -140,7 +140,7 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'detail_head_invoice': new Model() });
+        return of({ 'detail_invoice': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -153,14 +153,14 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
-        return of({ 'detail_head_invoice': new Model() });
+        return of({ 'detail_invoice': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.model = response.detail_;
-        if (response.head_invoice)
-          this.model.headinvoice = response.head_invoices[0];
+        this.model = response.detail_invoice;
+        if (response.head_invoices)
+          this.model.head_invoice = response.head_invoices[0];
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -169,7 +169,7 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
-    if (this.model.id) {
+    if (this.model && this.model.id) {
       this.created_at.setValue(this.model.created_at);
       this.updated_at.setValue(this.model.updated_at);
       this.details.setValue(this.model.details);
@@ -182,8 +182,8 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
       this.tax_exempt.setValue(this.model.tax_exempt);
       this.disccount.setValue(this.model.disccount);
       
-      if (this.model.headinvoice) {
-        this.headinvoice.setValue(this.model.headinvoice);
+      if (this.model.head_invoice) {
+        this.headinvoice.setValue(this.model.head_invoice);
       }
 
     } else {
@@ -227,7 +227,7 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
-    model.headinvoice = this.model.headinvoice.id;
+    model.head_invoice = this.model.head_invoice.id;
     
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -236,9 +236,9 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
           if (this.detailHeadInvoiceID) {
             this.hideModal();
           } else if(this.parent) {
-            this.router.navigate([this.parent + '/headinvoices']);
+            this.router.navigate([this.parent + '/detailinvoices']);
           } else {
-            this.router.navigate(['/headinvoices']);
+            this.router.navigate(['/detailinvoices']);
           }
         }
       }),
@@ -265,7 +265,7 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
   create() {
     this.requesting = true;
     let model = this.model;
-    model.headinvoice = this.model.headinvoice.id;
+    model.head_invoice = this.model.head_invoice.id;
 
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
@@ -274,9 +274,9 @@ export class DetailHeadInvoiceEditComponent implements OnInit, OnDestroy {
           if (this.detailHeadInvoiceID) {
             this.hideModal();
           } else if(this.parent) {
-            this.router.navigate([this.parent + '/headinvoices']);
+            this.router.navigate([this.parent + '/detailinvoices']);
           } else {
-            this.router.navigate(['/headinvoices']);
+            this.router.navigate(['/detailinvoices']);
           }
         } else {
           this.formGroup.reset()

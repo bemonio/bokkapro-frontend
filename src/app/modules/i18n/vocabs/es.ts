@@ -475,6 +475,7 @@ export const locale = {
       CLEAR: 'Limpiar',
       VERIFICATED: 'Verificado',
       PRINT: 'Imprimir',
+      GENERATE: 'Generar',
       DEVOLUTION: 'Devolución',
       ROTATE_LEFT: 'Rotar Izquierda',
       ROTATE_RIGTH: 'Rotar Derecha',
@@ -883,7 +884,23 @@ export const locale = {
       TOTAL_EXCESS_CUSTODY_VAULT: 'Total Custodia en Bóveda',
       TOTAL_EXCESS_CUSTODY_PERSONAL_ATM: 'Total Custodia de Personal de ATM en el Banco',
       TOTAL_EXCESS_PIECES: 'Total Piezas Procesadas',
-    },           
+    },
+    DETAILINVOICE: {
+      DETAILINVOICE: 'Detalle Factura',
+      DETAILINVOICES: 'Detalles Facturas',
+      ID: 'Id',
+      HEADINVOICE: 'Encabezado Factura',
+      HEADINVOICES: 'Encabezado Facturas',
+      DETAILS: 'Detalles',
+      DETAILS2: 'Detalles 2',
+      SIGNO: 'Signo',
+      VAULTINC: 'VAULTINC',
+      QUANTITY: 'Cantidad',
+      QUANTITY2: 'Cantidad 2',
+      TOTAL_AMOUNT: 'Monto Total',
+      TAX_EXEMPT: 'TAX_EXEMPT',
+      DISCCOUNT: 'Descuento',
+    }
   }
 };
 
