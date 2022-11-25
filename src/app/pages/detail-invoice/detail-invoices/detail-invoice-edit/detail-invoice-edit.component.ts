@@ -177,14 +177,17 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
     } else {
       this.details.setValue('');
       this.details2.setValue('');
-      this.signo.setValue('');
-      this.vaultinc.setValue('');
-      this.quantity.setValue('');
-      this.quantity2.setValue('');
-      this.total_amount.setValue('');
-      this.tax_exempt.setValue('');
-      this.disccount.setValue('');  
+      this.signo.setValue(false);
+      this.vaultinc.setValue(false);
+      this.quantity.setValue(0);
+      this.quantity2.setValue(0);
+      this.total_amount.setValue(0);
+      this.tax_exempt.setValue(false);
+      this.disccount.setValue(0);  
       this.head_invoice.setValue('');
+      if (this.headInvoiceId) {
+        this.getHeadInvoiceById(this.headInvoiceId);
+      }
     }
     this.formGroup.markAllAsTouched();
   }
@@ -326,6 +329,17 @@ export class DetailInvoiceEditComponent implements OnInit, OnDestroy {
       stringClass += ' is-invalid';
     }
     return stringClass;
+  }
+
+  getHeadInvoiceById(id) {
+    this.headInvoiceService.getById(id).toPromise().then(
+      response => {
+        this.head_invoice.setValue(response.head_invoice);
+      },
+      error => {
+        console.log('error getting head_invoice');
+      }
+    );
   }
 
   hideModal(){
