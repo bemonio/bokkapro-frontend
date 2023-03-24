@@ -672,7 +672,7 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
 
   changeTab(tabId: number) {
     this.activeTabId = tabId;
-    this.ngOnInit();
+    // this.ngOnInit();
   }
 
   ngOnDestroy() {

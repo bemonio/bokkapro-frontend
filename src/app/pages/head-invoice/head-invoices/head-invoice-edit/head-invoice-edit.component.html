@@ -89,7 +89,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'contract')">{{ 'HEADINVOICE.CONTRACT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
 
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.SERVICEORDER' | translate }}</label>
               <app-service-order-select
               name="serviceorder" [disabled]="!contract.value" [valid]="isControlValid('serviceorder')" [touched]="isControlTouched('serviceorder')" [class.is-invalid]="isControlInvalid('serviceorder')"
@@ -99,7 +99,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'serviceorder')">{{ 'HEADINVOICE.SERVICEORDER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'serviceorder')">{{ 'HEADINVOICE.SERVICEORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'serviceorder')">{{ 'HEADINVOICE.SERVICEORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
+            </div> -->
 
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.COMPANY_CONTACT' | translate }}</label>

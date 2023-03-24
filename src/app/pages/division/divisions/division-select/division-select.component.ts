@@ -51,14 +51,18 @@ export class DivisionSelectComponent implements ControlValueAccessor, OnInit, On
     }
 
     public ngOnInit() {
+        // if (!this.placeholder) {
+        //     this.placeholder = 'Select Division';
+        // }
+        // this.load();
+    }
+
+    ngOnChanges(): void {
+        // this.ngOnInit();
         if (!this.placeholder) {
             this.placeholder = 'Select Division';
         }
         this.load();
-    }
-
-    ngOnChanges(): void {
-        this.ngOnInit();
     }
 
     writeValue(value: any) {

@@ -624,7 +624,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
         .subscribe(response => {
             if (response) {
                 this.selectedModels = [];
-                this.loadLazy();
+                // this.loadLazy();
             }
         });
         this.unsubscribe.push(divisionChangeSubscription);

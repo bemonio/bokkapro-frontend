@@ -70,7 +70,7 @@ export class PackingsComponent implements OnInit {
 
 
         this.searchGroup = fb.group({
-            searchTerm: [''],
+            // searchTerm: [''],
         });
 
         this.translate.get('COMMON.MESSAGE_CONFIRM_DELETE').subscribe((res: string) => {
@@ -92,7 +92,7 @@ export class PackingsComponent implements OnInit {
 
         this.models = [];
         this.selectedModels = [];
-        this.getModels();
+        // this.getModels();
     }
 
     ngOnInit() {
