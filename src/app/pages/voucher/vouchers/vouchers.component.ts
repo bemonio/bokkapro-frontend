@@ -195,14 +195,14 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.showButtonTransferDivisionVoucher = false;
 
         this._with = [];
-        this._with.push({key: 'include[]', value: 'currency.*'})
-        this._with.push({key: 'include[]', value: 'cashier.*'})
-        // this._with.push({key: 'include[]', value: 'certified_cart.*'})
-        this._with.push({key: 'include[]', value: 'crew.*'})
-        this._with.push({key: 'include[]', value: 'crew_last.*'})
-        this._with.push({key: 'include[]', value: 'contract.*'})
-        this._with.push({key: 'include[]', value: 'origin_destination.origin.*'})
-        this._with.push({key: 'include[]', value: 'origin_destination.destination.*'})
+        // this._with.push({key: 'include[]', value: 'currency.*'})
+        // this._with.push({key: 'include[]', value: 'cashier.*'})
+        // // this._with.push({key: 'include[]', value: 'certified_cart.*'})
+        // this._with.push({key: 'include[]', value: 'crew.*'})
+        // this._with.push({key: 'include[]', value: 'crew_last.*'})
+        // this._with.push({key: 'include[]', value: 'contract.*'})
+        // this._with.push({key: 'include[]', value: 'origin_destination.origin.*'})
+        // this._with.push({key: 'include[]', value: 'origin_destination.destination.*'})
     }
     
     public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
@@ -295,77 +295,77 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.requesting = false;
-                this.models = [];
-                response.vouchers.forEach(element => {
-                    this.models.push(element);
-                });
-                if(response.currencies){
-                    response.currencies.forEach(currency => {
-                        this.models.forEach(element => {
-                            if (element.currency === currency.id) {
-                                element.currency = currency;
-                            }
-                        });
-                    });
-                }
-                if(response.cashiers){
-                    response.cashiers.forEach(cashier => {
-                        this.models.forEach(element => {
-                            if (element.cashier === cashier.id) {
-                                element.cashier = cashier;
-                            }
-                        });
-                    });
-                }
-                if(response.divisions){
-                    response.divisions.forEach(division => {
-                        this.models.forEach(element => {
-                            if (element.division === division.id) {
-                                element.division = division;
-                            }
-                        });
-                    });
-                }
-                if(response.contracts){
-                    response.contracts.forEach(contract => {
-                        this.models.forEach(element => {
-                            if (element.contract === contract.id) {
-                                element.contract = contract;
-                            }
-                        });
-                    });
-                }
-                if(response.origin_destinations){
-                    response.origin_destinations.forEach(origin_destination => {
-                        this.models.forEach(element => {
-                            if (element.origin_destination === origin_destination.id) {
-                                element.origin_destination = origin_destination;
-                            }
-                        });
-                    });
-                }
-                if(response.locations){
-                    response.locations.forEach(location => {
-                        this.models.forEach(element => {
-                            if(element.origin_destination) {
-                                if (element.origin_destination.origin === location.id) {
-                                    element.origin_destination.origin = location;
-                                }
-                            }
-                        });
-                    });
-                }
-                if(response.locations){
-                    response.locations.forEach(location => {
-                        this.models.forEach(element => {
-                            if(element.origin_destination){
-                                if (element.origin_destination.destination === location.id) {
-                                    element.origin_destination.destination = location;
-                                }
-                            }
-                        });
-                    });
-                }
+                this.models = response.vouchers;
+                // response.vouchers.forEach(element => {
+                //     this.models.push(element);
+                // });
+                // if(response.currencies){
+                //     response.currencies.forEach(currency => {
+                //         this.models.forEach(element => {
+                //             if (element.currency === currency.id) {
+                //                 element.currency = currency;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.cashiers){
+                //     response.cashiers.forEach(cashier => {
+                //         this.models.forEach(element => {
+                //             if (element.cashier === cashier.id) {
+                //                 element.cashier = cashier;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.divisions){
+                //     response.divisions.forEach(division => {
+                //         this.models.forEach(element => {
+                //             if (element.division === division.id) {
+                //                 element.division = division;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.contracts){
+                //     response.contracts.forEach(contract => {
+                //         this.models.forEach(element => {
+                //             if (element.contract === contract.id) {
+                //                 element.contract = contract;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.origin_destinations){
+                //     response.origin_destinations.forEach(origin_destination => {
+                //         this.models.forEach(element => {
+                //             if (element.origin_destination === origin_destination.id) {
+                //                 element.origin_destination = origin_destination;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.locations){
+                //     response.locations.forEach(location => {
+                //         this.models.forEach(element => {
+                //             if(element.origin_destination) {
+                //                 if (element.origin_destination.origin === location.id) {
+                //                     element.origin_destination.origin = location;
+                //                 }
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.locations){
+                //     response.locations.forEach(location => {
+                //         this.models.forEach(element => {
+                //             if(element.origin_destination){
+                //                 if (element.origin_destination.destination === location.id) {
+                //                     element.origin_destination.destination = location;
+                //                 }
+                //             }
+                //         });
+                //     });
+                // }
                 
                 this.totalRecords = response.meta.total_results;
             },
@@ -626,72 +626,73 @@ export class VouchersComponent implements OnInit, OnDestroy {
             response => {
                 this.requesting = false;
                 let models = [];
-                response.vouchers.forEach(element => {
-                    models.push(element);
-                });
-                if(response.currencies){
-                    response.currencies.forEach(currency => {
-                        models.forEach(element => {
-                            if (element.currency === currency.id) {
-                                element.currency = currency;
-                            }
-                        });
-                    });
-                }
-                if(response.cashiers){
-                    response.cashiers.forEach(cashier => {
-                        models.forEach(element => {
-                            if (element.cashier === cashier.id) {
-                                element.cashier = cashier;
-                            }
-                        });
-                    });
-                }
-                if(response.contracts){
-                    response.contracts.forEach(contract => {
-                        models.forEach(element => {
-                            if (element.contract === contract.id) {
-                                element.contract = contract;
-                            }
-                        });
-                    });
-                }
-                if(response.origin_destinations){
-                    response.origin_destinations.forEach(origin_destination => {
-                        models.forEach(element => {
-                            if (element.origin_destination === origin_destination.id) {
-                                element.origin_destination = origin_destination;
-                            }
-                        });
-                    });
-                }
-                if(response.locations){
-                    response.locations.forEach(location => {
-                        models.forEach(element => {
-                            if (element.origin_destination.origin === location.id) {
-                                element.origin_destination.origin = location;
-                            }
-                        });
-                    });
-                }
-                if(response.locations){
-                    response.locations.forEach(location => {
-                        models.forEach(element => {
-                            if (element.origin_destination.destination === location.id) {
-                                element.origin_destination.destination = location;
-                            }
-                        });
-                    });
-                }
-                if(response.divisions){
-                    response.divisions.forEach(division => {
-                        models.forEach(element => {
-                            if (element.division === division.id) {
-                                element.division = division;
-                            }
-                        });
-                    });
-                }
+                models = response.vouchers;
+                // response.vouchers.forEach(element => {
+                //     models.push(element);
+                // });
+                // if(response.currencies){
+                //     response.currencies.forEach(currency => {
+                //         models.forEach(element => {
+                //             if (element.currency === currency.id) {
+                //                 element.currency = currency;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.cashiers){
+                //     response.cashiers.forEach(cashier => {
+                //         models.forEach(element => {
+                //             if (element.cashier === cashier.id) {
+                //                 element.cashier = cashier;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.contracts){
+                //     response.contracts.forEach(contract => {
+                //         models.forEach(element => {
+                //             if (element.contract === contract.id) {
+                //                 element.contract = contract;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.origin_destinations){
+                //     response.origin_destinations.forEach(origin_destination => {
+                //         models.forEach(element => {
+                //             if (element.origin_destination === origin_destination.id) {
+                //                 element.origin_destination = origin_destination;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.locations){
+                //     response.locations.forEach(location => {
+                //         models.forEach(element => {
+                //             if (element.origin_destination.origin === location.id) {
+                //                 element.origin_destination.origin = location;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.locations){
+                //     response.locations.forEach(location => {
+                //         models.forEach(element => {
+                //             if (element.origin_destination.destination === location.id) {
+                //                 element.origin_destination.destination = location;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.divisions){
+                //     response.divisions.forEach(division => {
+                //         models.forEach(element => {
+                //             if (element.division === division.id) {
+                //                 element.division = division;
+                //             }
+                //         });
+                //     });
+                // }
 
                 if (models[0]) {
                     let found = false
@@ -1019,96 +1020,97 @@ export class VouchersComponent implements OnInit, OnDestroy {
         filters.push({ key: 'filter{verificated}', value: '1' });
         filters.push({ key: 'filter{is_active}', value: '1'});
         let _with = [];
-        _with.push({key: 'include[]', value: 'currency.*'})
-        _with.push({key: 'include[]', value: 'cashier.*'})
-        // _with.push({key: 'include[]', value: 'certified_cart.*'})
-        _with.push({key: 'include[]', value: 'crew.*'})
-        _with.push({key: 'include[]', value: 'crew_last.*'})
-        _with.push({key: 'include[]', value: 'contract.*'})
-        _with.push({key: 'include[]', value: 'origin_destination.origin.*'})
-        _with.push({key: 'include[]', value: 'origin_destination.destination.*'})
+        // _with.push({key: 'include[]', value: 'currency.*'})
+        // _with.push({key: 'include[]', value: 'cashier.*'})
+        // // _with.push({key: 'include[]', value: 'certified_cart.*'})
+        // _with.push({key: 'include[]', value: 'crew.*'})
+        // _with.push({key: 'include[]', value: 'crew_last.*'})
+        // _with.push({key: 'include[]', value: 'contract.*'})
+        // _with.push({key: 'include[]', value: 'origin_destination.origin.*'})
+        // _with.push({key: 'include[]', value: 'origin_destination.destination.*'})
 
         this.modelsService.get(page, per_page, sort, query, filters, _with).subscribe(
             response => {
                 this.requesting = false;
                 let models = [];
-                response.vouchers.forEach(voucher => {
-                    voucher.verificated = false;
-                    let packings = []
-                    voucher.packings.forEach(packing => {
-                        packing.verificated = false;
-                        packings.push(packing);
-                    });
-                    voucher.packings = packings;
-                    models.push(voucher);
-                });
-                if(response.currencies){
-                    response.currencies.forEach(currency => {
-                        models.forEach(element => {
-                            if (element.currency === currency.id) {
-                                element.currency = currency;
-                            }
-                        });
-                    });
-                }
-                if(response.cashiers){
-                    response.cashiers.forEach(cashier => {
-                        models.forEach(element => {
-                            if (element.cashier === cashier.id) {
-                                element.cashier = cashier;
-                            }
-                        });
-                    });
-                }
-                if(response.contracts){
-                    response.contracts.forEach(contract => {
-                        models.forEach(element => {
-                            if (element.contract === contract.id) {
-                                element.contract = contract;
-                            }
-                        });
-                    });
-                }
-                if(response.origin_destinations){
-                    response.origin_destinations.forEach(origin_destination => {
-                        models.forEach(element => {
-                            if (element.origin_destination === origin_destination.id) {
-                                element.origin_destination = origin_destination;
-                            }
-                        });
-                    });
-                }
-                if(response.locations){
-                    response.locations.forEach(location => {
-                        models.forEach(element => {
-                            if (element.origin_destination) {
-                                if (element.origin_destination.origin === location.id) {
-                                    element.origin_destination.origin = location;
-                                }
-                            }
-                        });
-                    });
-                }
-                if(response.locations){
-                    response.locations.forEach(location => {
-                        models.forEach(element => {
-                            if (element.origin_destination) {
-                                if (element.origin_destination.destination === location.id) {
-                                    element.origin_destination.destination = location;
-                                }
-                            }
-                        });
-                    });
-                }
-                if(response.divisions){
-                    response.divisions.forEach(division => {
-                        models.forEach(element => {
-                            if (element.division === division.id) {
-                                element.division = division;
-                            }
-                        });
-                    });
-                }
+                models = response.vouchers;
+                // response.vouchers.forEach(voucher => {
+                //     voucher.verificated = false;
+                //     let packings = []
+                //     voucher.packings.forEach(packing => {
+                //         packing.verificated = false;
+                //         packings.push(packing);
+                //     });
+                //     voucher.packings = packings;
+                //     models.push(voucher);
+                // });
+                // if(response.currencies){
+                //     response.currencies.forEach(currency => {
+                //         models.forEach(element => {
+                //             if (element.currency === currency.id) {
+                //                 element.currency = currency;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.cashiers){
+                //     response.cashiers.forEach(cashier => {
+                //         models.forEach(element => {
+                //             if (element.cashier === cashier.id) {
+                //                 element.cashier = cashier;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.contracts){
+                //     response.contracts.forEach(contract => {
+                //         models.forEach(element => {
+                //             if (element.contract === contract.id) {
+                //                 element.contract = contract;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.origin_destinations){
+                //     response.origin_destinations.forEach(origin_destination => {
+                //         models.forEach(element => {
+                //             if (element.origin_destination === origin_destination.id) {
+                //                 element.origin_destination = origin_destination;
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.locations){
+                //     response.locations.forEach(location => {
+                //         models.forEach(element => {
+                //             if (element.origin_destination) {
+                //                 if (element.origin_destination.origin === location.id) {
+                //                     element.origin_destination.origin = location;
+                //                 }
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.locations){
+                //     response.locations.forEach(location => {
+                //         models.forEach(element => {
+                //             if (element.origin_destination) {
+                //                 if (element.origin_destination.destination === location.id) {
+                //                     element.origin_destination.destination = location;
+                //                 }
+                //             }
+                //         });
+                //     });
+                // }
+                // if(response.divisions){
+                //     response.divisions.forEach(division => {
+                //         models.forEach(element => {
+                //             if (element.division === division.id) {
+                //                 element.division = division;
+                //             }
+                //         });
+                //     });
+                // }
                 this.listVouchersConfirmationDelivered = models;
                 let count = this.voucherLenght(this.listVouchersConfirmationDelivered);
                 this.vouchersConfirmationDelivered.setValidators(Validators.compose([Validators.required, Validators.minLength(count), Validators.maxLength(count)]));
@@ -1163,7 +1165,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
         if (this.authService.hasPermission('change_voucheradmin_sales')) {
             result = true;
         } else {
-            if (this.authService.currentDivisionValue.id === voucher.division.id) {
+            if (this.authService.currentDivisionValue.id === voucher.division) {
                 switch (this.route.parent.parent.snapshot.url[0].path) {
                     case 'vouchersconfirmationdelivered':
                         if (this.authService.hasPermission('change_voucherconfirmationdelivered')) {
@@ -1188,7 +1190,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     hasPermissionDelete(voucher) {
         let result = false;
-        if (this.authService.currentDivisionValue.id === voucher.division.id) {
+        if (this.authService.currentDivisionValue.id === voucher.division) {
             switch (this.route.parent.parent.snapshot.url[0].path) {
                 case 'vouchersconfirmationdelivered':
                     if (this.authService.hasPermission('delete_voucherconfirmationdelivered')) {

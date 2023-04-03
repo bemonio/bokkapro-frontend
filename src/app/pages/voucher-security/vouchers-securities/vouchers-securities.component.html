@@ -133,19 +133,19 @@
             {{value.code}}
           </td>
           <td>
-            {{value.packings.length}}
+            {{value.count_packings}}
           </td>
           <td>
-            {{value.contract?.code}}
+            {{value.contract_code}}
           </td>
           <td>
             {{value.date_delivery | date: 'MM/dd/yyyy HH:mm:ss':'UTC -4'}}
           </td>
           <td>
-            {{value.origin_destination?.origin?.name}} - {{value.origin_destination?.destination?.name}} 
+            {{value.origin_name}} - {{value.destination_name}} 
           </td>
           <td>
-            {{value.division?.name}}
+            {{value.division_name}}
           </td>
           <td>
             {{value.certified_cart_code}}

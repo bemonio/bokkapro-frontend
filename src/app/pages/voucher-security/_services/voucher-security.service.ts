@@ -54,7 +54,7 @@ export class VoucherSecurityService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=division.*`);
+        return this.http.get(`${this.API_URL}?${params}`);
     }
 
     public post(body: Object): Observable<any> {
