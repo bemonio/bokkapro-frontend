@@ -52,14 +52,18 @@ export class OriginDestinationSelectComponent implements ControlValueAccessor, O
     }
 
     public ngOnInit() {
+        // if (!this.placeholder) {
+        //     this.placeholder = 'Origin Destination';
+        // }
+        // this.load();
+    }
+
+    ngOnChanges(): void {
+        // this.ngOnInit();
         if (!this.placeholder) {
             this.placeholder = 'Origin Destination';
         }
         this.load();
-    }
-
-    ngOnChanges(): void {
-        this.ngOnInit();
     }
 
     writeValue(value: any) {

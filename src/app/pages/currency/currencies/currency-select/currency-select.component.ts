@@ -52,14 +52,18 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
     }
 
     public ngOnInit() {
+        // if (!this.placeholder) {
+        //     this.placeholder = '';
+        // }
+        // this.load();
+    }
+    
+    ngOnChanges(): void {
+        // this.ngOnInit();
         if (!this.placeholder) {
             this.placeholder = '';
         }
         this.load();
-    }
-    
-    ngOnChanges(): void {
-        this.ngOnInit();
     }
 
     writeValue(value: any) {
