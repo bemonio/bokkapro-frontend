@@ -46,7 +46,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CREW.DIVISION' | translate }}</label>
               <app-division-autocomplete [addFilters]="[{key: 'type_division', value: 2}]"
               name="division" [valid]="isControlValid('division')" [touched]="isControlTouched('division')" [class.is-invalid]="isControlInvalid('division')"
-              [class.is-valid]="isControlValid('division')" formControlName="division" id="division" [model]="model.division" (change)="changeDivision($event)"></app-division-autocomplete>
+              [class.is-valid]="isControlValid('division')" formControlName="division" id="division" [model]="model.division" (onSelect)="changeDivision($event)"></app-division-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('division')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CREW.DIVISION' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('division')">{{ 'CREW.DIVISION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'division')">{{ 'CREW.DIVISION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

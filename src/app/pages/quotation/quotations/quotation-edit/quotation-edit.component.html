@@ -68,7 +68,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'QUOTATION.TEMPLATE' | translate }}</label>
               <app-quote-template-autocomplete
               name="template" [valid]="isControlValid('template')" [touched]="isControlTouched('template')" [class.is-invalid]="isControlInvalid('template')"
-              [class.is-valid]="isControlValid('template')" formControlName="template" id="template" [model]="model.template" (change)="changeTemplate()"></app-quote-template-autocomplete>
+              [class.is-valid]="isControlValid('template')" formControlName="template" id="template" [model]="model.template" (onSelect)="changeTemplate()"></app-quote-template-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('template')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'QUOTATION.TEMPLATE' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('template')">{{ 'QUOTATION.TEMPLATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'template')">{{ 'QUOTATION.TEMPLATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

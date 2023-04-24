@@ -137,7 +137,7 @@
               <app-location-autocomplete
               name="location_destination" [valid]="isControlValid('location_destination')" [touched]="isControlTouched('location_destination')" [class.is-invalid]="isControlInvalid('location_destination')"
               [class.is-valid]="isControlValid('location_destination')" formControlName="location_destination" id="location_destination" [model]="model.location_destination"
-              [addFilters]="[{key: 'type_address', value: 'Destino'}]" (change)="changeRequiredLocation()"></app-location-autocomplete>
+              [addFilters]="[{key: 'type_address', value: 'Destino'}]" (onSelect)="changeRequiredLocation()"></app-location-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('location_destination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.LOCATION_DESTINATION' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('location_destination')">{{ 'VOUCHER.LOCATION_DESTINATION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'location_destination')">{{ 'VOUCHER.LOCATION_DESTINATION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -151,7 +151,7 @@
               <app-contract-autocomplete
               name="contract" [valid]="isControlValid('contract')" [touched]="isControlTouched('contract')" [class.is-invalid]="isControlInvalid('contract')"
               [class.is-valid]="isControlValid('contract')" formControlName="contract" id="contract" [model]="model.contract" 
-              (change)="changeContract()" [addFilters]="[{key: 'company.office_belongs', value: officeUser}]"></app-contract-autocomplete>
+              (onSelect)="changeContract()" [addFilters]="[{key: 'company.office_belongs', value: officeUser}]"></app-contract-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('contract')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'VOUCHER.CONTRACT' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('contract')">{{ 'VOUCHER.CONTRACT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'contract')">{{ 'VOUCHER.CONTRACT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
