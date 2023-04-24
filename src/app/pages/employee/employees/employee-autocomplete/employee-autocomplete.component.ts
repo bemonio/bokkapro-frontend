@@ -29,6 +29,7 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
     @Input() placeholder: string;
     @Input() isCrewInput: boolean;
     @Input() addFilters: { key: string, value: string }[];
+    @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
 
     public models: any[];
 
@@ -84,9 +85,10 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
         this.readOnly = isreadOnly;
     }
 
-    public change($event) {
+    public change(event) {
         this.onChange(this.value);
         this.onTouched(this.value);
+        this.onSelect.emit(event);
     }
 
     public loadLazy(event?) {

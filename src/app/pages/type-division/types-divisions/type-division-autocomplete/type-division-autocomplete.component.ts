@@ -25,6 +25,7 @@ export class TypeDivisionAutocompleteComponent implements ControlValueAccessor, 
     @Input() readOnly: boolean;
     @Input() placeholder: string;
     @Input() addFilters: { key: string, value: string }[];
+    @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
 
     public models: any[];
 
@@ -79,9 +80,10 @@ export class TypeDivisionAutocompleteComponent implements ControlValueAccessor, 
         this.readOnly = isreadOnly;
     }
 
-    public change($event) {
+    public change(event) {
         this.onChange(this.value);
         this.onTouched(this.value);
+        this.onSelect.emit(event);
     }
 
     public loadLazy(event?) {
