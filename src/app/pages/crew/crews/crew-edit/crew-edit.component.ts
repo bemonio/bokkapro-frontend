@@ -394,6 +394,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     this.division.setValue(division);
     if (division) {
       this.office.setValue({id:division.office,name:division.office_name});
+      this.model.office = {id:division.office,name:division.office_name}
     }
     this.loadForm();
   }
