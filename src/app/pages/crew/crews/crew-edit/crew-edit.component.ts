@@ -140,6 +140,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
         this.model = response.crew;
         if (response.divisions) {
           this.model.division = response.divisions[0];
+          this.model.office = {id:response.divisions[0].office,name:response.divisions[0].office_name}
         }
         if (response.employees) {
           this.model.driver = response.employees[0];
@@ -263,7 +264,7 @@ export class CrewEditComponent implements OnInit, OnDestroy {
     model.division = this.model.division.id;
     model.driver = this.model.driver.id;
     model.assistant = this.model.assistant.id;
-    model.assistant2 = this.model.assistant2.id;
+    model.assistant2 = (this.model.assistant2) ? this.model.assistant2.id :null;
     model.vehicle = this.model.vehicle.id;
     model.office = this.model.office.id;
 
@@ -388,11 +389,11 @@ export class CrewEditComponent implements OnInit, OnDestroy {
   }
 
   public changeDivision(event) {
-    let division = this.division.value;
-    this.formGroup.reset()
-    this.division.setValue(division)
+    let division = event;
+    this.formGroup.reset();
+    this.division.setValue(division);
     if (division) {
-      this.office.setValue(division.office)
+      this.office.setValue({id:division.office,name:division.office_name});
     }
     this.loadForm();
   }

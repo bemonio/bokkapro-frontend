@@ -23,9 +23,11 @@
           <p-toggleButton styleClass="form-control" onLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.ALL' | translate }}" offLabel="{{ 'COMMON.ASSIGNED_TO_ME' | translate}}"  [style]="{'width': '11em'}" (click)="applyFilter('cashier')"></p-toggleButton>
           <p-toggleButton styleClass="form-control ml-3" onLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.ACTIVES' | translate }}" offLabel="{{ 'COMMON.SHOW' | translate }} {{ 'COMMON.INACTIVES' | translate}}"  [style]="{'width': '11em'}" (click)="applyFilter('active')"></p-toggleButton>
         </div>
-        <div class="col-lg-6" [formGroup]="securityGroup">
-          <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
-            formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> </small>
+        <div class="col-lg-6">
+          <form action="#" [formGroup]="searchGroup">
+            <input type="text" class="form-control" name="searchText" placeholder="{{ 'COMMON.SEARCH' | translate }}" value="" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              formControlName="searchTerm" /><small class="form-text text-muted"><b>{{ 'COMMON.SEARCH' | translate }}</b> </small>
+          </form>
         </div>
       </div>
     </div>

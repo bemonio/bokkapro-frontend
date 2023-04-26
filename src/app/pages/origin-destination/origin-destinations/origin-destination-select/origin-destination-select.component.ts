@@ -102,7 +102,8 @@ export class OriginDestinationSelectComponent implements ControlValueAccessor, O
         }
 
         if(this.addFilters && this.addFilters[0].key === 'contract'){
-            this.getModelsOriginDestinationById(this.addFilters[0].value);
+            if(this.addFilters[0].value)
+                this.getModelsOriginDestinationById(this.addFilters[0].value);
         } else {
             this.getModels();
         }
