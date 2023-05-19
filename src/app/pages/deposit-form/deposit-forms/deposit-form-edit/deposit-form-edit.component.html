@@ -46,7 +46,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.PACKING' | translate }}</label>
               <app-packing-autocomplete
               name="packing" [valid]="isControlValid('packing')" [touched]="isControlTouched('packing')" [class.is-invalid]="isControlInvalid('packing')"
-              [class.is-valid]="isControlValid('packing')" formControlName="packing" id="packing" [model]="model.packing" [disabled]="packing.value ? true : false"></app-packing-autocomplete>
+              [class.is-valid]="isControlValid('packing')" formControlName="packing" id="packing" [model]="model.packing" [disabled]="formGroup.controls.packing.value ? true : false"></app-packing-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('packing')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.PACKING' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('packing')">{{ 'DEPOSITFORM.PACKING' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'packing')">{{ 'DEPOSITFORM.PACKING' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -159,15 +159,48 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
-            <div class="col-lg-12" *ngIf="model.id">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.REVIEW' | translate }}</label>
-              <p-editor formControlName="review" [style]="{'height':'220px'}" placeholder="{{ 'DEPOSITFORM.REVIEW' | translate }}"></p-editor>
+            
+          </div>
+
+          <div class="form-group row" formArrayName="arrayPrincipal">
+            <div *ngFor="let formArray of formGroup.get('arrayPrincipal')['controls']; let i = index">
+              <div [formArrayName]="i">
+                <h2>{{badges[i].moneda}}</h2>
+                <div class="row" *ngFor="let nestedFormGroup of formArray['controls']; let j = index" [formGroupName]="j">
+                  <div class="col-md-4">
+                    <label> {{badges[i].denominaciones[j].nombre}} </label>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="nestedFormControl1">Cantidad:</label>
+                    <input type="text" id="nestedFormControl1" formControlName="nestedFormControl1">
+                    <!-- <div *ngIf="nestedFormGroup.controls['nestedFormControl1'].invalid && nestedFormGroup.controls['nestedFormControl1'].touched">
+                      Este campo es requerido.
+                    </div> -->
+                  </div>
+        
+                  <div class="col-md-3">
+                    <label for="nestedFormControl2">Total:</label>
+                    <input type="text" id="nestedFormControl2" formControlName="nestedFormControl2">
+                    <!-- <div *ngIf="nestedFormGroup.controls['nestedFormControl2'].invalid && nestedFormGroup.controls['nestedFormControl2'].touched">
+                      Este campo es requerido.
+                    </div> -->
+                  </div>
+                  
+                </div>
+        
+              </div>
             </div>
           </div>
+       
+        
 
           <!-- <div class="mt-5" *ngIf="model && model.id">
             <app-deposit-formdetail></app-deposit-formdetail>
           </div> -->
+          <div class="col-lg-12">
+            <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.REVIEW' | translate }}</label>
+            <p-editor formControlName="review" [style]="{'height':'220px'}" placeholder="{{ 'DEPOSITFORM.REVIEW' | translate }}"></p-editor>
+          </div>
 
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/depositforms">{{ 'COMMON.CANCEL' | translate }}</a>
