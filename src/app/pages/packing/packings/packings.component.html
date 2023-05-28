@@ -55,7 +55,7 @@
               {{ 'PACKING.VERIFICATED' | translate }}
             </div>
           </th>
-          <th style="width: 10rem">
+          <th style="width: 13rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
@@ -82,6 +82,12 @@
             {{value.verificated}}
           </td>
           <td style="text-align: right">
+            <a title="{{ 'COMMON.NEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+            routerLink="{{parent}}/packings/view/{{value.id}}" *ngIf="authService.hasPermission('view_packing')">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/delivery-truck-van-svgrepo-com.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-info">
+              </span>
+            </a>
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
             routerLink="{{parent}}/packings/view/{{value.id}}" *ngIf="authService.hasPermission('view_packing')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Eye.svg'" cacheSVG="true"
