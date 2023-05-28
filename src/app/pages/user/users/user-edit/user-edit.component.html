@@ -149,7 +149,8 @@
               <div class="feedback" *ngIf="!isControlTouched('password')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'USER.PASSWORD' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('password')">{{ 'USER.PASSWORD' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'password')">{{ 'USER.PASSWORD' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'password')">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'password')">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 8</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'password')">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST_ONE_UPPERCASE_LETTER_AND_ONE_SPECIAL_CHARACTER' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'password')">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-2">

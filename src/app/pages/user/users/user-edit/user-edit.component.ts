@@ -74,7 +74,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
       first_name: [''],
       last_name: [''],
       email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
-      password: [''],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(100), Validators.pattern(/^(?=.*[A-Z])(?=.*[@$!%*?&.]).*$/)])],
       // user_permissions: [''],
       groups: [''],
       is_active: [''],
