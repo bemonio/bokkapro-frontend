@@ -159,13 +159,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4">
+              <p-multiSelect class="form-control form-control-lg form-control-solid" [options]="currencyOptions" formControlName="selectedCurrencies" optionLabel="name" (onChange)="onMultiSelectChange($event)"></p-multiSelect>
+            </div>
             
           </div>
 
-          <div class="form-group row" formArrayName="arrayPrincipal">
+          <!-- <div class="form-group row" formArrayName="arrayPrincipal">
             <div *ngFor="let formArray of formGroup.get('arrayPrincipal')['controls']; let i = index">
               <div [formArrayName]="i">
-                <h2>{{badges[i].moneda}}</h2>
                 <div class="row" *ngFor="let nestedFormGroup of formArray['controls']; let j = index" [formGroupName]="j">
                   <div class="col-md-4">
                     <label> {{badges[i].denominaciones[j].nombre}} </label>
@@ -173,25 +175,48 @@
                   <div class="col-md-4">
                     <label for="nestedFormControl1">Cantidad:</label>
                     <input type="text" id="nestedFormControl1" formControlName="nestedFormControl1">
-                    <!-- <div *ngIf="nestedFormGroup.controls['nestedFormControl1'].invalid && nestedFormGroup.controls['nestedFormControl1'].touched">
-                      Este campo es requerido.
-                    </div> -->
+                    
                   </div>
         
                   <div class="col-md-3">
                     <label for="nestedFormControl2">Total:</label>
                     <input type="text" id="nestedFormControl2" formControlName="nestedFormControl2">
-                    <!-- <div *ngIf="nestedFormGroup.controls['nestedFormControl2'].invalid && nestedFormGroup.controls['nestedFormControl2'].touched">
-                      Este campo es requerido.
-                    </div> -->
+                   
                   </div>
                   
                 </div>
         
               </div>
             </div>
+          </div> -->
+          <div class="form-group row test"  formArrayName="arrayPrincipal">
+            <div class="col-12 testb" *ngFor="let control of dynamicFormArray.controls; let i = index">
+              <div class="row test" [formGroupName]="i">
+                <div class="col-md-12"><h3>{{ control.value.item.name }}</h3></div> 
+                <div class="col-md-3"><h3>Denominación</h3></div>
+                <div class="col-md-3"><h3>Cantidad</h3></div>
+                <div class="col-md-6"><h3>Total</h3></div>
+                <div class="col-md-12" formArrayName="denominations">
+                  <div *ngFor="let denominationControl of control.get('denominations').controls; let j = index">
+                    <div class="row denomination" [formGroupName]="j">
+                      <div class="col-md-3">
+                        <label>{{denominationControl.value.denomination}}</label>
+                      </div>
+                      <div class="col-md-3">
+                        <input type="number" class="form-control form-control-md form-control-solid" autocomplete="off" formControlName="quantity" placeholder="value">  
+                      </div>
+                      <div class="col-md-3">
+                        <label>0</label>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-5 offset-md-5"><h3>Subtotal: 203209</h3></div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="dynamicFormArray.controls.length > 0" class="col-md-5 offset-md-5"><h3>Total: 203209</h3></div>
           </div>
-       
         
 
           <!-- <div class="mt-5" *ngIf="model && model.id">
