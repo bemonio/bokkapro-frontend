@@ -450,6 +450,7 @@ export const locale = {
       WAS_ENTERED_CORRECT: 'ingresado correctamente',
       SHOULD_HAVE_LEAST: 'debería tener mínimo',
       SHOULD_HAVE_MAXIMUM: 'debería tener máximo',
+      SHOULD_HAVE_LEAST_ONE_UPPERCASE_LETTER_AND_ONE_SPECIAL_CHARACTER: 'debería tener mínimo 1 mayúscula y 1 caracter especial',
       SHOWING: 'Mostrando',
       SHOW: 'Mostar',
       ASSIGNED_TO_ME: 'Asignados a mí',
