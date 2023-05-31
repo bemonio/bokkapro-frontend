@@ -53,16 +53,16 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   // };
   denominations: any = {
     dolar: [
-      { key: 'billete1', value: 'Billete 1' },
-      { key: 'billete2', value: 'Billete 2' },
-      { key: 'moneda1', value: 'Moneda 1' },
-      { key: 'moneda2', value: 'Moneda 2' }
+      { key: 'billete1', value: 'Billete 1', valueMoney: '1' },
+      { key: 'billete2', value: 'Billete 2', valueMoney: '2' },
+      { key: 'moneda1', value: 'Moneda 1', valueMoney: '0.01' },
+      { key: 'moneda2', value: 'Moneda 2', valueMoney: '0.02' }
     ],
     euro: [
-      { key: 'billete5', value: 'Billete 5' },
-      { key: 'billete10', value: 'Billete 10' },
-      { key: 'moneda5', value: 'Moneda 5' },
-      { key: 'moneda10', value: 'Moneda 10' }
+      { key: 'billete5', value: 'Billete 5', valueMoney: '5' },
+      { key: 'billete10', value: 'Billete 10', valueMoney: '10' },
+      { key: 'moneda5', value: 'Moneda 5', valueMoney: '0.05' },
+      { key: 'moneda10', value: 'Moneda 10', valueMoney: '0.1' }
     ]
   };
   items: SelectItem[] = [
@@ -352,11 +352,14 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     itemsToAdd.forEach(item => {
       const denominationsArray = this.denominations[item.value].map(denomination => this.fb.group({
         denomination: [denomination.value],
-        quantity: ['0']
+        quantity: ['0'],
+        valueDenomination: [denomination.valueMoney],
+        totalDimension: ['0'],
       }));
       const newGroup = this.fb.group({
         item: [item],
-        denominations: this.fb.array(denominationsArray)
+        denominations: this.fb.array(denominationsArray),
+        subtotal: ['0'],
       });
       this.dynamicFormArray.push(newGroup);
     });
@@ -370,7 +373,36 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  calcByDim(event: any, indexDenomination: string, indexControlDivisa:string){
+    const quantity = event.target.value;
+    
+
+    //Encontrar formulario de divisa
+    const divisaFormGroup = this.dynamicFormArray.controls[indexControlDivisa];
+    
+    //obtener el control del formulario correspondiente
+    var controlresult = divisaFormGroup.controls.denominations.controls[indexDenomination];
+    var result = quantity * controlresult.controls.valueDenomination.value;
+    //asignar el resultado a dicho control
+    controlresult.controls.totalDimension.setValue(result);
+    this.calcByBadge(indexControlDivisa);
+  }
+
+  calcByBadge(indexControlDivisa:string){
+    //Encontrar formulario de divisa
+    const divisaFormGroup = this.dynamicFormArray.controls[indexControlDivisa];
+    const controlsDivisa = divisaFormGroup.controls.denominations.controls;
+    
+    const suma = Object.keys(controlsDivisa).reduce((acc, controlName) => {
+      const controlValue = controlsDivisa[controlName].value.totalDimension;
+      const valueNumber= parseFloat(controlValue);
+      return acc + valueNumber;
+    }, 0);
   
+    divisaFormGroup.controls.subtotal.setValue(suma);
+  }
+
 
 
   save(saveAndExit) {
@@ -608,16 +640,16 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   {
     var denominations = {
       dolar: [
-        { key: 'billete1', value: 'Billete 1' },
-        { key: 'billete2', value: 'Billete 2' },
-        { key: 'moneda1', value: 'Moneda 1' },
-        { key: 'moneda2', value: 'Moneda 2' }
+        { key: 'Billete 1', value: '1' },
+        { key: 'Billete 2', value: '2' },
+        { key: 'Moneda 1', value: '0.01' },
+        { key: 'Moneda 2', value: '0.02' }
       ],
       euro: [
-        { key: 'billete5', value: 'Billete 5' },
-        { key: 'billete10', value: 'Billete 10' },
-        { key: 'moneda5', value: 'Moneda 5' },
-        { key: 'moneda10', value: 'Moneda 10' }
+        { key: 'Billete 5', value: '5' },
+        { key: 'Billete 10', value: '10' },
+        { key: 'Moneda 5', value: '0.05' },
+        { key: 'Moneda 10', value: '0.1' }
       ]
     };
     return denominations;
