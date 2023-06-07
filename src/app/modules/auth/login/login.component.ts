@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   isLoading$: Observable<boolean>;
   version = version;
 
+  lock: boolean;
+
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
 
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private userService: UserService,
   ) {
+    this.lock = false;
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
     if (this.authService.currentUserValue) {
@@ -49,6 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.lock = this.router.url.includes('/lock');
+
     this.initForm();
     // get return url from route parameters or default to '/'
     this.returnUrl =
@@ -75,8 +80,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.defaultAuth.password,
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(8),
           Validators.maxLength(100),
+          // Validators.pattern(/^(?=.*[A-Z])(?=.*[@$!%*?&.]).*$/)
         ]),
       ],
     });
@@ -84,6 +90,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submit() {
     this.hasError = false;
+    this.lock = false;
     const loginSubscr = this.authService
       .login(this.f.username.value, this.f.password.value)
       .pipe(first())

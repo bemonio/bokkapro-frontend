@@ -117,7 +117,7 @@
               <div class="valid-feedback" *ngIf="isControlValid('email')">{{ 'USER.EMAIL' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'email')">{{ 'USER.EMAIL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'email')">{{ 'USER.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">{{ 'USER.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'email')">{{ 'USER.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'USER.GROUPS' | translate }}</label>
@@ -141,6 +141,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'user_permissions')">{{ 'USER.PERMISSIONS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'user_permissions')">{{ 'USER.PERMISSIONS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div> -->
+            
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'USER.PASSWORD' | translate }}</label>
               <input type="password" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -149,9 +150,12 @@
               <div class="feedback" *ngIf="!isControlTouched('password')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'USER.PASSWORD' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('password')">{{ 'USER.PASSWORD' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'password')">{{ 'USER.PASSWORD' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'password')">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 8</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'password')">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST_ONE_UPPERCASE_LETTER_AND_ONE_SPECIAL_CHARACTER' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'password')">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'password')">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} {{password_setting.min_password_length}}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'password')">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} {{password_setting.max_password_length}}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'password') && passwordErrors?.requiredLowercase">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_LOWER_LEAST' | translate }} {{password_setting.min_lowercase_chars}}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'password') && passwordErrors?.requiredUppercase">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_UPPER_LEAST' | translate }} {{password_setting.min_uppercase_chars}}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'password') && passwordErrors?.requiredNumeric">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_NUMERIC_LEAST' | translate }} {{password_setting.min_numeric_chars}}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'password') && passwordErrors?.requiredSpecial">{{ 'USER.PASSWORD' | translate }} {{ 'COMMON.SHOULD_HAVE_SPECIAL_LEAST' | translate }} {{password_setting.min_special_chars}}</div>
             </div>
             <div class="col-lg-2">
               <label>{{ 'USER.IS_ACTIVATE' | translate }}</label>

@@ -489,6 +489,13 @@ const routes: Routes = [
             (m) => m.TypeServiceOrderRoutingModule
           ),
       },
+      {
+        path: 'passwordssettings',
+        loadChildren: () =>
+          import('../pages/password-setting/password-setting-routing.module').then(
+            (m) => m.PasswordSettingRoutingModule
+          ),
+      },
     ],
   },
 ];

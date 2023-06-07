@@ -22,8 +22,8 @@ export class TokenStorageService {
   public getAuth(): AuthModel {
     let authModel = new AuthModel();
     if (localStorage.getItem(TOKEN_KEY)) {
-      authModel.accessToken = this.getToken();
-      authModel.refreshToken = this.getRefreshToken();
+      authModel.access = this.getToken();
+      authModel.refresh = this.getRefreshToken();
     }
     return authModel;
   }
@@ -32,7 +32,7 @@ export class TokenStorageService {
     let token = undefined;
     if (localStorage.getItem(TOKEN_KEY))
     {
-      token = JSON.parse(localStorage.getItem(TOKEN_KEY)).accessToken;
+      token = JSON.parse(localStorage.getItem(TOKEN_KEY)).access;
     }
     return token;
   }
@@ -41,7 +41,7 @@ export class TokenStorageService {
     let token = undefined;
     if (localStorage.getItem(TOKEN_KEY))
     {
-      token = JSON.parse(localStorage.getItem(TOKEN_KEY)).refreshToken;
+      token = JSON.parse(localStorage.getItem(TOKEN_KEY)).refresh;
     }
     return token;
   }

@@ -9,6 +9,9 @@ import { UserModel as Model } from '../../_models/user.model';
 import { UserService as ModelsService } from '../../_services/user.service';
 import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 
+import { PasswordSettingModel as PasswordSettingModel } from '../../../password-setting/_models/password-setting.model';
+import { PasswordSettingService as PasswordSettingService } from '../../../password-setting/_services/password-setting.service';
+
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
@@ -56,12 +59,15 @@ export class UserEditComponent implements OnInit, OnDestroy {
   transform: ImageTransform = {};
   public displayModalAvatar: boolean;
 
+  public password_setting: PasswordSettingModel;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private passwordSettingService: PasswordSettingService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
@@ -69,19 +75,43 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
     this.view = false;
 
+    this.password_setting = new PasswordSettingModel();
+    this.password_setting.password_change_frequency_days = 30;
+    this.password_setting.password_expiry_notification = true;
+    this.password_setting.password_expiry_notification_days = 5;
+    this.password_setting.failed_login_attempts = 5;
+    this.password_setting.min_password_length = 8;
+    this.password_setting.max_password_length = 12;
+    this.password_setting.previous_passwords_disallowed = 8;
+    this.password_setting.password_reset_required = true;
+    this.password_setting.complex_password_required = true;
+    this.password_setting.min_lowercase_chars = 1;
+    this.password_setting.min_uppercase_chars = 1;
+    this.password_setting.min_numeric_chars = 1;
+    this.password_setting.min_special_chars = 0;
+
     this.formGroup = this.fb.group({
       username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
       first_name: [''],
       last_name: [''],
       email: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(255)])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(100), Validators.pattern(/^(?=.*[A-Z])(?=.*[@$!%*?&.]).*$/)])],
-      // user_permissions: [''],
+      password: ['',
+        Validators.compose(
+          [
+            Validators.required,
+            Validators.minLength(this.password_setting.min_password_length),
+            Validators.maxLength(this.password_setting.max_password_length),
+            Validators.pattern(`^(?=.*[a-z]{${this.password_setting.min_lowercase_chars},})(?=.*[A-Z]{${this.password_setting.min_uppercase_chars},})(?=.*\\d{${this.password_setting.min_numeric_chars},})(?=.*[^a-zA-Z\\d]{${this.password_setting.min_special_chars},}).+$`)
+          ]
+        )
+      ],
       groups: [''],
       is_active: [''],
       is_staff: [''],
       is_superuser: [''],
       avatar: ['']
-    });
+    })
+
     this.username = this.formGroup.controls['username'];
     this.first_name = this.formGroup.controls['first_name'];
     this.last_name = this.formGroup.controls['last_name'];
@@ -100,6 +130,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
     this.get();
+    this.get_password_settings();
 
     this.newAvatar = false;
     this.displayModalAvatar = false;
@@ -153,6 +184,44 @@ export class UserEditComponent implements OnInit, OnDestroy {
         }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
+      }
+    });
+    this.subscriptions.push(sb);
+  }
+
+  get_password_settings() {
+    this.requesting = true;
+    const sb = this.route.paramMap.pipe(
+      switchMap(params => {
+        return this.passwordSettingService.getById(1);
+      }),
+      catchError((error) => {
+        this.requesting = false;
+        let messageError = [];
+        if (!Array.isArray(error.error)) {
+          messageError.push(error.error);
+        } else {
+          messageError = error.error;
+        }
+        Object.entries(messageError).forEach(
+          ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
+        );
+        return of({ 'password_settings': new PasswordSettingModel() });
+      }),
+    ).subscribe((response: any) => {
+      this.requesting = false;
+      if (response) {
+        this.password_setting = response.password_setting;
+        this.password.setValidators(
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(this.password_setting.min_password_length),
+            Validators.maxLength(this.password_setting.max_password_length),
+            Validators.pattern(`^(.*[a-z]){${this.password_setting.min_lowercase_chars},}.*$`),
+            Validators.pattern(`^(.*[A-Z]){${this.password_setting.min_uppercase_chars},}.*$`),
+            Validators.pattern(`^(.*\\d){${this.password_setting.min_numeric_chars},}.*$`),
+            Validators.pattern(`^(.*[^a-zA-Z\\d]){${this.password_setting.min_special_chars},}.*$`)
+          ]));
       }
     });
     this.subscriptions.push(sb);
@@ -477,5 +546,32 @@ export class UserEditComponent implements OnInit, OnDestroy {
       }
     }
     return result
+  }
+
+  get passwordErrors() {
+    const errors = this.password.errors;
+    if (errors?.pattern) {
+      const passwordValue = this.password.value;
+      const errorObj: any = {};
+  
+      const lowercaseRegex = /[a-z]/;
+      const uppercaseRegex = /[A-Z]/;
+      const numericRegex = /\d/;
+      const specialRegex = /[^a-zA-Z\d]/;
+  
+      const minLowercaseChars = this.password_setting.min_lowercase_chars;
+      const minUppercaseChars = this.password_setting.min_uppercase_chars;
+      const minNumericChars = this.password_setting.min_numeric_chars;
+      const minSpecialChars = this.password_setting.min_special_chars;
+  
+      errorObj.requiredLowercase = minLowercaseChars > 0 && !lowercaseRegex.test(passwordValue);
+      errorObj.requiredUppercase = minUppercaseChars > 0 && !uppercaseRegex.test(passwordValue);
+      errorObj.requiredNumeric = minNumericChars > 0 && !numericRegex.test(passwordValue);
+      errorObj.requiredSpecial = minSpecialChars > 0 && !specialRegex.test(passwordValue);
+  
+      return errorObj;
+    }
+  
+    return null;
   }
 }

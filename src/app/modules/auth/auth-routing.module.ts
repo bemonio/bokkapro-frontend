@@ -31,6 +31,11 @@ const routes: Routes = [
         component: ForgotPasswordComponent
       },
       {
+        path: 'lock',
+        component: LoginComponent,
+        data: {returnUrl: window.location.pathname}
+      },
+      {
         path: 'logout',
         component: LogoutComponent
       },

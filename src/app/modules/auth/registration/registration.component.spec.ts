@@ -18,8 +18,8 @@ const fakeAuth = {
   email: 'admin@demo.com',
   password: 'demo',
   roles: [2], // Manager
-  accessToken: 'access-token-' + Math.random(),
-  refreshToken: 'access-token-' + Math.random(),
+  access: 'access-token-' + Math.random(),
+  refresh: 'access-token-' + Math.random(),
   expiresIn: new Date(Date.now() + 100 * 24 * 60 * 60 * 1000),
   pic: './assets/media/users/default.jpg',
 };
