@@ -908,8 +908,8 @@ export const locale = {
     },
     PASSWORDSETTING: {
       ID: 'id',
-      PASSWORDSETTING:"Confirguarción Contraseña",
-      PASSWORDSETTINGS:"Confirguarción de Contraseñas",
+      PASSWORDSETTING:"Configuarción Contraseña",
+      PASSWORDSETTINGS:"Configuarción de Contraseñas",
       PASSWORDCHANGEFREQUENCYDAYS: 'password_change_frequency_days',
       PASSWORDEXPIRYNOTIFICATION: 'password_expiry_notification',
       PASSWORDEXPIRYNOTIFICATIONDAYS: 'password_expiry_notification_days',
