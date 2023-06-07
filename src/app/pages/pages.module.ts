@@ -404,6 +404,9 @@ import { PasswordsSettingsComponent } from './password-setting/passwords-setting
 import { PasswordSettingComponent } from './password-setting/password-setting.component';
 import { PasswordSettingEditComponent } from './password-setting/passwords-settings/password-setting-edit/password-setting-edit.component';
 
+// ChangesPassword
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -668,6 +671,7 @@ import { PasswordSettingEditComponent } from './password-setting/passwords-setti
     PasswordsSettingsComponent,
     PasswordSettingComponent,
     PasswordSettingEditComponent,
+    ChangePasswordComponent
   ]
 })
 export class PagesModule { }

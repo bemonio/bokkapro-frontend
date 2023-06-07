@@ -496,6 +496,13 @@ const routes: Routes = [
             (m) => m.PasswordSettingRoutingModule
           ),
       },
+      {
+        path: 'changepassword',
+        loadChildren: () =>
+          import('../pages/change-password/change-password-routing.module').then(
+            (m) => m.ChangePasswordRoutingModule
+          ),
+      },
     ],
   },
 ];

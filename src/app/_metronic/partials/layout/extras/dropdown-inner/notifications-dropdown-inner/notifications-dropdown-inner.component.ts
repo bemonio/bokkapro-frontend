@@ -120,7 +120,7 @@ export class NotificationsDropdownInnerComponent implements OnInit, OnChanges {
                   "icon": "red",
                   "title": "Cambio de Clave Requerido",
                   "description": "Días restantes " + diasRestantes,
-                  "link": "passwordsettings",
+                  "link": "changepassword",
                   "is_read": false,
                   "type": "Notificación",
                   "module": "PasswordSettings",

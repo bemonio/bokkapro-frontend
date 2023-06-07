@@ -19,6 +19,10 @@ export const locale = {
         LEGAL: 'Legal',
         TERMS: 'Términos',
         CONTACT: 'Contacto',
+        CHANGE_PASSWORD: "Cambiar Clave",
+        NEW_PASSWORD: "Clave Nueva",
+        CURRENT_PASSWORD: "Clave Actual",
+        VERIFY_PASSWORD: "Clave Verificar",
       },
       LOGIN: {
         TITLE: 'Crear una cuenta',
@@ -924,6 +928,12 @@ export const locale = {
       MINNUMERICCHARS: 'min_numeric_chars',
       MINSPECIALCHARS: 'min_special_chars',
     },
+    CHANGEPASSWORD: {
+      PASSWORD_ACTUAL: "Contraseña Actual",
+      PASSWORD_NEW: "Contraseña Nueva",
+      PASSWORD_VERIFY: "Contraseña Verificar",
+      PASSWORD_MISMATCH: "Contraseña no coinciden"
+    }  
   }
 };
 
