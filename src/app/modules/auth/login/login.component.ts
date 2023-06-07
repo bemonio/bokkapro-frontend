@@ -133,7 +133,11 @@ export class LoginComponent implements OnInit, OnDestroy {
                   this.authService.currentDivisionValue = model.user.employee.divisions[0];
                 }
               }
-  
+
+              if (user.user_profiles) {
+                model.user.user_profiles = user.user_profiles[0];
+              }
+
               if (model.user.language) {
                 this.translationService.setLanguage(model.user.language);
               } else {
