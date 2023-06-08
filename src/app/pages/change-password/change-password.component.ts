@@ -128,6 +128,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     let model = {
       "id": this.authService.currentUserValue.id,
       "password":this.new_password.value,
+      "oldpassword":this.current_password.value,
       "userprofile":this.authService.currentUserValue.user_profiles
     };
     let id = this.authService.currentUserValue.id;
