@@ -86,6 +86,7 @@ import { StockSerialService } from './pages/stock-serial/_services';
 import { HeadInvoiceService } from './pages/head-invoice/_services';
 import { DetailInvoiceService } from './pages/detail-invoice/_services';
 import { TypeServiceOrderService } from './pages/type-service-order/_services';
+import { PasswordSettingService } from './pages/password-setting/_services';
 
 
 // OTHER MODULES
@@ -209,6 +210,7 @@ export function getHighlightLanguages() {
     HeadInvoiceService,
     DetailInvoiceService,
     TypeServiceOrderService,
+    PasswordSettingService,
     //Others
     CompaniesComponent
   ],

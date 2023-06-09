@@ -19,6 +19,10 @@ export const locale = {
         LEGAL: 'Legal',
         TERMS: 'Términos',
         CONTACT: 'Contacto',
+        CHANGE_PASSWORD: "Cambiar Clave",
+        NEW_PASSWORD: "Clave Nueva",
+        CURRENT_PASSWORD: "Clave Actual",
+        VERIFY_PASSWORD: "Clave Verificar",
       },
       LOGIN: {
         TITLE: 'Crear una cuenta',
@@ -53,7 +57,8 @@ export const locale = {
         MAX_LENGTH_FIELD: 'Maximum field length:',
         INVALID_FIELD: 'Field is not valid',
         USERNAME: 'Correo electrónico',
-        PASSWORD: 'Contraseña'
+        PASSWORD: 'Contraseña',
+        LOCK: 'Usuario Bloqueado',
       }
     },
     DASHBOARD: {
@@ -455,7 +460,10 @@ export const locale = {
       WAS_ENTERED_CORRECT: 'ingresado correctamente',
       SHOULD_HAVE_LEAST: 'debería tener mínimo',
       SHOULD_HAVE_MAXIMUM: 'debería tener máximo',
-      SHOULD_HAVE_LEAST_ONE_UPPERCASE_LETTER_AND_ONE_SPECIAL_CHARACTER: 'debería tener mínimo 1 mayúscula y 1 caracter especial',
+      SHOULD_HAVE_UPPER_LEAST: 'debería tener mínimo mayúsculas',
+      SHOULD_HAVE_LOWER_LEAST: 'debería tener mínimo minúsculas',
+      SHOULD_HAVE_NUMERIC_LEAST: 'debería tener mínimo números',
+      SHOULD_HAVE_SPECIAL_LEAST: 'debería tener mínimo caracteres especiales',
       SHOWING: 'Mostrando',
       SHOW: 'Mostar',
       ASSIGNED_TO_ME: 'Asignados a mí',
@@ -906,7 +914,31 @@ export const locale = {
       TOTAL_AMOUNT: 'Monto Total',
       TAX_EXEMPT: 'Exento de Impuesto',
       DISCCOUNT: 'Descuento',
-    }
+    },
+    PASSWORDSETTING: {
+      ID: 'id',
+      PASSWORDSETTING:"Configuarción Contraseña",
+      PASSWORDSETTINGS:"Configuarción de Contraseñas",
+      PASSWORDCHANGEFREQUENCYDAYS: 'password_change_frequency_days',
+      PASSWORDEXPIRYNOTIFICATION: 'password_expiry_notification',
+      PASSWORDEXPIRYNOTIFICATIONDAYS: 'password_expiry_notification_days',
+      FAILEDLOGINATTEMPTS: 'failed_login_attempts',
+      MINPASSWORDLENGTH: 'min_password_length',
+      MAXPASSWORDLENGTH: 'max_password_length',
+      PREVIOUSPASSWORDSDISALLOWED: 'previous_passwords_disallowed',
+      PASSWORDRESETREQUIRED: 'password_reset_required',
+      COMPLEXPASSWORDREQUIRED: 'complex_password_required',
+      MINLOWERCASECHARS: 'min_lowercase_chars',
+      MINUPPERCASECHARS: 'min_uppercase_chars',
+      MINNUMERICCHARS: 'min_numeric_chars',
+      MINSPECIALCHARS: 'min_special_chars',
+    },
+    CHANGEPASSWORD: {
+      PASSWORD_ACTUAL: "Contraseña Actual",
+      PASSWORD_NEW: "Contraseña Nueva",
+      PASSWORD_VERIFY: "Contraseña Verificar",
+      PASSWORD_MISMATCH: "Contraseña no coinciden"
+    }  
   }
 };
 

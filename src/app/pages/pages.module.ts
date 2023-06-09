@@ -399,6 +399,14 @@ import { TypeServiceOrderComponent } from './type-service-order/type-service-ord
 import { TypeServiceOrderEditComponent } from './type-service-order/types-service-orders/type-service-order-edit/type-service-order-edit.component';
 import { TypeServiceOrderSelectComponent } from './type-service-order/types-service-orders/type-service-order-select/type-service-order-select.component';
 
+// PasswordsSettings
+import { PasswordsSettingsComponent } from './password-setting/passwords-settings/passwords-settings.component';
+import { PasswordSettingComponent } from './password-setting/password-setting.component';
+import { PasswordSettingEditComponent } from './password-setting/passwords-settings/password-setting-edit/password-setting-edit.component';
+
+// ChangesPassword
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -660,6 +668,10 @@ import { TypeServiceOrderSelectComponent } from './type-service-order/types-serv
     TypeServiceOrderComponent,
     TypeServiceOrderEditComponent,
     TypeServiceOrderSelectComponent,
+    PasswordsSettingsComponent,
+    PasswordSettingComponent,
+    PasswordSettingEditComponent,
+    ChangePasswordComponent
   ]
 })
 export class PagesModule { }

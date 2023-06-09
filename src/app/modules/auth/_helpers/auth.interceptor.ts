@@ -42,7 +42,10 @@ export class AuthInterceptor implements HttpInterceptor {
           if (err.status === 401) {
             // redirect to the login route
             this.logout();
-            this.router.navigate(['login']);
+            // this.router.navigate(['login']);
+          }
+          if (err.status === 423) {
+            this.router.navigate(['auth/lock']);
           }
         }
       })
@@ -52,7 +55,7 @@ export class AuthInterceptor implements HttpInterceptor {
   logout() {
     const authService = this.injector.get(AuthService);
     authService.logout();
-    document.location.reload();
+    // document.location.reload();
   }
 }
 

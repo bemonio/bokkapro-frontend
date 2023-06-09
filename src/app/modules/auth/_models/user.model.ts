@@ -8,6 +8,9 @@ export class UserModel extends AuthModel {
   password: string;
   fullname: string;
   email: string;
+  user_profiles: {
+    password_changed_at: string;
+  }
   userprofile: {
     id: number;
     bio: string;
@@ -19,6 +22,7 @@ export class UserModel extends AuthModel {
     occupation: string;
     socialNetworks?: SocialNetworksModel;
     website: string;
+    password_changed_at: string;
   }
   groups: any[];
   employee: any;

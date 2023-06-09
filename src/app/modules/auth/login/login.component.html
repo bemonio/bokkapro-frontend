@@ -38,12 +38,13 @@
     <!-- end::Alert info-->
 
     <!-- begin::Alert error-->
-    <ng-container *ngIf="hasError">
+    <ng-container *ngIf="hasError || lock">
       <div
         class="mb-10 alert alert-custom alert-light-danger alert-dismissible"
       >
-        <div class="alert-text">{{ 'AUTH.VALIDATION.INVALID_LOGIN' | translate }}</div>
-      </div>
+      <div class="alert-text" *ngIf="!lock">{{ 'AUTH.VALIDATION.INVALID_LOGIN' | translate }}</div>
+      <div class="alert-text" *ngIf="lock">{{ 'AUTH.VALIDATION.LOCK' | translate }}</div>
+    </div>
     </ng-container>
     <!-- end::Alert error-->
 
@@ -129,7 +130,7 @@
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'minlength',
-          message: 'Password should have at least 3 symbols',
+          message: 'Password should have at least 8 symbols',
           control: loginForm.controls['password']
         }"
       ></ng-container>
@@ -138,6 +139,14 @@
         [ngTemplateOutletContext]="{
           validation: 'maxLength',
           message: 'Password should have maximum 100 symbols',
+          control: loginForm.controls['password']
+        }"
+      ></ng-container>
+      <ng-container
+        [ngTemplateOutlet]="formError"
+        [ngTemplateOutletContext]="{
+          validation: 'pattern',
+          message: 'Password should have at least one uppercase letter, and one special character.',
           control: loginForm.controls['password']
         }"
       ></ng-container>

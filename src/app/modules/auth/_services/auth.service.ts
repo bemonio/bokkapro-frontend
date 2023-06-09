@@ -85,7 +85,7 @@ export class AuthService implements OnDestroy {
 
   getUserByToken(): Observable<UserModel> {
     const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.accessToken) {
+    if (!auth || !auth.access) {
       return of(undefined);
     }
 
@@ -121,8 +121,8 @@ export class AuthService implements OnDestroy {
 
   // private methods
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
-    // store auth accessToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
-    if (auth && auth.accessToken) {
+    // store auth access/refresh/epiresIn in local storage to keep user logged in between page refreshes
+    if (auth && auth.access) {
       this.token.saveToken(JSON.stringify(auth));
       return true;
     }
