@@ -76,15 +76,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">{{ 'DEPOSITFORM.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.AMOUNT' | translate }}</label>
-              <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="amount" [class.is-invalid]="isControlInvalid('amount')"
-                [class.is-valid]="isControlValid('amount')" formControlName="amount" />
-              <div class="feedback" *ngIf="!isControlTouched('amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.AMOUNT' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('amount')">{{ 'DEPOSITFORM.AMOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">{{ 'DEPOSITFORM.AMOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'amount')">{{ 'DEPOSITFORM.AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">{{ 'DEPOSITFORM.AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.BANK' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="bank_account_number" [class.is-invalid]="isControlInvalid('bank')"
+                [class.is-valid]="isControlValid('bank')" formControlName="bank" />
+              <div class="feedback" *ngIf="!isControlTouched('bank')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.BANK' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('bank')">{{ 'DEPOSITFORM.BANK' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'bank')">{{ 'DEPOSITFORM.BANK' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'bank')">{{ 'DEPOSITFORM.BANK' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'bank')">{{ 'DEPOSITFORM.BANK' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.BANKACCOUNT' | translate }}</label>
@@ -97,16 +97,59 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'bank_account_number')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'bank_account_number')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.FORMNUMBER' | translate }}</label>
+              <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="count" [class.is-invalid]="isControlInvalid('form_number')"
+                [class.is-valid]="isControlValid('form_number')" formControlName="form_number" />
+              <div class="feedback" *ngIf="!isControlTouched('form_number')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.FORMNUMBER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('form_number')">{{ 'DEPOSITFORM.FORMNUMBER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'form_number')">{{ 'DEPOSITFORM.FORMNUMBER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'form_number')">{{ 'DEPOSITFORM.FORMNUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'form_number')">{{ 'DEPOSITFORM.FORMNUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.AMOUNT' | translate }}</label>
+              <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="amount" [class.is-invalid]="isControlInvalid('amount')"
+                [class.is-valid]="isControlValid('amount')" formControlName="amount" />
+              <div class="feedback" *ngIf="!isControlTouched('amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.AMOUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('amount')">{{ 'DEPOSITFORM.AMOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'amount')">{{ 'DEPOSITFORM.AMOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'amount')">{{ 'DEPOSITFORM.AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'amount')">{{ 'DEPOSITFORM.AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.CONTAIN' | translate }}</label>
+              <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="count" [class.is-invalid]="isControlInvalid('contain')"
+                [class.is-valid]="isControlValid('contain')" formControlName="contain" />
+              <div class="feedback" *ngIf="!isControlTouched('contain')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.CONTAIN' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('contain')">{{ 'DEPOSITFORM.CONTAIN' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'contain')">{{ 'DEPOSITFORM.CONTAIN' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'contain')">{{ 'DEPOSITFORM.CONTAIN' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'contain')">{{ 'DEPOSITFORM.CONTAIN' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
             <div class="col-lg-4" *ngIf="model.id">
               <label>{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}</label>
               <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="difference_amount" [class.is-invalid]="isControlInvalid('difference_amount')"
                 [class.is-valid]="isControlValid('difference_amount')" formControlName="difference_amount" disabled/>
-              <div class="feedback" *ngIf="!isControlTouched('difference_amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}</b></div>
+              <!-- <div class="feedback" *ngIf="!isControlTouched('difference_amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('difference_amount')">{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'difference_amount')">{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'difference_amount')">{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'difference_amount')">{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'difference_amount')">{{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div> -->
+            </div>
+            <div class="col-lg-4" *ngIf="differenceEnable">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.DIFFERENCE' | translate }}</label>
+              <p-dropdown styleClass="form-control form-control-lg form-control-solid" [options]="optionsDifference" 
+              optionLabel="key" name="difference" formControlName="difference" placeholder="seleccione"></p-dropdown>
+              <!-- <div class="feedback" *ngIf="!isControlTouched('bank_account_number')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.BANKACCOUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('bank_account_number')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'difference')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'difference')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'difference')">{{ 'DEPOSITFORM.BANKACCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div> -->
             </div>
             <div class="col-lg-4" *ngIf="model.id">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.VERIFIED' | translate}}</label>
@@ -160,38 +203,15 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
             <div class="col-lg-4">
-              <p-multiSelect class="form-control form-control-lg form-control-solid" [options]="currencyOptions" formControlName="selectedCurrencies" optionLabel="name" (onChange)="onMultiSelectChange($event)"></p-multiSelect>
+              <label>{{ 'DEPOSITFORM.CURRENCIES' | translate }}</label>
+              <p-multiSelect class="form-control form-control-solid" [options]="currencyOptions" formControlName="selectedCurrencies" optionLabel="name" (onChange)="onMultiSelectChange($event)"></p-multiSelect>
             </div>
             
           </div>
 
-          <!-- <div class="form-group row" formArrayName="arrayPrincipal">
-            <div *ngFor="let formArray of formGroup.get('arrayPrincipal')['controls']; let i = index">
-              <div [formArrayName]="i">
-                <div class="row" *ngFor="let nestedFormGroup of formArray['controls']; let j = index" [formGroupName]="j">
-                  <div class="col-md-4">
-                    <label> {{badges[i].denominaciones[j].nombre}} </label>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="nestedFormControl1">Cantidad:</label>
-                    <input type="text" id="nestedFormControl1" formControlName="nestedFormControl1">
-                    
-                  </div>
-        
-                  <div class="col-md-3">
-                    <label for="nestedFormControl2">Total:</label>
-                    <input type="text" id="nestedFormControl2" formControlName="nestedFormControl2">
-                   
-                  </div>
-                  
-                </div>
-        
-              </div>
-            </div>
-          </div> -->
-          <div class="form-group row test"  formArrayName="arrayPrincipal">
-            <div class="col-12 testb" *ngFor="let control of dynamicFormArray.controls; let i = index">
-              <div class="row test" [formGroupName]="i">
+          <div class="form-group row"  formArrayName="mainArray">
+            <div class="col-12" *ngFor="let control of dynamicFormArray.controls; let i = index">
+              <div class="row" [formGroupName]="i">
                 <div class="col-md-12"><h3>{{ control.value.item.name }}</h3></div> 
                 <div class="col-md-3"><h3>Denominación</h3></div>
                 <div class="col-md-3"><h3>Cantidad</h3></div>
@@ -215,14 +235,14 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="dynamicFormArray.controls.length > 0" class="col-md-5 offset-md-5"><h3>Total: 203209</h3></div>
+            <div *ngIf="dynamicFormArray.controls.length > 0" class="col-md-5 offset-md-5"><h3>Total: {{formGroup.controls.contain.value}} </h3></div>
           </div>
         
 
           <!-- <div class="mt-5" *ngIf="model && model.id">
             <app-deposit-formdetail></app-deposit-formdetail>
           </div> -->
-          <div class="col-lg-12">
+          <div class="col-lg-12" *ngIf="differenceEnable">
             <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.REVIEW' | translate }}</label>
             <p-editor formControlName="review" [style]="{'height':'220px'}" placeholder="{{ 'DEPOSITFORM.REVIEW' | translate }}"></p-editor>
           </div>

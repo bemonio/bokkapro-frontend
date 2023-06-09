@@ -47,28 +47,12 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   public showPage: number=0;
   currencies: any[];
   currencyOptions: any[];
-  // denominations: any = {
-  //   dolar: ['billete 1', 'billete 2', 'moneda 1', 'moneda 2'],
-  //   euro: ['billete 5', 'billete 10', 'moneda 5', 'moneda 10']
-  // };
-  denominations: any = {
-    dolar: [
-      { key: 'billete1', value: 'Billete 1', valueMoney: '1' },
-      { key: 'billete2', value: 'Billete 2', valueMoney: '2' },
-      { key: 'moneda1', value: 'Moneda 1', valueMoney: '0.01' },
-      { key: 'moneda2', value: 'Moneda 2', valueMoney: '0.02' }
-    ],
-    euro: [
-      { key: 'billete5', value: 'Billete 5', valueMoney: '5' },
-      { key: 'billete10', value: 'Billete 10', valueMoney: '10' },
-      { key: 'moneda5', value: 'Moneda 5', valueMoney: '0.05' },
-      { key: 'moneda10', value: 'Moneda 10', valueMoney: '0.1' }
-    ]
-  };
-  items: SelectItem[] = [
-    { label: 'Dólar', value: 'dolar' },
-    { label: 'Euro', value: 'euro' }
-  ];
+  
+  public denominations: any;
+  public items: SelectItem[];
+
+  public optionsDifference: { key: string, value: string }[];
+  public differenceEnable: boolean = false;
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
@@ -93,8 +77,10 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.model = undefined;
     this.previous = undefined;
     this.currencyOptions = this.getCurrencyOptions();
-    // this.badges= this.getDenominationBanknotesandCoins();
-    // this.denominations = this.getDenominationBanknotesandCoins();
+
+    this.denominations = this.getDenominationBanknotesandCoins();
+    this.items = this.getCurrencyOptions();
+    this.optionsDifference = this.getOptionsDifference();
     this.createForm();
 
     if (this.route.parent.parent.parent.snapshot.url.length > 0) {
@@ -173,10 +159,14 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   }
   createForm() {
     this.formGroup = this.fb.group({
-      amount: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
-      difference_amount: new FormControl(''),
+      amount: new FormControl('0', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      contain: new FormControl({value:'0', disabled: true}),
+      difference: new FormControl(''),
+      difference_amount: new FormControl('0'),
       review: new FormControl(''),
+      bank: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
       bank_account_number: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      form_number: new FormControl(',', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
       currency: new FormControl('', Validators.compose([Validators.required])),
       verified: new FormControl(''),
       verified_at: new FormControl(''),
@@ -186,9 +176,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       supervisor: new FormControl(''),
       supervisor_extra: new FormControl(''),
       selectedCurrencies: new FormControl([]),
-      arrayPrincipal: new FormArray([])
+      mainArray: new FormArray([])
     });
-    // this.iterateBadge();
     this.showPage = 1;
   }
 
@@ -222,13 +211,15 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       // }
       this.formGroup.patchValue({
         
-        amount: this.model.amount,
+        amount: this.model.amount,        
+        contain: this.model.contain,
         difference_amount: this.model.difference_amount,
         review: this.model.review,
+        bank : this.model.bank,
         bank_account_number: this.model.bank_account_number,
+        form_number : this.model.form_number,
         verified: this.model.verified,
         verified_at: new Date(this.model.verified_at),
-
         packing: this.model.packing,
         bank_account: this.model.bank_account,
         currency: this.model.currency,
@@ -252,93 +243,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  // createFormArray(): FormArray {
-  //   return new FormArray([
-  //     this.createNestedFormGroup()
-  //   ]);
-  // }
-
-  // createNestedFormGroup(): FormGroup {
-  //   return new FormGroup({
-  //     nestedFormControl1: new FormControl('', Validators.required),
-  //     nestedFormControl2: new FormControl('', Validators.required)
-  //   });
-  // }
-
-  // addFormArray(): void {
-  //   const arrayPrincipal = this.formGroup.get('arrayPrincipal') as FormArray;
-  //   arrayPrincipal.push(this.createFormArray());
-  // }
-
-  // addNestedFormGroup(formArray: FormArray): void {
-  //   formArray.push(this.createNestedFormGroup());
-  // }
-
-  // deleteNestedFormGroup(formArray: FormArray, index: number): void {
-  //   formArray.removeAt(index);
-  // }
-
-  // deleteFormArray(index: number): void {
-  //   const arrayPrincipal = this.formGroup.get('arrayPrincipal') as FormArray;
-  //   arrayPrincipal.removeAt(index);
-  // }
-
-  // //funcion que itere por cada elemento de badge y cree el form array, ademas que cree el formgroup;
-  // iterateBadge(){
-  //   this.badges.forEach(element => {
-  //     this.addFormArrayBadge(element);
-  //   });
-  // }
-  // addFormArrayBadge(badge=null): void {
-  //   const arrayPrincipal = this.formGroup.get('arrayPrincipal') as FormArray;
-  //   arrayPrincipal.push(this.createFormArrayBadge(badge));
-  // }
-
-  // createFormArrayBadge(badge): FormArray {
-  //   var formBadge = new FormArray([]);
-  //   badge.denominaciones.forEach(element => {
-  //     formBadge.push(this.createNestedFormGroup());
-  //   });
-    
-  //   return formBadge;
-  // }
-  //----
-  // // onMultiSelectChange(event: any) {
-  // //   const selectedValues = event.value;
-  // //   console.log(selectedValues);
-  // // }
-  // get dynamicFormArray(): FormArray {
-  //   return this.formGroup.get('arrayPrincipal') as FormArray;
-  // }
-
-  // onMultiSelectChange(event: any) {
-  //   const selectedValues = event.value;
-
-  //   // Comparar las selecciones con los elementos existentes en el FormArray
-  //   const currentItems = this.dynamicFormArray.controls.map(control => control.value.item);
-  //   const itemsToAdd = selectedValues.filter(value => !currentItems.includes(value));
-
-  //   // Agregar nuevos elementos al FormArray
-  //   itemsToAdd.forEach(item => {
-  //     // const newGroup = this.fb.group({
-  //     //   item: [item]
-  //     // });
-  //     // this.dynamicFormArray.push(newGroup);
-  //     var elementforAdd = this.badges.find(element => item.name == element.moneda); 
-  //     this.addFormArrayBadge(elementforAdd);
-  //   });
-
-  //   // Eliminar elementos del FormArray si ya no están seleccionados
-  //   // for (let i = this.dynamicFormArray.controls.length - 1; i >= 0; i--) {
-  //   //   const control = this.dynamicFormArray.controls[i];
-  //   //   const item = control.value.item;
-  //   //   if (!selectedValues.includes(item)) {
-  //   //     this.dynamicFormArray.removeAt(i);
-  //   //   }
-  //   // }
-  // }
   get dynamicFormArray(): FormArray {
-    return this.formGroup.get('arrayPrincipal') as FormArray;
+    return this.formGroup.get('mainArray') as FormArray;
   }
 
   onMultiSelectChange(event: any) {
@@ -382,11 +288,12 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     const divisaFormGroup = this.dynamicFormArray.controls[indexControlDivisa];
     
     //obtener el control del formulario correspondiente
-    var controlresult = divisaFormGroup.controls.denominations.controls[indexDenomination];
-    var result = quantity * controlresult.controls.valueDenomination.value;
+    var controlDenomination = divisaFormGroup.controls.denominations.controls[indexDenomination];
+    var result = quantity * controlDenomination.controls.valueDenomination.value;
     //asignar el resultado a dicho control
-    controlresult.controls.totalDimension.setValue(result);
-    this.calcByBadge(indexControlDivisa);
+    controlDenomination.controls.totalDimension.setValue(result);
+    this.calcContain();// this.calcByBadge(indexControlDivisa);
+    this.getDifference();
   }
 
   calcByBadge(indexControlDivisa:string){
@@ -401,8 +308,27 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     }, 0);
   
     divisaFormGroup.controls.subtotal.setValue(suma);
+    return suma;
   }
-
+  calcContain(){
+    var total = 0;
+    for(var i = 0; i < this.dynamicFormArray.controls.length; i++)
+      total += this.calcByBadge(i.toString());
+    
+    this.formGroup.controls.contain.setValue(total);
+  }
+  getDifference(){
+    var contain = this.formGroup.controls.contain.value;
+    var amount = this.formGroup.controls.amount.value;
+    var difference = amount - contain;
+    var diffValid = 0;
+    // this.formGroup.controls.difference_amount.setValue(difference);
+    this.differenceEnable = false;
+    if(difference > diffValid || difference < diffValid)
+      this.differenceEnable = true;
+    // poner como obligatorio o no el formControl de diferencia y el acta
+    // que se active cuando se escribe el monto tambien
+  }
 
 
   save(saveAndExit) {
@@ -593,81 +519,58 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  // getDenominationBanknotesandCoins(){
-  //   var denominations =  [
-  //     {
-  //       moneda: "Dolar",
-  //       denominaciones: [
-  //         { valor: 1, nombre: "Billete de 1 dólar" },
-  //         { valor: 5, nombre: "Billete de 5 dólares" },
-  //         { valor: 10, nombre: "Billete de 10 dólares" },
-  //         { valor: 20, nombre: "Billete de 20 dólares" },
-  //         { valor: 50, nombre: "Billete de 50 dólares" },
-  //         { valor: 100, nombre: "Billete de 100 dólares" },
-
-  //         { valor: 0.01, nombre: "Moneda de 1 centavo" },
-  //         { valor: 0.05, nombre: "Moneda de 5 centavos" },
-  //         { valor: 0.10, nombre: "Moneda de 10 centavos" },
-  //         { valor: 0.25, nombre: "Moneda de 25 centavos" },
-  //         { valor: 0.50, nombre: "Moneda de 50 centavos" },
-  //         { valor: 1, nombre: "Moneda de 1 dólar" }
-  //       ],
-  //     },
-  //     {
-  //       moneda: "Euro",
-  //       denominaciones: [
-  //         { valor: 5, nombre: "Billete de 5 euros" },
-  //         { valor: 10, nombre: "Billete de 10 euros" },
-  //         { valor: 20, nombre: "Billete de 20 euros" },
-  //         { valor: 50, nombre: "Billete de 50 euros" },
-  //         { valor: 100, nombre: "Billete de 100 euros" },
-  //         { valor: 200, nombre: "Billete de 200 euros" },
-  //         { valor: 500, nombre: "Billete de 500 euros" },
-  //         { valor: 0.01, nombre: "Moneda de 1 céntimo" },
-  //         { valor: 0.02, nombre: "Moneda de 2 céntimos" },
-  //         { valor: 0.05, nombre: "Moneda de 5 céntimos" },
-  //         { valor: 0.10, nombre: "Moneda de 10 céntimos" },
-  //         { valor: 0.20, nombre: "Moneda de 20 céntimos" },
-  //         { valor: 0.50, nombre: "Moneda de 50 céntimos" },
-  //         { valor: 1, nombre: "Moneda de 1 euro" },
-  //         { valor: 2, nombre: "Moneda de 2 euros" }
-  //       ],
-  //     }
-  //   ];
-  //   return denominations;
-  // }
-  getDenominationBanknotesandCoins()
-  {
-    var denominations = {
-      dolar: [
-        { key: 'Billete 1', value: '1' },
-        { key: 'Billete 2', value: '2' },
-        { key: 'Moneda 1', value: '0.01' },
-        { key: 'Moneda 2', value: '0.02' }
-      ],
-      euro: [
-        { key: 'Billete 5', value: '5' },
-        { key: 'Billete 10', value: '10' },
-        { key: 'Moneda 5', value: '0.05' },
-        { key: 'Moneda 10', value: '0.1' }
-      ]
-    };
-    return denominations;
-  }
-  
-  getCurrencyOptions(): any {
+  getCurrencyOptions(){
     return [
       { name: 'Dolar', value: 'dolar' },
       { name: 'Euro', value: 'euro' }
     ];
   }
+  getDenominationBanknotesandCoins()
+  {
+    var denominations = {
+      dolar: [
+        { key: 'billete1', value: 'Billete 1', valueMoney: '1' },
+        { key: 'billete2', value: 'Billete 2', valueMoney: '2' },
+        { key: 'moneda1', value: 'Moneda 1', valueMoney: '0.01' },
+        { key: 'moneda2', value: 'Moneda 2', valueMoney: '0.02' }
+      ],
+      euro: [
+        { key: 'billete5', value: 'Billete 5', valueMoney: '5' },
+        { key: 'billete10', value: 'Billete 10', valueMoney: '10' },
+        { key: 'moneda5', value: 'Moneda 5', valueMoney: '0.05' },
+        { key: 'moneda10', value: 'Moneda 10', valueMoney: '0.1' }
+      ]
+    };
+    return denominations;
+  }
+  
+  getOptionsDifference(): any {
+    return [
+      { key: 'Diferencia en monto, monto mayor', value: 'Diferencia en monto, monto mayor' },
+      { key: 'Diferencia en monto, monto menor', value: 'Diferencia en monto, monto menor' },
+      { key: 'Diferencia de cantitades de billetes', value: 'Diferencia de cantitades de billetes' },
+    ];
+  }
   /*
   
-  - Agregar un valor al formulario con el resultado de la multiplicacion cada dimension
-  - Agregar un valor que recoja el subtotal de cada moneda
-  - Hacer un metodo que multiplique cada dimension
-  - Hacer un metodo que sume los resultados de cada item
-  - Hacer un metodo que pase a la moneda seleccionada total de moneda
-  - Hacer un metodo que pase sume los subtotales 
+ 
+  - Hacer un metodo que sume los resultados de cada item (ya)
+
+  - Casilla de seleccion si hay diferencia entre valor contado y registrado  (ya)
+    Diferencia en monto, monto mayor
+    Diferencia en monto, monto menor
+    Diferencia de cantitades de billetes
+
+  - poner banco (ya)
+  - cuenta bancaria que se digite (ya)
+
+  - Falta que "suma " se divida en la moneda seleccionada y en ese caso si sume)
+    Se debe realizar la consulta, con las monedas y su conversion
+  - Numero de planilla, se digita 
+  - Acta se debe mostrar y casilla de seleccion si hay diferencia si hay diferencia
+  - Codigo de comprobante (Unc comprobante contiene envases y los envases tiene planilla de deposito)
+    Se debe realizar la consulta,
+  - En la planilla de envases, mostrar codigo de comprobante
+  - Que actualice los valores traidos desde el backend
   */
 }
