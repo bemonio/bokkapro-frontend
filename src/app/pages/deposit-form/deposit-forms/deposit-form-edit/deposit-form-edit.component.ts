@@ -159,23 +159,22 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   }
   createForm() {
     this.formGroup = this.fb.group({
-      amount: new FormControl('0', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      amount: new FormControl('0', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(255)])),
       contain: new FormControl({value:'0', disabled: true}),
-      difference: new FormControl(''),
-      difference_amount: new FormControl('0'),
+      difference: new FormControl({value:'', disabled: true}),
+      difference_amount: new FormControl({value:'0', disabled: true}),
       review: new FormControl(''),
       bank: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
-      bank_account_number: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      bank_account: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
       form_number: new FormControl(',', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
       currency: new FormControl('', Validators.compose([Validators.required])),
       verified: new FormControl(''),
       verified_at: new FormControl(''),
       packing: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
-      bank_account: new FormControl(''),
-      employee_who_counts: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1)])),
+      employee_who_counts: new FormControl({value:'', disabled: false}, Validators.compose([Validators.required, Validators.minLength(1)])),
       supervisor: new FormControl(''),
       supervisor_extra: new FormControl(''),
-      selectedCurrencies: new FormControl([]),
+      selected_currencies: new FormControl([]),
       mainArray: new FormArray([])
     });
     this.showPage = 1;
@@ -188,7 +187,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       // this.amount.setValue(this.model.amount)
       // this.difference_amount.setValue(this.model.difference_amount)
       // this.review.setValue(this.model.review)
-      // this.bank_account_number.setValue(this.model.bank_account_number)
+      // this.bank_account.setValue(this.model.bank_account)
       // this.verified.setValue(this.model.verified)
       // this.verified_at.setValue(new Date(this.model.verified_at));
       // if (this.model.packing) {
@@ -209,6 +208,9 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       // if (this.model.supervisor_extra) {
       //   this.supervisor_extra.setValue(this.model.supervisor_extra);
       // }
+      this.model.detail_deposit_form_edit = this.testMainArrayBBDD();
+      this.model.selected_currencies = this.testSelectedCurrencies();
+
       this.formGroup.patchValue({
         
         amount: this.model.amount,        
@@ -216,17 +218,19 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
         difference_amount: this.model.difference_amount,
         review: this.model.review,
         bank : this.model.bank,
-        bank_account_number: this.model.bank_account_number,
+        bank_account: this.model.bank_account,
         form_number : this.model.form_number,
         verified: this.model.verified,
-        verified_at: new Date(this.model.verified_at),
+        verified_at: this.model.verified_at ? new Date(this.model.verified_at) : null,
         packing: this.model.packing,
-        bank_account: this.model.bank_account,
         currency: this.model.currency,
+        selected_currencies: this.findMultipleElementsInJSONArray(this.currencyOptions, this.model.selected_currencies,"value"),
         employee_who_counts: this.model.employee_who_counts,
         supervisor: this.model.supervisor,
         supervisor_extra: this.model.supervisor_extra,
       });
+      this.listFieldsFormsArray(this.dynamicFormArray,this.model.detail_deposit_form_edit);
+      this.formGroup.get('packing').disabled;
     } else {
       if (this.packingId) {
         this.getPackingById(this.packingId);
@@ -249,36 +253,64 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
   onMultiSelectChange(event: any) {
     const selectedValues = event.value;
-
+    
     // Comparar las selecciones con los elementos existentes en el FormArray
     const currentItems = this.dynamicFormArray.controls.map(control => control.value.item);
-    const itemsToAdd = selectedValues.filter(value => !currentItems.includes(value));
-
+    const itemsToAdd = selectedValues.filter(selectedValue => 
+      !currentItems.some(item => item.value == selectedValue.value)
+    );
+    
     // Agregar nuevos elementos al FormArray
     itemsToAdd.forEach(item => {
-      const denominationsArray = this.denominations[item.value].map(denomination => this.fb.group({
-        denomination: [denomination.value],
-        quantity: ['0'],
-        valueDenomination: [denomination.valueMoney],
-        totalDimension: ['0'],
-      }));
-      const newGroup = this.fb.group({
-        item: [item],
-        denominations: this.fb.array(denominationsArray),
-        subtotal: ['0'],
-      });
-      this.dynamicFormArray.push(newGroup);
+      this.addCurrency(item);
     });
 
     // Eliminar elementos del FormArray si ya no están seleccionados
     for (let i = this.dynamicFormArray.controls.length - 1; i >= 0; i--) {
       const control = this.dynamicFormArray.controls[i];
       const item = control.value.item;
-      if (!selectedValues.includes(item)) {
+      if (!selectedValues.some(selectedValue => selectedValue.value == item.value)) {
         this.dynamicFormArray.removeAt(i);
       }
     }
   }
+
+  addCurrency( nameCurrency, currency:any = null ) {
+      var denominationsLoc = currency ? currency.denominations :this.denominations[nameCurrency.value];
+      const denominationsArray = denominationsLoc.map(denomination => this.fb.group({
+        denomination: [denomination.value],
+        quantity: [denomination.quantity ? denomination.quantity : '0', Validators.compose([ Validators.required, Validators.minLength(1) ])],
+        valueDenomination: [denomination.valueDenomination],
+        totalDimension: [denomination.totalDimension ? denomination.totalDimension: '0'],
+      }));
+      const newGroup = this.fb.group({
+        item: [currency ? currency.item : nameCurrency],
+        denominations: this.fb.array(denominationsArray),
+        subtotal: [currency ? currency.subtotal : '0'],
+      });
+      this.dynamicFormArray.push(newGroup);
+    
+    return;
+  }
+
+  clearFormArray = (formArray: FormArray) => 
+  {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
+  }
+  listFieldsFormsArray(formArrayLoc: FormArray,data:any[])
+  {
+    this.clearFormArray(formArrayLoc);
+
+    if(data.length>0){
+      data.forEach(element => {
+        this.addCurrency(element.item,element);
+      });
+    }
+  }
+  
+  
 
   calcByDim(event: any, indexDenomination: string, indexControlDivisa:string){
     const quantity = event.target.value;
@@ -317,22 +349,24 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     
     this.formGroup.controls.contain.setValue(total);
   }
-  getDifference(){
+  getDifference($event=null){
     var contain = this.formGroup.controls.contain.value;
     var amount = this.formGroup.controls.amount.value;
     var difference = amount - contain;
+    difference = Math.abs(difference);
     var diffValid = 0;
-    // this.formGroup.controls.difference_amount.setValue(difference);
+    this.formGroup.controls.difference_amount.setValue(difference);
     this.differenceEnable = false;
-    if(difference > diffValid || difference < diffValid)
+    if(difference > diffValid)
       this.differenceEnable = true;
     // poner como obligatorio o no el formControl de diferencia y el acta
     // que se active cuando se escribe el monto tambien
   }
 
-
   save(saveAndExit) {
     this.saveAndExit = saveAndExit;
+    
+    this.formGroup.value.selected_currencies = this.getValueCurrenciesSelected(this.formGroup.value.selected_currencies);
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       const formValues = this.formGroup.value;
@@ -348,9 +382,9 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
-    // model.verified_at = this.formatDate(this.verified_at.value);
+    model.verified_at = this.formatDate(this.model.verified_at);
     model.packing = this.model.packing.id;
-    model.bank_account = this.model.bank_account.id;
+    model.bank_account = this.model.bank_account;//model.bank_account = this.model.bank_account.id;
     model.currency = this.model.currency.id;
     model.employee_who_counts = this.model.employee_who_counts.id;
     model.supervisor = this.model.supervisor.id;
@@ -390,7 +424,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;    
     model.packing = this.model.packing.id;
-    model.bank_account = this.model.bank_account.id;
+    model.bank_account = this.model.bank_account;//model.bank_account = this.model.bank_account.id;
     model.currency = this.model.currency.id;
     model.employee_who_counts = this.model.employee_who_counts.id;
     model.supervisor = this.model.supervisor.id;
@@ -432,7 +466,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
           this.router.navigate(['/depositforms']);
         }
       } else {
-        this.formGroup.reset()
+        this.clearFormArray(this.dynamicFormArray);
+        this.formGroup.reset();
       }
     });
     // this.subscriptions.push(sbCreate);
@@ -447,6 +482,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   }
 
   public formatDate(date) {
+    if(date == '' || date == null)
+      return null;
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();
@@ -519,6 +556,18 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     );
   }
 
+  findMultipleElementsInJSONArray(jsonArray, selectedArray, fieldName) {
+    return jsonArray.filter((jsonObject) => selectedArray.includes(jsonObject[fieldName]));
+  }
+  
+  getValueCurrenciesSelected(currencies: any[]){
+    var id_currencies = [];  
+    currencies.forEach(element =>{
+      id_currencies.push(element.value);
+    });
+    return id_currencies;
+  }
+
   getCurrencyOptions(){
     return [
       { name: 'Dolar', value: 'dolar' },
@@ -529,16 +578,16 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   {
     var denominations = {
       dolar: [
-        { key: 'billete1', value: 'Billete 1', valueMoney: '1' },
-        { key: 'billete2', value: 'Billete 2', valueMoney: '2' },
-        { key: 'moneda1', value: 'Moneda 1', valueMoney: '0.01' },
-        { key: 'moneda2', value: 'Moneda 2', valueMoney: '0.02' }
+        { key: 'billete1', value: 'Billete 1', valueDenomination: '1' },
+        { key: 'billete2', value: 'Billete 2', valueDenomination: '2' },
+        { key: 'moneda1', value: 'Moneda 1', valueDenomination: '0.01' },
+        { key: 'moneda2', value: 'Moneda 2', valueDenomination: '0.02' }
       ],
       euro: [
-        { key: 'billete5', value: 'Billete 5', valueMoney: '5' },
-        { key: 'billete10', value: 'Billete 10', valueMoney: '10' },
-        { key: 'moneda5', value: 'Moneda 5', valueMoney: '0.05' },
-        { key: 'moneda10', value: 'Moneda 10', valueMoney: '0.1' }
+        { key: 'billete5', value: 'Billete 5', valueDenomination: '5' },
+        { key: 'billete10', value: 'Billete 10', valueDenomination: '10' },
+        { key: 'moneda5', value: 'Moneda 5', valueDenomination: '0.05' },
+        { key: 'moneda10', value: 'Moneda 10', valueDenomination: '0.1' }
       ]
     };
     return denominations;
@@ -551,6 +600,50 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       { key: 'Diferencia de cantitades de billetes', value: 'Diferencia de cantitades de billetes' },
     ];
   }
+
+  testSelectedCurrencies(){
+    return [
+      "euro"
+    ];
+  }
+  testMainArrayBBDD(){
+    return [
+        {
+            "item": {
+                "name": "Euro",
+                "value": "euro"
+            },
+            "denominations": [
+                {
+                    "denomination": "Billete 1",
+                    "quantity": "0",
+                    "valueDenomination": "1",
+                    "totalDimension": "0"
+                },
+                {
+                    "denomination": "Billete 2",
+                    "quantity": 10,
+                    "valueDenomination": "2",
+                    "totalDimension": 20
+                },
+                {
+                    "denomination": "Moneda 1",
+                    "quantity": "0",
+                    "valueDenomination": "0.01",
+                    "totalDimension": "0"
+                },
+                {
+                    "denomination": "Moneda 2",
+                    "quantity": "0",
+                    "valueDenomination": "0.02",
+                    "totalDimension": "0"
+                }
+            ],
+            "subtotal": 20
+        }
+    ]
+  }
+
   /*
   
  
@@ -563,14 +656,23 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
   - poner banco (ya)
   - cuenta bancaria que se digite (ya)
+  - Numero de planilla, se digita (ya)
+  - Acta se debe mostrar y casilla de seleccion si hay diferencia si hay diferencia (ya)
 
+  - Que guarde es el array en las divisas (ya)
+  - Que para los valores del value de las monedas traiga es el id (ya)
+  
+  - Que muestre la informacion 
+    envase, empleado
+  - Que si carga una divisa por defecto la tome como valor en este componente  
   - Falta que "suma " se divida en la moneda seleccionada y en ese caso si sume)
     Se debe realizar la consulta, con las monedas y su conversion
-  - Numero de planilla, se digita 
-  - Acta se debe mostrar y casilla de seleccion si hay diferencia si hay diferencia
-  - Codigo de comprobante (Unc comprobante contiene envases y los envases tiene planilla de deposito)
+  - Codigo de comprobante (Un comprobante contiene envases y los envases tiene planilla de deposito)
     Se debe realizar la consulta,
   - En la planilla de envases, mostrar codigo de comprobante
-  - Que actualice los valores traidos desde el backend
+  
+
+
+  
   */
 }

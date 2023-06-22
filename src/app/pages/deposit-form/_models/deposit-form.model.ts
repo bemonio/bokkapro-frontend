@@ -19,6 +19,8 @@ export class DepositFormModel {
   supervisor_extra: any;
   created_at: string;
   updated_at: string;
+  detail_deposit_form_edit: any;
+  selected_currencies: any;
 }
 
 
