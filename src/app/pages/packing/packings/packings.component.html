@@ -45,6 +45,11 @@
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
+          <th pSortableColumn="voucher">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.VOUCHER' | translate }}
+            </div>
+          </th>
           <th pSortableColumn="code">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'PACKING.CODE' | translate }}
@@ -74,6 +79,9 @@
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
+            {{value.vouchers[0]}}
           </td>
           <td>
             {{value.code}}

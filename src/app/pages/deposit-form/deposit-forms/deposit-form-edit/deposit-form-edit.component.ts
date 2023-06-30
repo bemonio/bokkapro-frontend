@@ -171,11 +171,11 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       verified: new FormControl(''),
       verified_at: new FormControl(''),
       packing: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
-      employee_who_counts: new FormControl({value:'', disabled: false}, Validators.compose([Validators.required, Validators.minLength(1)])),
+      employee_who_counts: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1)])),
       supervisor: new FormControl(''),
       supervisor_extra: new FormControl(''),
       selected_currencies: new FormControl([]),
-      mainArray: new FormArray([])
+      detail_deposit_form_edit: new FormArray([])// mainArray: new FormArray([])
     });
     this.showPage = 1;
   }
@@ -248,7 +248,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   }
 
   get dynamicFormArray(): FormArray {
-    return this.formGroup.get('mainArray') as FormArray;
+    return this.formGroup.get('detail_deposit_form_edit') as FormArray;
   }
 
   onMultiSelectChange(event: any) {
@@ -278,7 +278,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   addCurrency( nameCurrency, currency:any = null ) {
       var denominationsLoc = currency ? currency.denominations :this.denominations[nameCurrency.value];
       const denominationsArray = denominationsLoc.map(denomination => this.fb.group({
-        denomination: [denomination.value],
+        label: [denomination.label],
         quantity: [denomination.quantity ? denomination.quantity : '0', Validators.compose([ Validators.required, Validators.minLength(1) ])],
         valueDenomination: [denomination.valueDenomination],
         totalDimension: [denomination.totalDimension ? denomination.totalDimension: '0'],
@@ -362,10 +362,16 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     // poner como obligatorio o no el formControl de diferencia y el acta
     // que se active cuando se escribe el monto tambien
   }
+  enableSomeControls()
+  {
+    this.formGroup.get('contain').enable();
+    this.formGroup.get('difference').enable();
+    this.formGroup.get('difference_amount').enable();
+  }
 
   save(saveAndExit) {
     this.saveAndExit = saveAndExit;
-    
+    this.enableSomeControls();
     this.formGroup.value.selected_currencies = this.getValueCurrenciesSelected(this.formGroup.value.selected_currencies);
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
@@ -383,12 +389,12 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.verified_at = this.formatDate(this.model.verified_at);
-    model.packing = this.model.packing.id;
-    model.bank_account = this.model.bank_account;//model.bank_account = this.model.bank_account.id;
+    model.packing = (this.model.packing.id) ? this.model.packing.id : this.model.packing;
+    model.bank_account = null;//model.bank_account = this.model.bank_account;//model.bank_account = this.model.bank_account.id;
     model.currency = this.model.currency.id;
     model.employee_who_counts = this.model.employee_who_counts.id;
-    model.supervisor = this.model.supervisor.id;
-    model.supervisor_extra = this.model.supervisor_extra.id;
+    model.supervisor = (this.model.supervisor) ? this.model.supervisor.id : undefined;
+    model.supervisor_extra = (this.model.supervisor_extra) ?  this.model.supervisor_extra.id : undefined;
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
@@ -424,11 +430,11 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;    
     model.packing = this.model.packing.id;
-    model.bank_account = this.model.bank_account;//model.bank_account = this.model.bank_account.id;
+    model.bank_account = null;//model.bank_account = this.model.bank_account;//model.bank_account = this.model.bank_account.id;
     model.currency = this.model.currency.id;
     model.employee_who_counts = this.model.employee_who_counts.id;
-    model.supervisor = this.model.supervisor.id;
-    model.supervisor_extra = this.model.supervisor_extra.id;
+    model.supervisor = (this.model.supervisor) ? this.model.supervisor.id : undefined;
+    model.supervisor_extra = (this.model.supervisor_extra) ?  this.model.supervisor_extra.id : undefined;
 
     model.verified_at = undefined;
     // if (this.verified_at.value) {
@@ -578,16 +584,16 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   {
     var denominations = {
       dolar: [
-        { key: 'billete1', value: 'Billete 1', valueDenomination: '1' },
-        { key: 'billete2', value: 'Billete 2', valueDenomination: '2' },
-        { key: 'moneda1', value: 'Moneda 1', valueDenomination: '0.01' },
-        { key: 'moneda2', value: 'Moneda 2', valueDenomination: '0.02' }
+        { key: 'billete1', label: 'Billete 1', valueDenomination: '1' },
+        { key: 'billete2', label: 'Billete 2', valueDenomination: '2' },
+        { key: 'moneda1', label: 'Moneda 1', valueDenomination: '0.01' },
+        { key: 'moneda2', label: 'Moneda 2', valueDenomination: '0.02' }
       ],
       euro: [
-        { key: 'billete5', value: 'Billete 5', valueDenomination: '5' },
-        { key: 'billete10', value: 'Billete 10', valueDenomination: '10' },
-        { key: 'moneda5', value: 'Moneda 5', valueDenomination: '0.05' },
-        { key: 'moneda10', value: 'Moneda 10', valueDenomination: '0.1' }
+        { key: 'billete5', label: 'Billete 5', valueDenomination: '5' },
+        { key: 'billete10', label: 'Billete 10', valueDenomination: '10' },
+        { key: 'moneda5', label: 'Moneda 5', valueDenomination: '0.05' },
+        { key: 'moneda10', label: 'Moneda 10', valueDenomination: '0.1' }
       ]
     };
     return denominations;
@@ -615,25 +621,25 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
             },
             "denominations": [
                 {
-                    "denomination": "Billete 1",
+                    "label": "Billete 1",
                     "quantity": "0",
                     "valueDenomination": "1",
                     "totalDimension": "0"
                 },
                 {
-                    "denomination": "Billete 2",
+                    "label": "Billete 2",
                     "quantity": 10,
                     "valueDenomination": "2",
                     "totalDimension": 20
                 },
                 {
-                    "denomination": "Moneda 1",
+                    "label": "Moneda 1",
                     "quantity": "0",
                     "valueDenomination": "0.01",
                     "totalDimension": "0"
                 },
                 {
-                    "denomination": "Moneda 2",
+                    "label": "Moneda 2",
                     "quantity": "0",
                     "valueDenomination": "0.02",
                     "totalDimension": "0"
@@ -662,17 +668,14 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   - Que guarde es el array en las divisas (ya)
   - Que para los valores del value de las monedas traiga es el id (ya)
   
-  - Que muestre la informacion 
-    envase, empleado
-  - Que si carga una divisa por defecto la tome como valor en este componente  
-  - Falta que "suma " se divida en la moneda seleccionada y en ese caso si sume)
-    Se debe realizar la consulta, con las monedas y su conversion
+  - Que muestre la informacion  (ya, se hizo con consulta separada)
+    envase, empleado 
+  - En la planilla de envases, mostrar codigo de comprobante (ya)
   - Codigo de comprobante (Un comprobante contiene envases y los envases tiene planilla de deposito)
     Se debe realizar la consulta,
-  - En la planilla de envases, mostrar codigo de comprobante
-  
-
-
-  
+  - que se hace con ese bank account?
+  - Falta que "suma " se divida en la moneda seleccionada y en ese caso si sume)
+    Se debe realizar la consulta, con las monedas y su conversion
+   
   */
 }

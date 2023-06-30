@@ -18,6 +18,7 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
 })
 export class PackingAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
+    @Input() model_id: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
     @Input() required: boolean;
@@ -55,6 +56,14 @@ export class PackingAutocompleteComponent implements ControlValueAccessor, OnIni
     public ngOnInit() {
         if (!this.placeholder) {
             this.placeholder = '';
+        }
+    }
+
+    public ngOnChanges(){
+        this.filters = [];
+        if (this.model_id) {
+            this.filters.push({ key: 'filter{id.icontains}', value:  String(this.model_id) });
+            this.getModels();
         }
     }
 
@@ -113,7 +122,7 @@ export class PackingAutocompleteComponent implements ControlValueAccessor, OnIni
         if (event && event.rows) {
             this.per_page = event.rows;
         }
-
+        
 
         if (!this.firstTime) {
             this.getModels();
@@ -126,9 +135,10 @@ export class PackingAutocompleteComponent implements ControlValueAccessor, OnIni
             response => {
                 this.models = response.packings;
                 this.totalRecords = response.meta.total_results;
+                this.selModel();
                 // if (this.model) {
-                //     if (this.model.id) {
-                //         this.model.id = undefined;
+                //     if (this.model) {
+                //         this.model = undefined;
                 //         this.value = this.models[0];
                 //         this.filters = [];
                 //     }
@@ -158,5 +168,14 @@ export class PackingAutocompleteComponent implements ControlValueAccessor, OnIni
             }
         }
         return stringClass;
+    }
+    public selModel(){
+        if (this.model_id) {
+            if (this.model_id) {
+                this.model_id = undefined;
+                this.value = this.models[0];
+                this.filters = [];
+            }
+        }
     }
 }

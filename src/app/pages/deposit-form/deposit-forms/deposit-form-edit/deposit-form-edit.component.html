@@ -46,7 +46,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.PACKING' | translate }}</label>
               <app-packing-autocomplete
               name="packing" [valid]="isControlValid('packing')" [touched]="isControlTouched('packing')" [class.is-invalid]="isControlInvalid('packing')"
-              [class.is-valid]="isControlValid('packing')" formControlName="packing" id="packing" [model]="model.packing"></app-packing-autocomplete>
+              [class.is-valid]="isControlValid('packing')" formControlName="packing" id="packing" [model_id]="model.packing"></app-packing-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('packing')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.PACKING' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('packing')">{{ 'DEPOSITFORM.PACKING' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'packing')">{{ 'DEPOSITFORM.PACKING' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -57,7 +57,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.EMPLOYEEWHOCOUNTS' | translate }}</label>
               <app-employee-autocomplete
               name="employee_who_counts" [valid]="isControlValid('employee_who_counts')" [touched]="isControlTouched('employee_who_counts')" [class.is-invalid]="isControlInvalid('employee_who_counts')"
-              [class.is-valid]="isControlValid('employee_who_counts')" formControlName="employee_who_counts" id="employee_who_counts" [model]="model.employee_who_counts"></app-employee-autocomplete>
+              [class.is-valid]="isControlValid('employee_who_counts')" formControlName="employee_who_counts" id="employee_who_counts" [model_id]="model.employee_who_counts"></app-employee-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('employee_who_counts')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.EMPLOYEEWHOCOUNTS' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('employee_who_counts')">{{ 'DEPOSITFORM.EMPLOYEEWHOCOUNTS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee_who_counts')">{{ 'DEPOSITFORM.EMPLOYEEWHOCOUNTS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -78,7 +78,7 @@
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.BANK' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="bank_account" [class.is-invalid]="isControlInvalid('bank')"
+                name="bank" [class.is-invalid]="isControlInvalid('bank')"
                 [class.is-valid]="isControlValid('bank')" formControlName="bank" />
               <div class="feedback" *ngIf="!isControlTouched('bank')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.BANK' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('bank')">{{ 'DEPOSITFORM.BANK' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
@@ -185,7 +185,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.SUPERVISOR' | translate }}</label>
               <app-employee-autocomplete
               name="supervisor" [valid]="isControlValid('supervisor')" [touched]="isControlTouched('supervisor')" [class.is-invalid]="isControlInvalid('supervisor')"
-              [class.is-valid]="isControlValid('supervisor')" formControlName="supervisor" id="supervisor" [model]="model.supervisor"></app-employee-autocomplete>
+              [class.is-valid]="isControlValid('supervisor')" formControlName="supervisor" id="supervisor" [model_id]="model.supervisor"></app-employee-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('supervisor')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.SUPERVISOR' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('supervisor')">{{ 'DEPOSITFORM.SUPERVISOR' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'supervisor')">{{ 'DEPOSITFORM.SUPERVISOR' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -196,7 +196,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }}</label>
               <app-employee-autocomplete
               name="supervisor_extra" [valid]="isControlValid('supervisor_extra')" [touched]="isControlTouched('supervisor_extra')" [class.is-invalid]="isControlInvalid('supervisor_extra')"
-              [class.is-valid]="isControlValid('supervisor_extra')" formControlName="supervisor_extra" id="supervisor_extra" [model]="model.supervisor_extra"></app-employee-autocomplete>
+              [class.is-valid]="isControlValid('supervisor_extra')" formControlName="supervisor_extra" id="supervisor_extra" [model_id]="model.supervisor_extra"></app-employee-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('supervisor_extra')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'supervisor_extra')">{{ 'DEPOSITFORM.SUPERVISOREXTRA' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -210,7 +210,7 @@
             
           </div>
 
-          <div class="form-group row"  formArrayName="mainArray">
+          <div class="form-group row"  formArrayName="detail_deposit_form_edit">
             <div class="col-12" *ngFor="let control of dynamicFormArray.controls; let i = index">
               <div class="row" [formGroupName]="i">
                 <div class="col-md-12"><h3>{{ control.value.item.name }}</h3></div> 
@@ -221,7 +221,7 @@
                   <div *ngFor="let denominationControl of control.get('denominations').controls; let j = index">
                     <div class="row denomination" [formGroupName]="j">
                       <div class="col-md-3">
-                        <label>{{denominationControl.value.denomination}}</label>
+                        <label>{{denominationControl.value.label}}</label>
                       </div>
                       <div class="col-md-3">
                         <input type="number" class="form-control form-control-md form-control-solid" autocomplete="off" formControlName="quantity" (change)="calcByDim($event,j,i)" placeholder="value">  

@@ -112,7 +112,7 @@ export class DepositFormsDetailsComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
-        this.ngOnInit();
+        // this.ngOnInit();
     }
 
     public loadLazy(event?: LazyLoadEvent) {

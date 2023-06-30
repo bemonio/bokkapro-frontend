@@ -21,6 +21,7 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
 })
 export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
+    @Input() model_id: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
     @Input() required: boolean;
@@ -60,6 +61,15 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
     public ngOnInit() {
         if (!this.placeholder) {
             this.placeholder = '';
+        }
+    }
+
+    public ngOnChanges(){
+        this.filters = [];
+        if (this.model_id) {
+            // this.filters.push({key: 'id-lk', value: String(this.model_id)});
+            this.filters.push({ key: 'filter{id.icontains}', value:  String(this.model_id) });
+            this.getModels();
         }
     }
 
@@ -146,6 +156,7 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
                     //         this.filters = [];
                     //     }
                     // }
+                    this.selModel();
                 },
                 error => {
                     let messageError = [];
@@ -164,6 +175,7 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
                 response => {
                     this.models = response.employees;
                     this.totalRecords = response.meta.total_results;
+                    this.selModel();
                     // if (this.model) {
                     //     if (this.model.id) {
                     //         this.model.id = undefined;
@@ -197,5 +209,14 @@ export class EmployeeAutocompleteComponent implements ControlValueAccessor, OnIn
             }
         }
         return stringClass;
+    }
+    public selModel(){
+        if (this.model_id) {
+            if (this.model_id) {
+                this.model_id = undefined;
+                this.value = this.models[0];
+                this.filters = [];
+            }
+        }
     }
 }

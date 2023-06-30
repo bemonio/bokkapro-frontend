@@ -92,6 +92,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
         this.onChange(this.value);
         this.onTouched(this.value);
         this.onMyChange.emit(this.value);
+        console.log(this.value);
     }
 
     public load() {

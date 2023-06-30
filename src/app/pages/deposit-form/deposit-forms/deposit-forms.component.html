@@ -130,7 +130,7 @@
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
 
-<p-dialog header="{{ 'DEPOSITFORMDETAIL.DEPOSITFORMSDETAILS' | translate }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" 
+<p-dialog *ngIf="displayModal" header="{{ 'DEPOSITFORMDETAIL.DEPOSITFORMSDETAILS' | translate }}" [modal]="true" [style]="{width: '50vw'}" 
   [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
 
   <div class="mt-5">

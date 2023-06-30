@@ -100,7 +100,7 @@ export class DepositFormsComponent implements OnInit {
 
         this.models = [];
         this.selectedModels = [];
-        this.getModels();
+        // this.getModels();
     }
 
     ngOnInit() {
