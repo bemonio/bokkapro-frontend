@@ -44,7 +44,7 @@
           <div class="form-group row">
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'CURRENCYDETAIL.DENOMINATION' | translate }}</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+              <input type="number" min="1" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="denomination" [class.is-invalid]="isControlInvalid('denomination')"
                 [class.is-valid]="isControlValid('denomination')" formControlName="denomination" />
               <div class="feedback" *ngIf="!isControlTouched('denomination')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'CURRENCYDETAIL.DENOMINATION' | translate }}</b></div>

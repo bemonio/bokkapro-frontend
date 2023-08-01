@@ -39,6 +39,16 @@
               {{ 'DEPOSITFORM.ID' | translate }}
             </div>
           </th>
+          <th pSortableColumn="voucher">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'VOUCHER.VOUCHER' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="packing">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'PACKING.PACKING' | translate }}
+            </div>
+          </th>
           <th pSortableColumn="created_at">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.CREATED_AT' | translate }}
@@ -77,6 +87,12 @@
           </td>
           <td>
             {{value.id}}
+          </td>
+          <td>
+            {{value.packing}}
+          </td>
+          <td>
+            {{value.voucher}}
           </td>
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}

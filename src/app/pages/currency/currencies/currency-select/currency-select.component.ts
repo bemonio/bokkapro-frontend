@@ -4,6 +4,7 @@ import { CurrencyService as ModelsService } from '../../_services/currency.servi
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
+import { element } from 'protractor';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CurrencySelectComponent),
@@ -18,6 +19,7 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
 })
 export class CurrencySelectComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input() model: any;
+    @Input() model_id: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
     @Input() required: boolean;
@@ -25,7 +27,10 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
     @Input() readOnly: boolean;
     @Input() placeholder: string;
     @Input() addFilters: { key: string, value: string }[];
+    @Input() addWith: { key: string, value: string }[];
     @Output() onMyChange: EventEmitter<any> = new EventEmitter<any>();
+    @Output() currencyOptionsOutput: EventEmitter<any[]> = new EventEmitter<any[]>();
+
 
     public models: any[];
 
@@ -41,6 +46,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
     public _with: { key: string, value: string }[];
 
     public value: any;
+    firstOnce: boolean = true;
 
     constructor(
         public modelsService: ModelsService,
@@ -94,7 +100,10 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
         this.onMyChange.emit(this.value);
         console.log(this.value);
     }
-
+    public currencyOptionsEmit(options: any[]){
+        this.currencyOptionsOutput.emit(options);
+        // console.log(options);
+    }
     public load() {
         this.filters = [];
         if (this.addFilters) {
@@ -106,6 +115,7 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
     }
 
     getModels() {
+        this._with = [{key: 'CurrencyDetail', value: 'CurrencyDetail'}];
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.models = response.currencies;
@@ -117,7 +127,21 @@ export class CurrencySelectComponent implements ControlValueAccessor, OnInit, On
                 //         this.filters = [];
                 //     }
                 // }
+                
+                if(this.firstOnce){
 
+                    this.currencyOptionsEmit(this.models);
+                    this.firstOnce = false;
+                    if(this.model_id)
+                    {
+                        this.models.forEach(element =>{
+                            if(element.id == this.model_id){
+                                this.value = element;
+                            }
+                        });
+                    }
+                    this.model_id = undefined;
+                }
                 response.offices.forEach(office => {
                     this.models.forEach(element => {
                         if (element.office === office.id) {

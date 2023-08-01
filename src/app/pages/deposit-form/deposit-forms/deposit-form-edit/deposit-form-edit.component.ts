@@ -9,10 +9,13 @@ import { AuthService } from 'src/app/modules/auth';
 import { DepositFormModel as Model } from '../../_models/deposit-form.model';
 import { DepositFormService as ModelsService } from '../../_services/deposit-form.service';
 import { PackingService } from 'src/app/pages/packing/_services';
-import { OfficeService } from 'src/app/pages/office/_services';
-import { MultiSelectModule } from 'primeng/multiselect';
+import { CurrencyDetailService } from 'src/app/pages/currency-detail/_services';
+import { ThrowStmt } from '@angular/compiler';
 import { element } from 'protractor';
-import { SelectItem } from 'primeng/api';
+// import { OfficeService } from 'src/app/pages/office/_services';
+// import { MultiSelectModule } from 'primeng/multiselect';
+// import { element } from 'protractor';
+// import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-deposit-form-edit',
@@ -45,11 +48,11 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   
   public view: boolean;
   public showPage: number=0;
+  public officeUser: any;
   currencies: any[];
   currencyOptions: any[];
   
-  public denominations: any;
-  public items: SelectItem[];
+  public currencyDetails: any;
 
   public optionsDifference: { key: string, value: string }[];
   public differenceEnable: boolean = false;
@@ -61,13 +64,14 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private toastService: ToastService,
     private packingService: PackingService,
+    private currencyDetailService: CurrencyDetailService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
     this.requesting = false;
 
     this.view = false;
-
+    this.officeUser = this.authService.currentDivisionValue.office;
     
     
   }
@@ -76,10 +80,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
-    this.currencyOptions = this.getCurrencyOptions();
 
-    this.denominations = this.getDenominationBanknotesandCoins();
-    this.items = this.getCurrencyOptions();
     this.optionsDifference = this.getOptionsDifference();
     this.createForm();
 
@@ -149,8 +150,11 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       this.requesting = false;
       if (response) {
         this.model = response.deposit_form;
-        
-
+        this.model.deposit_form_details = response.deposit_form_details ? response.deposit_form_details : [];
+        this.model.deposit_form_details.forEach(element => {
+          element.depositdetail_depositformdetail = response.deposit_form_detail_currency_details.filter(item => item.deposit_form_detail == element.id);          
+        });
+        delete this.model.depositdetail_depositform;
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -161,7 +165,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       amount: new FormControl('0', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(255)])),
       contain: new FormControl({value:'0', disabled: true}),
-      difference: new FormControl({value:'', disabled: true}),
+      difference: new FormControl({value:undefined, disabled: false}),
       difference_amount: new FormControl({value:'0', disabled: true}),
       review: new FormControl(''),
       bank: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
@@ -175,7 +179,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       supervisor: new FormControl(''),
       supervisor_extra: new FormControl(''),
       selected_currencies: new FormControl([]),
-      detail_deposit_form_edit: new FormArray([])// mainArray: new FormArray([])
+      deposit_form_details: new FormArray([])// mainArray: new FormArray([])
     });
     this.showPage = 1;
   }
@@ -208,13 +212,14 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
       // if (this.model.supervisor_extra) {
       //   this.supervisor_extra.setValue(this.model.supervisor_extra);
       // }
-      this.model.detail_deposit_form_edit = this.testMainArrayBBDD();
-      this.model.selected_currencies = this.testSelectedCurrencies();
+      // this.model.deposit_form_details = this.testMainArrayBBDD();
+      // var selected_currencies = this.model.deposit_form_details.map((json) => json.deposit_form_detail.currency);
 
       this.formGroup.patchValue({
         
         amount: this.model.amount,        
         contain: this.model.contain,
+        difference: this.optionsDifference.find(element => element.value == this.model.difference),
         difference_amount: this.model.difference_amount,
         review: this.model.review,
         bank : this.model.bank,
@@ -224,12 +229,11 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
         verified_at: this.model.verified_at ? new Date(this.model.verified_at) : null,
         packing: this.model.packing,
         currency: this.model.currency,
-        selected_currencies: this.findMultipleElementsInJSONArray(this.currencyOptions, this.model.selected_currencies,"value"),
+        // selected_currencies: this.findMultipleElementsInJSONArray(this.currencyOptions, selected_currencies,"id"),
         employee_who_counts: this.model.employee_who_counts,
         supervisor: this.model.supervisor,
         supervisor_extra: this.model.supervisor_extra,
       });
-      this.listFieldsFormsArray(this.dynamicFormArray,this.model.detail_deposit_form_edit);
       this.formGroup.get('packing').disabled;
     } else {
       if (this.packingId) {
@@ -248,45 +252,62 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   }
 
   get dynamicFormArray(): FormArray {
-    return this.formGroup.get('detail_deposit_form_edit') as FormArray;
+    return this.formGroup.get('deposit_form_details') as FormArray;
   }
 
   onMultiSelectChange(event: any) {
     const selectedValues = event.value;
     
     // Comparar las selecciones con los elementos existentes en el FormArray
-    const currentItems = this.dynamicFormArray.controls.map(control => control.value.item);
+    const currentItems = this.dynamicFormArray.controls.map(control => control.value.deposit_form_detail);
     const itemsToAdd = selectedValues.filter(selectedValue => 
-      !currentItems.some(item => item.value == selectedValue.value)
+      !currentItems.some(item => item.currency_id == selectedValue.id)
     );
     
     // Agregar nuevos elementos al FormArray
     itemsToAdd.forEach(item => {
       this.addCurrency(item);
     });
-
+    this.calcContain();
+    this.getDifference();
     // Eliminar elementos del FormArray si ya no están seleccionados
     for (let i = this.dynamicFormArray.controls.length - 1; i >= 0; i--) {
       const control = this.dynamicFormArray.controls[i];
-      const item = control.value.item;
-      if (!selectedValues.some(selectedValue => selectedValue.value == item.value)) {
+      const item = control.value.deposit_form_detail.currency_id;
+      if (!selectedValues.some(selectedValue => selectedValue.id == item)) {
         this.dynamicFormArray.removeAt(i);
       }
     }
   }
 
-  addCurrency( nameCurrency, currency:any = null ) {
-      var denominationsLoc = currency ? currency.denominations :this.denominations[nameCurrency.value];
-      const denominationsArray = denominationsLoc.map(denomination => this.fb.group({
-        label: [denomination.label],
-        quantity: [denomination.quantity ? denomination.quantity : '0', Validators.compose([ Validators.required, Validators.minLength(1) ])],
-        valueDenomination: [denomination.valueDenomination],
-        totalDimension: [denomination.totalDimension ? denomination.totalDimension: '0'],
-      }));
+  addCurrency( currency, dep_form_edit_det:any = null ) {
+      var currencyDetailsLoc = this.currencyDetails.filter((jsonObject) => jsonObject.currency.id == currency.id);
+  
+      const currencyDetailsArray = currencyDetailsLoc.map(item => 
+        {
+          var currency_detail_loc = this.getCurrencyDetailData(item,dep_form_edit_det);
+          var totalDenomination = currency_detail_loc.quantity * item.denomination;
+          return this.fb.group({
+          id: currency_detail_loc.id,  
+          currency_detail_id: item.id,
+          label: [item.type_currency.name + ' ' + item.denomination], // no se debe guardar
+          valueDenomination: [item.denomination], // no se debe guardar
+          quantity: [currency_detail_loc.quantity, Validators.compose([ Validators.required, Validators.minLength(1) ])],
+          totalDenomination: [totalDenomination],
+          });
+        }
+      );
+      const deposit_form_detail = this.fb.group({
+        id: [ dep_form_edit_det ? dep_form_edit_det.id :  undefined],
+        exchange_rate: [ dep_form_edit_det ? dep_form_edit_det.exchange_rate :  currency.exchange_rate],
+        name: [ currency.name], // no se debe guardar
+        counted_quantity_convert: [0], // no se debe guardar
+        currency_id: [currency.id],
+        counted_quantity: [dep_form_edit_det ? dep_form_edit_det.counted_quantity : 0]
+      });
       const newGroup = this.fb.group({
-        item: [currency ? currency.item : nameCurrency],
-        denominations: this.fb.array(denominationsArray),
-        subtotal: [currency ? currency.subtotal : '0'],
+        deposit_form_detail: deposit_form_detail,
+        deposit_form_detail_currency_detail: this.fb.array(currencyDetailsArray),
       });
       this.dynamicFormArray.push(newGroup);
     
@@ -305,8 +326,13 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
     if(data.length>0){
       data.forEach(element => {
-        this.addCurrency(element.item,element);
+        // this.addCurrency(element.item,element);
+        var currencySelect = this.currencyOptions.find((option) => option.id == element.currency);
+        this.addCurrency(currencySelect,element);
+        
       });
+      this.calcContain();
+      this.getDifference();
     }
   }
   
@@ -320,10 +346,10 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     const divisaFormGroup = this.dynamicFormArray.controls[indexControlDivisa];
     
     //obtener el control del formulario correspondiente
-    var controlDenomination = divisaFormGroup.controls.denominations.controls[indexDenomination];
+    var controlDenomination = divisaFormGroup.controls.deposit_form_detail_currency_detail.controls[indexDenomination];
     var result = quantity * controlDenomination.controls.valueDenomination.value;
     //asignar el resultado a dicho control
-    controlDenomination.controls.totalDimension.setValue(result);
+    controlDenomination.controls.totalDenomination.setValue(result);
     this.calcContain();// this.calcByBadge(indexControlDivisa);
     this.getDifference();
   }
@@ -331,16 +357,17 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   calcByBadge(indexControlDivisa:string){
     //Encontrar formulario de divisa
     const divisaFormGroup = this.dynamicFormArray.controls[indexControlDivisa];
-    const controlsDivisa = divisaFormGroup.controls.denominations.controls;
+    const controlsDivisa = divisaFormGroup.controls.deposit_form_detail_currency_detail.controls;
     
     const suma = Object.keys(controlsDivisa).reduce((acc, controlName) => {
-      const controlValue = controlsDivisa[controlName].value.totalDimension;
+      const controlValue = controlsDivisa[controlName].value.totalDenomination;
       const valueNumber= parseFloat(controlValue);
       return acc + valueNumber;
     }, 0);
-  
-    divisaFormGroup.controls.subtotal.setValue(suma);
-    return suma;
+    var sumaConvert = this.convertCurrency(suma, divisaFormGroup.value.deposit_form_detail.currency_id, this.formGroup.value.currency, this.currencyOptions);
+    divisaFormGroup.controls.deposit_form_detail.controls.counted_quantity_convert.setValue(sumaConvert);
+    divisaFormGroup.controls.deposit_form_detail.controls.counted_quantity.setValue(suma);
+    return sumaConvert;
   }
   calcContain(){
     var total = 0;
@@ -371,8 +398,8 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
 
   save(saveAndExit) {
     this.saveAndExit = saveAndExit;
-    this.enableSomeControls();
-    this.formGroup.value.selected_currencies = this.getValueCurrenciesSelected(this.formGroup.value.selected_currencies);
+    // this.enableSomeControls();
+    // this.formGroup.value.selected_currencies = this.getValueCurrenciesSelected(this.formGroup.value.selected_currencies);
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       const formValues = this.formGroup.value;
@@ -395,7 +422,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     model.employee_who_counts = this.model.employee_who_counts.id;
     model.supervisor = (this.model.supervisor) ? this.model.supervisor.id : undefined;
     model.supervisor_extra = (this.model.supervisor_extra) ?  this.model.supervisor_extra.id : undefined;
-
+    model.difference =   this.model.difference ? this.model.difference.value : null;
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
@@ -435,7 +462,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     model.employee_who_counts = this.model.employee_who_counts.id;
     model.supervisor = (this.model.supervisor) ? this.model.supervisor.id : undefined;
     model.supervisor_extra = (this.model.supervisor_extra) ?  this.model.supervisor_extra.id : undefined;
-
+    model.difference =   this.model.difference ? this.model.difference.value : null;
     model.verified_at = undefined;
     // if (this.verified_at.value) {
     //   model.verified_at = this.formatDate(this.verified_at.value);
@@ -563,7 +590,9 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   }
 
   findMultipleElementsInJSONArray(jsonArray, selectedArray, fieldName) {
-    return jsonArray.filter((jsonObject) => selectedArray.includes(jsonObject[fieldName]));
+    return jsonArray.filter((jsonObject) => 
+    selectedArray.includes(jsonObject[fieldName])
+    );
   }
   
   getValueCurrenciesSelected(currencies: any[]){
@@ -574,108 +603,122 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
     return id_currencies;
   }
 
-  getCurrencyOptions(){
-    return [
-      { name: 'Dolar', value: 'dolar' },
-      { name: 'Euro', value: 'euro' }
-    ];
+  updateCurrencyOptions(array: any[]){
+    
+    this.currencyOptions = array;
+    var array_ids = array.map(objetoJson => objetoJson.id);
+    this.getCurrencyDetail(array_ids);
+    
   }
-  getDenominationBanknotesandCoins()
-  {
-    var denominations = {
-      dolar: [
-        { key: 'billete1', label: 'Billete 1', valueDenomination: '1' },
-        { key: 'billete2', label: 'Billete 2', valueDenomination: '2' },
-        { key: 'moneda1', label: 'Moneda 1', valueDenomination: '0.01' },
-        { key: 'moneda2', label: 'Moneda 2', valueDenomination: '0.02' }
-      ],
-      euro: [
-        { key: 'billete5', label: 'Billete 5', valueDenomination: '5' },
-        { key: 'billete10', label: 'Billete 10', valueDenomination: '10' },
-        { key: 'moneda5', label: 'Moneda 5', valueDenomination: '0.05' },
-        { key: 'moneda10', label: 'Moneda 10', valueDenomination: '0.1' }
-      ]
-    };
-    return denominations;
+
+  convertCurrency(amount, fromCurrency, toCurrency, rates) {
+    const fromRate = rates.find(item => item.id == fromCurrency);//rates[fromCurrency];
+    
+    const toRate = toCurrency.id ? toCurrency : rates.find(item => item.id == toCurrency);//rates[toCurrency];
+  
+    // // Convertir la cantidad de la moneda de origen a la moneda de referencia (euro)
+    // const referenceAmount = amount * fromRate.exchange_rate;
+  
+    // // Convertir la cantidad de moneda de referencia a la moneda de destino
+    // const convertedAmountsh = referenceAmount / toRate.exchange_rate;
+    var  convertedAmount = amount * (fromRate.exchange_rate / toRate.exchange_rate );
+    return convertedAmount;
+  }
+  
+  getCurrencyDetail(array_ids: any[]) {
+    var filters = [{key: 'currency', value: array_ids}];
+        this.currencyDetailService.get(null, 1000, null, null, filters).subscribe(
+            response => {
+              this.currencyDetails = this.fitListCurrencyDetail(response);
+                // this.models = response.currencies;
+                // this.totalRecords = response.meta.total_results;
+                if(this.model.deposit_form_details)// deposit_form_details
+
+                {
+                  var selected_currencies = this.model.deposit_form_details.map((json) => json.currency);
+                  this.formGroup.controls.selected_currencies.patchValue(this.findMultipleElementsInJSONArray(this.currencyOptions, selected_currencies,"id"));
+                  this.listFieldsFormsArray(this.dynamicFormArray,this.model.deposit_form_details);
+                }
+                
+            },
+            error => {
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
+                );
+                return [];
+            }
+        );
+  }
+  
+  // Función para buscar un objeto por su ID en un array
+  findObjectById(array, id) {
+    return array.find(item => item.id === id);
+  }
+  fitListCurrencyDetail(data:any){
+    // var response = [];
+    // Asignar currencies y type_currencies a currency_details
+    data.currency_details = data.currency_details.filter(element => 
+      this.currencyOptions.some(option => element.currency == option.id));
+    data.currency_details.forEach(detail => {
+      // Buscar el objeto currency correspondiente por su ID
+      const currency = this.findObjectById(data.currencies, detail.currency);
+      // Asignar el objeto currency a la propiedad "currency" de currency_details
+      detail.currency = currency;
+
+      // Buscar el objeto type_currency correspondiente por su ID
+      const type_currency = this.findObjectById(data.type_currencies, detail.type_currency);
+      // Asignar el objeto type_currency a la propiedad "type_currency" de currency_details
+      detail.type_currency = type_currency;
+    });
+    return data.currency_details;
+  }
+
+  getCurrencyDetailData(currency_detail: any, dep_form_edit_det: any) {
+    var currency_detail_find = { id: undefined, quantity : 0 };
+    if(dep_form_edit_det != null)
+    {
+      if(dep_form_edit_det.depositdetail_depositformdetail)
+      {
+        if(dep_form_edit_det.depositdetail_depositformdetail.length > 0)
+        {
+          dep_form_edit_det.depositdetail_depositformdetail.forEach(element =>{
+            if(element.currency_detail == currency_detail.id){
+              currency_detail_find.id =  element.id;
+              currency_detail_find.quantity = element.quantity;
+            } 
+              
+          });
+        }
+      }
+    }  
+    
+    return currency_detail_find;  
   }
   
   getOptionsDifference(): any {
     return [
       { key: 'Diferencia en monto, monto mayor', value: 'Diferencia en monto, monto mayor' },
       { key: 'Diferencia en monto, monto menor', value: 'Diferencia en monto, monto menor' },
-      { key: 'Diferencia de cantitades de billetes', value: 'Diferencia de cantitades de billetes' },
+      { key: 'Diferencia de cantitades de billetes', value: 'Diferencia de cantidades de billetes' },
     ];
   }
 
-  testSelectedCurrencies(){
-    return [
-      "euro"
-    ];
-  }
-  testMainArrayBBDD(){
-    return [
-        {
-            "item": {
-                "name": "Euro",
-                "value": "euro"
-            },
-            "denominations": [
-                {
-                    "label": "Billete 1",
-                    "quantity": "0",
-                    "valueDenomination": "1",
-                    "totalDimension": "0"
-                },
-                {
-                    "label": "Billete 2",
-                    "quantity": 10,
-                    "valueDenomination": "2",
-                    "totalDimension": 20
-                },
-                {
-                    "label": "Moneda 1",
-                    "quantity": "0",
-                    "valueDenomination": "0.01",
-                    "totalDimension": "0"
-                },
-                {
-                    "label": "Moneda 2",
-                    "quantity": "0",
-                    "valueDenomination": "0.02",
-                    "totalDimension": "0"
-                }
-            ],
-            "subtotal": 20
-        }
-    ]
-  }
 
   /*
+    
+    - que se hace con ese bank_account y bank? ver cuando se envian los datos en el front
+    - que se hace cuando se le da guardar al editar?
+    - que se pueda crear una y guarden las relaciones (backend en views.py)
   
- 
-  - Hacer un metodo que sume los resultados de cada item (ya)
-
-  - Casilla de seleccion si hay diferencia entre valor contado y registrado  (ya)
-    Diferencia en monto, monto mayor
-    Diferencia en monto, monto menor
-    Diferencia de cantitades de billetes
-
-  - poner banco (ya)
-  - cuenta bancaria que se digite (ya)
-  - Numero de planilla, se digita (ya)
-  - Acta se debe mostrar y casilla de seleccion si hay diferencia si hay diferencia (ya)
-
-  - Que guarde es el array en las divisas (ya)
-  - Que para los valores del value de las monedas traiga es el id (ya)
-  
-  - Que muestre la informacion  (ya, se hizo con consulta separada)
-    envase, empleado 
-  - En la planilla de envases, mostrar codigo de comprobante (ya)
-  - Codigo de comprobante (Un comprobante contiene envases y los envases tiene planilla de deposito)
-    Se debe realizar la consulta,
-  - que se hace con ese bank account?
-  - Falta que "suma " se divida en la moneda seleccionada y en ese caso si sume)
-    Se debe realizar la consulta, con las monedas y su conversion
-   
   */
 }
+
+
+
+
