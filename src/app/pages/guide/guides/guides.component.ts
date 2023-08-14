@@ -42,6 +42,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
     public date_filter: AbstractControl;
     public created_at_filter: AbstractControl;
     public am_pm_filter: AbstractControl;
+    public type_guide: number;
 
     public showFilter: boolean;
 
@@ -158,6 +159,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
 
     public loadLazy(event?: LazyLoadEvent) {
         if (event && event.first) {
+            console.log('evento',event)
             if (event && event.first) {
             this.page = (event.first / this.per_page) + 1;
             }
@@ -205,15 +207,17 @@ export class GuidesComponent implements OnInit, OnDestroy {
                 this.parent = 'guidesinput';
                 this.permission = 'guideinput';
                 this.showFilter = true;
+                this.type_guide = 1;
                 break;
             case 'guidesoutput':
                 this.filters.push({ key: 'filter{division_origin}[]', value: this.authService.currentDivisionValue.id.toString() })
                 this.parent = 'guidesoutput';
                 this.permission = 'guideoutput';
                 this.showFilter = true;
+                this.type_guide = 3;
                 break;
             case 'guidescheck':
-                this.filters.push({ key: 'filter{type_guide}[]', value: '3' })
+                this.filters.push({ key: 'filter{type_guide}[]', value: '2' })
                 this.parent = 'guidescheck';
                 this.permission = 'guidecheck';
                 this.showFilter = true;
@@ -247,7 +251,12 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.requesting = false;
-                this.models = response.guides;
+                //this.models = response.guides;
+                //console.log("Vouches_new",this.models);
+                response.guides.forEach(element => {
+                if(element.type_guide === this.type_guide || element.type_guide === 2)
+                    this.models.push(element);
+                });
                 this.totalRecords = response.meta.total_results;
             },
             error => {

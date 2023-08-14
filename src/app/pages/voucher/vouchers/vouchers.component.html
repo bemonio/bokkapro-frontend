@@ -124,8 +124,11 @@
           <td>
             {{value.id}}
           </td>
-          <td>
+          <td *ngIf="!value.pickup_date">
             {{value.created_at | date: 'MM/dd/yyyy HH:mm:ss':'UTC -4'}}
+          </td>
+          <td *ngIf="value.pickup_date">
+            {{value.pickup_date | date: 'MM/dd/yyyy HH:mm:ss':'UTC -4'}}
           </td>
           <td>
             {{value.code}}
