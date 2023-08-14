@@ -49,8 +49,15 @@ export class CurrencyDetailService {
                 params.append(element.key, String(element.value));
             });
         }
-
+        var include = [{key:'include[]',value: 'currency.*'},
+                        {key:'include[]',value: 'type_currency.*'}]
+        if (include !== null && include !== undefined && include.length > 0) {
+            include.forEach(element => {
+                params.append(element.key, String(element.value));
+            });
+        }
         return this.http.get(`${this.API_URL}?${params}`);
+        // return this.http.get(`${this.API_URL}?${params}&include[]=type_currency.*&include[]=currency.*`);
     }
 
     public post(body: Object): Observable<any> {
