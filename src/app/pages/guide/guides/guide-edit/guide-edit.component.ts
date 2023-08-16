@@ -264,7 +264,6 @@ export class GuideEditComponent implements OnInit, OnDestroy {
 
   loadForm() {
     // this.certified_cart.setValue(false);
-
     if (this.model && this.model.id) {
       this.description.setValue(this.model.description);
       this.status.setValue(this.model.status);
@@ -272,7 +271,7 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.date.setValue(new Date(this.model.date));
       // this.certified_cart.setValue(this.model.certified_cart);
       // this.certified_cart_code.setValue(this.model.certified_cart_code);
-        if (this.model.division_origin) {
+      if (this.model.division_origin) {
         this.division_origin.setValue(this.model.division_origin);
       }
       if (this.model.division_destination) {
@@ -292,11 +291,10 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.date.setValue(new Date());
       this.am_pm.reset();
       this.division_destination.reset();
-      if(this.division_origin.value.name === "Apertura"){
+      if(this.division_origin.value.id === 3){
         this.getDivision(1);
-        // this.division_destination.disabled()
       }
-      if(this.division_origin.value.name === "Check IN/OUT"){
+      if(this.division_origin.value.id === 1){
         this.getDivision(2);
       }
       this.employee_destination.setValidators([])
