@@ -291,11 +291,19 @@ export class GuideEditComponent implements OnInit, OnDestroy {
       this.date.setValue(new Date());
       this.am_pm.reset();
       this.division_destination.reset();
-      if(this.division_origin.value.id === 3){
-        this.getDivision(1);
-      }
-      if(this.division_origin.value.id === 1){
-        this.getDivision(2);
+      switch (this.division_origin.value.id) {
+        case 1:
+          this.getDivision(2);
+          break;
+        case 587324:
+          this.getDivision(587325);
+          break;
+        case 587338:
+          this.getDivision(587339);
+          break;
+        case 3:
+          this.getDivision(1);
+          break;
       }
       this.employee_destination.setValidators([])
     } else {

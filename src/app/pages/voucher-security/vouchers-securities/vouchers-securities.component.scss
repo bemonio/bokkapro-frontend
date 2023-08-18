@@ -1,0 +1,8 @@
+.width-action{
+    width: 10rem;
+}
+@media (max-width: 960px) {
+    .width-action{
+        width: 5rem;
+    }
+}
