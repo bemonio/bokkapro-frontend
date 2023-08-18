@@ -48,6 +48,8 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
     public active_filter: boolean;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
+    
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -160,6 +162,8 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
         this.certified_cart.setValue(false);
 
         this.subscribeToDivisionChange();
+
+        this.screenWidth();
 
         this._with = [];
         // this._with.push({key: 'include[]', value: 'currency.*'})
@@ -769,5 +773,11 @@ export class VouchersSecuritiesComponent implements OnInit, OnDestroy, OnChanges
             response = false;
         }
         return response;
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

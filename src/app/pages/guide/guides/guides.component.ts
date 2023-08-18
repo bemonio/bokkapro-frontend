@@ -55,6 +55,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
     public certified_cart_code: AbstractControl;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -151,6 +152,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.requesting = false;
         this.subscribeToDivisionChange();
+        this.screenWidth();
     }
 
     static matches(form: AbstractControl){
@@ -657,5 +659,11 @@ export class GuidesComponent implements OnInit, OnDestroy {
         this.displayModal = false;
         this.listVouchers = [];
         this.verificationGuides = [];
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

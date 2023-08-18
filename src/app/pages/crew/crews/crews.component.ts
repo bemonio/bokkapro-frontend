@@ -44,6 +44,7 @@ export class CrewsComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -148,6 +149,7 @@ export class CrewsComponent implements OnInit {
             locale: 'es',
             themeSystem: 'bootstrap'
         }
+        this.screenWidth();
     }
 
     handleDateClick(arg) {
@@ -451,5 +453,11 @@ export class CrewsComponent implements OnInit {
     hideModal() {
         this.getModelsCalendar();
         this.showViewTourDetail = false;
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

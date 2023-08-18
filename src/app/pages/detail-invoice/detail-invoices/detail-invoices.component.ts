@@ -45,6 +45,7 @@ export class DetailInvoicesComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -111,7 +112,7 @@ export class DetailInvoicesComponent implements OnInit {
         this.detailInvoiceID = {id: undefined, isNew: false};
         this._with = [];
         this._with.push({key: 'include[]', value: 'head_invoice.*'})
-
+        this.screenWidth();
         this.setViewHeadInvoice = false;
     }
 
@@ -371,5 +372,11 @@ export class DetailInvoicesComponent implements OnInit {
         }
     
         return [year, month, day].join('-') + ' ' + [hours, minutes].join(':');
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

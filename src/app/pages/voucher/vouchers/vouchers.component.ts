@@ -49,6 +49,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     public active_filter: boolean;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -190,6 +191,8 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
         this.subscribeToDivisionChange();
 
+        this.screenWidth();
+
         this.showButtonConfirmationDelivered = false;
         this.showButtonDevolutionVoucher = false;
         this.showButtonTransferDivisionVoucher = false;
@@ -204,7 +207,6 @@ export class VouchersComponent implements OnInit, OnDestroy {
         // this._with.push({key: 'include[]', value: 'origin_destination.origin.*'})
         // this._with.push({key: 'include[]', value: 'origin_destination.destination.*'})
     }
-    
     public loadLazy(event?: LazyLoadEvent, isCashierFilter?: string) {
         if (event && (event.first || event.first == 0)) {
             this.page = (event.first / this.per_page) + 1;
@@ -1214,5 +1216,11 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     public showFile(url) {
         window.open(url, '_blank');
+    }
+    
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }
