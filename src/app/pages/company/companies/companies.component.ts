@@ -40,6 +40,7 @@ export class CompaniesComponent implements OnInit, OnChanges {
 
     searchGroup: FormGroup;
 
+    public size_width: boolean = false;
     public requesting: boolean = false;
 
     public confirmDialogPosition: string;
@@ -94,6 +95,7 @@ export class CompaniesComponent implements OnInit, OnChanges {
         this.requesting = false;
         this.visibleSidebar = false;
         this.companiesCompanyId = undefined;
+        this.screenWidth();
     }
 
     ngOnChanges(): void {
@@ -238,6 +240,12 @@ export class CompaniesComponent implements OnInit, OnChanges {
             this.companiesCompanyId = val;
         } else {
             this.companiesCompanyId = this.companiesCompanyId
+        }
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
         }
     }
 }

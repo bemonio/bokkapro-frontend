@@ -42,6 +42,7 @@ export class CertifiedCartsComponent implements OnInit {
 
     searchGroup: FormGroup;
 
+    public size_width: boolean = false;
     public requesting: boolean = false;
 
     public confirmDialogPosition: string;
@@ -123,6 +124,7 @@ export class CertifiedCartsComponent implements OnInit {
     ngOnInit() {
         this.requesting = false;
         this.subscribeToDivisionChange();
+        this.screenWidth();
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -549,5 +551,11 @@ export class CertifiedCartsComponent implements OnInit {
         this.displayModal = false;
         this.listVouchers = [];
         this.verificationCertifiedCarts = [];
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

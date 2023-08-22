@@ -40,6 +40,7 @@ export class StockTransactionDetailsComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -97,6 +98,7 @@ export class StockTransactionDetailsComponent implements OnInit {
         this._with.push({key: 'include[]', value: 'stock_transaction.*'})
 
         this.setViewStockTransactionDetail = false;
+        this.screenWidth();
     }
 
     ngOnChanges() {
@@ -307,5 +309,11 @@ export class StockTransactionDetailsComponent implements OnInit {
 
     changeSelectedmodels() {
         this.selectedModelsChange.emit(this.selectedModels);
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

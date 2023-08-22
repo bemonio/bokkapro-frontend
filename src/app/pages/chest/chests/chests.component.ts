@@ -39,6 +39,7 @@ export class ChestsComponent implements OnInit, OnChanges {
 
     searchGroup: FormGroup;
 
+    public size_width: boolean = false;
     public requesting: boolean = false;
 
     public confirmDialogPosition: string;
@@ -94,6 +95,7 @@ export class ChestsComponent implements OnInit, OnChanges {
         this.requesting = false;
         this.chestID = {id: undefined, isNew: false};
         this._with = [];
+        this.screenWidth();
         this._with.push({key: 'include[]', value: 'service_order.contract.*'})
     }
 
@@ -287,5 +289,11 @@ export class ChestsComponent implements OnInit, OnChanges {
 
     changeSelectedmodels() {
         this.selectedModelsChange.emit(this.selectedModels);
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

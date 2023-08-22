@@ -45,6 +45,7 @@ export class ClientBinnaclesComponent implements OnInit, OnChanges {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -109,6 +110,7 @@ export class ClientBinnaclesComponent implements OnInit, OnChanges {
         this._with.push({key: 'include[]', value: 'company.*'})
         this._with.push({key: 'include[]', value: 'employee.*'})
         this.loadLazy();
+        this.screenWidth();
     }
 
     ngOnChanges(): void {
@@ -296,5 +298,11 @@ export class ClientBinnaclesComponent implements OnInit, OnChanges {
     hideModalDialog() {
         this.displayModal = false;
         this.getModels();
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

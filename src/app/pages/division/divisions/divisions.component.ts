@@ -39,6 +39,7 @@ export class DivisionsComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -90,6 +91,7 @@ export class DivisionsComponent implements OnInit {
 
         this._with = [];
         this._with.push({key: 'include[]', value: 'type_division.*'})
+        this.screenWidth();
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -241,5 +243,10 @@ export class DivisionsComponent implements OnInit {
                 this.delete(id);
             }
         });
+    }
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

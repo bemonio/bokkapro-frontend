@@ -44,6 +44,7 @@ export class RatesComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -107,6 +108,7 @@ export class RatesComponent implements OnInit {
         this._with = [];
         this._with.push({key: 'include[]', value: 'office.*'})
         this._with.push({key: 'include[]', value: 'product_and_service.*'})
+        this.screenWidth();
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -285,5 +287,11 @@ export class RatesComponent implements OnInit {
     hideModalDialog() {
         this.displayModal = false;
         this.getModels();
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

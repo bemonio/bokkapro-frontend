@@ -46,6 +46,7 @@ export class ToursDetailsComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -152,6 +153,7 @@ export class ToursDetailsComponent implements OnInit {
             themeSystem: 'bootstrap'
         }
         this.getModelsCalendar();
+        this.screenWidth();
     }
 
     public handleDateClick(arg) {
@@ -939,5 +941,11 @@ export class ToursDetailsComponent implements OnInit {
     public printReport() {
         let url = environment.apiUrl + 'pdf/toursdetails?start=' + this.calendarStart + '&end=' + this.calendarEnd + '&token=' + this.authService.currentUserValue.id;
         window.open(url, '_blank');
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

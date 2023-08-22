@@ -47,6 +47,7 @@ export class DepositFormsDetailsComponent implements OnInit, OnChanges {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -109,6 +110,7 @@ export class DepositFormsDetailsComponent implements OnInit, OnChanges {
         this.requesting = false;
         this.createOrEdit = {create: false, id: undefined};
         this.loadLazy();
+        this.screenWidth();
     }
 
     ngOnChanges() {
@@ -278,5 +280,11 @@ export class DepositFormsDetailsComponent implements OnInit, OnChanges {
 
     showNew(id?) {
         this.createOrEdit = {create: true, id: id ? id : undefined}
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

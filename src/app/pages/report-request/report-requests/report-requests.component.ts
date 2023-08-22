@@ -41,6 +41,7 @@ export class ReportRequestsComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -90,6 +91,7 @@ export class ReportRequestsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this.screenWidth();
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -234,5 +236,11 @@ export class ReportRequestsComponent implements OnInit {
     print(id) {
         let url = environment.apiUrl + 'pdf/requests?id=' + id;
         window.open(url, '_blank');
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

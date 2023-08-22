@@ -43,6 +43,7 @@ export class StockTransactionsComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -103,6 +104,7 @@ export class StockTransactionsComponent implements OnInit {
         this.stockTransactionID = {id: undefined, isNew: false};
         this._with = [];
         this._with.push({key: 'include[]', value: 'service_order.*'})
+        this.screenWidth();
     }
 
     ngOnChanges() {
@@ -312,5 +314,11 @@ export class StockTransactionsComponent implements OnInit {
 
     changeSelectedmodels() {
         this.selectedModelsChange.emit(this.selectedModels);
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

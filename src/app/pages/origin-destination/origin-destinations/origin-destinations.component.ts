@@ -43,6 +43,7 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
     public precall_filter: boolean;
  
     public requesting: boolean = false;
+    public size_width: boolean = false;
  
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -106,6 +107,7 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
         this._with.push({key: 'include[]', value: 'division.*'})
  
         this.setViewOriginDestination = false;
+        this.screenWidth();
     }
  
     ngOnChanges() {
@@ -360,5 +362,11 @@ export class OriginDestinationsComponent implements OnInit, OnChanges {
             }
         }
         this.getModels();
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

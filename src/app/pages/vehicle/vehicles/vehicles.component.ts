@@ -41,6 +41,7 @@ export class VehiclesComponent implements OnInit {
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
+    public size_width: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -95,6 +96,7 @@ export class VehiclesComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this.screenWidth();
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -245,5 +247,11 @@ export class VehiclesComponent implements OnInit {
                 this.delete(id);
             }
         });
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

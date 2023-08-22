@@ -39,6 +39,7 @@ export class PackingsComponent implements OnInit {
 
     searchGroup: FormGroup;
 
+    public size_width: boolean = false;
     public requesting: boolean = false;
 
     public confirmDialogPosition: string;
@@ -97,6 +98,7 @@ export class PackingsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this.screenWidth();
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -267,5 +269,11 @@ export class PackingsComponent implements OnInit {
                 this.delete(id);
             }
         });
+    }
+
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }

@@ -38,6 +38,7 @@ export class BanksAccountsComponent implements OnInit {
 
     searchGroup: FormGroup;
 
+    public size_width: boolean = false;
     public requesting: boolean = false;
 
     public confirmDialogPosition: string;
@@ -88,6 +89,7 @@ export class BanksAccountsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+        this.screenWidth();
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -230,5 +232,10 @@ export class BanksAccountsComponent implements OnInit {
                 this.delete(id);
             }
         });
+    }
+    public screenWidth(){
+        if (screen.width < 600){
+            this.size_width = true;
+        }
     }
 }
