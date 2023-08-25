@@ -773,6 +773,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
     }    
 
     public addListVouchersConfirmationDelivered(event) {
+        console.log('array',this.listVouchersConfirmationDelivered);
         this.listVouchersConfirmationDeliveredList.forEach(element => {
             if (element == event.value) {                
                 event.value = event.value.replace(/[^a-zA-Z0-9]/g, '')
@@ -785,14 +786,18 @@ export class VouchersComponent implements OnInit, OnDestroy {
         this.listVouchersConfirmationDelivered.forEach(element => {
             if (element.code === event.value) {
                 element.verificated = true;
+                element.newStatus = true;
                 found = true;
             }
-            element.packings.forEach(element2 => {
-                if (element2.code === event.value) {
-                    element2.verificated = true;
-                    found = true;
-                }
-            });
+            if (element.packing){
+                element.packings.forEach(element2 => {
+                    if (element2.code === event.value) {
+                        element2.verificated = true;
+                        found = true;
+                    }
+                });
+            }
+            
         });
 
         if (!found) {
@@ -1114,9 +1119,13 @@ export class VouchersComponent implements OnInit, OnDestroy {
                 //     });
                 // }
                 this.listVouchersConfirmationDelivered = models;
+                console.log('array 1',this.listVouchersConfirmationDelivered);
                 let count = this.voucherLenght(this.listVouchersConfirmationDelivered);
                 this.vouchersConfirmationDelivered.setValidators(Validators.compose([Validators.required, Validators.minLength(count), Validators.maxLength(count)]));
-                this.ConfirmationDeliveredGroup.markAllAsTouched();        
+                this.ConfirmationDeliveredGroup.markAllAsTouched();
+                this.listVouchersConfirmationDelivered.forEach(element => {
+                    element.newStatus = false;
+                });        
             },
             error => {
                 this.requesting = false;

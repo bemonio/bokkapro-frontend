@@ -379,6 +379,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
                 this.verificationGuides.push(response.guide);
                 let count = this.voucherLenght(this.verificationGuides, true) + this.countPackings(this.verificationGuides, true, true) + this.countCerifiedCart(this.verificationGuides);                
                 this.vouchers.setValidators(Validators.compose([Validators.required, Validators.minLength(count)]));
+                console.log('response modal',this.verificationGuides);
             }
         });
     }
@@ -386,7 +387,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
     public verification(guide) {
         this.displayModal = true;
         this.listVouchers = [];
-        this.get(guide.id)
+        this.get(guide.id) 
     }
 
     public verificationList() {
