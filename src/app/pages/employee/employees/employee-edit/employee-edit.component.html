@@ -86,6 +86,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'user')">{{ 'EMPLOYEE.USER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'user')">{{ 'EMPLOYEE.USER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>
+            <div class="col-lg-6">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="employee_number" [class.is-invalid]="isControlInvalid('employee_number')"
+                [class.is-valid]="isControlValid('employee_number')" formControlName="employee_number" />
+              <div class="feedback" *ngIf="!isControlTouched('employee_number')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('employee_number')">{{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee_number')">{{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employee_number')">{{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employee_number')">{{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/employees">{{ 'COMMON.CANCEL' | translate }}</a>

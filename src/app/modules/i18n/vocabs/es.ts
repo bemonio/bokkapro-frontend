@@ -197,6 +197,7 @@ export const locale = {
       DESCRIPTION: 'Descripción',
       POSITION: 'Cargo',
       USER: 'Usuario',
+      EMPLOYEE_NUMBER: 'Número Empleados',
     },
     ZONE: {
       ZONE: 'Zona',

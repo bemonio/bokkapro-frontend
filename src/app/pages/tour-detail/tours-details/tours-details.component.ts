@@ -125,7 +125,7 @@ export class ToursDetailsComponent implements OnInit {
         this.visibleSidebar = false;
 
         this.calendarOptions = {
-            initialView: 'timeGridDay',
+            initialView: 'listDay',
             eventClick: (e) => {
                 this.showViewTourDetail = true;
                 this.selectedModelId = e.event.id;
@@ -133,14 +133,13 @@ export class ToursDetailsComponent implements OnInit {
             headerToolbar: {
                 left: 'prev,next,today',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                right: 'listMonth,listWeek,listDay'
             },
             buttonText: {
                 today:    'Hoy',
                 month:    'mes',
                 week:     'semana',
-                day:      'día',
-                list:     'lista'
+                day:      'día'
             },
             allDayText: 'Todo el día',
             dateClick: this.handleDateClick.bind(this),
@@ -167,7 +166,7 @@ export class ToursDetailsComponent implements OnInit {
         this.filtersCalendar.push({'key': 'start-min', 'value': this.calendarStart});
         this.filtersCalendar.push({'key': 'end-max', 'value': this.calendarEnd});
         this.viewtypecalendar = dateInfo.view.type;
-        if (this.viewtypecalendar==='timeGridDay') {
+        if (this.viewtypecalendar==='listDay') {
             this.dateSchedule = new Date(dateInfo.startStr);
         }
         this.getModelsCalendar();

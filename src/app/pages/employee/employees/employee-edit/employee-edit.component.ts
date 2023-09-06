@@ -28,6 +28,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   public description: AbstractControl;
   public position: AbstractControl;
   public user: AbstractControl;
+  public employee_number: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -53,11 +54,13 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       description: ['', Validators.compose([Validators.maxLength(255)])],
       position: ['', Validators.compose([Validators.required])],
       user: [''],
+      employee_number: ['', Validators.compose([Validators.required])],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];
     this.position = this.formGroup.controls['position'];
     this.user = this.formGroup.controls['user'];
+    this.employee_number = this.formGroup.controls['employee_number'];
   }
 
   ngOnInit(): void {
@@ -124,6 +127,9 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       }
       if (this.model.user) {
         this.user.setValue(this.model.user);
+      }
+      if (this.model.employee_number) {
+        this.employee_number.setValue(this.model.employee_number);
       }
     }
     this.formGroup.markAllAsTouched();

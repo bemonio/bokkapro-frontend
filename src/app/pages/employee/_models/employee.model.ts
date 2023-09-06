@@ -7,4 +7,5 @@ export class EmployeeModel {
   description: string;
   position: any;
   user: any;
+  employee_number: number;
 }
