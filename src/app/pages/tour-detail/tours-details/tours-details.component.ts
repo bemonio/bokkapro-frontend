@@ -12,6 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { CalendarOptions } from '@fullcalendar/angular';
+import listPlugin from '@fullcalendar/list';
 import { OriginDestinationService } from '../../origin-destination/_services';
 import { OriginDestinationModel } from '../../origin-destination/_models/origin-destination.model';
 import { environment } from '../../../../environments/environment';
@@ -125,6 +126,7 @@ export class ToursDetailsComponent implements OnInit {
         this.visibleSidebar = false;
 
         this.calendarOptions = {
+            plugins: [ listPlugin ],
             initialView: 'listDay',
             eventClick: (e) => {
                 this.showViewTourDetail = true;
@@ -137,9 +139,9 @@ export class ToursDetailsComponent implements OnInit {
             },
             buttonText: {
                 today:    'Hoy',
-                month:    'mes',
-                week:     'semana',
-                day:      'día'
+                listMonth:    'mes',
+                listWeek:     'semana',
+                listDay:      'día',
             },
             allDayText: 'Todo el día',
             dateClick: this.handleDateClick.bind(this),

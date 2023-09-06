@@ -18,9 +18,9 @@
     <div class="card-toolbar">
       <!-- <a type="button" class="btn btn-primary" routerLink="{{parent}}/toursdetails/add">{{ 'COMMON.NEW' | translate }}</a> -->
       <button type="button" class="btn btn-primary font-weight-bold mr-2"
-      [disabled]="viewtypecalendar!='timeGridDay'" (click)="printReport()">{{ 'COMMON.PRINT' | translate }}</button>
+      [disabled]="viewtypecalendar!='listDay'" (click)="printReport()">{{ 'COMMON.PRINT' | translate }}</button>
       <button type="button" class="btn btn-primary font-weight-bold mr-2"
-      [disabled]="viewtypecalendar!='timeGridDay'" (click)="showListOriginDestination()" *ngIf="authService.hasPermission('add_tourdetail')">{{ 'COMMON.ADD' | translate }}</button>
+      [disabled]="viewtypecalendar!='listDay'" (click)="showListOriginDestination()" *ngIf="authService.hasPermission('add_tourdetail')">{{ 'COMMON.ADD' | translate }}</button>
     </div>
   </div>
   <div class="card-body">
