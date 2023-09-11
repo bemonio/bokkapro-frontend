@@ -170,7 +170,7 @@
     <div class="form-group row">
       <div class="col-lg-4">
         <button type="submit" class="btn btn-primary font-weight-bold mr-2" style="width: inherit;"
-        (click)="addAllOriginDestination()">{{ 'COMMON.ADD_ALL' | translate }}</button>
+        (click)="addAllOriginDestination()" [disabled]="visibleButtomAll">{{ 'COMMON.ADD_ALL' | translate }}</button>
       </div>
       <div class="col-lg-4">
         <button type="submit" class="btn btn-primary font-weight-bold mr-2" style="width: inherit;"

@@ -498,7 +498,8 @@ export const locale = {
       ROTATE_VERTICAL: 'Girar Vertical',
       RESET_IMAGE: 'Resetear Imagen',
       PLACE: 'Caribbean Island / Brinks',
-      PROJECT_NAME: 'Ingenious Caribe'
+      PROJECT_NAME: 'Ingenious Caribe',
+      ONLY_NUMBERS: 'Solo se permiten números '
     },
     QUOTETEMPLATE: { 
       QUOTETEMPLATE: 'Plantilla Cotización',

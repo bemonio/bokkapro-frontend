@@ -96,6 +96,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee_number')">{{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employee_number')">{{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employee_number')">{{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'employee_number')">{{ 'EMPLOYEE.EMPLOYEE_NUMBER' | translate }}  {{ 'COMMON.ONLY_NUMBERS' | translate }}</div>
             </div>
           </div>
           <div class="float-right">

@@ -48,6 +48,7 @@ export class ToursDetailsComponent implements OnInit {
 
     public requesting: boolean = false;
     public size_width: boolean = false;
+    public visibleButtomAll: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -527,6 +528,7 @@ export class ToursDetailsComponent implements OnInit {
         let query = undefined;
         let filters = [];
         let _with = [];
+        this.visibleButtomAll = true;
         _with.push({key: 'include[]', value: 'origin.*'})
         _with.push({key: 'include[]', value: 'destination.*'})
         _with.push({key: 'include[]', value: 'service_order.*'})

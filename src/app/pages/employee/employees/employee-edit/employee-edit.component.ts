@@ -54,7 +54,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       description: ['', Validators.compose([Validators.maxLength(255)])],
       position: ['', Validators.compose([Validators.required])],
       user: [''],
-      employee_number: ['', Validators.compose([Validators.required])],
+      employee_number: ['', Validators.compose([Validators.required,Validators.pattern(/^([0-9])*$/)])],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];
