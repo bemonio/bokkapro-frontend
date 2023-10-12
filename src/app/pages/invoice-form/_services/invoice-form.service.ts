@@ -7,6 +7,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 @Injectable()
 export class InvoiceFormService {
     API_URL = `${environment.apiUrl}invoiceforms`;
+    API_URL_CREATE = `${environment.apiUrl}createinvoiceitems`
     // private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -67,5 +68,8 @@ export class InvoiceFormService {
 
     public getById(id: number): Observable<any> {
         return this.http.get(`${this.API_URL}/${id}/?include[]=packing.*&include[]=bank_account.*&include[]=employee_who_counts.*&include[]=supervisor.*&include[]=currency.*&include[]=supervisor_extra.*`);
+    }
+    public postInvoiceItems(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL_CREATE}`, JSON.stringify(body));
     }
 }

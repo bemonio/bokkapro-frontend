@@ -10,6 +10,8 @@ import { InvoiceFormModel as Model } from '../../_models/invoice-form.model';
 import { InvoiceFormService as ModelsService } from '../../_services/invoice-form.service';
 import { PackingService } from 'src/app/pages/packing/_services';
 import { OfficeService } from 'src/app/pages/office/_services';
+import { CompanyService } from 'src/app/pages/company/_services';
+import { ContractService } from 'src/app/pages/contract/_services';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { element } from 'protractor';
 import { SelectItem } from 'primeng/api';
@@ -40,13 +42,27 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
 
   public saveAndExit;
 
-  public packingId: number;
+  public company_name: AbstractControl;
+  // public company_code: AbstractControl;
+  // public company_identification: AbstractControl;
+  public contract: AbstractControl;
+  public expires_in: AbstractControl;
+  public date_service: AbstractControl; 
+  public quantity: AbstractControl;
+  public amount: AbstractControl;
+  public currency: AbstractControl;
+  public invoice_description: AbstractControl;
+  public invoice_number: AbstractControl;
   public parent: string;
+  public subtotal: AbstractControl;
+  public total: AbstractControl;
+  public item_description: AbstractControl;
   
   public view: boolean;
   public showPage: number=0;
   currencies: any[];
   currencyOptions: any[];
+  arrayControls: string[];
   
   public denominations: any;
   public items: SelectItem[];
@@ -60,7 +76,8 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public authService: AuthService,
     private toastService: ToastService,
-    private packingService: PackingService,
+    private companyService: CompanyService,
+    private contractService: ContractService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info
     this.saveAndExit = false;
@@ -76,20 +93,14 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
-    this.currencyOptions = this.getCurrencyOptions();
-
-    this.denominations = this.getDenominationBanknotesandCoins();
-    this.items = this.getCurrencyOptions();
-    this.optionsDifference = this.getOptionsDifference();
     this.createForm();
 
     if (this.route.parent.parent.parent.snapshot.url.length > 0) {
       this.route.parent.parent.parent.params.subscribe((params) => {
           if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
               let params1 = params.id;
-              this.packingId = params1;
-              this.getPackingById(params1);
-
+              // this.company_code = params1;
+              
               if (this.route.parent.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
                   this.route.parent.parent.parent.parent.parent.parent.params.subscribe((params) => {
                       let params2 = params.id;
@@ -131,7 +142,7 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'deposit_form': new Model() });
+        return of({ 'invoice_form': new Model() });
       }),
       catchError((error) => {
         let messageError = [];
@@ -143,13 +154,13 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
         );
-        return of({ 'deposit_form': new Model() });
+        return of({ 'invoice_form': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.model = response.deposit_form;
-        
+        this.model = response.invoice_form;
+        console.log('model',this.model);  
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -157,33 +168,40 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
     });
     // this.subscriptions.push(sb);
   }
+  ChangeValue(){}
   createForm() {
     this.formGroup = this.fb.group({
-      amount: new FormControl('0', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
-      contain: new FormControl({value:'0', disabled: true}),
-      difference: new FormControl(''),
-      difference_amount: new FormControl('0'),
-      review: new FormControl(''),
-      bank: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
-      bank_account_number: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
-      form_number: new FormControl(',', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
-      currency: new FormControl('', Validators.compose([Validators.required])),
-      verified: new FormControl(''),
-      verified_at: new FormControl(''),
-      packing: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
-      bank_account: new FormControl(''),
-      employee_who_counts: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1)])),
-      supervisor: new FormControl(''),
-      supervisor_extra: new FormControl(''),
-      selectedCurrencies: new FormControl([]),
-      mainArray: new FormArray([])
+      contract: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      invoice_number: new FormControl('0', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      // amount: new FormControl('0', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      company_name: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      // company_code: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      // company_identification: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])),
+      // currency: new FormControl('', Validators.compose([Validators.required])),
+      expires_in: new FormControl('', Validators.compose([Validators.required])),
+      date_service: new FormControl('', Validators.compose([Validators.required])),
+      subtotal: new FormControl(0),
+      total: new FormControl(0),
+      invoice_form_details: new FormArray([])
     });
+    this.contract = this.formGroup.controls['contract'];
+    this.expires_in = this.formGroup.controls['expires_in'];
+    this.date_service = this.formGroup.controls['date_service'];
+    this.invoice_number = this.formGroup.controls['invoice_number'];
+    this.company_name = this.formGroup.controls['company_name'];
+    this.subtotal = this.formGroup.controls['subtotal'];
+    this.total = this.formGroup.controls['total'];
+    // this.company_code = this.formGroup.controls['company_code'];
+    // this.company_identification = this.formGroup.controls['company_identification'];
+    // this.currency = this.formGroup.controls['currency'];
+    
+
     this.showPage = 1;
   }
 
   loadForm() {
     // this.verified.setValue(false);
-
+    console.log(this.model);
     if (this.model.id) {
       // this.amount.setValue(this.model.amount)
       // this.difference_amount.setValue(this.model.difference_amount)
@@ -214,9 +232,28 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
         //completar despues de llenar el model
       });
     } else {
-      if (this.packingId) {
-        this.getPackingById(this.packingId);
-      }
+        // if (this.model.company_identification) {
+        //   this.company_identification.setValue(this.model.company_identification);
+        // } else {
+        //   this.company_identification.setValue('');
+        // }
+        // if (this.model.company_name) {
+        //   this.company_name.setValue(this.model.company_name);
+        // } else {
+        //   this.company_name.setValue('');
+        // }
+        // if (this.model.company_code) {
+        //   this.company_code.setValue(this.model.company_code);
+        // } else {
+        //   this.company_code.setValue('');
+        // }
+        this.company_name.setValue('');
+        this.contract.setValue('');
+        // this.company_code.setValue('');
+        // this.company_identification.setValue('');
+        this.date_service.setValue('');
+        this.expires_in.setValue('');
+        // this.currency.setValue('');
       // this.employee_who_counts.setValue(this.authService.currentUserValue.employee);
     }
     this.formGroup.markAllAsTouched();
@@ -230,92 +267,8 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
   }
 
   get dynamicFormArray(): FormArray {
-    return this.formGroup.get('mainArray') as FormArray;
+    return this.formGroup.get('invoice_form_details') as FormArray;
   }
-
-  onMultiSelectChange(event: any) {
-    const selectedValues = event.value;
-
-    // Comparar las selecciones con los elementos existentes en el FormArray
-    const currentItems = this.dynamicFormArray.controls.map(control => control.value.item);
-    const itemsToAdd = selectedValues.filter(value => !currentItems.includes(value));
-
-    // Agregar nuevos elementos al FormArray
-    itemsToAdd.forEach(item => {
-      const denominationsArray = this.denominations[item.value].map(denomination => this.fb.group({
-        denomination: [denomination.value],
-        quantity: ['0'],
-        valueDenomination: [denomination.valueMoney],
-        totalDimension: ['0'],
-      }));
-      const newGroup = this.fb.group({
-        item: [item],
-        denominations: this.fb.array(denominationsArray),
-        subtotal: ['0'],
-      });
-      this.dynamicFormArray.push(newGroup);
-    });
-
-    // Eliminar elementos del FormArray si ya no están seleccionados
-    for (let i = this.dynamicFormArray.controls.length - 1; i >= 0; i--) {
-      const control = this.dynamicFormArray.controls[i];
-      const item = control.value.item;
-      if (!selectedValues.includes(item)) {
-        this.dynamicFormArray.removeAt(i);
-      }
-    }
-  }
-
-  calcByDim(event: any, indexDenomination: string, indexControlDivisa:string){
-    const quantity = event.target.value;
-    
-
-    //Encontrar formulario de divisa
-    const divisaFormGroup = this.dynamicFormArray.controls[indexControlDivisa];
-    
-    //obtener el control del formulario correspondiente
-    var controlDenomination = divisaFormGroup.controls.denominations.controls[indexDenomination];
-    var result = quantity * controlDenomination.controls.valueDenomination.value;
-    //asignar el resultado a dicho control
-    controlDenomination.controls.totalDimension.setValue(result);
-    this.calcContain();// this.calcByBadge(indexControlDivisa);
-    this.getDifference();
-  }
-
-  calcByBadge(indexControlDivisa:string){
-    //Encontrar formulario de divisa
-    const divisaFormGroup = this.dynamicFormArray.controls[indexControlDivisa];
-    const controlsDivisa = divisaFormGroup.controls.denominations.controls;
-    
-    const suma = Object.keys(controlsDivisa).reduce((acc, controlName) => {
-      const controlValue = controlsDivisa[controlName].value.totalDimension;
-      const valueNumber= parseFloat(controlValue);
-      return acc + valueNumber;
-    }, 0);
-  
-    divisaFormGroup.controls.subtotal.setValue(suma);
-    return suma;
-  }
-  calcContain(){
-    var total = 0;
-    for(var i = 0; i < this.dynamicFormArray.controls.length; i++)
-      total += this.calcByBadge(i.toString());
-    
-    this.formGroup.controls.contain.setValue(total);
-  }
-  getDifference(){
-    var contain = this.formGroup.controls.contain.value;
-    var amount = this.formGroup.controls.amount.value;
-    var difference = amount - contain;
-    var diffValid = 0;
-    // this.formGroup.controls.difference_amount.setValue(difference);
-    this.differenceEnable = false;
-    if(difference > diffValid || difference < diffValid)
-      this.differenceEnable = true;
-    // poner como obligatorio o no el formControl de diferencia y el acta
-    // que se active cuando se escribe el monto tambien
-  }
-
 
   save(saveAndExit) {
     this.saveAndExit = saveAndExit;
@@ -341,9 +294,9 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
-            this.router.navigate([this.parent + '/depositforms']);
+            this.router.navigate([this.parent + '/invoiceforms']);
           } else {
-            this.router.navigate(['/depositforms']);
+            this.router.navigate(['/invoiceforms']);
           }
         }
       }),
@@ -368,10 +321,18 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
 
   create() {
     this.requesting = true;
-    let model = this.model;    
-    // completar luego de llenar el model
-
-    const sbCreate = this.modelsService.post(model).pipe(
+    let model = this.model;
+    model.date_service = this.formatDate(model.date_service);
+    model.due_date = this.formatDate(model.date_service);
+    model.currency = 2;
+    model.deleted = 0;
+    model.discount = 0;
+    model.discount_amount = 0;
+    model.tax_rate = 0;
+    model.tax_amount = 0;
+    delete model.contract;
+    console.log("Form Values:",this.formGroup.value, "Model: ", this.model);
+    const sbCreate = this.modelsService.postInvoiceItems(model).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
       }),
@@ -416,7 +377,136 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
     // this.subscriptions.forEach(sb => sb.unsubscribe());
   }
 
+  // helpers for View
+  isControlValid(controlName: string): boolean {
+    const control = this.formGroup.controls[controlName];
+    return control.valid && (control.dirty || control.touched);
+  }
+  arrayIsControlValid(controlName: string, position: number): boolean {
+    const control = this.dynamicFormArray.controls[position].get(controlName);
+    return control.valid && (control.dirty || control.touched);
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.formGroup.controls[controlName];
+    return control.invalid && (control.dirty || control.touched);
+  }
+  arrayIsControlInvalid(controlName: string, position: number): boolean {
+    const control = this.dynamicFormArray.controls[position].get(controlName);
+    return control.invalid && (control.dirty || control.touched);
+  }
+
+  controlHasError(validation: string, controlName: string) {
+    const control = this.formGroup.controls[controlName];
+    return control.hasError(validation) && (control.dirty || control.touched);
+  }
+
+  arrayControlHasError(validation: string, controlName: string, position: number) {
+    const control = this.dynamicFormArray.controls[position].get(controlName);
+    return control.hasError(validation) && (control.dirty || control.touched);
+  }
+
+  isControlTouched(controlName: string): boolean {
+    const control = this.formGroup.controls[controlName];
+    return control.dirty || control.touched;
+  }
+
+  arrayIsControlTouched(controlName: string, position: number): boolean {
+    const control = this.dynamicFormArray.controls[position].get(controlName);
+    return control.dirty || control.touched;
+  }
+
+  public getValidClass(valid) {
+    let stringClass = 'form-control form-control-lg form-control-solid';
+    if (valid) {
+      stringClass += ' is-valid';
+    } else {
+      stringClass += ' is-invalid';
+    }
+    return stringClass;
+  }
+
+  // getCompanyById(id) {
+  //   console.log('entramos');
+  //   this.companyService.getById(id).toPromise().then(
+  //     response => {
+  //       this.model.company_name = response.company;
+  //     },
+  //    error => {
+  //     console.log('error getting company');
+  //      }
+  //   );
+  // }
+  getValues(value) {
+    this.formGroup.patchValue({        
+      company_name: value.name_invoce_to,
+    });
+    this.model.contract_id = value.id;
+    this.model.company_id = value.company;
+  }
+  getContractById(id) {
+    this.contractService.getById(id).toPromise().then(
+      response => {
+        this.company_name.setValue(response.company);
+        //console.log('company', this.company_name);
+      },
+      error => {
+        console.log('error getting company');
+      }
+    );
+  }
+  addItem(event: any) { 
+    event.preventDefault();
+    this.dynamicFormArray.push(this.createItem());
+    //refresh Form group
+    this.formGroup.setControl('invoice_form_details', this.dynamicFormArray);
+    //update FormGroup
+    this.dynamicFormArray.updateValueAndValidity();
+    console.log(this.formGroup);
+    console.log(this.dynamicFormArray);
+
+
+  }
+  deleteItem(event: any) { 
+    //eliminar la ultima posicion del arreglo de items
+    event.preventDefault();
+    this.dynamicFormArray.removeAt(this.dynamicFormArray.length-1);
+    //refresh Form group
+    this.formGroup.setControl('invoice_form_details', this.dynamicFormArray);
+    //update FormGroup
+    this.dynamicFormArray.updateValueAndValidity();
+
+  }
+  createItem(){
+    // this.item_description = this.dynamicFormArray.controls['invoice_description'];
+    // this.quantity = this.dynamicFormArray.controls['quantity'];
+    // this.amount = this.dynamicFormArray.controls['amount'];
+    return this.fb.group({
+      item_description: new FormControl('', Validators.compose([Validators.required])),
+      quantity: new FormControl('', Validators.compose([Validators.required])),
+      amount: new FormControl('', Validators.compose([Validators.required])),
+    });
+  }
+  calcTotal(){
+    let total = 0;
+    this.dynamicFormArray.controls.forEach(element => {
+      total += element.value.quantity * element.value.amount;
+    });
+    this.model.total = total;
+    this.model.subtotal = total;
+    this.formGroup.patchValue({        
+      subtotal: total,
+      total: total,
+    });
+    console.log(this.formGroup);
+    //actualizar formGroup
+    this.formGroup.updateValueAndValidity();
+    
+  }
+
   public formatDate(date) {
+    if(date == '' || date == null)
+      return null;
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();
@@ -447,80 +537,6 @@ export class InvoiceFormEditComponent implements OnInit, OnDestroy {
     return [year, month, day].join('-');
   }
 
-  // helpers for View
-  isControlValid(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.valid && (control.dirty || control.touched);
-  }
-
-  isControlInvalid(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.invalid && (control.dirty || control.touched);
-  }
-
-  controlHasError(validation: string, controlName: string) {
-    const control = this.formGroup.controls[controlName];
-    return control.hasError(validation) && (control.dirty || control.touched);
-  }
-
-  isControlTouched(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.dirty || control.touched;
-  }
-
-  public getValidClass(valid) {
-    let stringClass = 'form-control form-control-lg form-control-solid';
-    if (valid) {
-      stringClass += ' is-valid';
-    } else {
-      stringClass += ' is-invalid';
-    }
-    return stringClass;
-  }
-
-  getPackingById(id) {
-    this.packingService.getById(id).toPromise().then(
-      response => {
-        // this.packing.setValue(response.packing)
-      },
-      error => {
-        console.log('error getting packing');
-      }
-    );
-  }
-
-  getCurrencyOptions(){
-    return [
-      { name: 'Dolar', value: 'dolar' },
-      { name: 'Euro', value: 'euro' }
-    ];
-  }
-  getDenominationBanknotesandCoins()
-  {
-    var denominations = {
-      dolar: [
-        { key: 'billete1', value: 'Billete 1', valueMoney: '1' },
-        { key: 'billete2', value: 'Billete 2', valueMoney: '2' },
-        { key: 'moneda1', value: 'Moneda 1', valueMoney: '0.01' },
-        { key: 'moneda2', value: 'Moneda 2', valueMoney: '0.02' }
-      ],
-      euro: [
-        { key: 'billete5', value: 'Billete 5', valueMoney: '5' },
-        { key: 'billete10', value: 'Billete 10', valueMoney: '10' },
-        { key: 'moneda5', value: 'Moneda 5', valueMoney: '0.05' },
-        { key: 'moneda10', value: 'Moneda 10', valueMoney: '0.1' }
-      ]
-    };
-    return denominations;
-  }
-  
-  getOptionsDifference(): any {
-    return [
-      { key: 'Diferencia en monto, monto mayor', value: 'Diferencia en monto, monto mayor' },
-      { key: 'Diferencia en monto, monto menor', value: 'Diferencia en monto, monto menor' },
-      { key: 'Diferencia de cantitades de billetes', value: 'Diferencia de cantitades de billetes' },
-    ];
-  }
   /*
   
  

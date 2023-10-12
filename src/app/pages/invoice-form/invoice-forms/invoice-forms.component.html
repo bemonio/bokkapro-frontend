@@ -1,11 +1,11 @@
 <div class="card card-custom gutter-b">
   <div class="card-header">
     <div class="card-title">
-      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'DEPOSITFORM.DEPOSITFORMS' | translate }}
+      <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>{{ 'INVOICE.INVOICEFORM' | translate }}
     </div>
     <div class="card-toolbar">
       <!-- <a type="button" class="btn btn-primary" (click)="showModalDialog()" *ngIf="selectedModels.length > 0">{{ 'COMMON.TRANSFER' | translate }}</a> -->
-      <a type="button" class="btn btn-primary" routerLink="{{parent}}/depositforms/add" *ngIf="authService.hasPermission('add_depositform')">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="{{parent}}/invoiceforms/add" *ngIf="authService.hasPermission('add_depositform')">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -36,7 +36,7 @@
           </th>
           <th pSortableColumn="id">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'DEPOSITFORM.ID' | translate }}
+              {{ 'INVOICE.ID' | translate }}
             </div>
           </th>
           <th pSortableColumn="created_at">
@@ -48,17 +48,17 @@
           </th>
           <th pSortableColumn="bank_account_number">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'DEPOSITFORM.BANKACCOUNT' | translate }}
+              {{ 'INVOICE.CLIENT' | translate }}
             </div>
           </th>
           <th pSortableColumn="amount">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'DEPOSITFORM.AMOUNT' | translate }}
+              {{ 'INVOICE.AMOUNT' | translate }}
             </div>
           </th>
           <th pSortableColumn="difference_amount">
             <div class="p-d-flex p-jc-between p-ai-center">
-              {{ 'DEPOSITFORM.DIFFERENCEAMOUNT' | translate }}
+              {{ 'INVOICE.CURRENCY' | translate }}
             </div>
           </th>
           <th style="width: 10rem">
@@ -85,7 +85,7 @@
             {{value.bank_account_number}}
           </td>
           <td>
-            {{value.amount}}
+            {{value.total}}
           </td>
           <td>
             {{value.difference_amount}}
@@ -134,6 +134,6 @@
   [baseZIndex]="10000" [blockScroll]="false" [draggable]="false" [dismissableMask]="true" [resizable]="false">
 
   <div class="mt-5">
-    <app-deposit-formsdetails [depositFormID]="depositFormId" [showListFormDetails]="showListFormDetails" [redirectURL]="false"></app-deposit-formsdetails>
+    <app-invoice-form-edit ></app-invoice-form-edit>
   </div>
 </p-dialog>

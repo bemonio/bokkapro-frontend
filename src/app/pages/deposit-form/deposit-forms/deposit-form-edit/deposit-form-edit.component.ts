@@ -22,7 +22,7 @@ import { element } from 'protractor';
   templateUrl: './deposit-form-edit.component.html',
   styleUrls: ['./deposit-form-edit.component.scss']
 })
-export class DepositFormEditComponent implements OnInit, OnDestroy {
+export class DepositFormEditComponent implements OnInit, OnDestroy { 
   public id: number;
   public model: Model;
   public previous: Model;
@@ -30,7 +30,7 @@ export class DepositFormEditComponent implements OnInit, OnDestroy {
   public requesting: boolean = false;
 
   public badges: any[];
-
+  
   public tabs = {
     BASIC_TAB: 0,
     DEPOSITFORMDETAIL_TAB: 1,

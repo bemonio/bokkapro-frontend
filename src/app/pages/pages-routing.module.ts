@@ -503,6 +503,13 @@ const routes: Routes = [
             (m) => m.ChangePasswordRoutingModule
           ),
       },
+      {
+        path: 'invoiceforms',
+        loadChildren: () =>
+          import('../pages/invoice-form/invoice-form-routing.module').then(
+            (m) => m.InvoiceFormRoutingModule
+          ),
+      },
     ],
   },
 ];

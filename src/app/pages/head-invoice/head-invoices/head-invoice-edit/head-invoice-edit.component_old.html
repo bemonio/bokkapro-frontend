@@ -1,0 +1,542 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="requesting">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="model">
+          {{ (id ? 'COMMON.EDIT' : 'COMMON.NEW') | translate }}
+          <span *ngIf="model && model.id">{{ 'HEADINVOICE.HEADINVOICE' | translate }} : {{ model.id }}</span>
+        </ng-container>
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="{{parent}}/headinvoices">
+        <i class="fa fa-arrow-left"></i>{{ 'COMMON.BACK' | translate }}
+      </a>
+      <!-- <button class="btn btn-secondary ml-2" (click)="reset()">
+        <i class="fa fa-redo"></i>{{ 'COMMON.RESET' | translate }}
+      </button> -->
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+        <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+          [class.active]="activeTabId === tabs.BASIC_TAB">
+          {{ 'COMMON.BASIC_INFO' | translate }}
+        </a>
+      </li>
+      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PROFILE"
+          [class.active]="activeTabId === tabs.PROFILE">Profile</a>
+      </li> -->
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+      <div class="mt-5" *ngIf="model">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.OFFICE' | translate }}</label>
+              <app-office-autocomplete
+              name="office" [valid]="isControlValid('office')" [touched]="isControlTouched('office')" [class.is-invalid]="isControlInvalid('office')"
+              [class.is-valid]="isControlValid('office')" formControlName="office" id="office" [model]="model.office"></app-office-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('office')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.OFFICE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('office')">{{ 'HEADINVOICE.OFFICE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'office')">{{ 'HEADINVOICE.OFFICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'office')">{{ 'HEADINVOICE.OFFICE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'office')">{{ 'HEADINVOICE.OFFICE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>               
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.INVOICE_NUMBER' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="invoice_number" [class.is-invalid]="isControlInvalid('invoice_number')"
+                [class.is-valid]="isControlValid('invoice_number')" formControlName="invoice_number"/>
+              <div class="feedback" *ngIf="!isControlTouched('invoice_number')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.INVOICE_NUMBER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('invoice_number')">{{ 'HEADINVOICE.INVOICE_NUMBER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'invoice_number')">{{ 'HEADINVOICE.INVOICE_NUMBER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'invoice_number')">{{ 'HEADINVOICE.INVOICE_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'invoice_number')">{{ 'HEADINVOICE.INVOICE_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.EMPLOYEE' | translate }}</label>
+              <app-employee-autocomplete
+              name="employee" [valid]="isControlValid('employee')" [touched]="isControlTouched('employee')" [class.is-invalid]="isControlInvalid('employee')"
+              [class.is-valid]="isControlValid('employee')" formControlName="employee" id="employee" [model]="model.employee"></app-employee-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('employee')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.EMPLOYEE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('employee')">{{ 'HEADINVOICE.EMPLOYEE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'employee')">{{ 'HEADINVOICE.EMPLOYEE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'employee')">{{ 'HEADINVOICE.EMPLOYEE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'employee')">{{ 'HEADINVOICE.EMPLOYEE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.CONTRACT' | translate }}</label>
+              <app-contract-autocomplete
+              name="contract" [valid]="isControlValid('contract')" [touched]="isControlTouched('contract')" [class.is-invalid]="isControlInvalid('contract')"
+              [class.is-valid]="isControlValid('contract')" formControlName="contract" id="contract" [model]="model.contract" 
+              (onMyChange)="changeContract($event)" [addFilters]="[{key: 'company.office_belongs', value: officeUser}]"></app-contract-autocomplete>              <div class="feedback" *ngIf="!isControlTouched('contract')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.CONTRACT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('contract')">{{ 'HEADINVOICE.CONTRACT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'contract')">{{ 'HEADINVOICE.CONTRACT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'contract')">{{ 'HEADINVOICE.CONTRACT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'contract')">{{ 'HEADINVOICE.CONTRACT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <!-- <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.SERVICEORDER' | translate }}</label>
+              <app-service-order-select
+              name="serviceorder" [disabled]="!contract.value" [valid]="isControlValid('serviceorder')" [touched]="isControlTouched('serviceorder')" [class.is-invalid]="isControlInvalid('serviceorder')"
+              [addFilters]="[{key: 'contract', value: contract.value ? contract.value.id : undefined }]" [class.is-valid]="isControlValid('serviceorder')" formControlName="serviceorder" id="serviceorder" [model]="model.serviceorder" [(models)]="serviceorder_list"></app-service-order-select>
+              <div class="feedback" *ngIf="!isControlTouched('serviceorder')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.SERVICEORDER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('serviceorder')">{{ 'HEADINVOICE.SERVICEORDER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'serviceorder')">{{ 'HEADINVOICE.SERVICEORDER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'serviceorder')">{{ 'HEADINVOICE.SERVICEORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'serviceorder')">{{ 'HEADINVOICE.SERVICEORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div> -->
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.COMPANY_CONTACT' | translate }}</label>
+              <app-company-contact-autocomplete
+              name="company_contact" [valid]="isControlValid('company_contact')" [touched]="isControlTouched('company_contact')" [class.is-invalid]="isControlInvalid('company_contact')"
+              [class.is-valid]="isControlValid('company_contact')" formControlName="company_contact" id="company_contact" [model]="model.company_contact"></app-company-contact-autocomplete>
+              <div class="feedback" *ngIf="!isControlTouched('company_contact')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.COMPANY_CONTACT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('company_contact')">{{ 'HEADINVOICE.COMPANY_CONTACT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'company_contact')">{{ 'HEADINVOICE.COMPANY_CONTACT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'company_contact')">{{ 'HEADINVOICE.COMPANY_CONTACT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'company_contact')">{{ 'HEADINVOICE.COMPANY_CONTACT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TYPE_SERVICE_ORDER' | translate }}</label>
+              <app-type-service-order-select
+              name="type_service_order" [valid]="isControlValid('type_service_order')" [touched]="isControlTouched('type_service_order')" [class.is-invalid]="isControlInvalid('type_service_order')"
+              [class.is-valid]="isControlValid('type_service_order')" formControlName="type_service_order" id="type_service_order" [model]="model.type_service_order"></app-type-service-order-select>
+              <div class="feedback" *ngIf="!isControlTouched('type_service_order')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TYPE_SERVICE_ORDER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('type_service_order')">{{ 'HEADINVOICE.TYPE_SERVICE_ORDER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'type_service_order')">{{ 'HEADINVOICE.TYPE_SERVICE_ORDER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'type_service_order')">{{ 'HEADINVOICE.TYPE_SERVICE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_service_order')">{{ 'HEADINVOICE.TYPE_SERVICE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>      
+            
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.CURRENCY' | translate }}</label>
+              <app-currency-select
+              name="currency" [valid]="isControlValid('currency')" [touched]="isControlTouched('currency')" [class.is-invalid]="isControlInvalid('currency')"
+              [class.is-valid]="isControlValid('currency')" formControlName="currency" id="currency" [model]="model.currency"></app-currency-select>
+              <div class="feedback" *ngIf="!isControlTouched('currency')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.CURRENCY' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('currency')">{{ 'HEADINVOICE.CURRENCY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">{{ 'HEADINVOICE.CURRENCY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">{{ 'HEADINVOICE.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">{{ 'HEADINVOICE.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.EXCHANGE_RATE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="exchange_rate" [class.is-invalid]="isControlInvalid('exchange_rate')"
+                [class.is-valid]="isControlValid('exchange_rate')" formControlName="exchange_rate"/>
+              <div class="feedback" *ngIf="!isControlTouched('exchange_rate')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.EXCHANGE_RATE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('exchange_rate')">{{ 'HEADINVOICE.EXCHANGE_RATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'exchange_rate')">{{ 'HEADINVOICE.EXCHANGE_RATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'exchange_rate')">{{ 'HEADINVOICE.EXCHANGE_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'exchange_rate')">{{ 'HEADINVOICE.EXCHANGE_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TAX_RATE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="tax_rate" [class.is-invalid]="isControlInvalid('tax_rate')"
+                [class.is-valid]="isControlValid('tax_rate')" formControlName="tax_rate" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('tax_rate')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TAX_RATE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('tax_rate')">{{ 'HEADINVOICE.TAX_RATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'tax_rate')">{{ 'HEADINVOICE.TAX_RATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'tax_rate')">{{ 'HEADINVOICE.TAX_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tax_rate')">{{ 'HEADINVOICE.TAX_RATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>     
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_TAX_AMOUNT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_tax_amount" [class.is-invalid]="isControlInvalid('total_tax_amount')"
+                [class.is-valid]="isControlValid('total_tax_amount')" formControlName="total_tax_amount" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_tax_amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_TAX_AMOUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_tax_amount')">{{ 'HEADINVOICE.TOTAL_TAX_AMOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_tax_amount')">{{ 'HEADINVOICE.TOTAL_TAX_AMOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_tax_amount')">{{ 'HEADINVOICE.TOTAL_TAX_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_tax_amount')">{{ 'HEADINVOICE.TOTAL_TAX_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TAX_EXEMPT' | translate }}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="tax_exempt" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('tax_exempt')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TAX_EXEMPT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('tax_exempt')">{{ 'HEADINVOICE.TAX_EXEMPT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'tax_exempt')">{{ 'HEADINVOICE.TAX_EXEMPT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'tax_exempt')">{{ 'HEADINVOICE.TAX_EXEMPT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tax_exempt')">{{ 'HEADINVOICE.TAX_EXEMPT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_DISCOUNT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_disccount" [class.is-invalid]="isControlInvalid('total_disccount')"
+                [class.is-valid]="isControlValid('total_disccount')" formControlName="total_disccount" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_disccount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_DISCOUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_disccount')">{{ 'HEADINVOICE.TOTAL_DISCOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_disccount')">{{ 'HEADINVOICE.TOTAL_DISCOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_disccount')">{{ 'HEADINVOICE.TOTAL_DISCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_disccount')">{{ 'HEADINVOICE.TOTAL_DISCOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.FROM_DATE' | translate }}</label>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('from_date'))" name="from_date" formControlName="from_date" showTime="true" hourFormat="24"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('from_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.FROM_DATE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('from_date')">{{ 'HEADINVOICE.FROM_DATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'from_date')">{{ 'HEADINVOICE.FROM_DATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'from_date')">{{ 'HEADINVOICE.FROM_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'from_date')">{{ 'HEADINVOICE.FROM_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TO_DATE' | translate }}</label>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('to_date'))" name="to_date" formControlName="to_date" showTime="true" hourFormat="24"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('to_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TO_DATE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('to_date')">{{ 'HEADINVOICE.TO_DATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'to_date')">{{ 'HEADINVOICE.TO_DATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'to_date')">{{ 'HEADINVOICE.TO_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'to_date')">{{ 'HEADINVOICE.TO_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.DUE_DATE' | translate }}</label>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('due_date'))" name="due_date" formControlName="due_date" showTime="true" hourFormat="24"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('due_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.DUE_DATE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('due_date')">{{ 'HEADINVOICE.DUE_DATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'due_date')">{{ 'HEADINVOICE.DUE_DATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'due_date')">{{ 'HEADINVOICE.DUE_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'due_date')">{{ 'HEADINVOICE.DUE_DATE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.FUEL_CHARGE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="fuel_charge" [class.is-invalid]="isControlInvalid('fuel_charge')"
+                [class.is-valid]="isControlValid('fuel_charge')" formControlName="fuel_charge" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('fuel_charge')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.FUEL_CHARGE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('fuel_charge')">{{ 'HEADINVOICE.FUEL_CHARGE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'fuel_charge')">{{ 'HEADINVOICE.FUEL_CHARGE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'fuel_charge')">{{ 'HEADINVOICE.FUEL_CHARGE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'fuel_charge')">{{ 'HEADINVOICE.FUEL_CHARGE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.FUEL_CHARGE' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_fuel_charge" [class.is-invalid]="isControlInvalid('total_fuel_charge')"
+                [class.is-valid]="isControlValid('total_fuel_charge')" formControlName="total_fuel_charge" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_fuel_charge')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.FUEL_CHARGE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_fuel_charge')">{{ 'HEADINVOICE.FUEL_CHARGE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_fuel_charge')">{{ 'HEADINVOICE.FUEL_CHARGE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_fuel_charge')">{{ 'HEADINVOICE.FUEL_CHARGE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_fuel_charge')">{{ 'HEADINVOICE.FUEL_CHARGE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_AMOUNT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_amount" [class.is-invalid]="isControlInvalid('total_amount')"
+                [class.is-valid]="isControlValid('total_amount')" formControlName="total_amount" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_amount')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_AMOUNT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_amount')">{{ 'HEADINVOICE.TOTAL_AMOUNT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_amount')">{{ 'HEADINVOICE.TOTAL_AMOUNT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_amount')">{{ 'HEADINVOICE.TOTAL_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_amount')">{{ 'HEADINVOICE.TOTAL_AMOUNT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_QTY_CHEST' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_qty_chest" [class.is-invalid]="isControlInvalid('total_qty_chest')"
+                [class.is-valid]="isControlValid('total_qty_chest')" formControlName="total_qty_chest" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_qty_chest')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_QTY_CHEST' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_qty_chest')">{{ 'HEADINVOICE.TOTAL_QTY_CHEST' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_qty_chest')">{{ 'HEADINVOICE.TOTAL_QTY_CHEST' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_qty_chest')">{{ 'HEADINVOICE.TOTAL_QTY_CHEST' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_qty_chest')">{{ 'HEADINVOICE.TOTAL_QTY_CHEST' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_AMOUNT_CHEST' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_amount_chest" [class.is-invalid]="isControlInvalid('total_amount_chest')"
+                [class.is-valid]="isControlValid('total_amount_chest')" formControlName="total_amount_chest" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_amount_chest')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_AMOUNT_CHEST' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_amount_chest')">{{ 'HEADINVOICE.TOTAL_AMOUNT_CHEST' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_amount_chest')">{{ 'HEADINVOICE.TOTAL_AMOUNT_CHEST' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_amount_chest')">{{ 'HEADINVOICE.TOTAL_AMOUNT_CHEST' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_amount_chest')">{{ 'HEADINVOICE.TOTAL_AMOUNT_CHEST' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_INSURANCE_CHEST' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_insurance_chest" [class.is-invalid]="isControlInvalid('total_insurance_chest')"
+                [class.is-valid]="isControlValid('total_insurance_chest')" formControlName="total_insurance_chest" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_insurance_chest')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_INSURANCE_CHEST' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_insurance_chest')">{{ 'HEADINVOICE.TOTAL_INSURANCE_CHEST' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_insurance_chest')">{{ 'HEADINVOICE.TOTAL_INSURANCE_CHEST' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_insurance_chest')">{{ 'HEADINVOICE.TOTAL_INSURANCE_CHEST' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_insurance_chest')">{{ 'HEADINVOICE.TOTAL_INSURANCE_CHEST' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_TRAVELS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_travels" [class.is-invalid]="isControlInvalid('total_travels')"
+                [class.is-valid]="isControlValid('total_travels')" formControlName="total_travels" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_travels')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_TRAVELS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_travels')">{{ 'HEADINVOICE.TOTAL_TRAVELS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_travels')">{{ 'HEADINVOICE.TOTAL_TRAVELS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_travels')">{{ 'HEADINVOICE.TOTAL_TRAVELS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_travels')">{{ 'HEADINVOICE.TOTAL_TRAVELS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_TRAVELS_DIRECTS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_travels_directs" [class.is-invalid]="isControlInvalid('total_travels_directs')"
+                [class.is-valid]="isControlValid('total_travels_directs')" formControlName="total_travels_directs" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_travels_directs')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_TRAVELS_DIRECTS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_travels_directs')">{{ 'HEADINVOICE.TOTAL_TRAVELS_DIRECTS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_travels_directs')">{{ 'HEADINVOICE.TOTAL_TRAVELS_DIRECTS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_travels_directs')">{{ 'HEADINVOICE.TOTAL_TRAVELS_DIRECTS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_travels_directs')">{{ 'HEADINVOICE.TOTAL_TRAVELS_DIRECTS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_APPRAISAL' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_appraisal" [class.is-invalid]="isControlInvalid('total_appraisal')"
+                [class.is-valid]="isControlValid('total_appraisal')" formControlName="total_appraisal" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_appraisal')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_APPRAISAL' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_appraisal')">{{ 'HEADINVOICE.TOTAL_APPRAISAL' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_appraisal')">{{ 'HEADINVOICE.TOTAL_APPRAISAL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_appraisal')">{{ 'HEADINVOICE.TOTAL_APPRAISAL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_appraisal')">{{ 'HEADINVOICE.TOTAL_APPRAISAL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_COST_APPRAISAL' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_cost_appraisal" [class.is-invalid]="isControlInvalid('total_cost_appraisal')"
+                [class.is-valid]="isControlValid('total_cost_appraisal')" formControlName="total_cost_appraisal" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_cost_appraisal')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_COST_APPRAISAL' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_cost_appraisal')">{{ 'HEADINVOICE.TOTAL_COST_APPRAISAL' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_cost_appraisal')">{{ 'HEADINVOICE.TOTAL_COST_APPRAISAL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_cost_appraisal')">{{ 'HEADINVOICE.TOTAL_COST_APPRAISAL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_cost_appraisal')">{{ 'HEADINVOICE.TOTAL_COST_APPRAISAL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_HANDLING' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_handling" [class.is-invalid]="isControlInvalid('total_handling')"
+                [class.is-valid]="isControlValid('total_handling')" formControlName="total_handling" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_handling')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_HANDLING' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_handling')">{{ 'HEADINVOICE.TOTAL_HANDLING' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_handling')">{{ 'HEADINVOICE.TOTAL_HANDLING' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_handling')">{{ 'HEADINVOICE.TOTAL_HANDLING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_handling')">{{ 'HEADINVOICE.TOTAL_HANDLING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_COST_HANDLING' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_cost_handling" [class.is-invalid]="isControlInvalid('total_cost_handling')"
+                [class.is-valid]="isControlValid('total_cost_handling')" formControlName="total_cost_handling" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_cost_handling')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_COST_HANDLING' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_cost_handling')">{{ 'HEADINVOICE.TOTAL_COST_HANDLING' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_cost_handling')">{{ 'HEADINVOICE.TOTAL_COST_HANDLING' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_cost_handling')">{{ 'HEADINVOICE.TOTAL_COST_HANDLING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_cost_handling')">{{ 'HEADINVOICE.TOTAL_COST_HANDLING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_VOUCHERS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_vouchers" [class.is-invalid]="isControlInvalid('total_vouchers')"
+                [class.is-valid]="isControlValid('total_vouchers')" formControlName="total_vouchers" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_vouchers')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_VOUCHERS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_vouchers')">{{ 'HEADINVOICE.TOTAL_VOUCHERS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_vouchers')">{{ 'HEADINVOICE.TOTAL_VOUCHERS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_vouchers')">{{ 'HEADINVOICE.TOTAL_VOUCHERS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_vouchers')">{{ 'HEADINVOICE.TOTAL_VOUCHERS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_MATERIALS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_materials" [class.is-invalid]="isControlInvalid('total_materials')"
+                [class.is-valid]="isControlValid('total_materials')" formControlName="total_materials" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_materials')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_MATERIALS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_materials')">{{ 'HEADINVOICE.TOTAL_MATERIALS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_materials')">{{ 'HEADINVOICE.TOTAL_MATERIALS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_materials')">{{ 'HEADINVOICE.TOTAL_MATERIALS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_materials')">{{ 'HEADINVOICE.TOTAL_MATERIALS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_COST_MATERIALS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_cost_materials" [class.is-invalid]="isControlInvalid('total_cost_materials')"
+                [class.is-valid]="isControlValid('total_cost_materials')" formControlName="total_cost_materials" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_cost_materials')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_COST_MATERIALS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_cost_materials')">{{ 'HEADINVOICE.TOTAL_COST_MATERIALS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_cost_materials')">{{ 'HEADINVOICE.TOTAL_COST_MATERIALS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_cost_materials')">{{ 'HEADINVOICE.TOTAL_COST_MATERIALS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_cost_materials')">{{ 'HEADINVOICE.TOTAL_COST_MATERIALS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_CUSTODY_CPV' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_custody_cpv" [class.is-invalid]="isControlInvalid('total_custody_cpv')"
+                [class.is-valid]="isControlValid('total_custody_cpv')" formControlName="total_custody_cpv" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_custody_cpv')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_CUSTODY_CPV' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_custody_cpv')">{{ 'HEADINVOICE.TOTAL_CUSTODY_CPV' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_custody_cpv')">{{ 'HEADINVOICE.TOTAL_CUSTODY_CPV' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_custody_cpv')">{{ 'HEADINVOICE.TOTAL_CUSTODY_CPV' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_custody_cpv')">{{ 'HEADINVOICE.TOTAL_CUSTODY_CPV' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_CUSTODY_VAULT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_custody_vault" [class.is-invalid]="isControlInvalid('total_custody_vault')"
+                [class.is-valid]="isControlValid('total_custody_vault')" formControlName="total_custody_vault" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_custody_vault')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_CUSTODY_VAULT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_custody_vault')">{{ 'HEADINVOICE.TOTAL_CUSTODY_VAULT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_custody_vault')">{{ 'HEADINVOICE.TOTAL_CUSTODY_VAULT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_custody_vault')">{{ 'HEADINVOICE.TOTAL_CUSTODY_VAULT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_custody_vault')">{{ 'HEADINVOICE.TOTAL_CUSTODY_VAULT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_CUSTODY_PERSONAL_ATM' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_custody_personal_atm" [class.is-invalid]="isControlInvalid('total_custody_personal_atm')"
+                [class.is-valid]="isControlValid('total_custody_personal_atm')" formControlName="total_custody_personal_atm" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_custody_personal_atm')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_CUSTODY_PERSONAL_ATM' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_custody_personal_atm')">{{ 'HEADINVOICE.TOTAL_CUSTODY_PERSONAL_ATM' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_custody_personal_atm')">{{ 'HEADINVOICE.TOTAL_CUSTODY_PERSONAL_ATM' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_custody_personal_atm')">{{ 'HEADINVOICE.TOTAL_CUSTODY_PERSONAL_ATM' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_custody_personal_atm')">{{ 'HEADINVOICE.TOTAL_CUSTODY_PERSONAL_ATM' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_PIECES' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_pieces" [class.is-invalid]="isControlInvalid('total_pieces')"
+                [class.is-valid]="isControlValid('total_pieces')" formControlName="total_pieces" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_pieces')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_PIECES' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_pieces')">{{ 'HEADINVOICE.TOTAL_PIECES' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_pieces')">{{ 'HEADINVOICE.TOTAL_PIECES' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_pieces')">{{ 'HEADINVOICE.TOTAL_PIECES' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_pieces')">{{ 'HEADINVOICE.TOTAL_PIECES' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_FIXED_COSTS_PACKING' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_fixed_costs_packing" [class.is-invalid]="isControlInvalid('total_fixed_costs_packing')"
+                [class.is-valid]="isControlValid('total_fixed_costs_packing')" formControlName="total_fixed_costs_packing" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_fixed_costs_packing')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_FIXED_COSTS_PACKING' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_fixed_costs_packing')">{{ 'HEADINVOICE.TOTAL_FIXED_COSTS_PACKING' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_fixed_costs_packing')">{{ 'HEADINVOICE.TOTAL_FIXED_COSTS_PACKING' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_fixed_costs_packing')">{{ 'HEADINVOICE.TOTAL_FIXED_COSTS_PACKING' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_fixed_costs_packing')">{{ 'HEADINVOICE.TOTAL_FIXED_COSTS_PACKING' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_VIGILANT' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_vigilant" [class.is-invalid]="isControlInvalid('total_vigilant')"
+                [class.is-valid]="isControlValid('total_vigilant')" formControlName="total_vigilant" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_vigilant')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_VIGILANT' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_vigilant')">{{ 'HEADINVOICE.TOTAL_VIGILANT' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_vigilant')">{{ 'HEADINVOICE.TOTAL_VIGILANT' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_vigilant')">{{ 'HEADINVOICE.TOTAL_VIGILANT' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_vigilant')">{{ 'HEADINVOICE.TOTAL_VIGILANT' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_ATM_SUPPLY' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_atm_supply" [class.is-invalid]="isControlInvalid('total_atm_supply')"
+                [class.is-valid]="isControlValid('total_atm_supply')" formControlName="total_atm_supply" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_atm_supply')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_ATM_SUPPLY' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_atm_supply')">{{ 'HEADINVOICE.TOTAL_ATM_SUPPLY' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_atm_supply')">{{ 'HEADINVOICE.TOTAL_ATM_SUPPLY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_atm_supply')">{{ 'HEADINVOICE.TOTAL_ATM_SUPPLY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_atm_supply')">{{ 'HEADINVOICE.TOTAL_ATM_SUPPLY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TOTAL_ATM_FAILURE_1_2_LEVELS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="total_atm_failure_1_2_levels" [class.is-invalid]="isControlInvalid('total_atm_failure_1_2_levels')"
+                [class.is-valid]="isControlValid('total_atm_failure_1_2_levels')" formControlName="total_atm_failure_1_2_levels" 
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left', allowNegative: 'false' }"/>
+              <div class="feedback" *ngIf="!isControlTouched('total_atm_failure_1_2_levels')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TOTAL_ATM_FAILURE_1_2_LEVELS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('total_atm_failure_1_2_levels')">{{ 'HEADINVOICE.TOTAL_ATM_FAILURE_1_2_LEVELS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'total_atm_failure_1_2_levels')">{{ 'HEADINVOICE.TOTAL_ATM_FAILURE_1_2_LEVELS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'total_atm_failure_1_2_levels')">{{ 'HEADINVOICE.TOTAL_ATM_FAILURE_1_2_LEVELS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'total_atm_failure_1_2_levels')">{{ 'HEADINVOICE.TOTAL_ATM_FAILURE_1_2_3_LEVELS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>  
+
+            <div class="col-lg-12">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.FILE_UPLOADED' | translate }}</label>
+              <p-fileUpload name="file_uploaded" (onSelect)="onSelect($event)" multiple="false" maxFileSize="1000000" [showUploadButton]="false" [disabled]="view" accept="application/pdf"
+              chooseLabel="{{'COMMON.CHOOSE' | translate}}" uploadLabel="{{'COMMON.UPLOAD' | translate}}" cancelLabel="{{'COMMON.CANCEL' | translate}}">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="files.length > 0">
+                        <li *ngFor="let file of files">
+                          <span style="width: -webkit-fill-available; height: 35px;" class="label label-lg label-inline label-light-primary" (click)="showFile(file.file_uploaded)">
+                            <div style="text-align: left; width: 50%;">{{file.name}}</div>
+                            <div style="text-align: right; width: 50%;">/ size bytes</div>
+                          </span>
+                        </li>
+                    </ul>
+                </ng-template>
+              </p-fileUpload>
+            </div>            
+           </div>
+          <div *ngIf="model.id && authService.hasPermission('view_detailinvoice')">
+            <app-detail-invoices [headInvoiceId]="model.id"></app-detail-invoices>
+          </div>
+          <div class="float-right">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/headinvoices">{{ 'COMMON.CANCEL' | translate }}</a>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(false)" *ngIf="!view">{{ 'COMMON.SAVE' | translate }}</button>
+            <button type="submit" class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid" (click)="save(true)" *ngIf="!view">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+  </div>
+</div>

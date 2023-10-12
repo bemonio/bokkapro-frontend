@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DivisionService } from '../../division/_services';
+import { ContractService } from 'src/app/pages/contract/_services';
 
 @Component({
     selector: 'app-invoice-forms',
@@ -36,11 +37,6 @@ export class InvoiceFormsComponent implements OnInit {
     public filters: { key: string, value: string }[];
     public _with: { key: string, value: string }[];
 
-    // public formGroup: FormGroup;
-    // public employee_id_filter: AbstractControl;
-    // public department_id_filter: AbstractControl;
-    // public venue_id_filter: AbstractControl;
-
     searchGroup: FormGroup;
 
     public requesting: boolean = false;
@@ -54,6 +50,7 @@ export class InvoiceFormsComponent implements OnInit {
     public parent: string;
 
     public invoiceFormId: number;
+    public contracts: [];
 
     public displayModal: boolean;
     public showListFormDetails: boolean;
@@ -66,16 +63,8 @@ export class InvoiceFormsComponent implements OnInit {
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
+        private contractService: ContractService,
         fb: FormBuilder) {
-        // this.formGroup = fb.group({
-        //     'employee_id_filter': [''],
-        //     'department_id_filter': [''],
-        //     'venue_id_filter': [''],
-        // });
-        // this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
-        // this.department_id_filter = this.formGroup.controls['department_id_filter'];
-        // this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
-
 
         this.searchGroup = fb.group({
             searchTerm: [''],
@@ -175,14 +164,19 @@ export class InvoiceFormsComponent implements OnInit {
 
     public getModels() {
         this.requesting = true;
+        let contract_company;
         setTimeout(() => {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.requesting = false;
                 this.models = [];
-                response.deposit_forms.forEach(element => {
+                response.invoices.forEach(element => {
+                    contract_company = this.getContractById(2036);
+                    console.log('result contract', this.contracts);
+                    element.contract_array = contract_company;
                     this.models.push(element);
                 });
+                console.log(this.models);
                 this.totalRecords = response.meta.total_results;
             },
             error => {
@@ -283,11 +277,24 @@ export class InvoiceFormsComponent implements OnInit {
         this.showListFormDetails 
         ? this.showListFormDetails = false 
         : this.showListFormDetails = true;
-        this.invoiceFormId = id;
+        this.invoiceFormId = id; 
     }
 
     hideModalDialog() {
         this.displayModal = false;
         this.getModels();
     }
+
+    public getContractById(id) {
+        let response_contract;
+        this.contractService.getById(id).toPromise().then(
+          response => {
+            this.contracts = response.contract;
+          },
+          error => {
+            console.log('error getting contract');
+          }
+        );
+        return response_contract
+      }
 }

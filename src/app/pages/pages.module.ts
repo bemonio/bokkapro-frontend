@@ -393,6 +393,11 @@ import { DetailInvoicesComponent } from './detail-invoice/detail-invoices/detail
 import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.component';
 import { DetailInvoiceEditComponent } from './detail-invoice/detail-invoices/detail-invoice-edit/detail-invoice-edit.component';
 
+//FormInvoice
+import { InvoiceFormsComponent } from './invoice-form/invoice-forms/invoice-forms.component';
+import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
+import { InvoiceFormEditComponent } from './invoice-form/invoice-forms/invoice-form-edit/invoice-form-edit.component';
+
 // TypeServiceOrders
 import { TypesServiceOrdersComponent } from './type-service-order/types-service-orders/types-service-orders.component';
 import { TypeServiceOrderComponent } from './type-service-order/type-service-order.component';
@@ -671,7 +676,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     PasswordsSettingsComponent,
     PasswordSettingComponent,
     PasswordSettingEditComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    InvoiceFormComponent,
+    InvoiceFormsComponent,
+    InvoiceFormEditComponent, 
   ]
 })
 export class PagesModule { }

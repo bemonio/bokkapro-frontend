@@ -982,4 +982,10 @@ export class VoucherEditComponent implements OnInit, OnDestroy {
     reader.onload = (event) => result.next(btoa(event.target.result.toString()));
     return result;
   }
+
+  public showPickupDate(){
+    if(this.authService.currentDivisionValue.type_division === 1) return true;
+    if(this.authService.currentDivisionValue.type_division === 7) return true;
+    return false;
+  }
 }

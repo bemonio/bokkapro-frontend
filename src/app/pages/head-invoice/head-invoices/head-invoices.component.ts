@@ -187,6 +187,7 @@ export class HeadInvoicesComponent implements OnInit {
                 this.requesting = false;
                 this.models = response.head_invoices;
                 this.totalRecords = response.meta.total_results;
+                console.log(response);
                 if(response.contracts){                
                     response.contracts.forEach(contract => {
                         this.models.forEach(element => {

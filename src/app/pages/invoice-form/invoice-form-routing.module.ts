@@ -54,4 +54,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DepositFormRoutingModule {}
+export class InvoiceFormRoutingModule {}
