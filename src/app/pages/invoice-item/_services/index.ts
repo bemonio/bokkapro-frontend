@@ -1,0 +1,1 @@
+export { InvoiceItemService } from './invoice-item.service';

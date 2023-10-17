@@ -84,8 +84,8 @@ import { StockTransactionService } from './pages/stock-transaction/_services';
 import { StockTransactionDetailService } from './pages/stock-transaction-detail/_services';
 import { StockSerialService } from './pages/stock-serial/_services';
 import { HeadInvoiceService } from './pages/head-invoice/_services';
-import { InvoiceFormService } from './pages/invoice-form/_services';
-import { DetailInvoiceService } from './pages/detail-invoice/_services';
+import { InvoiceService } from './pages/invoice/_services';
+import { InvoiceItemService } from './pages/invoice-item/_services';
 import { TypeServiceOrderService } from './pages/type-service-order/_services';
 import { PasswordSettingService } from './pages/password-setting/_services';
 
@@ -209,10 +209,10 @@ export function getHighlightLanguages() {
     StockTransactionDetailService,
     StockSerialService,
     HeadInvoiceService,
-    DetailInvoiceService,
+    InvoiceItemService,
     TypeServiceOrderService,
     PasswordSettingService,
-    InvoiceFormService,
+    InvoiceService,
     //Others
     CompaniesComponent
   ],

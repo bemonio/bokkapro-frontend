@@ -476,10 +476,10 @@ const routes: Routes = [
           ),
       },   
       {
-        path: 'detailinvoices',
+        path: 'invoiceitems',
         loadChildren: () =>
-          import('../pages/detail-invoice/detail-invoice-routing.module').then(
-            (m) => m.DetailInvoiceRoutingModule
+          import('../pages/invoice-item/invoice-item-routing.module').then(
+            (m) => m.InvoiceItemRoutingModule
           ),
       },          
       {
@@ -504,10 +504,10 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'invoiceforms',
+        path: 'invoices',
         loadChildren: () =>
-          import('../pages/invoice-form/invoice-form-routing.module').then(
-            (m) => m.InvoiceFormRoutingModule
+          import('../pages/invoice/invoice-routing.module').then(
+            (m) => m.InvoiceRoutingModule
           ),
       },
     ],

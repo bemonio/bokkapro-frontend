@@ -525,8 +525,8 @@
               </p-fileUpload>
             </div>            
            </div>
-          <div *ngIf="model.id && authService.hasPermission('view_detailinvoice')">
-            <app-detail-invoices [headInvoiceId]="model.id"></app-detail-invoices>
+          <div *ngIf="model.id && authService.hasPermission('view_invoiceitem')">
+            <app-invoice-items [headInvoiceId]="model.id"></app-invoice-items>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/headinvoices">{{ 'COMMON.CANCEL' | translate }}</a>

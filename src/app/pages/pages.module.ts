@@ -388,15 +388,15 @@ import { HeadInvoiceComponent } from './head-invoice/head-invoice.component';
 import { HeadInvoiceEditComponent } from './head-invoice/head-invoices/head-invoice-edit/head-invoice-edit.component';
 import { HeadInvoiceAutocompleteComponent } from './head-invoice/head-invoices/head-invoice-autocomplete/head-invoice-autocomplete.component';
 
-// DetailInvoices
-import { DetailInvoicesComponent } from './detail-invoice/detail-invoices/detail-invoices.component';
-import { DetailInvoiceComponent } from './detail-invoice/detail-invoice.component';
-import { DetailInvoiceEditComponent } from './detail-invoice/detail-invoices/detail-invoice-edit/detail-invoice-edit.component';
+// InvoiceItems
+import { InvoiceItemsComponent } from './invoice-item/invoice-items/invoice-items.component';
+import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
+import { InvoiceItemEditComponent } from './invoice-item/invoice-items/invoice-item-edit/invoice-item-edit.component';
 
 //FormInvoice
-import { InvoiceFormsComponent } from './invoice-form/invoice-forms/invoice-forms.component';
-import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
-import { InvoiceFormEditComponent } from './invoice-form/invoice-forms/invoice-form-edit/invoice-form-edit.component';
+import { InvoicesComponent } from './invoice/invoices/invoices.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { InvoiceEditComponent } from './invoice/invoices/invoice-edit/invoice-edit.component';
 
 // TypeServiceOrders
 import { TypesServiceOrdersComponent } from './type-service-order/types-service-orders/types-service-orders.component';
@@ -666,9 +666,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     HeadInvoiceComponent,
     HeadInvoiceEditComponent,
     HeadInvoiceAutocompleteComponent,
-    DetailInvoicesComponent,
-    DetailInvoiceComponent,
-    DetailInvoiceEditComponent,
+    InvoiceItemsComponent,
+    InvoiceItemComponent,
+    InvoiceItemEditComponent,
     TypesServiceOrdersComponent,
     TypeServiceOrderComponent,
     TypeServiceOrderEditComponent,
@@ -677,9 +677,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     PasswordSettingComponent,
     PasswordSettingEditComponent,
     ChangePasswordComponent,
-    InvoiceFormComponent,
-    InvoiceFormsComponent,
-    InvoiceFormEditComponent, 
+    InvoiceComponent,
+    InvoicesComponent,
+    InvoiceEditComponent, 
   ]
 })
 export class PagesModule { }

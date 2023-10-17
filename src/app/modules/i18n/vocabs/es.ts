@@ -923,7 +923,7 @@ export const locale = {
       ID: 'Id',
       CLIENT: 'Cliente',
       CLIENTNAME: 'Nombre del cliente',
-      INVOICEFORM: 'Facturas a clientes',
+      INVOICES: 'Facturas a clientes',
       AMOUNT: 'Monto',
       CURRENCY: 'Moneda',
       TYPEINVOICE: 'Tipo de factura',
