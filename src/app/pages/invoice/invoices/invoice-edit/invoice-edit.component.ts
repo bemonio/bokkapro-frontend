@@ -226,12 +226,19 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
+    model.expires_in = this.expires_in.value.value;
     let due_date = new Date(model.date)
     due_date.setDate(due_date.getDate() + parseInt(this.model.expires_in, 0));
     model.due_date = this.formatDate(due_date);
     model.date = this.formatDate(model.date);
+    model.discount = 0;
+    model.discount_amount = 0;
+    model.tax_rate = 0;
+    model.tax_amount = 0;
+    model.contract_id = model.contract.id
+    delete model.contract;
 
-    const sbUpdate = this.modelsService.patch(this.id, model).pipe(
+    const sbUpdate = this.modelsService.patchInvoiceAndItems(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
         if (this.saveAndExit) {
@@ -274,7 +281,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
     model.tax_rate = 0;
     model.tax_amount = 0;
     delete model.contract;
-    const sbCreate = this.modelsService.postInvoiceItems(model).pipe(
+    const sbCreate = this.modelsService.postInvoiceAndItems(model).pipe(
       tap(() => {
         this.toastService.growl('top-right', 'success', 'success');
       }),

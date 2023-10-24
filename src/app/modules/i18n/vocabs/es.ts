@@ -933,6 +933,7 @@ export const locale = {
       DATEOFISSUE: 'Fecha de emisión',
       DATESERVICE: 'Fecha prestación de servicio',
       EXPIRESIN: 'Vence en',
+      CONTRACT: 'Contracto',
     },
     PASSWORDSETTING: {
       ID: 'id',

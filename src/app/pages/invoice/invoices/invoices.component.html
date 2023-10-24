@@ -46,9 +46,14 @@
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
-          <th pSortableColumn="bank_account_number">
+          <th pSortableColumn="number">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'INVOICE.INVOICENUMBER' | translate }}
+            </div>
+          </th>
+          <th pSortableColumn="contract.code">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'INVOICE.CONTRACT' | translate }}
             </div>
           </th>
           <th pSortableColumn="amount">
@@ -56,11 +61,11 @@
               {{ 'INVOICE.AMOUNT' | translate }}
             </div>
           </th>
-          <!-- <th pSortableColumn="difference_amount">
+          <th pSortableColumn="currency.name">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'INVOICE.CURRENCY' | translate }}
             </div>
-          </th> -->
+          </th>
           <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -85,11 +90,14 @@
             {{value.number}}
           </td>
           <td>
+            {{value.contract.code}}
+          </td>
+          <td>
             {{value.total}}
           </td>
-          <!-- <td>
-            {{value.difference_amount}}
-          </td> -->
+          <td>
+            {{value.currency.name}}
+          </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
               [routerLink]="'/invoices/view/' + value.id" *ngIf="authService.hasPermission('view_invoice')">

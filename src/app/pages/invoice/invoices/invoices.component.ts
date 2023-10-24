@@ -95,6 +95,11 @@ export class InvoicesComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+
+        this._with = [];
+        this._with.push({key: 'include[]', value: 'contract.company.*'})
+        this._with.push({key: 'include[]', value: 'invoice_items.*'})
+        this._with.push({key: 'include[]', value: 'currency.*'})
     }
 
     public loadLazy(event?: LazyLoadEvent) {
@@ -165,20 +170,31 @@ export class InvoicesComponent implements OnInit {
 
     public getModels() {
         this.requesting = true;
-        let contract_company;
         setTimeout(() => {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.requesting = false;
-                this.models = [];
-                response.invoices.forEach(element => {
-                    contract_company = this.getContractById(2036);
-                    console.log('result contract', this.contracts);
-                    element.contract_array = contract_company;
-                    this.models.push(element);
-                });
-                console.log(this.models);
+                this.models = response.invoices;
                 this.totalRecords = response.meta.total_results;
+                if(response.contracts){
+                    response.contracts.forEach(contract => {
+                        this.models.forEach(element => {
+                            if (element.contract === contract.id) {
+                                element.contract = contract;
+                            }
+                        });
+                    });
+                }
+
+                if(response.currencies){
+                    response.currencies.forEach(currency => {
+                        this.models.forEach(element => {
+                            if (element.currency === currency.id) {
+                                element.currency = currency;
+                            }
+                        });
+                    });
+                }
             },
             error => {
                 this.requesting = false;
