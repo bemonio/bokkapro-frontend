@@ -263,7 +263,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.deposit_form
+      // this.model = response.invoice
     });
     // this.subscriptions.push(sbUpdate);
   }
@@ -304,7 +304,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.deposit_form as Model
+      // this.model = response.invoice as Model
       if (this.saveAndExit) {
         if(this.parent){
           this.router.navigate([this.parent + '/invoices']);
@@ -393,19 +393,8 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
     this.model.contract_id = value.id;
     this.model.company_id = value.company;
   }
-  getContractById(id) {
-    this.contractService.getById(id).toPromise().then(
-      response => {
-        this.company_name.setValue(response.company);
-        //console.log('company', this.company_name);
-      },
-      error => {
-        console.log('error getting company');
-      }
-    );
-  }
 
-  addItem(event: any) { 
+  addItem(event: any) {
     event.preventDefault();
     this.dynamicFormArray.push(this.createItem());
     //refresh Form group
@@ -414,8 +403,6 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
     this.dynamicFormArray.updateValueAndValidity();
     console.log(this.formGroup);
     console.log(this.dynamicFormArray);
-
-
   }
 
   deleteItem(event: any) { 
