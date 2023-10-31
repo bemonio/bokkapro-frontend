@@ -66,6 +66,11 @@
               {{ 'HEADINVOICE.OFFICE' | translate }}
             </div>
           </th>
+          <th pSortableColumn="currency.id">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'HEADINVOICE.CURRENCY' | translate }}
+            </div>
+          </th>
           <th style="width: 10rem">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
@@ -94,6 +99,9 @@
           </td>
           <td>
             {{value.office?.name}}
+          </td>
+          <td>
+            {{value.currency?.name}}
           </td>
           <td style="text-align: right">
           <a title="{{ 'COMMON.PRINT' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"

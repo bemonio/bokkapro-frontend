@@ -115,6 +115,7 @@ export class HeadInvoicesComponent implements OnInit {
         this._with = [];
         this._with.push({key: 'include[]', value: 'contract.*'})
         this._with.push({key: 'include[]', value: 'office.*'})
+        this._with.push({key: 'include[]', value: 'currency.*'})
         this.screenWidth();
         this.setViewHeadInvoice = false;
     }
@@ -204,6 +205,15 @@ export class HeadInvoicesComponent implements OnInit {
                         this.models.forEach(element => {
                             if (element.office === office.id) {
                                 element.office = office;
+                            }
+                        });
+                    });
+                }
+                if(response.currencies){
+                    response.currencies.forEach(currency => {
+                        this.models.forEach(element => {
+                            if (element.currency === currency.id) {
+                                element.currency = currency;
                             }
                         });
                     });
