@@ -10,6 +10,8 @@ import { ConfirmationService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
+import { environment } from '../../../../environments/environment';
+
 @Component({
     selector: 'app-head-invoices',
     templateUrl: './head-invoices.component.html',
@@ -440,5 +442,13 @@ export class HeadInvoicesComponent implements OnInit {
         if (screen.width < 600){
             this.size_width = true;
         }
+    }
+
+    print(model) {
+        let url = environment.apiUrl + 'pdf/invoices?id=' + model.id;
+        if (model.file) {
+            url = model.file
+        }
+        window.open(url, '_blank');
     }
 }

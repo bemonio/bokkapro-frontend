@@ -69,6 +69,7 @@ export class InvoiceService {
     public getById(id: number): Observable<any> {
         return this.http.get(`${this.API_URL}/${id}/?include[]=contract.company.*&include[]=invoice_items.*&include[]=currency.*`);
     }
+
     public postInvoiceAndItems(body: Object): Observable<any> {
         return this.http.post(`${this.API_URL_INVOICE_AND_ITEMS}`, JSON.stringify(body));
     }

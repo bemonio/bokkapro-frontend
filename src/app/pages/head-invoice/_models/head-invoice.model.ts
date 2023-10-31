@@ -43,4 +43,9 @@ export class HeadInvoiceModel {
   office: any;
   type_service_order: any;
   currency: any;
+
+  // total: any;
+  // subtotal: any;
+
+  detail_invoices: any;
 }

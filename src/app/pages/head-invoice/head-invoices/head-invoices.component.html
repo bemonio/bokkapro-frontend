@@ -96,7 +96,13 @@
             {{value.office?.name}}
           </td>
           <td style="text-align: right">
-            <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
+          <a title="{{ 'COMMON.PRINT' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+            (click)="print(value)">
+            <span [inlineSVG]="'./assets/media/svg/icons/Devices/Printer.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-md svg-icon-primary">
+            </span>
+          </a>
+          <a title="{{ 'COMMON.VIEW' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
             (click)="showModalDialog(value.id, false, true)" *ngIf="authService.hasPermission('view_headinvoice') && contractId">
             <span [inlineSVG]="'./assets/media/svg/icons/General/Eye.svg'" cacheSVG="true"
             class="svg-icon svg-icon-md svg-icon-info">

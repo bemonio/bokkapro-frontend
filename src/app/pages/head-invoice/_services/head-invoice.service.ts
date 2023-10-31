@@ -9,6 +9,7 @@ export class HeadInvoiceService {
     API_URL = `${environment.apiUrl}headinvoices`;
     API_URL_GENERATE = `${environment.apiUrl}generateheadinvoices`;
     API_URL_REGENERATE = `${environment.apiUrl}regenerateheadinvoices`;
+    API_URL_INVOICE_AND_ITEMS = `${environment.apiUrl}invoiceanditems`
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -77,5 +78,13 @@ export class HeadInvoiceService {
 
     public reGenerate(body: Object): Observable<any> {
         return this.http.post(`${this.API_URL_REGENERATE}`, JSON.stringify(body));
+    }
+
+    public postInvoiceAndItems(body: Object): Observable<any> {
+        return this.http.post(`${this.API_URL_INVOICE_AND_ITEMS}`, JSON.stringify(body));
+    }
+
+    public patchInvoiceAndItems(id: number, body: Object): Observable<any> {
+        return this.http.patch(`${this.API_URL_INVOICE_AND_ITEMS}/${id}`, JSON.stringify(body));
     }
 }

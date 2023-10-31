@@ -26,7 +26,7 @@ export class InvoiceModel {
   discount_amount: number;
   tax_rate: number;
   tax_amount: number;
-  invoice_items: any
+  invoice_items: any;
 }
 
 

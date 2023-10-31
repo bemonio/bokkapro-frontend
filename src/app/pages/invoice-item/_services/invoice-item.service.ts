@@ -6,7 +6,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
 export class InvoiceItemService {
-    API_URL = `${environment.apiUrl}invoiceitems`;
+    API_URL = `${environment.apiUrl}detailinvoices`;
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
