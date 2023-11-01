@@ -75,6 +75,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
   public details: AbstractControl;
   public quantity: AbstractControl;
   public price: AbstractControl;
+  public tax: AbstractControl;
   public amount: AbstractControl;
 
   // public files = [];
@@ -350,6 +351,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
           newItem.get('details').setValue(element.details);
           newItem.get('quantity').setValue(element.quantity);
           newItem.get('price').setValue(element.price);
+          newItem.get('tax').setValue(element.tax);
           newItem.get('amount').setValue(element.total_amount);
       
           this.dynamicFormArray.push(newItem);
@@ -658,6 +660,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       details: new FormControl('', Validators.compose([Validators.required])),
       quantity: new FormControl(1, Validators.compose([Validators.required])),
       price: new FormControl('', Validators.compose([Validators.required])),
+      tax: new FormControl('', Validators.compose([Validators.required])),
       amount: new FormControl('', Validators.compose([Validators.required])),
     });
   }
@@ -667,9 +670,12 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
     this.dynamicFormArray.controls.forEach(element => {
       const quantity = element.get('quantity').value;
       const price = element.get('price').value;
-      const amount = quantity * price;
+      const tax = element.get('tax').value;
+      let amount = quantity * price;
+      const amount_tax = amount * (tax / 100);
+      amount = amount + amount_tax;
+      total += amount;
       element.get('amount').setValue(amount);
-      total += element.value.quantity * element.value.price;
     });
     this.total_amount.setValue(total);
     this.formGroup.updateValueAndValidity();

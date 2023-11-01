@@ -916,6 +916,9 @@ export const locale = {
       TOTAL_AMOUNT: 'Monto Total',
       TAX_EXEMPT: 'Exento de Impuesto',
       DISCCOUNT: 'Descuento',
+      TAX: 'Impuesto',
+      PRICE: 'Precio',
+      AMOUNT: 'Monto',
     },
     INVOICE: {
       INVOICE: 'Factura',
