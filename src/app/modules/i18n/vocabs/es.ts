@@ -153,7 +153,8 @@ export const locale = {
       EMAIL: 'Correo',
       DESCRIPTION: 'Descripción',
       COMPANY: 'Grupo Económico',
-      CURRENCY: 'Divisa'
+      CURRENCY: 'Divisa',
+      TAX: 'Impuesto'
     },
     TYPE_DIVISION: {
       TYPE_DIVISION: 'Tipo División',

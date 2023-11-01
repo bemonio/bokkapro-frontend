@@ -87,6 +87,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'email')">{{ 'OFFICE.EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>  
             <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'OFFICE.TAX' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="tax" [class.is-invalid]="isControlInvalid('tax')"
+                [class.is-valid]="isControlValid('tax')" formControlName="tax" />
+              <div class="feedback" *ngIf="!isControlTouched('tax')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'OFFICE.TAX' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('tax')">{{ 'OFFICE.TAX' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'tax')">{{ 'OFFICE.TAX' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'tax')">{{ 'OFFICE.TAX' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'tax')">{{ 'OFFICE.TAX' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>  
+            <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'OFFICE.COMPANY' | translate }}</label>
               <app-company-autocomplete
               name="company" [valid]="isControlValid('company')" [touched]="isControlTouched('company')" [class.is-invalid]="isControlInvalid('company')"

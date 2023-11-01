@@ -31,6 +31,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
   public email: AbstractControl;
   public company: AbstractControl;
   public currency: AbstractControl;
+  public tax: AbstractControl;
 
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -59,6 +60,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
       email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])],
       company: ['', Validators.compose([Validators.required])],
       currency: [''],
+      tax: ['', Validators.compose([Validators.required])],
     });
     this.name = this.formGroup.controls['name'];
     this.description = this.formGroup.controls['description'];
@@ -67,6 +69,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
     this.email = this.formGroup.controls['email'];
     this.company = this.formGroup.controls['company'];
     this.currency = this.formGroup.controls['currency'];
+    this.tax = this.formGroup.controls['tax'];
   }
 
   ngOnInit(): void {
@@ -131,6 +134,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
       this.address.setValue(this.model.address);
       this.phone.setValue(this.model.phone);
       this.email.setValue(this.model.email);
+      this.tax.setValue(this.model.tax);
 
       if (this.model.company) {
         this.company.setValue(this.model.company);

@@ -8,6 +8,7 @@ export class OfficeModel {
   address: string
   phone: string
   email: string
+  tax: number
   company: any;
   currency: any;
 }
