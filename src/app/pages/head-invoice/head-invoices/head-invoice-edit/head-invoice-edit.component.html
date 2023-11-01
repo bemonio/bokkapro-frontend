@@ -59,7 +59,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.OFFICE' | translate }}</label>
               <app-office-autocomplete
               name="office" [valid]="isControlValid('office')" [touched]="isControlTouched('office')" [class.is-invalid]="isControlInvalid('office')"
-              [class.is-valid]="isControlValid('office')" formControlName="office" id="office" [model]="model.office"></app-office-autocomplete>
+              [class.is-valid]="isControlValid('office')" formControlName="office" id="office" [model]="model.office" disabled="true"></app-office-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('office')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.OFFICE' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('office')">{{ 'HEADINVOICE.OFFICE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'office')">{{ 'HEADINVOICE.OFFICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

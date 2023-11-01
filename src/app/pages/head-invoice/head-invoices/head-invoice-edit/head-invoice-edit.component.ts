@@ -592,6 +592,10 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       response => {
         this.office.setValue(response.offices[0])
         this.currency.setValue(response.currencies[0])
+        this.dynamicFormArray.controls.forEach(element => {
+          element.get('tax').setValue(this.office.value.tax);
+        });
+        this.calcTotal();
       },
       error => {
         console.log('error getting serviceOrder');
@@ -660,7 +664,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       details: new FormControl('', Validators.compose([Validators.required])),
       quantity: new FormControl(1, Validators.compose([Validators.required])),
       price: new FormControl('', Validators.compose([Validators.required])),
-      tax: new FormControl('', Validators.compose([Validators.required])),
+      tax: new FormControl(this.office.value.tax, Validators.compose([Validators.required])),
       amount: new FormControl('', Validators.compose([Validators.required])),
     });
   }
@@ -692,8 +696,8 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
     this.formGroup.setControl('detail_invoices', this.dynamicFormArray);
     //update FormGroup
     this.dynamicFormArray.updateValueAndValidity();
-    console.log(this.formGroup);
-    console.log(this.dynamicFormArray);
+    this.formGroup.markAllAsTouched();
+    this.dynamicFormArray.markAllAsTouched();
   }
 
   deleteItem(event: any) { 
