@@ -70,7 +70,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
   // public company_contact: AbstractControl;
   public office: AbstractControl;
   // public type_service_order: AbstractControl;
-  public currency: AbstractControl;
+  // public currency: AbstractControl;
 
   public details: AbstractControl;
   public quantity: AbstractControl;
@@ -149,7 +149,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       // company_contact: [''],
       office: [''],
       // type_service_order: [''],
-      currency: [''],
+      // currency: [''],
       detail_invoices: new FormArray([])
     });
     this.invoice_number = this.formGroup.controls['invoice_number'];
@@ -192,7 +192,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
     // this.company_contact= this.formGroup.controls['company_contact'];
     this.office= this.formGroup.controls['office'];
     // this.type_service_order= this.formGroup.controls['type_service_order'];
-    this.currency= this.formGroup.controls['currency'];
+    // this.currency= this.formGroup.controls['currency'];
 
     // this.files = [];
   }
@@ -269,8 +269,8 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
           this.model.office = response.offices[0];
         if (response.type_service_orders)
           this.model.type_service_order = response.type_service_orders[0];
-        if (response.currencys)
-          this.model.currency = response.currencys[0];
+        // if (response.currencys)
+        //   this.model.currency = response.currencys[0];
 
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -339,9 +339,9 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       //   this.type_service_order.setValue(this.model.type_service_order);
       // }   
       
-      if (this.model.currency) {
-        this.currency.setValue(this.model.currency);
-      }   
+      // if (this.model.currency) {
+      //   this.currency.setValue(this.model.currency);
+      // }   
 
       if (this.model.detail_invoices) {
         this.model.detail_invoices.forEach(element => {
@@ -399,7 +399,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       // this.company_contact.setValue('');
       this.office.setValue('');
       // this.type_service_order.setValue('');
-      this.currency.setValue('');
+      // this.currency.setValue('');
 
       this.employee.setValue(this.authService.currentUserValue.employee);
     }
@@ -436,7 +436,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
     // model.company_contact = this.model.company_contact.id;
     model.office = this.model.office.id;
     // model.type_service_order = this.model.type_service_order.id;
-    model.currency = this.model.currency.id;
+    // model.currency = this.model.currency.id;
     // model.file_uploaded = this.fileBase64;
 
     const sbUpdate = this.modelsService.patchInvoiceAndItems(this.id, model).pipe(
@@ -481,7 +481,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
     // model.company_contact = this.model.company_contact.id;
     model.office = this.model.office.id;
     // model.type_service_order = this.model.type_service_order.id;
-    model.currency = this.model.currency.id;
+    // model.currency = this.model.currency.id;
     // model.file_uploaded = this.fileBase64;
 
     const sbCreate = this.modelsService.postInvoiceAndItems(model).pipe(
@@ -591,7 +591,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
     this.contractService.getById(id).toPromise().then(
       response => {
         this.office.setValue(response.offices[0])
-        this.currency.setValue(response.currencies[0])
+        // this.currency.setValue(response.currencies[0])
         this.dynamicFormArray.controls.forEach(element => {
           element.get('tax').setValue(this.office.value.tax);
         });
@@ -662,10 +662,10 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
     // this.amount = this.dynamicFormArray.controls['amount'];
     return this.fb.group({
       details: new FormControl('', Validators.compose([Validators.required])),
-      quantity: new FormControl(1, Validators.compose([Validators.required])),
-      price: new FormControl('', Validators.compose([Validators.required])),
+      quantity: new FormControl(0, Validators.compose([Validators.required])),
+      price: new FormControl(0, Validators.compose([Validators.required])),
       tax: new FormControl(this.office.value.tax, Validators.compose([Validators.required])),
-      amount: new FormControl('', Validators.compose([Validators.required])),
+      amount: new FormControl(0, Validators.compose([Validators.required])),
     });
   }
 

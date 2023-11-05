@@ -127,7 +127,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'type_service_order')">{{ 'HEADINVOICE.TYPE_SERVICE_ORDER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>       -->
             
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.CURRENCY' | translate }}</label>
               <app-currency-select
               name="currency" [valid]="isControlValid('currency')" [touched]="isControlTouched('currency')" [class.is-invalid]="isControlInvalid('currency')"
@@ -137,7 +137,7 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'currency')">{{ 'HEADINVOICE.CURRENCY' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'currency')">{{ 'HEADINVOICE.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 1</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'currency')">{{ 'HEADINVOICE.CURRENCY' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
-            </div>
+            </div> -->
 
             <!-- <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.EXCHANGE_RATE' | translate }}</label>
@@ -202,7 +202,7 @@
 
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.FROM_DATE' | translate }}</label>
-              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('from_date'))" name="from_date" formControlName="from_date" showTime="true" hourFormat="24"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('from_date'))" name="from_date" formControlName="from_date"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('from_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.FROM_DATE' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('from_date')">{{ 'HEADINVOICE.FROM_DATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'from_date')">{{ 'HEADINVOICE.FROM_DATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -212,7 +212,7 @@
 
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.TO_DATE' | translate }}</label>
-              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('to_date'))" name="to_date" formControlName="to_date" showTime="true" hourFormat="24"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('to_date'))" name="to_date" formControlName="to_date"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('to_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.TO_DATE' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('to_date')">{{ 'HEADINVOICE.TO_DATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'to_date')">{{ 'HEADINVOICE.TO_DATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -222,7 +222,7 @@
 
             <div class="col-lg-4">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'HEADINVOICE.DUE_DATE' | translate }}</label>
-              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('due_date'))" name="due_date" formControlName="due_date" showTime="true" hourFormat="24"></p-calendar>
+              <p-calendar dateFormat="dd/mm/yy" [inputStyleClass]="getValidClass(isControlValid('due_date'))" name="due_date" formControlName="due_date"></p-calendar>
               <div class="feedback" *ngIf="!isControlTouched('due_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'HEADINVOICE.DUE_DATE' | translate }}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('due_date')">{{ 'HEADINVOICE.DUE_DATE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'due_date')">{{ 'HEADINVOICE.DUE_DATE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -586,11 +586,11 @@
                   <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                     name="details" formControlName="details" 
                     [class.is-invalid]="arrayIsControlInvalid('details',i)" [class.is-valid]="arrayIsControlValid('details',i)" />
-                    <div class="feedback" *ngIf="!arrayIsControlTouched('details',i)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DETAILINVOICE.DESCRIPTION' | translate }}</b></div>
-                    <div class="valid-feedback" *ngIf="arrayIsControlValid('details',i)">{{ 'DETAILINVOICE.DESCRIPTION' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-                    <div class="invalid-feedback" *ngIf="arrayControlHasError('required', 'details', i)">{{ 'DETAILINVOICE.DESCRIPTION' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-                    <div class="invalid-feedback" *ngIf="arrayControlHasError('minlength', 'details', i)">{{ 'DETAILINVOICE.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-                    <div class="invalid-feedback" *ngIf="arrayControlHasError('maxLength', 'details', i)">{{ 'DETAILINVOICE.DESCRIPTION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+                    <div class="feedback" *ngIf="!arrayIsControlTouched('details',i)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DETAILINVOICE.DETAILS' | translate }}</b></div>
+                    <div class="valid-feedback" *ngIf="arrayIsControlValid('details',i)">{{ 'DETAILINVOICE.DETAILS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                    <div class="invalid-feedback" *ngIf="arrayControlHasError('required', 'details', i)">{{ 'DETAILINVOICE.DETAILS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                    <div class="invalid-feedback" *ngIf="arrayControlHasError('minlength', 'details', i)">{{ 'DETAILINVOICE.DETAILS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                    <div class="invalid-feedback" *ngIf="arrayControlHasError('maxLength', 'details', i)">{{ 'DETAILINVOICE.DETAILS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
                 </div> 
                 <div class="col-lg-2">
                   <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -637,10 +637,10 @@
             </div>
 
             <div class="col-lg-12 text-right" style="font-size: 18px; font-weight: 800;">
-              <span>Subtotal: {{ total_amount.value }}</span>
+              <span>Subtotal: {{ total_amount.value | number : '1.2-2' }}</span>
             </div>
             <div class="col-lg-12 text-right" style="font-size: 18px; font-weight: 800;">
-              <span> Total {{ total_amount.value }}</span>
+              <span> Total {{ total_amount.value | number : '1.2-2' }}</span>
             </div>  
           </div>    
 
