@@ -259,7 +259,7 @@
             </div>            
             <div class="col-lg-12" *ngIf="model.id">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'VOUCHER.FILE_UPLOADED' | translate }}</label>
-              <p-fileUpload name="file_uploaded" (onSelect)="onSelect($event)" multiple="false" maxFileSize="1000000" [showUploadButton]="false" [disabled]="view" accept="application/pdf"
+              <p-fileUpload name="file_uploaded" (onSelect)="onSelect($event)" multiple="false" maxFileSize="1000000" [showUploadButton]="false" [disabled]="view" accept="application/pdf, image/jpg, image/jpeg"
               chooseLabel="{{'COMMON.CHOOSE' | translate}}" uploadLabel="{{'COMMON.UPLOAD' | translate}}" cancelLabel="{{'COMMON.CANCEL' | translate}}">
                 <ng-template pTemplate="content">
                     <ul *ngIf="files.length > 0">
