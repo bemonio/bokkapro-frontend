@@ -526,31 +526,6 @@
       </li>
       <!-- end::1 Level -->
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_headinvoice')">
-        <a class="menu-link menu-toggle" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Files/Folder-star.svg'" cacheSVG="true" class="svg-icon menu-icon">
-          </span>
-          <span class="menu-text">{{ 'INVOICE.INVOICING' | translate }}</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <!-- begin::1 Level INVOICE -->
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_headinvoice')">
-              <a class="menu-link" routerLink="/invoices" routerLinkActive="active">
-                <i class="menu-bullet menu-bullet-dot">
-                  <span></span>
-                </i>
-                <span class="menu-text">{{ 'INVOICE.INVOICING' | translate }}</span>
-              </a>
-            </li>
-            <!-- end::1 Level -->            
-          </ul>
-        </div>
-      </li>
-      <!-- end::1 Level -->
-      <!-- begin::1 Level -->
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" 
       *ngIf="authService.hasPermission('view_rate') 
         || authService.hasPermission('view_origindestination') 
