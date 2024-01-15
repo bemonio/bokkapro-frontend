@@ -12,6 +12,7 @@ export class InvoiceItemModel {
   total_amount : number;
   tax_exempt : boolean;
   disccount : number;
+  divide : number;
   
   head_invoice : any;
 }

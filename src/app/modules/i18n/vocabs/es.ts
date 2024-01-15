@@ -920,6 +920,7 @@ export const locale = {
       TAX: 'Impuesto',
       PRICE: 'Precio',
       AMOUNT: 'Monto',
+      DIVIDE: 'Divide',
     },
     INVOICE: {
       INVOICE: 'Factura',

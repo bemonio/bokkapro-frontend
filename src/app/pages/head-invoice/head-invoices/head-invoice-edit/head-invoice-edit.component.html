@@ -560,14 +560,17 @@
               <div class="col-lg-1 invoice-text">
                 <span>#</span>
               </div>
-              <div class="col-lg-3 invoice-text">
+              <div class="col-lg-2 invoice-text">
                 <span>{{ 'DETAILINVOICE.DETAILS' | translate }}</span>
               </div>
-              <div class="col-lg-2 invoice-text">
+              <div class="col-lg-1 invoice-text">
                 <span>{{ 'DETAILINVOICE.QUANTITY' | translate }}</span>
               </div>
               <div class="col-lg-2 invoice-text">
                 <span>{{ 'DETAILINVOICE.PRICE' | translate }}</span>
+              </div>
+              <div class="col-lg-2 invoice-text">
+                <span>{{ 'DETAILINVOICE.DIVIDE' | translate }}</span>
               </div>
               <div class="col-lg-2 invoice-text">
                 <span>{{ 'DETAILINVOICE.TAX' | translate }}</span>
@@ -582,7 +585,7 @@
                 <div class="col-lg-1" style="font-size: 16px; align-self: center;">
                   <span>{{ i + 1 }}</span>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                   <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                     name="details" formControlName="details" 
                     [class.is-invalid]="arrayIsControlInvalid('details',i)" [class.is-valid]="arrayIsControlValid('details',i)" />
@@ -592,7 +595,7 @@
                     <div class="invalid-feedback" *ngIf="arrayControlHasError('minlength', 'details', i)">{{ 'DETAILINVOICE.DETAILS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
                     <div class="invalid-feedback" *ngIf="arrayControlHasError('maxLength', 'details', i)">{{ 'DETAILINVOICE.DETAILS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
                 </div> 
-                <div class="col-lg-2">
+                <div class="col-lg-1">
                   <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
                     name="quantity" [class.is-invalid]="arrayIsControlInvalid('quantity', i)"
                     [class.is-valid]="arrayIsControlValid('quantity', i)" formControlName="quantity" (change)="calcTotal()"/>
@@ -611,6 +614,16 @@
                   <div class="invalid-feedback" *ngIf="arrayControlHasError('required', 'price', i)">{{ 'DETAILINVOICE.PRICE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
                   <div class="invalid-feedback" *ngIf="arrayControlHasError('minlength', 'price', i)">{{ 'DETAILINVOICE.PRICE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
                   <div class="invalid-feedback" *ngIf="arrayControlHasError('maxLength', 'price', i)">{{ 'DETAILINVOICE.PRICE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+                </div> 
+                <div class="col-lg-2">
+                  <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                    name="divide" [class.is-invalid]="arrayIsControlInvalid('divide', i)"
+                    [class.is-valid]="arrayIsControlValid('divide', i)" formControlName="divide" (change)="calcTotal()"/>
+                  <div class="feedback" *ngIf="!arrayIsControlTouched('divide', i)">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'DETAILINVOICE.DIVIDE' | translate }}</b></div>
+                  <div class="valid-feedback" *ngIf="arrayIsControlValid('divide', i)">{{ 'DETAILINVOICE.DIVIDE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+                  <div class="invalid-feedback" *ngIf="arrayControlHasError('required', 'divide', i)">{{ 'DETAILINVOICE.DIVIDE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+                  <div class="invalid-feedback" *ngIf="arrayControlHasError('minlength', 'divide', i)">{{ 'DETAILINVOICE.DIVIDE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+                  <div class="invalid-feedback" *ngIf="arrayControlHasError('maxLength', 'divide', i)">{{ 'DETAILINVOICE.DIVIDE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
                 </div> 
                 <div class="col-lg-2">
                   <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"

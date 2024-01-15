@@ -353,6 +353,7 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
           newItem.get('price').setValue(element.price);
           newItem.get('tax').setValue(element.tax);
           newItem.get('amount').setValue(element.total_amount);
+          newItem.get('divide').setValue(element.divide);
       
           this.dynamicFormArray.push(newItem);
         });
@@ -666,16 +667,18 @@ export class HeadInvoiceEditComponent implements OnInit, OnDestroy {
       price: new FormControl(0, Validators.compose([Validators.required])),
       tax: new FormControl(this.office.value.tax, Validators.compose([Validators.required])),
       amount: new FormControl(0, Validators.compose([Validators.required])),
+      divide: new FormControl(1, Validators.compose([Validators.required])),
     });
   }
 
   calcTotal(){
     let total = 0;
     this.dynamicFormArray.controls.forEach(element => {
+      let divide = element.get('divide').value;
       const quantity = element.get('quantity').value;
       const price = element.get('price').value;
       const tax = element.get('tax').value;
-      let amount = quantity * price;
+      let amount = quantity * price / divide;
       const amount_tax = amount * (tax / 100);
       amount = amount + amount_tax;
       total += amount;
