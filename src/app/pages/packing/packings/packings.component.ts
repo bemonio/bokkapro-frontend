@@ -236,6 +236,26 @@ export class PackingsComponent implements OnInit {
         );
     }
 
+    public delete_packing_voucher_relationship(id, voucher_id) {
+        this.modelsService.delete_packing_voucher_relationship(id, voucher_id).toPromise().then(
+            response => {
+                this.toastService.growl('top-right', 'success', 'Delete');
+                this.getModels();
+            },
+            error => {
+                let messageError = [];
+                if (!Array.isArray(error.error)) {
+                    messageError.push(error.error);
+                } else {
+                    messageError = error.error;
+                }
+                Object.entries(messageError).forEach(
+                    ([key, value]) => this.toastService.growl('top-right', 'error', key + ': ' + value)
+                );
+            }
+        );
+    }
+
     public patch(values: Model) {
         const param = {
             // 'activated': values.activated
@@ -266,7 +286,10 @@ export class PackingsComponent implements OnInit {
         this.confirmationService.confirm({
             message: this.message_confirm_delete,
             accept: () => {
-                this.delete(id);
+                if (this.voucherId)
+                    this.delete_packing_voucher_relationship(id, this.voucherId);
+                else
+                    this.delete(id);
             }
         });
     }

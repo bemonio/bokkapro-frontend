@@ -7,6 +7,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 @Injectable()
 export class PackingService {
     API_URL = `${environment.apiUrl}packings`;
+    API_URL_PACKING_VOUCHER_RELATIONSHIP_DELETE = `${environment.apiUrl}packingvoucherrelationshipdelete`;
     // private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -68,4 +69,11 @@ export class PackingService {
     public getById(id: number): Observable<any> {
         return this.http.get(`${this.API_URL}/${id}/?include[]=vouchers.*&include[]=voucher_current.*`);
     }
+
+    public delete_packing_voucher_relationship(id: number, voucher_id: number): Observable<any> {
+        const url = `${this.API_URL_PACKING_VOUCHER_RELATIONSHIP_DELETE}/${id}`;
+        const params = { voucher_id: voucher_id.toString() };
+        
+        return this.http.delete(url, { params });
+    }    
 }
