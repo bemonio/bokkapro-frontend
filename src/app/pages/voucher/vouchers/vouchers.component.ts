@@ -983,8 +983,7 @@ export class VouchersComponent implements OnInit, OnDestroy {
 
     verifyShowCheckBox(value) {
         let response = false;
-        if (this.authService.currentDivisionValue.type_division != 1 && value.is_active === true || 
-            this.showRowCheckbox && value.is_active === true && value.verified_oi === true) {
+        if (this.showRowCheckbox && value.is_active === true) {
             response = true;
         }
         if (this.route.parent.parent.snapshot.url[0].path == "vouchersadmin") {
