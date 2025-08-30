@@ -1,27 +1,82 @@
-# Demo1App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
+# Bokkapro Frontend
 
-## Development server
+Bokkapro Frontend is a web application developed with Angular that serves as an interface for managing business operations, invoicing, users, reports, and other administrative modules. It is designed to integrate with backend services and streamline the management of internal company processes.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Tecnologías utilizadas
 
-## Code scaffolding
+- **Framework principal:** Angular 10+
+- **Lenguajes:** TypeScript, HTML, SCSS
+- **Librerías principales:**
+	- Angular Material
+	- PrimeNG
+	- Bootstrap 4
+	- RxJS
+	- ApexCharts
+	- ngx-translate
+	- Quill
+	- Otros: moment, highlight.js, ng-bootstrap, etc.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Instalación
 
-## Build
+1. **Clona el repositorio:**
+	 ```sh
+	 git clone <URL_DEL_REPOSITORIO>
+	 cd bokkapro_frontend
+	 ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+2. **Instala las dependencias:**
+	 ```sh
+	 npm install
+	 ```
 
-## Running unit tests
+3. **Variables de entorno:**
+	 - Por defecto, la configuración de entornos está en `src/environments/environment.ts` y `src/environments/environment.prod.ts`.
+	 - Modifica estos archivos si necesitas personalizar endpoints o claves.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Ejecución del proyecto
 
-## Running end-to-end tests
+### Servidor de desarrollo
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```sh
+npm start
+```
+Accede a la aplicación en [http://localhost:4200](http://localhost:4200).
 
-## Further help
+### Docker (opcional)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Si deseas ejecutar el proyecto en un contenedor Docker:
+
+```sh
+docker-compose up
+```
+
+## Ejemplo de uso
+
+```sh
+ng generate component example-component
+```
+Esto genera un nuevo componente Angular en el proyecto.
+
+## Pruebas
+
+- **Unitarias:**  
+	Ejecuta las pruebas unitarias con Karma:
+	```sh
+	npm test
+	```
+- **End-to-End:**  
+	Ejecuta las pruebas E2E con Protractor:
+	```sh
+	npm run e2e
+	```
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+## Créditos / Autor
+
+- Desarrollado por el equipo de Bokkapro.
+- Contacto principal: bemonio
+- Basado en Angular CLI y librerías de la comunidad.
