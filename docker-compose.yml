@@ -1,0 +1,35 @@
+version: '3.5'
+
+services:
+  bokkapro-frontend:
+    image: node:14.20.1
+    container_name: bokkapro-frontend
+    user: root
+    working_dir: /bokkapro-frontend
+    command: >
+      bash -c "echo '==== starting ====='
+      && npm install
+      && npm install -g @angular/cli@10.2.4
+      && npm start
+      && echo '==== done ====='
+      && sleep infinity"
+    volumes:
+      - ./:/bokkapro-frontend
+    # restart: always
+    environment:
+      - HOME=/bokkapro-frontend
+    networks:
+      - traefik_network
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.bokkapro-frontend.rule=Host(`platform.bokkapro.com`)
+      - traefik.http.routers.bokkapro-frontend.entrypoints=websecure
+      - traefik.http.services.bokkapro-frontend.loadbalancer.server.port=4200
+      - traefik.http.routers.bokkapro-frontend.tls=true
+      - traefik.http.routers.bokkapro-frontend.tls.certresolver=myresolver
+    extra_hosts:
+      api.bokkapro.com: 172.17.0.1
+
+networks:
+  traefik_network:
+    external: true

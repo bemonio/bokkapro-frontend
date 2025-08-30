@@ -17,7 +17,7 @@ import { TranslationModule } from '../../i18n/translation.module';
 import { TranslateModule } from '@ngx-translate/core';
 
 const fakeAuth = {
-  username: '@brinks.com',
+  username: '@fake.com',
   password: '',
 };
 

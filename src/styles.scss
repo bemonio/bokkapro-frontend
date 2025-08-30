@@ -223,8 +223,8 @@
 }
 
 .fc .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-listWeek-button.fc-button-active, .fc .fc-toolbar .fc-button.fc-today-button.fc-button-active {
-  background: #2196F3;
-  border-color: #2196F3;
+  background: #30B2BE;
+  border-color: #30B2BE;
   color: #ffffff;
 }
 
@@ -237,10 +237,10 @@
 .fc .fc-toolbar .fc-button.fc-dayGridMonth-button:focus, .fc .fc-toolbar .fc-button.fc-timeGridWeek-button:focus, .fc .fc-toolbar .fc-button.fc-timeGridDay-button:focus, .fc .fc-toolbar .fc-button.fc-listWeek-button:focus, .fc .fc-toolbar .fc-button.fc-today-button:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: 0 0 0 0.2rem #a6d5fa;
+  box-shadow: 0 0 0 0.2rem #30B2BE;
   z-index: 1;
 }
 
 .logo {
-  width: 200px;
+  width: 400px;
 }

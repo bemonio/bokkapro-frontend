@@ -13,14 +13,14 @@ export const DefaultLayoutConfig = {
       theme: {
         base: {
           white: '#ffffff',
-          primary: '#3699FF',
+          primary: '#30B2BE',
           secondary: '#E5EAEE',
           success: '#1BC5BD',
           info: '#8950FC',
           warning: '#FFA800',
           danger: '#F64E60',
           light: '#E4E6EF',
-          dark: '#181C32',
+          dark: '#212529',
         },
         light: {
           white: '#ffffff',
@@ -54,7 +54,7 @@ export const DefaultLayoutConfig = {
         'gray-600': '#7E8299',
         'gray-700': '#5E6278',
         'gray-800': '#3F4254',
-        'gray-900': '#181C32',
+        'gray-900': '#212529',
       },
     },
     fontFamily: 'Poppins',

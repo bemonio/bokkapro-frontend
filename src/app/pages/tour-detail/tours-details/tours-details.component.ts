@@ -316,8 +316,8 @@ export class ToursDetailsComponent implements OnInit {
                         "start": element.date_start,
                         "end": element.date_end,
                         "origin_destination": element.origin_destination.id,
-                        "backgroundColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
-                        "borderColor": element.origin_destination.precall ? '#689F38' : '#2196F3',
+                        "backgroundColor": element.origin_destination.precall ? '#689F38' : '#30B2BE',
+                        "borderColor": element.origin_destination.precall ? '#689F38' : '#30B2BE',
                     });
                 });            
                 this.calendarOptions.events = this.events;

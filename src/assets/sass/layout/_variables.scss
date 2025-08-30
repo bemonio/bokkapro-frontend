@@ -9,7 +9,7 @@ $root-font-size-md:                             	12px; // Root font size for mob
 
 // Layout Theme Colors
 $layout-themes: (
-	dark:  #1e1e2d, // Dark theme color
+	dark:  #032D4D, // Dark theme color
 	light: #ffffff // Light theme color
 ) !default;
 
@@ -480,16 +480,16 @@ $header-menu-config: (
 									self: (
 										bg-color: (
 											default: transparent,
-											open: #1b1b28,
-											active: #1b1b28,
-											hover: #1b1b28
+											open: #0a1931,
+											active: #0a1931,
+											hover: #0a1931
 										)
 									),
 
 									// Icon
 									icon: (
 										font-color:	(
-											default: #494b74,
+											default: #a2a3b7,
 											here: $primary,
 											active: $primary,
 											hover: $primary
@@ -500,7 +500,7 @@ $header-menu-config: (
 									bullet:	(
 										dot: (
 											bg-color: (
-												default: #494b74,
+												default: #a2a3b7,
 												here: $primary,
 												active: $primary,
 												hover: $primary
@@ -508,7 +508,7 @@ $header-menu-config: (
 										),
 										line: (
 											bg-color: (
-												default: #494b74,
+												default: #a2a3b7,
 												here: $primary,
 												active: $primary,
 												hover: $primary
@@ -529,7 +529,7 @@ $header-menu-config: (
 									// Arrow
 									arrow: (
 										font-color:	(
-											default: #494b74,
+											default: #a2a3b7,
 											here: $primary,
 											active: $primary,
 											hover: $primary
@@ -541,7 +541,7 @@ $header-menu-config: (
 								column: (
 									// Separator
 									separator: (
-										border: 1px solid rgba(#494b74, 0.25)
+										border: 1px solid rgba(#a2a3b7, 0.25)
 									),
 
 									// Heading
@@ -550,7 +550,7 @@ $header-menu-config: (
 										caption: (
 											// Icon
 											icon: (
-												font-color:	#494b74
+												font-color:	#a2a3b7
 											),
 
 											// Text
@@ -795,16 +795,16 @@ $header-menu-config: (
 								self: (
 									bg-color: (
 										default: transparent,
-										open: #1b1b28,
-										here: #1b1b28,
-										active: #1b1b28,
-										hover: #1b1b28
+										open: #0a1931,
+										here: #0a1931,
+										active: #0a1931,
+										hover: #0a1931
 									)
 								),
 								// Icon
 								icon: (
 									font-color:	(
-										default: #494b74,
+										default: #a2a3b7,
 										open: $primary,
 										here: $primary,
 										active: $primary,
@@ -883,17 +883,17 @@ $header-menu-config: (
 										self: (
 											bg-color: (
 												default: transparent,
-												open: #1b1b28,
-												here: #1b1b28,
-												active: #1b1b28,
-												hover: #1b1b28
+												open: #0a1931,
+												here: #0a1931,
+												active: #0a1931,
+												hover: #0a1931
 											)
 										),
 
 										// Icon
 										icon:	(
 											font-color:	(
-												default: #494b74,
+												default: #a2a3b7,
 												open: $primary,
 												here: $primary,
 												active: $primary,
@@ -1653,17 +1653,17 @@ $aside-menu-config: (
 							self: (
 								bg-color: (
 									default: transparent,
-									open: #1b1b28,
-									here: #1b1b28,
-									active: #1b1b28,
-									hover: #1b1b28
+									open: #0a1931,
+									here: #0a1931,
+									active: #0a1931,
+									hover: #0a1931
 								)
 							),
 
 							// Icon
 							icon: (
 								font-color:	(
-									default: #494b74,
+									default: #a2a3b7,
 									open: $primary,
 									here: $primary,
 									active: $primary,
@@ -1747,16 +1747,16 @@ $aside-menu-config: (
 									self: (
 										bg-color: (
 											default: transparent,
-											open: #1b1b28,
-											here: #1b1b28,
-											active: #1b1b28,
-											hover: #1b1b28
+											open: #0a1931,
+											here: #0a1931,
+											active: #0a1931,
+											hover: #0a1931
 										)
 									),
 									// Icon
 									icon:	(
 										font-color:	(
-											default: #494b74,
+											default: #a2a3b7,
 											open: $primary,
 											here: $primary,
 											active: $primary,

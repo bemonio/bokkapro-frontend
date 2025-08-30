@@ -17,7 +17,7 @@ export const locale = {
         BACK_BUTTON: 'Espalda',
         PRIVACY: 'Intimidad',
         LEGAL: 'Legal',
-        TERMS: 'Términos',
+        TERMS: 'Términos y Condiciones',
         CONTACT: 'Contacto',
         CHANGE_PASSWORD: "Cambiar Clave",
         NEW_PASSWORD: "Clave Nueva",
@@ -498,7 +498,7 @@ export const locale = {
       FLIP_HORIZONTAL: 'Girar Horizontal',
       ROTATE_VERTICAL: 'Girar Vertical',
       RESET_IMAGE: 'Resetear Imagen',
-      PLACE: 'Caribbean Island / Brinks',
+      PLACE: 'Ingenious Key / BokkaPro',
       PROJECT_NAME: 'Ingenious Caribe',
       ONLY_NUMBERS: 'Solo se permiten números '
     },

@@ -59,6 +59,9 @@ Thumbs.db
 .config
 .devcontainer
 .vscode
+.cache
+.dotnet
+.bash_history
 
 .cache
 .node-gyp
