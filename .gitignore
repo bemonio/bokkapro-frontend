@@ -49,16 +49,11 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# visual studio code
-.vscode
-
 .local/
 .ssh/
 .vscode-server/
 .gitconfig
 .config
-.devcontainer
-.vscode
 .cache
 .dotnet
 .bash_history
